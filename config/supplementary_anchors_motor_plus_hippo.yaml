@@ -1,0 +1,40 @@
+- pair_id: 22
+  label: M1 narrow (precentral gyrus)
+  hemisphere_L:
+    mouse_node_id: '1415'
+    human_node_id: '1869'
+  hemisphere_R:
+    mouse_node_id: '1616'
+    human_node_id: '1870'
+- pair_id: 23
+  label: CA1 hippocampal subfield
+  hemisphere_L:
+    mouse_node_id: '1319'
+    human_node_id: '453'
+  hemisphere_R:
+    mouse_node_id: '1092'
+    human_node_id: '454'
+- pair_id: 24
+  label: CA3 hippocampal subfield
+  hemisphere_L:
+    mouse_node_id: '651'
+    human_node_id: '451'
+  hemisphere_R:
+    mouse_node_id: '652'
+    human_node_id: '452'
+- pair_id: 25
+  label: Dentate hippocampal subfield
+  hemisphere_L:
+    mouse_node_id: '1095'
+    human_node_id: '437'
+  hemisphere_R:
+    mouse_node_id: '1096'
+    human_node_id: '438'
+- pair_id: 26
+  label: Subiculum hippocampal subfield
+  hemisphere_L:
+    mouse_node_id: '621'
+    human_node_id: '421'
+  hemisphere_R:
+    mouse_node_id: '844'
+    human_node_id: '422'

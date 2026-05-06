@@ -1,0 +1,148 @@
+# Extending the pipeline
+
+How to add a new modality, a new species, or a new model class without
+touching the rest of the codebase.
+
+## Add a new modality
+
+Suppose you want to add a within-species cost matrix from a new modality
+(e.g. dMRI tractography). Three integration points:
+
+### 1. A within-species cost function
+
+Add to `homer.costs.relational`:
+
+```python
+def tractography_correlation_distance(tract: np.ndarray) -> np.ndarray:
+    """Within-species relational distance from a tractography matrix."""
+    # ... return symmetric, zero-diagonal, finite (n, n) distance
+```
+
+Make sure it returns a `(n, n)` symmetric, zero-diagonal, non-negative,
+finite matrix. The tests in `tests/test_costs.py::_is_valid_cost_matrix`
+encode the contract.
+
+### 2. A pipeline step to precompute and cache it
+
+Add a `pipeline/03d_build_tractography_costs.py` script that:
+- loads the raw tractography from `data_external/`
+- calls `tractography_correlation_distance`
+- stashes the result in `outputs/anndata/full_costs.npz` as `Cm_tract` and
+  `Ch_tract`
+
+Then add the script name to `pipeline/03_build_costs.py`'s `STEPS` list so
+the orchestrator runs it.
+
+### 3. A model parameter
+
+Add to `MultimodalFGW.__init__`:
+
+```python
+def __init__(self, ..., use_tract: bool = False, tract_weight: float = 0.0,
+             ...):
+    ...
+    self.config.update(dict(use_tract=use_tract, tract_weight=tract_weight))
+```
+
+And in `_solve()`, mix it into the relational cost:
+
+```python
+if self.config["use_tract"]:
+    if Cm_tract is None or Ch_tract is None:
+        raise ValueError("use_tract=True but Cm_tract/Ch_tract not supplied to fit()")
+    weights["tract"] = self.config["tract_weight"]
+    Cm = Cm + weights["tract"] * Cm_tract.astype(np.float64)
+    Ch = Ch + weights["tract"] * Ch_tract.astype(np.float64)
+```
+
+### 4. A new test config
+
+In `pipeline/05a_anchor_cv.py`, add a `CONFIGS` entry:
+
+```python
+"fc_plus_tract": dict(
+    relational={"FC": 0.7, "tract": 0.3},
+    M={"xyz": 0.5},
+),
+```
+
+Then re-run `pipeline/05a_anchor_cv.py --configs fc_plus_tract`. The result
+will appear in the comparison table the next time `pipeline/07_build_artefacts.py`
+runs.
+
+## Add a new species
+
+Suppose you want to add macaque alongside mouse and human. Most of the codebase
+is species-agnostic — the work is in the data layer.
+
+### 1. Update the I/O constants
+
+`homer.data.io._MAT_TOPKEY` currently maps `"mouse" → "m"` and `"human" → "h"`.
+Extend it for your new species and the corresponding `corrs_<species>.mat`
+file under `data_external/`.
+
+### 2. Anchor definition
+
+The 42 Garin anchors are mouse-human-specific. For a new species pair, you
+need new putative homologue pairs. Two options:
+
+- Hand-curate them and update `homer.data.networks.PAIRID_TO_NETWORK` with
+  your new species' pair labels.
+- Use a published atlas (e.g. for macaque-human, the Markov 2014 hierarchy
+  has ~30 well-defined cortical homologues).
+
+### 3. Model use
+
+Once the data layer accepts your new species, the model classes work
+unchanged:
+
+```python
+from homer.data import load_cached
+from homer.models import MultimodalFGW
+M, _ = load_cached("macaque", cache_dir=...)
+H, _ = load_cached("human", cache_dir=...)
+model = MultimodalFGW(use_sc=True).fit(M, H)
+```
+
+## Add a new model class
+
+The base class contract is in `homer.models.base.FGWModel`. To add a new
+solver:
+
+```python
+from homer.models.base import FGWModel, FitInfo
+
+
+class MyNewSolverFGW(FGWModel):
+    """One-line description."""
+    _name = "MyNewSolverFGW"
+
+    def __init__(self, *, my_param: float = 1.0, **kwargs):
+        super().__init__(my_param=my_param, **kwargs)
+
+    def _solve(self, *, mouse_ad, human_ad, **kw):
+        # ... build Cm, Ch, M, etc.
+        # ... call your solver
+        # return (pi, FitInfo(loss=..., n_iter=..., converged=...))
+        return pi, FitInfo(loss=loss, n_iter=n_iter, converged=True)
+```
+
+Then export it from `homer.models.__init__`:
+
+```python
+from homer.models.my_new_solver import MyNewSolverFGW
+__all__.append("MyNewSolverFGW")
+```
+
+Test it the same way the other models are tested in `tests/test_models.py`
+(parametrise over the new class).
+
+## Use a custom evaluation metric
+
+Add a new function to `homer.eval` and re-export from `homer.eval.__init__`.
+Then add it to `pipeline/07_build_artefacts.py` if you want it to appear in
+the headline comparison table.
+
+The clean library API is built around the assumption that `model.evaluate()`
+returns a dict; downstream code (notebooks, comparison generators) iterates
+over the dict keys generically.

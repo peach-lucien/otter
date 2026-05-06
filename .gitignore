@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+build/
+dist/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Test / lint caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Editors / OS
+.DS_Store
+.vscode/
+.idea/
+
+# Virtual envs
+.venv/
+.env
+env/
+venv/
+
+# Generated artefacts (heavy / regeneratable; tracked separately if needed)
+outputs/anndata/*.h5ad
+outputs/anndata/*.npy
+outputs/anndata/*.npz
+outputs/coupling/
+outputs/figures/
+outputs/logs/
+outputs/comparison/
+outputs/viewer/
+
+# External data downloads (large; regeneratable from pipeline/00_external/)
+data_external/
+
+# Old
+experiments/archive/
+
+# Scratch / debugging artefacts
+.scratch/
+nb_runs/
+*.log

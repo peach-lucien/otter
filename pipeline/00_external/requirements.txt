@@ -1,0 +1,14 @@
+# Dependencies for the external-data scripts.
+# Install with: pip install -r requirements.txt
+#
+# Pinned ranges that are known to work as of May 2025; loosen if you hit
+# version conflicts with the rest of your environment.
+
+allensdk>=2.0          # Allen Mouse Brain Atlas + Mouse Connectivity Cache
+abagen>=0.1.3           # Allen Human Brain Atlas microarray → parcellated expression
+nibabel>=5.0            # NIfTI I/O — already a project dependency
+numpy>=1.0
+scipy>=1.12
+pandas>=2.0
+requests>=2.31          # for raw downloads where we don't go through a package
+tqdm>=4.66              # progress bars

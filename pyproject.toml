@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "homer"
+version = "0.1.0"
+description = "Cross-species brain region mapping via Fused Gromov–Wasserstein"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["neuroscience", "optimal-transport", "cross-species", "brain-mapping",
+            "gromov-wasserstein", "functional-connectivity"]
+dependencies = [
+    "numpy>=1.26",
+    "scipy>=1.12",
+    "pandas",
+    "h5py",
+    "mat73",
+    "anndata>=0.10",
+    "scikit-learn",
+    "nibabel",
+    "matplotlib",
+    "seaborn",
+    "plotly",
+    "pot>=0.9.4",
+]
+
+[project.optional-dependencies]
+flow = ["torch"]
+dev  = ["pytest", "ruff", "jupyterlab", "ipywidgets"]
+docs = ["mkdocs", "mkdocs-material"]
+
+[project.urls]
+Documentation = "./docs/pipeline.md"
+Methods       = "./docs/methods.md"
+Results       = "./docs/results.md"
+
+[project.scripts]
+# CLI shortcuts for the most-run pipeline steps. After `pip install -e .`
+# you can call them directly without `python pipeline/...`.
+homer-solve     = "homer.cli:solve_production"
+homer-evaluate  = "homer.cli:evaluate"
+homer-artefacts = "homer.cli:build_artefacts"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts   = "-ra -q"
+filterwarnings = [
+    # Old-API shim modules emit DeprecationWarnings — they're expected and
+    # documented; surfacing them in test output is noise.
+    "ignore::DeprecationWarning:homer\\..*",
+]

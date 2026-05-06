@@ -1,0 +1,8 @@
+- pair_id: 22
+  label: M1 narrow (precentral gyrus)
+  hemisphere_L:
+    mouse_node_id: '1415'
+    human_node_id: '1869'
+  hemisphere_R:
+    mouse_node_id: '1616'
+    human_node_id: '1870'
