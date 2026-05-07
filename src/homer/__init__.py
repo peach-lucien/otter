@@ -38,10 +38,6 @@ The minimal end-to-end recipe:
     >>> model.pi.shape
     (1864, 2094)
     >>> model.evaluate(eval_kind='translation')
-
-Backward-compat shims live for the old top-level modules
-(homer.fgw / hierarchical / anchors / eda / translate); these emit
-DeprecationWarnings and will be removed in a future cleanup pass.
 """
 __version__ = "0.1.0"
 

@@ -44,13 +44,15 @@ count (`fc_n_obs`), and the parsed `var` table with anchor labels.
 ## 3. Build cost matrices
 
 ```bash
-PYTHONPATH=src python pipeline/03_build_costs.py        # orchestrator (runs 03a, 03b, 03c)
+PYTHONPATH=src python pipeline/03_build_costs.py
 ```
 
-Or run individually:
-- `03a_build_full_costs.py` → FC + xyz costs in `outputs/anndata/full_costs.npz`
-- `03b_build_spatial_costs.py` → adds the per-species xyz GW cost
-- `03c_build_multimodal_costs.py` → adds SC, gene-coexpression, M_gene, M_anchor
+One script that builds all cost matrices into `outputs/anndata/full_costs.npz`:
+FC distances (Cm, Ch), within-species xyz (Cm_xyz, Ch_xyz), cross-species xyz
+(M_xyz), SC distances (Cm_SC, Ch_SC), gene-coexpression (Cm_gene, Ch_gene),
+cross-species gene cost (M_gene + M_gene_valid), and anchor-relationship M
+(M_anchor). The Knox-augmented `Cm_SC_knox` is added separately by
+`pipeline/00_external/06_knox_sc.py`.
 
 ## 4. Solve the production model
 
@@ -77,6 +79,7 @@ Or individually:
 - `05d_full_space_eval.py` — full-space (n_h=2094) recovery for production configs
 - `05e_knox_vs_standard_sc.py` — comparative: Knox leaf-level vs Allen summary-structure SC LONO
 - `05f_beauchamp_validation.py` — external validation against Beauchamp 2022's 22 mouse↔human pairs
+- `05g_compute_trust.py` — per-parcel model-confidence + regional-empirical trust score
 
 Outputs land in `outputs/logs/*.json`. Already-cached cells are skipped;
 pass `--recompute` to force a full recompute.
@@ -91,15 +94,12 @@ Saves `outputs/coupling/bootstrap_aggregate_fc_plus_SC.npz` with per-cell mean
 + std of π across 40 subject-bootstrap resamples, plus stability summary in
 `outputs/logs/bootstrap_summary_fc_plus_SC.json`. Pass `--config fc_only` to
 also get the FC-only baseline (saves to the corresponding `_fc_only` files).
-A legacy `bootstrap_summary_fc_only_legacy.json` from a pre-fix FC-only run
-(`bootstrap_summary.json`) is kept for reference but the per-config files are
-authoritative.
 
 ## 7. Build artefacts
 
 ```bash
 PYTHONPATH=src python pipeline/07_build_artefacts.py     # comparison table + figures
-PYTHONPATH=src python pipeline/07b_build_viewer.py       # interactive 3D viewer
+PYTHONPATH=src python pipeline/07_build_artefacts.py --viewer-only       # interactive 3D viewer
 ```
 
 Produces:

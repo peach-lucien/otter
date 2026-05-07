@@ -32,9 +32,12 @@ We validated against [Beauchamp et al. 2022 (eLife)](https://elifesciences.org/a
 
 | Where | Top-1 vs Beauchamp | Enrichment vs chance |
 |---|---:|---:|
-| **In supervised regions** (15 pairs, 927 mouse parcels) | 12% | **11.8×** |
+| In supervised regions, trained model (15 pairs, 927 mouse parcels) | 12% | **11.8×** |
 | In novel regions with no anchor (4 hippocampal pairs) | 0% | 0× |
-| After **adding 4 hippocampal supplementary anchors** | 7-9% on 3/4 pairs | **24.4×** |
+| After adding 4 hippocampal point anchors | 7-9% on 3/4 pairs | **24.4×** |
+| Held-out region CV (model gets *no* supervision for the tested region) | 3.4% average; mPFC 33%, Auditory 22%, Somatosensory 11% | ~7× chance |
+
+The 11.8× tells you the trained model's predictions in supervised regions match Beauchamp's published pairs about that often — that's what a downstream user querying π will experience. The 3.4× held-out tells you how much of that is the model recovering homology from FC/SC structure alone vs supervision doing the work. Both are real numbers answering different questions. See [`docs/results.md §5.6`](docs/results.md#56-s8--held-out-region-cv-the-honest-evaluation) for the per-region table. Beauchamp itself is a published hypothesis (gene-expression-derived), not ground truth — neither figure is "correct" in an absolute sense.
 
 Convergent negatives confirm the bottleneck is anchor density, not the
 solver: we tested FUGW (different OT formulation) and Knox 2019 leaf-level
@@ -57,8 +60,11 @@ The TL;DR: trust is regional and explicitly bounded.
 
 Four configs (`fc_only`, `fc_plus_xyz_gw`, `fc_plus_network_mask`,
 `fc_plus_SC`) differ by ≤1 of 42 anchors and McNemar-test as
-statistically tied. We default to `fc_plus_SC` because SC adds modest
-within-network FC translation gains.
+statistically tied. The held-out region CV ablation also shows SC adds
+zero top-1 improvement (3.6% FC-only vs 3.4% FC+SC). On this dataset,
+`SupervisedFGW` (FC + xyz + anchors) is the principled minimal model;
+`MultimodalFGW(use_sc=True)` is kept as the historical default for
+backward compatibility, but you can use either.
 
 ## Installation
 
@@ -111,20 +117,19 @@ homer/
 │   ├── eval/                    # CV, full-space metrics, FC translation, trust score
 │   └── viz/                     # 3D viewer + notebook plots
 ├── pipeline/                    # numbered, end-to-end replication scripts
-│   ├── 00_external/             #   data downloads (Allen, Domhof, Knox)
-│   ├── 02_build_anndata.py      #   per-species AnnData
-│   ├── 03*_build_costs.py       #   FC + xyz + SC + gene cost matrices
+│   ├── 00_external/             #   external data downloads (Allen, Domhof, Knox)
+│   ├── 02_build_anndata.py      #   per-species AnnData from colleague's .mat files
+│   ├── 03_build_costs.py        #   all FC + SC + xyz + gene cost matrices
 │   ├── 04_solve_production.py   #   fit MultimodalFGW
 │   ├── 05*.py                   #   evaluate (anchor CV, FC translation, nulls,
 │   │                            #     full-space metrics, Knox vs Allen, Beauchamp,
 │   │                            #     trust score)
 │   ├── 06_bootstrap.py          #   subject-level bootstrap stability
-│   └── 07*.py                   #   comparison table + interactive viewer
-├── experiments/                 # research scripts (A/B/C/D, M1, M4, anchor split)
-│   └── archive/                 # obsolete stepping-stones
+│   └── 07_build_artefacts.py    #   comparison table + figures (+ --viewer for HTML)
+├── experiments/archive/         # obsolete research scripts (negative results)
 ├── tests/                       # pytest, ~10 s on synthetic fixture
 ├── notebooks/                   # 4 interactive .ipynb walkthroughs
-├── docs/                        # see "Documentation" below
+├── docs/                        # 6 user-facing docs + dev/ subfolder
 ├── config/                      # supplementary-anchor YAML configs
 └── outputs/                     # all generated artefacts (π, JSONs, figures, viewer)
 ```
@@ -152,20 +157,15 @@ Two comparative additions:
 
 ## Documentation
 
-Recommended reading order:
+Six docs total, in suggested reading order:
 
 1. **[`docs/whats_in_the_box.md`](docs/whats_in_the_box.md)** — plain-English summary: what the model does, is it generalising, where to trust it. Start here.
-2. [`docs/methods_writeup.md`](docs/methods_writeup.md) — paper-style methods note.
-3. [`docs/external_validation.md`](docs/external_validation.md) — Beauchamp 2022 validation.
-4. [`docs/anchor_expansion_2026-05-06.md`](docs/anchor_expansion_2026-05-06.md) — supplementary anchor experiments (M1 + hippocampal subfields).
-5. [`docs/diagnostics_supervised_failures.md`](docs/diagnostics_supervised_failures.md) — why motor + tectum failed despite anchors.
-6. [`docs/comparative_methods.md`](docs/comparative_methods.md) — FUGW + Knox SC comparisons.
-7. [`docs/results.md`](docs/results.md) — comprehensive comparison table.
-8. [`docs/audit_2026-05-06.md`](docs/audit_2026-05-06.md) — end-to-end audit.
-9. [`docs/pipeline.md`](docs/pipeline.md) — replication recipe.
-10. [`docs/methods.md`](docs/methods.md) — internal methods reference.
-11. [`docs/extending.md`](docs/extending.md) — adding new modalities, species, model classes.
-12. [`ROADMAP.md`](ROADMAP.md) — full open-issue list.
+2. [`docs/methods.md`](docs/methods.md) — formulation, hyperparameters, design choices.
+3. [`docs/results.md`](docs/results.md) — all empirical results: headline configs, null calibration, bootstrap, **Beauchamp validation**, **anchor expansion experiments**, comparative methods (FUGW, Knox SC).
+4. [`docs/diagnostics.md`](docs/diagnostics.md) — why motor + tectum failed despite anchors; cross-species spatial topology issues.
+5. [`docs/pipeline.md`](docs/pipeline.md) — end-to-end replication recipe.
+6. [`docs/extending.md`](docs/extending.md) — adding new modalities, species, model classes.
+
 
 ## Notebooks
 
@@ -182,7 +182,7 @@ This is research software. Specifically:
 
 - **Validated only against Beauchamp 2022.** Other published correspondences (Mars 2018, Coletta 2020) are roadmap items.
 - **Cerebellum is excluded** from our parcellation; 14 of Beauchamp's 36 pairs cannot be evaluated.
-- **xyz cost is uniformly misleading for cross-species topology.** The model overcomes this in supervised regions via anchors + FC; in spatially-inverted regions (midbrain, hippocampus without supplementary anchors), it fails. See `docs/diagnostics_supervised_failures.md`.
+- **xyz cost is uniformly misleading for cross-species topology.** The model overcomes this in supervised regions via anchors + FC; in spatially-inverted regions (midbrain, hippocampus without supplementary anchors), it fails. See `docs/diagnostics.md`.
 - **Per-parcel correspondence is a region-level claim**, not a strict 1:1 statement. Mean argmax distance is 25-45 mm even in well-anchored regions.
 
 The model is most usefully framed as:

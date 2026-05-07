@@ -5,10 +5,12 @@ This document answers two questions a new reader is most likely to have:
 1. *What does the model actually do, and is it generalising?*
 2. *Where can I trust its predictions?*
 
-For deeper detail see `methods_writeup.md` (paper-style), `results.md`
-(comparison table), `external_validation.md` (Beauchamp 2022 result),
-`anchor_expansion_2026-05-06.md` (supplementary anchors story), and the
-audit at `audit_2026-05-06.md`.
+For deeper detail see [`methods.md`](methods.md) (formulation),
+[`results.md`](results.md) (all empirical results including the Beauchamp
+2022 validation, anchor expansion experiments, and comparative-method
+ablations), [`diagnostics.md`](diagnostics.md) (why motor + tectum failed
+despite anchors), and [`dev/audit_2026-05-06.md`](dev/audit_2026-05-06.md)
+(end-to-end audit).
 
 ## What we built
 

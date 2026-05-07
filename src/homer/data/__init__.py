@@ -7,7 +7,7 @@ Re-exports the public API at the package root for backward compatibility:
 The full sub-modules are also accessible:
     from homer.data import anchors, networks, eda, io
 """
-from homer.data import anchors, eda, io, networks, supplementary_anchors
+from homer.data import anchors, eda, io, networks, region_anchors, supplementary_anchors
 from homer.data.io import (
     DATA_DIR,
     build_anndata,

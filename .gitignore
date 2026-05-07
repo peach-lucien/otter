@@ -40,10 +40,18 @@ outputs/viewer/
 # External data downloads (large; regeneratable from pipeline/00_external/)
 data_external/
 
-# Old
+# Internal development artifacts (kept local; not pushed publicly)
+ROADMAP.md
+docs/dev/
+
+# Obsolete research scripts (results documented in docs/results.md for
+# context; the scripts themselves aren't part of the public package)
 experiments/archive/
 
 # Scratch / debugging artefacts
 .scratch/
 nb_runs/
 *.log
+
+# Dated audit reports (rebuild on demand if needed)
+docs/audit_*.md

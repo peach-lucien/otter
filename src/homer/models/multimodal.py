@@ -33,6 +33,7 @@ from homer.data.anchors import get_anchor_index
 from homer.data.networks import assign_networks, network_mismatch_mask
 from homer.models._solver import entropic_semirelaxed_fgw_multistart
 from homer.models.base import FitInfo
+from homer.data.region_anchors import apply_region_supervision
 from homer.models.supervised import SupervisedFGW, _apply_anchor_supervision, _build_xyz_M
 
 
@@ -120,6 +121,14 @@ class MultimodalFGW(SupervisedFGW):
                M_gene: Optional[np.ndarray] = None,
                M_gene_valid: Optional[np.ndarray] = None,
                net_mask: Optional[np.ndarray] = None,
+               # Region-anchor supervision (S4): list of RegionAnchorEntry
+               # applied to M *after* point-anchor supervision. Each entry
+               # forces the supervised mouse parcels to map only to parcels
+               # in the supervised human set (lam elsewhere).
+               region_anchors: Optional[Sequence] = None,
+               # Source marginal — defaults to uniform 1/n_m. Override with a
+               # length-n_m probability vector for volume/stability weighting.
+               p: Optional[np.ndarray] = None,
                **kw):
         idx_m = get_anchor_index(mouse_ad.var)
         idx_h = get_anchor_index(human_ad.var)
@@ -207,12 +216,25 @@ class MultimodalFGW(SupervisedFGW):
                 M_anchor = M_anchor / max(float(M_anchor.max()), 1e-9)
                 M += self.config["M_anchor_weight"] * M_anchor
 
-        # Anchor supervision
+        # Anchor supervision (point anchors)
         M = _apply_anchor_supervision(M, idx_m, idx_h, visible,
                                        lam=self.config["lam_anchor"])
+        # Region-anchor supervision (S4) — applied after point anchors so
+        # region constraints can extend or refine the existing point ones.
+        if region_anchors:
+            M = apply_region_supervision(
+                M, region_anchors, lam=self.config["lam_anchor"])
 
         # ---- Solve ----
-        p = np.full(n_m, 1.0 / n_m, dtype=np.float64)
+        if p is None:
+            p = np.full(n_m, 1.0 / n_m, dtype=np.float64)
+        else:
+            p = np.asarray(p, dtype=np.float64)
+            if p.shape != (n_m,):
+                raise ValueError(f"p shape {p.shape} != ({n_m},)")
+            if p.sum() < 1e-9 or (p < 0).any():
+                raise ValueError("p must be non-negative and sum to >0")
+            p = p / p.sum()    # normalise just in case
 
         if self.config["use_multistart"]:
             vis_mask = np.array([int(p_) in set(visible) for p_ in idx_m.pair_ids])
