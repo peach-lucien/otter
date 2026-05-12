@@ -30,16 +30,30 @@ mouse parcel ──► [HOMER (FGW + anchors + multi-modal cost)] ──► dist
 We validated against [Beauchamp et al. 2022 (eLife)](https://elifesciences.org/articles/79418)'s
 22 published mouse↔human region pairs. The picture splits cleanly:
 
-π is a *soft probabilistic mapping* — π[i, :] is a distribution over 2094 human parcels. We report top-K instead of top-1 as the primary metric: "is the right human partner in the model's short list?" rather than "is the single most-probable cell exactly right?". Top-1 stays as a secondary diagnostic.
+π is a *soft probabilistic mapping* — π[i, :] is a distribution over 2094 human parcels. The model is best framed as a **region-level predictor** (asks: which human *region* matches this mouse region?) rather than a parcel-level one (asks: which exact human *parcel* matches this mouse parcel?). We report both, leading with region-level.
+
+**Region-level** (does π pick the right *human region* out of 21 named candidates? — see [`docs/results.md §5.10`](docs/results.md#510-region-level-evaluation--predicting-human-regions-not-parcels)):
+
+| Where | top-1 | top-3 | top-5 | Mean fold enrichment |
+|---|---:|---:|---:|---:|
+| Supervised regions, qualified (rank ≤ k AND fold ≥ 1) | **37%** | **70%** | **70%** | **16×** |
+| Supervised regions, rank-only | 51% | 89% | 89% | — |
+| Novel hippocampal, qualified | 0% | 0% | 0% | 0× |
+| Column-permuted null (top-1) | 8% ± 9% | 25% ± 13% | 38% ± 12% | 1.3× |
+| Source-permuted null (top-1) | 11% ± 8% | 52% ± 11% | 67% ± 11% | 1.9× |
+
+Region-level top-1 of 37% is +4σ above either null. For a downstream user who works at region granularity, the model identifies the correct human region in its top-3 in ~70% of supervised cases, with mean rank 2/21 and 16× mean fold enrichment.
+
+**Parcel-level** (the stricter "find the exact cell" view):
 
 | Where | top-1 | top-5 | top-10 |
 |---|---:|---:|---:|
-| In supervised regions (15 pairs, 927 mouse parcels) | 12% | **20%** | **24%** |
+| In supervised regions (15 pairs, 927 mouse parcels) | 12% | 22% | 27% |
 | In novel regions with no anchor (4 hippocampal pairs) | 0% | 0% | 0% |
 | After adding 4 hippocampal point anchors | 7-9% on 3/4 | — | — |
 | Held-out region CV (no supervision for the tested region) | 3.4% | 5.5% | 6.6% |
 
-The supervised-region top-5 (20%) and top-10 (24%) are what a downstream user querying π will get: roughly **1 in 5 lookups finds the canonical human partner within the top 5 candidates**, and ~1 in 4 within the top 10. Held-out top-K (3.4% / 5.5% / 6.6%) is the honest measure of *generalisation* from FC/SC structure alone, without the supervision constraint propagating. See [`docs/results.md §5.6`](docs/results.md#56-s8--held-out-region-cv-the-honest-evaluation) for per-region detail. Beauchamp itself is a published hypothesis (gene-expression-derived), not ground truth — neither figure is "correct" in an absolute sense.
+Beauchamp itself is a published hypothesis (gene-expression-derived), not ground truth — neither figure is "correct" in an absolute sense.
 
 Convergent negatives confirm the bottleneck is anchor density, not the
 solver: we tested FUGW (different OT formulation) and Knox 2019 leaf-level

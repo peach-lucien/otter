@@ -144,3 +144,56 @@ def test_multimodal_use_sc_without_costs_raises(mouse_ad, human_ad):
     m = MultimodalFGW(use_sc=True)
     with pytest.raises(ValueError, match="Cm_SC"):
         m.fit(mouse_ad, human_ad)
+
+
+# ---------------------------------------------------------------------------
+# Per-mouse-parcel xyz weighting (TOPO-1, §5.11)
+
+
+def test_multimodal_xyz_weight_per_parcel_changes_pi(mouse_ad, human_ad):
+    """Zeroing the per-parcel xyz weight for grid rows changes π in those rows.
+
+    Anchor rows (first 10 in the synthetic fixture) are dominated by anchor
+    supervision so xyz contribution is overwritten; only grid rows feel xyz.
+    """
+    n_m = mouse_ad.uns["n_nodes"]
+    n_h = human_ad.uns["n_nodes"]
+    # Use a strong xyz_weight so the difference is visible at small scale
+    m_baseline = MultimodalFGW(epsilon=1e-2, use_sc=False, xyz_weight=1.0)
+    m_baseline.fit(mouse_ad, human_ad)
+    pi_baseline = m_baseline.pi.copy()
+
+    # Ablated: zero xyz for grid rows 12..16 (anchor rows are 0..9)
+    w = np.full(n_m, 1.0)
+    w[12:17] = 0.0
+    m_ablated = MultimodalFGW(epsilon=1e-2, use_sc=False, xyz_weight=1.0)
+    m_ablated.fit(mouse_ad, human_ad, xyz_weight_per_mouse_parcel=w)
+    pi_ablated = m_ablated.pi.copy()
+
+    assert pi_ablated.shape == (n_m, n_h)
+    diff_ablated = np.abs(pi_baseline[12:17] - pi_ablated[12:17]).sum()
+    assert diff_ablated > 1e-6, (
+        f"Zeroing xyz for grid rows 12..17 should change those rows; "
+        f"got total abs diff = {diff_ablated}"
+    )
+
+
+def test_multimodal_xyz_weight_per_parcel_matching_scalar_is_equivalent(
+    mouse_ad, human_ad,
+):
+    """An array of all-0.5 should match the scalar xyz_weight=0.5 solve."""
+    n_m = mouse_ad.uns["n_nodes"]
+    w = np.full(n_m, 0.5)
+    m_scalar = MultimodalFGW(epsilon=1e-2, use_sc=False, xyz_weight=0.5)
+    m_scalar.fit(mouse_ad, human_ad)
+    m_array  = MultimodalFGW(epsilon=1e-2, use_sc=False, xyz_weight=0.5)
+    m_array.fit(mouse_ad, human_ad, xyz_weight_per_mouse_parcel=w)
+    # Should converge to (approximately) the same π
+    np.testing.assert_allclose(m_scalar.pi, m_array.pi, atol=1e-6)
+
+
+def test_multimodal_xyz_weight_per_parcel_wrong_shape_raises(mouse_ad, human_ad):
+    m = MultimodalFGW(epsilon=1e-2, use_sc=False)
+    bad_w = np.zeros(5)   # wrong length
+    with pytest.raises(ValueError, match="shape"):
+        m.fit(mouse_ad, human_ad, xyz_weight_per_mouse_parcel=bad_w)

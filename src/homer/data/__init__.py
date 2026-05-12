@@ -23,6 +23,8 @@ from homer.data.io import (
 )
 from homer.data.anchors import (
     AnchorIndex,
+    assign_parcels_to_nearest_anchor_region,
+    build_xyz_weight_array,
     get_anchor_index,
     held_out_indices,
     held_out_metrics,
@@ -46,7 +48,8 @@ __all__ = [
     # anchors
     "AnchorIndex", "get_anchor_index", "held_out_indices", "held_out_metrics",
     "held_out_metrics_graded", "kfold_pair_ids", "metrics_summary",
-    "true_assignment",
+    "true_assignment", "assign_parcels_to_nearest_anchor_region",
+    "build_xyz_weight_array",
     # networks
     "NETWORKS", "PAIRID_TO_NETWORK", "assign_networks", "network_mismatch_mask",
     # sub-modules

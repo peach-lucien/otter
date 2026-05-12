@@ -11,7 +11,7 @@ Headline numbers and per-experiment notes. The raw tables live in
 > 3. The 4 best configs (`fc_only`, `fc_plus_xyz_gw`, `fc_plus_network_mask`, `fc_plus_SC`) differ by ≤1 of 42 anchors. McNemar p ≈ 1.00 between adjacent configs — **statistically tied**.
 > 4. FC translation r = 0.36 is **in-sample**; held-out subject-CV is **0.32 ± 0.006**.
 > 5. Bootstrap stability is 97.8% (40-iter, fc_plus_SC).
-> 6. **External validation against Beauchamp 2022** gives **20% top-5 and 24% top-10** in supervised regions (11.8× chance for top-1, but 4-5× chance is the more honest read in top-K terms). 0× for novel hippocampal regions — the cleanest demonstration that the model captures real cross-species biology where supervised but cannot generalise to unanchored anatomy. Details below.
+> 6. **External validation against Beauchamp 2022.** In supervised regions (15 pairs, 927 parcels) the model lands a Beauchamp-target parcel in its top-5 about **22%** of the time and top-10 about **27%** (top-1 is 12%, ≈11.8× chance for those regions). The "all 19 pairs" aggregate that mixes in the 4 novel hippocampal pairs (top-1/5/10 all 0%) gives 11.5% / 20% / 24%. 0× enrichment for novel hippocampal regions cleanly demonstrates the model captures real cross-species biology where supervised but cannot generalise to unanchored anatomy. Details below.
 
 ---
 
@@ -283,6 +283,150 @@ Per-region top-1 is **identical** for FC-only and FC+SC across all 15 regions (�
 The held-in figure is what users should look at when deciding whether to trust a specific prediction (Trust map / `docs/whats_in_the_box.md`). The held-out figure is what we cite when claiming "the FGW framework captures real cross-species biology" rather than "supervision wholly determines results".
 
 **Caveat on both:** Beauchamp 2022's 22 pairs are themselves a published hypothesis (derived from gene-expression similarity), not ground truth. Different validation sources (Mars 2018 white-matter, Coletta 2020 FC) might give different numbers. Adding more independent validation is roadmap item S3.
+
+### 5.10 Region-level evaluation — predicting human *regions*, not parcels
+
+Parcel-level top-K (§4-§5.7) asks "is the right human *parcel* in the model's short list?". That's harsh for a soft probabilistic mapping where π spreads mass across a region rather than nailing a single cell. The natural region-level question is:
+
+> Given a mouse region (set of parcels), which *human region*, out of a candidate set of named regions, does the model predict?
+
+**Implementation** (`homer.eval.region_level`, `pipeline/05j_region_level_eval.py`). For mouse region M with parcel indices `M_idx`:
+
+  `pi_M = π[M_idx, :].sum(axis=0); pi_M /= pi_M.sum()` → distribution over 2094 human parcels.
+
+For each candidate human region `H_i`, score = `pi_M[H_i_mask].sum()`. Rank candidates by score; report top-K. Fold enrichment = `score / (|H_i|/n_h)` (mass on `H_i` relative to uniform expectation).
+
+**Candidate set: Beauchamp-22** — the same 22 hand-curated human regions used in §4-§5.7, used as candidates against each other. 21 evaluable (medulla excluded; not in our atlas vocabulary). Chance top-1 varies by region size (≈ 1/21 ≈ 4.8% for equal-size).
+
+**Two flavours of top-K hit reported:**
+
+- **Rank-only top-K**: `rank(H_true) ≤ k`.
+- **Qualified top-K**: `rank ≤ k` AND `fold_enrichment ≥ 1.0`. Filters out "vacant" wins where the model put near-zero mass on every candidate and the true region won the noise (e.g. Motor, Inferior Colliculus — both rank 1 but fold ≈ 0).
+
+#### 5.10.1 Production π (FC + SC + 21 Garin point anchors)
+
+| Metric | All evaluable pairs (19) | Anchor-overlapping (15) | Novel hippocampal (4) |
+|---|---:|---:|---:|
+| Rank top-1 | 46.5% | 51.1% | 0.0% |
+| Rank top-3 | 87.8% | 89.4% | 71.7% |
+| Rank top-5 | 90.4% | 89.4% | 100.0% |
+| **Qualified top-1** | **33.9%** | **37.2%** | **0.0%** |
+| **Qualified top-3** | **63.5%** | **69.8%** | **0.0%** |
+| **Qualified top-5** | **63.5%** | **69.8%** | **0.0%** |
+| Mean rank (of 21) | 2.01 | 1.91 | 2.97 |
+| Median rank | 2.0 | — | — |
+| Mean fold enrichment | 14.4× | 15.8× | 0.0× |
+| Median fold enrichment | 4.3× | — | — |
+| Mean candidate-set mass coverage | 20.1% | — | — |
+
+The qualified metric is the honest read: it correctly identifies novel hippocampal pairs as having no real signal (rank-only top-3 of 71.7% is a candidate-overlap artefact — hippocampal subfields are spatially clustered and overlap each other in the candidate set).
+
+#### 5.10.2 Null calibration
+
+Two nulls, both run with n=100 trials. (`pipeline/05j_region_level_eval.py`):
+
+| Null | Null top-1 | Null top-3 | Null top-5 | Null fold | z top-1 | z top-3 | z top-5 | z fold |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Column-permuted (shuffle `pi_M`'s column order) | 8.4 ± 9.0% | 24.8 ± 13.4% | 38.0 ± 12.5% | 1.27 ± 0.90× | +4.2 | +4.7 | +4.2 | +14.6 |
+| Source-permuted (score `H_true` against another mouse region's `pi_M`) | 11.2 ± 8.0% | 52.1 ± 11.2% | 66.6 ± 11.1% | 1.93 ± 2.13× | +4.4 | +3.2 | +2.1 | +5.9 |
+
+The source-permuted null is the stronger test — it asks whether the mass on `H_true` is *specific* to its matching mouse region M, or a generic bias the model has regardless of source. **The model passes both nulls cleanly at top-1 (+4σ) and at fold enrichment (+6σ source / +15σ column).** Top-5 is only marginally above source-permuted (+2.1σ), reflecting that the candidate set has many similar-size adjacent regions.
+
+#### 5.10.3 What this changes about the story
+
+The parcel-level numbers (top-1 = 12 %, top-5 = 20 %, top-10 = 24 % in supervised regions) describe the worst case: "how often is the *single* most-probable human parcel correct?". Region-level numbers describe the use case for any downstream user who works at region granularity:
+
+- **The model picks the right human region as its top hypothesis in 34 % of cases** (qualified top-1), and the right region is in its top-3 in 64 %.
+- **Mean fold enrichment is 14×** — when the model scores `H_true`, it does so at ~14× the mass a uniform π would put there.
+- **Mean rank is 2.0 / 21** — the right region is almost always in the model's top two candidates.
+
+The novel-region 0 % qualified shows that this is real region-specific signal, not a candidate-set artefact: where supervision exists, the model identifies the right region; where it doesn't, the qualified metric correctly reports nothing.
+
+#### 5.10.4 Region anchors on this metric
+
+Re-running with the soft-region-anchor π (`pi_fc_plus_SC_with_soft_atlas_regions.npy`):
+
+| Metric | Production (point anchors) | + soft atlas region anchors |
+|---|---:|---:|
+| Qualified top-1 (anchor-overlapping) | 37.2 % | 31.8 % |
+| Qualified top-3 (anchor-overlapping) | 69.8 % | 58.8 % |
+| Rank top-3 (anchor-overlapping) | 89.4 % | 95.3 % |
+| Mean fold (anchor-overlapping) | 15.8× | **40.8×** |
+| Mean candidate-set mass coverage | 20.1 % | 24.5 % |
+
+Region anchors do exactly what they promise: they *concentrate* more mass inside the supervised region (mean fold 15.8× → 40.8×) and push rank top-3 up from 89% → 95%. Qualified top-K drops slightly because tighter concentration produces more rank-1 ties (penalised by the conservative "ties favour truth" rule we use for ranking). For anyone using π at region granularity, the soft-atlas-region version is strictly more concentrated on the right answer.
+
+#### 5.10.5 V2 candidate set — JuBrain ∪ Beauchamp-extras (~151 regions)
+
+The Beauchamp-22 set is small (21 evaluable) and only covers ~10 % of the 2 094 human parcels (mean candidate-set mass coverage on production π is just 20 %). For a sterner test, we re-run with the **JuBrain-184 atlas** as the candidate set. JuBrain regions (≥ 3 parcels) yield ~130 candidates; we union in 7 hand-curated Beauchamp targets (Pallidum, NAc, Caudate, IC, SC, Pons, Hypothalamus, Thalamus, CA-fields) that JuBrain doesn't cover, plus the matched JuBrain region (selected by best Jaccard overlap) for the other Beauchamp targets. Total = **151 candidates** (chance top-1 ≈ 0.7 %).
+
+| Metric (production π, anchor-overlapping pairs, 927 parcels) | Beauchamp-22 (21 candidates) | JuBrain ∪ extras (151 candidates) |
+|---|---:|---:|
+| Qualified top-1 | 37.2 % | **27.9 %** |
+| Qualified top-3 | 69.8 % | 36.0 % |
+| Qualified top-5 | 69.8 % | **60.6 %** |
+| Mean rank | 1.91 / 21 (top 9 %) | 7.72 / 151 (**top 5 %**) |
+| Mean fold enrichment | 15.8× | 15.9× |
+| Candidate-set mass coverage | 20 % | **67 %** |
+
+| Metric (production π, anchor-overlapping) | Real | Col-perm null | Src-perm null | z (vs col) | z (vs src) |
+|---|---:|---:|---:|---:|---:|
+| top-1 | 25.4 % | 1.1 ± 3.4 % | 2.5 ± 5.0 % | **+7.1** | +4.6 |
+| top-3 | 32.8 % | 3.8 ± 6.7 % | 3.3 ± 5.2 % | +4.3 | **+5.7** |
+| top-5 | 55.2 % | 7.9 ± 8.7 % | 5.5 ± 6.6 % | +5.5 | **+7.6** |
+
+(Values shown over all 19 evaluable pairs including novel.)
+
+**The right region is in the model's top 5 % of candidates (rank 7.72/151) — at +4–8σ above both nulls, including the strict source-permuted null.** This is a much sterner test than Beauchamp-22 (151-way vs 21-way classification), and the model passes cleanly.
+
+**An informative negative — Motor and Auditory fall out of top-K under JuBrain.** With Beauchamp-22, the hand-curated MNI balls for "precentral gyrus" and "Heschl's gyrus" capture our published targets exactly. With JuBrain, the best Jaccard match is `jubrain_92` (Motor) and `jubrain_15` (Auditory), and the model puts most of its mass elsewhere — at JuBrain regions adjacent to but not identical with these. This is consistent with `docs/diagnostics.md`: the model doesn't have the *exact* JuBrain neighbourhood right for these regions, even though it has the gross anatomical neighbourhood (Beauchamp-22 ball) right. The Beauchamp-22 result was generous; the JuBrain result is honest.
+
+**Mean fold enrichment is candidate-set-invariant (15.8× under both).** Fold doesn't depend on the candidate ranking — only on the mass on H_true and its size. This confirms it's the most stable headline metric.
+
+**Soft region anchors look worse here.** Re-running the soft-atlas-region π with JuBrain candidates gives qualified top-1 = 17.5 %, top-5 = 38.4 % — substantially worse than production's 27.9 % / 60.6 %. The soft anchors concentrate mass onto the Beauchamp-22 hand-curated balls (mean fold 40.8× under Beauchamp-22) but those balls don't coincide cleanly with JuBrain regions, so under a JuBrain candidate set the concentration looks misdirected. This is the parcellation-disagreement problem: a model that's "right" under one parcellation can look "wrong" under another. For users querying π, the Beauchamp targets are the right metric if they want named-anatomical hits; JuBrain is the right metric if they want atlas-grade region identification. The model is good at the former and only fair at the latter, and that's an honest read.
+
+### 5.11 TOPO-1 — Per-region xyz ablation (convergent negative)
+
+`docs/diagnostics.md` argues that Motor / Superior Colliculus / Olfactory (and others) fail because the xyz cost is *signed* — mouse and human atlases have inverted dorsoventral organisation in midbrain, so the spatial prior actively pulls non-anchor parcels into the wrong cross-species neighbourhood. The natural fix: weight xyz per parcel, lower for regions where it misleads.
+
+We tested this directly (`experiments/per_region_xyz/01_ablation.py`):
+
+**Step 1 — global xyz=0 sanity check.** Re-fit the production model with `xyz_weight=0` everywhere (FC + SC + anchors only). Beauchamp top-1 changes per pair:
+
+| Region | prod | xyz=0 global | Δ pp |
+|---|---:|---:|---:|
+| Thalamus | 33 % | 5 % | **−28** |
+| Somatosensory | 20 % | 3 % | **−17** |
+| Caudate | 13 % | 1 % | **−12** |
+| Hypothalamus | 12 % | 4 % | **−8** |
+| NAc | 8 % | 0 % | **−8** |
+| ACG | 13 % | 9 % | −4 |
+| Visual | 7 % | 7 % | 0 |
+| Auditory | 22 % | 22 % | 0 |
+| Pallidum | 5 % | 5 % | 0 |
+| Pons | 3 % | 3 % | 0 |
+| **Motor** | **0 %** | **4 %** | **+4** |
+| **Tectum (SC)** | **0 %** | **6 %** | **+6** |
+| **Piriform** | **0 %** | **13 %** | **+13** |
+
+xyz overall is **net positive** — it helps thalamus, S1, caudate, hypothalamus, NAc, ACG much more than it hurts Motor / Tectum / Piriform. The xyz cost isn't generally a topology-inversion problem; it's a real spatial prior that works for most regions and underperforms for ~3.
+
+**Step 2 — per-region xyz=0 for the three "helped" regions.** Use the new `xyz_weight_per_mouse_parcel` kwarg to zero xyz only for parcels nearest Garin pair_ids {2 (Motor), 11 (Piriform/Olfactory), 21 (Tectum)} — 308 of 1864 parcels. Re-fit:
+
+| Region | prod | xyz=0 global | xyz=0 per-region (targeted) |
+|---|---:|---:|---:|
+| Motor | 0 % | +4 → 4 % | **0 %** (no change) |
+| Tectum (SC) | 0 % | +6 → 6 % | **0 %** (no change) |
+| Piriform | 0 % | +13 → 13 % | **0 %** (no change) |
+| Thalamus | 33 % | -28 | 31 % (-2) |
+| S1 | 20 % | -17 | 20 % (no change) |
+| NAc | 8 % | -8 | 12 % (+4) |
+
+**The per-region intervention does not reproduce the global effect on the targeted regions.** Motor / Tectum / Piriform stay at 0 % top-1 even though zeroing xyz *globally* lifts them by 4 / 6 / 13 pp. The most plausible explanation: the FGW solver finds a joint coupling π that depends on the *full* M, not just on each row independently. Zeroing xyz for some rows changes their local cost but leaves the human marginal pulled in the same direction by the other 1556 parcels' xyz contributions, so the targeted parcels end up in the same equilibrium.
+
+**Conclusion.** Per-row xyz weighting *is not the right mechanism* for fixing topology-inverted regions in HOMER. The infrastructure (`xyz_weight_per_mouse_parcel` kwarg, `homer.data.build_xyz_weight_array` helper) is kept in the API as a general tool — and the unit tests confirm it works as intended at the cost-matrix level — but this specific application is a convergent negative. To actually fix Motor / Tectum / Piriform you would need to change the cost in a way that affects the global equilibrium (e.g. learned per-region xyz affine transforms, or removing xyz uniformly and accepting the cost of −28 pp on Thalamus). Both are research-grade interventions, not an evening's work.
+
+The most-likely-to-help next direction is therefore *not* per-region xyz weighting but the one we already established works empirically: **more anchors in the failure regions** — specifically Motor (pair_id 2), Tectum (21), Olfactory (11), via hand-curated anatomical homologue pairs from the cytoarchitecture literature.
 
 ---
 

@@ -136,6 +136,16 @@ class MultimodalFGW(SupervisedFGW):
                # Source marginal — defaults to uniform 1/n_m. Override with a
                # length-n_m probability vector for volume/stability weighting.
                p: Optional[np.ndarray] = None,
+               # Per-mouse-parcel xyz weighting (TOPO-1). If provided, this
+               # length-n_m array OVERRIDES self.config["xyz_weight"] row-wise
+               # in M. General-purpose hook for cost-matrix experiments. We
+               # tested its primary motivating use-case — zeroing xyz for
+               # topology-inverted regions (Motor / Tectum / Piriform) — and
+               # found per-row weighting cannot reproduce the global xyz
+               # effect (the FGW equilibrium is non-local). See docs/results
+               # §5.11 for the convergent negative. Pass None (default) for
+               # the uniform scalar behaviour.
+               xyz_weight_per_mouse_parcel: Optional[np.ndarray] = None,
                **kw):
         idx_m = get_anchor_index(mouse_ad.var)
         idx_h = get_anchor_index(human_ad.var)
@@ -185,10 +195,18 @@ class MultimodalFGW(SupervisedFGW):
         n_m, n_h = Cm.shape[0], Ch.shape[0]
         M = np.zeros((n_m, n_h), dtype=np.float64)
 
-        if self.config["xyz_weight"] != 0:
+        if self.config["xyz_weight"] != 0 or xyz_weight_per_mouse_parcel is not None:
             if M_xyz is None:
                 M_xyz = _build_xyz_M(mouse_ad.var, human_ad.var)
-            M += self.config["xyz_weight"] * M_xyz
+            if xyz_weight_per_mouse_parcel is not None:
+                w = np.asarray(xyz_weight_per_mouse_parcel, dtype=np.float64)
+                if w.shape != (n_m,):
+                    raise ValueError(
+                        f"xyz_weight_per_mouse_parcel shape {w.shape} != ({n_m},)"
+                    )
+                M += w[:, None] * M_xyz
+            else:
+                M += self.config["xyz_weight"] * M_xyz
 
         if self.config["network_mask_weight"] != 0:
             if net_mask is None:

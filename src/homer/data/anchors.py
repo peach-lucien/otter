@@ -73,6 +73,75 @@ def hemisphere_accuracy(pi: np.ndarray, idx_m: AnchorIndex, idx_h: AnchorIndex) 
     return float(correct.mean())
 
 
+def assign_parcels_to_nearest_anchor_region(
+    var: pd.DataFrame, anchor_index: AnchorIndex
+) -> np.ndarray:
+    """For each parcel in ``var``, return the ``pair_id`` of the nearest Garin anchor.
+
+    Distance is computed in xyz mm. Each parcel is assigned to the pair_id of
+    its single nearest anchor across both hemispheres. General-purpose helper
+    for region-level operations on parcels (e.g. building per-region weight
+    arrays for the TOPO-1 ablation — see docs/results §5.11).
+
+    Parameters
+    ----------
+    var : DataFrame
+        Must have x/y/z columns in mm.
+    anchor_index : AnchorIndex
+        Garin anchor index (typically from ``get_anchor_index(var)``).
+
+    Returns
+    -------
+    (n_parcels,) ndarray of int — pair_id of the nearest anchor for each parcel.
+    """
+    parcel_xyz = var[["x", "y", "z"]].to_numpy()
+    anchor_xyz = parcel_xyz[anchor_index.pos]
+    if len(anchor_xyz) == 0:
+        raise ValueError("anchor_index is empty")
+    # (n_parcels, n_anchors) pairwise xyz distances
+    d = np.linalg.norm(parcel_xyz[:, None, :] - anchor_xyz[None, :, :], axis=2)
+    nearest = np.argmin(d, axis=1)
+    return anchor_index.pair_ids[nearest].astype(int)
+
+
+def build_xyz_weight_array(
+    var: pd.DataFrame,
+    anchor_index: AnchorIndex,
+    weights_per_pair_id: dict[int, float],
+    *,
+    default_weight: float = 1.0,
+) -> np.ndarray:
+    """Build a per-parcel xyz weight array via nearest-anchor region assignment.
+
+    Each parcel gets ``weights_per_pair_id[pair_id]`` if its nearest anchor's
+    pair_id is in the dict; otherwise ``default_weight``. Pass the result to
+    ``MultimodalFGW.fit(..., xyz_weight_per_mouse_parcel=array)`` to override
+    the scalar ``xyz_weight`` for rows in the specified regions.
+
+    Parameters
+    ----------
+    var : DataFrame
+        Must have x/y/z columns in mm.
+    anchor_index : AnchorIndex
+        Garin anchor index for the same species.
+    weights_per_pair_id : {pair_id: weight}
+        Per-region overrides.
+    default_weight : float, default 1.0
+        Weight used for parcels whose nearest-anchor pair_id is not in
+        ``weights_per_pair_id``. Typically set to ``self.config["xyz_weight"]``
+        so the experiment matches the production scalar where not overridden.
+
+    Returns
+    -------
+    (n_parcels,) ndarray of float — the xyz weight for each parcel's row in M.
+    """
+    pair_ids = assign_parcels_to_nearest_anchor_region(var, anchor_index)
+    out = np.full(len(pair_ids), float(default_weight), dtype=np.float64)
+    for pid, w in weights_per_pair_id.items():
+        out[pair_ids == int(pid)] = float(w)
+    return out
+
+
 def metrics_summary(pi: np.ndarray, idx_m: AnchorIndex, idx_h: AnchorIndex) -> dict[str, float]:
     """Compact one-shot metrics dict for a coupling pi between mouse and human anchors."""
     true_idx = true_assignment(idx_m, idx_h)

@@ -5,6 +5,7 @@ import pytest
 from homer.data.anchors import (
     AnchorIndex, get_anchor_index, held_out_metrics_graded,
     metrics_summary, true_assignment, kfold_pair_ids,
+    assign_parcels_to_nearest_anchor_region, build_xyz_weight_array,
 )
 from homer.data.networks import (
     NETWORKS, PAIRID_TO_NETWORK, assign_networks, network_mismatch_mask,
@@ -103,3 +104,61 @@ def test_pairid_to_network_covers_all_anchors():
     """Every Garin pair_id 1..21 has a network label."""
     assert set(PAIRID_TO_NETWORK.keys()) == set(range(1, 22))
     assert all(v in NETWORKS for v in PAIRID_TO_NETWORK.values())
+
+
+# ---------------------------------------------------------------------------
+# Per-parcel region assignment + xyz weight helpers (TOPO-1)
+
+
+def test_assign_parcels_to_nearest_anchor_region_shape(mouse_ad):
+    idx = get_anchor_index(mouse_ad.var)
+    out = assign_parcels_to_nearest_anchor_region(mouse_ad.var, idx)
+    assert out.shape == (len(mouse_ad.var),)
+    # Every output is one of the anchor pair_ids
+    assert set(out.tolist()).issubset(set(idx.pair_ids.tolist()))
+
+
+def test_assign_parcels_anchors_assigned_to_themselves(mouse_ad):
+    """Every anchor parcel is closest to itself, so its region = its own pair_id."""
+    idx = get_anchor_index(mouse_ad.var)
+    out = assign_parcels_to_nearest_anchor_region(mouse_ad.var, idx)
+    # Anchor parcel at idx.pos[k] should get pair_ids[k]
+    for k in range(len(idx)):
+        assert out[idx.pos[k]] == idx.pair_ids[k]
+
+
+def test_build_xyz_weight_array_overrides_specific_pair(mouse_ad):
+    """Parcels closest to pair_id 1 get weight 0.0, others get default 0.5."""
+    idx = get_anchor_index(mouse_ad.var)
+    weights = build_xyz_weight_array(
+        mouse_ad.var, idx,
+        weights_per_pair_id={1: 0.0},
+        default_weight=0.5,
+    )
+    assert weights.shape == (len(mouse_ad.var),)
+    pair_ids = assign_parcels_to_nearest_anchor_region(mouse_ad.var, idx)
+    # Every parcel nearest to pair_id 1 has weight 0.0
+    assert (weights[pair_ids == 1] == 0.0).all()
+    # Every other parcel has weight 0.5
+    assert (weights[pair_ids != 1] == 0.5).all()
+
+
+def test_build_xyz_weight_array_multiple_overrides(mouse_ad):
+    idx = get_anchor_index(mouse_ad.var)
+    weights = build_xyz_weight_array(
+        mouse_ad.var, idx,
+        weights_per_pair_id={1: 0.0, 3: 0.25},
+        default_weight=1.0,
+    )
+    pair_ids = assign_parcels_to_nearest_anchor_region(mouse_ad.var, idx)
+    assert (weights[pair_ids == 1] == 0.0).all()
+    assert (weights[pair_ids == 3] == 0.25).all()
+    assert (weights[(pair_ids != 1) & (pair_ids != 3)] == 1.0).all()
+
+
+def test_build_xyz_weight_array_empty_overrides_returns_default(mouse_ad):
+    idx = get_anchor_index(mouse_ad.var)
+    weights = build_xyz_weight_array(
+        mouse_ad.var, idx, weights_per_pair_id={}, default_weight=0.7,
+    )
+    assert (weights == 0.7).all()

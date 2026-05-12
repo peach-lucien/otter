@@ -31,6 +31,17 @@ from homer.eval.paired_tests import (
     mcnemar_paired_anchors,
     paired_bootstrap_diff,
 )
+from homer.eval.region_level import (
+    aggregate_pi_over_mouse_region,
+    score_candidate_human_regions,
+    fold_enrichment_candidate_regions,
+    rank_candidate_regions,
+    region_topk,
+    evaluate_region_level,
+    column_permuted_null,
+    source_permuted_null,
+    RegionLevelPairResult,
+)
 
 __all__ = [
     "fc_translation_quality",
@@ -48,4 +59,13 @@ __all__ = [
     "compare_configs",
     "mcnemar_paired_anchors",
     "paired_bootstrap_diff",
+    "aggregate_pi_over_mouse_region",
+    "score_candidate_human_regions",
+    "fold_enrichment_candidate_regions",
+    "rank_candidate_regions",
+    "region_topk",
+    "evaluate_region_level",
+    "column_permuted_null",
+    "source_permuted_null",
+    "RegionLevelPairResult",
 ]
