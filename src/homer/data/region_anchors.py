@@ -170,37 +170,64 @@ def apply_region_supervision(
     entries: Sequence[RegionAnchorEntry],
     *,
     lam: float = 1.0,
+    lam_outside: float = 0.15,
+    beta_in: float = 0.0,
 ) -> np.ndarray:
     """Apply region-anchor supervision to a cross-species cost matrix M.
 
-    Modifies a copy and returns it. For each entry, sets:
-      - M[mp, :] = lam        for mp in mouse_indices  (forbid all human)
-      - M[mp, hp] = 0         for hp in human_indices  (allow within region)
-      - M[:, hp] = lam        for hp in human_indices  (forbid all mouse on column)
-      - M[mp, hp] = 0         re-allow within region after column forbid
+    Modifies a copy and returns it.
 
-    The ordering of the row-then-column writes matters: we forbid the
-    column first, then re-allow the in-region cells. Identical semantics
-    to ``_apply_anchor_supervision`` for point anchors when the entries
-    are size-1 sets.
+    Parameters
+    ----------
+    M : (n_m, n_h) ndarray
+        Cross-species cost matrix. Modified copy is returned.
+    entries : sequence of RegionAnchorEntry
+        Region anchors to apply.
+    lam : float, default 1.0
+        Legacy / point-anchor scale. Used only when ``lam_outside`` is set
+        to ``None`` for back-compat with the original hard behaviour. New
+        callers should use ``lam_outside`` directly.
+    lam_outside : float, default 0.15
+        Cost ASSIGNED outside the region for supervised rows / columns.
+        Default ``0.15`` is the *soft* constraint that gives better-
+        calibrated probability distributions (see docs/results §5.6.0a).
+        Set ``lam_outside = 1.0`` (or ``None``, which falls back to ``lam``)
+        for the original hard 0/1 behaviour.
+    beta_in : float, default 0.0
+        Cost ASSIGNED inside the region. Default 0 makes in-region cells
+        "free" (the solver prefers them since outside cells have cost
+        ``lam_outside`` > 0). Setting ``beta_in`` < 0 would give the
+        solver a positive preference for in-region cells beyond cost-free.
+
+    Notes
+    -----
+    Discrete top-K predictions (argmax / top-5 / top-10) are essentially
+    identical at any ``lam_outside`` in ``[0.05, 1.0]``. The default
+    ``0.15`` is chosen because it gives a ~43% better mean rank — the
+    *full* π distribution is better-calibrated, which is what matters
+    for downstream uses that consume more than just the argmax (e.g. FC
+    translation, region-set probability sums, soft homology scores).
+    See docs/results §5.6.0a for the sweep that motivates this default.
     """
+    if lam_outside is None:
+        lam_outside = lam   # back-compat hard behaviour
     M_out = np.array(M, copy=True)
     for e in entries:
         mset = list(e.mouse_indices)
         hset = list(e.human_indices)
         if not mset or not hset:
             continue
-        # Forbid all human cells for these mouse parcels
-        M_out[mset, :] = lam
-        # Allow only the in-region human cells for these mouse parcels
+        # Assign outside-region cost to supervised mouse rows
+        M_out[mset, :] = lam_outside
+        # Assign inside-region cost (default 0 = free)
         m_idx_arr = np.asarray(mset)[:, None]
         h_idx_arr = np.asarray(hset)[None, :]
-        M_out[m_idx_arr, h_idx_arr] = 0.0
-        # Forbid all mouse cells for these human parcels (other rows)
+        M_out[m_idx_arr, h_idx_arr] = beta_in
+        # Outside-region cost for supervised human cols (other rows)
         for hp in hset:
             mask = np.ones(M_out.shape[0], dtype=bool)
             mask[mset] = False    # don't overwrite the in-region rows
-            M_out[mask, hp] = lam
+            M_out[mask, hp] = lam_outside
     return M_out
 
 

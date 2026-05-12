@@ -6,11 +6,12 @@ Headline numbers and per-experiment notes. The raw tables live in
 
 > **Caveats — read these first.**
 >
-> 1. The "top-1" column below is **restricted-anchor ranking accuracy** (argmax among held-out anchor columns only). Full-space top-1 (argmax over all 2094 human nodes) is **2.4%**, mean rank **206/2094**. The model reliably *ranks the correct anchor first among held-out anchor candidates*; it does NOT reliably pick the correct anchor as the global argmax.
-> 2. The 4 best configs (`fc_only`, `fc_plus_xyz_gw`, `fc_plus_network_mask`, `fc_plus_SC`) differ by ≤1 of 42 anchors. McNemar p ≈ 1.00 between adjacent configs — **statistically tied**.
-> 3. FC translation r = 0.36 is **in-sample**; held-out subject-CV is **0.32 ± 0.006**.
-> 4. Bootstrap stability is 97.8% (40-iter, fc_plus_SC).
-> 5. **External validation against Beauchamp 2022** gives 11.8× chance enrichment for anchored regions, 0× for novel — the cleanest demonstration that the model captures real cross-species biology where supervised but cannot generalise to unanchored anatomy. Details below.
+> 1. **Top-K, not top-1, is the right metric for π.** This is a *soft probabilistic* mapping — π[i, :] is a probability distribution over 2094 human parcels. Asking "did the *single most-probable* parcel land exactly in the published target sphere?" (top-1) is brittle: a parcel can be in the next-most-probable cell and score 0. Top-5 and top-10 tell you whether the correct human is *in the model's short list*, which is what a downstream user actually consumes. We report all three; top-5 / top-10 are the headline numbers.
+> 2. The "top-1" column below is **restricted-anchor ranking accuracy** (argmax among held-out anchor columns only). Full-space top-1 (argmax over all 2094 human nodes) is **2.4%**, mean rank **206/2094**. The model reliably *ranks the correct anchor first among held-out anchor candidates*; it does NOT reliably pick the correct anchor as the global argmax.
+> 3. The 4 best configs (`fc_only`, `fc_plus_xyz_gw`, `fc_plus_network_mask`, `fc_plus_SC`) differ by ≤1 of 42 anchors. McNemar p ≈ 1.00 between adjacent configs — **statistically tied**.
+> 4. FC translation r = 0.36 is **in-sample**; held-out subject-CV is **0.32 ± 0.006**.
+> 5. Bootstrap stability is 97.8% (40-iter, fc_plus_SC).
+> 6. **External validation against Beauchamp 2022** gives **20% top-5 and 24% top-10** in supervised regions (11.8× chance for top-1, but 4-5× chance is the more honest read in top-K terms). 0× for novel hippocampal regions — the cleanest demonstration that the model captures real cross-species biology where supervised but cannot generalise to unanchored anatomy. Details below.
 
 ---
 
@@ -205,6 +206,43 @@ This is a methodological probe — held-in supervision gives 100% by constructio
 | top-1 | **3.4%** | 80% |
 | top-5 | 5.5% | 87% |
 | top-10 | 6.6% | 88% |
+
+### 5.6.0a SOFT-1 — Soft region anchors (hard penalty → mild penalty)
+
+The original `apply_region_supervision` set `M[mp, h_outside] = 1.0` (hard prohibitive) and `M[mp, h_inside] = 0` (free). This makes the constraint a 0/1 wall: the optimizer literally cannot put any mass outside the declared region. When atlas regions overlap (Visual striate ↔ pre/extra, Insula ↔ Claustrum in our setup) or the Garin anchor is mis-placed relative to Beauchamp's target (Motor; DIAG-1), the hard wall actively *misdirects* mass.
+
+Soft alternative: replace the 0/1 wall with a mild penalty `lam_outside < 1`. The optimizer still prefers in-region cells (cost = 0 vs lam_outside) but *can* violate the constraint if structural cost (Cm, Ch) strongly disagrees.
+
+Held-out region CV sweep (15 region anchors × 7 `lam_outside` values × 5 s each):
+
+| `lam_outside` | top-1 | top-5 | top-10 | Mean rank |
+|---|---:|---:|---:|---:|
+| 0.05 (very soft) | 3.4% | 5.5% | 6.5% | 509 |
+| **0.10** | **3.4%** | **5.5%** | **6.6%** | **477** ← best |
+| 0.20 | 3.4% | 5.5% | 6.6% | 483 |
+| 0.30 | 3.4% | 5.5% | 6.6% | 707 |
+| 0.50 | 3.4% | 5.5% | 6.6% | 836 |
+| 0.70 | 3.4% | 5.5% | 6.6% | 836 |
+| 1.00 (hard, legacy) | 3.4% | 5.5% | 6.6% | 843 |
+
+**Findings:**
+
+- **Discrete top-K is unchanged** at any `lam_outside`. The argmax / top-5 / top-10 of held-out regions is determined by FC/SC structure; the strength of nearby region constraints doesn't change which cells "win" the discrete ranking.
+- **Mean rank improves substantially** with softer constraints — from 843 / 2094 (hard) to 477 / 2094 (best at `lam_outside = 0.1`). That's a 43% reduction. The correct human partner moves from "top 40%" of π's row to "top 22%". The full *probability distribution* π is better-calibrated, even though the argmax is unchanged.
+- The sweet spot is `lam_outside ≈ 0.1–0.2`. Below that the constraint loses effect; above 0.3 it starts behaving like the hard version.
+
+**Default (committed)**: `region_lam_outside = 0.15` is now the default in both `apply_region_supervision()` and `MultimodalFGW._solve()`. Hard constraints (1.0) remain available for cases where you want explicit enforcement (e.g., known biological priors that should override structure) — pass `region_lam_outside=1.0`.
+
+**Implication for the trust map**: a softer region anchor doesn't change which parcel "wins" the per-row argmax — so the trust map (which is argmax-based) won't move. But for downstream tasks that use the full π distribution (FC translation, region-set lookups, soft homology probabilities), the soft version provides better-calibrated answers.
+
+**Important caveat — the held-in trained π is near-identical between hard and soft on our dataset.**
+The mean-rank improvement above is from the **held-out** CV sweep, where the region is *not* in the supervision set and only nearby region constraints leak in. When we actually re-solve the production model (FC + SC + 15 atlas region anchors) with `region_lam_outside=0.15` vs `1.0`, the two trained π files agree to solver precision: max abs diff `1.3e-7`, mean abs diff `3.3e-12`, argmax overlap 100 % (1864 / 1864 rows), Beauchamp top-K identical. The reason: once a region is *in* the supervision set, FC + SC structure already concentrates mass on the same in-region cells regardless of whether outside is penalised at 0.15 or 1.0; the hard wall is essentially redundant. So the default change is principled (it's the right default for new users adding new region anchors on data where structure is weak) but largely cosmetic for anyone querying the shipped π — both regimes produce the same numbers downstream.
+
+**When the choice actually matters:**
+
+- **Fitting on new data / new region anchors** where FC/SC support for the region is thin — soft (0.15) leaves room for structure to push back, hard (1.0) forbids that.
+- **Held-out / leave-one-region-out evaluations** — soft gives 43 % lower mean rank for the held-out region (the nearby-constraint regime above).
+- **Anywhere you consume the full π distribution, not just argmax** — entropy, region-set probability sums, soft homology — soft is mildly better-calibrated.
 
 ### 5.6.0 Ablation: does the source marginal weighting matter?
 

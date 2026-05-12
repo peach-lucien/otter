@@ -104,6 +104,47 @@ H, _ = load_cached("human", cache_dir=...)
 model = MultimodalFGW(use_sc=True).fit(M, H)
 ```
 
+## Add a new region anchor (supplementary supervision)
+
+If you want to add a new mouse↔human region pair on top of the 15 atlas-derived
+region anchors, you can either modify a YAML config or build the anchor entries
+programmatically.
+
+YAML form (see `config/region_anchors_motor.yaml` for an example):
+
+```yaml
+- pair_id: 30        # must be > 21 to avoid clashing with Garin point anchors
+  label: "Some new region"
+  mouse:
+    node_ids: ["L_708", "R_808"]   # explicit
+    # OR
+    centroid_mm: [-1.5, 2.6, 1.8]
+    radius_mm: 1.5
+  human:
+    node_ids: ["L_935"]
+    # OR
+    centroid_mm: [-35, -20, 55]
+    radius_mm: 15
+```
+
+Then in code:
+
+```python
+from homer.data.region_anchors import parse_region_anchors_config, apply_region_supervision
+
+entries = parse_region_anchors_config("config/my_region.yaml", M.var, H.var)
+# Soft constraint (default 0.15) — gives room for FC/SC structure to push back
+M_cost = apply_region_supervision(M_cost, entries)
+# Hard constraint (legacy 0/1 wall) — use when you want strict enforcement
+M_cost = apply_region_supervision(M_cost, entries, lam_outside=1.0)
+```
+
+Region anchors are most useful when the mouse and/or human side is a multi-parcel
+set rather than a single point, and when you trust the *set* of permitted
+partners but don't want to commit to a specific 1-to-1 pairing. See
+[results §5.6.0a](results.md#5.6.0a-soft-1--soft-region-anchors-hard-penalty--mild-penalty)
+for the soft-vs-hard tradeoff.
+
 ## Add a new model class
 
 The base class contract is in `homer.models.base.FGWModel`. To add a new

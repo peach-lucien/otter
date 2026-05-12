@@ -30,14 +30,16 @@ mouse parcel ──► [HOMER (FGW + anchors + multi-modal cost)] ──► dist
 We validated against [Beauchamp et al. 2022 (eLife)](https://elifesciences.org/articles/79418)'s
 22 published mouse↔human region pairs. The picture splits cleanly:
 
-| Where | Top-1 vs Beauchamp | Enrichment vs chance |
-|---|---:|---:|
-| In supervised regions, trained model (15 pairs, 927 mouse parcels) | 12% | **11.8×** |
-| In novel regions with no anchor (4 hippocampal pairs) | 0% | 0× |
-| After adding 4 hippocampal point anchors | 7-9% on 3/4 pairs | **24.4×** |
-| Held-out region CV (model gets *no* supervision for the tested region) | 3.4% average; mPFC 33%, Auditory 22%, Somatosensory 11% | ~7× chance |
+π is a *soft probabilistic mapping* — π[i, :] is a distribution over 2094 human parcels. We report top-K instead of top-1 as the primary metric: "is the right human partner in the model's short list?" rather than "is the single most-probable cell exactly right?". Top-1 stays as a secondary diagnostic.
 
-The 11.8× tells you the trained model's predictions in supervised regions match Beauchamp's published pairs about that often — that's what a downstream user querying π will experience. The 3.4× held-out tells you how much of that is the model recovering homology from FC/SC structure alone vs supervision doing the work. Both are real numbers answering different questions. See [`docs/results.md §5.6`](docs/results.md#56-s8--held-out-region-cv-the-honest-evaluation) for the per-region table. Beauchamp itself is a published hypothesis (gene-expression-derived), not ground truth — neither figure is "correct" in an absolute sense.
+| Where | top-1 | top-5 | top-10 |
+|---|---:|---:|---:|
+| In supervised regions (15 pairs, 927 mouse parcels) | 12% | **20%** | **24%** |
+| In novel regions with no anchor (4 hippocampal pairs) | 0% | 0% | 0% |
+| After adding 4 hippocampal point anchors | 7-9% on 3/4 | — | — |
+| Held-out region CV (no supervision for the tested region) | 3.4% | 5.5% | 6.6% |
+
+The supervised-region top-5 (20%) and top-10 (24%) are what a downstream user querying π will get: roughly **1 in 5 lookups finds the canonical human partner within the top 5 candidates**, and ~1 in 4 within the top 10. Held-out top-K (3.4% / 5.5% / 6.6%) is the honest measure of *generalisation* from FC/SC structure alone, without the supervision constraint propagating. See [`docs/results.md §5.6`](docs/results.md#56-s8--held-out-region-cv-the-honest-evaluation) for per-region detail. Beauchamp itself is a published hypothesis (gene-expression-derived), not ground truth — neither figure is "correct" in an absolute sense.
 
 Convergent negatives confirm the bottleneck is anchor density, not the
 solver: we tested FUGW (different OT formulation) and Knox 2019 leaf-level

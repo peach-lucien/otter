@@ -60,15 +60,14 @@ def test_parse_centroid_radius_form():
     assert sorted(entries[0].human_indices) == [0, 1]
 
 
-def test_apply_region_supervision_size_1_matches_point_anchor():
-    """Region anchor with size-1 sets should produce same M as point anchor."""
+def test_apply_region_supervision_size_1_matches_point_anchor_hard():
+    """With lam_outside=1.0 (hard), region anchor of size 1 == point anchor."""
     n_m, n_h = 5, 5
     M = np.full((n_m, n_h), 0.5)   # neutral baseline
     entry = RegionAnchorEntry(pair_id=22, label="point",
                                mouse_indices=[2], human_indices=[3])
-    out = apply_region_supervision(M, [entry], lam=1.0)
+    out = apply_region_supervision(M, [entry], lam_outside=1.0)
     # Expect: row 2 is all 1.0 except column 3 which is 0.0
-    #         column 3 is all 1.0 except row 2 which is 0.0
     assert out[2, 3] == 0.0
     assert (out[2, :] == np.array([1.0, 1.0, 1.0, 0.0, 1.0])).all()
     assert (out[:, 3] == np.array([1.0, 1.0, 0.0, 1.0, 1.0])).all()
@@ -77,24 +76,39 @@ def test_apply_region_supervision_size_1_matches_point_anchor():
     assert out[4, 4] == 0.5
 
 
-def test_apply_region_supervision_set_membership():
-    """Region anchor with multi-parcel sets allows in-region cells, forbids
-    out-of-region cells on the supervised rows/cols."""
+def test_apply_region_supervision_set_membership_hard():
+    """With lam_outside=1.0 (hard), region anchor enforces 0/1 wall."""
     n_m, n_h = 6, 6
     M = np.full((n_m, n_h), 0.5)
     entry = RegionAnchorEntry(pair_id=22, label="motor region",
                                mouse_indices=[1, 2], human_indices=[3, 4])
-    out = apply_region_supervision(M, [entry], lam=1.0)
-    # Mouse rows 1, 2 should have 0 at h ∈ {3,4}, lam elsewhere
+    out = apply_region_supervision(M, [entry], lam_outside=1.0)
+    # Mouse rows 1, 2 should have 0 at h ∈ {3,4}, 1.0 elsewhere
     assert out[1, 3] == 0.0 and out[1, 4] == 0.0
     assert out[2, 3] == 0.0 and out[2, 4] == 0.0
     assert out[1, 0] == 1.0 and out[1, 5] == 1.0
     assert out[2, 0] == 1.0 and out[2, 5] == 1.0
-    # Human cols 3, 4 should have 0 only at m ∈ {1,2}, lam at other rows
+    # Human cols 3, 4 should have 0 only at m ∈ {1,2}, 1.0 at other rows
     assert out[0, 3] == 1.0 and out[5, 3] == 1.0
     assert out[3, 4] == 1.0 and out[4, 4] == 1.0
     # Untouched cells unchanged
     assert out[0, 0] == 0.5 and out[5, 5] == 0.5
+
+
+def test_apply_region_supervision_default_is_soft():
+    """Default (lam_outside=0.15) produces a soft wall: in-region cells are
+    cost 0, outside cells are cost 0.15 (preferred but not forbidden)."""
+    n_m, n_h = 5, 5
+    M = np.full((n_m, n_h), 0.5)
+    entry = RegionAnchorEntry(pair_id=22, label="soft",
+                               mouse_indices=[2], human_indices=[3])
+    out = apply_region_supervision(M, [entry])    # default lam_outside=0.15
+    assert out[2, 3] == 0.0     # in-region still free
+    assert np.allclose(out[2, [0, 1, 2, 4]], 0.15)   # outside is mild
+    assert np.allclose(out[[0, 1, 3, 4], 3], 0.15)
+    # Untouched cells unchanged
+    assert out[0, 0] == 0.5
+    assert out[4, 4] == 0.5
 
 
 def test_pair_id_le_21_rejected():

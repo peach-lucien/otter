@@ -126,6 +126,13 @@ class MultimodalFGW(SupervisedFGW):
                # forces the supervised mouse parcels to map only to parcels
                # in the supervised human set (lam elsewhere).
                region_anchors: Optional[Sequence] = None,
+               # Soft region anchors (SOFT-1): outside-region penalty for
+               # region anchor constraints. Default 0.15 is soft — gives
+               # better-calibrated probability distributions at no cost to
+               # argmax / top-K predictions. Pass 1.0 (or None) for the
+               # original hard 0/1 wall behaviour.
+               region_lam_outside: float = 0.15,
+               region_beta_in: float = 0.0,
                # Source marginal — defaults to uniform 1/n_m. Override with a
                # length-n_m probability vector for volume/stability weighting.
                p: Optional[np.ndarray] = None,
@@ -223,7 +230,11 @@ class MultimodalFGW(SupervisedFGW):
         # region constraints can extend or refine the existing point ones.
         if region_anchors:
             M = apply_region_supervision(
-                M, region_anchors, lam=self.config["lam_anchor"])
+                M, region_anchors,
+                lam=self.config["lam_anchor"],
+                lam_outside=region_lam_outside,
+                beta_in=region_beta_in,
+            )
 
         # ---- Solve ----
         if p is None:

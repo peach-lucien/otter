@@ -69,6 +69,23 @@ visible-anchor mouse rows are forced to point at their correct human partner.
 The held-out (CV) anchors get no such constraint and must find their partner
 purely through the FC + xyz + SC signal.
 
+### Region anchors (optional, soft by default)
+
+A region anchor (`homer.data.region_anchors`) generalises a point anchor to a
+*set* of mouse parcels mapping to a *set* of human parcels. Encoding in M for
+each region anchor with mouse-set `Mset` and human-set `Hset`:
+
+- `M[mp, :] = lam_outside` for `mp ∈ Mset` (mild penalty everywhere else)
+- `M[mp, hp] = 0` for `mp ∈ Mset, hp ∈ Hset` (free within the region)
+- Symmetrically along human columns.
+
+`lam_outside = 0.15` is the default ("soft region anchor"). Compared to the
+legacy hard variant (`lam_outside = 1.0`), the soft constraint produces
+better-calibrated probability tails (held-out region CV mean rank ↓ 43 %)
+while leaving the trained-π argmax unchanged — see
+[results §5.6.0a](results.md#5.6.0a-soft-1--soft-region-anchors-hard-penalty--mild-penalty)
+for the sweep. Pass `region_lam_outside=1.0` to recover the hard wall.
+
 ## Modality combinations
 
 Each modality contributes either to the relational cost (within-species) or to
@@ -94,7 +111,8 @@ Optional terms (off by default in the production config, available as ablations)
 | α                | 0.5      | Equal weight to relational + feature terms            |
 | ε                | 5e-3     | Small → mostly-deterministic π. Larger ε softens π but loses anchor-CV accuracy. |
 | `xyz_weight`     | 0.5      | Spatial prior strong enough to disambiguate, not so strong it swamps FC |
-| `lam_anchor`     | 1.0      | Forbidden-cell penalty; large vs the [0, 1] cost scale |
+| `lam_anchor`     | 1.0      | Point-anchor forbidden-cell penalty; large vs the [0, 1] cost scale |
+| `region_lam_outside` | 0.15 | Region-anchor outside-region penalty (soft default — see results §5.6.0a) |
 | `fc_weight`      | 0.7      | Production FC + SC mix                                 |
 | `sc_weight`      | 0.3      | Production FC + SC mix                                 |
 | `cost_normalisation` | "max" | Each cost matrix divided by its max off-diagonal entry |
