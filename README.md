@@ -8,6 +8,14 @@ Output: a coupling matrix **π** of shape (1864 mouse parcels × 2094 human parc
 
 ---
 
+## Try it in your browser (no install)
+
+**→ [Open the HOMER Mapping Explorer](https://peach-lucien.github.io/homer/)**
+
+A self-contained 3D viewer for the production coupling: search a mouse region or parcel, see its top-K human partners ranked by coupling mass, toggle the cortical surface or mouse atlas shell, and inspect the trust evidence behind every prediction. No Python, no install, no backend — it's a single HTML file with the recommended model baked in. Use this if you want to *look at* HOMER. The rest of the README is for using it programmatically or reproducing it.
+
+---
+
 ## Headline numbers
 
 | Metric (recommended `pi_fc_plus_SC_with_all_packs.npy`) | Value |
@@ -20,7 +28,9 @@ Output: a coupling matrix **π** of shape (1864 mouse parcels × 2094 human parc
 
 Multi-source trust map says: 19 % of mouse parcels are in the `anchored_and_validated` tier, 36 % in `validated_only`, 13 % in `structural`, 29 % `low_evidence`. See [`docs/03_results.md`](docs/03_results.md).
 
-## Install + quickstart
+## Install + quickstart (for programmatic use)
+
+Skip this section if you just want to look at the couplings — use the [explorer](https://peach-lucien.github.io/homer/) above. Install only if you need to query π in code, re-train the model, or extend it.
 
 ```bash
 git clone <this-repo> homer && cd homer
@@ -49,23 +59,23 @@ trust = np.load("outputs/coupling/trust_multisource_all_packs.npz", allow_pickle
 reliable = trust["evidence_tier"] == "anchored_and_validated"     # 19% of parcels
 ```
 
-For interactive exploration, see `notebooks/01_quickstart.ipynb`.
+For interactive exploration, see `notebooks/01_quickstart.ipynb` (Python) or the browser-only [HOMER Mapping Explorer](https://peach-lucien.github.io/homer/) (no install).
 
 ## What's in this repo
 
 ```
 homer/
-├── docs/                # 7-doc structured reading path (start with docs/README.md)
+├── docs/                # 7-doc reading path + the published GUI (docs/index.html)
 ├── src/homer/           # The library — data, models, eval, viz, costs
-├── pipeline/            # End-to-end reproduction scripts (02 → 07)
+├── pipeline/            # End-to-end reproduction scripts (02 → 08)
 ├── experiments/         # Anchor-pack experiments + ablations
 ├── notebooks/           # 4 interactive walkthroughs
 ├── tests/               # pytest
-├── outputs/             # All generated artefacts
+├── outputs/             # All generated artefacts (gitignored)
 └── config/              # YAML configs for anchors
 ```
 
-Documentation navigation hub: [`docs/README.md`](docs/README.md).
+Documentation navigation hub: [`docs/README.md`](docs/README.md). To rebuild the explorer locally, run `python pipeline/08_build_gui.py --publish` — this regenerates `docs/index.html` from the current model.
 
 ## How the method works in one paragraph
 
