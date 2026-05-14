@@ -232,3 +232,9 @@ def build_garin_region_anchors_from_atlases(
               f"in those cases (held-out CV will reveal effects)")
     print(f"Built {n_built} region anchors from atlas labels (pid {pid_offset+1}..{pid_offset+max(pair_to_pos_m)}).")
     return out
+
+
+# Curated per-region anchor packs (BICCN motor, Tectum, etc.) live in
+# ``homer.data.anchor_packs.*`` — each pack is a small self-contained module.
+# This file keeps only the systematic atlas-derived pack
+# (``build_garin_region_anchors_from_atlases``).

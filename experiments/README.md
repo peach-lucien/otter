@@ -1,30 +1,54 @@
 # Experiments
 
-Each subfolder is one research experiment from the project's iteration history.
-Items in this directory are **not** part of the production pipeline — they're
-documented and kept for reproducibility. Most returned negative or no-op results
-(see [`docs/results.md`](../docs/results.md) for the consolidated comparison table).
+Reproducible one-off experiments. The `src/homer/` library is the production code; everything here is research scripts that produced a specific result documented in `docs/`.
 
 ## Layout
 
-| Folder                          | What                                                    | Result      |
-|---------------------------------|---------------------------------------------------------|-------------|
-| `A_anchor_M_cost/`              | Anchor-relationship features as cross-species M term    | negative    |
-| `B_iterative_coclustering/`     | Bootstrap high-confidence pairs back as soft anchors    | no-op       |
-| `C_confidence_weighted_fc/`     | Bayesian shrinkage of FC by per-cell `n_obs`            | structural no-op |
-| `D_subject_cv/`                 | K-fold subject-level CV on FC translation               | small gap (~4pp) |
-| `M1_multistart/`                | Multistart entropic FGW (5 random + uniform inits)      | no-op (loss spread <1e-6) |
-| `M4_hierarchical/`              | Per-network sub-FGW solves                              | trade-off (CV worse, within-net FC better) |
-| `archive/`                      | Stepping-stone scripts superseded by current pipeline   | obsolete    |
-
-## How to re-run
-
-Each script that produced a substantive result is preserved here. Re-running:
-
-```bash
-PYTHONPATH=src python experiments/B_iterative_coclustering/iterative_cv.py --config fc_plus_SC --networks visual,brainstem
-PYTHONPATH=src python experiments/D_subject_cv/subject_cv.py --config fc_plus_SC --k-folds 5
+```
+experiments/
+├── anchor_packs/          # Per-pack experiment runners (default + opt-in)
+├── ablations/             # Methodology ablations (soft anchors, marginals, xyz)
+├── archive/               # Older detours superseded by the current pipeline
+└── outputs/               # Cached intermediate results from these runs
 ```
 
-For items A and M1 (no dedicated script), see the per-folder README — they
-were configuration flags of `pipeline/05a_anchor_cv.py`.
+## anchor_packs/ — region-anchor experiments
+
+Each script fits the production point-anchor π plus one anchor pack and reports the Beauchamp delta. They're the experiments behind `docs/04_anchor_packs.md`.
+
+| Script | Pack | Pids | Reference |
+|---|---|---|---|
+| `biccn_motor.py` | M1 + M2 | 30, 31 | Bakken 2021 *Nature* |
+| `tectum.py` | SC + IC | 32, 33 | May 2006; Schreiner 2007 |
+| `olfactory.py` | Piriform + AON | 34, 35 | Mori 2014; Carlén 2017 |
+| `cingulate.py` | sgACC + RSC (opt-in) | 36, 37 | Vogt 2019 |
+| `amygdala.py` | Cortical subplate | 38 | Janak & Tye 2015 |
+| `hippocampal.py` | Subi + CA1 + CA3 + DG | 39-42 | Strange 2014 |
+| `lateral_pfc.py` | OFC + dlPFC (opt-in for dlPFC) | 45, 46 | Wallis 2012; Carlén 2017 |
+| `compose_all.py` | All default packs (headline result) | 30-35, 38-42 | — |
+
+Run any with:
+```bash
+PYTHONPATH=src python experiments/anchor_packs/<name>.py
+```
+
+`compose_all.py` is the "headline result" experiment that produces the recommended production-with-packs π. See `docs/03_results.md` for the numbers.
+
+## ablations/ — methodology ablations
+
+Three ablations that justify or contextualise design choices in the production model. Each produced a documented result in `docs/archive/iteration_log.md`.
+
+| Script | Question | Result |
+|---|---|---|
+| `soft_region_anchors.py` | Hard 0/1 wall vs soft `lam_outside < 1` constraint? | Soft is better-calibrated (43% lower mean rank); soft `0.15` is now default. |
+| `marginal_weighting.py` | Does volume- or stability-weighted source marginal help? | No (0.0 pp difference). Uniform is fine. |
+| `per_region_xyz.py` | Can per-region xyz weighting fix topology-inverted regions? | Convergent negative — local intervention doesn't reproduce global xyz effect. |
+
+Run with:
+```bash
+PYTHONPATH=src python experiments/ablations/<name>.py
+```
+
+## archive/ — older detours
+
+Stepping-stone experiments from earlier iterations. Kept for reproducibility but not part of the current narrative. See `docs/archive/iteration_log.md` for context.

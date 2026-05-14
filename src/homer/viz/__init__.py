@@ -15,11 +15,16 @@ Three modules:
                             wide CSV / long CSV / markdown summary +
                             comparison figures.
 
+  ``homer.viz.gui``      — region-first static GUI builder for
+                            ``outputs/gui/index.html``.
+
 Public:
 
     from homer.viz import (
         # viewer
         build_viewer_html, build_viewer_data, write_viewer,
+        # GUI
+        build_gui_payload, build_gui_html, build_visual_layers, write_gui,
         # notebook plotters
         plot_brain_3d, plot_pi_partners,
         plot_per_network_heatmap, plot_comparison_bars,
@@ -35,6 +40,12 @@ from homer.viz.viewer import (
     topk_per_col,
     topk_per_row,
     write_viewer,
+)
+from homer.viz.gui import (
+    build_gui_html,
+    build_gui_payload,
+    build_visual_layers,
+    write_gui,
 )
 from homer.viz.notebook import (
     plot_brain_3d,
@@ -60,6 +71,8 @@ __all__ = [
     # viewer
     "build_viewer_data", "build_viewer_html", "write_viewer",
     "topk_per_row", "topk_per_col", "row_entropy", "col_entropy",
+    # GUI
+    "build_gui_payload", "build_gui_html", "build_visual_layers", "write_gui",
     # notebook plotters
     "plot_brain_3d", "plot_pi_partners", "plot_pi_partners_pair",
     "plot_per_network_heatmap", "plot_comparison_bars",

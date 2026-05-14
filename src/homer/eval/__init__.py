@@ -42,6 +42,14 @@ from homer.eval.region_level import (
     source_permuted_null,
     RegionLevelPairResult,
 )
+from homer.eval.trust_score import (
+    compute_trust_score,
+    compute_multisource_trust,
+)
+from homer.eval.network_coherence import (
+    network_compactness,
+    compare_network_compactness,
+)
 
 __all__ = [
     "fc_translation_quality",
@@ -68,4 +76,8 @@ __all__ = [
     "column_permuted_null",
     "source_permuted_null",
     "RegionLevelPairResult",
+    "compute_trust_score",
+    "compute_multisource_trust",
+    "network_compactness",
+    "compare_network_compactness",
 ]

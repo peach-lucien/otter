@@ -175,6 +175,115 @@ def compute_trust_score(
     }
 
 
+def compute_multisource_trust(
+    M_anndata,
+    H_anndata,
+    pi: np.ndarray,
+    *,
+    bootstrap_path: Optional[str | Path] = None,
+    region_anchor_entries: Optional[list] = None,
+    beauchamp_per_pair: Optional[dict] = None,
+    mouse_dsurqe_labels: Optional[np.ndarray] = None,
+    beauchamp_region_to_mouse_dsurqe: Optional[dict] = None,
+    weights: tuple[float, float, float] = (0.4, 0.4, 0.2),
+) -> dict:
+    """Multi-source per-parcel trust map (v1).
+
+    Layers external supervision signals (anchor presence, Beauchamp
+    region-validation) on top of the existing internal ``compute_trust_score``
+    composite. Produces a multi-tier classification:
+
+      ``"anchored_and_validated"`` — parcel is in an anchor pack AND its
+        Beauchamp region has top-1 > 0
+      ``"anchored_only"``         — parcel is in an anchor pack but its
+        Beauchamp region (if any) is still 0 % or it's outside any
+        Beauchamp region
+      ``"validated_only"``        — parcel is in a Beauchamp region with
+        top-1 > 0 but is not in any anchor pack
+      ``"structural"``            — parcel has high internal trust
+        (bootstrap + concentration + FC) but no anchor and no Beauchamp
+        validation: pure structural confidence
+      ``"low_evidence"``          — none of the above
+
+    Parameters
+    ----------
+    region_anchor_entries : list of RegionAnchorEntry (optional)
+        If provided, parcels in any entry's mouse_indices are flagged as
+        ``pack_anchored``.
+    beauchamp_per_pair : dict (optional)
+        Loaded ``outputs/logs/beauchamp_validation_*.json``. Keys are
+        "Mouse region -> Human region" strings; values include "top1".
+    mouse_dsurqe_labels : (n_m,) ndarray of int (optional)
+        Per-parcel DSURQE label. Needed (with ``beauchamp_region_to_mouse_dsurqe``)
+        to attach each parcel to its Beauchamp validation pair.
+    beauchamp_region_to_mouse_dsurqe : dict (optional)
+        {Beauchamp mouse name: set of DSURQE label IDs}. Use
+        ``pipeline.05f_beauchamp_validation.parse_dsurqe_tree`` to build.
+
+    Returns
+    -------
+    dict with all keys from ``compute_trust_score`` plus:
+        garin_anchored   : (n_m,) bool — parcel is one of the 42 Garin anchors
+        pack_anchored    : (n_m,) bool — in any region_anchor entry
+        beauchamp_top1   : (n_m,) float — its Beauchamp pair's top-1 (NaN if N/A)
+        evidence_tier    : (n_m,) of strings (5 tiers — see above)
+    """
+    # Start with the internal composite trust score
+    base = compute_trust_score(
+        M_anndata, H_anndata, pi,
+        bootstrap_path=bootstrap_path, weights=weights,
+    )
+    n_m = pi.shape[0]
+
+    # ---- Garin anchored flag
+    idx_m = get_anchor_index(M_anndata.var)
+    garin_anchored = np.zeros(n_m, dtype=bool)
+    garin_anchored[idx_m.pos] = True
+
+    # ---- Pack-anchored flag
+    pack_anchored = np.zeros(n_m, dtype=bool)
+    if region_anchor_entries:
+        for e in region_anchor_entries:
+            pack_anchored[list(e.mouse_indices)] = True
+
+    # ---- Beauchamp per-parcel top-1 (via mouse-region membership)
+    beau_top1 = np.full(n_m, np.nan, dtype=np.float64)
+    if (beauchamp_per_pair is not None
+            and mouse_dsurqe_labels is not None
+            and beauchamp_region_to_mouse_dsurqe is not None):
+        # Map each Beauchamp mouse-region name to its top-1
+        for pair_str, payload in beauchamp_per_pair.items():
+            if pair_str.startswith("_"): continue
+            if "skip_reason" in payload: continue
+            top1 = payload.get("top1")
+            if top1 is None: continue
+            mouse_name = pair_str.split(" -> ")[0]
+            labels = beauchamp_region_to_mouse_dsurqe.get(mouse_name)
+            if not labels: continue
+            mask = np.isin(mouse_dsurqe_labels, list(labels))
+            beau_top1[mask] = float(top1)
+
+    # ---- Evidence tier
+    evidence_tier = np.full(n_m, "low_evidence", dtype=object)
+    is_validated = (beau_top1 > 0)
+    is_anchored  = garin_anchored | pack_anchored
+    is_structural = base["trust"] >= np.percentile(base["trust"], 67)
+
+    evidence_tier[is_anchored & is_validated]  = "anchored_and_validated"
+    evidence_tier[is_anchored & ~is_validated] = "anchored_only"
+    evidence_tier[~is_anchored & is_validated] = "validated_only"
+    evidence_tier[~is_anchored & ~is_validated & is_structural] = "structural"
+    # rest stay "low_evidence"
+
+    return {
+        **base,
+        "garin_anchored": garin_anchored,
+        "pack_anchored":  pack_anchored,
+        "beauchamp_top1": beau_top1,
+        "evidence_tier":  evidence_tier,
+    }
+
+
 def calibrate_trust_against_validation(
     trust: np.ndarray,
     tier: np.ndarray,

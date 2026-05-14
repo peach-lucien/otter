@@ -105,6 +105,59 @@ def test_build_viewer_data_rejects_1d_pi(mouse_ad, human_ad):
 
 
 # ---------------------------------------------------------------------------
+# Region-first GUI
+# ---------------------------------------------------------------------------
+def test_build_gui_payload_smoke(mouse_ad, human_ad):
+    from homer.viz.gui import build_gui_payload
+    rng = np.random.default_rng(0)
+    pi = rng.uniform(0, 1, size=(20, 25))
+    payload = build_gui_payload(
+        [{"id": "toy", "label": "Toy model", "pi": pi}],
+        mouse_ad,
+        human_ad,
+        top_k=4,
+    )
+    assert payload["version"] == 1
+    assert payload["models"][0]["id"] == "toy"
+    assert len(payload["models"][0]["top_mouse_to_human"]) == 20
+    assert len(payload["models"][0]["top_mouse_to_human"][0]) == 4
+    assert payload["mouse"]["ids"][0] == "1"
+    assert "groups" in payload and "mouse" in payload["groups"]
+
+
+def test_build_gui_html_contains_app(mouse_ad, human_ad):
+    from homer.viz.gui import build_gui_html, build_gui_payload
+    pi = np.eye(20, 25)
+    payload = build_gui_payload(
+        [{"id": "identity", "label": "Identity-ish", "pi": pi}],
+        mouse_ad,
+        human_ad,
+        top_k=3,
+    )
+    html = build_gui_html(payload)
+    assert "<!DOCTYPE html>" in html
+    assert "HOMER Mapping Explorer" in html
+    assert "plotMouse" in html and "plotHuman" in html
+    assert "Identity-ish" in html
+
+
+def test_write_gui_creates_files(mouse_ad, human_ad, tmp_path):
+    from homer.viz.gui import build_gui_payload, write_gui
+    pi = np.eye(20, 25)
+    payload = build_gui_payload(
+        [{"id": "identity", "label": "Identity-ish", "pi": pi}],
+        mouse_ad,
+        human_ad,
+        top_k=3,
+    )
+    data_path, html_path = write_gui(payload, output_dir=tmp_path)
+    assert data_path.exists()
+    assert html_path.exists()
+    data = json.loads(data_path.read_text())
+    assert data["models"][0]["id"] == "identity"
+
+
+# ---------------------------------------------------------------------------
 # Notebook plotters — verify they return Plotly Figure objects
 # ---------------------------------------------------------------------------
 @pytest.fixture

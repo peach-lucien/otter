@@ -36,6 +36,7 @@ outputs/figures/
 outputs/logs/
 outputs/comparison/
 outputs/viewer/
+outputs/gui/
 
 # External data downloads (large; regeneratable from pipeline/00_external/)
 data_external/
