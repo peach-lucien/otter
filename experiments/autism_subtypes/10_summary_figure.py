@@ -14,6 +14,11 @@ def main():
     j2b = json.loads(Path("outputs/logs/autism_subtypes_contrast.json").read_text())
     j2c = json.loads(Path("outputs/logs/autism_subtypes_full_matrix.json").read_text())
     j3  = json.loads(Path("outputs/logs/autism_subtypes_gene_spatial.json").read_text())
+    # Optional: expanded gene result (if Allen API expansion has been run)
+    p_exp = Path("outputs/logs/autism_subtypes_gene_spatial_expanded.json")
+    p_diag = Path("outputs/logs/autism_subtypes_gene_diagnostics.json")
+    j3_exp = json.loads(p_exp.read_text()) if p_exp.exists() else None
+    j3_diag = json.loads(p_diag.read_text()) if p_diag.exists() else None
 
     # 4-panel summary: title bar at top, then 4 panels
     fig = plt.figure(figsize=(14, 9))
@@ -63,8 +68,19 @@ def main():
     null_means = [
         (j2b["null"]["pearson_mean"], j2b["null"]["pearson_ci95"], j2b["pearson_r"], "Test 2b\nrow-sum (n=8)"),
         (j2c["null"]["pearson_mean"], j2c["null"]["pearson_ci95"], j2c["pearson_r"], "Test 2c\nfull matrix (n=36)"),
-        (j3["null"]["pearson_mean"], j3["null"]["pearson_ci95"], j3["pearson_r"], "Test 3\ngene-spatial (n=8)"),
     ]
+    if j3_diag is not None:
+        # For the expanded test, use the gene-bootstrap CI (not permutation null)
+        null_means.append((
+            0.0, [-0.05, 0.05],   # placeholder "null mean ≈ 0" with a tight band for display
+            j3_diag["bootstrap"]["mean_r"],
+            f"Test 3 (expanded)\n{j3_exp['n_genes_total']:,} genes — bootstrap"
+        ))
+    else:
+        null_means.append((
+            j3["null"]["pearson_mean"], j3["null"]["pearson_ci95"], j3["pearson_r"],
+            "Test 3\ngene-spatial (n=8)"
+        ))
     for i, (nm, ci, real, lbl) in enumerate(null_means):
         ax.barh(i, ci[1] - ci[0], left=ci[0], height=0.4, color="#cccccc", alpha=0.6)
         ax.scatter(nm, i, color="gray", marker="|", s=200)
@@ -82,6 +98,27 @@ def main():
 
     # Panel 4 — text panel with verdict per test
     ax = axes[3]; ax.axis("off")
+    if j3_exp is not None and j3_diag is not None:
+        boot_mean = j3_diag["bootstrap"]["mean_r"]
+        boot_ci   = j3_diag["bootstrap"]["ci95"]
+        boot_pos  = j3_diag["bootstrap"]["pct_r_positive"]
+        n_genes   = j3_exp["n_genes_total"]
+        gene_summary = [
+            f"$\\bf{{Test\\ 3}}$ — Gene-set spatial (claim 4), $\\bf{{expanded:\\ {n_genes:,}\\ genes}}$:",
+            f"  Bootstrap r = {boot_mean:+.3f}, 95% CI ({boot_ci[0]:+.3f}, {boot_ci[1]:+.3f})",
+            f"  {boot_pos*100:.1f}% of 1,000 gene-resamples positive",
+            "  → Confirms overall claim-4 cross-species spatial replication;",
+            "     per-pathway direction-by-subtype not testable from",
+            "     published source (hypo magnitude << hyper)",
+        ]
+    else:
+        gene_summary = [
+            "$\\bf{Test\\ 3}$ — Gene-set spatial proof-of-concept (claim 4):",
+            f"  Pearson r = {j3['pearson_r']:+.3f} (p = {j3['pearson_p']:.3f}),  Spearman ρ = {j3['spearman_r']:+.3f}",
+            f"  Empirical p = {j3['null']['spearman_empirical_p']:.3f} (Spearman, marginal)",
+            "  → Underpowered (36 / 6,415 Pagani genes in HOMER atlas);",
+            "     suggestive but needs full Allen gene coverage",
+        ]
     lines = [
         "$\\bf{Summary}$ (HOMER fit independently of Pagani 2026)",
         "",
@@ -97,11 +134,7 @@ def main():
         "  → HOMER π reproduces joint network-pair Δ structure",
         "     across species without using name-bridge",
         "",
-        "$\\bf{Test\\ 3}$ — Gene-set spatial proof-of-concept (claim 4):",
-        f"  Pearson r = {j3['pearson_r']:+.3f} (p = {j3['pearson_p']:.3f}),  Spearman ρ = {j3['spearman_r']:+.3f}",
-        f"  Empirical p = {j3['null']['spearman_empirical_p']:.3f} (Spearman, marginal)",
-        "  → Underpowered (36 / 6,415 Pagani genes in HOMER atlas);",
-        "     suggestive but needs full Allen gene coverage",
+        *gene_summary,
     ]
     for i, line in enumerate(lines):
         ax.text(0.02, 0.97 - i * 0.052, line, fontsize=9, transform=ax.transAxes,

@@ -11,6 +11,7 @@ dist/
 
 # Test / lint caches
 .pytest_cache/
+pytest-of-*/
 .ruff_cache/
 .mypy_cache/
 .coverage
@@ -40,6 +41,17 @@ outputs/gui/
 
 # External data downloads (large; regeneratable from pipeline/00_external/)
 data_external/
+
+# Allen ISH download cache from Pagani gene-expansion experiment
+# (~600 MB of raw zips; the per-parcel matrix `pagani_mouse_expr.npy` IS
+#  tracked because it's small and lets downstream users skip the 1-3 day
+#  Allen API download)
+experiments/autism_subtypes/allen_expansion/pagani_ish_cache/
+
+# ABIDE / nilearn cache (lives in user $HOME/abide_cache by default;
+# allowlist here in case someone puts it in-tree)
+abide_cache/
+*.1D
 
 # Internal development artifacts (kept local; not pushed publicly)
 ROADMAP.md

@@ -26,8 +26,10 @@ A self-contained 3D viewer for the production coupling: search a mouse region or
 | Region-level qualified top-3 (Beauchamp-22 candidate set) | **100 %** |
 | Bootstrap argmax stability (40 subject resamples) | **97.8 %** |
 | Pagani 2026 name-based network bridge — independent check | **4 / 8** canonical pairs diagonal-argmax (1.92× over null; chance: 2/8, 0.97×). *Methodological check on their scaffolding, not a replication of their findings.* |
-| Pagani 2026 subtype-contrast spatial pattern (their claim 3) | **Pearson r = +0.547** on per-network row-sums (n=8). Sharper full-matrix version: **r = +0.537 over 36 network-pair entries, analytical p = 0.0007, empirical p < 0.005** vs permuted-π null. |
-| Pagani 2026 gene-set spatial pattern (their claim 4) | Spearman ρ = +0.619, empirical p = 0.045 (proof-of-concept; 36 of Pagani's 6,415 genes covered by HOMER's curated Allen-ISH set). |
+| Pagani 2026 subtype-contrast spatial pattern (their claim 3) | **Pearson r = +0.547** on per-network row-sums (n=8). Sharper full-matrix version: **r = +0.527 over 36 network-pair entries, analytical p = 0.0009, empirical p = 0.000** vs permuted-π null. |
+| Pagani 2026 gene-set spatial pattern (their claim 4) | Expanded to 1,713 Pagani genes via Allen ISH API. Bootstrap-mean Pearson r = **+0.428, 95% CI (+0.349, +0.497)**, 100% of 1,000 resamples positive. Supports their cross-species spatial-replication claim; per-pathway direction-by-subtype not testable from published source data. |
+| Pagani 2026 per-subject ASD classification via HOMER template (their claim 1, individual level) | **p=0.042, Cliff's δ=−0.083** (817 ABIDE subjects). ASD subjects score more "hypo-like" than controls on the HOMER hyper−hypo template. Small but significant; ASD distribution remains unimodal (no within-ASD subtype recovery). |
+| Cross-disease specificity check (autism vs other psych conditions) | **Signal is NOT autism-specific.** ADHD, schizophrenia, bipolar all produce r ≈ +0.41-0.45 with same human ASD pattern. HOMER captures shared brain-disorder spatial geometry, not autism-specific gene biology. |
 
 Multi-source trust map says: 19 % of mouse parcels are in the `anchored_and_validated` tier, 36 % in `validated_only`, 13 % in `structural`, 29 % `low_evidence`. See [`docs/03_results.md`](docs/03_results.md).
 

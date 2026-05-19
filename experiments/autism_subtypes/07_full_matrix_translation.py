@@ -63,7 +63,10 @@ GARIN_PID_TO_PAGANI_MOUSE = {
     15: "Caudate Putamen", # Pallidum (sits at ventral striatum / GP); Pagani lumps into "CaudatePutamen"
     16: "Salience",        # Claustrum
     17: "HC",              # Amygdala (limbic; Pagani lumps into HC)
-    18: "Thalamus",        # Hypothalamus → Thalamus (Pagani has no hypothal; nearest is Thalamus)
+    18: None,              # Hypothalamus — Pagani's mouse atlas (Liska 2015) excludes
+                           # hypothalamus from its 9-net partition. Lumping into "Thalamus"
+                           # biases the Thalamus row of T toward subcortical/hypothalamic
+                           # routing. Drop it like pons/tectum (audit fix M4).
     19: "Thalamus",        # Thalamus ← KEY for splitting subcortical
     20: None,              # Pons — Pagani has no brainstem
     21: None,              # Tectum — Pagani has no brainstem
@@ -225,15 +228,20 @@ def main():
     print(f"  Spearman ρ = {r_s:+.3f} (analytical p = {p_s:.4f})")
 
     # Permuted-π null
-    print(f"\nPermuted-π null (200 trials):")
+    # NB: permute rows WITHIN the kept 1613 mouse parcels (i.e., shuffle the
+    # mouse-parcel-to-network assignment among kept parcels). Earlier version
+    # permuted all 1864 rows then re-selected via keep_m, which mixed in
+    # brainstem rows whose coupling structure differs from forebrain — that
+    # null was wider than it should have been. (Audit fix B1.)
+    print(f"\nPermuted-π null (200 trials, within-kept-rows):")
     rng = np.random.default_rng(seed=42)
     n_trials = 200
     null_p = []
     null_s = []
+    pi_kept_baseline = pi[keep_m]
     for _ in range(n_trials):
-        perm = rng.permutation(pi.shape[0])
-        pi_n = pi[perm]
-        pi_n_kept = pi_n[keep_m]
+        perm = rng.permutation(pi_kept_baseline.shape[0])
+        pi_n_kept = pi_kept_baseline[perm]
         T_n = build_translation_operator(pi_n_kept, mouse_net[keep_m],
                                           len(mouse_pagani_names),
                                           new_human_net, len(pagani_human_names))

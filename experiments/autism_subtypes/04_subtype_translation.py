@@ -47,7 +47,24 @@ assign_human_paper_networks = mod.assign_human_paper_networks
 from homer.data import load_cached
 
 
-PAGANI_XLSX = "/sessions/wizardly-admiring-tesla/mnt/uploads/41593_2026_2287_MOESM6_ESM.xlsx"
+import os
+# Sandbox path → user-machine fallback. Override via PAGANI_XLSX env var.
+_DEFAULT_SANDBOX = "/sessions/wizardly-admiring-tesla/mnt/uploads/41593_2026_2287_MOESM6_ESM.xlsx"
+_USER_FALLBACKS = [
+    Path(__file__).resolve().parents[2] / "data_external" / "pagani_2026" / "41593_2026_2287_MOESM6_ESM.xlsx",
+    Path(__file__).resolve().parent / "41593_2026_2287_MOESM6_ESM.xlsx",
+    Path(__file__).resolve().parents[2] / "41593_2026_2287_MOESM6_ESM.xlsx",
+]
+PAGANI_XLSX = os.environ.get("PAGANI_XLSX")
+if not PAGANI_XLSX:
+    if Path(_DEFAULT_SANDBOX).exists():
+        PAGANI_XLSX = _DEFAULT_SANDBOX
+    else:
+        for p in _USER_FALLBACKS:
+            if p.exists():
+                PAGANI_XLSX = str(p); break
+        if not PAGANI_XLSX:
+            PAGANI_XLSX = _DEFAULT_SANDBOX  # final fallback; will error clearly if missing
 
 # Mouse 9-network names (from ED Fig 1 of paper)
 PAGANI_MOUSE_NETS = [
