@@ -1,0 +1,21 @@
+# Ablations
+
+Three ablation experiments that motivated production design choices in HOMER. All three converged to the same direction: **the recommended π configuration (soft anchors, uniform mouse marginal, area-level xyz weighting) outperforms variants**. Documented here for provenance; see `docs/archive/iteration_log.md` for the full discussion of each.
+
+## Files
+
+| Script | Tested | Outcome |
+|---|---|---|
+| `soft_region_anchors.py` | Soft anchors (λ_outside ≈ 0.15) vs hard anchors (λ_outside → 0) | Soft is the default — keeps anchor supervision honest about cases where structural cost disagrees with the prescribed pair |
+| `marginal_weighting.py` | Uniform mouse marginal (1/n) vs volume-weighted (parcel-volume proportional) | Uniform stayed in production — volume weighting biased the human-side mass distribution toward large parcels without improving Beauchamp top-K |
+| `per_region_xyz.py` | Per-region xyz weighting (downweight xyz cost in spatially-inverted regions like tectum) | Local intervention did not reproduce the global xyz effect; superseded by region-anchor packs for inverted regions |
+
+## Reproduce
+
+```bash
+PYTHONPATH=src python experiments/ablations/soft_region_anchors.py
+PYTHONPATH=src python experiments/ablations/marginal_weighting.py
+PYTHONPATH=src python experiments/ablations/per_region_xyz.py
+```
+
+Results are written to `outputs/logs/`. See `docs/archive/iteration_log.md` §5.6 (SOFT-1), §5.7 (WEIGHT-1), §5.11 (TOPO-1) for context.

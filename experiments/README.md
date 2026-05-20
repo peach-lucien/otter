@@ -6,48 +6,33 @@ Reproducible one-off experiments. The `src/homer/` library is the production cod
 
 ```
 experiments/
-├── anchor_packs/          # Per-pack experiment runners (default + opt-in)
-├── ablations/             # Methodology ablations (soft anchors, marginals, xyz)
-├── archive/               # Older detours superseded by the current pipeline
-└── outputs/               # Cached intermediate results from these runs
+├── anchor_packs/                   # Per-pack experiment runners (default + opt-in)
+├── ablations/                      # Methodology ablations (soft anchors, marginals, xyz)
+├── autism_subtypes/                # Pagani 2026 4-hypothesis arc + ABIDE + gene-set tests
+├── hodge_2019_cortical_layers/     # Hodge 2019 cortical-layer marker translation
+├── margulies_2016_principal_gradient/  # Margulies 2016 + Huntenburg 2021 brain-wide gradient
+├── coletta_2020_cross_species_rsn/ # Coletta 2020 cross-species RSN correspondence
+├── biccn_2023_cell_types/          # BICCN (Yao 2023 + Siletti 2023) cell-type markers
+├── enigma_cross_disorder/          # ENIGMA cross-disorder spatial validation
+├── whitesell_2021_dmn/             # Whitesell 2021 DMN refinement note
+├── pagani_2026_per_model/          # Per-mouse-model exploratory translation
+├── archive/                        # Older detours superseded by the current pipeline
+└── outputs/                        # Cached intermediate results from these runs
 ```
+
+Each subdirectory has its own `README.md` documenting its scripts, inputs, and outputs.
 
 ## anchor_packs/ — region-anchor experiments
 
-Each script fits the production point-anchor π plus one anchor pack and reports the Beauchamp delta. They're the experiments behind `docs/04_anchor_packs.md`.
-
-| Script | Pack | Pids | Reference |
-|---|---|---|---|
-| `biccn_motor.py` | M1 + M2 | 30, 31 | Bakken 2021 *Nature* |
-| `tectum.py` | SC + IC | 32, 33 | May 2006; Schreiner 2007 |
-| `olfactory.py` | Piriform + AON | 34, 35 | Mori 2014; Carlén 2017 |
-| `cingulate.py` | sgACC + RSC (opt-in) | 36, 37 | Vogt 2019 |
-| `amygdala.py` | Cortical subplate | 38 | Janak & Tye 2015 |
-| `hippocampal.py` | Subi + CA1 + CA3 + DG | 39-42 | Strange 2014 |
-| `lateral_pfc.py` | OFC + dlPFC (opt-in for dlPFC) | 45, 46 | Wallis 2012; Carlén 2017 |
-| `compose_all.py` | All default packs (headline result) | 30-35, 38-42 | — |
-
-Run any with:
-```bash
-PYTHONPATH=src python experiments/anchor_packs/<name>.py
-```
-
-`compose_all.py` is the "headline result" experiment that produces the recommended production-with-packs π. See `docs/03_results.md` for the numbers.
+12 per-pack runners that fit production-with-pack π and report Beauchamp + region-level deltas. `compose_all.py` produces the recommended `pi_fc_plus_SC_with_all_packs.npy`. See [`anchor_packs/README.md`](anchor_packs/README.md) for the per-pack table and citations.
 
 ## ablations/ — methodology ablations
 
-Three ablations that justify or contextualise design choices in the production model. Each produced a documented result in `docs/archive/iteration_log.md`.
+Three ablations that justify production design choices (soft anchors, uniform marginal, area-level xyz weighting). All three converged to the same direction: the production defaults outperform variants. See [`ablations/README.md`](ablations/README.md).
 
-| Script | Question | Result |
-|---|---|---|
-| `soft_region_anchors.py` | Hard 0/1 wall vs soft `lam_outside < 1` constraint? | Soft is better-calibrated (43% lower mean rank); soft `0.15` is now default. |
-| `marginal_weighting.py` | Does volume- or stability-weighted source marginal help? | No (0.0 pp difference). Uniform is fine. |
-| `per_region_xyz.py` | Can per-region xyz weighting fix topology-inverted regions? | Convergent negative — local intervention doesn't reproduce global xyz effect. |
+## Third-party validations
 
-Run with:
-```bash
-PYTHONPATH=src python experiments/ablations/<name>.py
-```
+Each `<paper>_*/` subdirectory takes a published cross-species paper and tests whether HOMER's π reproduces or refines its findings. Outputs feed `notebooks/05-11`. See `docs/03_results.md` §"Independent third-party validation" for the consolidated result table.
 
 ## archive/ — older detours
 

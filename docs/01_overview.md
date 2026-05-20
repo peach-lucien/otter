@@ -37,25 +37,24 @@ See `03_results.md` for what each tier means and how to read the headline number
 
 ## What HOMER *is not*
 
-- Not an unsupervised method — it requires anchor pairs (we ship 21 Garin point anchors + 7 region-anchor packs).
+- Not an unsupervised method — it requires anchor pairs (we ship 21 Garin point anchors + 11 region-anchor entries from 7 published anchor packs).
 - Not a voxel-level mapping — π is parcel-to-parcel. Mouse parcels span ~12-2837 voxels each.
 - Not a cellular-resolution tool — it's spatial and connectivity-based; cell-type homology (BICCN, Allen Brain Cell Atlas) is a separate problem.
 - Not validated for cerebellum or medulla (excluded from our parcellation).
 
 ## Headline number
 
-For the **recommended π** (`pi_fc_plus_SC_with_all_packs.npy`, fits with 5 default anchor packs):
+For the **recommended π** (`pi_fc_plus_SC_with_all_packs.npy`):
 
 | Metric | Value |
 |---|---:|
-| Beauchamp 2022 anchor-overlapping top-1 | **37 %** (vs 12 % for production point-anchor only) |
-| Beauchamp top-5 | **46 %** |
-| Mean rank of correct human partner / 2094 | **85** (in the top 4 % on average) |
+| Beauchamp 2022 parcel-level top-1 | **37 %** (vs 12 % strict baseline; 3.1×) |
 | Region-level qualified top-3 (Beauchamp-22 set) | **100 %** |
 | Bootstrap argmax stability (40 subject-resamples) | **97.8 %** |
+| z-score vs permuted-anchor null | **+17.8** |
 | Multi-source trust tier "anchored_and_validated" | 19 % of parcels |
 
-See `03_results.md` for the full numbers, breakdowns, and honest caveats. See `04_anchor_packs.md` for the per-pack contribution.
+See `03_results.md` for the full per-region breakdown, the third-party validation table across eight cross-species papers, and the honest caveats. See `04_anchor_packs.md` for the per-pack contribution.
 
 ## Project structure at a glance
 

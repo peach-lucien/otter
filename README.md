@@ -18,20 +18,20 @@ A self-contained 3D viewer for the production coupling: search a mouse region or
 
 ## Headline numbers
 
+On Beauchamp 2022's external 22-pair gene-expression benchmark:
+
 | Metric (recommended `pi_fc_plus_SC_with_all_packs.npy`) | Value |
 |---|---:|
-| Beauchamp 2022 anchor-overlapping top-1 | **37 %** (3.1× over the strict baseline) |
-| Beauchamp top-5 | **46 %** |
-| Mean rank of correct human partner / 2094 | **85** (top 4 %) |
-| Region-level qualified top-3 (Beauchamp-22 candidate set) | **100 %** |
+| Parcel-level top-1 | **37 %** (3.1× over the strict baseline) |
+| Region-level qualified top-3 | **100 %** |
 | Bootstrap argmax stability (40 subject resamples) | **97.8 %** |
-| Pagani 2026 name-based network bridge — independent check | **4 / 8** canonical pairs diagonal-argmax (1.92× over null; chance: 2/8, 0.97×). *Methodological check on their scaffolding, not a replication of their findings.* |
-| Pagani 2026 subtype-contrast spatial pattern (their claim 3) | **Pearson r = +0.547** on per-network row-sums (n=8). Sharper full-matrix version: **r = +0.527 over 36 network-pair entries, analytical p = 0.0009, empirical p = 0.000** vs permuted-π null. |
-| Pagani 2026 gene-set spatial pattern (their claim 4) | Expanded to 1,713 Pagani genes via Allen ISH API. Bootstrap-mean Pearson r = **+0.428, 95% CI (+0.349, +0.497)**, 100% of 1,000 resamples positive. Supports their cross-species spatial-replication claim; per-pathway direction-by-subtype not testable from published source data. |
-| Pagani 2026 per-subject ASD classification via HOMER template (their claim 1, individual level) | **p=0.042, Cliff's δ=−0.083** (817 ABIDE subjects). ASD subjects score more "hypo-like" than controls on the HOMER hyper−hypo template. Small but significant; ASD distribution remains unimodal (no within-ASD subtype recovery). |
-| Cross-disease specificity check (autism vs other psych conditions) | **Signal is NOT autism-specific.** ADHD, schizophrenia, bipolar all produce r ≈ +0.41-0.45 with same human ASD pattern. HOMER captures shared brain-disorder spatial geometry, not autism-specific gene biology. |
+| z-score vs permuted-anchor null | **+17.8** |
 
-Multi-source trust map says: 19 % of mouse parcels are in the `anchored_and_validated` tier, 36 % in `validated_only`, 13 % in `structural`, 29 % `low_evidence`. See [`docs/03_results.md`](docs/03_results.md).
+Independent third-party validation against **eight cross-species papers** (Pagani 2026 autism subtypes, Margulies/Huntenburg gradient, Coletta 2020 RSN, BICCN cell types, ENIGMA cross-disorder, Whitesell 2021 DMN, Hodge 2019 layers, Pagani per-model) establishes a clean resolution boundary: HOMER preserves cross-species signal at the **regional / area / network level** but does not translate **broadly-distributed cortical class markers**, **within-area lamination**, or **disorder-specific signal**.
+
+Multi-source trust map: 19 % of mouse parcels are `anchored_and_validated`, 36 % `validated_only`, 13 % `structural`, 29 % `low_evidence`.
+
+Full result tables, per-paper snapshots, and the honest caveats live in [`docs/03_results.md`](docs/03_results.md). Showcase walkthroughs in [`notebooks/05-11`](notebooks/).
 
 ## Install + quickstart (for programmatic use)
 
@@ -41,7 +41,7 @@ Skip this section if you just want to look at the couplings — use the [explore
 git clone <this-repo> homer && cd homer
 conda env create -f env.yml && conda activate homer
 pip install -e ".[dev]"
-pytest -q                            # ~10s, 161 tests
+pytest -q                            # ~10s, 173 tests
 ```
 
 Query a region after installation:
@@ -74,7 +74,7 @@ homer/
 ├── src/homer/           # The library — data, models, eval, viz, costs
 ├── pipeline/            # End-to-end reproduction scripts (02 → 08)
 ├── experiments/         # Anchor-pack experiments + ablations
-├── notebooks/           # 4 interactive walkthroughs
+├── notebooks/           # 11 interactive walkthroughs (4 core + 7 third-party showcases)
 ├── tests/               # pytest
 ├── outputs/             # All generated artefacts (gitignored)
 └── config/              # YAML configs for anchors
