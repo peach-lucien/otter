@@ -83,7 +83,7 @@ each region anchor with mouse-set `Mset` and human-set `Hset`:
 legacy hard variant (`lam_outside = 1.0`), the soft constraint produces
 better-calibrated probability tails (held-out region CV mean rank ↓ 43 %)
 while leaving the trained-π argmax unchanged — see
-[results §5.6.0a](results.md#5.6.0a-soft-1--soft-region-anchors-hard-penalty--mild-penalty)
+[iteration log §5.6.0a](archive/iteration_log.md)
 for the sweep. Pass `region_lam_outside=1.0` to recover the hard wall.
 
 ## Modality combinations
@@ -154,7 +154,7 @@ nodes, and we don't force fake correspondences.
 
 ## Validation pipeline
 
-Three independent metrics, each described in [`docs/results.md`](results.md):
+Three independent metrics, each described in [`docs/03_results.md`](03_results.md):
 
 1. **Held-out anchor CV** (binary `top-k`, graded `mean_rank`, `mean_xyz_dist`):
    leave-one-network-out, model gets all anchors except those in the held-out

@@ -14,23 +14,25 @@ This is *not* a generative method — packs encode what's already known about an
 
 All citations have been verified against the literature (Consensus search, May 2026). Citation count + journal links provided per pack data sheet below.
 
-| pid range | Pack | Default? | Primary reference |
+The **"In recommended π?"** column is authoritative against `src/homer/data/anchor_packs/registry.py` — the single source of truth for which packs are composed into `pi_fc_plus_SC_with_all_packs.npy`. As of 2026-05-21 **all 15 packs are in the recommended composition** (26 region-anchor entries): a multi-benchmark comparison showed the full set wins the TransBrain region-level homology benchmark decisively and ties for best on Beauchamp. A few packs carry an honest Beauchamp-metric trade-off (flagged in their data sheets below); they are kept because the broader evidence favours inclusion.
+
+| pid range | Pack | In recommended π? | Primary reference |
 |---|---|---|---|
 | 1..21 | Garin point anchors (one mouse parcel ↔ one human parcel per pair) | yes | Garin 2021 |
 | 30, 31 | BICCN motor (M1, M2 / PMd) | yes | [Bakken 2021, *Nature*](https://consensus.app/papers/details/82aefc336c0e5f2e88d65f51d91cfbfe/) |
 | 32, 33 | Tectum (Superior + Inferior Colliculus) | yes | [Isa 2021, *Curr Biol*](https://consensus.app/papers/details/b167c990210e55e7923df8ebdf731a32/); Winer & Schreiner 2005 |
 | 34, 35 | Olfactory (Piriform + Anterior olfactory nucleus) | yes | [Mori 2014](https://consensus.app/papers/details/0db38e2b1d39564799a5f173c4d942b1/); [Carlén 2017, *Science*](https://consensus.app/papers/details/8f13a81410c4529c920311c591ff7833/) |
-| 36, 37 | Cingulate (Subgenual ACC + Retrosplenial) | **opt-in** | [Vogt et al. 2012, *Brain Struct Funct*](https://consensus.app/papers/details/ad69e350c1925154a579cd8ab2259311/) |
+| 36, 37 | Cingulate (Subgenual ACC + Retrosplenial) | yes (trade-off) | [Vogt et al. 2012, *Brain Struct Funct*](https://consensus.app/papers/details/ad69e350c1925154a579cd8ab2259311/) |
 | 38 | Amygdala (Cortical subplate) | yes | [Janak & Tye 2015, *Nature*](https://consensus.app/papers/details/51a6d86145eb5376a83388d1d98475eb/); [Pessoa & Adolphs 2010, *Nat Rev Neurosci*](https://consensus.app/papers/details/e2ba7247dbca506a85f4d75eaf008c49/) |
 | 39-42 | Hippocampal (Subi + CA1 + CA3 + Dentate gyrus) | yes | [Strange et al. 2014, *Nat Rev Neurosci*](https://consensus.app/papers/details/825d36a33ecd562c9c8a572b9930dd51/); [Iglesias et al. 2015, *NeuroImage*](https://consensus.app/papers/details/c7d5cd3753935868968799a20b664da7/) |
-| 45, 46 | Lateral PFC (OFC + dlPFC) | yes (OFC); **opt-in** (dlPFC) | [Wallis 2011, *Nat Neurosci*](https://consensus.app/papers/details/580020c7d32e54d4bb2b4f3270b6a2b2/); [Carlén 2017, *Science*](https://consensus.app/papers/details/8f13a81410c4529c920311c591ff7833/) vs [Preuss 1995, *J Cogn Neurosci*](https://consensus.app/papers/details/2e000a3af07f508489ac7ba2f68c68dc/) |
+| 45 (46 opt-in) | Lateral PFC — OFC default; dlPFC contested, excluded | yes (OFC only) | [Wallis 2011, *Nat Neurosci*](https://consensus.app/papers/details/580020c7d32e54d4bb2b4f3270b6a2b2/); [Carlén 2017, *Science*](https://consensus.app/papers/details/8f13a81410c4529c920311c591ff7833/) vs [Preuss 1995, *J Cogn Neurosci*](https://consensus.app/papers/details/2e000a3af07f508489ac7ba2f68c68dc/) |
 | 47, 48 | Striatum (CP dorsolateral, CP ventromedial) | yes | [Voorn et al. 2004, *TINS*](https://consensus.app/papers/details/abd59449cc065adfa2988e4c7511869c/) |
 | 49 | Entorhinal cortex | yes | [Franjic et al. 2021, *Neuron*](https://consensus.app/papers/details/8133c8accfab51e6892690a7bed0c27e/) |
-| 52 | Visual extrastriate (mouse LM ↔ human V2) | yes | [Wang & Burkhalter 2007, *J Comp Neurol*](https://consensus.app/papers/details/b4b515e8765d5045976cb27b170a865b/) |
+| 52 | Visual extrastriate (mouse LM ↔ human V2) | yes (trade-off) | [Wang & Burkhalter 2007, *J Comp Neurol*](https://consensus.app/papers/details/b4b515e8765d5045976cb27b170a865b/) |
 | 54 | Periaqueductal gray (PAG) | yes | [Ezra et al. 2015, *Hum Brain Mapp*](https://consensus.app/papers/details/38ef392c65c5502d8004b70a100c0d55/); [Kingsbury et al. 2011, *PLOS ONE*](https://consensus.app/papers/details/a1924b15fe8f5245bdbe097e02235646/) |
 | 55 | Perirhinal cortex | yes | [Burwell et al. 1995, *Hippocampus*](https://consensus.app/papers/details/c76cb6a4230b5090b0c27d6b1685c7aa/) |
 | 56, 57 | Auditory core + belt (A1 + A2-dorsal/ventral) | yes | [Hackett et al. 2001, *J Comp Neurol*](https://consensus.app/papers/details/052fa94346785c9b8a06d58cbe6f651d/); [Kaas & Hackett 2000, *PNAS*](https://consensus.app/papers/details/275d7ce7c42857c7b78dc8f2a9fb3b16/) |
-| 58, 59, 60 | Somatosensory body-map (face, hand, leg) | **opt-in** | Penfield 1937; [Seelke et al. 2012, *PLOS ONE*](https://consensus.app/papers/details/668dd505c7205f73ae24bd50fdf577c0/); [Gordon et al. 2023, *Nature*](https://consensus.app/papers/details/f24dace36aa05982a170fdc5de32b051/) |
+| 58, 59, 60 | Somatosensory body-map (face, hand, leg) | yes (trade-off) | Penfield 1937; [Seelke et al. 2012, *PLOS ONE*](https://consensus.app/papers/details/668dd505c7205f73ae24bd50fdf577c0/); [Gordon et al. 2023, *Nature*](https://consensus.app/papers/details/f24dace36aa05982a170fdc5de32b051/) |
 | 61 | Posterior parietal cortex (BA7) | yes | [Whitlock 2017, *Current Biology*](https://consensus.app/papers/details/27e90f12f5b95e2c8f6c8e0a25c33c5d/) |
 | ≥ 62 | (reserved for future packs — see Roadmap below) | — | — |
 
@@ -68,7 +70,7 @@ All citations have been verified against the literature (Consensus search, May 2
 - **Off-target**: None — cleanest pack
 - **Composition caveat**: shares 2 human parcels (L/R Olfactory cortex) with the amygdala pack — see amygdala below.
 
-### cingulate — pids 36, 37 (opt-in)
+### cingulate — pids 36, 37 (in recommended π; Beauchamp trade-off)
 
 - **Sources**:
   - [Vogt et al. 2012, *Brain Structure and Function*](https://consensus.app/papers/details/ad69e350c1925154a579cd8ab2259311/) — "Cytoarchitecture of mouse and rat cingulate cortex with human homologies" (318 cit). DOI: 10.1007/s00429-012-0411-8. **Primary reference for the area-32 subgenual/pregenual subdivisions used here.**
@@ -78,7 +80,7 @@ All citations have been verified against the literature (Consensus search, May 2
 - **pid 37**: Mouse Retrosplenial (27 parcels) ↔ Human RSC at MNI(±15, –55, 10) r=10 mm (8 parcels)
 - **Beauchamp ACG impact**: 13 % → **9 %** (anchor target = subgenual ACC, validation target = pregenual ACC). Documented hurt.
 - **Off-target**: None (besides ACG)
-- **Why opt-in**: the metric drop on ACG is real and reflects a real anatomical disagreement between anchor location and validation location.
+- **Beauchamp trade-off**: the metric drop on ACG is real and reflects a real anatomical disagreement between anchor location and validation location. The pack stays in the recommended composition — it is anatomically defensible and the broad multi-benchmark evidence favours inclusion.
 
 ### amygdala — pid 38
 
@@ -105,7 +107,7 @@ All citations have been verified against the literature (Consensus search, May 2
 - **CA2 skipped**: not in DSURQE tree
 - **Held-out**: Anchoring Subiculum alone leaves CA1/CA3/DG at 0 % — confirms structure does not propagate across subfields.
 
-### lateral_pfc — pids 45, 46 (dlPFC opt-in)
+### lateral_pfc — pid 45 OFC (in recommended π); pid 46 dlPFC (opt-in, excluded by default)
 
 - **Sources**:
   - [Wallis 2011, *Nature Neuroscience*](https://consensus.app/papers/details/580020c7d32e54d4bb2b4f3270b6a2b2/) — "Cross-species studies of orbitofrontal cortex and value-based decision-making" (347 cit). DOI: 10.1038/nn.2956. **OFC homology, high confidence.**
@@ -113,7 +115,7 @@ All citations have been verified against the literature (Consensus search, May 2
   - [Preuss 1995, *J Cognitive Neuroscience*](https://consensus.app/papers/details/2e000a3af07f508489ac7ba2f68c68dc/) — "Do Rats Have Prefrontal Cortex? The Rose-Woolsey-Akert Program Reconsidered" (684 cit). DOI: 10.1162/jocn.1995.7.1.1. **Argues against rodent dlPFC homology.**
   - Laubach 2018, *eNeuro* — "What, If Anything, Is Rodent Prefrontal Cortex?" (351 cit). Modern continuation of debate.
 - **pid 45 — OFC**: Mouse Orbital area lateral (21 parcels) ↔ Human OFC BA11/47 at MNI(±25, 35, –15) r=10 mm (8 parcels). High confidence.
-- **pid 46 — dlPFC (contested)**: Mouse Prelimbic (11 parcels) ↔ Human dlPFC BA9/46 at MNI(±40, 25, 35) r=10 mm (12 parcels). **Preuss 1995 argues rodents lack a true dlPFC; Carlén 2017 / Laubach 2018 argue functional homology.** Users rejecting the homology should exclude this entry.
+- **pid 46 — dlPFC (contested, opt-in)**: Mouse Prelimbic (11 parcels) ↔ Human dlPFC BA9/46 at MNI(±40, 25, 35) r=10 mm (12 parcels). **Preuss 1995 argues rodents lack a true dlPFC; Carlén 2017 / Laubach 2018 argue functional homology.** This entry is **excluded from the recommended composition by default** — the homology is contested and HOMER's own Balsters 2020 falsification test contradicts it (forcing the anchor routes 23 % of mouse-MFC mass to dlPFC by construction). Pass `build_lateral_pfc_region_anchors(..., include_dlpfc=True)` to add it for ablations.
 - **Lifts**: Neither OFC nor dlPFC has a Beauchamp validation pair — purely anatomical-credibility supervision.
 - **Off-target**: None measurable.
 
@@ -173,7 +175,7 @@ All citations have been verified against the literature (Consensus search, May 2
 - **Off-target**: None detected.
 - **Why this works**: A1 anchor's mouse-side set is identical to Beauchamp's validation set, and the A1-core human ball sits *inside* Beauchamp's Heschl's gyrus ball — so the soft constraint concentrates mass on the canonical target without competing with other regions.
 
-### somatosensory — pids 58, 59, 60 (opt-in)
+### somatosensory — pids 58, 59, 60 (in recommended π; Beauchamp trade-off)
 
 - **Sources**:
   - Penfield 1937 — canonical sensorimotor homunculus.
@@ -185,7 +187,7 @@ All citations have been verified against the literature (Consensus search, May 2
 - **pid 60 — Leg S1**: Mouse Lower limb (14 parcels) ↔ Human Leg S1 / paracentral at MNI(±10, –40, 70) r=10 mm (12 parcels).
 - **Beauchamp impact**: "Primary somatosensory area → postcentral gyrus" **20 % → 15 %** (−5 pp). Same dynamic as cingulate pack: anchor target ≠ validation target. Beauchamp's r=15 ball is centred at hand S1 (-40, -25, 55); our face S1 ball at (-55, -15, 25) is ~35 mm away — outside the validation ball.
 - **Off-target**: None outside S1.
-- **Why opt-in**: it hurts Beauchamp S1. Use this pack when you want body-map-specific S1 queries (Penfield-style face/hand/leg distinction) and don't care about Beauchamp's broad-ball validation metric. Anatomical credibility is unimpeachable; the validation just measures something different.
+- **Beauchamp trade-off**: it lowers the Beauchamp S1 *parcel* metric, but adds body-map-specific S1 structure (Penfield-style face/hand/leg distinction). Anatomical credibility is unimpeachable; Beauchamp's broad-ball validation just measures something coarser. The pack stays in the recommended composition.
 
 ### ppc — pid 61
 
@@ -198,46 +200,22 @@ All citations have been verified against the literature (Consensus search, May 2
 
 ## Composition recipe
 
-Compose all default packs (opt-in cingulate and opt-in dlPFC entries omitted):
+The recommended π is composed from the `default=True` packs in the registry
+(`src/homer/data/anchor_packs/registry.py`) — currently all 15 packs
+(26 region-anchor entries). Use `build_default_pack_entries` rather than
+re-listing the builders by hand:
 
 ```python
 import numpy as np
 from homer.data import load_cached
-from homer.data.anchor_packs import (
-    build_biccn_motor_region_anchors,
-    build_tectum_region_anchors,
-    build_olfactory_region_anchors,
-    build_amygdala_region_anchors,
-    build_hippocampal_region_anchors,
-    build_lateral_pfc_region_anchors,    # OFC default; dlPFC opt-in
-    build_striatum_region_anchors,
-    build_entorhinal_region_anchors,
-    build_visual_region_anchors,
-    build_pag_region_anchors,
-    build_perirhinal_region_anchors,
-    build_auditory_region_anchors,
-    build_ppc_region_anchors,
-    # NB: build_somatosensory_region_anchors is opt-in (hurts Beauchamp S1)
-)
+from homer.data.anchor_packs import build_default_pack_entries
 from homer.models import MultimodalFGW
 
 M, _ = load_cached("mouse", cache_dir="outputs/anndata")
 H, _ = load_cached("human", cache_dir="outputs/anndata")
 costs = np.load("outputs/anndata/full_costs.npz")
 
-entries = sum([
-    build_biccn_motor_region_anchors(M.var, H.var),
-    build_tectum_region_anchors(M.var, H.var),
-    build_olfactory_region_anchors(M.var, H.var),
-    build_amygdala_region_anchors(M.var, H.var),
-    build_hippocampal_region_anchors(M.var, H.var),
-    build_striatum_region_anchors(M.var, H.var),
-    build_entorhinal_region_anchors(M.var, H.var),
-    build_visual_region_anchors(M.var, H.var),
-    build_pag_region_anchors(M.var, H.var),
-    build_perirhinal_region_anchors(M.var, H.var),
-    build_auditory_region_anchors(M.var, H.var),
-], [])
+entries = build_default_pack_entries(M.var, H.var)
 
 model = MultimodalFGW(use_sc=True, sc_weight=0.3, fc_weight=0.7,
                       epsilon=5e-3, xyz_weight=0.5, lam_anchor=1.0)
@@ -246,7 +224,13 @@ model.fit(M, H, Cm_SC=costs["Cm_SC"], Ch_SC=costs["Ch_SC"],
 np.save("outputs/coupling/pi_fc_plus_SC_with_all_packs.npy", model.pi)
 ```
 
-Run end-to-end via `experiments/anchor_packs/compose_all.py`.
+To add a pack to the recommended composition, flip its `default` flag in the
+registry — every consumer (compose script, GUI, trust step) picks it up.
+
+Run end-to-end via `experiments/anchor_packs/compose_all.py`, or the whole
+recommended-model pipeline via `pipeline/run_recommended_model.py`. The
+non-default packs above remain available — compose them explicitly (or run
+`experiments/anchor_packs/<pack>.py`) for ablations and targeted queries.
 
 ## Tuning the soft constraint
 
@@ -275,7 +259,7 @@ The soft default gives essentially identical argmax to hard but better-calibrate
 
 ## Roadmap — remaining candidate packs
 
-Default packs cover 18 entries across 10 packs (pids 30–54). Remaining candidates with strong literature support but not yet implemented:
+The recommended composition is all 15 packs / 26 region-anchor entries (pids 30–61). Remaining candidates with strong literature support but not yet implemented:
 
 | Candidate | Strong reference | Feasibility | Reserved pids |
 |---|---|---|---|

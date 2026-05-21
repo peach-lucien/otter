@@ -150,6 +150,61 @@ def test_apply_returns_copy_not_inplace():
 
 
 # ---------------------------------------------------------------------------
+# Regression: conflict-aware application across overlapping entries
+
+
+def test_overlapping_entries_do_not_clobber():
+    """Two entries sharing a human parcel: BOTH entries' allowed cells stay
+    free. The pre-fix sequential application let the later entry overwrite the
+    earlier one's 0-cost cells on the shared column."""
+    M = np.full((8, 8), 0.5)
+    a = RegionAnchorEntry(pair_id=22, label="A",
+                          mouse_indices=[1, 2], human_indices=[3, 4])
+    b = RegionAnchorEntry(pair_id=23, label="B",
+                          mouse_indices=[5, 6], human_indices=[4, 7])  # shares h=4
+    out = apply_region_supervision(M, [a, b], lam_outside=1.0)
+    # A's allowed cells — including the shared column 4 — stay free
+    for mp in (1, 2):
+        for hp in (3, 4):
+            assert out[mp, hp] == 0.0, f"A cell ({mp},{hp}) was clobbered"
+    # B's allowed cells stay free
+    for mp in (5, 6):
+        for hp in (4, 7):
+            assert out[mp, hp] == 0.0, f"B cell ({mp},{hp}) was clobbered"
+
+
+def test_region_supervision_order_independent():
+    """Applying entries in either order gives the identical cost matrix."""
+    M = np.full((8, 8), 0.5)
+    a = RegionAnchorEntry(pair_id=22, label="A",
+                          mouse_indices=[1, 2], human_indices=[3, 4])
+    b = RegionAnchorEntry(pair_id=23, label="B",
+                          mouse_indices=[2, 5], human_indices=[4, 6])  # shares m=2, h=4
+    out_ab = apply_region_supervision(M, [a, b])
+    out_ba = apply_region_supervision(M, [b, a])
+    assert np.array_equal(out_ab, out_ba)
+    # mouse parcel 2 is in both entries → allowed to the UNION {3,4,6}
+    assert out_ab[2, 3] == 0.0 and out_ab[2, 4] == 0.0 and out_ab[2, 6] == 0.0
+
+
+def test_protect_mask_preserves_point_anchors():
+    """A protected cell (e.g. a point-anchor allowed cell) is never raised to
+    lam_outside by a region anchor layered on top."""
+    M = np.full((6, 6), 0.5)
+    M[1, 3] = 0.0                       # a point anchor allowed mouse 1 → human 3
+    protect = np.zeros((6, 6), dtype=bool)
+    protect[1, 3] = True
+    # a region anchor whose human set includes column 3, but not mouse 1
+    entry = RegionAnchorEntry(pair_id=22, label="region",
+                              mouse_indices=[2, 4], human_indices=[3, 5])
+    out = apply_region_supervision(M, [entry], lam_outside=1.0, protect=protect)
+    assert out[1, 3] == 0.0            # point anchor preserved
+    # without protect, the same cell would be clobbered to lam_outside
+    out_noprotect = apply_region_supervision(M, [entry], lam_outside=1.0)
+    assert out_noprotect[1, 3] == 1.0
+
+
+# ---------------------------------------------------------------------------
 # BICCN motor region anchors (integration test — needs real DSURQE atlas)
 
 

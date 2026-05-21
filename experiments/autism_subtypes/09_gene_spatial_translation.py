@@ -47,7 +47,10 @@ network_intensity = st.network_intensity
 from homer.data import load_cached
 
 
-PAGANI_GENES_PATH = "/sessions/wizardly-admiring-tesla/mnt/uploads/41593_2026_2287_MOESM4_ESM.xlsx"
+PAGANI_GENES_PATH = (
+    Path(__file__).resolve().parents[2]
+    / "data_external" / "pagani_2026" / "41593_2026_2287_MOESM4_ESM.xlsx"
+)
 
 
 def load_pagani_gene_sets() -> tuple[set, set]:

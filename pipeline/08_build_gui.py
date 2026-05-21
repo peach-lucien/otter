@@ -34,22 +34,14 @@ DOCS = ROOT / "docs"
 
 
 def _default_anchor_entries(M, H):
-    """Anchor entries matching the current recommended all-packs pi."""
+    """Anchor entries matching the current recommended all-packs pi.
+
+    Uses the pack registry (``homer.data.anchor_packs.registry``) so the GUI's
+    anchor-pack groups stay in lockstep with what ``compose_all.py`` fits.
+    """
     try:
-        from homer.data.anchor_packs import (                           # noqa: E402
-            build_amygdala_region_anchors,
-            build_biccn_motor_region_anchors,
-            build_hippocampal_region_anchors,
-            build_olfactory_region_anchors,
-            build_tectum_region_anchors,
-        )
-        return (
-            build_biccn_motor_region_anchors(M.var, H.var, atlas_root=ROOT)
-            + build_tectum_region_anchors(M.var, H.var, atlas_root=ROOT)
-            + build_olfactory_region_anchors(M.var, H.var, atlas_root=ROOT)
-            + build_amygdala_region_anchors(M.var, H.var, atlas_root=ROOT)
-            + build_hippocampal_region_anchors(M.var, H.var, atlas_root=ROOT)
-        )
+        from homer.data.anchor_packs import build_default_pack_entries     # noqa: E402
+        return build_default_pack_entries(M.var, H.var, atlas_root=ROOT)
     except Exception as exc:  # pragma: no cover - depends on external atlas files
         print(f"  warning: could not build anchor-pack groups: {exc}")
         return []

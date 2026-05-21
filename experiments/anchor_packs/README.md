@@ -4,24 +4,32 @@ Per-pack runner scripts that fit a variant of π with one or more anchor packs a
 
 See `docs/04_anchor_packs.md` for the citations and biological motivation behind each pack.
 
+## Which packs are "default"
+
+The **recommended model** (`outputs/coupling/pi_fc_plus_SC_with_all_packs.npy`) is composed from the packs flagged `default=True` in the pack registry, `src/homer/data/anchor_packs/registry.py` — the single source of truth. `compose_all.py`, the GUI builder (`pipeline/08_build_gui.py`), and the multi-source trust step (`pipeline/08a_multisource_trust.py`) all read that registry, so it cannot drift from what is actually fitted.
+
+As of 2026-05-21 **all 15 packs are in the recommended composition** (26 region-anchor entries) — a multi-benchmark comparison favoured the full set. To change which packs are composed, flip the `default` flag in the registry and re-run `compose_all.py` (or `pipeline/run_recommended_model.py`).
+
 ## Per-pack runners
 
-| Script | Pack contents | Default? |
-|---|---|:---:|
-| `biccn_motor.py` | BICCN M1 → human area 4 (Bakken 2021) | ✅ |
-| `tectum.py` | Mouse SC + IC → human tectal regions (May 2006) | ✅ |
-| `olfactory.py` | Mouse piriform + AON → human olfactory cortex (Mori 2014) | ✅ |
-| `cingulate.py` | Mouse Cg1/Cg2/RSC → human ACC sub-areas (Vogt 2019) | opt-in |
-| `amygdala.py` | Mouse amygdalar nuclei → human amygdala (Janak & Tye 2015) | ✅ |
-| `hippocampal.py` | Mouse CA1/CA3/DG/Sub → human hippocampal subfields (Strange 2014) | ✅ |
-| `lateral_pfc.py` | Mouse PrL → human dlPFC/vlPFC/OFC (Wallis 2012, Carlén 2017) | opt-in |
-| `entorhinal.py` | Mouse ERh → human EC (Burwell 1995) | ✅ |
-| `striatum.py` | Mouse CPu → human putamen + caudate (Voorn 2004) | opt-in |
-| `visual.py` | Mouse V1+V2 extrastriate → human V1 + LO (Wang 2011) | ✅ |
-| `pag.py` | Mouse PAG → human PAG (Linnman 2012) | ✅ |
-| `compose_all.py` | All default packs in one fit | — |
+Each runner below fits a single-pack ablation variant. All of these packs are also in the recommended composition; `compose_all.py` fits all 15 at once.
 
-Opt-in packs are biologically defensible but hurt one Beauchamp validation metric — see `docs/04_anchor_packs.md` for the trade-off discussion.
+| Script | Pack contents | Note |
+|---|---|---|
+| `biccn_motor.py` | Mouse M1 + M2/PMd → human area 4 / area 6 (Bakken 2021) | |
+| `tectum.py` | Mouse SC + IC → human tectal regions (Isa 2021) | |
+| `olfactory.py` | Mouse piriform + AON → human olfactory cortex (Mori 2014) | |
+| `amygdala.py` | Mouse cortical subplate → human amygdala (Janak & Tye 2015) | |
+| `hippocampal.py` | Mouse Sub/CA1/CA3/DG → human hippocampal subfields (Strange 2014) | |
+| `cingulate.py` | Mouse subgenual ACC + RSC → human ACC sub-areas (Vogt 2012) | Beauchamp ACG trade-off |
+| `lateral_pfc.py` | Mouse OFC + PrL → human OFC + dlPFC (Wallis 2011, Carlén 2017) | dlPFC entry contested |
+| `entorhinal.py` | Mouse entorhinal area → human entorhinal cortex (Franjic 2021) | |
+| `striatum.py` | Mouse CPu dorsolateral/ventromedial → human putamen + caudate (Voorn 2004) | |
+| `visual.py` | Mouse LM → human V2 (Wang & Burkhalter 2007) | Beauchamp cuneus trade-off |
+| `pag.py` | Mouse PAG → human PAG (Ezra 2015) | |
+| `compose_all.py` | All 15 registry packs in one fit | builds the recommended π |
+
+The trade-offs (cingulate, somatosensory, visual lower a coarse Beauchamp metric for one region; the dlPFC entry is anatomically contested) are documented per pack in `docs/04_anchor_packs.md`. Four further packs — `perirhinal`, `auditory`, `somatosensory`, `ppc` — are in the recommended composition and exist as builders in `src/homer/data/anchor_packs/` but have no standalone runner here; compose them programmatically via the registry.
 
 ## Reproduce production-with-all-packs π
 
@@ -29,13 +37,17 @@ Opt-in packs are biologically defensible but hurt one Beauchamp validation metri
 PYTHONPATH=src python experiments/anchor_packs/compose_all.py
 ```
 
-This produces `outputs/coupling/pi_fc_plus_SC_with_all_packs.npy` — the recommended π for downstream queries.
+This produces `outputs/coupling/pi_fc_plus_SC_with_all_packs.npy` — the recommended π for downstream queries. To run the whole recommended-model pipeline (solve → compose → bootstrap → trust → GUI) end to end:
+
+```bash
+PYTHONPATH=src python pipeline/run_recommended_model.py
+```
 
 ## Reproduce individual pack ablations
 
 ```bash
 PYTHONPATH=src python experiments/anchor_packs/biccn_motor.py
-# … etc for each pack
+# … etc for each runner script above
 ```
 
 Per-pack outputs are useful for ablations ("does removing the cingulate pack change DMN-DMN row-mass?") and for the multi-source trust map.

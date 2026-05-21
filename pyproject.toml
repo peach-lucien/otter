@@ -19,11 +19,15 @@ dependencies = [
     "mat73",
     "anndata>=0.10",
     "scikit-learn",
+    "scikit-image",
     "nibabel",
+    "nilearn",
     "matplotlib",
     "seaborn",
     "plotly",
     "pot>=0.9.4",
+    "pyyaml",
+    "openpyxl",
 ]
 
 [project.optional-dependencies]

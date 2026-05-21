@@ -42,8 +42,6 @@ sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "autism_subtypes"))
 
 PAGANI_XLSX = ROOT / "data_external" / "pagani_2026" / "41593_2026_2287_MOESM6_ESM.xlsx"
-if not PAGANI_XLSX.exists():
-    PAGANI_XLSX = Path("/sessions/wizardly-admiring-tesla/mnt/uploads/41593_2026_2287_MOESM6_ESM.xlsx")
 
 
 # Biological prior on subtype assignment (per Pagani Fig 1d).

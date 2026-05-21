@@ -1,6 +1,6 @@
 # Notebooks
 
-Seven interactive walkthroughs. None re-fit the model from scratch — they load pre-computed outputs from `outputs/`. Run `pipeline/04_solve_production.py` + `experiments/anchor_packs/compose_all.py` first if you need to regenerate.
+Fifteen interactive walkthroughs. None re-fit the model from scratch — they load pre-computed outputs from `outputs/`. Run `pipeline/04_solve_production.py` + `experiments/anchor_packs/compose_all.py` first if you need to regenerate.
 
 ## Reading order
 
@@ -17,8 +17,12 @@ Seven interactive walkthroughs. None re-fit the model from scratch — they load
 | 09 | [`09_pagani_per_model_translation.ipynb`](09_pagani_per_model_translation.ipynb) | HOMER × Pagani per-mouse-model — exploratory showcase of which human ASD subtype each of 20 mouse autism models translates to via HOMER's π. Honest about being subtype-resolution because 1,491-feature decoding wasn't possible. | 10 min |
 | 10 | [`10_biccn_cell_type_markers.ipynb`](10_biccn_cell_type_markers.ipynb) | HOMER × BICCN (Yao 2023 + Siletti 2023) cell-type markers — Pvalb, Sst, Th, Gfap, etc. Establishes that HOMER preserves regionally-concentrated cell-type signals (Th, Gfap, Plp1) but not broadly-cortical class markers (interneurons). Side-by-side with Hodge layer markers. | 10 min |
 | 11 | [`11_enigma_cross_disorder.ipynb`](11_enigma_cross_disorder.ipynb) | HOMER × ENIGMA cross-disorder spatial validation. Phase 1 (in-notebook): per-disorder predictions at parcel resolution show HOMER's cross-disorder correlations at r > 0.97 — confirming no disorder-specificity. Phase 2 (needs external ENIGMA Toolbox download): comparison against published Cohen's d maps. | 10 min |
+| 12 | [`12_fulcher_2019_multimodal_gradient.ipynb`](12_fulcher_2019_multimodal_gradient.ipynb) | HOMER × Fulcher 2019 (PNAS multimodal mouse-cortex gradients) — routes mouse T1w:T2w + cytoarchitecture through π; both reproduce the human HCP myelin map. Structural, Beauchamp-independent, 3-panel figure. | 5 min |
+| 13 | [`13_balsters_2020_mfc_divergence.ipynb`](13_balsters_2020_mfc_divergence.ipynb) | HOMER × Balsters 2020 (PNAS) — falsification test: mouse medial frontal cortex routes to human medial/premotor/cingulate cortex and avoids dlPFC, as the connectivity evidence predicts. | 5 min |
+| 14 | [`14_transbrain_2025_benchmark.ipynb`](14_transbrain_2025_benchmark.ipynb) | HOMER × TransBrain 2025 (Nature Methods) — honest head-to-head against a sibling mouse↔human translation method, plus scoring HOMER on TransBrain's literature homology benchmark. | 5 min |
+| 15 | [`15_buckner_krienen_2013_tethering.ipynb`](15_buckner_krienen_2013_tethering.ipynb) | HOMER × Buckner & Krienen 2013 (TICS) — negative control: HOMER's π is dramatically sparsest over human association cortex, as the tethering hypothesis predicts. | 5 min |
 
-Notebooks 05-11 are **third-party showcases** — each takes a published cross-species paper and tests whether HOMER's π reproduces (or refines) its findings. The template (load HOMER, load paper's source data, route through π, compare, interpret) generalises to any future paper with usable cross-species supplementary data.
+Notebooks 05-15 are **third-party showcases** — each takes a published cross-species paper and tests whether HOMER's π reproduces (or refines) its findings. The template (load HOMER, load paper's source data, route through π, compare, interpret) generalises to any future paper with usable cross-species supplementary data.
 
 ## Required widgets
 

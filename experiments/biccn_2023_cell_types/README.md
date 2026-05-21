@@ -54,7 +54,7 @@ Together with Hodge 2019 (layer markers), this completes the resolution-boundary
 |---|---|---|
 | Beauchamp 2022 | 22 specific region pairs | 37 % top-1, 100 % qualified top-3 |
 | Pagani Test 2c | Network-pair Δ | r = +0.527, p = 0.0009 |
-| Margulies/Huntenburg | Brain-wide gradient | r = +0.144, p = 4e-11 |
+| Margulies/Huntenburg | Brain-wide gradient | \|r\| = 0.426, empirical p = 0.000 |
 | **BICCN Th/Aqp4** | **Region-concentrated cell types** | **r = +0.05 to +0.10 per marker, several p < 0.001** |
 | Hodge layer markers | Within-area lamination | Null (only RORB significant) |
 | **BICCN interneurons** | **Broadly-cortical cell classes** | **Null** |

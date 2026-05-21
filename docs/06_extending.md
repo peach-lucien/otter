@@ -142,7 +142,7 @@ M_cost = apply_region_supervision(M_cost, entries, lam_outside=1.0)
 Region anchors are most useful when the mouse and/or human side is a multi-parcel
 set rather than a single point, and when you trust the *set* of permitted
 partners but don't want to commit to a specific 1-to-1 pairing. See
-[results §5.6.0a](results.md#5.6.0a-soft-1--soft-region-anchors-hard-penalty--mild-penalty)
+[iteration log §5.6.0a](archive/iteration_log.md)
 for the soft-vs-hard tradeoff.
 
 ## Add a new model class

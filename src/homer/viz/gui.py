@@ -34,7 +34,12 @@ def _rounded_float_list(x, ndigits: int = 3) -> list[float]:
 def _var_text(var, name: str, n: int, default: str = "") -> list[str]:
     if name not in var:
         return [default] * n
-    return var[name].fillna(default).astype(str).tolist()
+    # .astype(object) first: several var columns load from h5ad as pandas
+    # Categorical, and .fillna() on a Categorical raises on modern pandas
+    # (>=2.0) when the fill value is not already a category. Demoting to
+    # object dtype makes fillna accept any value; behaviour is unchanged
+    # when the column has no missing entries.
+    return var[name].astype(object).fillna(default).astype(str).tolist()
 
 
 def _short_text(text: str, max_len: int = 140) -> str:
@@ -76,7 +81,10 @@ def _node_records(ad, *, trust_path: Optional[str | Path] = None, species: str) 
         "pairid": [int(v) for v in var["pairid"].astype(int).tolist()],
         "anchor_pair_id": [
             int(v) if str(v) not in ("<NA>", "nan", "None") else 0
-            for v in var["anchor_pair_id"].fillna(0).astype(int).tolist()
+            # .astype(object) before fillna: anchor_pair_id loads as a
+            # Categorical, and fillna() on a Categorical raises on pandas >=2.0
+            # unless the fill value is already a category.
+            for v in var["anchor_pair_id"].astype(object).fillna(0).astype(int).tolist()
         ],
     }
     if species == "mouse":

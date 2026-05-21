@@ -37,7 +37,7 @@ See `03_results.md` for what each tier means and how to read the headline number
 
 ## What HOMER *is not*
 
-- Not an unsupervised method — it requires anchor pairs (we ship 21 Garin point anchors + 11 region-anchor entries from 7 published anchor packs).
+- Not an unsupervised method — it requires anchor pairs (we ship 21 Garin point anchors + 26 region-anchor entries from 15 anchor packs).
 - Not a voxel-level mapping — π is parcel-to-parcel. Mouse parcels span ~12-2837 voxels each.
 - Not a cellular-resolution tool — it's spatial and connectivity-based; cell-type homology (BICCN, Allen Brain Cell Atlas) is a separate problem.
 - Not validated for cerebellum or medulla (excluded from our parcellation).
@@ -48,13 +48,13 @@ For the **recommended π** (`pi_fc_plus_SC_with_all_packs.npy`):
 
 | Metric | Value |
 |---|---:|
-| Beauchamp 2022 parcel-level top-1 | **37 %** (vs 12 % strict baseline; 3.1×) |
+| Beauchamp 2022 parcel-level top-1 | **39 %** (vs 12 % strict baseline; 3.3×) |
 | Region-level qualified top-3 (Beauchamp-22 set) | **100 %** |
 | Bootstrap argmax stability (40 subject-resamples) | **97.8 %** |
 | z-score vs permuted-anchor null | **+17.8** |
-| Multi-source trust tier "anchored_and_validated" | 19 % of parcels |
+| Multi-source trust tier "anchored_and_validated" | 31 % of parcels |
 
-See `03_results.md` for the full per-region breakdown, the third-party validation table across eight cross-species papers, and the honest caveats. See `04_anchor_packs.md` for the per-pack contribution.
+See `03_results.md` for the full per-region breakdown, the third-party validation table across twelve cross-species papers, and the honest caveats. See `04_anchor_packs.md` for the per-pack contribution.
 
 ## Project structure at a glance
 
@@ -63,9 +63,9 @@ homer/
 ├── src/homer/          # The library (data, models, eval, viz, costs)
 ├── pipeline/           # Reproduction scripts (02 → 07)
 ├── experiments/        # Anchor-pack runners + ablations
-├── notebooks/          # 4 interactive walkthroughs
+├── notebooks/          # 15 interactive walkthroughs
 ├── docs/               # You are here
-├── tests/              # pytest (~10s, 161 tests)
+├── tests/              # pytest (~10s, 176 tests)
 ├── outputs/            # All generated artefacts (π, JSONs, figures)
 └── config/             # YAML configs for anchors
 ```

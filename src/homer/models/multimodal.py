@@ -244,14 +244,21 @@ class MultimodalFGW(SupervisedFGW):
         # Anchor supervision (point anchors)
         M = _apply_anchor_supervision(M, idx_m, idx_h, visible,
                                        lam=self.config["lam_anchor"])
-        # Region-anchor supervision (S4) — applied after point anchors so
-        # region constraints can extend or refine the existing point ones.
+        # Region-anchor supervision (S4) — applied after point anchors. The
+        # `protect` mask flags the point-anchor "allowed" cells so the
+        # conflict-aware region layer cannot clobber point-anchor supervision.
         if region_anchors:
+            visible_set = {int(p) for p in visible}
+            protect = np.zeros(M.shape, dtype=bool)
+            for k in range(len(idx_m.pos)):
+                if int(idx_m.pair_ids[k]) in visible_set:
+                    protect[idx_m.pos[k], idx_h.pos[k]] = True
             M = apply_region_supervision(
                 M, region_anchors,
                 lam=self.config["lam_anchor"],
                 lam_outside=region_lam_outside,
                 beta_in=region_beta_in,
+                protect=protect,
             )
 
         # ---- Solve ----

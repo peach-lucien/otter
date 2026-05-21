@@ -8,7 +8,7 @@ idempotent and saves to `outputs/`.
 ```bash
 conda env create -f env.yml && conda activate homer
 pip install -e ".[dev]"
-pytest -q                      # 83 tests, ~10 s
+pytest -q                      # 176 tests, ~10 s
 ```
 
 ## 1. External data download (slow, network-dependent)
@@ -87,7 +87,7 @@ pass `--recompute` to force a full recompute.
 ## 6. Bootstrap stability
 
 ```bash
-PYTHONPATH=src python pipeline/06_bootstrap.py --config fc_plus_SC --n-iter 40   # ~10 min
+PYTHONPATH=src python pipeline/06_bootstrap.py --config fc_plus_SC --iters 40   # ~10 min
 ```
 
 Saves `outputs/coupling/bootstrap_aggregate_fc_plus_SC.npz` with per-cell mean
@@ -110,6 +110,28 @@ Produces:
 - `outputs/figures/14_config_x_network_heatmap.png` — full heatmap
 - `outputs/viewer/index.html` — self-contained interactive viewer
 
+## 8. Multi-source trust map + GUI
+
+```bash
+PYTHONPATH=src python pipeline/08a_multisource_trust.py     # five-tier per-parcel evidence map
+PYTHONPATH=src python pipeline/08_build_gui.py --publish    # region-first explorer
+```
+
+`08a` writes `outputs/coupling/trust_multisource_all_packs.npz` (the evidence
+map the GUI and `notebooks/02_trust_map.ipynb` read); `08_build_gui.py` builds
+`outputs/gui/index.html` and, with `--publish`, copies it to `docs/index.html`
+for GitHub Pages.
+
+## One-shot: reproduce the recommended model
+
+`pipeline/run_recommended_model.py` chains solve → compose packs → bootstrap →
+multi-source trust → GUI in the correct order:
+
+```bash
+PYTHONPATH=src python pipeline/run_recommended_model.py              # full run
+PYTHONPATH=src python pipeline/run_recommended_model.py --start-from trust   # reuse fits, refresh trust + GUI
+```
+
 ## Headline numbers you should see
 
 After running steps 1–7 end-to-end on the original cohort:
@@ -125,7 +147,7 @@ After running steps 1–7 end-to-end on the original cohort:
 | Subject-CV gap (test − train)         | **−0.04 ± 0.01** |
 | Bootstrap mean stability              | **0.98**        |
 
-See [`docs/results.md`](results.md) for the full per-config breakdown.
+See [`docs/03_results.md`](03_results.md) for the full per-config breakdown.
 
 ## Time budget
 

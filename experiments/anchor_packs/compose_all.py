@@ -1,6 +1,9 @@
-"""COMPOSE-ALL: fit MultimodalFGW with all 5 default anchor packs at once.
+"""COMPOSE-ALL: fit MultimodalFGW with all default anchor packs at once.
 
-Composes the 5 default anchor packs (everything except opt-in cingulate):
+The set of default packs is defined once in
+:mod:`homer.data.anchor_packs.registry` (``DEFAULT_PACK_NAMES``) and built
+here via :func:`build_default_pack_entries` — this script no longer keeps
+its own copy of the list. Currently the default packs are:
 
   - biccn_motor (pid 30, 31) — Bakken 2021
   - tectum      (pid 32, 33) — May 2006; Schreiner & Winer 2007
@@ -8,10 +11,9 @@ Composes the 5 default anchor packs (everything except opt-in cingulate):
   - amygdala    (pid 38)     — Janak & Tye 2015
   - hippocampal (pid 39-42)  — Strange et al. 2014
 
-11 region-anchor entries in total, layered on top of the 21 Garin point
-anchors. Reports Beauchamp top-K across all 19 evaluable pairs, region-
-level eval (Beauchamp-22 candidate set), and the per-pair before/after
-comparison.
+These are layered on top of the 21 Garin point anchors. Reports Beauchamp
+top-K across all 19 evaluable pairs, region-level eval (Beauchamp-22
+candidate set), and the per-pair before/after comparison.
 
 Outputs:
   - outputs/coupling/pi_fc_plus_SC_with_all_packs.npy
@@ -36,11 +38,8 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from homer.data import load_cached                                  # noqa: E402
 from homer.data.anchor_packs import (                                # noqa: E402
-    build_biccn_motor_region_anchors,
-    build_tectum_region_anchors,
-    build_olfactory_region_anchors,
-    build_amygdala_region_anchors,
-    build_hippocampal_region_anchors,
+    DEFAULT_PACK_NAMES,
+    build_default_pack_entries,
 )
 from homer.models import MultimodalFGW                              # noqa: E402
 
@@ -55,13 +54,10 @@ def main():
     costs = np.load(ANN / "full_costs.npz")
     print(f"Mouse parcels: {len(M.var)}, human parcels: {len(H.var)}")
 
-    # Compose all 5 default packs
-    print("\nBuilding all 5 default anchor packs ...")
-    entries = (build_biccn_motor_region_anchors(M.var, H.var, atlas_root=ROOT)
-               + build_tectum_region_anchors(M.var, H.var, atlas_root=ROOT)
-               + build_olfactory_region_anchors(M.var, H.var, atlas_root=ROOT)
-               + build_amygdala_region_anchors(M.var, H.var, atlas_root=ROOT)
-               + build_hippocampal_region_anchors(M.var, H.var, atlas_root=ROOT))
+    # Compose all default packs (registry is the single source of truth).
+    print(f"\nBuilding all {len(DEFAULT_PACK_NAMES)} default anchor packs "
+          f"({', '.join(DEFAULT_PACK_NAMES)}) ...")
+    entries = build_default_pack_entries(M.var, H.var, atlas_root=ROOT)
     print(f"\n{len(entries)} region-anchor entries:")
     for e in entries:
         print(f"  pid={e.pair_id:>3d}  {e.label!r:60s} "

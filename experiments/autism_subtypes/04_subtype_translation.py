@@ -48,23 +48,23 @@ from homer.data import load_cached
 
 
 import os
-# Sandbox path → user-machine fallback. Override via PAGANI_XLSX env var.
-_DEFAULT_SANDBOX = "/sessions/wizardly-admiring-tesla/mnt/uploads/41593_2026_2287_MOESM6_ESM.xlsx"
-_USER_FALLBACKS = [
+# Pagani 2026 MOESM6 supplementary workbook. Override via the PAGANI_XLSX env
+# var; otherwise resolve against in-repo locations (the canonical one is
+# data_external/pagani_2026/).
+_CANDIDATE_PATHS = [
     Path(__file__).resolve().parents[2] / "data_external" / "pagani_2026" / "41593_2026_2287_MOESM6_ESM.xlsx",
     Path(__file__).resolve().parent / "41593_2026_2287_MOESM6_ESM.xlsx",
     Path(__file__).resolve().parents[2] / "41593_2026_2287_MOESM6_ESM.xlsx",
 ]
 PAGANI_XLSX = os.environ.get("PAGANI_XLSX")
 if not PAGANI_XLSX:
-    if Path(_DEFAULT_SANDBOX).exists():
-        PAGANI_XLSX = _DEFAULT_SANDBOX
+    for p in _CANDIDATE_PATHS:
+        if p.exists():
+            PAGANI_XLSX = str(p); break
     else:
-        for p in _USER_FALLBACKS:
-            if p.exists():
-                PAGANI_XLSX = str(p); break
-        if not PAGANI_XLSX:
-            PAGANI_XLSX = _DEFAULT_SANDBOX  # final fallback; will error clearly if missing
+        # Default to the canonical in-repo location; opening it raises a clear
+        # FileNotFoundError if the supplementary file is missing.
+        PAGANI_XLSX = str(_CANDIDATE_PATHS[0])
 
 # Mouse 9-network names (from ED Fig 1 of paper)
 PAGANI_MOUSE_NETS = [

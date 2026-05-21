@@ -1,31 +1,56 @@
 # Margulies 2016 + Huntenburg 2021 principal-gradient validation
 
-Tests whether HOMER's π preserves the cross-species principal connectivity gradient — a single brain-wide ordering, orthogonal to specific-pair anchor benchmarks.
+Tests whether HOMER's π preserves the cross-species principal connectivity
+gradient — a single brain-wide ordering, orthogonal to specific-pair anchor
+benchmarks.
 
 ## Why this experiment
 
-[Margulies et al. 2016 (PNAS)](https://www.pnas.org/doi/10.1073/pnas.1608282113) introduced the principal connectivity gradient — derived by diffusion-map embedding on the human resting-state FC matrix, it spans from primary sensorimotor cortex (unimodal end) to default-mode network (transmodal end). It's the dominant organisational axis of human cortex.
+[Margulies et al. 2016 (PNAS)](https://www.pnas.org/doi/10.1073/pnas.1608282113)
+introduced the principal connectivity gradient — derived by diffusion-map
+embedding on the resting-state FC matrix, it spans from primary sensorimotor
+cortex (unimodal end) to default-mode network (transmodal end). It's the
+dominant organisational axis of cortex.
 
-[Huntenburg et al. 2021 (Nat Comm)](https://www.nature.com/articles/s41467-021-26703-z) extended the same procedure to mouse rsfMRI and showed an analogous gradient exists in mouse, broadly conserved across species.
+[Huntenburg et al. 2021 (Nat Comm)](https://www.nature.com/articles/s41467-021-26703-z)
+extended the same procedure to mouse rsfMRI and showed an analogous gradient
+exists in mouse, broadly conserved across species.
 
-If HOMER's π is anatomically faithful, then routing the mouse principal gradient through π should approximately reproduce the human principal gradient. This is a **single global number**: correlation of predicted vs observed human gradient over 2,094 parcels.
+If HOMER's π is anatomically faithful, routing the mouse principal gradient
+through π should reproduce the human principal gradient — a single global
+correlation.
 
 ## Result
 
-**Pearson r = +0.144, Spearman ρ = +0.343, analytical p = 4×10⁻¹¹**
-**Permuted-π null |r| mean = +0.015, 95% CI (+0.001, +0.043). Empirical p = 0.000.**
+**|r| = 0.426  (|ρ| = 0.394, n = 1,435 parcels; region-level |r| = 0.415)**
+**Permuted-π null |r| mean = 0.026; empirical p = 0.000 — 16× the null.**
 
-The observed correlation is ≈ 10× the null mean and well outside the null 95% CI. The Spearman ρ being substantially larger than Pearson r indicates the *ordering* of parcels along the gradient is more preserved than absolute values — biologically the more meaningful statistic since the gradient is defined up to monotonic transformation.
+HOMER preserves the broad cross-species cortical organisation gradient, well
+clear of the permuted-π null. Combined with the other validations:
 
-**HOMER preserves the broad cross-species cortical organisation gradient.** Combined with the other validations:
-
-| Test | Granularity | Pearson r | Status |
+| Test | Granularity | \|r\| | Status |
 |---|---|---:|:---:|
 | Pagani Test 2c | Network-pair Δ (36 elements) | +0.527 | Strong |
-| **Margulies/Huntenburg gradient** | **Brain-wide ordering (2,094 parcels)** | **+0.144** | **Modest but p=4e-11** |
+| **Margulies/Huntenburg gradient** | **Brain-wide ordering** | **0.426** | **Strong** |
+| Fulcher 2019 T1w:T2w → myelin | Cortical region | +0.314 | Strong |
 | Hodge layer markers | Within-area lamination | ~0 | Null |
 
-This is a *brain-wide* organisational test, not driven by anchor pairs. The Pagani Test 2c (r=+0.527) is the strongest result but operates at the network-pair level. The Margulies gradient is more diffuse but covers the whole brain — establishing that HOMER's cross-species fidelity isn't only at the 22 Beauchamp anchor pairs or the network-aggregated level.
+A *brain-wide* organisational test, not driven by anchor pairs — establishing
+that HOMER's cross-species fidelity isn't only at the 22 Beauchamp anchor pairs
+or the network-aggregated level.
+
+### Routing note
+
+An earlier version of this experiment routed the gradient with an
+un-normalised `mouse_grad @ π` and scored only r = 0.144. That product
+conflates the translated gradient with π's per-column mass (which varies
+widely under the semirelaxed coupling). Routing instead as a **transport-
+weighted average** —
+
+    predicted_h[j] = Σ_i mouse_grad[i]·π[i,j] / Σ_i π[i,j]
+
+— removes that confound and roughly trebles the correlation. Human parcels
+that receive negligible π mass are left undefined (n = 1,435 of 2,094).
 
 ## Method
 
@@ -36,13 +61,16 @@ Standard Margulies-style diffusion-map embedding per species:
 4. Symmetric-normalised graph Laplacian L = I − D^{−½} W D^{−½}
 5. Second-smallest eigenvalue's eigenvector = principal gradient
 
-Then `mouse_grad @ π` → predicted human gradient. Pearson r vs observed. Permuted-π null.
+Then route the mouse gradient through π as a transport-weighted average,
+compare to the observed human gradient (Pearson + Spearman, parcel level and
+Schaefer-400 region level), permuted-π null. Eigenvectors are sign-ambiguous,
+so |r| is the headline.
 
 ## Files
 
 | File | What |
 |---|---|
-| `01_gradient_validation.py` | Compute per-species principal gradient, route mouse through π, correlate, null |
+| `01_gradient_validation.py` | Compute per-species gradient, route mouse through π, correlate, null |
 | `02_plot.py` | 3-panel figure (mouse gradient distribution, scatter, null CI) |
 | `README.md` | This file |
 
@@ -54,9 +82,9 @@ PYTHONPATH=src python experiments/margulies_2016_principal_gradient/02_plot.py
 ```
 
 Outputs:
-- `outputs/logs/margulies_2016_gradient.json` (full per-parcel gradients + stats)
+- `outputs/logs/margulies_2016_gradient.json` (per-parcel gradients + stats)
 - `outputs/figures/margulies_2016_gradient.png` (3-panel figure)
 
 ## Showcase notebook
 
-See [`notebooks/07_margulies_huntenburg_gradient.ipynb`](../../notebooks/07_margulies_huntenburg_gradient.ipynb) for an interactive walkthrough.
+See [`notebooks/07_margulies_huntenburg_gradient.ipynb`](../../notebooks/07_margulies_huntenburg_gradient.ipynb).

@@ -17,12 +17,15 @@ Why region anchors:
     map to any human precentral parcel, letting the FC/SC structure pick
     the right one within the supervised set.
 
-Cost-matrix encoding (in cross-species M):
-    For each region anchor with mouse set Mset and human set Hset:
-      M[mp, :]      = lam   for mp in Mset      (forbid by default)
-      M[mp, hp]     = 0     for mp in Mset, hp in Hset    (allow within region)
-      M[:, hp]      = lam   for hp in Hset      (forbid by default)
-      M[mp, hp]     = 0     for mp in Mset, hp in Hset    (re-allow)
+Cost-matrix encoding (in cross-species M), conflict-aware across all entries:
+    A cell (mp, hp) is *region-supervised* if mp is named by any entry's mouse
+    set or hp by any entry's human set. One global compatibility mask is built
+    first, then:
+      M[mp, hp] = beta_in       if (mp, hp) co-occur in some entry  (allowed)
+      M[mp, hp] = lam_outside   if supervised but incompatible
+      M[mp, hp] = unchanged     if unsupervised, or point-anchor-protected
+    A mouse parcel in several entries is allowed to map to the *union* of
+    their human sets — the application is order-independent.
 
 Usage::
 
@@ -172,8 +175,16 @@ def apply_region_supervision(
     lam: float = 1.0,
     lam_outside: float = 0.15,
     beta_in: float = 0.0,
+    protect: Optional[np.ndarray] = None,
 ) -> np.ndarray:
     """Apply region-anchor supervision to a cross-species cost matrix M.
+
+    **Conflict-aware.** A single global compatibility mask is built across all
+    entries before anything is written, so the result is *order-independent*.
+    A mouse parcel appearing in several entries is allowed to map to the
+    *union* of those entries' human sets (and symmetrically for human
+    parcels) — earlier work applied entries sequentially, which let a later
+    overlapping entry overwrite an earlier one's allowed (0-cost) cells.
 
     Modifies a copy and returns it.
 
@@ -184,50 +195,52 @@ def apply_region_supervision(
     entries : sequence of RegionAnchorEntry
         Region anchors to apply.
     lam : float, default 1.0
-        Legacy / point-anchor scale. Used only when ``lam_outside`` is set
-        to ``None`` for back-compat with the original hard behaviour. New
-        callers should use ``lam_outside`` directly.
+        Legacy scale. Used only when ``lam_outside`` is ``None`` (back-compat
+        with the original hard behaviour).
     lam_outside : float, default 0.15
-        Cost ASSIGNED outside the region for supervised rows / columns.
-        Default ``0.15`` is the *soft* constraint that gives better-
-        calibrated probability distributions (see docs/results §5.6.0a).
-        Set ``lam_outside = 1.0`` (or ``None``, which falls back to ``lam``)
-        for the original hard 0/1 behaviour.
+        Cost assigned to a supervised-but-incompatible cell. The *soft* 0.15
+        default gives better-calibrated π distributions (see docs/results).
     beta_in : float, default 0.0
-        Cost ASSIGNED inside the region. Default 0 makes in-region cells
-        "free" (the solver prefers them since outside cells have cost
-        ``lam_outside`` > 0). Setting ``beta_in`` < 0 would give the
-        solver a positive preference for in-region cells beyond cost-free.
+        Cost assigned to a compatible (allowed) mouse-human pair.
+    protect : (n_m, n_h) bool ndarray, optional
+        Cells that must never be raised to ``lam_outside`` — typically the
+        point-anchor "allowed" cells, so region anchors layered on top of
+        point-anchor supervision do not clobber it.
 
     Notes
     -----
-    Discrete top-K predictions (argmax / top-5 / top-10) are essentially
-    identical at any ``lam_outside`` in ``[0.05, 1.0]``. The default
-    ``0.15`` is chosen because it gives a ~43% better mean rank — the
-    *full* π distribution is better-calibrated, which is what matters
-    for downstream uses that consume more than just the argmax (e.g. FC
-    translation, region-set probability sums, soft homology scores).
-    See docs/results §5.6.0a for the sweep that motivates this default.
+    A cell is *region-supervised* if its mouse row or its human column is
+    named by any entry. Supervised cells become ``beta_in`` if the
+    mouse/human pair is compatible (co-occurs in some entry) and
+    ``lam_outside`` otherwise. Unsupervised cells and protected cells are
+    left untouched.
     """
     if lam_outside is None:
         lam_outside = lam   # back-compat hard behaviour
     M_out = np.array(M, copy=True)
+    entries = [e for e in entries if e.mouse_indices and e.human_indices]
+    if not entries:
+        return M_out
+
+    n_m, n_h = M_out.shape
+    # one global compatibility mask, built before anything is written
+    allowed = np.zeros((n_m, n_h), dtype=bool)
+    sup_m = np.zeros(n_m, dtype=bool)
+    sup_h = np.zeros(n_h, dtype=bool)
     for e in entries:
-        mset = list(e.mouse_indices)
-        hset = list(e.human_indices)
-        if not mset or not hset:
-            continue
-        # Assign outside-region cost to supervised mouse rows
-        M_out[mset, :] = lam_outside
-        # Assign inside-region cost (default 0 = free)
-        m_idx_arr = np.asarray(mset)[:, None]
-        h_idx_arr = np.asarray(hset)[None, :]
-        M_out[m_idx_arr, h_idx_arr] = beta_in
-        # Outside-region cost for supervised human cols (other rows)
-        for hp in hset:
-            mask = np.ones(M_out.shape[0], dtype=bool)
-            mask[mset] = False    # don't overwrite the in-region rows
-            M_out[mask, hp] = lam_outside
+        mi = np.asarray(e.mouse_indices, dtype=int)
+        hi = np.asarray(e.human_indices, dtype=int)
+        allowed[mi[:, None], hi[None, :]] = True
+        sup_m[mi] = True
+        sup_h[hi] = True
+
+    supervised = sup_m[:, None] | sup_h[None, :]
+    M_out[supervised & ~allowed] = lam_outside   # supervised but incompatible
+    M_out[allowed] = beta_in                     # every compatible pair is free
+
+    if protect is not None:
+        protect = np.asarray(protect, dtype=bool)
+        M_out[protect] = np.asarray(M)[protect]  # never clobber point anchors
     return M_out
 
 

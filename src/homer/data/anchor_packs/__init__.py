@@ -53,6 +53,13 @@ and lives separately because it's a single object rather than per-region.
 For per-region curation (literature-derived single homology pairs), use
 the modules here.
 
+Which packs make up the recommended model
+-----------------------------------------
+:mod:`homer.data.anchor_packs.registry` is the single source of truth for
+which packs are composed into the recommended π
+(``pi_fc_plus_SC_with_all_packs.npy``). Use :func:`build_default_pack_entries`
+rather than re-listing the default pack builders by hand.
+
 Designing a new pack
 --------------------
 Create a new file ``my_region.py`` in this directory exposing one
@@ -78,6 +85,13 @@ from homer.data.anchor_packs.auditory import build_auditory_region_anchors
 from homer.data.anchor_packs.somatosensory import build_somatosensory_region_anchors
 from homer.data.anchor_packs.ppc import build_ppc_region_anchors
 
+from homer.data.anchor_packs.registry import (
+    DEFAULT_PACK_NAMES,
+    PACKS,
+    PackSpec,
+    build_default_pack_entries,
+)
+
 __all__ = [
     "build_biccn_motor_region_anchors",
     "build_tectum_region_anchors",
@@ -94,4 +108,9 @@ __all__ = [
     "build_auditory_region_anchors",
     "build_somatosensory_region_anchors",
     "build_ppc_region_anchors",
+    # Pack registry — single source of truth for the recommended composition.
+    "PACKS",
+    "PackSpec",
+    "DEFAULT_PACK_NAMES",
+    "build_default_pack_entries",
 ]

@@ -55,8 +55,6 @@ from homer.data import load_cached
 
 
 MOESM5_PATH = ROOT / "data_external" / "pagani_2026" / "41593_2026_2287_MOESM5_ESM.xlsx"
-if not MOESM5_PATH.exists():
-    MOESM5_PATH = Path("/sessions/wizardly-admiring-tesla/mnt/uploads/41593_2026_2287_MOESM5_ESM.xlsx")
 
 
 def load_other_disease_genes() -> dict[str, set[str]]:
@@ -80,8 +78,6 @@ def load_pagani_subtype_gene_sets():
     """Reload autism subtype gene sets from MOESM4 for the comparison."""
     from openpyxl import load_workbook
     p = ROOT / "data_external" / "pagani_2026" / "41593_2026_2287_MOESM4_ESM.xlsx"
-    if not p.exists():
-        p = Path("/sessions/wizardly-admiring-tesla/mnt/uploads/41593_2026_2287_MOESM4_ESM.xlsx")
     wb = load_workbook(p, data_only=True)
     ws = wb["subtypes"]
     hypo, hyper = set(), set()

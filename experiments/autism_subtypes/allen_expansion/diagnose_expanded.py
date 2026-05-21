@@ -32,10 +32,7 @@ fm = import_module("07_full_matrix_translation")
 from homer.data import load_cached
 
 
-PAGANI_PATHWAYS_PATH = ROOT.parent.parent.parent.parent / "uploads" / "41593_2026_2287_MOESM3_ESM.xlsx"
-# Fallback: try the canonical session uploads path
-if not PAGANI_PATHWAYS_PATH.exists():
-    PAGANI_PATHWAYS_PATH = Path("/sessions/wizardly-admiring-tesla/mnt/uploads/41593_2026_2287_MOESM3_ESM.xlsx")
+PAGANI_PATHWAYS_PATH = ROOT / "data_external" / "pagani_2026" / "41593_2026_2287_MOESM3_ESM.xlsx"
 
 
 def load_pathway_genes() -> dict[str, set]:
