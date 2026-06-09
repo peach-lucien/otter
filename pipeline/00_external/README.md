@@ -35,20 +35,23 @@ pip install -r scripts/external/requirements.txt
    reports their affine, dims, and likely coordinate system. **Run this first**
    so we know what we're working with before downloading datasets.
 
-2. **`01_mouse_sc.py`** — Downloads the Allen Mouse Connectivity Atlas
-   (Oh et al. 2014, Nature) summary-structure connectivity matrix (~290 regions)
-   plus the CCFv3 annotation volume. For each of the 1864 mouse nodes, looks up
-   its CCFv3 region (using the node's voxel indices and `rsmask.nii`'s affine),
-   then assigns the corresponding row/column of the structure-level SC matrix.
+2. **`01b_mouse_sc_v2.py`** — Downloads the Allen Mouse Connectivity Atlas
+   (Oh et al. 2014, Nature) summary-structure connectivity matrix (~290 regions).
+   For each of the 1864 mouse nodes it reads the pre-warped CCFv3 voxel centre
+   `ns_center_ix` directly from `corrs_mouse_v2.mat` (Paul's nonlinear
+   DSURQE→CCFv3 elastix warp), looks up the CCFv3 region there, and assigns the
+   corresponding row/column of the structure-level SC matrix.
    Output: `mouse_sc.npy`.
 
-   Caveats: assumes `rsmask.nii` is in CCFv3 coordinates (or a linearly-related
-   space). `00_inspect_masks.py` will flag if not — you may need a registration
-   step with ANTs/FSL first.
+   No registration step is needed under v2 — the mouse→CCFv3 warp is applied
+   upstream by Paul and ships inside the .mat file. (The legacy v1 heuristic
+   transform path was removed; it lives on the `archive/v1-pipeline` branch.)
 
-3. **`02_mouse_genes.py`** — Downloads Allen Mouse Brain ISH atlas
-   (Lein et al. 2007, Nature). Uses a curated set of ~4000 well-characterised
-   genes (configurable). Per-node expression by averaging voxels.
+3. **`02c_mouse_genes_v2.py`** — Downloads Allen Mouse Brain ISH atlas
+   (Lein et al. 2007, Nature) energy volumes and samples them at 200 µm over
+   each node's pre-warped CCFv3 voxel set (`AS_ix` from `corrs_mouse_v2.mat`).
+   Reads its gene list from the immutable `mouse_gene_list_master.csv` and writes
+   the NaN-pruned list (aligned 1:1 with the matrix) to `mouse_gene_list.csv`.
    Output: `mouse_genes.npy`.
 
 4. **`03_human_sc.py`** — Downloads a public group-averaged human structural
@@ -75,14 +78,15 @@ pip install -r scripts/external/requirements.txt
 
 ## What to do if things break
 
-The most likely failure mode: `00_inspect_masks.py` reports that `rsmask.nii` is
-**not** aligned to Allen CCFv3 (or `rsmask_human.nii` is not in MNI152). In that
-case you'll need to:
+On the **mouse** side, the v2 path requires no mask registration — voxel indices
+are pre-warped into CCFv3 (NS) and DSURQE (SS) space inside `corrs_mouse_v2.mat`.
+If `01b`/`02c` warn that the loaded schema is not `v2`, the resolver fell back to
+the legacy `corrs_mouse.mat`; point `homer.data.DATA_DIR` at the
+`updated_connectom_0906_26/` package.
 
-- Register the colleague's mask to the standard space (ANTs `antsRegistration`
-  or FSL `flirt`)
-- Apply the resulting transformation to the per-node centre coordinates
-- Re-run the projection
+On the **human** side, the most likely failure mode is `00_inspect_masks.py`
+reporting that `rsmask_human.nii` is not in MNI152 — register it to the standard
+space (ANTs `antsRegistration` / FSL `flirt`) and re-run.
 
 Each script is idempotent — re-running just rebuilds the npy without
 re-downloading raw data (which is cached by allensdk / abagen).

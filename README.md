@@ -66,6 +66,18 @@ reliable = trust["evidence_tier"] == "anchored_and_validated"     # 19% of parce
 
 For interactive exploration, see `notebooks/01_quickstart.ipynb` (Python) or the browser-only [HOMER Mapping Explorer](https://peach-lucien.github.io/homer/) (no install).
 
+## Mouse package: v2 is now the default
+
+HOMER now consumes the **v2 mouse package** (`corrs_mouse_v2.mat`) by default. v2 ships pre-warped CCFv3 voxel indices for every parcel (`ns_center_ix` at 25 µm, `AS_ix` at 200 µm) derived from Paul's nonlinear DSURQE → CCFv3 elastix warp. The legacy v1 heuristic — a brute-force 48-permutation + centroid-translation transform built by `pipeline/00_external/00c_align_mouse_to_ccf.py` — is no longer needed for mouse data; the v2 loader reads CCFv3 voxel indices directly from the .mat file. The human side stays on v1.
+
+**v2 entry points** (use these for the production build):
+
+- `pipeline/00_external/01b_mouse_sc_v2.py` — rebuild `mouse_sc.npy` from `ns_center_ix`.
+- `pipeline/00_external/02c_mouse_genes_v2.py` — rebuild `mouse_genes.npy` from `AS_ix`.
+- `src/homer/io.py` v2 loader — exposes the new voxel-index fields for downstream code.
+
+The redundant v1 mouse scripts (`01_mouse_sc.py`, `02_mouse_genes.py`, `02b_mouse_genes_direct.py`, `diagnose_allen_ish.py`) and the `warp_rebuild/` directory have been removed from `main` and preserved on the **`archive/v1-pipeline`** branch. `00c_align_mouse_to_ccf.py` and `_mouse_transform.py` are retained only because the `experiments/autism_subtypes/allen_expansion/` chain still imports the heuristic transform — migrating that experiment to the v2 `AS_ix` path will let those be retired too.
+
 ## What's in this repo
 
 ```

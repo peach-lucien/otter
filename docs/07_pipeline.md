@@ -16,9 +16,8 @@ pytest -q                      # 176 tests, ~10 s
 ```bash
 PYTHONPATH=src python pipeline/00_external/00_inspect_masks.py
 PYTHONPATH=src python pipeline/00_external/00b_verify_alignment.py
-PYTHONPATH=src python pipeline/00_external/00c_align_mouse_to_ccf.py
-PYTHONPATH=src python pipeline/00_external/01_mouse_sc.py
-PYTHONPATH=src python pipeline/00_external/02b_mouse_genes_direct.py    # ~1h, only ~25% of Allen ISH datasets have grid data
+PYTHONPATH=src python pipeline/00_external/01b_mouse_sc_v2.py            # reads pre-warped ns_center_ix from corrs_mouse_v2.mat
+PYTHONPATH=src python pipeline/00_external/02c_mouse_genes_v2.py        # samples Allen ISH over v2 AS_ix voxel sets
 PYTHONPATH=src python pipeline/00_external/03_human_sc.py
 PYTHONPATH=src python pipeline/00_external/04_human_genes.py
 PYTHONPATH=src python pipeline/00_external/05_orthologs.py

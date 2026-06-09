@@ -48,9 +48,9 @@ For the **recommended π** (`pi_fc_plus_SC_with_all_packs.npy`):
 
 | Metric | Value |
 |---|---:|
-| Beauchamp 2022 parcel-level top-1 | **39 %** (vs 12 % strict baseline; 3.3×) |
+| Beauchamp 2022 parcel-level top-1 | **45.7 %** (enrichment 50.6× over null) |
 | Region-level qualified top-3 (Beauchamp-22 set) | **100 %** |
-| Bootstrap argmax stability (40 subject-resamples) | **97.8 %** |
+| Bootstrap argmax stability (40 subject-resamples) | **98.2 %** |
 | z-score vs permuted-anchor null | **+17.8** |
 | Multi-source trust tier "anchored_and_validated" | 31 % of parcels |
 

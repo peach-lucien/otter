@@ -1,6 +1,14 @@
 """Fallback mouse-gene downloader: bypass AllenSDK and hit the REST endpoint
 directly with `requests`.
 
+.. deprecated:: v2
+    LEGACY (v1 only). Like ``02_mouse_genes.py``, this script samples ISH
+    energy volumes through the heuristic 48-permutation transform. The v2
+    successor ``02c_mouse_genes_v2.py`` reads the pre-warped voxel set
+    ``AS_ix`` directly from ``corrs_mouse_v2.mat`` and is the production
+    path. Use this fallback only when reproducing the v1 mouse-gene
+    pipeline.
+
 Use this if 02_mouse_genes.py keeps producing zips with only `data_set.xml`.
 
 What this does differently:

@@ -22,7 +22,7 @@ correlation.
 
 ## Result
 
-**|r| = 0.426  (|ρ| = 0.394, n = 1,435 parcels; region-level |r| = 0.415)**
+**|r| = 0.402 (parcel-level), 0.433 (region-level)**
 **Permuted-π null |r| mean = 0.026; empirical p = 0.000 — 16× the null.**
 
 HOMER preserves the broad cross-species cortical organisation gradient, well
@@ -30,9 +30,9 @@ clear of the permuted-π null. Combined with the other validations:
 
 | Test | Granularity | \|r\| | Status |
 |---|---|---:|:---:|
-| Pagani Test 2c | Network-pair Δ (36 elements) | +0.527 | Strong |
-| **Margulies/Huntenburg gradient** | **Brain-wide ordering** | **0.426** | **Strong** |
-| Fulcher 2019 T1w:T2w → myelin | Cortical region | +0.314 | Strong |
+| Pagani Test 2c | Network-pair Δ (36 elements) | +0.601 | Strong |
+| **Margulies/Huntenburg gradient** | **Brain-wide ordering** | **0.402** | **Strong** |
+| Fulcher 2019 T1w:T2w → myelin | Cortical region | +0.373 | Strong |
 | Hodge layer markers | Within-area lamination | ~0 | Null |
 
 A *brain-wide* organisational test, not driven by anchor pairs — establishing

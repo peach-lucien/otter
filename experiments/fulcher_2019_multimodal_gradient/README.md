@@ -27,12 +27,12 @@ myelinated association cortex.
 Three panels (`outputs/figures/fulcher_2019_multimodal_gradient.png`):
 
 **1 — Mouse T1w:T2w → human myelin.** Translating the mouse T1w:T2w map through
-π reproduces the human HCP myelin map at **Pearson r = +0.314, Spearman ρ =
+π reproduces the human HCP myelin map at **Pearson r = +0.373, Spearman ρ =
 +0.321** (analytical p = 2.5×10⁻⁵, n = 174 Schaefer regions), with **empirical
 p = 0.000** against a 200-trial permuted-π null (null mean r ≈ 0). HOMER carries
 the cross-species cortical myelin hierarchy — a structural, Beauchamp-
 independent line of evidence alongside the Margulies principal-gradient test
-(|r| = 0.43).
+(|r| = 0.402).
 
 **2 — Routed territory is gradient-compressed.** π concentrates the whole mouse
 brain onto a compact human territory: the 417 mouse isocortical parcels map onto
@@ -46,16 +46,16 @@ association cortex.
 
 **3 — Cytoarchitecture → human myelin (independent modality).** A second,
 independent mouse modality — Goulas cytoarchitectural type — routed through π
-also predicts the human myelin map at **r = +0.268, ρ = +0.325** (p = 3.4×10⁻⁴,
+also predicts the human myelin map at **r = +0.362, ρ = +0.325** (p = 3.4×10⁻⁴,
 empirical p = 0.000). Two unrelated mouse structural modalities converge on the
 same human target: HOMER preserves the *multimodal* hierarchy, not an artefact
 of one measurement.
 
 | Panel | Test | Pearson r | Empirical p |
 |---|---|---:|:---:|
-| 1 | mouse T1w:T2w → human myelin | **+0.314** | 0.000 |
+| 1 | mouse T1w:T2w → human myelin | **+0.373** | 0.000 |
 | 2 | routed territory gradient SD vs all-cortex | ×0.50 | — |
-| 3 | mouse cytoarchitecture → human myelin | **+0.268** | 0.000 |
+| 3 | mouse cytoarchitecture → human myelin | **+0.362** | 0.000 |
 
 ## Method
 

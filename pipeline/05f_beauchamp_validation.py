@@ -242,6 +242,12 @@ def main(args):
         f"pi shape {pi.shape} != ({len(M.var)}, {len(H.var)})"
 
     # ---- Mouse side: parcel -> DSURQE label -> Beauchamp region membership
+    #
+    # NB: an attempted v2 dispatch (read Paul's pre-computed
+    # `region_vote_ss_dsq` column instead of live atlas lookup) was
+    # reverted 2026-06-09 because Paul's vote vocabulary uses different
+    # region names than the live atlas (Caudoputamen vs striatum,
+    # American vs British spelling, etc.). See _dsurqe.py docstring.
     name_to_dsurqe_labels = parse_dsurqe_tree(EXT / "AMBA/data/DSURQE_tree.json")
     parcel_dsurqe = assign_dsurqe_labels(
         M, EXT / "AMBA/data/imaging/DSURQE_CCFv3_labels_200um.mnc",

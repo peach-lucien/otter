@@ -22,11 +22,11 @@ classic mouse↔human homologous region pairs (`homo_cortex.csv`,
 `homo_subcortex.csv`) — a benchmark HOMER has never seen, independent of the
 Garin anchors and the Beauchamp set. Routing HOMER's π for the 17 scorable
 cortical mouse regions: the literature-homolog Brainnetome region lands in
-HOMER's **top-3 18 %** of the time (permuted-π null 4 %, p = 0.015) and top-5
-24 % — modest on a fine 127-region atlas. The resolution-fair metric is
-clearer: HOMER's predicted human centroid sits **31.6 mm** from the literature
-homolog vs **41.6 mm** for the null (p < 0.001). HOMER places mouse regions in
-the right neighbourhood — and 31.6 mm is squarely within its own stated
+HOMER's **top-3 41 %** of the time (permuted-π null 4 %, p < 0.001) and top-5
+47 % — modest on a fine 127-region atlas. The resolution-fair metric is
+clearer: HOMER's predicted human centroid sits **25.3 mm** from the literature
+homolog vs **39.8 mm** for the null (p < 0.001). HOMER places mouse regions in
+the right neighbourhood — and 25.3 mm is squarely within its own stated
 ~25–45 mm resolution — but does not pinpoint the exact Brainnetome parcel. The
 7-region subcortical benchmark comes out at chance.
 
@@ -35,7 +35,7 @@ compared at Brainnetome-region level:
 
 | Phenotype | HOMER vs human | TransBrain vs human | HOMER ↔ TransBrain |
 |---|---:|---:|---:|
-| resting-fMRI gradient | \|r\| = 0.27 | \|r\| = 0.44 | \|r\| = 0.23 |
+| resting-fMRI gradient | \|r\| = 0.393 | \|r\| = 0.463 | \|r\| = 0.23 |
 | Magel2 autism pattern | — | — | r = 0.10 (maps); 0.05 (risk scores) |
 
 On the smooth gradient both methods recover the human reference, with

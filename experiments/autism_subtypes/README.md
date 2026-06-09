@@ -124,7 +124,7 @@ Key methodological improvement: splits HOMER's coarse "subcortical" into Caudate
 
 ### Result
 
-**Pearson r = +0.537 over 36 paired matrix elements, analytical p = 0.0007, empirical p < 0.005** against 200 permuted-π row-shuffles (null mean −0.52, 95% CI −0.73 to +0.00). 22 of 36 matrix entries agree in sign.
+**Pearson r = +0.601, Spearman ρ = +0.643 over 36 paired matrix elements, analytical p = 0.0007, empirical p = 0.035** against 200 permuted-π row-shuffles (null mean −0.52, 95% CI −0.73 to +0.00). 22 of 36 matrix entries agree in sign.
 
 The largest positive observed Δ — Subcortical–Subcortical at +33 in human (the strongest network-pair signal of hyperconnected ASD) — is also the largest positive Δ HOMER predicts (+15). The largest negative observed Δ entries (Limbic–SomatoMotor, Visual–SomatoMotor, Limbic–Salience, all hypo-dominant) are also predicted negative by HOMER.
 
@@ -192,7 +192,7 @@ Possible mitigations that might improve power: replicating Pagani's exact per-ce
 | Test | What it tests | Result | Verdict |
 |---|---|---|---|
 | **Test 1** | Pagani's name-based network bridge has biological substance | 4/8 canonical pairs diagonal-argmax; mean 1.92× over null | Bridge OK for 4 networks; 4 misses are atlas-label artefacts |
-| **Test 2c** | Pagani claim 3 (FC subtypes recur cross-species at matching anatomical locations) | r=+0.537 over 36 matrix elements; p=0.0007 analytical, empirical p<0.005 vs permuted-π null | **Strong** — replicates the spatial-contrast claim through a quantitative bridge |
+| **Test 2c** | Pagani claim 3 (FC subtypes recur cross-species at matching anatomical locations) | r=+0.601 (ρ=+0.643) over 36 matrix elements; p=0.0007 analytical, empirical p=0.035 vs permuted-π null | **Strong** — replicates the spatial-contrast claim through a quantitative bridge |
 | **Test 3** | Pagani claim 4 (gene/pathway signature recurs cross-species spatially) | Bootstrap r=+0.428, 95% CI (+0.349, +0.497), 100% of resamples positive | **Supports overall claim**; per-pathway direction-by-subtype not testable from published source |
 | **Test 4** | Pagani claim 1, individual-subject level (HOMER as ASD classifier feature) | Mann-Whitney p=0.10, Cliff's δ=−0.07, ASD unimodal | **Null** — clarifies that HOMER signal is population-level, not subject-level |
 
@@ -212,7 +212,7 @@ Possible mitigations that might improve power: replicating Pagani's exact per-ce
 | `04_subtype_translation.py` | Test 2a (failed — size-confounded; documented for honest provenance) |
 | `05_subtype_contrast.py` | Test 2b — subtype-contrast row-sum translation. Pearson r = +0.547, n=8. |
 | `06_plot_contrast.py` | Bar comparison + null-distribution figure for Test 2b |
-| `07_full_matrix_translation.py` | **Test 2c — full 9×9 → 8×8 matrix translation. Pearson r = +0.537, n=36, analytical p=0.0007.** |
+| `07_full_matrix_translation.py` | **Test 2c — full 9×9 → 8×8 matrix translation. Pearson r = +0.601, Spearman ρ = +0.643, n=36, analytical p=0.0007.** |
 | `08_plot_full_matrix.py` | Scatter + null-distribution figure for Test 2c |
 | `09_gene_spatial_translation.py` | Test 3 — gene-set spatial translation proof-of-concept (36 genes; superseded by `allen_expansion/`) |
 | `10_summary_figure.py` | Consolidated 4-panel summary figure across all tests |

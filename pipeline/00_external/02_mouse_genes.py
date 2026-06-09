@@ -1,5 +1,14 @@
 """Project Allen Mouse Brain ISH gene expression onto the 1864-node parcellation.
 
+.. deprecated:: v2
+    LEGACY (v1 only). This script uses the heuristic 48-permutation
+    transform from ``00c_align_mouse_to_ccf.py`` to map parcel centres
+    into CCFv3 before ISH sampling. The v2 successor
+    ``02c_mouse_genes_v2.py`` reads the pre-warped voxel set ``AS_ix``
+    directly from ``corrs_mouse_v2.mat`` (Paul's nonlinear DSURQE -> CCFv3
+    warp) and is the production path. Use this script only when working
+    from the v1 mouse package.
+
 For each gene we get a 3D 'energy' volume in CCFv3 200 µm space. We then sample
 the volume at each node's voxel positions (after transforming colleague-mouse
 coords → CCFv3 coords).

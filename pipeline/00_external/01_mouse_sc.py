@@ -1,6 +1,15 @@
 """Project the Allen Mouse Connectivity Atlas SC onto the colleague's 1864-node
 parcellation, using the mouse → CCFv3 transform from 00c.
 
+.. deprecated:: v2
+    LEGACY (v1 only). This script depends on the heuristic 48-permutation
+    transform from ``00c_align_mouse_to_ccf.py`` to assign each parcel a
+    CCFv3 summary structure. The v2 successor ``01b_mouse_sc_v2.py`` reads
+    the pre-warped voxel centre ``ns_center_ix`` directly from
+    ``corrs_mouse_v2.mat`` (Paul's nonlinear DSURQE -> CCFv3 warp) and is
+    the production path. Use this script only when working from the v1
+    mouse package.
+
 Pipeline:
   1. Use AllenSDK to download CCFv3 annotation + structure-level SC matrix
      (Oh et al. 2014 normalised projection volumes, summary structures only).

@@ -1,7 +1,21 @@
 """Shared utility for loading and applying the colleague-mouse → CCFv3 transform.
 
-Imported by 01_mouse_sc.py and 02_mouse_genes.py. The transform is computed
-once by 00c_align_mouse_to_ccf.py and saved to
+.. deprecated:: v2
+    LEGACY (v1 only). This module wraps the heuristic 48-permutation +
+    centroid-translation transform produced by ``00c_align_mouse_to_ccf.py``.
+    Under the v2 mouse package (``corrs_mouse_v2.mat``) the warped CCFv3
+    voxel indices ship inside the .mat file as ``ns_center_ix`` /
+    ``AS_ix``, so no coordinate transform is required. New code should
+    read those fields via the v2 loader. The redundant v1 mouse-SC/gene
+    scripts that used to import this module were removed (see the
+    ``archive/v1-pipeline`` branch); it is retained ONLY because the
+    ``experiments/autism_subtypes/allen_expansion/`` chain
+    (``download_pagani_ish.py``) still depends on it. Once that experiment
+    is migrated to the v2 ``AS_ix`` path, this module and
+    ``00c_align_mouse_to_ccf.py`` can be retired.
+
+Imported by ``experiments/autism_subtypes/allen_expansion/download_pagani_ish.py``.
+The transform is computed once by 00c_align_mouse_to_ccf.py and saved to
 data_external/_diagnostics/mouse_to_ccf_transform.json.
 """
 from __future__ import annotations
@@ -51,8 +65,24 @@ def colleague_voxel_to_ccf_world(rsmask_affine: np.ndarray,
     """
     idx = np.asarray(voxel_indices_1d, dtype=np.int64)
     if one_based: idx = idx - 1
-    valid = (idx >= 0) & (idx < int(np.prod(rsmask_shape)))
-    idx = idx[valid]
+    grid_size = int(np.prod(rsmask_shape))
+    # B5: previously silently filtered out-of-bounds indices, which under v2
+    # would return an empty array because EVERY v2 SS-grid index exceeds the
+    # rsmask 200 µm grid size (273,916). Silent empty propagates as a NaN-
+    # filled gene matrix downstream. Raise loudly instead — consumers that
+    # pass v2 indices must migrate to ns_voxel_indices + NS affine, or
+    # ss_voxel_indices + SS affine.
+    if idx.size > 0 and ((idx < 0).any() or (idx >= grid_size).any()):
+        n_oob = int(((idx < 0) | (idx >= grid_size)).sum())
+        first_bad = int(np.argmax((idx < 0) | (idx >= grid_size)))
+        raise ValueError(
+            f"colleague_voxel_to_ccf_world received {n_oob} out-of-bounds "
+            f"indices for rsmask grid {rsmask_shape} (size {grid_size}). "
+            f"First bad index at position {first_bad}: value {int(idx[first_bad])}. "
+            f"If this is v2 data, do NOT use this function — use "
+            f"ns_voxel_indices with the NS affine, or ss_voxel_indices "
+            f"with the SS affine, instead."
+        )
     ijk = np.array(np.unravel_index(idx, rsmask_shape, order=order)).T   # (N, 3)
     homog = np.column_stack([ijk, np.ones(len(ijk))])
     world_colleague = (rsmask_affine @ homog.T).T[:, :3]

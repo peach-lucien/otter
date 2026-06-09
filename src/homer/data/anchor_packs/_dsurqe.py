@@ -17,6 +17,15 @@ import pandas as pd
 
 # Mouse-coord → DSURQE-volume world-coord offset, calibrated from 6 Garin
 # anchors (see pipeline/05f_beauchamp_validation.py for the derivation).
+#
+# .. deprecated:: v2
+#     Used only by the v1 ``assign_dsurqe_labels`` path. Under v2 the
+#     DSURQE vote labels are pre-computed by Paul's nonlinear warp and
+#     ship inside ``corrs_mouse_v2.mat`` as ``DS_region_vote_DSURQUE``
+#     (loaded as ``region_vote_ss_dsq`` in M_var). The new
+#     ``mouse_parcels_in_dsurqe_region`` prefers the v2 column and only
+#     falls back to this offset+volume lookup when M_var lacks v2
+#     metadata (i.e. when running against a v1 corrs_mouse.mat file).
 DSURQE_OFFSET_MM = np.array([-0.027, -2.334, +1.018])
 
 
@@ -60,15 +69,64 @@ def assign_dsurqe_labels(
     return out
 
 
+def _build_dsurqe_ancestor_map(tree_path: Path) -> dict[str, set[str]]:
+    """Return ``{node_name: set(ancestor_names_including_self)}`` from the DSURQE tree.
+
+    Kept as a utility for future option-(c) work — currently unused by the
+    production lookup (see ``mouse_parcels_in_dsurqe_region`` docstring
+    for why the naive v2 dispatch was reverted).
+    """
+    tree = json.loads(Path(tree_path).read_text())
+    out: dict[str, set[str]] = {}
+
+    def _walk(node, ancestors: tuple[str, ...]) -> None:
+        nm = node.get("name")
+        chain = ancestors + ((nm,) if nm else ())
+        if nm:
+            out[nm] = set(chain)
+        for c in (node.get("children") or {}).values():
+            _walk(c, chain)
+
+    _walk(tree["msg"][0], ())
+    return out
+
+
+def _has_v2_dsurqe_votes(M_var: pd.DataFrame) -> bool:
+    """True iff M_var carries Paul's pre-computed v2 DSURQE vote labels.
+
+    Kept as a utility for future option-(c) work.
+    """
+    return "region_vote_ss_dsq" in M_var.columns
+
+
 def mouse_parcels_in_dsurqe_region(
     M_var: pd.DataFrame, region_name: str, atlas_root: Path | str = ".",
 ) -> list[int]:
     """Return positional indices of mouse parcels in the named DSURQE region.
 
     Resolves ``region_name`` against the DSURQE hierarchy (so e.g. "Primary
-    motor area" picks up all its leaf labels). Raises FileNotFoundError if
-    the Beauchamp 2022 DSURQE atlas isn't present at
-    ``data_external/MouseHumanTranscriptomicSimilarity/AMBA/data/``.
+    motor area" picks up all its leaf labels) and returns every parcel
+    whose DSURQE label lies in that subtree. Uses Beauchamp 2022's live
+    atlas volume + the hand-calibrated ``DSURQE_OFFSET_MM``.
+
+    .. note::
+       An attempted v2 dispatch (consume Paul's ``region_vote_ss_dsq``
+       column directly) was investigated and reverted on 2026-06-09.
+       Paul's v2 vote vocabulary uses DIFFERENT names than the anchor
+       packs query for — e.g. packs ask for "Caudoputamen" while Paul
+       votes "striatum" (a parent in the DSURQE tree), packs ask for
+       "Periaqueductal gray" (American) while Paul votes "periaqueductal
+       grey" (British). A naïve subtree-membership check returns empty
+       sets for most pack queries because the names don't align. The
+       option-(c) refactor needs a name-mapping table from pack-side
+       names to Paul's vote vocabulary before it's safe. The 114 unique
+       vote strings Paul ships (`A.var["region_vote_ss_dsq"].unique()`)
+       are coarser-grained than the live atlas lookup at the parcel-set
+       majority-vote level. Kept here as documentation for the next
+       maintainer.
+
+    Raises FileNotFoundError if the Beauchamp 2022 DSURQE atlas isn't
+    present at ``data_external/MouseHumanTranscriptomicSimilarity/AMBA/data/``.
     """
     atlas_root = Path(atlas_root)
     base = atlas_root / "data_external/MouseHumanTranscriptomicSimilarity/AMBA/data"
