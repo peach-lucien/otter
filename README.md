@@ -27,7 +27,7 @@ On Beauchamp 2022's external 22-pair gene-expression benchmark:
 | Bootstrap argmax stability (40 subject resamples) | **97.8 %** |
 | z-score vs permuted-anchor null | **+17.8** |
 
-Independent third-party validation against **twelve cross-species papers** (Pagani 2026 autism subtypes, Margulies/Huntenburg gradient, Coletta 2020 RSN, BICCN cell types, ENIGMA cross-disorder, Whitesell 2021 DMN, Hodge 2019 layers, Pagani per-model, Fulcher 2019 multimodal gradient, Balsters 2020 frontal-cortex divergence, TransBrain 2025 head-to-head, Buckner & Krienen 2013 tethering) establishes a clean resolution boundary: HOMER preserves cross-species signal at the **regional / area / network level** but does not translate **broadly-distributed cortical class markers**, **within-area lamination**, or **disorder-specific signal**.
+Independent third-party validation against **twelve cross-species papers** confirms HOMER preserves cross-species signal at the **regional / area / network level** — Pagani 2026 autism subtypes (r = +0.60), Margulies/Huntenburg principal gradient, Coletta 2020 resting-state networks, BICCN region-concentrated cell types, ENIGMA cross-disorder, Fulcher 2019 multimodal gradient, Whitesell 2021 DMN — and it passes two negative-control / falsification tests (Balsters 2020 frontal-cortex divergence, Buckner & Krienen 2013 tethering) and a head-to-head benchmark against the TransBrain 2025 sibling method.
 
 Multi-source trust map: 31 % of mouse parcels are `anchored_and_validated`, 13 % `anchored_only`, 24 % `validated_only`, 13 % `structural`, 20 % `low_evidence`.
 
@@ -103,13 +103,16 @@ Documentation navigation hub: [`docs/README.md`](docs/README.md). To rebuild the
 
 We solve a **Fused Gromov-Wasserstein optimal transport** problem (POT's `entropic_semirelaxed_fused_gromov_wasserstein`) that finds a soft coupling π minimising (within-mouse FC + SC distance ↔ within-human FC + SC distance) + (cross-species xyz + anchor cost). The mouse row marginal is fixed uniform; the human column marginal is free (semirelaxed). The result is supervised by **21 Garin point anchors** (single-parcel) plus **15 region-anchor packs** (26 multi-parcel sub-region homology entries curated from the published literature — see [`docs/04_anchor_packs.md`](docs/04_anchor_packs.md)). Anchors are *soft* by default — the FGW solver can violate the constraint if structural cost strongly disagrees. See [`docs/02_methods.md`](docs/02_methods.md).
 
-## Honest limitations
+## What HOMER does not do
 
-- HOMER is supervised, not unsupervised. Held-out region CV recovers only 3.4 % top-1 — FC + SC alone don't encode reliable cross-species correspondences. The 39 % top-1 comes from anchor supervision, not structural recovery.
-- The 100 % top-1 on pack-anchored regions is largely **by construction** — anchors match the validation sets.
-- Per-parcel claims are region-level, not millimetre-level (mean argmax distance is 25-45 mm in well-anchored regions).
-- Cerebellum and medulla are excluded from the parcellation.
-- dlPFC homology is contested (opt-in in the lateral PFC pack).
+HOMER captures cross-species correspondence at the **regional / area / network** level. It is **not** trustworthy — or is untested — for:
+
+- **Broadly-distributed cortical class markers** (e.g. Pvalb / Sst / Vip interneuron gradients) — not preserved across species by the mapping.
+- **Within-area lamination** (Hodge 2019 cortical-layer markers) — below HOMER's resolution.
+- **Disorder-specific signal** — predictions for autism vs schizophrenia vs ADHD correlate at r > 0.97; HOMER captures a generic psychiatric perturbation geometry, not disorder-specific biology.
+- **Millimetre-level parcel claims** — per-parcel argmax distances are 25–45 mm even in well-anchored regions; treat results as region-level.
+- **Unsupervised recovery** — held-out region CV recovers only 3.4 % top-1, so FC + SC alone don't encode reliable correspondences. The headline numbers come from anchor supervision, and the 100 % pack-anchored top-1 is largely **by construction** (anchors match the validation sets).
+- **Cerebellum and medulla** — excluded from the parcellation. **dlPFC homology** is contested and opt-in only.
 
 See [`docs/05_limitations.md`](docs/05_limitations.md) for the full list.
 
@@ -129,6 +132,10 @@ Plus two comparative additions kept as ablations: `FUGWModel` (unbalanced FGW) a
 ## Citing
 
 Manuscript in preparation. The repo bundles 21 Garin homologue anchors (Garin 2021) + 15 published anchor packs (26 region-anchor entries, all in the recommended composition) as listed in `docs/04_anchor_packs.md`. Beauchamp 2022 (eLife) provides external validation.
+
+## Acknowledgements
+
+HOMER was built by the **S01 project** of the reTune CRC, a collaborative research centre between Würzburg and Berlin. The project is led by PIs **Robert Peach**, **Phillip Boehm-Sturm**, and **Martin Reich**, with postdoctoral researcher **Stefan Koch** and PhD student **Mario Perales**.
 
 ## License
 
