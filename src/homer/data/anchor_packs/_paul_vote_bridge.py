@@ -1,34 +1,33 @@
-"""Bridge table: Paul's v2 DSURQE vote vocabulary → DSURQE_tree.json names.
+"""Bridge table: precomputed DSURQE vote vocabulary → DSURQE_tree.json names.
 
-Paul's ``region_vote_ss_dsq`` and ``region_vote_ns_dsq`` columns in
-``corrs_mouse_v2.mat`` contain DSURQE atlas region names from his own
+The mouse parcel table's ``region_vote_ss_dsq`` and ``region_vote_ns_dsq``
+columns contain DSURQE atlas region names from the upstream connectome
 pipeline. Those strings do not all line up with the names HOMER's anchor
 packs query against via the Beauchamp 2022 ``DSURQE_tree.json``.
 
 This module supplies the alignment in three layers, with decreasing
 automated coverage and increasing manual review:
 
-  (A) **Direct tree match** — 23 of Paul's 114 vote strings appear
-      verbatim in ``DSURQE_tree.json``. No lookup needed.
+  (A) **Direct tree match** — 23 of the 114 vote strings appear verbatim
+      in ``DSURQE_tree.json``. No lookup needed.
 
   (B) **Beauchamp CSV mapping** — 77 more are bridged via
       ``DSURQE_40micron_R_mapping_long.csv`` (also shipped in the
-      Beauchamp 2022 repo). The CSV has columns ``Structure`` (Paul's
+      Beauchamp 2022 repo). The CSV has columns ``Structure`` (the vote
       naming convention with left/right prefixes) and ``ABI`` (the
       DSURQE_tree.json name). Strip the left/right prefix and look up.
 
   (C) **Hand-authored bridge** (this file) — 8 votes remain after (A)
       and (B). 6 cerebellar entries are out of scope for HOMER's
       parcellation. The 8 entries below are HAND-AUTHORED based on
-      neuroanatomical interpretation of Paul's region names. **Every
-      entry is flagged as needing confirmation from Paul** — see the
-      ``CONFIDENCE`` column below and the ``OPTION_C_FINDING.md``
-      writeup for the full discussion.
+      neuroanatomical interpretation of the region names, and each is
+      flagged in the ``CONFIDENCE`` column as worth confirming with the
+      upstream pipeline author.
 
-These mappings cover ~5 % of the 1864 parcels. The current production
-``_dsurqe.py`` uses the live atlas lookup so this file is currently
-informational; if option (c) is ever re-attempted, the dispatch should
-consult this table.
+These mappings cover ~5 % of the 1864 parcels. The production
+``_dsurqe.py`` uses the live atlas lookup, so this file is currently
+informational; if the dispatch is ever switched to consume these labels
+directly, it should consult this table.
 
 Confidence column conventions:
     HIGH    — anatomical mapping is unambiguous (e.g., CA1 stratum
@@ -121,8 +120,8 @@ CEREBELLAR_VOTES_EXCLUDED: set[str] = {
 }
 
 
-# Open questions to confirm with Paul (one per uncertain mapping above).
-# Used to seed the optional confirmation email — see OPTION_C_FINDING.md.
+# Open questions to confirm with the upstream pipeline author (one per
+# uncertain mapping above). Used to seed an optional confirmation email.
 PAUL_CONFIRMATION_QUESTIONS: list[dict] = [
     {
         "paul_vote": "CA1Or / CA2Or / CA3Or",

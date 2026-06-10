@@ -1,11 +1,5 @@
 # Results
 
-> **Updated 2026-06-09 to the v2 mouse coordinate frame** — all headline
-> numbers below reflect the production π refit on the v2 corpus (Paul's
-> nonlinear DSURQE→CCFv3 warp). See `pipeline/00_external/v2_loader_design/`
-> for the migration history. v1 baseline numbers are preserved in
-> `docs/archive/iteration_log.md` for reference.
-
 The headline numbers, the resolution boundary, and the honest caveats. Full per-paper detail lives in the showcase notebooks (`notebooks/05-15`) and per-experiment READMEs.
 
 ## Synthesis

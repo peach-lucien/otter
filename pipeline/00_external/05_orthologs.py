@@ -1,6 +1,6 @@
 """Align mouse and human gene expression matrices via mouse-human orthologs.
 
-Reads the gene lists produced by 02c_mouse_genes_v2.py and 04_human_genes.py and
+Reads the gene lists produced by 02_mouse_genes.py and 04_human_genes.py and
 finds the mouse-gene ↔ human-gene ortholog pairs. Restricts both matrices to
 the orthologous gene set in the same order, so direct comparison is possible.
 
@@ -102,8 +102,8 @@ def main():
     human_meta = pd.read_csv(OUT / "human_gene_list.csv")
     print(f"mouse genes: {len(mouse_meta)}, human genes: {len(human_meta)}")
     if len(mouse_meta) == 0:
-        print("\nERROR: mouse_gene_list.csv is empty. Did 02c_mouse_genes_v2.py finish?")
-        print("Re-run: PYTHONPATH=src python pipeline/00_external/02c_mouse_genes_v2.py")
+        print("\nERROR: mouse_gene_list.csv is empty. Did 02_mouse_genes.py finish?")
+        print("Re-run: PYTHONPATH=src python pipeline/00_external/02_mouse_genes.py")
         sys.exit(1)
     if len(human_meta) == 0:
         print("ERROR: human_gene_list.csv is empty. Run 04_human_genes.py first.")

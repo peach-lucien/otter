@@ -1,26 +1,26 @@
-"""Finding-document test: why the v2 dispatch in _dsurqe.py was NOT
-adopted on 2026-06-09.
+"""Why ``_dsurqe.py`` uses the live atlas lookup, not the precomputed votes.
 
-This test exists to lock in the discovery that motivated reverting the
-attempted option-(c) refactor:
+This test locks in the reason ``mouse_parcels_in_dsurqe_region`` resolves
+regions via the live DSURQE atlas volume rather than the parcel table's
+precomputed DSURQE vote labels:
 
-  - Paul's v2 t-table ships ``region_vote_ss_dsq`` — pre-computed
+  - The mouse parcel table ships ``region_vote_ss_dsq`` — precomputed
     DSURQE vote labels per parcel.
   - HOMER's anchor packs query ``mouse_parcels_in_dsurqe_region(M, NAME)``
     with names like "Caudoputamen", "Periaqueductal gray", "Lateral
     visual area".
-  - Paul's vote vocabulary uses DIFFERENT NAMES — coarser-grained and
-    with different conventions (e.g. "striatum" instead of
-    "Caudoputamen"; British "periaqueductal grey" instead of American
-    "Periaqueductal gray"; "Secondary visual cortex,lateral area"
-    instead of "Lateral visual area").
+  - The vote vocabulary uses DIFFERENT NAMES — coarser-grained and with
+    different conventions (e.g. "striatum" instead of "Caudoputamen";
+    British "periaqueductal grey" instead of American "Periaqueductal
+    gray"; "Secondary visual cortex,lateral area" instead of "Lateral
+    visual area").
 
-A naïve subtree-membership check against Paul's votes would return
-EMPTY sets for most pack queries because the names don't line up. The
-option-(c) refactor needs a name-mapping table before it's safe.
+A naïve subtree-membership check against those votes would return EMPTY
+sets for most pack queries because the names don't line up; consuming
+them directly needs a name-mapping table first.
 
-This test asserts the *fact* of the vocabulary mismatch so future-you
-doesn't try the same refactor again without addressing it.
+This test asserts the *fact* of the vocabulary mismatch so the lookup
+isn't naively switched over without addressing it.
 """
 from __future__ import annotations
 

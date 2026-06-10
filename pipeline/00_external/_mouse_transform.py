@@ -1,20 +1,15 @@
-"""Shared utility for loading and applying the colleague-mouse → CCFv3 transform.
+"""Heuristic mouse → CCFv3 coordinate transform (experiment-only).
 
-.. deprecated:: v2
-    LEGACY (v1 only). This module wraps the heuristic 48-permutation +
-    centroid-translation transform produced by ``00c_align_mouse_to_ccf.py``.
-    Under the v2 mouse package (``corrs_mouse_v2.mat``) the warped CCFv3
-    voxel indices ship inside the .mat file as ``ns_center_ix`` /
-    ``AS_ix``, so no coordinate transform is required. New code should
-    read those fields via the v2 loader. The redundant v1 mouse-SC/gene
-    scripts that used to import this module were removed (see the
-    ``archive/v1-pipeline`` branch); it is retained ONLY because the
-    ``experiments/autism_subtypes/allen_expansion/`` chain
-    (``download_pagani_ish.py``) still depends on it. Once that experiment
-    is migrated to the v2 ``AS_ix`` path, this module and
-    ``00c_align_mouse_to_ccf.py`` can be retired.
+This module wraps the 48-permutation + centroid-translation alignment
+produced by ``00c_align_mouse_to_ccf.py``. The main pipeline does NOT use
+it — ``01_mouse_sc.py`` / ``02_mouse_genes.py`` read pre-warped CCFv3 voxel
+indices (``ns_center_ix`` / ``AS_ix``) directly from the mouse ``.mat``
+file, so no coordinate transform is applied there.
 
-Imported by ``experiments/autism_subtypes/allen_expansion/download_pagani_ish.py``.
+It is retained only because the
+``experiments/autism_subtypes/allen_expansion/`` chain
+(``download_pagani_ish.py``) still depends on it.
+
 The transform is computed once by 00c_align_mouse_to_ccf.py and saved to
 data_external/_diagnostics/mouse_to_ccf_transform.json.
 """
@@ -66,12 +61,12 @@ def colleague_voxel_to_ccf_world(rsmask_affine: np.ndarray,
     idx = np.asarray(voxel_indices_1d, dtype=np.int64)
     if one_based: idx = idx - 1
     grid_size = int(np.prod(rsmask_shape))
-    # B5: previously silently filtered out-of-bounds indices, which under v2
-    # would return an empty array because EVERY v2 SS-grid index exceeds the
-    # rsmask 200 µm grid size (273,916). Silent empty propagates as a NaN-
-    # filled gene matrix downstream. Raise loudly instead — consumers that
-    # pass v2 indices must migrate to ns_voxel_indices + NS affine, or
-    # ss_voxel_indices + SS affine.
+    # Out-of-bounds indices are a hard error. This function expects indices
+    # into the rsmask 200 µm grid; the pre-warped CCFv3/DSURQE voxel indices
+    # carried in the mouse .mat file are on different grids and must NOT be
+    # passed here — use ns_voxel_indices with the NS affine, or
+    # ss_voxel_indices with the SS affine, instead. (Silently filtering
+    # would propagate as a NaN-filled gene matrix downstream.)
     if idx.size > 0 and ((idx < 0).any() or (idx >= grid_size).any()):
         n_oob = int(((idx < 0) | (idx >= grid_size)).sum())
         first_bad = int(np.argmax((idx < 0) | (idx >= grid_size)))
@@ -79,7 +74,7 @@ def colleague_voxel_to_ccf_world(rsmask_affine: np.ndarray,
             f"colleague_voxel_to_ccf_world received {n_oob} out-of-bounds "
             f"indices for rsmask grid {rsmask_shape} (size {grid_size}). "
             f"First bad index at position {first_bad}: value {int(idx[first_bad])}. "
-            f"If this is v2 data, do NOT use this function — use "
+            f"Pre-warped CCFv3/DSURQE voxel indices must not be passed here — use "
             f"ns_voxel_indices with the NS affine, or ss_voxel_indices "
             f"with the SS affine, instead."
         )

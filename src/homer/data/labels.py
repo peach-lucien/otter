@@ -1,6 +1,6 @@
-"""Atlas label resolution for v2 corrs_mouse table.
+"""Atlas label resolution for the mouse parcel table.
 
-The v2 mouse table ships labels in two distinct atlas vocabularies:
+The mouse table ships labels in two distinct atlas vocabularies:
 
   - ``*_ABA`` columns contain Allen full NAME strings, e.g.
     "Anterior cingulate area ventral part layer 5". These resolve to
@@ -211,8 +211,8 @@ def unravel_ns(idx: int | np.ndarray) -> np.ndarray:
     """Convenience: unravel a 0-based linear NS index → (i, j, k) ijk in NS grid.
 
     Returned shape: (3,) if input scalar; (n, 3) if input array. Always
-    int64. Uses Fortran (column-major) order — the convention v2 indices
-    follow.
+    int64. Uses Fortran (column-major) order — the convention the parcel
+    voxel indices follow.
     """
     from homer.data.io import _NS_SHAPE
     if np.isscalar(idx):

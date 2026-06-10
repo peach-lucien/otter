@@ -1,15 +1,14 @@
-"""Tests for the v2 corrs_mouse loader.
+"""Tests for the mouse parcel-table loader.
 
 Split into:
   - synthetic unit tests (no external data dependency)
-  - integration tests gated on the v2 file being present on disk
+  - integration tests gated on the mouse data file being present on disk
 
-Empirical anchors pinned from the Phase-1 fact-finding (see
-pipeline/00_external/v2_loader_design/REVIEW.md):
+Empirical anchors (pinned from the loader's fact-finding):
 
   - NS round-trip max error: EXACTLY 0.0 mm  →  atol=1e-9 here.
   - SS round-trip max error: 0.5495 mm  →  atol=0.6 in the SS test.
-  - |v1.center - v2.DS_center_mm|.max() = 0.117 mm  →  threshold 0.2 mm.
+  - |center - DS_center_mm|.max() = 0.117 mm  →  threshold 0.2 mm.
 """
 from __future__ import annotations
 

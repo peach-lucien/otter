@@ -1,17 +1,13 @@
 """Estimate the rigid transform from the colleague's bregma-centred mouse
 coordinate system into Allen CCFv3 voxel space.
 
-.. deprecated:: v2
-    LEGACY (v1 only). The heuristic 48-permutation + centroid-translation
-    transform produced by this script is superseded by the v2 mouse
-    package (``corrs_mouse_v2.mat``), which carries pre-warped CCFv3 voxel
-    indices (``ns_center_ix`` / ``AS_ix``) derived from Paul's nonlinear
-    DSURQE -> CCFv3 elastix warp. Under v2 you do NOT need to run this
-    script. See ``01b_mouse_sc_v2.py`` and ``02c_mouse_genes_v2.py`` for
-    the production paths. This script is retained ONLY because the
-    ``experiments/autism_subtypes/allen_expansion/`` chain still consumes
-    the transform JSON it produces (via ``_mouse_transform.py``); migrate
-    that experiment to the v2 ``AS_ix`` path to retire both.
+.. note::
+    Experiment-only. The main pipeline does NOT use this transform —
+    ``01_mouse_sc.py`` / ``02_mouse_genes.py`` read pre-warped CCFv3 voxel
+    indices (``ns_center_ix`` / ``AS_ix``) directly from the mouse ``.mat``
+    file. This script is retained only because the
+    ``experiments/autism_subtypes/allen_expansion/`` chain consumes the
+    transform JSON it produces (via ``_mouse_transform.py``).
 
 The colleague's mouse mask is in a bregma-centred stereotaxic convention
 (x symmetric around midline, y/z origin near a stereotaxic landmark) — not

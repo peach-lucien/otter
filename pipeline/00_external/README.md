@@ -35,21 +35,21 @@ pip install -r scripts/external/requirements.txt
    reports their affine, dims, and likely coordinate system. **Run this first**
    so we know what we're working with before downloading datasets.
 
-2. **`01b_mouse_sc_v2.py`** — Downloads the Allen Mouse Connectivity Atlas
+2. **`01_mouse_sc.py`** — Downloads the Allen Mouse Connectivity Atlas
    (Oh et al. 2014, Nature) summary-structure connectivity matrix (~290 regions).
-   For each of the 1864 mouse nodes it reads the pre-warped CCFv3 voxel centre
-   `ns_center_ix` directly from `corrs_mouse_v2.mat` (Paul's nonlinear
-   DSURQE→CCFv3 elastix warp), looks up the CCFv3 region there, and assigns the
-   corresponding row/column of the structure-level SC matrix.
+   For each of the 1864 mouse nodes it reads the parcel's pre-warped CCFv3 centre
+   voxel (`ns_center_ix`) from the mouse `.mat` file, looks up the CCFv3 region
+   there, and assigns the corresponding row/column of the structure-level SC
+   matrix.
    Output: `mouse_sc.npy`.
 
-   No registration step is needed under v2 — the mouse→CCFv3 warp is applied
-   upstream by Paul and ships inside the .mat file. (The legacy v1 heuristic
-   transform path was removed; it lives on the `archive/v1-pipeline` branch.)
+   No coordinate-registration step is needed — the mouse→CCFv3 warp is applied
+   upstream (nonlinear DSURQE→CCFv3 registration) and the resulting voxel indices
+   ship inside the `.mat` file.
 
-3. **`02c_mouse_genes_v2.py`** — Downloads Allen Mouse Brain ISH atlas
+3. **`02_mouse_genes.py`** — Downloads Allen Mouse Brain ISH atlas
    (Lein et al. 2007, Nature) energy volumes and samples them at 200 µm over
-   each node's pre-warped CCFv3 voxel set (`AS_ix` from `corrs_mouse_v2.mat`).
+   each node's pre-warped CCFv3 voxel set (`AS_ix`).
    Reads its gene list from the immutable `mouse_gene_list_master.csv` and writes
    the NaN-pruned list (aligned 1:1 with the matrix) to `mouse_gene_list.csv`.
    Output: `mouse_genes.npy`.
@@ -78,11 +78,11 @@ pip install -r scripts/external/requirements.txt
 
 ## What to do if things break
 
-On the **mouse** side, the v2 path requires no mask registration — voxel indices
-are pre-warped into CCFv3 (NS) and DSURQE (SS) space inside `corrs_mouse_v2.mat`.
-If `01b`/`02c` warn that the loaded schema is not `v2`, the resolver fell back to
-the legacy `corrs_mouse.mat`; point `homer.data.DATA_DIR` at the
-`updated_connectom_0906_26/` package.
+On the **mouse** side, no mask registration is needed — voxel indices are
+pre-warped into CCFv3 (NS) and DSURQE (SS) space inside the mouse `.mat` file.
+If `01_mouse_sc.py` / `02_mouse_genes.py` warn that the parcel table is missing
+the pre-warped voxel-index columns, point `homer.data.DATA_DIR` at the mouse
+package that ships them.
 
 On the **human** side, the most likely failure mode is `00_inspect_masks.py`
 reporting that `rsmask_human.nii` is not in MNI152 — register it to the standard

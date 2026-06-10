@@ -1,68 +1,77 @@
-"""Project the Allen Mouse Connectivity Atlas SC onto the colleague's 1864-node
-parcellation, using the mouse → CCFv3 transform from 00c.
+"""Build mouse_sc.npy from each parcel's CCFv3 centre voxel.
 
-.. deprecated:: v2
-    LEGACY (v1 only). This script depends on the heuristic 48-permutation
-    transform from ``00c_align_mouse_to_ccf.py`` to assign each parcel a
-    CCFv3 summary structure. The v2 successor ``01b_mouse_sc_v2.py`` reads
-    the pre-warped voxel centre ``ns_center_ix`` directly from
-    ``corrs_mouse_v2.mat`` (Paul's nonlinear DSURQE -> CCFv3 warp) and is
-    the production path. Use this script only when working from the v1
-    mouse package.
+Reads ``ns_center_ix`` from the mouse ``.mat`` file and looks up the CCFv3
+25 µm annotation at that voxel directly. The voxel indices are pre-warped
+into CCFv3 space (nonlinear DSURQE→CCFv3 registration), so no coordinate
+transform is applied here.
 
-Pipeline:
-  1. Use AllenSDK to download CCFv3 annotation + structure-level SC matrix
-     (Oh et al. 2014 normalised projection volumes, summary structures only).
-  2. Load the colleague→CCFv3 transform from 00c.
-  3. For each of the 1864 mouse nodes:
-       a. Get its (x,y,z) centre in the colleague's bregma-centred mm.
-       b. Apply the transform → CCFv3 world mm.
-       c. Convert to CCFv3 voxel index.
-       d. Look up the CCFv3 region ID at that voxel.
-       e. Map up the structure tree to find which 'summary structure' it belongs to.
-  4. Build the (1864 × 1864) SC matrix by indexing the structure-level matrix.
+The summary-structure SC matrix itself comes from the Allen Mouse
+Connectivity Atlas (Oh et al. 2014) summary-level unionised projection
+volumes via AllenSDK; this script maps each parcel to a summary structure
+using its CCFv3 centre voxel (``ns_center_ix``).
 
-Output: data_external/mouse_sc.npy + mouse_sc_meta.json
+Outputs:
+  - ``data_external/mouse_sc.npy``         shape (1864, 1864) float32
+  - ``data_external/mouse_sc_meta.json``   provenance + node_struct_idx
+
+Usage:
+    PYTHONPATH=src python pipeline/00_external/01_mouse_sc.py
 """
 from __future__ import annotations
 
+import importlib.util
+import importlib.machinery
 import json
 import sys
-from collections import Counter
 from pathlib import Path
 
+import nibabel as nib
 import numpy as np
 
+
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / "src"))
-sys.path.insert(0, str(Path(__file__).parent))               # for _mouse_transform
+DATA = ROOT.parent / "data_crossspecies"
+V2_DIR = DATA / "updated_connectom_0906_26"
+OUT = ROOT / "data_external"
+OUT.mkdir(parents=True, exist_ok=True)
 
-from homer.data import load_metadata, parse_t_table         # noqa: E402
-from _mouse_transform import load_transform, apply_transform # noqa: E402
 
-OUT  = ROOT / "data_external"; OUT.mkdir(parents=True, exist_ok=True)
-DIAG = OUT / "_diagnostics"
+def _load_io():
+    pkg_homer = importlib.util.module_from_spec(importlib.machinery.ModuleSpec("homer", None))
+    pkg_data  = importlib.util.module_from_spec(importlib.machinery.ModuleSpec("homer.data", None))
+    sys.modules.setdefault("homer", pkg_homer)
+    sys.modules.setdefault("homer.data", pkg_data)
+    spec = importlib.util.spec_from_file_location("homer.data.io", ROOT / "src/homer/data/io.py")
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules["homer.data.io"] = mod
+    spec.loader.exec_module(mod)
+    return mod
 
 
 def main(resolution_um: int = 100):
+    IO = _load_io()
+
     try:
         from allensdk.core.mouse_connectivity_cache import MouseConnectivityCache
     except ImportError:
         print("ERROR: pip install allensdk")
         sys.exit(1)
 
-    transform = load_transform(DIAG)
-    print(f"using mouse→CCFv3 transform (coverage at fit: {transform['coverage']:.1%})")
-
     cache_dir = Path.home() / ".allensdk_cache"
     print(f"Allen SDK cache → {cache_dir}")
-    mcc = MouseConnectivityCache(resolution=resolution_um,
-                                 manifest_file=str(cache_dir / "manifest.json"))
+    mcc = MouseConnectivityCache(
+        resolution=resolution_um,
+        manifest_file=str(cache_dir / "manifest.json"),
+    )
 
-    # -- 1. CCFv3 annotation + structure tree --------------------------------
-    print("downloading CCFv3 annotation...")
+    # -- 1. AllenSDK CCFv3 annotation (still used to derive summary IDs) ----
+    # Note: a shipped 25 µm CCFv3 annotation (ANO_ABA_NS.nii.gz) is also
+    # available alongside the mouse package, but we use the AllenSDK version
+    # for the structure-tree mapping (descendant_ids), which is independent
+    # of voxel-level lookups.
+    print("downloading CCFv3 annotation via AllenSDK...")
     ann, _ = mcc.get_annotation_volume()
-    print(f"  annotation shape={ann.shape} (CCFv3 at {resolution_um} µm)")
+    print(f"  AllenSDK annotation shape={ann.shape} at {resolution_um} µm")
 
     print("downloading structure tree...")
     structure_tree = mcc.get_structure_tree()
@@ -72,7 +81,8 @@ def main(resolution_um: int = 100):
     print(f"  {len(summary_ids)} summary structures")
     sid_to_idx = {sid: i for i, sid in enumerate(summary_ids)}
 
-    # -- 2. Build structure-level SC matrix from per-experiment unionizes ----
+    # -- 2. Build structure-level SC from unionised projection volumes ------
+    # (Independent of parcel placement.)
     print("building structure-level SC (slow)...")
     experiments = mcc.get_experiments(injection_structure_ids=summary_ids, cre=False)
     n_struct = len(summary_ids)
@@ -86,75 +96,90 @@ def main(resolution_um: int = 100):
                 hemisphere_ids=[3], is_injection=False,
             )
         except Exception as e:
-            tqdm.write(f"  skip {exp['id']}: {e}"); continue
+            tqdm.write(f"  skip {exp['id']}: {e}")
+            continue
         src_id = exp["structure_id"]
-        if src_id not in sid_to_idx: continue
+        if src_id not in sid_to_idx:
+            continue
         i = sid_to_idx[src_id]
         for _, row in unionizes.iterrows():
             j = sid_to_idx.get(int(row["structure_id"]))
-            if j is None: continue
+            if j is None:
+                continue
             SC[i, j] += float(row["normalized_projection_volume"])
             counts[i, j] += 1
     SC = np.where(counts > 0, SC / np.maximum(counts, 1), 0.0)
     print(f"  SC density (non-zero entries): {(SC > 0).mean():.2%}")
 
-    # -- 3. Project each of 1864 nodes onto a CCFv3 region -------------------
-    print("projecting 1864 mouse nodes onto CCFv3 regions...")
-    meta = load_metadata("mouse")
-    df = parse_t_table(meta["t"], meta["ht"])
+    # -- 3. Project each of 1864 nodes onto a CCFv3 region -----------------
+    print("projecting 1864 mouse nodes onto CCFv3 regions via ns_center_ix...")
+    meta = IO.load_metadata("mouse")
+    if meta["_schema"] != "v2":
+        print(f"  WARNING: the mouse parcel table is missing the pre-warped "
+              f"voxel-index columns. Point DATA_DIR at the mouse package "
+              f"that ships them.")
+    df = IO.parse_t_table(meta["t"], meta["ht"])
     n_nodes = len(df)
-    centres = df[["x", "y", "z"]].values
 
-    # Per-node centre → CCFv3 voxel index
-    res_mm = resolution_um / 1000.0
-    ccf_world = apply_transform(centres, transform)
-    ccf_ijk = (ccf_world / res_mm).astype(np.int64)
+    # ns_center_ix is 0-based linear index into the 25 µm NS grid (528, 320, 456).
+    # AllenSDK gives us the 100 µm version (132, 80, 114) — same PIR layout
+    # but 4× coarser per axis. Downsample by integer division.
+    ns_ix_25um = df["ns_center_ix"].to_numpy().astype(np.int64)
+    ijk_25 = np.column_stack(np.unravel_index(ns_ix_25um, IO._NS_SHAPE, order="F"))
+    # Allen 100 µm grid is 1/4 the resolution
+    scale = 25 // resolution_um if resolution_um <= 25 else resolution_um // 25
+    if resolution_um == 25:
+        ijk = ijk_25
+    elif resolution_um == 100:
+        ijk = ijk_25 // 4
+    elif resolution_um == 200:
+        ijk = ijk_25 // 8
+    else:
+        raise ValueError(f"unsupported resolution_um={resolution_um}; use 25, 100, or 200")
 
-    in_bounds = ((ccf_ijk[:, 0] >= 0) & (ccf_ijk[:, 0] < ann.shape[0]) &
-                 (ccf_ijk[:, 1] >= 0) & (ccf_ijk[:, 1] < ann.shape[1]) &
-                 (ccf_ijk[:, 2] >= 0) & (ccf_ijk[:, 2] < ann.shape[2]))
+    in_bounds = ((ijk[:, 0] >= 0) & (ijk[:, 0] < ann.shape[0]) &
+                 (ijk[:, 1] >= 0) & (ijk[:, 1] < ann.shape[1]) &
+                 (ijk[:, 2] >= 0) & (ijk[:, 2] < ann.shape[2]))
     node_region = np.zeros(n_nodes, dtype=np.int64)
     ok = np.where(in_bounds)[0]
-    node_region[ok] = ann[ccf_ijk[ok, 0], ccf_ijk[ok, 1], ccf_ijk[ok, 2]]
+    node_region[ok] = ann[ijk[ok, 0], ijk[ok, 1], ijk[ok, 2]]
     n_in_brain = int((node_region > 0).sum())
     print(f"  {n_in_brain}/{n_nodes} nodes assigned a CCFv3 region "
           f"({n_in_brain/n_nodes:.1%})")
 
-    # Optional: also use voxel-level lookups for nodes whose centre fell outside
-    # CCFv3 brain — sample over all the node's voxels and take the mode.
-    # (This is a robustness fallback, not on the hot path; commented out for now.)
-
-    # -- 4. Map fine CCFv3 region → summary structure (via ancestry) ---------
+    # -- 4. Map fine CCFv3 region → summary structure (via ancestry) -------
     print("mapping CCFv3 IDs → summary structures via ancestry...")
-    descendants = {sid: set(structure_tree.descendant_ids([sid])[0]) for sid in summary_ids}
+    descendants = {
+        sid: set(structure_tree.descendant_ids([sid])[0]) for sid in summary_ids
+    }
     node_struct_idx = np.full(n_nodes, -1, dtype=np.int64)
     n_unmapped = 0
     for i, reg in enumerate(node_region):
-        if reg == 0: n_unmapped += 1; continue
+        if reg == 0:
+            n_unmapped += 1
+            continue
         for sid in summary_ids:
             if reg in descendants[sid]:
-                node_struct_idx[i] = sid_to_idx[sid]; break
+                node_struct_idx[i] = sid_to_idx[sid]
+                break
         else:
             n_unmapped += 1
     print(f"  {n_unmapped}/{n_nodes} nodes had no summary-structure ancestor")
 
-    # -- 5. Build (1864, 1864) SC matrix -------------------------------------
+    # -- 5. Build (1864, 1864) SC matrix -----------------------------------
     print("assembling per-node SC matrix...")
     SC_node = np.zeros((n_nodes, n_nodes), dtype=np.float32)
     valid_idx = np.where(node_struct_idx >= 0)[0]
     for i in valid_idx:
         for j in valid_idx:
             SC_node[i, j] = SC[node_struct_idx[i], node_struct_idx[j]]
-
-    # Symmetrise: SC tracer is directional, but for our FGW use we want a
-    # symmetric relational cost. Use the average of the two directions.
     SC_node = 0.5 * (SC_node + SC_node.T)
 
     np.save(OUT / "mouse_sc.npy", SC_node)
     meta_out = {
         "source": "Allen Mouse Connectivity Atlas (Oh et al. 2014, Nature) via AllenSDK",
+        "schema_loaded": meta["_schema"],
         "resolution_um":     resolution_um,
-        "transform_used":    transform,
         "n_structures":      len(summary_ids),
         "structure_acronyms": summary_names,
         "n_nodes":           int(n_nodes),
@@ -162,6 +187,7 @@ def main(resolution_um: int = 100):
         "n_unmapped":        int(n_unmapped),
         "node_struct_idx":   node_struct_idx.tolist(),
         "symmetrised":       True,
+        "ns_source": "ns_center_ix (nonlinear DSURQE→CCFv3 warp)",
     }
     (OUT / "mouse_sc_meta.json").write_text(json.dumps(meta_out, indent=2, default=str))
     print(f"\nsaved → {OUT / 'mouse_sc.npy'}")
@@ -171,5 +197,6 @@ def main(resolution_um: int = 100):
 if __name__ == "__main__":
     import argparse
     ap = argparse.ArgumentParser()
-    ap.add_argument("--resolution-um", type=int, default=100)
+    ap.add_argument("--resolution-um", type=int, default=100,
+                    help="AllenSDK annotation resolution (25, 100, or 200 µm).")
     main(ap.parse_args().resolution_um)

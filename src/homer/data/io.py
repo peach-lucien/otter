@@ -32,15 +32,16 @@ DATA_DIR = Path(__file__).resolve().parents[4] / "data_crossspecies"
 # Mapping from spoken species name to top-level key inside the .mat file.
 _MAT_TOPKEY = {"mouse": "m", "human": "h"}
 
-# ----- v1 / v2 mouse-table schemas ------------------------------------------
+# ----- mouse parcel-table schemas -------------------------------------------
 #
-# Paul ships v2 with full Allen full-NAME labels in `*_ABA` columns and DSURQE
-# atlas-specific labels (e.g., "CA1Or") in `*_DSURQUE` columns. Note Paul's
-# spelling is "DSURQUE" (D-S-U-R-Q-U-E — with an extra U) — case-sensitive.
-#
-# Schema detection branches on exact-equality of the ht column list. v2-ish
-# files with permuted/extra columns must be rejected; this keeps the loader
-# from silently mis-decoding a partially-migrated future file.
+# The mouse parcel table comes in two column layouts. The richer layout adds
+# full Allen NAME labels in `*_ABA` columns and DSURQE atlas labels (e.g.
+# "CA1Or") in `*_DSURQUE` columns (note the source spelling "DSURQUE", with an
+# extra U — case-sensitive), plus pre-warped CCFv3 (NS) and DSURQE (SS) voxel
+# indices. Schema detection branches on exact-equality of the ht column list;
+# files with permuted or extra columns are rejected so the loader never
+# silently mis-decodes an unexpected layout. The two layouts are tagged
+# internally as the 7-column ("v1") and 19-column ("v2") schemas.
 
 _V1_HT = ["type", "numid", "pairid", "region", "subregion", "center", "indices"]
 
@@ -54,7 +55,7 @@ _V2_HT = [
     "DS_region_vote_DSURQUE",   "DS_region_vote_ABA",
 ]
 
-# v2 grid shapes — used both for index-bound validation and for documenting
+# Mouse grid shapes — used both for index-bound validation and for documenting
 # what `np.unravel_index(..., order='F')` expects from downstream consumers.
 #
 # NS = "Native Space" = Allen CCFv3-2017 25 µm.
@@ -64,8 +65,9 @@ _V2_HT = [
 _NS_SHAPE = (528, 320, 456)
 _SS_SHAPE = (181, 274, 139)
 
-# Where the v2 file lives by default. `_mat_path` prefers v2 if present in
-# DATA_DIR/<this subfolder>/, falls back to v1 in DATA_DIR.
+# Default mouse data file. `_mat_path` prefers the file in the subfolder below
+# (which carries the pre-warped voxel indices), falling back to corrs_mouse.mat
+# in DATA_DIR.
 _V2_MOUSE_SUBDIR = "updated_connectom_0906_26"
 _V2_MOUSE_FILENAME = "corrs_mouse_v2.mat"
 
@@ -73,10 +75,10 @@ _V2_MOUSE_FILENAME = "corrs_mouse_v2.mat"
 def _detect_schema(ht: list[str]) -> str:
     """Return 'v1' or 'v2' based on exact equality of the ht column list.
 
-    Raises ValueError on any other arrangement — including a v2 list with
-    a 20th column appended or columns reordered. The strictness is intentional:
-    silent mis-decoding of a half-migrated future file would be much worse
-    than a loud failure here.
+    Raises ValueError on any other arrangement — including a 19-column list
+    with a 20th column appended or columns reordered. The strictness is
+    intentional: silently mis-decoding an unexpected column layout would be
+    much worse than a loud failure here.
     """
     ht_list = list(ht)
     if ht_list == _V1_HT:
