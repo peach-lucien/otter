@@ -1,225 +1,228 @@
-"""Per-mouse-model HOMER translation showcase.
+"""Per-mouse-model subtype translation through HOMER's π  (CORRECTED, 2026-06-10).
 
-Pagani 2026 publishes a 20-model × 1,491-feature matrix in MOESM6 'Figura 1c'.
-Each row is one mouse autism model (Fmr1, Tsc2, Shank3, Mecp2, …) and the
-1,491 columns are FC perturbation features.
+This supersedes the earlier version of this script, which relied on a
+biological-prior guess for the hyper/hypo subtype of each model — a prior that
+turned out to be **inverted** (it labelled Fmr1/Chd8/Tsc2 as hypo when they are
+hyper). See `DATA_VALIDATION_2026-06-10.md`.
 
-We can't decode exactly what the 1,491 features represent without the paper's
-methods section, and ~5 % of the cells appear to be Excel-formatting-corrupted
-outliers (huge integers like 1,283,728 where small decimals should be). After
-masking outliers, the remaining 95 % are correlation-like values [-1, 1] that
-we can use for clustering.
+What changed now that the Gozzi lab shared the clean data
+(`data_crossspecies/pagani/`):
 
-Procedure:
-  1. Load 20 × 1,491 matrix, mask |v| > 5 as NaN, impute column-mean.
-  2. PCA (n=2) of the 20 models in 1,491-feature space.
-  3. KMeans (k=2) to recover the hyper/hypo split that Pagani derives.
-  4. Compare against the biological prior: Trem2/Btbr/Il6/Mecp2 = hyper;
-     Tsc2/Shank3/Fmr1 = hypo (per Pagani Fig 1d).
-  5. Take HOMER's per-subtype human-parcel prediction (from Test 2c output) as
-     the "human-space template" each model maps to via its inferred subtype.
-  6. Visualise where each model lands in HOMER-translated human-space.
+  1. The clean Fig 1c matrix `sorted_etiology_by_feature_matrix.csv`
+     (20 models × 1,491 voxelwise weighted-degree-centrality features) replaces
+     the Excel-corrupted MOESM6 load — no more outlier masking.
 
-What this gives us: a showcase of "which human ASD subtype does each mouse
-model resemble in HOMER-translated space?". Caveat: per-model resolution is
-degraded to subtype-resolution because we couldn't decode 1,491 → 1,864.
-Honest exploratory result, not validated.
+  2. The per-model hyper/hypo labels are no longer guessed. The CSV is *sorted*
+     by Pagani's hierarchical clustering, so the subtype split falls exactly on
+     row order: rows 1–9 = hyperconnectivity (n=9), rows 10–20 =
+     hypoconnectivity (n=11). We *verify* this from the data itself (mean global
+     connectivity > 0 for hyper, < 0 for hypo) rather than asserting it.
+
+The translation itself (mouse subtype signature → human-parcel prediction via π)
+reuses the validated Test 2 machinery in `04_subtype_translation.py`. It does NOT
+depend on decoding the 1,491 features to voxels (which is not robustly possible —
+see the validation note); the per-subtype network signatures come from Pagani's
+own ED Fig 1 / Fig 4e network matrices.
+
+Outputs:
+  - outputs/logs/pagani_subtype_translation_corrected.json
+  - outputs/figures/pagani_subtype_translation_corrected.png   (via 02_plot.py)
+
+Usage:
+    PYTHONPATH=src python experiments/pagani_2026_per_model/01_per_model_clustering.py
 """
 from __future__ import annotations
 
+import csv
 import json
 import sys
+from importlib import import_module
 from pathlib import Path
 
 import numpy as np
-import openpyxl
-import pandas as pd
-from sklearn.cluster import KMeans
-from sklearn.decomposition import PCA
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "autism_subtypes"))
 
-PAGANI_XLSX = ROOT / "data_external" / "pagani_2026" / "41593_2026_2287_MOESM6_ESM.xlsx"
+from homer.data import DATA_DIR, load_cached  # noqa: E402
+
+st = import_module("04_subtype_translation")
+ncv = import_module("01_network_crossvalidation")
+
+CLEAN_CSV = Path(DATA_DIR) / "pagani" / "sorted_etiology_by_feature_matrix.csv"
+PI_PATH = ROOT / "outputs" / "coupling" / "pi_fc_plus_SC.npy"
+
+# Pagani's hierarchical-clustering row split (Fig 1c): first 9 rows are the
+# hyperconnectivity subtype, the remaining 11 the hypoconnectivity subtype.
+N_HYPER = 9  # rows 0..8
 
 
-# Biological prior on subtype assignment (per Pagani Fig 1d).
-# Hyperconnected: immune / late-onset / certain syndromic models
-# Hypoconnected: synaptic / NMDA-glutamatergic / classical autism risk models
-PAGANI_KNOWN_HYPER = {"Trem2", "Btbr", "Il6", "Mecp2", "Oxtr",
-                      "16p11.2", "Sgsh", "Ube3a", "22q11.2"}
-PAGANI_KNOWN_HYPO  = {"Fmr1", "Chd8", "Tsc2", "Cdkl5 [ko]", "Cdkl5 [ht]",
-                      "Shank3", "En2", "Syn2", "Cntnap2",
-                      "Nlgn3 [ko]", "Nlgn3-R451"}
+# ---------------------------------------------------------------------------
+# 1. Load clean Fig 1c and derive + verify subtype labels
+# ---------------------------------------------------------------------------
+def load_clean_figura_1c() -> tuple[np.ndarray, list[str]]:
+    labels, rows = [], []
+    with open(CLEAN_CSV) as fh:
+        for r in csv.reader(fh):
+            labels.append(r[0])
+            rows.append([float(x) for x in r[1:]])
+    return np.asarray(rows, dtype=np.float64), labels
 
 
-def load_figura_1c():
-    """Load the 20 × 1491 per-model matrix from MOESM6. Mask outliers."""
-    wb = openpyxl.load_workbook(PAGANI_XLSX, data_only=True)
-    ws = wb["Figura 1c"]
-    labels, data = [], []
-    for r in range(1, 21):
-        row = ws[r]
-        labels.append(row[0].value)
-        vals = []
-        for c in row[1:]:
-            v = c.value
-            if v is None:
-                vals.append(np.nan)
-                continue
-            try:
-                f = float(v)
-                vals.append(f if abs(f) <= 5 else np.nan)
-            except (TypeError, ValueError):
-                vals.append(np.nan)
-        # Pad or truncate to 1491
-        if len(vals) < 1491:
-            vals = vals + [np.nan] * (1491 - len(vals))
-        data.append(vals[:1491])
-    return np.array(data, dtype=np.float64), labels
+def derive_and_verify_subtypes(X: np.ndarray, labels: list[str]) -> list[str]:
+    """Assign subtype by row order, then verify against the data (mean sign)."""
+    subtype = ["hyper" if i < N_HYPER else "hypo" for i in range(len(labels))]
+    row_mean = X.mean(axis=1)
+
+    # Verification: hyper rows should have positive mean global connectivity,
+    # hypo rows negative. This is what makes the row-order split trustworthy.
+    hyper_means = row_mean[:N_HYPER]
+    hypo_means = row_mean[N_HYPER:]
+    assert (hyper_means > 0).all(), (
+        "Expected all hyper rows to have positive mean connectivity; "
+        f"got {hyper_means}")
+    assert (hypo_means < 0).all(), (
+        "Expected all hypo rows to have negative mean connectivity; "
+        f"got {hypo_means}")
+    return subtype
 
 
-def fill_nans_columnwise(X):
-    col_mean = np.nanmean(X, axis=0)
-    col_mean = np.where(np.isnan(col_mean), 0.0, col_mean)
-    inds = np.where(np.isnan(X))
-    X = X.copy()
-    X[inds] = np.take(col_mean, inds[1])
-    return X
+# ---------------------------------------------------------------------------
+# 2. Leave-one-out per-model membership on the hyper↔hypo axis
+# ---------------------------------------------------------------------------
+def loo_membership(X: np.ndarray, subtype: list[str]) -> list[dict]:
+    """For each model, correlate its 1,491-feature vector with the mean
+    signature of each subtype — *excluding the model itself* from the mean, so
+    the placement isn't circular. Returns hyper/hypo correlations and a signed
+    membership score (hyper minus hypo correlation)."""
+    sub = np.array(subtype)
+    hyper_idx = np.where(sub == "hyper")[0]
+    hypo_idx = np.where(sub == "hypo")[0]
+    out = []
+    for i in range(X.shape[0]):
+        hy = [j for j in hyper_idx if j != i]
+        ho = [j for j in hypo_idx if j != i]
+        hyper_sig = X[hy].mean(axis=0)
+        hypo_sig = X[ho].mean(axis=0)
+        r_hyper = float(np.corrcoef(X[i], hyper_sig)[0, 1])
+        r_hypo = float(np.corrcoef(X[i], hypo_sig)[0, 1])
+        out.append({
+            "r_to_hyper_signature": r_hyper,
+            "r_to_hypo_signature": r_hypo,
+            "membership_score": r_hyper - r_hypo,   # >0 ⇒ closer to hyper
+            "predicted_side": "hyper" if r_hyper > r_hypo else "hypo",
+        })
+    return out
+
+
+# ---------------------------------------------------------------------------
+# 3. Subtype signature → human-parcel prediction via π  (reuses Test 2)
+# ---------------------------------------------------------------------------
+def subtype_translation_through_pi() -> dict:
+    M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))
+    H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
+    pi = np.load(PI_PATH)
+
+    mpn, mnames = ncv.assign_mouse_paper_networks(M.var, separate_aud=True)
+    hpn, hnames = ncv.assign_human_paper_networks(H.var, separate_aud=True)
+    # Merge our human Auditory into SomatoMotor for the 8-net Pagani comparison.
+    a, s = hnames.index("Auditory"), hnames.index("SomatoMotor")
+    hpn_m = hpn.copy()
+    hpn_m[hpn == a] = s
+
+    data = st.load_pagani_subtype_matrices()
+    metric = "abs_rowcol_sum"
+
+    preds, obs = {}, {}
+    for subtype in ("hyper", "hypo"):
+        mouse_M = data[f"mouse_{subtype}"]
+        human_M = data[f"human_{subtype}"]
+        m_int = st.network_intensity(mouse_M, metric=metric)
+        m_dict = {st.PAGANI_MOUSE_NETS[i]: float(m_int[i])
+                  for i in range(len(st.PAGANI_MOUSE_NETS))}
+        parcel_vals = st.mouse_intensity_to_parcel_values(mpn, mnames, m_dict)
+        human_pred = parcel_vals @ pi  # (2094,)
+        pred_net = st.aggregate_human_parcels_to_networks(
+            human_pred, hpn_m, hnames, st.PAGANI_HUMAN_NETS)
+        h_int = st.network_intensity(human_M, metric=metric)
+        obs_net = {st.PAGANI_HUMAN_NETS[i]: float(h_int[i])
+                   for i in range(len(st.PAGANI_HUMAN_NETS))}
+        preds[subtype] = pred_net
+        obs[subtype] = obs_net
+
+    # Cross correlation matrix between predicted and observed subtype patterns.
+    nets = st.PAGANI_HUMAN_NETS
+    def vec(d):
+        return np.array([d[n] for n in nets], dtype=float)
+    xcorr = {}
+    for ps in ("hyper", "hypo"):
+        for os_ in ("hyper", "hypo"):
+            pv, ov = vec(preds[ps]), vec(obs[os_])
+            xcorr[f"pred_{ps}__obs_{os_}"] = float(np.corrcoef(pv, ov)[0, 1])
+
+    specificity_hyper = xcorr["pred_hyper__obs_hyper"] > xcorr["pred_hyper__obs_hypo"]
+    specificity_hypo = xcorr["pred_hypo__obs_hypo"] > xcorr["pred_hypo__obs_hyper"]
+    return {
+        "human_networks": nets,
+        "predicted": preds,
+        "observed": obs,
+        "cross_correlation": xcorr,
+        "subtype_specific_hyper": bool(specificity_hyper),
+        "subtype_specific_hypo": bool(specificity_hypo),
+    }
 
 
 def main():
-    print("=" * 80)
-    print("Per-mouse-model HOMER translation showcase")
-    print("=" * 80)
+    print("=" * 78)
+    print("Pagani 2026 — corrected per-model subtype translation through π")
+    print("=" * 78)
 
-    # ---- Load and clean ----
-    print("\nLoading Figura 1c (20 models × 1491 features)...")
-    X_raw, labels = load_figura_1c()
-    n_outliers = np.isnan(X_raw).sum()
-    print(f"  raw shape: {X_raw.shape}")
-    print(f"  outliers masked: {n_outliers} cells ({100*n_outliers/X_raw.size:.1f}%)")
-    print(f"  model labels: {labels}")
-    X = fill_nans_columnwise(X_raw)
-    print(f"  after column-mean imputation: range "
-          f"[{X.min():.2f}, {X.max():.2f}], mean {X.mean():.3f}")
+    X, labels = load_clean_figura_1c()
+    print(f"\nClean Fig 1c: {X.shape[0]} models × {X.shape[1]} features "
+          f"(range [{X.min():.2f}, {X.max():.2f}], no outlier masking)")
 
-    # ---- PCA + KMeans clustering in 1491-feature space ----
-    print("\nPCA + KMeans (k=2) on 20 × 1491 matrix...")
-    pca = PCA(n_components=2, random_state=0)
-    pcs = pca.fit_transform(X)
-    print(f"  PC1 explained variance: {pca.explained_variance_ratio_[0]*100:.1f}%")
-    print(f"  PC2 explained variance: {pca.explained_variance_ratio_[1]*100:.1f}%")
-
-    km = KMeans(n_clusters=2, n_init=20, random_state=0).fit(X)
-    cluster_labels = km.labels_
-
-    # Assign which cluster is hyper vs hypo using the biological prior
-    cluster_0_models = {labels[i] for i in range(20) if cluster_labels[i] == 0}
-    cluster_1_models = {labels[i] for i in range(20) if cluster_labels[i] == 1}
-    # Cluster with more known-hyper models = hyper
-    n_hyper_in_0 = len(cluster_0_models & PAGANI_KNOWN_HYPER)
-    n_hyper_in_1 = len(cluster_1_models & PAGANI_KNOWN_HYPER)
-    if n_hyper_in_1 > n_hyper_in_0:
-        hyper_cluster, hypo_cluster = 1, 0
-    else:
-        hyper_cluster, hypo_cluster = 0, 1
-    cluster_subtype = ["hyper" if c == hyper_cluster else "hypo" for c in cluster_labels]
-
-    # Score against the prior
-    print(f"\n{'Model':<14s} | {'inferred subtype':>16s} | {'prior subtype':>14s} | match?")
-    print("-" * 65)
-    n_match = 0
-    n_known = 0
-    rows = []
+    subtype = derive_and_verify_subtypes(X, labels)
+    n_hyper = subtype.count("hyper")
+    print(f"\nSubtype split (verified by mean-connectivity sign): "
+          f"{n_hyper} hyper / {len(subtype) - n_hyper} hypo")
+    print(f"\n{'row':>3}  {'model':<14} {'mean_conn':>9}  {'subtype':>7}")
+    rmean = X.mean(axis=1)
     for i, lbl in enumerate(labels):
-        prior = "hyper" if lbl in PAGANI_KNOWN_HYPER else (
-            "hypo" if lbl in PAGANI_KNOWN_HYPO else "(unknown)")
-        inferred = cluster_subtype[i]
-        match = "★" if prior == inferred else ("·" if prior == "(unknown)" else "✗")
-        if prior in ("hyper", "hypo"):
-            n_known += 1
-            if prior == inferred:
-                n_match += 1
-        print(f"  {lbl:<14s} | {inferred:>16s} | {prior:>14s} | {match}")
-        rows.append({"model": lbl, "inferred": inferred, "prior": prior,
-                      "pc1": float(pcs[i, 0]), "pc2": float(pcs[i, 1])})
-    print(f"\nClustering recovery: {n_match}/{n_known} known subtypes match the prior")
+        print(f"{i + 1:>3}  {lbl:<14} {rmean[i]:>9.3f}  {subtype[i]:>7}")
 
-    # ---- HOMER per-subtype prediction ----
-    # The Test 2c per-subtype prediction is in outputs/logs/autism_subtypes_full_matrix.json
-    # The per-parcel prediction for hyper vs hypo can be reconstructed from
-    # mouse-network Δ + π.
-    print("\nHOMER per-subtype prediction (from Test 2c logic)...")
-    from importlib import import_module
-    st = import_module("04_subtype_translation")
-    fm = import_module("07_full_matrix_translation")
-    from homer.data import load_cached
-    M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))
-    H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
-    pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")
+    members = loo_membership(X, subtype)
+    n_consistent = sum(members[i]["predicted_side"] == subtype[i]
+                       for i in range(len(labels)))
+    print(f"\nLeave-one-out membership consistency: "
+          f"{n_consistent}/{len(labels)} models fall on their own subtype side")
 
-    data = st.load_pagani_subtype_matrices()
-    mouse_pagani_net, mouse_pagani_names = fm.assign_mouse_pagani_networks(M.var)
-    keep = mouse_pagani_net >= 0
+    print("\nRouting per-subtype signatures through π → human space ...")
+    trans = subtype_translation_through_pi()
+    xc = trans["cross_correlation"]
+    print("  cross-species correlation (predicted human ↔ observed human):")
+    print(f"    pred_hyper · obs_hyper = {xc['pred_hyper__obs_hyper']:+.3f}  "
+          f"(vs obs_hypo {xc['pred_hyper__obs_hypo']:+.3f})")
+    print(f"    pred_hypo  · obs_hypo  = {xc['pred_hypo__obs_hypo']:+.3f}  "
+          f"(vs obs_hyper {xc['pred_hypo__obs_hyper']:+.3f})")
+    print(f"  subtype-specific (hyper): {trans['subtype_specific_hyper']}")
+    print(f"  subtype-specific (hypo):  {trans['subtype_specific_hypo']}")
 
-    def _intensity(MM):
-        Ma = np.abs(MM)
-        return Ma.sum(axis=0) + Ma.sum(axis=1) - np.diag(Ma)
-
-    def _per_subtype_prediction(M_subtype):
-        intensity = _intensity(0.5 * (M_subtype + M_subtype.T))
-        v = np.zeros(pi.shape[0])
-        for i in range(len(mouse_pagani_names)):
-            v[(mouse_pagani_net == i) & keep] = intensity[i]
-        return v @ pi   # (2094,)
-
-    hyper_human_pred = _per_subtype_prediction(data["mouse_hyper"])
-    hypo_human_pred  = _per_subtype_prediction(data["mouse_hypo"])
-    print(f"  hyper template: shape={hyper_human_pred.shape}, "
-          f"range [{hyper_human_pred.min():.2f}, {hyper_human_pred.max():.2f}]")
-    print(f"  hypo template:  shape={hypo_human_pred.shape}, "
-          f"range [{hypo_human_pred.min():.2f}, {hypo_human_pred.max():.2f}]")
-
-    # For each model, assign its HOMER-predicted human map = the hyper or hypo template
-    # weighted by its cluster membership (soft via KMeans distance ratio)
-    distances = km.transform(X)  # (20, 2) — distance to each centroid
-    # Convert to soft membership: closer to hyper centroid = higher hyper-weight
-    hyper_dist = distances[:, hyper_cluster]
-    hypo_dist  = distances[:, hypo_cluster]
-    # Softmax(inverse distance) for membership probability
-    eps = 1e-6
-    hyper_weight = (1.0 / (hyper_dist + eps)) / (1.0 / (hyper_dist + eps) + 1.0 / (hypo_dist + eps))
-    hypo_weight = 1 - hyper_weight
-
-    # Per-model human-space score = which subtype's HOMER prediction dominates
-    print(f"\n{'Model':<14s} | {'inferred subtype':>16s} | "
-          f"{'hyper-weight':>13s} | {'hypo-weight':>12s}")
-    print("-" * 65)
-    for i, lbl in enumerate(labels):
-        rows[i]["hyper_weight"] = float(hyper_weight[i])
-        rows[i]["hypo_weight"]  = float(hypo_weight[i])
-        print(f"  {lbl:<14s} | {cluster_subtype[i]:>16s} | "
-              f"{hyper_weight[i]:>13.3f} | {hypo_weight[i]:>12.3f}")
-
-    # Save
     out = {
-        "n_models":       int(len(labels)),
-        "feature_outliers_masked_pct": float(100 * n_outliers / X_raw.size),
-        "models":         rows,
-        "n_match_known":  int(n_match),
-        "n_known":        int(n_known),
-        "pca_var": {
-            "pc1": float(pca.explained_variance_ratio_[0]),
-            "pc2": float(pca.explained_variance_ratio_[1]),
-        },
-        "homer_predictions": {
-            "hyper_human_per_parcel": hyper_human_pred.tolist(),
-            "hypo_human_per_parcel":  hypo_human_pred.tolist(),
-        },
+        "n_models": len(labels),
+        "n_hyper": n_hyper,
+        "n_hypo": len(labels) - n_hyper,
+        "models": [
+            {"row": i + 1, "model": labels[i], "subtype": subtype[i],
+             "mean_connectivity": float(rmean[i]), **members[i]}
+            for i in range(len(labels))
+        ],
+        "loo_consistency": f"{n_consistent}/{len(labels)}",
+        "translation": trans,
+        "note": ("Supersedes inverted-prior version. Subtype labels verified "
+                 "from data; translation independent of 1,491-feature decode."),
     }
-    out_path = ROOT / "outputs" / "logs" / "pagani_per_model_translation.json"
+    out_path = ROOT / "outputs" / "logs" / "pagani_subtype_translation_corrected.json"
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(out, indent=2))
     print(f"\nWrote {out_path}")

@@ -45,7 +45,7 @@ def main():
         sys.exit(1)
 
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs" / "anndata"))
-    pi = np.load(str(ROOT / "outputs" / "coupling" / "pi_fc_plus_SC_with_all_packs.npy"))
+    pi = np.load(str(ROOT / "outputs" / "coupling" / "pi_fc_plus_SC.npy"))
 
     expr = np.load(expr_path)
     meta = pd.read_csv(meta_path)

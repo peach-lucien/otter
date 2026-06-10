@@ -1,37 +1,74 @@
-# Pagani 2026 per-mouse-model HOMER translation (exploratory)
+# Pagani 2026 subtype translation through HOMER's π
 
-A showcase of how HOMER's π would translate per-mouse-model FC perturbation patterns into human-parcel space. Frames a real biological question: *which human ASD phenotype does each mouse model resemble?*
+How HOMER's π translates Pagani's autism connectivity **subtypes** from mouse to
+human, with each of the 20 mouse models placed on the hyper↔hypo axis. Frames a
+real biological question: *does the human ASD subtype HOMER predicts from a mouse
+subtype match the human subtype Pagani actually observed?*
 
-## What we attempted vs what we accomplished
+> **Rewritten 2026-06-10** after the Gozzi lab shared the clean data. The earlier
+> version PCA/KMeans-clustered the 20 models in the (Excel-corrupted) 1,491-feature
+> space and labelled subtypes from a biological prior that was **inverted**. Both
+> problems are now fixed. Background: [`DATA_VALIDATION_2026-06-10.md`](DATA_VALIDATION_2026-06-10.md).
 
-**Goal**: Take Pagani 2026's 20-model × 1,491-feature matrix (MOESM6, Figura 1c), route each model's mouse-side FC perturbation through HOMER's π, and produce per-model human-parcel predictions. Cluster the 20 models in HOMER-translated human space to ask: which mouse models look most like the human hyperconnected ASD subtype, which look hypoconnected, and where do outlier models sit?
+## What it does now
 
-**Reality**: We can't decode the 1,491 features. Without access to Pagani's methods section explaining the underlying parcellation (the value range looks correlation-like for ~95 % of cells, with the remaining 5 % being Excel-formatting-corrupted outliers — large integers from mis-parsed small decimals), the 1,491 → 1,864 alignment to HOMER's mouse atlas isn't possible. Per-model resolution degrades to subtype-average resolution.
+1. **Loads the clean Fig 1c matrix** (`sorted_etiology_by_feature_matrix.csv`,
+   20 models × 1,491 voxelwise weighted-degree-centrality features) — no outlier
+   masking needed.
+2. **Derives the subtype split from the data, and verifies it.** The CSV is sorted
+   by Pagani's hierarchical clustering: rows 1–9 = hyperconnectivity (n=9), rows
+   10–20 = hypoconnectivity (n=11). We assert this against mean global
+   connectivity sign (hyper > 0, hypo < 0) rather than guessing.
+3. **Leave-one-out per-model membership.** Each model is correlated to the mean
+   hyper and hypo feature signature (excluding itself), placing all 20 on the
+   hyper↔hypo axis. 17/20 fall on their own side; the 3 exceptions are the
+   near-zero-polarization models (Trem2, Btbr, Syn2-class).
+4. **Subtype translation through π.** Each subtype's mouse network signature
+   (Pagani ED Fig 1) is routed through π to human-parcel space and aggregated to
+   human networks, then compared to the observed human subtype pattern (Fig 4e).
+   **Result: subtype-specific in both directions** — predicted-hyper correlates
+   with observed-hyper (r ≈ +0.52) far better than with observed-hypo (−0.40);
+   predicted-hypo with observed-hypo (+0.25) better than observed-hyper (−0.28).
 
-**What we delivered**: An honest exploratory showcase with three layers:
-
-1. **Mouse-side PCA + KMeans clustering** of the 20 models in opaque 1,491-feature space. Recovers 2 clusters; structure of which doesn't cleanly match my biological prior on Pagani's hyper/hypo subtypes (likely either because my prior is wrong without paper access, or because outlier-corruption correlates with row order).
-2. **HOMER per-subtype prediction** from Test 2c — the predicted human-parcel Δ pattern that any mouse model "would translate to" if it sits in the hyper or hypo subtype.
-3. **Per-model soft membership** to the hyper vs hypo template (distance-weighted KMeans probability), showing the 20 models distributed along the hyper↔hypo axis HOMER predicts.
-
-## What this is useful for
-
-- **Method showcase**: demonstrates the per-model translation pipeline, validates that the data flows correctly, and produces a publishable-quality figure
-- **Framing future work**: identifies the precise bottleneck (1,491 feature decoding) and what data would unblock real per-model translation
-- **Honest exploratory result**: not validated against ground truth, but illustrative of the geometric layout HOMER implies
+This deliberately does **not** depend on decoding the 1,491 features to voxels
+(not robustly possible — see the validation note); the subtype network signatures
+come from Pagani's own published matrices.
 
 ## What it's NOT
 
-- Not a quantitative claim about which mouse model "is" which human subtype
-- Not a substitute for per-model parcel-level translation (which requires decoding the 1,491 features)
-- Not a validation of Pagani's subtype assignments — those would need direct access to Figure 1d
+- Not a *per-voxel* per-model translation — that needs the 20 per-model
+  degree-centrality NIfTIs (see "remaining" below), not the 1,491-feature CSV.
+- The π routing is at network resolution (Pagani's 9 mouse / 8 human networks).
+
+## Direction 1 result — parcel-resolution spatial routing (occurrence maps)
+
+`03_spatial_subtype_routing.py` drives the mouse side from the actual Fig 1d
+occurrence maps (aggregated to the 13 conserved regions via a verified Allen
+region-name bridge; 1,052/1,864 parcels matched) instead of the 9-network
+matrices. Finding, reported honestly:
+
+- **Hyper subtype translates cross-species** (pred-hyper ↔ obs-hyper r=+0.37 vs
+  obs-hypo −0.32).
+- **Hypo subtype does NOT** (pred-hypo ↔ obs-hypo −0.25; it actually leans toward
+  obs-hyper +0.28).
+
+This is consistent with the recurring "hypo is the weak side" theme in the
+autism_subtypes tests, and has a clear methodological cause: the occurrence maps
+are **unsigned consistency counts** (0–5), not signed connectivity Δ, so they
+can't carry the hypo subtype's direction. The signed per-model degree-centrality
+NIfTIs (requested in `email_draft_per_model_nifti.md`) are what a clean
+parcel-resolution hypo translation needs. (The signed *network* matrices in
+`01_per_model_clustering.py` do recover both subtypes — see that result.)
 
 ## Files
 
 | File | What |
 |---|---|
-| `01_per_model_clustering.py` | Load Figura 1c, mask outliers, PCA + KMeans, compute per-model HOMER soft membership |
-| `02_plot.py` | 3-panel figure |
+| `01_per_model_clustering.py` | Clean Fig 1c → verified subtype split → LOO membership → π subtype translation (signed networks; both subtypes specific) |
+| `03_spatial_subtype_routing.py` | Occurrence-map → conserved-region → π routing (parcel resolution; hyper specific, hypo not) |
+| `02_plot.py` | 3-panel figure for `01` |
+| `DATA_VALIDATION_2026-06-10.md` | Ingest/validation of the shared data package |
+| `email_draft_per_model_nifti.md` | Request to Silvia for the 20 signed per-model maps |
 | `README.md` | This file |
 
 ## Reproduce
@@ -42,8 +79,8 @@ PYTHONPATH=src python experiments/pagani_2026_per_model/02_plot.py
 ```
 
 Outputs:
-- `outputs/logs/pagani_per_model_translation.json`
-- `outputs/figures/pagani_per_model_translation.png`
+- `outputs/logs/pagani_subtype_translation_corrected.json`
+- `outputs/figures/pagani_subtype_translation_corrected.png`
 
 ## Showcase notebook
 
@@ -51,12 +88,26 @@ Outputs:
 
 ## To make this a real validation, we would need
 
-1. ~~**Pagani's exact 1,491-feature definition**~~ — **DECODED**. From Pagani's `rsfMRI-global-local-connectivity` GitHub repo + supplementary methods PDF: the 1,491 features are **per-voxel global connectivity** (weighted-degree centrality, Cole et al. 2009) within `chd8_functional_template_mask_wo_cerebellum.nii.gz`. Each value is the mean Pearson's r between that voxel and all other voxels in the mask for a given mouse model. Resolution is ~700 µm isotropic (1,491 voxels in mouse brain minus cerebellum ≈ 500 mm³ / 1,491 ≈ 0.335 mm³/voxel).
+> **Status update 2026-06-10** — Gozzi lab shared a data package (now in
+> `data_crossspecies/pagani/`). Full ingest/validation in
+> [`DATA_VALIDATION_2026-06-10.md`](DATA_VALIDATION_2026-06-10.md). Net effect:
+> the **subtype-level** route is now unblocked, but the **per-model 1,491-feature**
+> route is *not* — the decode below was wrong.
 
-2. **The mask file itself** — `chd8_functional_template_mask_wo_cerebellum.nii.gz`. We know the features ARE voxel-level, but without the mask we don't know which feature-index corresponds to which voxel position. **Email draft to Pagani group is in `email_draft_to_pagani_group.md`.**
+1. ~~**Pagani's exact 1,491-feature definition** — DECODED as per-voxel global connectivity in `chd8_functional_template_mask_wo_cerebellum.nii.gz`~~ — **FALSIFIED (2026-06-10)**. The shared mask contains **10,111** voxels, not 1,491, and the `rsfMRI-global-local-connectivity` repo confirms the maps are voxelwise (≈10,111 values). The 1,491 Fig 1c columns are a *reduced/parcel-level* summary whose index→location mapping is still unknown. The earlier ~700 µm / "0.335 mm³ per voxel" reasoning was unfounded.
 
-3. **Per-model parcel-level mouse FC matrices** — the underlying data behind Figura 1c, before reduction to 1,491 voxel signatures. The Gozzi lab might share these on request.
+2. ~~**The mask file itself**~~ — **RECEIVED** (`rsfMRI-templates-main/`, functional grid 100×100×18 @ 2.3×2.3×6 mm). Necessary but, per (1), **not sufficient** to decode the 1,491 features.
+
+3. **The 20 per-model voxelwise degree-centrality maps as NIfTIs** *(the real per-model blocker — NOT a "1,491 key")* — the full-resolution Fig 1a/b maps in functional or Allen space, one per model. These register to HOMER's mouse atlas and route through π directly. The 1,491-feature CSV cannot substitute: it is a downsampled, dendrogram-sorted reduction with no published feature-index → voxel key, so it can't be inverted robustly (see `DATA_VALIDATION_2026-06-10.md`).
 
 4. **Per-model human ASD FC** — ABIDE doesn't disaggregate by genetic subtype, but ENIGMA-ASD or SFARI's per-cohort data might.
 
-With the mask file (requirement 2), per-model translation is straightforward — ~2 hours of code. Drafted email is ready to send.
+**Newly available — subtype-level translation (no decode needed):** the Fig 1d
+occurrence maps (`cluster1_…_pos` = hyper, `cluster2_…_neg` = hypo) are in Allen
+CCFv3 space and route directly through π. Moreover the **per-model hyper/hypo
+labels are recoverable** straight from the CSV row order — rows 1–9 (mean global
+connectivity +0.19) = hyperconnectivity (n=9), rows 10–20 (−0.26) =
+hypoconnectivity (n=11), matching the paper. **⚠️ This is inverted relative to the
+`PAGANI_KNOWN_HYPER/HYPO` prior currently hard-coded in
+`01_per_model_clustering.py`** (which wrongly lists Fmr1/Chd8/Tsc2 as hypo) — that
+prior must be replaced.
