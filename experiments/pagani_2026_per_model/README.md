@@ -84,7 +84,7 @@ Outputs:
 
 ## Showcase notebook
 
-[`notebooks/09_pagani_per_model_translation.ipynb`](../../notebooks/09_pagani_per_model_translation.ipynb) — interactive walkthrough with explicit caveats about what's exploratory.
+[`notebooks/09_pagani_per_model_translation.ipynb`](../../notebooks/09_pagani_per_model_translation.ipynb) — interactive walkthrough of the corrected analysis (verified subtype split, LOO membership, π subtype-specificity, and the Direction 1 spatial-routing limit). Rewritten 2026-06-10; supersedes the earlier exploratory PCA/KMeans version.
 
 ## To make this a real validation, we would need
 

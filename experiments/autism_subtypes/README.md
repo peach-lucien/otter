@@ -164,28 +164,28 @@ Predicted Δ from Test 3 (gene-derived) vs predicted Δ from Test 2c (FC-derived
 
 Every pathway tested — synaptic AND immune AND mTOR AND WNT AND chromatin AND GPCR AND MAPK — shows the **same direction**: positive r ≈ +0.35 to +0.51 with observed hyper Δ, negative r with observed hypo Δ. The direction-by-pathway split that Pagani's claim 4 requires (synaptic → hypo; immune → hyper) doesn't separate cleanly through HOMER. Reason: **Pagani's published "hypo" matrix in Fig 4e has tiny magnitudes** (range 0–1.5) compared to "hyper" (range 0–33), so the Δ test is dominated by the hyper side regardless of which pathway you feed in. We can confirm Pagani's *overall* cross-species spatial replication (every pathway translates positively to human hyper-side ASD perturbation) but their *direction-by-pathway* claim isn't testable from the published source data alone — that would need per-parcel human pathway-spatial maps, which Pagani didn't ship.
 
-## Test 4 — ABIDE per-subject HOMER-template scoring (null result)
+## Test 4 — ABIDE per-subject HOMER-template scoring (small population effect; no subject-level classifier)
 
 A stronger test of Pagani's claim 1 (ASD splits into hyper/hypo subtypes at the individual level): build a HOMER human template by routing the mouse hyper−hypo subtype Δ-matrix through π, score each ABIDE-pcp subject by dot-product against that template, and ask whether ASD subjects systematically differ from controls and split bimodally.
 
-**Pipeline**: fetched 871 ABIDE-pcp subjects (CPAC pipeline, AAL-116 parcellation across 24 sites). Per-subject `mean(|FC|)` per AAL parcel, minus site-matched control mean, mapped to HOMER's 2,094 parcels by nearest centroid, scored vs z-scored HOMER template.
+**Pipeline**: fetched 871 ABIDE-pcp subjects (CPAC pipeline, AAL-116 parcellation across 24 sites), 817 valid. Per-subject per-AAL-parcel FC profile, minus site-matched control mean, mapped to HOMER's 2,094 parcels by nearest centroid, scored vs z-scored HOMER template. Two profile features were tested: the original coarse `mean(|FC|)` (`abs`) and the audit-fixed **signed** mean-FC feature.
 
-### Result — null
+### Result — small but real at the population level (feature-dependent)
 
-| Metric | Value |
-|---|---:|
-| n valid subjects | 817 (377 ASD, 440 control) |
-| Mann-Whitney p | 0.10 |
-| Cliff's δ | −0.07 (negligible, slightly negative direction) |
-| Within-ASD GMM | 1-component preferred (Δ BIC = +17.8) |
+| Metric | `signed` feature (headline) | `abs` feature (original) |
+|---|---:|---:|
+| n valid subjects | 817 (377 ASD, 440 control) | 817 |
+| Mann-Whitney p | **0.042** | 0.10 |
+| Cliff's δ | −0.083 (negligible magnitude, ASD lower) | −0.066 |
+| Within-ASD GMM | 1-component preferred (Δ BIC = +17.8) | 1-component |
 
-HOMER's cross-species template does NOT distinguish ASD vs control or recover Pagani's hyper/hypo split at the individual subject level.
+With the audit-fixed **signed**-FC feature, ASD subjects score systematically *lower* on HOMER's (hyper−hypo) template than controls (p = 0.042, Cliff's δ = −0.083) — i.e. ASD-as-a-group leans toward the hypoconnected template, consistent with the longstanding ASD-hypoconnectivity literature. The effect is *small* and the within-ASD distribution is **unimodal**: HOMER does **not** recover Pagani's hyper/hypo split as a within-ASD subject-level classifier. The older coarse `abs` feature was a null (p = 0.10) — the conclusion is feature-dependent, which is itself the point.
 
 ### Where HOMER's signal lives
 
-Tests 2c and 3 show HOMER's translation carries genuine signal at the **population/network-aggregate level**. Test 4 shows the same signal does NOT survive as a per-subject classifier on noisy individual FC. This is a natural granularity boundary: HOMER carries cross-species signal at the level Pagani actually publishes (per-subtype averages on networks), not at single-subject diagnostic resolution.
+Tests 2c and 3 show HOMER's translation carries genuine signal at the **population/network-aggregate level**. Test 4 shows that signal is at most a *weak* per-subject population shift and does NOT survive as a per-subject *classifier* on noisy individual FC. This is a natural granularity boundary: HOMER carries cross-species signal at the level Pagani actually publishes (per-subtype averages on networks), not at single-subject diagnostic resolution.
 
-Possible mitigations that might improve power: replicating Pagani's exact per-cell FC perturbation pipeline instead of our coarse `mean|FC|`; using a finer parcellation (Schaefer-400 or CC400 instead of AAL-116); richer site/age/motion regression. But Cliff's δ pointing slightly negative (not positive) suggests there isn't a strong subject-level signal to recover regardless of feature engineering.
+Possible mitigations that might improve power: replicating Pagani's exact per-cell FC perturbation pipeline; using a finer parcellation (Schaefer-400 or CC400 instead of AAL-116); richer site/age/motion regression. But Cliff's δ pointing slightly negative (not positive) suggests there isn't a strong subject-level signal to recover regardless of feature engineering.
 
 ## Summary across the four tests
 
@@ -194,7 +194,7 @@ Possible mitigations that might improve power: replicating Pagani's exact per-ce
 | **Test 1** | Pagani's name-based network bridge has biological substance | 4/8 canonical pairs diagonal-argmax; mean 1.92× over null | Bridge OK for 4 networks; 4 misses are atlas-label artefacts |
 | **Test 2c** | Pagani claim 3 (FC subtypes recur cross-species at matching anatomical locations) | r=+0.601 (ρ=+0.643) over 36 matrix elements; p=0.0007 analytical, empirical p=0.035 vs permuted-π null | **Strong** — replicates the spatial-contrast claim through a quantitative bridge |
 | **Test 3** | Pagani claim 4 (gene/pathway signature recurs cross-species spatially) | Bootstrap r=+0.428, 95% CI (+0.349, +0.497), 100% of resamples positive | **Supports overall claim**; per-pathway direction-by-subtype not testable from published source |
-| **Test 4** | Pagani claim 1, individual-subject level (HOMER as ASD classifier feature) | Mann-Whitney p=0.10, Cliff's δ=−0.07, ASD unimodal | **Null** — clarifies that HOMER signal is population-level, not subject-level |
+| **Test 4** | Pagani claim 1, individual-subject level (HOMER as ASD classifier feature) | signed-FC feature: Mann-Whitney p=0.042, Cliff's δ=−0.083, ASD unimodal (abs feature: p=0.10) | **Weak population effect, no subject classifier** — ASD leans hypo at the group level; HOMER signal is population-level, not subject-level |
 
 ## Future extensions
 
@@ -217,7 +217,7 @@ Possible mitigations that might improve power: replicating Pagani's exact per-ce
 | `09_gene_spatial_translation.py` | Test 3 — gene-set spatial translation proof-of-concept (36 genes; superseded by `allen_expansion/`) |
 | `10_summary_figure.py` | Consolidated 4-panel summary figure across all tests |
 | `allen_expansion/` | Expanded Test 3 — full Allen API gene download (1,713 Pagani genes). See `allen_expansion/README.md`. Bootstrap r=+0.428, 95% CI (+0.349, +0.497). |
-| `abide_subtype/` | Future Test 4 — ABIDE per-subject HOMER-template scoring. See `abide_subtype/README.md`. Scaffold ready; awaiting first run. |
+| `abide_subtype/` | Test 4 — ABIDE per-subject HOMER-template scoring (run; small population effect, see above). See `abide_subtype/README.md`. NB: π path updated to `pi_fc_plus_SC.npy`; re-run requires the ABIDE download. |
 | `README.md` | This file — workflow walkthrough + result summary |
 
 ## Citing
