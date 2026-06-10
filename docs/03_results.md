@@ -1,10 +1,10 @@
 # Results
 
-The headline numbers, the resolution boundary, and the honest caveats. Full per-paper detail lives in the showcase notebooks (`notebooks/05-15`) and per-experiment READMEs.
+The headline numbers and the caveats. Full per-paper detail lives in the showcase notebooks (`notebooks/05-15`) and per-experiment READMEs.
 
 ## Synthesis
 
-HOMER produces a soft probabilistic mouse↔human parcel coupling π (1,864 × 2,094) via Fused Gromov-Wasserstein optimal transport, supervised on 21 Garin 2021 point anchors + 26 region-anchor entries from 15 cross-species packs. On Beauchamp 2022's external 22-pair gene-expression benchmark, the recommended π hits 45.7 % parcel-level top-1 (50.6× over null) and 100 % qualified top-3 at region level, with 98.2 % bootstrap stability and +17.8 σ above the permuted-anchor null. Independent third-party validation against **twelve cross-species papers spanning FC, gene expression, cell types, cortical layers, connectivity gradients, intracortical myelin, psychiatric disorders, two negative-control / falsification tests (frontal-cortex homology and the tethering hypothesis), and a head-to-head benchmark against the TransBrain sibling method** establishes a clean resolution boundary: HOMER preserves cross-species signal at the **regional / area / network level** (Pagani 2026 r=+0.601 on subtype perturbation matrices, Margulies/Huntenburg |r|=0.402 (parcel) / 0.433 (region) on the brain-wide gradient, Coletta 2020 6/10 diagonal-argmax on RSN correspondence, BICCN region-concentrated cell types like Th at r=+0.080) but does not translate **broadly-distributed cortical class markers** (Pvalb, Sst, Vip interneurons), **within-area lamination** (Hodge layer markers), or **disorder-specific signal** (predictions for autism vs schizophrenia vs ADHD correlate at r > 0.97 — HOMER captures a generic psychiatric perturbation geometry, not autism-specific biology).
+HOMER produces a soft probabilistic mouse↔human parcel coupling π (1,864 × 2,094) via Fused Gromov-Wasserstein optimal transport, supervised on 21 Garin 2021 point anchors + 26 region-anchor entries from 15 cross-species packs. On Beauchamp 2022's external 22-pair gene-expression benchmark, the recommended π hits 45.7 % parcel-level top-1 (50.6× over null) and 100 % qualified top-3 at region level, with 98.2 % bootstrap stability and +17.8 σ above the permuted-anchor null. It was tested against twelve independent cross-species datasets spanning FC, gene expression, cell types, cortical layers, connectivity gradients, intracortical myelin, and psychiatric disorders, plus two negative-control tests (frontal-cortex homology and the tethering hypothesis) and a head-to-head comparison with the TransBrain method. Translation is strongest at the regional/area/network level: the Margulies/Huntenburg principal gradient at |r| = 0.402 (parcel) and 0.433 (region), and Coletta 2020 resting-state networks at 6/10 diagonal-argmax. Gene-spatial patterns translate at moderate strength. Allen ISH cell-type markers (BICCN) translate for 13 of 23 markers (mean r = +0.089), strongest for interneuron and glutamatergic classes (Drd1 +0.227, Slc17a7 +0.221, Vip +0.201, Calb2 +0.199, Pvalb +0.198). Cortical layer markers (Hodge 2019) translate for 6 of 7 (mean r = +0.119). Disorder-specific signal does not survive: predicted human maps for autism, schizophrenia, bipolar and ADHD correlate at r > 0.97 (ENIGMA), so the model carries a shared psychiatric geometry rather than disorder-specific biology.
 
 ## Two π files
 
@@ -28,7 +28,7 @@ Beauchamp 2022 external validation (15 anchor-overlapping mouse↔human pairs, 9
 
 Region-level evaluation (Beauchamp-22 candidate set): qualified top-1 jumps **37 % → 81 %**, qualified top-3 **70 % → 100 %**, mean fold enrichment **16× → 122×**.
 
-Bootstrap argmax stability over 40 subject-resamples: **98.2 %** (88 % of mouse rows have identical argmax across all 40 resamples).
+Bootstrap argmax stability over 40 subject-resamples: **98.2 %** (89 % of mouse rows have identical argmax across all 40 resamples).
 
 z-score vs permuted-anchor null: **+17.8** — the specific mouse↔human pairings matter, not just having any 42 anchor constraints.
 
@@ -82,7 +82,7 @@ We tested HOMER against 12 cross-species neuroscience papers using completely in
 
 | Paper | Test | Result | Verdict |
 |---|---|---|---|
-| **Pagani 2026** (Nat Neurosci) | Subtype FC perturbation matrix via π | **Pearson r = +0.601**, Spearman ρ = +0.643 on 36 network-pair Δ; empirical perm-p = 0.035 | **Strong** |
+| **Pagani 2026** (Nat Neurosci) | Subtype perturbation Δ predicted from gene sets via π | Pearson r = +0.822 (p = 0.012), Spearman ρ = +0.524 (n.s.), over 8 networks using the 36 Pagani genes in HOMER's panel | Moderate, small n |
 | Pagani 2026 | ABIDE per-subject scoring | p = 0.042, Cliff's δ = −0.083 (ASD < CTRL) | Modest direction |
 | Pagani 2026 | Cross-disease gene-set spatial | autism r ≈ ADHD r ≈ SCZ r ≈ +0.43 | **No disorder-specificity** |
 | **Margulies 2016 + Huntenburg 2021** | Principal connectivity gradient | **\|r\| = 0.402** parcel-level (region-level 0.433), empirical p = 0.000 (13× null) | **Strong (brain-wide)** |
@@ -91,22 +91,22 @@ We tested HOMER against 12 cross-species neuroscience papers using completely in
 | **TransBrain 2025** (Nat Methods) | Head-to-head vs a sibling method + its homology benchmark | predicted-centroid **25.3 mm vs 39.8 mm null** (**p < 0.001**); top-3 **41 %**; head-to-head gradient \|r\| 0.393 (HOMER) vs 0.463 (TransBrain) | **Methods comparison** |
 | **Buckner & Krienen 2013** (TICS) | Negative control — is π sparsest over untethered association cortex? | sensorimotor−association coverage gap **6.7 log units** (p = 3.4×10⁻⁷, empirical p = 0.000) | **Pass (negative control)** |
 | **Coletta 2020** (Sci Adv) | Labeled mouse-net → Yeo-7 + coherence | **6/10 diagonal-argmax**, **9/11 nets compact** vs null | **Strong** |
-| **BICCN** (Yao 2023 + Siletti 2023) | Cell-type marker spatial | Region-concentrated cells (Th +0.080, Aqp4 +0.077, Plp1 +0.059) p < 0.01 | **Strong (regional)** |
+| **BICCN** (Yao 2023 + Siletti 2023) | Cell-type marker spatial | 13/23 markers significant, mean r = +0.089; glutamatergic 4/4, interneuron 4/7 (Drd1 +0.227, Slc17a7 +0.221, Vip +0.201, Pvalb +0.198) | Moderate |
 | BICCN | Broadly-cortical interneurons | Pvalb, Sst, Vip null | Null — pan-cortical limit |
 | Whitesell 2021 (Neuron) | DMN refinement | Yeo-DMN 23.9 %; DMN-aligned cortical territory 54.5 % | Methodological note |
 | **ENIGMA Phase 1** | Cross-disorder predictions at parcel level | Off-diagonal r = +0.988 (autism ≈ SCZ ≈ ADHD ≈ bipolar) | **Confirms no disorder-specificity** |
-| Hodge 2019 (Nature) | Cortical layer markers | 6/7 markers null; only RORB (L4) significant | Null — laminar limit |
+| Hodge 2019 (Nature) | Cortical layer markers | 6/7 markers significant, mean r = +0.119 (L2/3 +0.083/+0.176/+0.189, L4 +0.090, L5 +0.168, L6 +0.108) | Moderate |
 | Pagani per-model | 20 mouse models × 1,491 features | Decoded as per-voxel global-connectivity; voxel-ordering pending mask file | Pending external data |
 
 Each validation has its own showcase notebook (see `notebooks/05–15`) with the full method, figure, and discussion. Brief snapshots below.
 
 ### Pagani 2026 (autism subtypes, Nat Neurosci)
 
-Four-hypothesis arc against the paper's claims. **Strongest result**: translating the mouse subtype Δ-matrix through π reproduces the human subtype Δ-matrix at r = +0.601 (Spearman ρ = +0.643) over 36 network-pair elements (empirical perm-p = 0.035) — independent quantitative replication of their claim 3 (FC subtypes recur cross-species at matching anatomical locations) without using their name-based bridge. Per-subject scoring on 817 ABIDE subjects shows ASD on the hypo side of HOMER's template (p = 0.042). Gene-spatial cross-disease check breaks the autism-specific framing — all 4 brain disorders (autism, SCZ, bipolar, ADHD) give r ≈ +0.4 against Pagani's observed pattern, so HOMER captures shared psychiatric geometry, not autism-specific biology. Showcase: `notebooks/05_pagani_2026_validation.ipynb`.
+Four-hypothesis arc against the paper's claims. The subtype test takes Pagani's hypo- and hyper-connected subtype gene sets, keeps the 36 genes that overlap HOMER's curated panel (10 hypo, 26 hyper), translates the mouse hypo/hyper gene scores through π into human-parcel space, aggregates to Pagani's 8 networks, and correlates the predicted hyper−hypo Δ with the observed network Δ. Pearson r = +0.822 (p = 0.012), Spearman ρ = +0.524 (not significant), over 8 networks — a small-n, proof-of-concept result that depends on a 36-gene overlap, not a full pathway-spatial test. Per-subject scoring on 817 ABIDE subjects shows ASD on the hypo side of HOMER's template (p = 0.042). A cross-disease gene-spatial check gives r ≈ +0.4 for all four disorders (autism, SCZ, bipolar, ADHD) against Pagani's observed pattern, so the signal is shared psychiatric geometry rather than autism-specific. Showcase: `notebooks/05_pagani_2026_validation.ipynb`.
 
 ### Margulies 2016 + Huntenburg 2021 (principal connectivity gradient)
 
-A brain-wide ordering test orthogonal to anchor pairs. Diffusion-map embedding of FC in each species → first non-trivial eigenvector spans sensorimotor → DMN. Translating the mouse gradient through π as a **transport-weighted average** reproduces the observed human gradient at **|r| = 0.402** at parcel resolution (region-level 0.433, n = 1,223 parcels) — 13× the permuted-π null mean (0.031), empirical p = 0.000. An earlier un-normalised `mouse_grad @ π` routing scored only r = 0.144; normalising by π's per-column mass removes a confound and roughly trebles the correlation. Establishes HOMER preserves the cross-species cortical organisational axis brain-wide, not only at the 22 Beauchamp anchor pairs. Showcase: `notebooks/07_margulies_huntenburg_gradient.ipynb`.
+A brain-wide ordering test orthogonal to anchor pairs. Diffusion-map embedding of FC in each species → first non-trivial eigenvector spans sensorimotor → DMN. Translating the mouse gradient through π as a **transport-weighted average** reproduces the observed human gradient at **|r| = 0.402** at parcel resolution (region-level 0.433, n = 1,244 parcels) — 13× the permuted-π null mean (0.031), empirical p = 0.000. An earlier un-normalised `mouse_grad @ π` routing scored only r = 0.144; normalising by π's per-column mass removes a confound and roughly trebles the correlation. Establishes HOMER preserves the cross-species cortical organisational axis brain-wide, not only at the 22 Beauchamp anchor pairs. Showcase: `notebooks/07_margulies_huntenburg_gradient.ipynb`.
 
 ### Fulcher 2019 (multimodal cortical gradient, PNAS)
 
@@ -132,7 +132,7 @@ Three sub-tests at network resolution. **Labeled correspondence** (HOMER PAIRID 
 
 ### BICCN cell-type markers (Yao 2023 + Siletti 2023)
 
-23 cell-type-defining markers tested via Allen ISH (mouse) → π → AHBA (human) comparison. **Regionally-concentrated cells translate**: Th (dopaminergic, midbrain) r = +0.080 (p < 0.001), Aqp4 (astrocyte) r = +0.077, Plp1 (oligodendrocyte) r = +0.059, and other region-localised markers. **Broadly-cortical class markers don't**: Pvalb, Sst, Vip, Camk2a all null. Establishes that HOMER preserves region-localised signals but not pan-cortical class distributions. Showcase: `notebooks/10_biccn_cell_type_markers.ipynb`.
+23 cell-type-defining markers tested via Allen ISH (mouse) → π → AHBA (human). 13 of 23 markers translate at empirical p < 0.05, with a mean Pearson r of +0.089 across all 23. The strongest are glutamatergic and interneuron markers: Drd1 +0.227, Slc17a7 +0.221, Vip +0.201, Calb2 +0.199, Pvalb +0.198, Slc17a6 +0.196, Camk2a +0.182, Grin1 +0.174; weaker but significant are Gad1 +0.092, Drd2 +0.079, Reln +0.069, Plp1 +0.063, Gfap +0.051. By class, glutamatergic markers translate 4/4 (mean +0.193) and interneuron 4/7 (mean +0.107); oligodendrocyte (1/4) and microglia (0/1) markers are mostly null. Showcase: `notebooks/10_biccn_cell_type_markers.ipynb`.
 
 ### ENIGMA cross-disorder (Phase 1 in-sandbox; Phase 2 external)
 
@@ -142,9 +142,9 @@ Predicted human spatial patterns at parcel resolution for autism, bipolar, schiz
 
 Whitesell's broad mouse-DMN (mPFC + ACC + RSC + PPC + dorsal hippocampus + entorhinal) routes through π to give Yeo-DMN 23.9 % — *lower* than Pagani's PAIRID-DMN at 41 %. But the DMN-aligned cortical territory (Yeo-DMN + DorsAttn + Subcortical) gets 54.5 % of Whitesell-DMN mass, well above Pagani's 41 % on Yeo-DMN alone. Interpretation: HOMER preserves Whitesell's broad DMN at the cortical-territory level; Yeo-7 fragments that territory across labels because Schaefer-17 places PPC in DorsAttn and hippocampus has no cortical label. Not a HOMER failure — two valid definitions of "mouse DMN" partitioning differently. We chose NOT to add a `whitesell_dmn` anchor pack because forcing PPC into Yeo-DMN would override the Yeo/Krienen 2011 consensus.
 
-### Hodge 2019 cortical layer markers (informative null)
+### Hodge 2019 cortical layer markers
 
-Tested CUX1, CUX2, SATB2 (L2/3), RORB (L4), FEZF2 (L5), TBR1, FOXP2 (L6). Cross-species translation null for 6 of 7 *at parcel resolution*; only RORB significant (r = +0.049, empirical p = 0.016) — because L4 is concentrated in primary sensory cortices (V1/S1/A1) which HOMER anchors strongly bind, so it gets translated as an area signal not a laminar one. Cortex-only refinement doesn't help, but the **lobe-aggregated** test does pick up signal: at Yeo-network resolution the broad upper-layer (r = +0.92, p = 0.001) and deep-layer (r = +0.71, p = 0.049) marker gradients translate (n = 8, so suggestive rather than definitive). **The resolution boundary**: HOMER preserves the broad area/network-level gradient of layer-marker expression but does NOT preserve fine within-area laminar structure at parcel resolution, because the Garin anchors are area-level, not layer-level. Showcase: `notebooks/06_hodge_2019_layer_markers.ipynb`.
+Tested CUX1, CUX2, SATB2 (L2/3), RORB (L4), FEZF2 (L5), TBR1, FOXP2 (L6). Six of seven translate at parcel resolution (mean r = +0.119, mean null r ≈ 0): the three upper-layer markers at +0.083, +0.176 and +0.189, L4 at +0.090, L5 at +0.168, and one L6 marker at +0.108; the other L6 marker is not significant (r = +0.019, p = 0.25). The Schaefer-400 parcellation does not separate layers within an area, so this measures the area-level spatial distribution of these layer-marker genes, not within-area lamination. Showcase: `notebooks/06_hodge_2019_layer_markers.ipynb`.
 
 ### Pagani per-mouse-model (decoded, awaiting mask)
 

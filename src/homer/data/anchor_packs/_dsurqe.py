@@ -110,7 +110,9 @@ def mouse_parcels_in_dsurqe_region(
        subtree-membership check against those labels returns empty sets for
        most queries. Consuming them directly would first require a
        name-mapping table from pack names to the vote vocabulary (see
-       ``_paul_vote_bridge.py``).
+       ``_paul_vote_bridge.py``). For the quantitative live-vs-votes
+       comparison that backs this choice, see
+       ``experiments/dsurqe_lookup_crosscheck/``.
 
     Raises FileNotFoundError if the Beauchamp 2022 DSURQE atlas isn't
     present at ``data_external/MouseHumanTranscriptomicSimilarity/AMBA/data/``.

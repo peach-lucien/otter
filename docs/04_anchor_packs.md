@@ -14,7 +14,7 @@ This is *not* a generative method — packs encode what's already known about an
 
 All citations have been verified against the literature (Consensus search, May 2026). Citation count + journal links provided per pack data sheet below.
 
-The **"In recommended π?"** column is authoritative against `src/homer/data/anchor_packs/registry.py` — the single source of truth for which packs are composed into `pi_fc_plus_SC_with_all_packs.npy`. As of 2026-05-21 **all 15 packs are in the recommended composition** (26 region-anchor entries): a multi-benchmark comparison showed the full set wins the TransBrain region-level homology benchmark decisively and ties for best on Beauchamp. A few packs carry an honest Beauchamp-metric trade-off (flagged in their data sheets below); they are kept because the broader evidence favours inclusion.
+The **"In recommended π?"** column is authoritative against `src/homer/data/anchor_packs/registry.py` — the single source of truth for which packs are composed into `pi_fc_plus_SC_with_all_packs.npy`. **All 15 packs are in the recommended composition** (26 region-anchor entries): a multi-benchmark comparison showed the full set wins the TransBrain region-level homology benchmark decisively and ties for best on Beauchamp. A few packs carry an honest Beauchamp-metric trade-off (flagged in their data sheets below); they are kept because the broader evidence favours inclusion.
 
 | pid range | Pack | In recommended π? | Primary reference |
 |---|---|---|---|

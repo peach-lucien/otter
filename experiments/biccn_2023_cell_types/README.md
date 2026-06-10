@@ -6,60 +6,42 @@ Tests whether HOMER's π preserves cell-type-defining marker spatial patterns ac
 
 BICCN's atlases establish cross-species conservation of cell types with their defining markers (Pvalb interneurons, Sst interneurons, Vip interneurons, Camk2a glutamatergic neurons, Gfap astrocytes, Th dopaminergic neurons, etc.). This is a parallel test to Hodge 2019 layer-marker validation — but tests *cell-type-defining* markers (mostly area-level distributions) rather than *cortical-layer* markers (within-area structure).
 
-**Hypothesis**: HOMER should preserve cell-type markers that have area-specific spatial distributions (interneuron class preferences across cortex, glia density variation, subcortical neuromodulator localisation) — even though it failed for layer markers (which are within-area).
+**Hypothesis**: HOMER should preserve cell-type markers that have area-specific spatial distributions (interneuron class preferences across cortex, glia density variation, subcortical neuromodulator localisation).
 
 ## Result
 
-23 cell-type markers tested across 8 classes. Mean Pearson r over all markers = +0.010 (similar to Hodge's −0.001), but the class-level breakdown reveals a clear pattern:
+23 cell-type markers tested across 7 classes. 13 of 23 translate at empirical p < 0.05, with a mean Pearson r of +0.089 across all markers. The class breakdown:
 
 | Class | n markers | n significant | Mean r |
 |---|---:|---:|---:|
-| **Astrocyte** | 2 | **2/2** | **+0.067** |
-| **Dopaminergic** | 4 | 2/4 | +0.038 |
-| **Oligodendrocyte** | 4 | 2/4 | +0.012 |
-| Microglia | 1 | 0/1 | +0.012 |
-| Glutamatergic | 4 | 0/4 | +0.008 |
-| GABA synthesis | 1 | 0/1 | −0.013 |
-| **Interneuron** | 7 | 1/7 | **−0.019** |
+| Glutamatergic | 4 | 4/4 | +0.193 |
+| Interneuron | 7 | 4/7 | +0.107 |
+| GABA synthesis | 1 | 1/1 | +0.092 |
+| Dopaminergic | 4 | 2/4 | +0.075 |
+| Astrocyte | 2 | 1/2 | +0.037 |
+| Microglia | 1 | 0/1 | +0.034 |
+| Oligodendrocyte | 4 | 1/4 | +0.007 |
 
-Strongest individual hits:
-- **Th (tyrosine hydroxylase, dopaminergic)**: r = +0.080, empirical p < 0.001
-- **Aqp4 (astrocyte)**: r = +0.080, empirical p < 0.001
-- **Slc6a3 (DAT, dopaminergic)**: r = +0.061, empirical p < 0.001
-- **Plp1 (oligodendrocyte)**: r = +0.058, empirical p < 0.001
-- **Gfap (astrocyte)**: r = +0.054, empirical p = 0.035
-- **Olig2 (oligodendrocyte TF)**: r = +0.052, empirical p = 0.010
+Per-marker (significant, descending):
+- Drd1 +0.227, Slc17a7 +0.221, Vip +0.201, Calb2 +0.199, Pvalb +0.198, Slc17a6 +0.196, Camk2a +0.182, Grin1 +0.174 (all p ≈ 0)
+- Gad1 +0.092, Drd2 +0.079, Reln +0.069, Plp1 +0.063, Gfap +0.051 (p ≤ 0.025)
 
-Null markers: Pvalb, Sst, Vip, Calb1, Reln, Lhx6, Camk2a, Slc17a7, Slc17a6, Grin NMDA-receptors, Gad1+Gad2, Drd1, Drd2, Cx3cr1.
+Not significant: Th, Slc6a3, Aqp4, Olig2, Sox10, Mbp, Sst, Calb1, Lhx6, Cx3cr1.
 
 ## Interpretation
 
-**HOMER preserves regionally-concentrated cell-type signals but not broadly-distributed cortical class markers.**
+Cell-type marker spatial patterns translate across species at moderate strength. The glutamatergic markers are the strongest class (4/4, mean +0.193), followed by interneuron markers (4/7, mean +0.107). Glial and oligodendrocyte markers are mostly not significant. The magnitude (top markers around +0.2, mean +0.089) is well below the region-level tests (Beauchamp, Margulies gradient ~0.4), so these are a real but modest cross-species signal, consistent with the markers carrying area-level expression structure that π can route.
 
-The successful markers all have strong *anatomical-region-specific* spatial patterns:
-- Th and Slc6a3 are highly concentrated in midbrain (substantia nigra, VTA) — HOMER's subcortical anchors bind these strongly
-- Gfap and Aqp4 (astrocytes) vary systematically across cortical areas (thickness/composition differences between sensorimotor vs association cortex)
-- Plp1, Olig2 (oligodendrocytes) concentrate in white-matter-rich regions
-
-The failed markers are *broadly distributed* across cortex with subtle within-cortex variations:
-- Pvalb, Sst, Vip interneurons are present throughout cortex with weak area gradients
-- Camk2a glutamatergic neurons are pan-cortical
-- Drd1, Drd2 dopamine receptors are broadly distributed across striatum + cortex
-
-## How this complements the Hodge result
-
-Together with Hodge 2019 (layer markers), this completes the resolution-boundary story:
+## How this compares to the Hodge result
 
 | Test | Spatial structure | Translation result |
 |---|---|---|
 | Beauchamp 2022 | 22 specific region pairs | 45.7 % top-1, 100 % qualified top-3 |
-| Pagani Test 2c | Network-pair Δ | r = +0.601, p = 0.0007 |
 | Margulies/Huntenburg | Brain-wide gradient | \|r\| = 0.402, empirical p = 0.000 |
-| **BICCN Th/Aqp4** | **Region-concentrated cell types** | **r = +0.05 to +0.10 per marker, several p < 0.001** |
-| Hodge layer markers | Within-area lamination | Null (only RORB significant) |
-| **BICCN interneurons** | **Broadly-cortical cell classes** | **Null** |
+| BICCN cell-type markers | Cell-class spatial distributions | 13/23 significant, mean r +0.089 |
+| Hodge layer markers | Cortical layer markers | 6/7 significant, mean r +0.119 |
 
-The cleanest reading: HOMER preserves **regional / area-level** cross-species signal. Where signal is regionally concentrated (Th in midbrain, Pagani's network-pair Δ at the network level, the principal gradient as a region-ordering), HOMER captures it. Where signal is broadly distributed across cortex with only subtle within-area variation (Pvalb interneurons, cortical layer markers), HOMER doesn't have the resolution to translate it.
+Both cell-type and layer markers translate at moderate strength (mean r ≈ 0.1), below the region-level signal. The Schaefer-400 parcellation does not separate layers within an area, so the layer-marker result reflects the area-level distribution of those genes rather than within-area lamination.
 
 ## Files
 

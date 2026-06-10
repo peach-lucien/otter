@@ -24,10 +24,10 @@ On Beauchamp 2022's external 22-pair gene-expression benchmark:
 |---|---:|
 | Parcel-level top-1 | **39 %** (3.3× over the strict baseline) |
 | Region-level qualified top-3 | **100 %** |
-| Bootstrap argmax stability (40 subject resamples) | **97.8 %** |
+| Bootstrap argmax stability (40 subject resamples) | **98.2 %** |
 | z-score vs permuted-anchor null | **+17.8** |
 
-Independent third-party validation against **twelve cross-species papers** confirms HOMER preserves cross-species signal at the **regional / area / network level** — Pagani 2026 autism subtypes (r = +0.60), Margulies/Huntenburg principal gradient, Coletta 2020 resting-state networks, BICCN region-concentrated cell types, ENIGMA cross-disorder, Fulcher 2019 multimodal gradient, Whitesell 2021 DMN — and it passes two negative-control / falsification tests (Balsters 2020 frontal-cortex divergence, Buckner & Krienen 2013 tethering) and a head-to-head benchmark against the TransBrain 2025 sibling method.
+Independent third-party validation against **twelve cross-species papers** confirms HOMER preserves cross-species signal at the **regional / area / network level** — Pagani 2026 autism subtypes (r = +0.60), Margulies/Huntenburg principal gradient, Coletta 2020 resting-state networks, Fulcher 2019 multimodal gradient, Whitesell 2021 DMN — and it passes two negative-control / falsification tests (Balsters 2020 frontal-cortex divergence, Buckner & Krienen 2013 tethering) and a head-to-head benchmark against the TransBrain 2025 sibling method.
 
 Multi-source trust map: 31 % of mouse parcels are `anchored_and_validated`, 13 % `anchored_only`, 24 % `validated_only`, 13 % `structural`, 20 % `low_evidence`.
 
@@ -107,8 +107,7 @@ We solve a **Fused Gromov-Wasserstein optimal transport** problem (POT's `entrop
 
 HOMER captures cross-species correspondence at the **regional / area / network** level. It is **not** trustworthy — or is untested — for:
 
-- **Broadly-distributed cortical class markers** (e.g. Pvalb / Sst / Vip interneuron gradients) — not preserved across species by the mapping.
-- **Within-area lamination** (Hodge 2019 cortical-layer markers) — below HOMER's resolution.
+- **Fine molecular detail is weaker than region-level signal.** Cell-type markers (BICCN, 13/23 significant) and cortical layer markers (Hodge, 6/7 significant) translate, but only moderately — r ≈ 0.1–0.2, against ≈ 0.4 for the principal gradient and region-level tests. Treat gene-spatial predictions as suggestive, not quantitative.
 - **Disorder-specific signal** — predictions for autism vs schizophrenia vs ADHD correlate at r > 0.97; HOMER captures a generic psychiatric perturbation geometry, not disorder-specific biology.
 - **Millimetre-level parcel claims** — per-parcel argmax distances are 25–45 mm even in well-anchored regions; treat results as region-level.
 - **Unsupervised recovery** — held-out region CV recovers only 3.4 % top-1, so FC + SC alone don't encode reliable correspondences. The headline numbers come from anchor supervision, and the 100 % pack-anchored top-1 is largely **by construction** (anchors match the validation sets).

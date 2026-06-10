@@ -243,11 +243,10 @@ def main(args):
 
     # ---- Mouse side: parcel -> DSURQE label -> Beauchamp region membership
     #
-    # NB: an attempted v2 dispatch (read Paul's pre-computed
-    # `region_vote_ss_dsq` column instead of live atlas lookup) was
-    # reverted 2026-06-09 because Paul's vote vocabulary uses different
-    # region names than the live atlas (Caudoputamen vs striatum,
-    # American vs British spelling, etc.). See _dsurqe.py docstring.
+    # NB: regions are resolved via the live DSURQE atlas volume, not the
+    # parcel table's precomputed `region_vote_ss_dsq` labels — the vote
+    # vocabulary uses different region names than the tree (striatum vs
+    # Caudoputamen, British vs American spelling, etc.). See _dsurqe.py.
     name_to_dsurqe_labels = parse_dsurqe_tree(EXT / "AMBA/data/DSURQE_tree.json")
     parcel_dsurqe = assign_dsurqe_labels(
         M, EXT / "AMBA/data/imaging/DSURQE_CCFv3_labels_200um.mnc",

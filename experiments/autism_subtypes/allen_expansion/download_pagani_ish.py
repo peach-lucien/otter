@@ -159,7 +159,9 @@ def read_ish_grid(zip_path: Path, variable: str = "energy") -> np.ndarray:
         big = msb is not None and msb.group(1).strip().lower() in {"true", "1"}
         np_dtype = np.dtype(dtype).newbyteorder(">" if big else "<")
         buf = z.read(raw)
-        return np.frombuffer(buf, dtype=np_dtype).reshape(shape).astype(np.float32)
+        # MetaImage (.mhd/.raw) is column-major: reshape with order="F"
+        # (NumPy's default C-order would mis-order the volume).
+        return np.frombuffer(buf, dtype=np_dtype).reshape(shape, order="F").astype(np.float32)
 
 
 # ---------------------------------------------------------------------------

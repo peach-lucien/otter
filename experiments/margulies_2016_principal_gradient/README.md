@@ -41,11 +41,11 @@ or the network-aggregated level.
 
 ### Routing note
 
-An earlier version of this experiment routed the gradient with an
-un-normalised `mouse_grad @ π` and scored only r = 0.144. That product
-conflates the translated gradient with π's per-column mass (which varies
-widely under the semirelaxed coupling). Routing instead as a **transport-
-weighted average** —
+The gradient is routed as a **transport-weighted average**. The bare
+un-normalised `mouse_grad @ π` conflates the translated gradient with π's
+per-column mass (which varies widely under the semirelaxed coupling) and
+scores only r = 0.144; normalising by the column mass removes that confound.
+Routing as —
 
     predicted_h[j] = Σ_i mouse_grad[i]·π[i,j] / Σ_i π[i,j]
 

@@ -1,14 +1,11 @@
 """Reproducible end-to-end pipeline for the recommended HOMER model.
 
 The "recommended model" is the production FC+SC coupling supervised with the
-five default region-anchor packs (``pi_fc_plus_SC_with_all_packs.npy``). It is
+default region-anchor packs (``pi_fc_plus_SC_with_all_packs.npy``). It is
 the π most downstream queries and the GUI should use.
 
-Reproducing it from scratch previously meant running five scripts by hand, in
-the right order, from three different directories — and the multi-source trust
-step had no script at all (``compute_multisource_trust`` was orphaned, so the
-GUI silently fell back to "unknown" trust tiers). This orchestrator runs the
-whole chain in order:
+This orchestrator reproduces it from scratch, running the whole chain in order
+so the steps stay in sync (solve → compose → bootstrap → trust → GUI):
 
     solve      pipeline/04_solve_production.py
                  -> outputs/coupling/pi_fc_plus_SC.npy

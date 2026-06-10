@@ -18,8 +18,8 @@ gradient. Procedure:
      Laplacian → second eigenvector).
   2. Translate the mouse gradient through π as a **transport-weighted average**
        predicted_h[j] = Σ_i mouse_grad[i]·π[i,j] / Σ_i π[i,j]
-     (the un-normalised `mouse_grad @ π` used previously conflates the gradient
-     with π's per-column mass, which roughly trebled the noise — see history).
+     (the bare un-normalised `mouse_grad @ π` conflates the gradient with π's
+     per-column mass; normalising by the column mass removes that confound).
   3. Compare predicted vs observed human gradient via Pearson r, both at parcel
      level and aggregated to Schaefer-400 regions. Eigenvectors are
      sign-ambiguous, so |r| is the headline.

@@ -19,10 +19,10 @@ much we should trust its predicted human partner:
 The composite score is in [0, 1] (higher = more trustworthy).  Three tiers
 (high / medium / low) are assigned by quantile cuts.
 
-Note: an earlier version used "distance to nearest mouse anchor in mm" as
-component 2; that turned out to be uninformative because every mouse
-parcel is within ~4mm of *some* anchor (the mouse brain is small).
-Argmax mass concentration is a much better signal of model confidence.
+Note: "distance to nearest mouse anchor in mm" is deliberately not used as a
+component — it is uninformative because every mouse parcel is within ~4mm of
+*some* anchor (the mouse brain is small). Argmax mass concentration is a much
+better signal of model confidence.
 
 Usage::
 

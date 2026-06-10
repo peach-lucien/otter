@@ -95,7 +95,10 @@ def read_ish_grid(zip_path: Path, variable: str = "energy") -> np.ndarray:
         arr = np.frombuffer(z.read(raw), dtype=np_dtype)
         if arr.size != int(np.prod(shape)):
             raise ValueError(f"size mismatch in {zip_path.name}: header {shape} vs {arr.size}")
-        return arr.reshape(shape).astype(np.float32)
+        # MetaImage (.mhd/.raw) stores voxels column-major (first DimSize axis
+        # varies fastest), so the buffer must be reshaped with order="F".
+        # NumPy's default C-order would mis-order the volume.
+        return arr.reshape(shape, order="F").astype(np.float32)
 
 
 def find_or_download_gene(sds_id: int, work_dir: Path) -> Path | None:
@@ -154,11 +157,9 @@ def main():
     print(f"  {n_parcels} parcels (schema={schema})")
 
     # Read the gene list from an immutable master so re-runs are idempotent.
-    # Earlier versions overwrote mouse_gene_list.csv in place with the
-    # NaN-pruned subset, so a second run would read the already-shrunk list
-    # and could prune it further. The master is written once and never
-    # overwritten; the per-run output (mouse_gene_list.csv) is the pruned
-    # list that aligns 1:1 with mouse_genes.npy columns.
+    # The master is written once and never overwritten; the per-run output
+    # (mouse_gene_list.csv) is the NaN-pruned list that aligns 1:1 with the
+    # columns of mouse_genes.npy.
     GENE_LIST = DATA_EXT / "mouse_gene_list.csv"
     MASTER = DATA_EXT / "mouse_gene_list_master.csv"
     if MASTER.exists():

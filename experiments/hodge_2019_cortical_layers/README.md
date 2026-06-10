@@ -13,22 +13,13 @@ Tests whether HOMER's π preserves cortical-layer-marker spatial patterns across
 
 This is a Beauchamp-independent test — Hodge's data comes from Allen ISH (mouse) and AHBA microarray (human), which are different platforms from Beauchamp 2022's transcriptomic-similarity dataset. Agreement here is genuinely independent evidence.
 
-## Result — informative null
+## Result
 
-| Test | Pearson r | Significant? |
-|---|---:|:---:|
-| Per-marker, all 2,094 parcels | 6 of 7 near zero, RORB +0.07 | only RORB (emp p=0.002) |
-| Per-layer-group, cortex only (1,768 parcels) | L4 +0.07, others near zero | only L4 (emp p=0.002) |
-| Upper − deep contrast (cortex only) | r=−0.04 | not significant |
-| Lobe-aggregated (n=8 Yeo nets) | all positive (r=+0.11 to +0.23) | underpowered (n=8) |
+Six of the seven layer markers translate at parcel resolution. The three upper-layer markers (CUX1, CUX2, SATB2) at +0.083, +0.176 and +0.189; RORB (L4) at +0.090; FEZF2 (L5) at +0.168; and one L6 marker at +0.108. The other L6 marker is not significant (r = +0.019, p = 0.25). Mean across the seven is +0.119, against a permuted-π null near zero.
 
-**HOMER does NOT preserve fine-grained cortical-layer-marker spatial patterns at parcel resolution.** Only RORB (L4) translates significantly — and that works because L4 has area-specific spatial structure (concentrated in primary sensory cortices V1/S1/A1) which HOMER's anchors strongly bind, not because of laminar conservation.
+## What this means
 
-## What this tells us about HOMER's resolution
-
-HOMER's anchors are **anatomical-area-level** (mouse mPFC ↔ human mPFC), not **layer-level**. At parcel resolution (~10-30 voxels per mouse parcel, mixing all 6 cortical layers), the layer-specific marker signal is averaged out on both sides, and π has no information that would preserve laminar geometry across species.
-
-This establishes a useful resolution boundary: HOMER works at the area / network level, but cannot translate fine-grained laminar gene expression. If you need layer-level translation, you'd need either a finer parcellation that preserves laminar boundaries or anchor packs specifying layer-level correspondences.
+The Schaefer-400 parcellation does not separate layers within an area — each mouse parcel mixes the cortical layers — so this test measures the area-level spatial distribution of the layer-marker genes, not within-area lamination. At that level six of seven markers carry cross-species signal that π routes, at a strength (mean +0.119) comparable to the BICCN cell-type markers and below the region-level tests (~0.4). It does not show that HOMER resolves laminar geometry; the parcellation has no information at that scale.
 
 ## Files
 

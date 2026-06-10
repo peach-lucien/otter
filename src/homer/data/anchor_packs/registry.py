@@ -7,8 +7,8 @@ This module makes the registry canonical: every consumer imports
 the recommended composition can never silently disagree with itself again.
 
 The **recommended model** — ``outputs/coupling/pi_fc_plus_SC_with_all_packs.npy``
-— is composed from every pack flagged ``default=True`` below. As of 2026-05-21
-that is **all 15 packs** (26 region-anchor entries): a multi-benchmark
+— is composed from every pack flagged ``default=True`` below: **all 15 packs**
+(26 region-anchor entries). A multi-benchmark
 comparison showed that the full set wins the TransBrain literature-homology
 benchmark decisively and ties for best on Beauchamp, while a smaller set only
 ever wins Beauchamp narrowly by exploiting that benchmark's coarse validation

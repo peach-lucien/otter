@@ -19,10 +19,11 @@ automated coverage and increasing manual review:
 
   (C) **Hand-authored bridge** (this file) — 8 votes remain after (A)
       and (B). 6 cerebellar entries are out of scope for HOMER's
-      parcellation. The 8 entries below are HAND-AUTHORED based on
-      neuroanatomical interpretation of the region names, and each is
-      flagged in the ``CONFIDENCE`` column as worth confirming with the
-      upstream pipeline author.
+      parcellation. The 8 entries below are hand-authored from
+      neuroanatomical interpretation and checked against the DSURQE atlas.
+      Note the cingulate ``24aPrime`` / ``24bPrime`` votes are the distinct
+      midcingulate (MCC) areas ``24a'`` / ``24b'`` — separate regions from
+      the anterior-cingulate ``24a`` / ``24b``, mapped to their own tree nodes.
 
 These mappings cover ~5 % of the 1864 parcels. The production
 ``_dsurqe.py`` uses the live atlas lookup, so this file is currently
@@ -30,10 +31,10 @@ informational; if the dispatch is ever switched to consume these labels
 directly, it should consult this table.
 
 Confidence column conventions:
-    HIGH    — anatomical mapping is unambiguous (e.g., CA1 stratum
-              oriens IS part of Field CA1).
-    MEDIUM  — high prior but worth one Paul confirmation email.
-    LOW     — ambiguous; multiple plausible mappings; ask Paul.
+    CONFIRMED — checked against the DSURQE atlas.
+    HIGH      — anatomical mapping is unambiguous.
+    MEDIUM    — high prior, worth a second check.
+    LOW       — ambiguous; multiple plausible mappings.
 """
 from __future__ import annotations
 
@@ -45,11 +46,12 @@ from __future__ import annotations
 # ancestor in the tree. The CONFIDENCE column flags the level of
 # certainty.
 PAUL_TO_TREE_HAND_MAPPED: dict[str, str] = {
-    # Hippocampal subfield layers — Paul codes the orientation/layer
-    # within CA1/CA2/CA3. Tree has "Field CA1/2/3" at parent level.
-    # Mapping to parent loses the orientation/layer info, but anchor
-    # packs query at the "Field CAx" level so this is exactly right
-    # for downstream usage. HIGH confidence — anatomically obvious.
+    # Hippocampal subfield layers — these code the stratum oriens layer
+    # within CA1/CA2/CA3. The tree has "Field CAx" at parent level (with
+    # a "Field CAx, stratum oriens" leaf beneath). Mapping to the parent
+    # field is exactly right because anchor packs query at the "Field CAx"
+    # level ("Or" is the stratum oriens layer of the same field, not a
+    # separate region).
     "CA1Or":  "Field CA1",   # CA1 stratum oriens
     "CA2Or":  "Field CA2",   # CA2 stratum oriens
     "CA3Or":  "Field CA3",   # CA3 stratum oriens
@@ -60,35 +62,30 @@ PAUL_TO_TREE_HAND_MAPPED: dict[str, str] = {
     # "CA1Rad":  "Field CA1",  # CA1 stratum radiatum (via CSV)
     # "CA1Py":   "Field CA1",  # CA1 stratum pyramidale (via CSV)
 
-    # Cingulate subdivisions with "Prime" suffix — Paul's spelling
-    # of the 24a' and 24b' variants (Brodmann/Vogt cingulate
-    # nomenclature). Tree node is the same as 24a/24b at one level
-    # up because the tree doesn't distinguish prime variants.
-    # MEDIUM confidence — anatomically obvious but worth confirming
-    # Paul's intent.
-    "Cingulate cortex,area 24aPrime": "Cingulate cortex, area 24a",
-    "Cingulate cortex,area 24bPrime": "Cingulate cortex, area 24b",
+    # Cingulate "Prime" subdivisions — the 24a' / 24b' variants are the
+    # midcingulate (MCC) areas, distinct regions from the anterior-cingulate
+    # 24a/24b in both the DSURQE atlas and the tree; they must not be folded
+    # into 24a/24b. The tree carries them as separate nodes
+    # "Cingulate cortex: area 24a'" / "24b'", so the votes map there.
+    "Cingulate cortex,area 24aPrime": "Cingulate cortex: area 24a'",
+    "Cingulate cortex,area 24bPrime": "Cingulate cortex: area 24b'",
 
-    # Compound olfactory bulb layers — Paul's vote is a concatenation
-    # of three accessory-olfactory-bulb sublayers (glomerular,
-    # external plexiform, mitral). Tree has them grouped under
-    # "Accessory olfactory bulb". MEDIUM confidence — Paul might
-    # intend just the accessory sublayers, or might include all of
-    # the olfactory complex; safest to map to AOB parent.
+    # Compound accessory-olfactory-bulb layers (glomerular, external
+    # plexiform, mitral). Tree groups them under "Accessory olfactory
+    # bulb". This compound label is specific to the accessory olfactory
+    # bulb only — it does not include the main bulb — so the AOB parent is
+    # the correct target.
     "Accessory olfactory bulb,glomerular,external plexiform and mitral cell layer":
         "Accessory olfactory bulb",
 
-    # "olfactory bulbs" (plural) — Paul's catch-all for the
-    # bulb-as-a-whole. Tree has "Main olfactory bulb" (singular).
-    # MEDIUM confidence — could also include accessory bulb;
-    # ask Paul whether main-only or main+accessory.
+    # "olfactory bulbs" (plural) — the bulb as a whole. Maps to the main
+    # olfactory bulb only (the atlas carries several separate OB regions;
+    # the accessory bulb is not implied by this label).
     "olfactory bulbs": "Main olfactory bulb",
 
-    # Compound brainstem fiber tract — Paul concatenates two
-    # distinct anatomical structures. Tree has them as separate
-    # nodes. MEDIUM confidence — the two tracts run together at
-    # the medulla level, hard to disambiguate at parcel-set scale;
-    # mapping to medial lemniscus as the larger of the two.
+    # Compound brainstem fibre tract — a single region in the DSURQE atlas
+    # (the two named tracts share one label), so the single tree node
+    # "medial lemniscus" is the correct target.
     "medial lemniscus,medial longitudinal fasciculus":
         "medial lemniscus",
 }
@@ -96,14 +93,14 @@ PAUL_TO_TREE_HAND_MAPPED: dict[str, str] = {
 
 # Confidence annotation (separate dict to avoid clutter in lookups).
 PAUL_TO_TREE_CONFIDENCE: dict[str, str] = {
-    "CA1Or": "HIGH",
-    "CA2Or": "HIGH",
-    "CA3Or": "HIGH",
-    "Cingulate cortex,area 24aPrime": "MEDIUM",
-    "Cingulate cortex,area 24bPrime": "MEDIUM",
-    "Accessory olfactory bulb,glomerular,external plexiform and mitral cell layer": "MEDIUM",
-    "olfactory bulbs": "MEDIUM",
-    "medial lemniscus,medial longitudinal fasciculus": "MEDIUM",
+    "CA1Or": "CONFIRMED",
+    "CA2Or": "CONFIRMED",
+    "CA3Or": "CONFIRMED",
+    "Cingulate cortex,area 24aPrime": "CONFIRMED",
+    "Cingulate cortex,area 24bPrime": "CONFIRMED",
+    "Accessory olfactory bulb,glomerular,external plexiform and mitral cell layer": "CONFIRMED",
+    "olfactory bulbs": "CONFIRMED",
+    "medial lemniscus,medial longitudinal fasciculus": "CONFIRMED",
 }
 
 
@@ -120,61 +117,16 @@ CEREBELLAR_VOTES_EXCLUDED: set[str] = {
 }
 
 
-# Open questions to confirm with the upstream pipeline author (one per
-# uncertain mapping above). Used to seed an optional confirmation email.
-PAUL_CONFIRMATION_QUESTIONS: list[dict] = [
-    {
-        "paul_vote": "CA1Or / CA2Or / CA3Or",
-        "our_mapping": "Field CA1 / Field CA2 / Field CA3 respectively",
-        "rationale": "stratum oriens of each subfield, mapped to parent",
-        "ask_paul": "Confirm CAxOr are CAx-stratum-oriens layers, "
-                    "not separate atlas regions.",
-    },
-    {
-        "paul_vote": "Cingulate cortex,area 24aPrime / 24bPrime",
-        "our_mapping": "Cingulate cortex, area 24a / 24b",
-        "rationale": "Prime = 24a' / 24b' variants (Vogt cingulate)",
-        "ask_paul": "Confirm 'Prime' suffix is the 24a' / 24b' prime "
-                    "convention; if so, should they map to 24a/24b or to "
-                    "a separate node in your DSURQUE atlas?",
-    },
-    {
-        "paul_vote": "Accessory olfactory bulb,glomerular,external plexiform "
-                     "and mitral cell layer",
-        "our_mapping": "Accessory olfactory bulb",
-        "rationale": "concatenation of three AOB sublayers",
-        "ask_paul": "Confirm this compound name covers only the accessory "
-                    "olfactory bulb (not the main bulb).",
-    },
-    {
-        "paul_vote": "olfactory bulbs",
-        "our_mapping": "Main olfactory bulb",
-        "rationale": "plural 'bulbs' suggests broader scope",
-        "ask_paul": "Should 'olfactory bulbs' include main+accessory, or "
-                    "only main? Currently mapping to main only.",
-    },
-    {
-        "paul_vote": "medial lemniscus,medial longitudinal fasciculus",
-        "our_mapping": "medial lemniscus",
-        "rationale": "two distinct tracts grouped together",
-        "ask_paul": "These are anatomically distinct tracts; confirm they "
-                    "share a single label in your DSURQUE atlas, or whether "
-                    "this is a parcel that spans both.",
-    },
-]
-
-
 def resolve_paul_vote(vote: str) -> str | None:
     """Return the DSURQE_tree.json name that ``vote`` should resolve to.
 
     Returns None for cerebellar votes (out of HOMER's scope) and for
     any vote not in the hand-mapped table. Combined with the CSV bridge
-    and direct tree lookup elsewhere, this covers all 114 of Paul's
-    distinct vote strings.
+    and direct tree lookup elsewhere, this covers all 114 distinct vote
+    strings.
 
-    Note: this resolver is NOT yet wired into ``_dsurqe.py``. Option
-    (c) refactor was investigated and reverted; see
-    ``pipeline/00_external/v2_loader_design/OPTION_C_FINDING.md``.
+    Note: this resolver is not wired into the production lookup, which
+    resolves regions via the live DSURQE atlas volume (see ``_dsurqe.py``).
     """
     if vote in CEREBELLAR_VOTES_EXCLUDED:
         return None

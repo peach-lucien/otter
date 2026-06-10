@@ -135,7 +135,7 @@ def main(args):
     print(f"  {(mouse_dsurqe_labels > 0).sum()}/{len(mouse_dsurqe_labels)} "
           f"parcels assigned a DSURQE label")
 
-    # ---- Multi-source trust  (the previously-orphaned function)
+    # ---- Multi-source trust
     print("\nComputing multi-source trust map ...")
     out = compute_multisource_trust(
         M, H, pi,
