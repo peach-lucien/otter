@@ -49,6 +49,8 @@ The paper's cross-species link in **step 6** is by name: mouse-Somatomotor ↔ h
 
 **4/8 diagonal-argmax with mean 2.69× over null. Permuted-π null: 1.95/8 and 0.97×** — exactly chance, confirming the signal is structural.
 
+> **Fair-null confirmation (audit 2026-06-11, F-027).** Unlike the smooth-gradient tests, this discrete result **survives a spatially-fair null**: under a *mouse-parcel spin* (rotate the mouse networks on a sphere so they keep their spatial shape but change location, then re-aggregate π), the diagonal-argmax count drops to **mean 1.78/8** (95th pct 3/8) and the observed 4/8 beats it at **p=0.026**. So the mouse→human network correspondence is *specific*, not an artifact of spatial autocorrelation. (Run: `experiments/spatial_null_check/fair_nulls_discrete.py`.)
+
 Misses are interpretable: mouse visual cortex covers higher-order visual regions that Schaefer-17 places in DorsAttn; mouse HC routes to "Subcortical" because hippocampus *is* subcortical in cortical-only parcellations; Auditory is limited by Schaefer's narrow auditory label; BF/Olfactory has no clean cortical counterpart in Yeo-7. None of these are HOMER failures — they're Schaefer/Yeo definition limits.
 
 ## Robustness — Test 1b
