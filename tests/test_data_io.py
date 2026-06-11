@@ -55,7 +55,7 @@ def test_parse_t_table_rejects_wrong_header():
     t, ht = _build_t_ht()
     bad_ht = ["type", "numid", "pairid", "region", "subregion"]    # missing center+indices
     import pytest
-    with pytest.raises(ValueError, match="unexpected header"):
+    with pytest.raises(ValueError, match="unrecognised ht schema"):
         parse_t_table(t, bad_ht)
 
 
