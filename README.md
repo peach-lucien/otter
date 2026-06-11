@@ -22,7 +22,7 @@ On Beauchamp 2022's external 22-pair gene-expression benchmark:
 
 | Metric (recommended `pi_fc_plus_SC_with_all_packs.npy`) | Value |
 |---|---:|
-| Parcel-level top-1 | **39 %** (3.3× over the strict baseline) |
+| Parcel-level top-1 (weighted by n parcels) | **45.7 %** (50.6× over the permuted-anchor null; 0.9 % chance) |
 | Region-level qualified top-3 | **100 %** |
 | Bootstrap argmax stability (40 subject resamples) | **98.2 %** |
 | z-score vs permuted-anchor null | **+17.8** |
