@@ -2,7 +2,7 @@
 
 **Hom**ology **E**stimation across species via **R**egional optimal transport.
 
-A Python package that learns soft cross-species correspondences between mouse and human brain parcels using **Fused Gromov–Wasserstein optimal transport**, anchored on published homologue pairs.
+A Python package that learns probabilistic cross-species correspondences between mouse and human brain parcels using **Fused Gromov–Wasserstein optimal transport**, anchored on published homologue pairs.
 
 Output: a coupling matrix **π** of shape (1864 mouse parcels × 2094 human parcels) where `π[i, j]` is the model's estimated probability that mouse parcel *i* corresponds to human parcel *j*.
 
@@ -27,7 +27,9 @@ On Beauchamp 2022's external 22-pair gene-expression benchmark:
 | Bootstrap argmax stability (40 subject resamples) | **98.2 %** |
 | z-score vs permuted-anchor null | **+17.8** |
 
-Independent third-party validation against **twelve cross-species papers** confirms HOMER preserves cross-species signal at the **regional / area / network level** — Pagani 2026 autism subtypes (r = +0.60), Margulies/Huntenburg principal gradient, Coletta 2020 resting-state networks, Fulcher 2019 multimodal gradient, Whitesell 2021 DMN — and it passes two negative-control / falsification tests (Balsters 2020 frontal-cortex divergence, Buckner & Krienen 2013 tethering) and a head-to-head benchmark against the TransBrain 2025 sibling method.
+> **Read these honestly:** they are **anchor-supervised** numbers — the recommended π is supervised on published homologues, and the high top-1 is partly *by construction* (anchors overlap the validation set). Held-out region cross-validation (drop a region's anchor, then predict it) recovers **3.4 % top-1 (~7× chance)**, and zeroing the spatial (xyz) prior collapses top-1 to chance. FC+SC alone don't encode reliable correspondence — the *supervision* carries it. HOMER's value is a calibrated, anchor-informed coupling, not unsupervised homology discovery.
+
+Independent third-party validation against **twelve cross-species papers**, evaluated against **spatial-autocorrelation-preserving spin nulls** (a bar most cross-species analyses never set). HOMER's **discrete network/homology correspondences are specific and survive these nulls**: Coletta 2020 resting-state networks (6/10 diagonal-argmax, spin-null **p = 0.002**) and the Pagani 2026 network bridge (4/8, **p = 0.026**). It also passes two negative-control / falsification tests (Balsters 2020 frontal-cortex divergence, Buckner & Krienen 2013 tethering) and a head-to-head benchmark against the TransBrain 2025 sibling method. **Continuous spatial maps** — the Margulies/Huntenburg principal gradient and the Pagani subtype Δ-matrix — are *matched* but do **not** exceed spatial-autocorrelation expectation under a spin test (p ≈ 0.16–0.22); we report this rather than over-claim it. So HOMER's reliable scope is **categorical region/network correspondence**, not smooth-map translation.
 
 Multi-source trust map: 31 % of mouse parcels are `anchored_and_validated`, 13 % `anchored_only`, 24 % `validated_only`, 13 % `structural`, 20 % `low_evidence`.
 
@@ -105,9 +107,10 @@ We solve a **Fused Gromov-Wasserstein optimal transport** problem (POT's `entrop
 
 ## What HOMER does not do
 
-HOMER captures cross-species correspondence at the **regional / area / network** level. It is **not** trustworthy — or is untested — for:
+HOMER captures cross-species correspondence at the **categorical region / area / network** level. It is **not** trustworthy — or is untested — for:
 
-- **Fine molecular detail is weaker than region-level signal.** Cell-type markers (BICCN, 13/23 significant) and cortical layer markers (Hodge, 6/7 significant) translate, but only moderately — r ≈ 0.1–0.2, against ≈ 0.4 for the principal gradient and region-level tests. Treat gene-spatial predictions as suggestive, not quantitative.
+- **Smooth continuous maps (gradients, per-network Δ-matrices).** These are *matched* but do **not** exceed spatial-autocorrelation expectation under a spin test (Margulies principal gradient |r|=0.40, spin p≈0.16–0.22; Pagani subtype Δ-matrix r=0.55, spin p=0.19). Smooth maps are the hardest cross-species target — easy to match by smoothness, hard to prove specific. Use HOMER for *which network/region corresponds*, not for translating a continuous field.
+- **Fine molecular detail is weaker than region-level signal.** Cell-type markers (BICCN, 13/23 significant) and cortical layer markers (Hodge, 6/7 significant) translate, but only moderately — r ≈ 0.1–0.2. Treat gene-spatial predictions as suggestive, not quantitative.
 - **Disorder-specific signal** — predictions for autism vs schizophrenia vs ADHD correlate at r > 0.97; HOMER captures a generic psychiatric perturbation geometry, not disorder-specific biology.
 - **Millimetre-level parcel claims** — per-parcel argmax distances are 25–45 mm even in well-anchored regions; treat results as region-level.
 - **Unsupervised recovery** — held-out region CV recovers only 3.4 % top-1, so FC + SC alone don't encode reliable correspondences. The headline numbers come from anchor supervision, and the 100 % pack-anchored top-1 is largely **by construction** (anchors match the validation sets).
