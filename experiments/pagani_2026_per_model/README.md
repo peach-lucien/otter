@@ -26,13 +26,22 @@ subtype match the human subtype Pagani actually observed?*
 4. **Subtype translation through π.** Each subtype's mouse network signature
    (Pagani ED Fig 1) is routed through π to human-parcel space and aggregated to
    human networks, then compared to the observed human subtype pattern (Fig 4e).
-   **Result (recommended π `pi_fc_plus_SC_with_all_packs.npy`): hyper is
-   subtype-specific, hypo is not.** Predicted-hyper correlates with observed-hyper
-   (r = +0.351) better than with observed-hypo (−0.254). Predicted-hypo does **not**
-   match observed-hypo (−0.133) and leans toward observed-hyper (+0.205). So at
-   network resolution HOMER recovers the *hyper* subtype cross-species but not the
-   *hypo* subtype — consistent with the Direction 1 spatial result and the recurring
-   hypo-side weakness.
+   **Result (recommended π): apparent "hyper translates, hypo doesn't" — but the
+   specificity is NOT inferential (do not headline it).** Predicted-hyper correlates
+   with observed-hyper (r = +0.351) better than observed-hypo (−0.254); predicted-hypo
+   does not match observed-hypo (−0.133).
+   > **⚠️ Critical caveat (audit 2026-06-11, F-025).** The "subtype-specific" flag here
+   > is just `r(pred_hyper,obs_hyper) > r(pred_hyper,obs_hypo)` — not a significance
+   > test. A **permuted-π null satisfies "hyper-specific" in 50/50 trials** (i.e. a
+   > random coupling reproduces it ~100 % of the time), and the observed r=0.351 sits
+   > *below* the null mean. This is the project's own confounded **"Test 2a" absolute-
+   > correlation approach**: it is forced by the magnitude structure of the observed
+   > human maps (hyper network intensities are large, 60–244; hypo are tiny, 0.5–6), so
+   > any non-negative routing correlates with hyper and not hypo *by construction*. **So
+   > this does NOT demonstrate cross-species hyper translation.** The valid, magnitude-
+   > cancelling result is the contrast-based **Test 2b/2c** in `../autism_subtypes/`
+   > (still only "partial" — see F-007/F-016). Treat this per-model subtype result as
+   > illustrative of the pipeline, not as evidence.
 
    > **Note (2026-06-11 audit):** an earlier run of this experiment used the *base*
    > coupling `pi_fc_plus_SC.npy` and reported both subtypes as specific
