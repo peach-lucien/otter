@@ -2,7 +2,9 @@
 
 ## What HOMER is
 
-HOMER (**Hom**ology **E**stimation across species via **R**egional optimal transport) is a Python package that learns soft probabilistic correspondences between mouse and human brain parcels. The output is a coupling matrix **π** of shape (1864 mouse parcels × 2094 human parcels) where `π[i, j]` is interpretable as "probability that mouse parcel *i* corresponds to human parcel *j*".
+HOMER (**Hom**ology **E**stimation across species via **R**egional optimal transport) is a Python package that learns probabilistic correspondences between mouse and human brain parcels. The output is a coupling matrix **π** of shape (1864 mouse parcels × 2094 human parcels) where `π[i, j]` is interpretable as "probability that mouse parcel *i* corresponds to human parcel *j*".
+
+> **Note on sharpness and coverage (audit 2026-06-11).** At the production regularisation (ε=0.005) the coupling is **sharp/peaked, not broadly soft**: ~67 % of mouse rows place essentially all mass on a single human parcel (median effective targets ≈ 1; an intended low-entropy regime, tunable via ε — raising ε softens it). Because the human marginal is free (semirelaxed FGW), the coupling maps the mouse atlas onto a **subset** of human parcels: ~53 % of human parcels receive negligible mass, so reverse (human→mouse) queries have no source for about half of human parcels. See `_audit/FINDINGS_LOG.md` F-014/F-015.
 
 The method is **Fused Gromov-Wasserstein optimal transport** (POT's `entropic_semirelaxed_fused_gromov_wasserstein`), supervised by published mouse↔human anchor pairs.
 

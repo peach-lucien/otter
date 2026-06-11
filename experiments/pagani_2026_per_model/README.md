@@ -54,9 +54,15 @@ come from Pagani's own published matrices.
 ## Direction 1 result — parcel-resolution spatial routing (occurrence maps)
 
 `03_spatial_subtype_routing.py` drives the mouse side from the actual Fig 1d
-occurrence maps (aggregated to the 13 conserved regions via a verified Allen
+occurrence maps (aggregated to the 13 conserved regions via an Allen
 region-name bridge; 1,052/1,864 parcels matched) instead of the 9-network
-matrices. Finding, reported honestly:
+matrices. **Bridge caveat (audit):** the AMBA↔CCFv3 transform was verified and
+the bridge is anatomically valid, but spatially imprecise — name-matched parcels
+fall inside the corresponding Pagani mask 85–94 % of the time for cortex but only
+61–77 % subcortically and **30 % for amygdala** (boundary/definition differences;
+`_audit/FINDINGS_LOG.md` F-013). The contrast p-value here also rides a strongly
+negative permuted-π null (F-016), so treat this routing as exploratory. Finding,
+reported honestly:
 
 - **Hyper subtype translates cross-species** (pred-hyper ↔ obs-hyper r=+0.78 vs
   obs-hypo −0.57).

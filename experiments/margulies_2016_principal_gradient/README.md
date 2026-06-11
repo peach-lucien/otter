@@ -30,7 +30,7 @@ clear of the permuted-π null. Combined with the other validations:
 
 | Test | Granularity | \|r\| | Status |
 |---|---|---:|:---:|
-| Pagani Test 2c | Network-pair Δ (36 elements) | +0.601 | Strong |
+| Pagani Test 2c | Network-pair Δ (36 elements) | +0.55 (leverage-driven; Spearman n.s.) | Partial |
 | **Margulies/Huntenburg gradient** | **Brain-wide ordering** | **0.402** | **Strong** |
 | Fulcher 2019 T1w:T2w → myelin | Cortical region | +0.373 | Strong |
 | Hodge layer markers | Within-area lamination | ~0 | Null |
