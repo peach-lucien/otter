@@ -26,9 +26,20 @@ subtype match the human subtype Pagani actually observed?*
 4. **Subtype translation through π.** Each subtype's mouse network signature
    (Pagani ED Fig 1) is routed through π to human-parcel space and aggregated to
    human networks, then compared to the observed human subtype pattern (Fig 4e).
-   **Result: subtype-specific in both directions** — predicted-hyper correlates
-   with observed-hyper (r ≈ +0.52) far better than with observed-hypo (−0.40);
-   predicted-hypo with observed-hypo (+0.25) better than observed-hyper (−0.28).
+   **Result (recommended π `pi_fc_plus_SC_with_all_packs.npy`): hyper is
+   subtype-specific, hypo is not.** Predicted-hyper correlates with observed-hyper
+   (r = +0.351) better than with observed-hypo (−0.254). Predicted-hypo does **not**
+   match observed-hypo (−0.133) and leans toward observed-hyper (+0.205). So at
+   network resolution HOMER recovers the *hyper* subtype cross-species but not the
+   *hypo* subtype — consistent with the Direction 1 spatial result and the recurring
+   hypo-side weakness.
+
+   > **Note (2026-06-11 audit):** an earlier run of this experiment used the *base*
+   > coupling `pi_fc_plus_SC.npy` and reported both subtypes as specific
+   > (hyper +0.52, hypo +0.25). That was an artifact of the wrong π — the base
+   > point-anchor coupling *before* the region-anchor packs. Under the recommended
+   > `_with_all_packs` coupling the hypo subtype is **not** specific. See
+   > `_audit/FINDINGS_LOG.md` F-001/F-005.
 
 This deliberately does **not** depend on decoding the 1,491 features to voxels
 (not robustly possible — see the validation note); the subtype network signatures
@@ -47,24 +58,29 @@ occurrence maps (aggregated to the 13 conserved regions via a verified Allen
 region-name bridge; 1,052/1,864 parcels matched) instead of the 9-network
 matrices. Finding, reported honestly:
 
-- **Hyper subtype translates cross-species** (pred-hyper ↔ obs-hyper r=+0.37 vs
-  obs-hypo −0.32).
-- **Hypo subtype does NOT** (pred-hypo ↔ obs-hypo −0.25; it actually leans toward
-  obs-hyper +0.28).
+- **Hyper subtype translates cross-species** (pred-hyper ↔ obs-hyper r=+0.78 vs
+  obs-hypo −0.57).
+- **Hypo subtype does NOT** (pred-hypo ↔ obs-hypo −0.50; it actually leans toward
+  obs-hyper +0.69).
+
+(Values under the recommended `_with_all_packs` coupling; the base-π run gave the
+weaker +0.37/−0.25.)
 
 This is consistent with the recurring "hypo is the weak side" theme in the
 autism_subtypes tests, and has a clear methodological cause: the occurrence maps
 are **unsigned consistency counts** (0–5), not signed connectivity Δ, so they
 can't carry the hypo subtype's direction. The signed per-model degree-centrality
 NIfTIs (requested in `email_draft_per_model_nifti.md`) are what a clean
-parcel-resolution hypo translation needs. (The signed *network* matrices in
-`01_per_model_clustering.py` do recover both subtypes — see that result.)
+parcel-resolution hypo translation needs. (Under the recommended π, the signed
+*network* matrices in `01_per_model_clustering.py` also recover **hyper but not
+hypo** — so the hypo-side weakness is consistent across both routings, not a
+quirk of the occurrence maps alone.)
 
 ## Files
 
 | File | What |
 |---|---|
-| `01_per_model_clustering.py` | Clean Fig 1c → verified subtype split → LOO membership → π subtype translation (signed networks; both subtypes specific) |
+| `01_per_model_clustering.py` | Clean Fig 1c → verified subtype split → LOO membership → π subtype translation (signed networks; hyper specific, hypo not, under recommended π) |
 | `03_spatial_subtype_routing.py` | Occurrence-map → conserved-region → π routing (parcel resolution; hyper specific, hypo not) |
 | `02_plot.py` | 3-panel figure for `01` |
 | `DATA_VALIDATION_2026-06-10.md` | Ingest/validation of the shared data package |

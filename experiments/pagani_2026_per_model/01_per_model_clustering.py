@@ -51,7 +51,7 @@ st = import_module("04_subtype_translation")
 ncv = import_module("01_network_crossvalidation")
 
 CLEAN_CSV = Path(DATA_DIR) / "pagani" / "sorted_etiology_by_feature_matrix.csv"
-PI_PATH = ROOT / "outputs" / "coupling" / "pi_fc_plus_SC.npy"
+PI_PATH = ROOT / "outputs" / "coupling" / "pi_fc_plus_SC_with_all_packs.npy"
 
 # Pagani's hierarchical-clustering row split (Fig 1c): first 9 rows are the
 # hyperconnectivity subtype, the remaining 11 the hypoconnectivity subtype.

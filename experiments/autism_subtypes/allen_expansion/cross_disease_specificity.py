@@ -97,7 +97,7 @@ def main():
     # Load HOMER expanded matrix + metadata
     expr = np.load(ROOT / "experiments/autism_subtypes/allen_expansion/pagani_mouse_expr.npy")
     meta = pd.read_csv(ROOT / "experiments/autism_subtypes/allen_expansion/pagani_gene_list_resolved.csv")
-    pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC.npy")
+    pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs" / "anndata"))
     print(f"\nHOMER expanded matrix: {expr.shape}")
 

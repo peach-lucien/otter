@@ -142,7 +142,7 @@ def main():
     print("\nStep 1: building HOMER-translated templates from Pagani mouse matrices...")
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs" / "anndata"))
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs" / "anndata"))
-    pi = np.load(str(ROOT / "outputs" / "coupling" / "pi_fc_plus_SC.npy"))
+    pi = np.load(str(ROOT / "outputs" / "coupling" / "pi_fc_plus_SC_with_all_packs.npy"))
 
     from importlib import import_module
     st = import_module("04_subtype_translation")

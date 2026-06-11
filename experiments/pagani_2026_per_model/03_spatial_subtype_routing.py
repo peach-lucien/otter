@@ -122,7 +122,7 @@ def main():
 
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
-    pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC.npy")
+    pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")
     assign = parcel_to_region(M.var)
     print(f"\nmouse parcels matched to conserved regions: "
           f"{int((assign != '(none)').sum())}/{len(assign)}")
