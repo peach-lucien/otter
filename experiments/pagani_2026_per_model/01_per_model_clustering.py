@@ -1,22 +1,17 @@
-"""Per-mouse-model subtype translation through HOMER's π  (CORRECTED, 2026-06-10).
+"""Per-mouse-model subtype translation through HOMER's π.
 
-This supersedes the earlier version of this script, which relied on a
-biological-prior guess for the hyper/hypo subtype of each model — a prior that
-turned out to be **inverted** (it labelled Fmr1/Chd8/Tsc2 as hypo when they are
-hyper). See `DATA_VALIDATION_2026-06-10.md`.
-
-What changed now that the Gozzi lab shared the clean data
-(`data_crossspecies/pagani/`):
+The per-model hyper/hypo subtype labels come from the Gozzi lab's clean data
+(`data_crossspecies/pagani/`); see `DATA_VALIDATION_2026-06-10.md`.
 
   1. The clean Fig 1c matrix `sorted_etiology_by_feature_matrix.csv`
-     (20 models × 1,491 voxelwise weighted-degree-centrality features) replaces
-     the Excel-corrupted MOESM6 load — no more outlier masking.
+     (20 models × 1,491 voxelwise weighted-degree-centrality features) is loaded
+     directly — no outlier masking.
 
-  2. The per-model hyper/hypo labels are no longer guessed. The CSV is *sorted*
-     by Pagani's hierarchical clustering, so the subtype split falls exactly on
-     row order: rows 1–9 = hyperconnectivity (n=9), rows 10–20 =
-     hypoconnectivity (n=11). We *verify* this from the data itself (mean global
-     connectivity > 0 for hyper, < 0 for hypo) rather than asserting it.
+  2. The CSV is *sorted* by Pagani's hierarchical clustering, so the subtype
+     split falls exactly on row order: rows 1–9 = hyperconnectivity (n=9),
+     rows 10–20 = hypoconnectivity (n=11). We *verify* this from the data itself
+     (mean global connectivity > 0 for hyper, < 0 for hypo) rather than
+     asserting it.
 
 The translation itself (mouse subtype signature → human-parcel prediction via π)
 reuses the validated Test 2 machinery in `04_subtype_translation.py`. It does NOT

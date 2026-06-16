@@ -1,5 +1,5 @@
 """Apply a spatial-autocorrelation-preserving (spin) null to the parcel-level
-gradient validations (audit finding F-024).
+gradient validations.
 
 The experiments report significance against a *permuted-π* null, which destroys
 spatial autocorrelation and so over-states significance when the target is a
@@ -48,6 +48,41 @@ def _self_test(coords):
           % (s_indep["r_observed"], s_indep["p_spin"]))
 
 
+def _fulcher_spin():
+    """Fulcher panels are at Schaefer-400 region resolution, so they use the
+    400 region centroids (outputs/anndata/_schaefer_order.txt), not the parcel
+    coords. The map vectors are 401-long (index 0 is padding)."""
+    log = LOG / "fulcher_2019_gradient.json"
+    order = ROOT / "outputs/anndata/_schaefer_order.txt"
+    if not (log.exists() and order.exists()):
+        print("\nFulcher: log or _schaefer_order.txt missing — skip"); return {}
+    d = json.loads(log.read_text())
+    coords = np.array([[float(p[2]), float(p[3]), float(p[4])]
+                       for p in (ln.split("\t") for ln in order.read_text().splitlines())])
+
+    def vec(key):
+        v = np.array(d[key], dtype=float)
+        return v[1:401] if v.shape[0] == 401 else v
+
+    terr = vec("territory_mask") > 0.5
+    myelin = vec("myelin_region")
+    out = {}
+    for key, label in [("predicted_t1t2_region", "Fulcher Panel 1 (T1w:T2w → myelin)"),
+                       ("predicted_cytoarch_region", "Fulcher Panel 3 (cytoarch → myelin)")]:
+        pred = vec(key)
+        # restrict to the routed territory by NaN-masking outside it; spin_null
+        # spins all 400 regions and correlates over the finite (territory) entries.
+        a = np.where(terr, pred, np.nan)
+        b = np.where(terr, myelin, np.nan)
+        res = spin_null(a, b, coords, n_trials=1000, seed=0)
+        verdict = "survives" if res["p_spin"] < 0.05 else "does NOT survive"
+        print(f"\n{label}  (n={int(terr.sum())} regions)")
+        print(f"  observed |r| = {abs(res['r_observed']):.3f}")
+        print(f"  SPIN null p  = {res['p_spin']:.4f}  (spin |r| mean {res['null_abs_mean']:.3f}) → {verdict}")
+        out[label] = {"abs_r": abs(res["r_observed"]), "p_spin": res["p_spin"]}
+    return out
+
+
 def main():
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
     coords = H.var[["x", "y", "z"]].to_numpy(dtype=float)
@@ -55,6 +90,8 @@ def main():
 
     print("\nSpin-null self-test:")
     _self_test(coords)
+
+    fulcher = _fulcher_spin()
 
     out = {}
     for name, fname, akey, bkey in [
@@ -87,6 +124,7 @@ def main():
         out[name] = {"abs_r": abs(res["r_observed"]), "p_spin": res["p_spin"],
                       "spin_null_abs_mean": res["null_abs_mean"], "n": n_finite}
 
+    out.update(fulcher)
     out_path = LOG / "spin_test_gradients.json"
     out_path.write_text(json.dumps(out, indent=2))
     print(f"\nWrote {out_path}")

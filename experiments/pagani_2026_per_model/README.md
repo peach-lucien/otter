@@ -5,12 +5,9 @@ human, with each of the 20 mouse models placed on the hyper↔hypo axis. Frames 
 real biological question: *does the human ASD subtype HOMER predicts from a mouse
 subtype match the human subtype Pagani actually observed?*
 
-> **Rewritten 2026-06-10** after the Gozzi lab shared the clean data. The earlier
-> version PCA/KMeans-clustered the 20 models in the (Excel-corrupted) 1,491-feature
-> space and labelled subtypes from a biological prior that was **inverted**. Both
-> problems are now fixed. Background: [`DATA_VALIDATION_2026-06-10.md`](DATA_VALIDATION_2026-06-10.md).
+Background: [`DATA_VALIDATION_2026-06-10.md`](DATA_VALIDATION_2026-06-10.md).
 
-## What it does now
+## What it does
 
 1. **Loads the clean Fig 1c matrix** (`sorted_etiology_by_feature_matrix.csv`,
    20 models × 1,491 voxelwise weighted-degree-centrality features) — no outlier
@@ -30,25 +27,23 @@ subtype match the human subtype Pagani actually observed?*
    specificity is NOT inferential (do not headline it).** Predicted-hyper correlates
    with observed-hyper (r = +0.351) better than observed-hypo (−0.254); predicted-hypo
    does not match observed-hypo (−0.133).
-   > **⚠️ Critical caveat (audit 2026-06-11, F-025).** The "subtype-specific" flag here
+   > **⚠️ Critical caveat.** The "subtype-specific" flag here
    > is just `r(pred_hyper,obs_hyper) > r(pred_hyper,obs_hypo)` — not a significance
    > test. A **permuted-π null satisfies "hyper-specific" in 50/50 trials** (i.e. a
    > random coupling reproduces it ~100 % of the time), and the observed r=0.351 sits
-   > *below* the null mean. This is the project's own confounded **"Test 2a" absolute-
+   > *below* the null mean. This is the confounded **"Test 2a" absolute-
    > correlation approach**: it is forced by the magnitude structure of the observed
    > human maps (hyper network intensities are large, 60–244; hypo are tiny, 0.5–6), so
    > any non-negative routing correlates with hyper and not hypo *by construction*. **So
    > this does NOT demonstrate cross-species hyper translation.** The valid, magnitude-
    > cancelling result is the contrast-based **Test 2b/2c** in `../autism_subtypes/`
-   > (still only "partial" — see F-007/F-016). Treat this per-model subtype result as
+   > (still only "partial"). Treat this per-model subtype result as
    > illustrative of the pipeline, not as evidence.
 
-   > **Note (2026-06-11 audit):** an earlier run of this experiment used the *base*
-   > coupling `pi_fc_plus_SC.npy` and reported both subtypes as specific
-   > (hyper +0.52, hypo +0.25). That was an artifact of the wrong π — the base
+   > **Note:** the *base* coupling `pi_fc_plus_SC.npy` reports both subtypes as specific
+   > (hyper +0.52, hypo +0.25). That is an artifact of the wrong π — the base
    > point-anchor coupling *before* the region-anchor packs. Under the recommended
-   > `_with_all_packs` coupling the hypo subtype is **not** specific. See
-   > `_audit/FINDINGS_LOG.md` F-001/F-005.
+   > `_with_all_packs` coupling the hypo subtype is **not** specific.
 
 This deliberately does **not** depend on decoding the 1,491 features to voxels
 (not robustly possible — see the validation note); the subtype network signatures
@@ -65,13 +60,11 @@ come from Pagani's own published matrices.
 `03_spatial_subtype_routing.py` drives the mouse side from the actual Fig 1d
 occurrence maps (aggregated to the 13 conserved regions via an Allen
 region-name bridge; 1,052/1,864 parcels matched) instead of the 9-network
-matrices. **Bridge caveat (audit):** the AMBA↔CCFv3 transform was verified and
-the bridge is anatomically valid, but spatially imprecise — name-matched parcels
-fall inside the corresponding Pagani mask 85–94 % of the time for cortex but only
-61–77 % subcortically and **30 % for amygdala** (boundary/definition differences;
-`_audit/FINDINGS_LOG.md` F-013). The contrast p-value here also rides a strongly
-negative permuted-π null (F-016), so treat this routing as exploratory. Finding,
-reported honestly:
+matrices. **Bridge caveat:** the AMBA↔CCFv3 transform is anatomically valid, but
+spatially imprecise — name-matched parcels fall inside the corresponding Pagani
+mask 85–94 % of the time for cortex but only 61–77 % subcortically and **30 % for
+amygdala** (boundary/definition differences). The contrast p-value here also rides
+a strongly negative permuted-π null, so treat this routing as exploratory. Finding:
 
 - **Hyper subtype translates cross-species** (pred-hyper ↔ obs-hyper r=+0.78 vs
   obs-hypo −0.57).
@@ -115,19 +108,23 @@ Outputs:
 
 ## Showcase notebook
 
-[`notebooks/09_pagani_per_model_translation.ipynb`](../../notebooks/09_pagani_per_model_translation.ipynb) — interactive walkthrough of the corrected analysis (verified subtype split, LOO membership, π subtype-specificity, and the Direction 1 spatial-routing limit). Rewritten 2026-06-10; supersedes the earlier exploratory PCA/KMeans version.
+[`notebooks/09_pagani_per_model_translation.ipynb`](../../notebooks/09_pagani_per_model_translation.ipynb) — interactive walkthrough of the analysis (verified subtype split, LOO membership, π subtype-specificity, and the Direction 1 spatial-routing limit).
 
 ## To make this a real validation, we would need
 
-> **Status update 2026-06-10** — Gozzi lab shared a data package (now in
-> `data_crossspecies/pagani/`). Full ingest/validation in
-> [`DATA_VALIDATION_2026-06-10.md`](DATA_VALIDATION_2026-06-10.md). Net effect:
-> the **subtype-level** route is now unblocked, but the **per-model 1,491-feature**
-> route is *not* — the decode below was wrong.
+> The Gozzi lab shared a data package (now in `data_crossspecies/pagani/`). Full
+> ingest/validation in [`DATA_VALIDATION_2026-06-10.md`](DATA_VALIDATION_2026-06-10.md).
+> Net effect: the **subtype-level** route is unblocked, but the **per-model
+> 1,491-feature** route is *not*.
 
-1. ~~**Pagani's exact 1,491-feature definition** — DECODED as per-voxel global connectivity in `chd8_functional_template_mask_wo_cerebellum.nii.gz`~~ — **FALSIFIED (2026-06-10)**. The shared mask contains **10,111** voxels, not 1,491, and the `rsfMRI-global-local-connectivity` repo confirms the maps are voxelwise (≈10,111 values). The 1,491 Fig 1c columns are a *reduced/parcel-level* summary whose index→location mapping is still unknown. The earlier ~700 µm / "0.335 mm³ per voxel" reasoning was unfounded.
+1. **Pagani's exact 1,491-feature definition.** The shared mask
+   `chd8_functional_template_mask_wo_cerebellum.nii.gz` contains **10,111** voxels,
+   not 1,491, and the `rsfMRI-global-local-connectivity` repo confirms the maps are
+   voxelwise (≈10,111 values). The 1,491 Fig 1c columns are a *reduced/parcel-level*
+   summary whose index→location mapping is unknown, so they cannot be decoded to
+   per-voxel global connectivity.
 
-2. ~~**The mask file itself**~~ — **RECEIVED** (`rsfMRI-templates-main/`, functional grid 100×100×18 @ 2.3×2.3×6 mm). Necessary but, per (1), **not sufficient** to decode the 1,491 features.
+2. **The mask file itself** — **RECEIVED** (`rsfMRI-templates-main/`, functional grid 100×100×18 @ 2.3×2.3×6 mm). Necessary but, per (1), **not sufficient** to decode the 1,491 features.
 
 3. **The 20 per-model voxelwise degree-centrality maps as NIfTIs** *(the real per-model blocker — NOT a "1,491 key")* — the full-resolution Fig 1a/b maps in functional or Allen space, one per model. These register to HOMER's mouse atlas and route through π directly. The 1,491-feature CSV cannot substitute: it is a downsampled, dendrogram-sorted reduction with no published feature-index → voxel key, so it can't be inverted robustly (see `DATA_VALIDATION_2026-06-10.md`).
 

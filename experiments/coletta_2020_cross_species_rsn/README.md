@@ -14,7 +14,7 @@ This is a stricter version of Pagani's Test 1, with three improvements: (i) uses
 
 **6/10 canonical pairs are diagonal-argmax**, with up to 7.5× over null:
 
-> **Fair-null confirmation (audit 2026-06-11, F-027).** This discrete result **survives a spatially-fair mouse-parcel spin null**: rotating the mouse networks on a sphere and re-aggregating π drops the diagonal-argmax count to **mean 1.23/10** (95th pct 2); the observed 6/10 beats it at **p=0.002**. So the mouse↔human RSN correspondence is specific, not spatial autocorrelation. (Run `experiments/spatial_null_check/fair_nulls_coletta_test2c.py`.)
+> **Fair-null confirmation.** This discrete result **survives a spatially-fair mouse-parcel spin null**: rotating the mouse networks on a sphere and re-aggregating π drops the diagonal-argmax count to **mean 1.23/10** (95th pct 2); the observed 6/10 beats it at **p=0.002**. So the mouse↔human RSN correspondence is specific, not spatial autocorrelation. (Run `experiments/spatial_null_check/fair_nulls_coletta_test2c.py`.)
 
 | Pair | HOMER mass | Null | Ratio | Argmax? |
 |---|---:|---:|---:|:---:|

@@ -32,18 +32,16 @@ clear of the permuted-π null. Combined with the other validations:
 |---|---|---:|:---:|
 | Pagani Test 2c | Network-pair Δ (36 elements) | +0.55 (leverage-driven; Spearman n.s.) | Partial |
 | **Margulies/Huntenburg gradient** | **Brain-wide ordering** | **0.402** | **n.s. by spin test** ¹ |
-| Fulcher 2019 T1w:T2w → myelin | Cortical region | +0.373 | Spin test pending ¹ |
+| Fulcher 2019 T1w:T2w → myelin | Cortical region | +0.373 | Survives spin test (p = 0.02) ¹ |
 | Hodge layer markers | Within-area lamination | ~0 | Null |
 
-> ¹ **Audit 2026-06-11 (F-024).** The original "Strong" rating used a *permuted-π*
-> null, which destroys spatial autocorrelation and over-states significance for a
-> smooth target like a gradient. Under a proper **spin test** (rotate parcel
-> centroids on a sphere; `homer.eval.nulls.spin_null`, run via
+> ¹ A permuted-π null destroys spatial autocorrelation and over-states
+> significance for a smooth target like a gradient. Under a proper **spin test**
+> (rotate parcel centroids on a sphere; `homer.eval.nulls.spin_null`, run via
 > `experiments/spatial_null_check/apply_spin_test.py`), the Margulies correlation
 > **does not survive**: |r|=0.402, spin p=**0.16** (spin-null |r| mean 0.25, 95th
-> pct 0.51). So this is a *modest, spatially-unexceptional* correspondence, not a
-> "strong" one. Re-rate any spatial-map correlation with the spin null before
-> claiming significance.
+> pct 0.51). So this is a *modest, spatially-unexceptional* correspondence. Re-rate
+> any spatial-map correlation with the spin null before claiming significance.
 
 A *brain-wide* organisational test, not driven by anchor pairs — establishing
 that HOMER's cross-species fidelity isn't only at the 22 Beauchamp anchor pairs
