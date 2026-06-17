@@ -72,13 +72,19 @@ def _download(url: str, dest: Path) -> None:
 
 
 def _safe_extract(tar: tarfile.TarFile, dest: Path) -> None:
-    """Extract while refusing any member that escapes ``dest`` (path traversal)."""
+    """Extract while refusing any member that escapes ``dest`` (path traversal),
+    and skipping macOS junk (AppleDouble ``._*`` sidecars, ``.DS_Store``)."""
     dest = dest.resolve()
+    safe = []
     for member in tar.getmembers():
+        base = Path(member.name).name
+        if base.startswith("._") or base == ".DS_Store":
+            continue
         target = (dest / member.name).resolve()
         if not str(target).startswith(str(dest)):
             sys.exit(f"refusing unsafe path in archive: {member.name}")
-    tar.extractall(dest)  # noqa: S202 (members validated above)
+        safe.append(member)
+    tar.extractall(dest, members=safe)  # noqa: S202 (members validated above)
 
 
 def fetch_tier(tier: str, manifest: dict, force: bool) -> None:
