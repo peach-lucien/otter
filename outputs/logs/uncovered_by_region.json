@@ -1,0 +1,149 @@
+[
+  {
+    "pid": 5,
+    "region": "Visual striate cortex",
+    "n_total": 78,
+    "n_uncov": 57,
+    "frac_uncov": 0.7307692307692307
+  },
+  {
+    "pid": 11,
+    "region": "Olfactory cortex",
+    "n_total": 78,
+    "n_uncov": 48,
+    "frac_uncov": 0.6153846153846154
+  },
+  {
+    "pid": 16,
+    "region": "Claustrum",
+    "n_total": 93,
+    "n_uncov": 57,
+    "frac_uncov": 0.6129032258064516
+  },
+  {
+    "pid": 9,
+    "region": "Insula and others in lateral sulcus",
+    "n_total": 105,
+    "n_uncov": 59,
+    "frac_uncov": 0.5619047619047619
+  },
+  {
+    "pid": 8,
+    "region": "Middle Temporal, Inferior temporal, Temporal pole (MIPT)",
+    "n_total": 101,
+    "n_uncov": 49,
+    "frac_uncov": 0.48514851485148514
+  },
+  {
+    "pid": 1,
+    "region": "Medial prefrontal cortex (mPFC)",
+    "n_total": 208,
+    "n_uncov": 98,
+    "frac_uncov": 0.47115384615384615
+  },
+  {
+    "pid": 13,
+    "region": "Striatum",
+    "n_total": 72,
+    "n_uncov": 33,
+    "frac_uncov": 0.4583333333333333
+  },
+  {
+    "pid": 7,
+    "region": "Auditory cortex (Superior temporal )",
+    "n_total": 158,
+    "n_uncov": 70,
+    "frac_uncov": 0.4430379746835443
+  },
+  {
+    "pid": 20,
+    "region": "Pons",
+    "n_total": 82,
+    "n_uncov": 36,
+    "frac_uncov": 0.43902439024390244
+  },
+  {
+    "pid": 3,
+    "region": "Somatosensory cortex",
+    "n_total": 164,
+    "n_uncov": 66,
+    "frac_uncov": 0.4024390243902439
+  },
+  {
+    "pid": 14,
+    "region": "Basal forebrain",
+    "n_total": 30,
+    "n_uncov": 12,
+    "frac_uncov": 0.4
+  },
+  {
+    "pid": 6,
+    "region": "Visual pre and extra striate cortex",
+    "n_total": 160,
+    "n_uncov": 61,
+    "frac_uncov": 0.38125
+  },
+  {
+    "pid": 12,
+    "region": "Periarchicortex",
+    "n_total": 38,
+    "n_uncov": 12,
+    "frac_uncov": 0.3157894736842105
+  },
+  {
+    "pid": 21,
+    "region": "Tectum",
+    "n_total": 60,
+    "n_uncov": 17,
+    "frac_uncov": 0.2833333333333333
+  },
+  {
+    "pid": 19,
+    "region": "Thalamus",
+    "n_total": 50,
+    "n_uncov": 13,
+    "frac_uncov": 0.26
+  },
+  {
+    "pid": 10,
+    "region": "Septum",
+    "n_total": 18,
+    "n_uncov": 4,
+    "frac_uncov": 0.2222222222222222
+  },
+  {
+    "pid": 18,
+    "region": "Hypothalamus",
+    "n_total": 10,
+    "n_uncov": 2,
+    "frac_uncov": 0.2
+  },
+  {
+    "pid": 4,
+    "region": "Posterior parietal cortex",
+    "n_total": 296,
+    "n_uncov": 58,
+    "frac_uncov": 0.19594594594594594
+  },
+  {
+    "pid": 2,
+    "region": "Motor and premotor",
+    "n_total": 258,
+    "n_uncov": 45,
+    "frac_uncov": 0.1744186046511628
+  },
+  {
+    "pid": 17,
+    "region": "Amygdala",
+    "n_total": 24,
+    "n_uncov": 4,
+    "frac_uncov": 0.16666666666666666
+  },
+  {
+    "pid": 15,
+    "region": "Pallidum",
+    "n_total": 11,
+    "n_uncov": 0,
+    "frac_uncov": 0.0
+  }
+]

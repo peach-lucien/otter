@@ -1,0 +1,19 @@
+region,n_live,n_vote,n_intersection,jaccard
+Caudoputamen,143,0,0,0.0
+Cortical subplate,58,61,43,0.5658
+Dorsal auditory area,5,0,0,0.0
+Entorhinal area,82,62,55,0.618
+Lateral visual area,7,0,0,0.0
+Periaqueductal gray,16,21,10,0.3704
+Perirhinal area,6,8,6,0.75
+Piriform area,52,75,46,0.5679
+Prelimbic area,11,0,0,0.0
+Primary auditory area,9,8,7,0.7
+Primary motor area,53,37,34,0.6071
+"Primary somatosensory area, barrel field",61,0,0,0.0
+"Primary somatosensory area, lower limb",12,0,0,0.0
+"Primary somatosensory area, nose",28,0,0,0.0
+"Primary somatosensory area, upper limb",23,0,0,0.0
+Retrosplenial area,30,0,0,0.0
+Secondary motor area,44,39,32,0.6275
+Ventral auditory area,5,0,0,0.0

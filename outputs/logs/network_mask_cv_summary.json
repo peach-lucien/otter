@@ -1,0 +1,237 @@
+{
+  "b0.75_l0.10": {
+    "beta": 0.75,
+    "lam_net": 0.1,
+    "top1_mean": 0.95,
+    "top1_std": 0.09999999999999999,
+    "pair_mean": 0.95,
+    "pair_std": 0.09999999999999999,
+    "hemi_mean": 1.0,
+    "hemi_std": 0.0,
+    "folds": [
+      {
+        "fold": 0,
+        "top1": 1.0,
+        "pair_id": 1.0,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      },
+      {
+        "fold": 1,
+        "top1": 1.0,
+        "pair_id": 1.0,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      },
+      {
+        "fold": 2,
+        "top1": 0.75,
+        "pair_id": 0.75,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      },
+      {
+        "fold": 3,
+        "top1": 1.0,
+        "pair_id": 1.0,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      },
+      {
+        "fold": 4,
+        "top1": 1.0,
+        "pair_id": 1.0,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      }
+    ]
+  },
+  "b0.75_l0.00": {
+    "beta": 0.75,
+    "lam_net": 0.0,
+    "top1_mean": 0.71,
+    "top1_std": 0.24779023386727733,
+    "pair_mean": 0.71,
+    "pair_std": 0.24779023386727733,
+    "hemi_mean": 1.0,
+    "hemi_std": 0.0,
+    "folds": [
+      {
+        "fold": 0,
+        "top1": 0.8,
+        "pair_id": 0.8,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      },
+      {
+        "fold": 1,
+        "top1": 0.75,
+        "pair_id": 0.75,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      },
+      {
+        "fold": 2,
+        "top1": 0.75,
+        "pair_id": 0.75,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      },
+      {
+        "fold": 3,
+        "top1": 0.25,
+        "pair_id": 0.25,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      },
+      {
+        "fold": 4,
+        "top1": 1.0,
+        "pair_id": 1.0,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      }
+    ]
+  },
+  "b0.75_l0.05": {
+    "beta": 0.75,
+    "lam_net": 0.05,
+    "top1_mean": 0.8,
+    "top1_std": 0.2318404623873926,
+    "pair_mean": 0.8,
+    "pair_std": 0.2318404623873926,
+    "hemi_mean": 1.0,
+    "hemi_std": 0.0,
+    "folds": [
+      {
+        "fold": 0,
+        "top1": 1.0,
+        "pair_id": 1.0,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      },
+      {
+        "fold": 1,
+        "top1": 0.875,
+        "pair_id": 0.875,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      },
+      {
+        "fold": 2,
+        "top1": 0.75,
+        "pair_id": 0.75,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      },
+      {
+        "fold": 3,
+        "top1": 0.375,
+        "pair_id": 0.375,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      },
+      {
+        "fold": 4,
+        "top1": 1.0,
+        "pair_id": 1.0,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      }
+    ]
+  },
+  "b0.75_l0.25": {
+    "beta": 0.75,
+    "lam_net": 0.25,
+    "top1_mean": 1.0,
+    "top1_std": 0.0,
+    "pair_mean": 1.0,
+    "pair_std": 0.0,
+    "hemi_mean": 1.0,
+    "hemi_std": 0.0,
+    "folds": [
+      {
+        "fold": 0,
+        "top1": 1.0,
+        "pair_id": 1.0,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      },
+      {
+        "fold": 1,
+        "top1": 1.0,
+        "pair_id": 1.0,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      },
+      {
+        "fold": 2,
+        "top1": 1.0,
+        "pair_id": 1.0,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      },
+      {
+        "fold": 3,
+        "top1": 1.0,
+        "pair_id": 1.0,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      },
+      {
+        "fold": 4,
+        "top1": 1.0,
+        "pair_id": 1.0,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      }
+    ]
+  },
+  "b0.75_l0.50": {
+    "beta": 0.75,
+    "lam_net": 0.5,
+    "top1_mean": 1.0,
+    "top1_std": 0.0,
+    "pair_mean": 1.0,
+    "pair_std": 0.0,
+    "hemi_mean": 1.0,
+    "hemi_std": 0.0,
+    "folds": [
+      {
+        "fold": 0,
+        "top1": 1.0,
+        "pair_id": 1.0,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      },
+      {
+        "fold": 1,
+        "top1": 1.0,
+        "pair_id": 1.0,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      },
+      {
+        "fold": 2,
+        "top1": 1.0,
+        "pair_id": 1.0,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      },
+      {
+        "fold": 3,
+        "top1": 1.0,
+        "pair_id": 1.0,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      },
+      {
+        "fold": 4,
+        "top1": 1.0,
+        "pair_id": 1.0,
+        "hemi": 1.0,
+        "elapsed": 4.8
+      }
+    ]
+  }
+}

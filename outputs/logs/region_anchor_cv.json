@@ -1,0 +1,280 @@
+{
+  "_full_train": {
+    "elapsed_s": 5.0,
+    "loss": 0.01809696157112959,
+    "per_region": {
+      "31": {
+        "top1": 1.0,
+        "top5": 1.0,
+        "top10": 1.0,
+        "mean_rank": 1.0,
+        "n_mouse": 6,
+        "n_human": 18
+      },
+      "32": {
+        "top1": 1.0,
+        "top5": 1.0,
+        "top10": 1.0,
+        "mean_rank": 1.0,
+        "n_mouse": 47,
+        "n_human": 10
+      },
+      "33": {
+        "top1": 1.0,
+        "top5": 1.0,
+        "top10": 1.0,
+        "mean_rank": 1.0,
+        "n_mouse": 61,
+        "n_human": 10
+      },
+      "34": {
+        "top1": 1.0,
+        "top5": 1.0,
+        "top10": 1.0,
+        "mean_rank": 1.0,
+        "n_mouse": 95,
+        "n_human": 11
+      },
+      "35": {
+        "top1": 0.0,
+        "top5": 0.0,
+        "top10": 0.0,
+        "mean_rank": 905.0,
+        "n_mouse": 17,
+        "n_human": 17
+      },
+      "36": {
+        "top1": 1.0,
+        "top5": 1.0,
+        "top10": 1.0,
+        "mean_rank": 1.0,
+        "n_mouse": 9,
+        "n_human": 17
+      },
+      "37": {
+        "top1": 1.0,
+        "top5": 1.0,
+        "top10": 1.0,
+        "mean_rank": 1.0,
+        "n_mouse": 9,
+        "n_human": 12
+      },
+      "38": {
+        "top1": 1.0,
+        "top5": 1.0,
+        "top10": 1.0,
+        "mean_rank": 1.0,
+        "n_mouse": 20,
+        "n_human": 7
+      },
+      "39": {
+        "top1": 1.0,
+        "top5": 1.0,
+        "top10": 1.0,
+        "mean_rank": 1.0,
+        "n_mouse": 40,
+        "n_human": 11
+      },
+      "41": {
+        "top1": 0.0,
+        "top5": 0.0,
+        "top10": 0.0,
+        "mean_rank": 1388.0,
+        "n_mouse": 149,
+        "n_human": 14
+      },
+      "44": {
+        "top1": 1.0,
+        "top5": 1.0,
+        "top10": 1.0,
+        "mean_rank": 1.0,
+        "n_mouse": 24,
+        "n_human": 7
+      },
+      "46": {
+        "top1": 1.0,
+        "top5": 1.0,
+        "top10": 1.0,
+        "mean_rank": 1.0,
+        "n_mouse": 149,
+        "n_human": 10
+      },
+      "47": {
+        "top1": 1.0,
+        "top5": 1.0,
+        "top10": 1.0,
+        "mean_rank": 1.0,
+        "n_mouse": 55,
+        "n_human": 7
+      },
+      "48": {
+        "top1": 1.0,
+        "top5": 1.0,
+        "top10": 1.0,
+        "mean_rank": 1.0,
+        "n_mouse": 52,
+        "n_human": 1
+      },
+      "51": {
+        "top1": 1.0,
+        "top5": 1.0,
+        "top10": 1.0,
+        "mean_rank": 1.0,
+        "n_mouse": 53,
+        "n_human": 5
+      }
+    }
+  },
+  "_held_out": {
+    "31": {
+      "top1": 0.3333333333333333,
+      "top5": 0.3333333333333333,
+      "top10": 0.3333333333333333,
+      "mean_rank": 23.333333333333332,
+      "n_mouse": 6,
+      "n_human": 18,
+      "elapsed_s": 4.9,
+      "label": "Garin pair_id=1 (Medial prefrontal cortex (mPFC)) \u2014 mouse=DSURQE, human=schaefer"
+    },
+    "32": {
+      "top1": 0.0425531914893617,
+      "top5": 0.06382978723404255,
+      "top10": 0.0851063829787234,
+      "mean_rank": 59.08510638297872,
+      "n_mouse": 47,
+      "n_human": 10,
+      "elapsed_s": 5.0,
+      "label": "Garin pair_id=2 (Motor and premotor) \u2014 mouse=DSURQE, human=schaefer_400"
+    },
+    "33": {
+      "top1": 0.11475409836065574,
+      "top5": 0.26229508196721313,
+      "top10": 0.29508196721311475,
+      "mean_rank": 29.21311475409836,
+      "n_mouse": 61,
+      "n_human": 10,
+      "elapsed_s": 5.0,
+      "label": "Garin pair_id=3 (Somatosensory cortex) \u2014 mouse=DSURQE, human=schaefer_400"
+    },
+    "34": {
+      "top1": 0.05263157894736842,
+      "top5": 0.09473684210526316,
+      "top10": 0.12631578947368421,
+      "mean_rank": 218.21052631578948,
+      "n_mouse": 95,
+      "n_human": 11,
+      "elapsed_s": 5.0,
+      "label": "Garin pair_id=4 (Posterior parietal cortex) \u2014 mouse=DSURQE, human=schaefer_400"
+    },
+    "35": {
+      "top1": 0.0,
+      "top5": 0.0,
+      "top10": 0.0,
+      "mean_rank": 1433.5882352941176,
+      "n_mouse": 17,
+      "n_human": 17,
+      "elapsed_s": 5.0,
+      "label": "Garin pair_id=5 (Visual striate cortex) \u2014 mouse=DSURQE, human=schaefer_400"
+    },
+    "36": {
+      "top1": 0.0,
+      "top5": 0.0,
+      "top10": 0.0,
+      "mean_rank": 1545.888888888889,
+      "n_mouse": 9,
+      "n_human": 17,
+      "elapsed_s": 4.9,
+      "label": "Garin pair_id=6 (Visual pre and extra striate cortex) \u2014 mouse=DSURQE, human=scha"
+    },
+    "37": {
+      "top1": 0.2222222222222222,
+      "top5": 0.2222222222222222,
+      "top10": 0.2222222222222222,
+      "mean_rank": 285.6666666666667,
+      "n_mouse": 9,
+      "n_human": 12,
+      "elapsed_s": 5.0,
+      "label": "Garin pair_id=7 (Auditory cortex (Superior temporal )) \u2014 mouse=DSURQE, human=sch"
+    },
+    "38": {
+      "top1": 0.1,
+      "top5": 0.1,
+      "top10": 0.1,
+      "mean_rank": 962.15,
+      "n_mouse": 20,
+      "n_human": 7,
+      "elapsed_s": 5.0,
+      "label": "Garin pair_id=8 (Middle Temporal, Inferior temporal, Temporal pole (MIPT)) \u2014 mou"
+    },
+    "39": {
+      "top1": 0.025,
+      "top5": 0.025,
+      "top10": 0.025,
+      "mean_rank": 787.375,
+      "n_mouse": 40,
+      "n_human": 11,
+      "elapsed_s": 5.0,
+      "label": "Garin pair_id=9 (Insula and others in lateral sulcus) \u2014 mouse=DSURQE, human=scha"
+    },
+    "41": {
+      "top1": 0.0,
+      "top5": 0.0,
+      "top10": 0.0,
+      "mean_rank": 1388.0,
+      "n_mouse": 149,
+      "n_human": 14,
+      "elapsed_s": 5.0,
+      "label": "Garin pair_id=11 (Olfactory cortex) \u2014 mouse=DSURQE, human=schaefer_400"
+    },
+    "44": {
+      "top1": 0.08333333333333333,
+      "top5": 0.16666666666666666,
+      "top10": 0.2916666666666667,
+      "mean_rank": 22.0,
+      "n_mouse": 24,
+      "n_human": 7,
+      "elapsed_s": 5.1,
+      "label": "Garin pair_id=14 (Basal forebrain) \u2014 mouse=DSURQE, human=jubrain_184"
+    },
+    "46": {
+      "top1": 0.0,
+      "top5": 0.0,
+      "top10": 0.0,
+      "mean_rank": 1393.0,
+      "n_mouse": 149,
+      "n_human": 10,
+      "elapsed_s": 5.0,
+      "label": "Garin pair_id=16 (Claustrum) \u2014 mouse=DSURQE, human=schaefer_400"
+    },
+    "47": {
+      "top1": 0.03636363636363636,
+      "top5": 0.03636363636363636,
+      "top10": 0.03636363636363636,
+      "mean_rank": 82.6,
+      "n_mouse": 55,
+      "n_human": 7,
+      "elapsed_s": 5.0,
+      "label": "Garin pair_id=17 (Amygdala) \u2014 mouse=DSURQE, human=jubrain_184"
+    },
+    "48": {
+      "top1": 0.019230769230769232,
+      "top5": 0.019230769230769232,
+      "top10": 0.019230769230769232,
+      "mean_rank": 1830.3076923076924,
+      "n_mouse": 52,
+      "n_human": 1,
+      "elapsed_s": 5.0,
+      "label": "Garin pair_id=18 (Hypothalamus) \u2014 mouse=DSURQE, human=jubrain_184"
+    },
+    "51": {
+      "top1": 0.018867924528301886,
+      "top5": 0.018867924528301886,
+      "top10": 0.018867924528301886,
+      "mean_rank": 591.3962264150944,
+      "n_mouse": 53,
+      "n_human": 5,
+      "elapsed_s": 5.0,
+      "label": "Garin pair_id=21 (Tectum) \u2014 mouse=DSURQE, human=schaefer_400"
+    }
+  }
+}

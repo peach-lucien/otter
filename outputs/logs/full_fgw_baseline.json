@@ -1,0 +1,29 @@
+{
+  "tag": "baseline",
+  "alpha": 0.5,
+  "epsilon": 0.005,
+  "lam": 1.0,
+  "xyz_weight": 0.5,
+  "max_iter": 25,
+  "elapsed_sec": 14.4,
+  "fgw_dist": 0.033588534891561383,
+  "n_iter": -1,
+  "diagnostics": {
+    "anchor_block_metrics": {
+      "top1": 1.0,
+      "top5": 1.0,
+      "pair_id": 1.0,
+      "hemisphere": 1.0,
+      "n": 42
+    },
+    "anchor_diag_mass": 0.020057308590956165,
+    "anchor_block_total_mass": 0.020057308590956165,
+    "rowmax_on_diag": 1.0,
+    "rowmax_mass_avg": 0.0004775549664513373,
+    "anchor_total_mass_full": 0.022532188841201714,
+    "leak_anchor_to_grid": 0.0024748802502455487
+  },
+  "pi_path": "/sessions/wizardly-admiring-tesla/mnt/brain_crossspecies_translation/moscot/outputs/coupling/pi_baseline.npy",
+  "n_m": 1864,
+  "n_h": 2094
+}

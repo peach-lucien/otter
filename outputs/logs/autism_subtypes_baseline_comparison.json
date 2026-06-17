@@ -1,0 +1,36 @@
+{
+  "variants": [
+    {
+      "pi": "with_all_packs (recommended)",
+      "n_diag_argmax": 4,
+      "n_pairs_scored": 8,
+      "fraction_diagonal_argmax": 0.5,
+      "mean_ratio_over_null": 2.6932838209795387,
+      "median_ratio_over_null": 2.085217990578949
+    },
+    {
+      "pi": "fc_plus_SC (Garin only)",
+      "n_diag_argmax": 4,
+      "n_pairs_scored": 8,
+      "fraction_diagonal_argmax": 0.5,
+      "mean_ratio_over_null": 1.7386394693146552,
+      "median_ratio_over_null": 1.8232795201083947
+    },
+    {
+      "pi": "fc_plus_SC_xyz_zero",
+      "n_diag_argmax": 3,
+      "n_pairs_scored": 8,
+      "fraction_diagonal_argmax": 0.375,
+      "mean_ratio_over_null": 1.9831500153589328,
+      "median_ratio_over_null": 1.4713712474997633
+    },
+    {
+      "pi": "permuted_pi_null (20 trials)",
+      "n_diag_argmax": 2.0,
+      "n_pairs_scored": 8,
+      "fraction_diagonal_argmax": 0.25,
+      "mean_ratio_over_null": 1.02662701965072,
+      "median_ratio_over_null": 1.0046469654601071
+    }
+  ]
+}

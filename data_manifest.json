@@ -1,0 +1,23 @@
+{
+  "doi": "10.5281/zenodo.20733163",
+  "record_url": "https://doi.org/10.5281/zenodo.20733163",
+  "version": "v1.0.0",
+  "archives": {
+    "reproduce": {
+      "filename": "homer-reproduce-v1.0.0.tar.gz",
+      "url": "https://zenodo.org/api/records/20733163/files/homer-reproduce-v1.0.0.tar.gz/content",
+      "md5": "3a3df8cfaf77c26368940ecdfbd2caaf",
+      "approx_size_mb": 173,
+      "unpacks_to": ["outputs/", "data_external/"],
+      "description": "Precomputed coupling + processed caches + validation inputs. Re-run any experiment or notebook without rebuilding."
+    },
+    "raw": {
+      "filename": "homer-raw-inputs-v1.0.0.tar.gz",
+      "url": "https://zenodo.org/api/records/20733163/files/homer-raw-inputs-v1.0.0.tar.gz/content",
+      "md5": "f965f0d569c7b5796c1a0cb93f4f9a46",
+      "approx_size_mb": 606,
+      "unpacks_to": ["data_external/"],
+      "description": "Full raw data_external/ for a bitwise rebuild of the coupling via pipeline/."
+    }
+  }
+}

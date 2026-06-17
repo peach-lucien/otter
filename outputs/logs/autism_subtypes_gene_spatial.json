@@ -1,0 +1,96 @@
+{
+  "n_homer_genes": 61,
+  "n_overlap_hypo_genes": 10,
+  "n_overlap_hyper_genes": 26,
+  "homer_hypo_genes": [
+    "Bdnf",
+    "Calb1",
+    "Calb2",
+    "Cux1",
+    "Dbh",
+    "Gria1",
+    "Pax6",
+    "Reln",
+    "Slc17a7",
+    "Snap25"
+  ],
+  "homer_hyper_genes": [
+    "Aqp4",
+    "Camk2a",
+    "Cux2",
+    "Drd1",
+    "Drd2",
+    "Foxp2",
+    "Gad1",
+    "Gad2",
+    "Gfap",
+    "Grin1",
+    "Grin2b",
+    "Lhx2",
+    "Lhx6",
+    "Mbp",
+    "Nrgn",
+    "Olig2",
+    "Plekhg1",
+    "Plp1",
+    "Rorb",
+    "Slc17a6",
+    "Slc17a8",
+    "Sox10",
+    "Sst",
+    "Syn1",
+    "Tac1",
+    "Th"
+  ],
+  "pagani_human_networks": [
+    "Control",
+    "DMN",
+    "DorsAtten",
+    "Limbic",
+    "Salience",
+    "SomatoMotor",
+    "Visual",
+    "Subcortical"
+  ],
+  "observed_delta": [
+    55.709926184,
+    71.01568361,
+    59.689279662,
+    116.784566881,
+    121.465088035,
+    130.484142459,
+    105.31552274200001,
+    243.47989377
+  ],
+  "predicted_delta": [
+    -3.101774082591608e-05,
+    -5.277866867071024e-05,
+    -4.580711271370779e-05,
+    -8.469991601214267e-05,
+    -3.1037774237156613e-06,
+    -1.3809983374804176e-05,
+    2.8462470816803695e-05,
+    0.00013726546287382252
+  ],
+  "same_sign_count": 2,
+  "pearson_r": 0.8219109085901659,
+  "pearson_p": 0.012301699503860293,
+  "spearman_r": 0.523809523809524,
+  "spearman_p": 0.18272075053971484,
+  "null": {
+    "n_trials": 200,
+    "pearson_mean": -0.03334758122114181,
+    "pearson_ci95": [
+      -0.6675860224866413,
+      0.6111697046021954
+    ],
+    "spearman_mean": -0.030357142857142857,
+    "spearman_ci95": [
+      -0.643452380952381,
+      0.5958333333333335
+    ],
+    "pearson_empirical_p": 0.005,
+    "spearman_empirical_p": 0.055
+  },
+  "caveat": "HOMER's curated gene set is 51 genes; only 36 overlap with Pagani's 1,952+4,463 implicated genes. This is a proof-of-concept; a full pathway-spatial test would need parcel-level Allen Brain Atlas expression for the full gene lists."
+}

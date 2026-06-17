@@ -1,0 +1,92 @@
+{
+  "n_cortical_parcels": 1768,
+  "per_layer_group": [
+    {
+      "layer_group": "upper (L2/3)",
+      "markers": [
+        "Cux1",
+        "Cux2",
+        "Satb2"
+      ],
+      "n_cortical_parcels": 1768,
+      "pearson_r": 0.04655902035006074,
+      "pearson_p_analytical": 0.050303792724656266,
+      "spearman_r": 0.035874245880338676,
+      "null_mean": -0.0008012407986000247,
+      "null_ci95": [
+        -0.05641062871258956,
+        0.057106192850234015
+      ],
+      "empirical_p": 0.06
+    },
+    {
+      "layer_group": "middle (L4)",
+      "markers": [
+        "Rorb"
+      ],
+      "n_cortical_parcels": 1768,
+      "pearson_r": 0.05710712601711442,
+      "pearson_p_analytical": 0.01632895554955521,
+      "spearman_r": 0.15652089045927683,
+      "null_mean": -0.0009586695939411431,
+      "null_ci95": [
+        -0.050891863428833034,
+        0.048491931999933194
+      ],
+      "empirical_p": 0.008
+    },
+    {
+      "layer_group": "deep (L5/6)",
+      "markers": [
+        "Fezf2",
+        "Tbr1",
+        "Foxp2"
+      ],
+      "n_cortical_parcels": 1768,
+      "pearson_r": 0.02032504746384844,
+      "pearson_p_analytical": 0.3930478638484107,
+      "spearman_r": -0.00013664636362264106,
+      "null_mean": -0.0019465610949444688,
+      "null_ci95": [
+        -0.04626548877140045,
+        0.047424778931249516
+      ],
+      "empirical_p": 0.176
+    }
+  ],
+  "upper_minus_deep_contrast": {
+    "test": "upper \u2212 deep contrast (cortex only)",
+    "pearson_r": 0.03081419424424771,
+    "pearson_p_analytical": 0.19530165754778644,
+    "spearman_r": -0.01562786863648381,
+    "null_mean": 0.0007570534361715918,
+    "null_ci95": [
+      -0.05427104755302086,
+      0.055011689969916934
+    ],
+    "empirical_p": 0.136
+  },
+  "lobe_aggregated": [
+    {
+      "layer_group": "upper (L2/3)",
+      "n_networks": 8,
+      "pearson_r": 0.08974566432093582,
+      "pearson_p_analytical": 0.8326282425373881,
+      "spearman_r": 0.38095238095238104
+    },
+    {
+      "layer_group": "middle (L4)",
+      "n_networks": 8,
+      "pearson_r": 0.7936673052867996,
+      "pearson_p_analytical": 0.018702445725092498,
+      "spearman_r": 0.6666666666666669
+    },
+    {
+      "layer_group": "deep (L5/6)",
+      "n_networks": 8,
+      "pearson_r": 0.5852313779714096,
+      "pearson_p_analytical": 0.12749665214667766,
+      "spearman_r": 0.880952380952381
+    }
+  ]
+}

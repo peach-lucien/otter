@@ -1,0 +1,273 @@
+{
+  "n_models": 20,
+  "n_hyper": 9,
+  "n_hypo": 11,
+  "models": [
+    {
+      "row": 1,
+      "model": "Fmr1",
+      "subtype": "hyper",
+      "mean_connectivity": 0.31581487525150903,
+      "r_to_hyper_signature": -0.24083055026010083,
+      "r_to_hypo_signature": -0.16605065943486025,
+      "membership_score": -0.07477989082524059,
+      "predicted_side": "hypo"
+    },
+    {
+      "row": 2,
+      "model": "Chd8",
+      "subtype": "hyper",
+      "mean_connectivity": 0.2301190523138833,
+      "r_to_hyper_signature": 0.15688881406486177,
+      "r_to_hypo_signature": -0.08143418330493395,
+      "membership_score": 0.23832299736979573,
+      "predicted_side": "hyper"
+    },
+    {
+      "row": 3,
+      "model": "Il6",
+      "subtype": "hyper",
+      "mean_connectivity": 0.1765784419852448,
+      "r_to_hyper_signature": 0.19577712772521969,
+      "r_to_hypo_signature": -0.0494860474925444,
+      "membership_score": 0.24526317521776408,
+      "predicted_side": "hyper"
+    },
+    {
+      "row": 4,
+      "model": "Tsc2",
+      "subtype": "hyper",
+      "mean_connectivity": 0.19888515921598926,
+      "r_to_hyper_signature": 0.11168991878629252,
+      "r_to_hypo_signature": -0.14427582324730098,
+      "membership_score": 0.2559657420335935,
+      "predicted_side": "hyper"
+    },
+    {
+      "row": 5,
+      "model": "Trem2",
+      "subtype": "hyper",
+      "mean_connectivity": 0.047248382964453384,
+      "r_to_hyper_signature": -0.21897124745614235,
+      "r_to_hypo_signature": -0.1674426142749972,
+      "membership_score": -0.051528633181145145,
+      "predicted_side": "hypo"
+    },
+    {
+      "row": 6,
+      "model": "Btbr",
+      "subtype": "hyper",
+      "mean_connectivity": 0.08114890677397722,
+      "r_to_hyper_signature": -0.03678215971724315,
+      "r_to_hypo_signature": 0.05725569574857978,
+      "membership_score": -0.09403785546582293,
+      "predicted_side": "hypo"
+    },
+    {
+      "row": 7,
+      "model": "Cdkl5 [ko]",
+      "subtype": "hyper",
+      "mean_connectivity": 0.3931105211267605,
+      "r_to_hyper_signature": 0.3992732122362905,
+      "r_to_hypo_signature": -0.24734097512133563,
+      "membership_score": 0.6466141873576261,
+      "predicted_side": "hyper"
+    },
+    {
+      "row": 8,
+      "model": "Mecp2",
+      "subtype": "hyper",
+      "mean_connectivity": 0.15195514131374913,
+      "r_to_hyper_signature": 0.3622943263298254,
+      "r_to_hypo_signature": -0.146602511469561,
+      "membership_score": 0.5088968377993863,
+      "predicted_side": "hyper"
+    },
+    {
+      "row": 9,
+      "model": "Cdkl5 [ht]",
+      "subtype": "hyper",
+      "mean_connectivity": 0.11603118324845067,
+      "r_to_hyper_signature": 0.1524364272300863,
+      "r_to_hypo_signature": 0.029744262087437967,
+      "membership_score": 0.12269216514264833,
+      "predicted_side": "hyper"
+    },
+    {
+      "row": 10,
+      "model": "Shank3",
+      "subtype": "hypo",
+      "mean_connectivity": -0.6658997739771966,
+      "r_to_hyper_signature": -0.024870824811879088,
+      "r_to_hypo_signature": 0.17120698662099254,
+      "membership_score": -0.19607781143287162,
+      "predicted_side": "hypo"
+    },
+    {
+      "row": 11,
+      "model": "En2",
+      "subtype": "hypo",
+      "mean_connectivity": -0.7308950160965795,
+      "r_to_hyper_signature": -0.08929751870219943,
+      "r_to_hypo_signature": 0.162153825217882,
+      "membership_score": -0.2514513439200814,
+      "predicted_side": "hypo"
+    },
+    {
+      "row": 12,
+      "model": "Syn2",
+      "subtype": "hypo",
+      "mean_connectivity": -0.03874847417840376,
+      "r_to_hyper_signature": -0.1147265050539658,
+      "r_to_hypo_signature": 0.09063776687839466,
+      "membership_score": -0.20536427193236045,
+      "predicted_side": "hypo"
+    },
+    {
+      "row": 13,
+      "model": "Cntnap2",
+      "subtype": "hypo",
+      "mean_connectivity": -0.12427368477531858,
+      "r_to_hyper_signature": -0.05714506998626779,
+      "r_to_hypo_signature": 0.06939994116701971,
+      "membership_score": -0.1265450111532875,
+      "predicted_side": "hypo"
+    },
+    {
+      "row": 14,
+      "model": "Nlgn3 [ko]",
+      "subtype": "hypo",
+      "mean_connectivity": -0.09137163044936283,
+      "r_to_hyper_signature": -0.024373177937884828,
+      "r_to_hypo_signature": 0.04233134034181143,
+      "membership_score": -0.06670451827969626,
+      "predicted_side": "hypo"
+    },
+    {
+      "row": 15,
+      "model": "Nlgn3-R451",
+      "subtype": "hypo",
+      "mean_connectivity": -0.02621591788517773,
+      "r_to_hyper_signature": -0.1493210596395827,
+      "r_to_hypo_signature": 0.048436404836372036,
+      "membership_score": -0.19775746447595474,
+      "predicted_side": "hypo"
+    },
+    {
+      "row": 16,
+      "model": "Oxtr",
+      "subtype": "hypo",
+      "mean_connectivity": -0.06589552034991951,
+      "r_to_hyper_signature": -0.016208196074093826,
+      "r_to_hypo_signature": 0.03816687095870662,
+      "membership_score": -0.05437506703280044,
+      "predicted_side": "hypo"
+    },
+    {
+      "row": 17,
+      "model": "16p11.2",
+      "subtype": "hypo",
+      "mean_connectivity": -0.3036324587525151,
+      "r_to_hyper_signature": 0.00764983929501535,
+      "r_to_hypo_signature": 0.18552281811890306,
+      "membership_score": -0.17787297882388772,
+      "predicted_side": "hypo"
+    },
+    {
+      "row": 18,
+      "model": "Sgsh",
+      "subtype": "hypo",
+      "mean_connectivity": -0.17911505593158955,
+      "r_to_hyper_signature": -0.20360151731178672,
+      "r_to_hypo_signature": 0.16313768481765706,
+      "membership_score": -0.3667392021294438,
+      "predicted_side": "hypo"
+    },
+    {
+      "row": 19,
+      "model": "Ube3a",
+      "subtype": "hypo",
+      "mean_connectivity": -0.28859007847082496,
+      "r_to_hyper_signature": -0.14359914526162437,
+      "r_to_hypo_signature": 0.19225697436673866,
+      "membership_score": -0.33585611962836304,
+      "predicted_side": "hypo"
+    },
+    {
+      "row": 20,
+      "model": "22q11.2",
+      "subtype": "hypo",
+      "mean_connectivity": -0.32978474044265593,
+      "r_to_hyper_signature": -0.10107156187455585,
+      "r_to_hypo_signature": 0.038481880206961576,
+      "membership_score": -0.13955344208151743,
+      "predicted_side": "hypo"
+    }
+  ],
+  "loo_consistency": "17/20",
+  "translation": {
+    "human_networks": [
+      "Control",
+      "DMN",
+      "DorsAtten",
+      "Limbic",
+      "Salience",
+      "SomatoMotor",
+      "Visual",
+      "Subcortical"
+    ],
+    "predicted": {
+      "hyper": {
+        "Control": 0.010226770523069069,
+        "DMN": 0.022238458475031624,
+        "DorsAtten": 0.011471588403156681,
+        "Limbic": 0.08055108392833764,
+        "Salience": 0.0158518794297998,
+        "SomatoMotor": 0.024692122837119145,
+        "Visual": 0.005891817307327958,
+        "Subcortical": 0.03726870657989887
+      },
+      "hypo": {
+        "Control": 0.015083061307886695,
+        "DMN": 0.024239520191354152,
+        "DorsAtten": 0.021423844685125176,
+        "Limbic": 0.06626075496290458,
+        "Salience": 0.015380504256696334,
+        "SomatoMotor": 0.03860852417160116,
+        "Visual": 0.0052979384578960365,
+        "Subcortical": 0.0277282739723221
+      }
+    },
+    "observed": {
+      "hyper": {
+        "Control": 61.941589961999995,
+        "DMN": 76.087703976,
+        "DorsAtten": 64.04273452,
+        "Limbic": 119.989548997,
+        "Salience": 122.831498622,
+        "SomatoMotor": 133.138462674,
+        "Visual": 108.44860807200001,
+        "Subcortical": 244.007937156
+      },
+      "hypo": {
+        "Control": 6.231663778,
+        "DMN": 5.072020365999999,
+        "DorsAtten": 4.353454858000001,
+        "Limbic": 3.2049821160000005,
+        "Salience": 1.366410587,
+        "SomatoMotor": 2.654320215,
+        "Visual": 3.13308533,
+        "Subcortical": 0.528043386
+      }
+    },
+    "cross_correlation": {
+      "pred_hyper__obs_hyper": 0.3511066687406238,
+      "pred_hyper__obs_hypo": -0.2542894503426909,
+      "pred_hypo__obs_hyper": 0.20519374932683626,
+      "pred_hypo__obs_hypo": -0.1330227146433768
+    },
+    "subtype_specific_hyper": true,
+    "subtype_specific_hypo": false
+  },
+  "note": "Supersedes inverted-prior version. Subtype labels verified from data; translation independent of 1,491-feature decode."
+}

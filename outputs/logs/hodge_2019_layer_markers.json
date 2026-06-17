@@ -1,0 +1,99 @@
+{
+  "n_markers": 7,
+  "markers": [
+    {
+      "gene": "Cux1",
+      "layer": "L2/3 upper",
+      "pearson_r": 0.08306365258223047,
+      "pearson_p_analytical": 0.0001416205472342504,
+      "spearman_r": 0.03921089421138407,
+      "null_mean": -0.0010191338049601176,
+      "null_ci95": [
+        -0.04676356643409133,
+        0.05402417292741107
+      ],
+      "empirical_p": 0.0
+    },
+    {
+      "gene": "Cux2",
+      "layer": "L2/3 upper",
+      "pearson_r": 0.17638990570330543,
+      "pearson_p_analytical": 4.269772578860122e-16,
+      "spearman_r": 0.19212083166532978,
+      "null_mean": 0.0008941383691320049,
+      "null_ci95": [
+        -0.05286701736792534,
+        0.055108376840884404
+      ],
+      "empirical_p": 0.0
+    },
+    {
+      "gene": "Satb2",
+      "layer": "L2/3 upper",
+      "pearson_r": 0.18901756158377533,
+      "pearson_p_analytical": 2.7075919149999307e-18,
+      "spearman_r": 0.23065545200687246,
+      "null_mean": 0.0001013988692003983,
+      "null_ci95": [
+        -0.048345334578961466,
+        0.0496834144096326
+      ],
+      "empirical_p": 0.0
+    },
+    {
+      "gene": "Rorb",
+      "layer": "L4 granular",
+      "pearson_r": 0.08988523425248957,
+      "pearson_p_analytical": 3.804307273176298e-05,
+      "spearman_r": 0.20809206126181704,
+      "null_mean": 0.0010733004498868829,
+      "null_ci95": [
+        -0.05754083347368943,
+        0.0500100897454294
+      ],
+      "empirical_p": 0.0
+    },
+    {
+      "gene": "Fezf2",
+      "layer": "L5 infragranular",
+      "pearson_r": 0.1682552447597644,
+      "pearson_p_analytical": 9.180789247661436e-15,
+      "spearman_r": 0.22916768343425534,
+      "null_mean": -0.0025097255260960443,
+      "null_ci95": [
+        -0.060326210563970806,
+        0.05884636004143113
+      ],
+      "empirical_p": 0.0
+    },
+    {
+      "gene": "Tbr1",
+      "layer": "L6 deep",
+      "pearson_r": 0.10829119648618385,
+      "pearson_p_analytical": 6.796656841205981e-07,
+      "spearman_r": 0.17223358400911992,
+      "null_mean": 0.0010191958343714106,
+      "null_ci95": [
+        -0.054104891688558907,
+        0.053113932541692756
+      ],
+      "empirical_p": 0.0
+    },
+    {
+      "gene": "Foxp2",
+      "layer": "L6 deep",
+      "pearson_r": 0.01862355700067361,
+      "pearson_p_analytical": 0.39433425021703056,
+      "spearman_r": -0.045189392841758026,
+      "null_mean": 0.0001268116868951541,
+      "null_ci95": [
+        -0.05539968879110157,
+        0.055874452320811493
+      ],
+      "empirical_p": 0.25
+    }
+  ],
+  "mean_pearson_r": 0.11907519319548895,
+  "mean_null_pearson_r": -4.4859160224330174e-05,
+  "n_markers_p_below_0.05": 6
+}

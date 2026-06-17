@@ -1,0 +1,121 @@
+{
+  "fc_plus_xyz_gw": {
+    "pearson_r_overall": 0.3651840039679063,
+    "n_pairs_used": 1122751,
+    "n_human_nodes_kept": 1499,
+    "pred_mean": 0.025032058358192444,
+    "pred_std": 0.0622846782207489,
+    "actual_mean": 0.008663671287876505,
+    "actual_std": 0.09116566798031947,
+    "pearson_r_within_net": 0.44872745610612275,
+    "n_within_net": 142091,
+    "pearson_r_cross_net": 0.20250794749027237,
+    "n_cross_net": 980660,
+    "q_marginal_min": 2.8390551789007866e-87,
+    "q_marginal_max": 0.0032188791662700537,
+    "fgw_dist": 0.011532179377644582
+  },
+  "fc_plus_network_mask": {
+    "pearson_r_overall": 0.3795428341269872,
+    "n_pairs_used": 348195,
+    "n_human_nodes_kept": 835,
+    "pred_mean": 0.029909588396549225,
+    "pred_std": 0.07008682936429977,
+    "actual_mean": 0.010324363025453146,
+    "actual_std": 0.10335592540505652,
+    "pearson_r_within_net": 0.4926367787823415,
+    "n_within_net": 46896,
+    "pearson_r_cross_net": 0.1698925415495056,
+    "n_cross_net": 301299,
+    "q_marginal_min": 7.907085185077183e-92,
+    "q_marginal_max": 0.014482757539859246,
+    "fgw_dist": 0.031473271742719015
+  },
+  "baseline_fc_only": {
+    "pearson_r_overall": 0.3642807914229501,
+    "n_pairs_used": 1040403,
+    "n_human_nodes_kept": 1443,
+    "pred_mean": 0.02541537396609783,
+    "pred_std": 0.06350788474082947,
+    "actual_mean": 0.008458015771807163,
+    "actual_std": 0.09000232490177908,
+    "pearson_r_within_net": 0.44702494550475036,
+    "n_within_net": 132739,
+    "pearson_r_cross_net": 0.19916797152012733,
+    "n_cross_net": 907664,
+    "q_marginal_min": 1.5022442933970364e-90,
+    "q_marginal_max": 0.0032188831530042612,
+    "fgw_dist": 0.014140404414654629
+  },
+  "fc_plus_SC": {
+    "pearson_r_overall": 0.36101677155077716,
+    "n_pairs_used": 950131,
+    "n_human_nodes_kept": 1379,
+    "pred_mean": 0.02664097025990486,
+    "pred_std": 0.06484740227460861,
+    "actual_mean": 0.008539699684536814,
+    "actual_std": 0.09250718744611418,
+    "pearson_r_within_net": 0.44350561030078944,
+    "n_within_net": 119916,
+    "pearson_r_cross_net": 0.198247639873798,
+    "n_cross_net": 830215,
+    "q_marginal_min": 3.76190413982978e-96,
+    "q_marginal_max": 0.003972635187013052,
+    "fgw_dist": 0.015617427750542642
+  },
+  "_baseline_uniform": {
+    "pearson_r_overall": NaN,
+    "n_pairs_used": 2191371,
+    "n_human_nodes_kept": 2094,
+    "pred_mean": 0.024028630927205086,
+    "pred_std": 7.078051567077637e-08,
+    "actual_mean": 0.0054437951686022645,
+    "actual_std": 0.09187600840795031,
+    "pearson_r_within_net": NaN,
+    "n_within_net": 250230,
+    "pearson_r_cross_net": NaN,
+    "n_cross_net": 1941141
+  },
+  "_baseline_random": {
+    "pearson_r_mean": -0.0004836453828116562,
+    "pearson_r_std": 0.0034836555404860587,
+    "n_trials": 10
+  },
+  "hierarchical_fc_only": {
+    "pearson_r_overall": 0.39470737669547057,
+    "n_pairs_used": 309291,
+    "n_human_nodes_kept": 787,
+    "pred_mean": 0.03179280832409859,
+    "pred_std": 0.07403156906366348,
+    "actual_mean": 0.012834167571526058,
+    "actual_std": 0.08962997999350242,
+    "pearson_r_within_net": 0.5476831575028238,
+    "n_within_net": 37390,
+    "pearson_r_cross_net": 0.1611368694433197,
+    "n_cross_net": 271901
+  },
+  "subject_cv": {
+    "fc_plus_SC": {
+      "k_folds": 5,
+      "train_r_mean": 0.35665683630471845,
+      "train_r_std": 0.0022330237348987935,
+      "test_r_mean": 0.3178140779819579,
+      "test_r_std": 0.006122818668865836,
+      "test_within_r_mean": 0.41734918850658664,
+      "test_cross_r_mean": 0.1659364244240427,
+      "gap_mean": -0.03884275832276064,
+      "gap_std": 0.00830244753227562
+    },
+    "fc_only": {
+      "k_folds": 5,
+      "train_r_mean": 0.35969739553202584,
+      "train_r_std": 0.0020747251645553,
+      "test_r_mean": 0.3189183437722862,
+      "test_r_std": 0.005514201886222784,
+      "test_within_r_mean": 0.41951532740528386,
+      "test_cross_r_mean": 0.1663140097022664,
+      "gap_mean": -0.04077905175973969,
+      "gap_std": 0.007442089950153908
+    }
+  }
+}
