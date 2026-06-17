@@ -33,7 +33,14 @@ def adatas() -> dict[str, ad.AnnData]:
             A, _ = load_cached(sp, cache_dir=CACHE)
             out[sp] = A
         else:
-            out[sp] = build_anndata(sp, cache_dir=CACHE, overwrite=True)
+            try:
+                out[sp] = build_anndata(sp, cache_dir=CACHE, overwrite=True)
+            except FileNotFoundError:
+                pytest.skip(
+                    f"{sp}: no cached .h5ad and no raw .mat source available. "
+                    "Run `python scripts/fetch_data.py` for the caches, or set "
+                    "DATA_DIR to the raw source to rebuild."
+                )
     return out
 
 
@@ -142,7 +149,14 @@ def test_voxel_indices_present_and_nonempty():
     """
     from homer.data import load_metadata, parse_t_table
     for sp in ("mouse",):  # mouse is small/fast; sufficient as a smoke test
-        meta = load_metadata(sp)
+        try:
+            meta = load_metadata(sp)
+        except FileNotFoundError:
+            pytest.skip(
+                "raw .mat source (DATA_DIR) not present; rebuilding metadata from "
+                "source is maintainer-only. Downstream users get the built caches "
+                "via `python scripts/fetch_data.py`."
+            )
         df = parse_t_table(meta["t"], meta["ht"])
         vox = df["voxel_indices"].tolist()
         assert len(vox) == 1864
@@ -172,6 +186,11 @@ def test_parse_t_table_with_synthetic():
 
 # Smoke test: data dir exists --------------------------------------------------
 def test_data_dir_present():
-    assert DATA_DIR.exists(), f"DATA_DIR not found: {DATA_DIR}"
+    if not DATA_DIR.exists():
+        pytest.skip(
+            f"DATA_DIR (raw .mat source) not present: {DATA_DIR}. Only needed to "
+            "rebuild the caches from source; downstream users fetch the built "
+            "caches via `python scripts/fetch_data.py`."
+        )
     assert (DATA_DIR / "corrs_human.mat").exists()
     assert (DATA_DIR / "corrs_mouse.mat").exists()
