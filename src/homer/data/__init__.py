@@ -7,12 +7,13 @@ Re-exports the public API at the package root for backward compatibility:
 The full sub-modules are also accessible:
     from homer.data import anchors, networks, eda, io
 """
-from homer.data import anchors, eda, io, networks, region_anchors, supplementary_anchors
+from homer.data import anchors, eda, fetch, io, networks, region_anchors, supplementary_anchors
 from homer.data.io import (
     DATA_DIR,
     build_anndata,
     load_cached,
     load_metadata,
+    load_pi,
     load_struct,
     parse_t_table,
     stream_mean_fc,
@@ -21,6 +22,7 @@ from homer.data.io import (
     _MAT_TOPKEY,
     _mat_path,
 )
+from homer.data.fetch import DataNotFound, ensure_data, fetch_tier
 from homer.data.anchors import (
     AnchorIndex,
     assign_parcels_to_nearest_anchor_region,
@@ -42,9 +44,11 @@ from homer.data.networks import (
 
 __all__ = [
     # io
-    "DATA_DIR", "build_anndata", "load_cached", "load_metadata", "load_struct",
-    "parse_t_table", "stream_mean_fc", "stream_mean_fc_subset",
+    "DATA_DIR", "build_anndata", "load_cached", "load_metadata", "load_pi",
+    "load_struct", "parse_t_table", "stream_mean_fc", "stream_mean_fc_subset",
     "stream_subject_nan_stats",
+    # fetch
+    "DataNotFound", "ensure_data", "fetch_tier",
     # anchors
     "AnchorIndex", "get_anchor_index", "held_out_indices", "held_out_metrics",
     "held_out_metrics_graded", "kfold_pair_ids", "metrics_summary",
@@ -53,5 +57,5 @@ __all__ = [
     # networks
     "NETWORKS", "PAIRID_TO_NETWORK", "assign_networks", "network_mismatch_mask",
     # sub-modules
-    "anchors", "eda", "io", "networks",
+    "anchors", "eda", "fetch", "io", "networks",
 ]

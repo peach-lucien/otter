@@ -770,7 +770,14 @@ def load_cached(
         ``rr`` is mmap-loaded if ``{species}.fc.npy`` exists; otherwise None.
     """
     cache_dir = Path(cache_dir)
-    A = ad.read_h5ad(cache_dir / f"{species}.h5ad")
+    h5_path = cache_dir / f"{species}.h5ad"
+    if not h5_path.exists():
+        # Prompt to fetch the data bundle (or raise a clear, actionable error)
+        # instead of letting read_h5ad raise a bare FileNotFoundError.
+        from homer.data.fetch import ensure_data
+        ensure_data([f"outputs/anndata/{species}.h5ad"],
+                    what=f"load_cached({species!r})")
+    A = ad.read_h5ad(h5_path)
 
     if strict_schema:
         try:
@@ -804,3 +811,19 @@ def load_cached(
     fc_path = cache_dir / f"{species}.fc.npy"
     rr = np.load(fc_path, mmap_mode="r") if fc_path.exists() else None
     return A, rr
+
+
+def load_pi(name: str = "pi_fc_plus_SC_with_all_packs.npy",
+            *, coupling_dir: Path | None = None) -> np.ndarray:
+    """Load a coupling matrix, fetching the data bundle first if it's absent.
+
+    Defaults to the recommended coupling. Prefer this over a bare
+    ``np.load("outputs/coupling/...")`` so a fresh user is prompted to fetch the
+    data (or gets a clear error) rather than a bare ``FileNotFoundError``.
+    """
+    from homer.data.fetch import ensure_data, find_root
+    root = find_root()
+    coupling_dir = Path(coupling_dir) if coupling_dir is not None else root / "outputs" / "coupling"
+    if not (coupling_dir / name).exists():
+        ensure_data([f"outputs/coupling/{name}"], what=f"load_pi({name!r})")
+    return np.load(coupling_dir / name)
