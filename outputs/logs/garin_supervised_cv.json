@@ -1,0 +1,259 @@
+{
+  "config": {
+    "alpha": 0.5,
+    "epsilon": 0.005,
+    "lam": 1.0,
+    "use_xyz": true,
+    "xyz_weight": 0.5,
+    "n_restarts": 6,
+    "max_iter": 1500,
+    "n_splits": 5,
+    "seed": 42
+  },
+  "aggregated": {
+    "held_top1_mean": 1.0,
+    "held_top1_std": 0.0,
+    "held_pair_mean": 1.0,
+    "held_pair_std": 0.0,
+    "held_hemi_mean": 1.0,
+    "held_hemi_std": 0.0,
+    "overall_pair_mean": 1.0
+  },
+  "folds": [
+    {
+      "fold": 0,
+      "visible": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        12,
+        14,
+        15,
+        18,
+        19,
+        20
+      ],
+      "held_out": [
+        11,
+        13,
+        16,
+        17,
+        21
+      ],
+      "held_out_metrics": {
+        "top1": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "n": 10
+      },
+      "overall_metrics": {
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "n": 42
+      },
+      "best_loss": 0.07062738074096436,
+      "loss_range": [
+        0.07062738074096436,
+        0.07062738074096588
+      ],
+      "elapsed": 1.9
+    },
+    {
+      "fold": 1,
+      "visible": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        9,
+        11,
+        12,
+        13,
+        14,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "held_out": [
+        7,
+        8,
+        10,
+        15
+      ],
+      "held_out_metrics": {
+        "top1": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "n": 8
+      },
+      "overall_metrics": {
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "n": 42
+      },
+      "best_loss": 0.07053528752078042,
+      "loss_range": [
+        0.07053528752078042,
+        0.07053528752078923
+      ],
+      "elapsed": 1.9
+    },
+    {
+      "fold": 2,
+      "visible": [
+        2,
+        3,
+        5,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19,
+        20,
+        21
+      ],
+      "held_out": [
+        1,
+        4,
+        6,
+        18
+      ],
+      "held_out_metrics": {
+        "top1": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "n": 8
+      },
+      "overall_metrics": {
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "n": 42
+      },
+      "best_loss": 0.07049635213891552,
+      "loss_range": [
+        0.07049635213891552,
+        0.07049635213891552
+      ],
+      "elapsed": 1.3
+    },
+    {
+      "fold": 3,
+      "visible": [
+        1,
+        2,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        21
+      ],
+      "held_out": [
+        3,
+        5,
+        12,
+        20
+      ],
+      "held_out_metrics": {
+        "top1": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "n": 8
+      },
+      "overall_metrics": {
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "n": 42
+      },
+      "best_loss": 0.07044842968343115,
+      "loss_range": [
+        0.07044842968343115,
+        0.07044842968359818
+      ],
+      "elapsed": 0.6
+    },
+    {
+      "fold": 4,
+      "visible": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17,
+        18,
+        20,
+        21
+      ],
+      "held_out": [
+        2,
+        9,
+        14,
+        19
+      ],
+      "held_out_metrics": {
+        "top1": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "n": 8
+      },
+      "overall_metrics": {
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "n": 42
+      },
+      "best_loss": 0.0703953633638329,
+      "loss_range": [
+        0.0703953633638329,
+        0.0703953633638329
+      ],
+      "elapsed": 0.7
+    }
+  ]
+}

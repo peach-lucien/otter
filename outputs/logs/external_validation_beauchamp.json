@@ -1,0 +1,9 @@
+{
+  "gene_homolog_overlap": {
+    "ours_n": 51,
+    "theirs_n": 3331,
+    "shared": 48,
+    "frac_ours_shared": 0.9411764705882353,
+    "frac_theirs_shared": 0.01441008706094266
+  }
+}

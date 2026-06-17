@@ -1,0 +1,109 @@
+{
+  "_held_out": {
+    "31": {
+      "top1": 0.3333333333333333,
+      "mean_rank": 34.666666666666664,
+      "n_mouse": 6,
+      "n_human": 18,
+      "elapsed_s": 4.9
+    },
+    "32": {
+      "top1": 0.0425531914893617,
+      "mean_rank": 57.57446808510638,
+      "n_mouse": 47,
+      "n_human": 10,
+      "elapsed_s": 4.9
+    },
+    "33": {
+      "top1": 0.11475409836065574,
+      "mean_rank": 33.85245901639344,
+      "n_mouse": 61,
+      "n_human": 10,
+      "elapsed_s": 4.9
+    },
+    "34": {
+      "top1": 0.06315789473684211,
+      "mean_rank": 209.33684210526314,
+      "n_mouse": 95,
+      "n_human": 11,
+      "elapsed_s": 4.9
+    },
+    "35": {
+      "top1": 0.0,
+      "mean_rank": 1448.764705882353,
+      "n_mouse": 17,
+      "n_human": 17,
+      "elapsed_s": 4.9
+    },
+    "36": {
+      "top1": 0.0,
+      "mean_rank": 1480.0,
+      "n_mouse": 9,
+      "n_human": 17,
+      "elapsed_s": 4.9
+    },
+    "37": {
+      "top1": 0.2222222222222222,
+      "mean_rank": 277.0,
+      "n_mouse": 9,
+      "n_human": 12,
+      "elapsed_s": 4.9
+    },
+    "38": {
+      "top1": 0.1,
+      "mean_rank": 953.7,
+      "n_mouse": 20,
+      "n_human": 7,
+      "elapsed_s": 4.9
+    },
+    "39": {
+      "top1": 0.025,
+      "mean_rank": 809.0,
+      "n_mouse": 40,
+      "n_human": 11,
+      "elapsed_s": 4.9
+    },
+    "41": {
+      "top1": 0.0,
+      "mean_rank": 1388.0,
+      "n_mouse": 149,
+      "n_human": 14,
+      "elapsed_s": 4.9
+    },
+    "44": {
+      "top1": 0.08333333333333333,
+      "mean_rank": 35.041666666666664,
+      "n_mouse": 24,
+      "n_human": 7,
+      "elapsed_s": 4.9
+    },
+    "46": {
+      "top1": 0.0,
+      "mean_rank": 1393.0,
+      "n_mouse": 149,
+      "n_human": 10,
+      "elapsed_s": 4.9
+    },
+    "47": {
+      "top1": 0.03636363636363636,
+      "mean_rank": 103.54545454545455,
+      "n_mouse": 55,
+      "n_human": 7,
+      "elapsed_s": 4.9
+    },
+    "48": {
+      "top1": 0.019230769230769232,
+      "mean_rank": 1883.7115384615386,
+      "n_mouse": 52,
+      "n_human": 1,
+      "elapsed_s": 4.9
+    },
+    "51": {
+      "top1": 0.018867924528301886,
+      "mean_rank": 659.3584905660377,
+      "n_mouse": 53,
+      "n_human": 5,
+      "elapsed_s": 4.9
+    }
+  }
+}

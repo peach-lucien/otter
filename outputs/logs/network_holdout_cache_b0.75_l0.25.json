@@ -1,0 +1,144 @@
+[
+  {
+    "network": "auditory",
+    "n_anchors_held": 2,
+    "n_pair_ids_held": 1,
+    "held_pair_ids": [
+      7
+    ],
+    "top1": 1.0,
+    "pair_id": 1.0,
+    "hemi": 1.0,
+    "elapsed": 4.8
+  },
+  {
+    "network": "brainstem",
+    "n_anchors_held": 4,
+    "n_pair_ids_held": 2,
+    "held_pair_ids": [
+      20,
+      21
+    ],
+    "top1": 0.5,
+    "pair_id": 0.5,
+    "hemi": 1.0,
+    "elapsed": 4.8
+  },
+  {
+    "network": "frontal_dmn",
+    "n_anchors_held": 2,
+    "n_pair_ids_held": 1,
+    "held_pair_ids": [
+      1
+    ],
+    "top1": 1.0,
+    "pair_id": 1.0,
+    "hemi": 1.0,
+    "elapsed": 4.8
+  },
+  {
+    "network": "frontoparietal",
+    "n_anchors_held": 2,
+    "n_pair_ids_held": 1,
+    "held_pair_ids": [
+      4
+    ],
+    "top1": 1.0,
+    "pair_id": 1.0,
+    "hemi": 1.0,
+    "elapsed": 4.8
+  },
+  {
+    "network": "limbic",
+    "n_anchors_held": 6,
+    "n_pair_ids_held": 3,
+    "held_pair_ids": [
+      10,
+      12,
+      17
+    ],
+    "top1": 1.0,
+    "pair_id": 1.0,
+    "hemi": 1.0,
+    "elapsed": 4.8
+  },
+  {
+    "network": "olfactory",
+    "n_anchors_held": 2,
+    "n_pair_ids_held": 1,
+    "held_pair_ids": [
+      11
+    ],
+    "top1": 1.0,
+    "pair_id": 1.0,
+    "hemi": 1.0,
+    "elapsed": 4.8
+  },
+  {
+    "network": "salience",
+    "n_anchors_held": 4,
+    "n_pair_ids_held": 2,
+    "held_pair_ids": [
+      9,
+      16
+    ],
+    "top1": 0.5,
+    "pair_id": 0.5,
+    "hemi": 1.0,
+    "elapsed": 4.8
+  },
+  {
+    "network": "sensorimotor",
+    "n_anchors_held": 4,
+    "n_pair_ids_held": 2,
+    "held_pair_ids": [
+      2,
+      3
+    ],
+    "top1": 0.5,
+    "pair_id": 0.5,
+    "hemi": 1.0,
+    "elapsed": 5.0
+  },
+  {
+    "network": "subcortical",
+    "n_anchors_held": 10,
+    "n_pair_ids_held": 5,
+    "held_pair_ids": [
+      13,
+      14,
+      15,
+      18,
+      19
+    ],
+    "top1": 1.0,
+    "pair_id": 1.0,
+    "hemi": 1.0,
+    "elapsed": 4.8
+  },
+  {
+    "network": "temporal_dmn",
+    "n_anchors_held": 2,
+    "n_pair_ids_held": 1,
+    "held_pair_ids": [
+      8
+    ],
+    "top1": 1.0,
+    "pair_id": 1.0,
+    "hemi": 1.0,
+    "elapsed": 4.8
+  },
+  {
+    "network": "visual",
+    "n_anchors_held": 4,
+    "n_pair_ids_held": 2,
+    "held_pair_ids": [
+      5,
+      6
+    ],
+    "top1": 0.5,
+    "pair_id": 0.5,
+    "hemi": 1.0,
+    "elapsed": 4.8
+  }
+]

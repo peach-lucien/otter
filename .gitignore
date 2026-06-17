@@ -34,7 +34,11 @@ outputs/anndata/*.npy
 outputs/anndata/*.npz
 outputs/coupling/
 outputs/figures/
-outputs/logs/
+# logs: ignore the dir's contents EXCEPT the small result files, which we commit
+# so a fresh clone can read every headline number without downloading the data.
+outputs/logs/*
+!outputs/logs/*.json
+!outputs/logs/*.csv
 outputs/comparison/
 outputs/viewer/
 outputs/gui/

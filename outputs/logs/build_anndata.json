@@ -1,0 +1,36 @@
+{
+  "human": {
+    "elapsed_sec": 13.1,
+    "n_subjects": 113,
+    "n_nodes": 2094,
+    "garin_anchors": 42,
+    "fc_mean_shape": [
+      2094,
+      2094
+    ],
+    "fc_diag_mean": 1.0,
+    "fc_n_obs_min": 100,
+    "fc_n_obs_max": 113,
+    "fc_cells_full": 3721041,
+    "fc_cells_partial": 663795,
+    "fc_cells_zero": 0,
+    "h5ad_path": "/sessions/wizardly-admiring-tesla/mnt/brain_crossspecies_translation/moscot/outputs/anndata/human.h5ad"
+  },
+  "mouse": {
+    "elapsed_sec": 10.1,
+    "n_subjects": 105,
+    "n_nodes": 1864,
+    "garin_anchors": 42,
+    "fc_mean_shape": [
+      1864,
+      1864
+    ],
+    "fc_diag_mean": 1.0,
+    "fc_n_obs_min": 105,
+    "fc_n_obs_max": 105,
+    "fc_cells_full": 3474496,
+    "fc_cells_partial": 0,
+    "fc_cells_zero": 0,
+    "h5ad_path": "/sessions/wizardly-admiring-tesla/mnt/brain_crossspecies_translation/moscot/outputs/anndata/mouse.h5ad"
+  }
+}

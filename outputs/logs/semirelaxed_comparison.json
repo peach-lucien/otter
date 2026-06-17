@@ -1,0 +1,11 @@
+{
+  "n_human_nodes_total": 2094,
+  "n_uncovered_semirelaxed": 801,
+  "frac_uncovered_semirelaxed": 0.3825214899713467,
+  "n_uncovered_balanced": 0,
+  "anchor_diag_mass_sr": 0.022532188799232244,
+  "anchor_diag_mass_bl": 0.020057308953255415,
+  "leak_sr": 0.0,
+  "leak_bl": 0.0024748802488988794,
+  "threshold_used": 0.0002387774594078319
+}

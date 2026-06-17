@@ -1,0 +1,12 @@
+{
+  "config": "fc_plus_SC",
+  "n_iterations": 40,
+  "argmax_row_stability_mean": 0.9821217811158798,
+  "argmax_row_stability_median": 1.0,
+  "argmax_row_frac_above_0.8": 0.9645922746781116,
+  "argmax_row_frac_above_0.5": 0.996244635193133,
+  "argmax_row_frac_perfect": 0.8948497854077253,
+  "cell_stability_mean": 0.9999377727508545,
+  "cell_stability_median": 1.0,
+  "cell_frac_stable_above_0.8": 0.999884198056167
+}

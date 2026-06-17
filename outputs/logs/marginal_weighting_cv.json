@@ -1,0 +1,323 @@
+{
+  "uniform": {
+    "31": {
+      "top1": 0.3333333333333333,
+      "mean_rank": 23.333333333333332,
+      "n_mouse": 6,
+      "n_human": 18,
+      "elapsed_s": 5.1
+    },
+    "32": {
+      "top1": 0.0425531914893617,
+      "mean_rank": 59.08510638297872,
+      "n_mouse": 47,
+      "n_human": 10,
+      "elapsed_s": 5.0
+    },
+    "33": {
+      "top1": 0.11475409836065574,
+      "mean_rank": 29.21311475409836,
+      "n_mouse": 61,
+      "n_human": 10,
+      "elapsed_s": 5.0
+    },
+    "34": {
+      "top1": 0.05263157894736842,
+      "mean_rank": 218.21052631578948,
+      "n_mouse": 95,
+      "n_human": 11,
+      "elapsed_s": 5.0
+    },
+    "35": {
+      "top1": 0.0,
+      "mean_rank": 1433.5882352941176,
+      "n_mouse": 17,
+      "n_human": 17,
+      "elapsed_s": 5.0
+    },
+    "36": {
+      "top1": 0.0,
+      "mean_rank": 1545.888888888889,
+      "n_mouse": 9,
+      "n_human": 17,
+      "elapsed_s": 5.0
+    },
+    "37": {
+      "top1": 0.2222222222222222,
+      "mean_rank": 285.6666666666667,
+      "n_mouse": 9,
+      "n_human": 12,
+      "elapsed_s": 5.0
+    },
+    "38": {
+      "top1": 0.1,
+      "mean_rank": 962.15,
+      "n_mouse": 20,
+      "n_human": 7,
+      "elapsed_s": 4.9
+    },
+    "39": {
+      "top1": 0.025,
+      "mean_rank": 787.375,
+      "n_mouse": 40,
+      "n_human": 11,
+      "elapsed_s": 5.0
+    },
+    "41": {
+      "top1": 0.0,
+      "mean_rank": 1388.0,
+      "n_mouse": 149,
+      "n_human": 14,
+      "elapsed_s": 5.0
+    },
+    "44": {
+      "top1": 0.08333333333333333,
+      "mean_rank": 22.0,
+      "n_mouse": 24,
+      "n_human": 7,
+      "elapsed_s": 5.0
+    },
+    "46": {
+      "top1": 0.0,
+      "mean_rank": 1393.0,
+      "n_mouse": 149,
+      "n_human": 10,
+      "elapsed_s": 5.0
+    },
+    "47": {
+      "top1": 0.03636363636363636,
+      "mean_rank": 82.6,
+      "n_mouse": 55,
+      "n_human": 7,
+      "elapsed_s": 5.0
+    },
+    "48": {
+      "top1": 0.019230769230769232,
+      "mean_rank": 1830.3076923076924,
+      "n_mouse": 52,
+      "n_human": 1,
+      "elapsed_s": 5.0
+    },
+    "51": {
+      "top1": 0.018867924528301886,
+      "mean_rank": 591.3962264150944,
+      "n_mouse": 53,
+      "n_human": 5,
+      "elapsed_s": 5.0
+    }
+  },
+  "volume": {
+    "31": {
+      "top1": 0.3333333333333333,
+      "mean_rank": 20.5,
+      "n_mouse": 6,
+      "n_human": 18,
+      "elapsed_s": 5.0
+    },
+    "32": {
+      "top1": 0.0425531914893617,
+      "mean_rank": 57.212765957446805,
+      "n_mouse": 47,
+      "n_human": 10,
+      "elapsed_s": 5.0
+    },
+    "33": {
+      "top1": 0.09836065573770492,
+      "mean_rank": 37.295081967213115,
+      "n_mouse": 61,
+      "n_human": 10,
+      "elapsed_s": 5.0
+    },
+    "34": {
+      "top1": 0.05263157894736842,
+      "mean_rank": 204.90526315789472,
+      "n_mouse": 95,
+      "n_human": 11,
+      "elapsed_s": 5.0
+    },
+    "35": {
+      "top1": 0.0,
+      "mean_rank": 1371.1176470588234,
+      "n_mouse": 17,
+      "n_human": 17,
+      "elapsed_s": 5.0
+    },
+    "36": {
+      "top1": 0.0,
+      "mean_rank": 1416.3333333333333,
+      "n_mouse": 9,
+      "n_human": 17,
+      "elapsed_s": 5.0
+    },
+    "37": {
+      "top1": 0.2222222222222222,
+      "mean_rank": 282.0,
+      "n_mouse": 9,
+      "n_human": 12,
+      "elapsed_s": 5.0
+    },
+    "38": {
+      "top1": 0.1,
+      "mean_rank": 956.9,
+      "n_mouse": 20,
+      "n_human": 7,
+      "elapsed_s": 5.0
+    },
+    "39": {
+      "top1": 0.025,
+      "mean_rank": 740.825,
+      "n_mouse": 40,
+      "n_human": 11,
+      "elapsed_s": 5.0
+    },
+    "41": {
+      "top1": 0.0,
+      "mean_rank": 1388.0,
+      "n_mouse": 149,
+      "n_human": 14,
+      "elapsed_s": 5.0
+    },
+    "44": {
+      "top1": 0.08333333333333333,
+      "mean_rank": 23.75,
+      "n_mouse": 24,
+      "n_human": 7,
+      "elapsed_s": 5.0
+    },
+    "46": {
+      "top1": 0.0,
+      "mean_rank": 1393.0,
+      "n_mouse": 149,
+      "n_human": 10,
+      "elapsed_s": 5.0
+    },
+    "47": {
+      "top1": 0.03636363636363636,
+      "mean_rank": 89.12727272727273,
+      "n_mouse": 55,
+      "n_human": 7,
+      "elapsed_s": 5.0
+    },
+    "48": {
+      "top1": 0.019230769230769232,
+      "mean_rank": 1836.7307692307693,
+      "n_mouse": 52,
+      "n_human": 1,
+      "elapsed_s": 5.0
+    },
+    "51": {
+      "top1": 0.018867924528301886,
+      "mean_rank": 599.5471698113207,
+      "n_mouse": 53,
+      "n_human": 5,
+      "elapsed_s": 5.0
+    }
+  },
+  "stability": {
+    "31": {
+      "top1": 0.3333333333333333,
+      "mean_rank": 23.166666666666668,
+      "n_mouse": 6,
+      "n_human": 18,
+      "elapsed_s": 5.0
+    },
+    "32": {
+      "top1": 0.0425531914893617,
+      "mean_rank": 59.1063829787234,
+      "n_mouse": 47,
+      "n_human": 10,
+      "elapsed_s": 5.0
+    },
+    "33": {
+      "top1": 0.11475409836065574,
+      "mean_rank": 29.24590163934426,
+      "n_mouse": 61,
+      "n_human": 10,
+      "elapsed_s": 5.0
+    },
+    "34": {
+      "top1": 0.05263157894736842,
+      "mean_rank": 218.37894736842105,
+      "n_mouse": 95,
+      "n_human": 11,
+      "elapsed_s": 5.0
+    },
+    "35": {
+      "top1": 0.0,
+      "mean_rank": 1423.764705882353,
+      "n_mouse": 17,
+      "n_human": 17,
+      "elapsed_s": 5.0
+    },
+    "36": {
+      "top1": 0.0,
+      "mean_rank": 1560.3333333333333,
+      "n_mouse": 9,
+      "n_human": 17,
+      "elapsed_s": 5.0
+    },
+    "37": {
+      "top1": 0.2222222222222222,
+      "mean_rank": 285.8888888888889,
+      "n_mouse": 9,
+      "n_human": 12,
+      "elapsed_s": 5.0
+    },
+    "38": {
+      "top1": 0.1,
+      "mean_rank": 961.9,
+      "n_mouse": 20,
+      "n_human": 7,
+      "elapsed_s": 5.0
+    },
+    "39": {
+      "top1": 0.025,
+      "mean_rank": 787.325,
+      "n_mouse": 40,
+      "n_human": 11,
+      "elapsed_s": 5.0
+    },
+    "41": {
+      "top1": 0.0,
+      "mean_rank": 1388.0,
+      "n_mouse": 149,
+      "n_human": 14,
+      "elapsed_s": 5.0
+    },
+    "44": {
+      "top1": 0.08333333333333333,
+      "mean_rank": 21.958333333333332,
+      "n_mouse": 24,
+      "n_human": 7,
+      "elapsed_s": 5.0
+    },
+    "46": {
+      "top1": 0.0,
+      "mean_rank": 1393.0,
+      "n_mouse": 149,
+      "n_human": 10,
+      "elapsed_s": 5.0
+    },
+    "47": {
+      "top1": 0.03636363636363636,
+      "mean_rank": 82.54545454545455,
+      "n_mouse": 55,
+      "n_human": 7,
+      "elapsed_s": 5.0
+    },
+    "48": {
+      "top1": 0.019230769230769232,
+      "mean_rank": 1829.0961538461538,
+      "n_mouse": 52,
+      "n_human": 1,
+      "elapsed_s": 5.0
+    },
+    "51": {
+      "top1": 0.018867924528301886,
+      "mean_rank": 590.9811320754717,
+      "n_mouse": 53,
+      "n_human": 5,
+      "elapsed_s": 5.0
+    }
+  }
+}

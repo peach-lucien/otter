@@ -1,0 +1,13 @@
+{
+  "median_distance_actual": 0.2625998210276988,
+  "median_distance_random": 0.5040983984086826,
+  "mean_distance_actual": 0.2777377883263312,
+  "mean_distance_random": 0.5103695130293014,
+  "frac_within_0.1_actual": 0.06586169045005488,
+  "frac_within_0.2_actual": 0.3013172338090011,
+  "frac_within_0.3_actual": 0.6212952799121844,
+  "frac_within_0.1_random": 0.0043907793633369925,
+  "frac_within_0.2_random": 0.03567508232711306,
+  "frac_within_0.3_random": 0.1300768386388584,
+  "n_grid_nodes": 1822
+}

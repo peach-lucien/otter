@@ -1,0 +1,57 @@
+{
+  "n_bootstraps": 500,
+  "results": {
+    "bipolar_disorder": {
+      "n_overlap": 109,
+      "r_observed": 0.5499595013810434,
+      "p_analytical": 0.15788253110555742,
+      "boot_mean": 0.5489913112614527,
+      "boot_ci95": [
+        0.5116062215959742,
+        0.5881861757571603
+      ],
+      "pct_positive": 1.0
+    },
+    "schizophrenia": {
+      "n_overlap": 530,
+      "r_observed": 0.5567222351064143,
+      "p_analytical": 0.15177860915161825,
+      "boot_mean": 0.5568764930122686,
+      "boot_ci95": [
+        0.5388683750541824,
+        0.5744074563949434
+      ],
+      "pct_positive": 1.0
+    },
+    "psoriasis": {
+      "n_overlap": 2,
+      "skipped": true
+    },
+    "dementia": {
+      "n_overlap": 0,
+      "skipped": true
+    },
+    "adhd": {
+      "n_overlap": 30,
+      "r_observed": 0.5862039257914906,
+      "p_analytical": 0.12670968460365375,
+      "boot_mean": 0.5821867435890518,
+      "boot_ci95": [
+        0.5318976870093284,
+        0.6330189717640168
+      ],
+      "pct_positive": 1.0
+    },
+    "autism_combined": {
+      "n_overlap": 1713,
+      "r_observed": 0.5549385682063783,
+      "p_analytical": 0.15337572770914207,
+      "boot_mean": 0.5549518251970089,
+      "boot_ci95": [
+        0.5459704641867847,
+        0.5635337259706649
+      ],
+      "pct_positive": 1.0
+    }
+  }
+}

@@ -1,0 +1,471 @@
+{
+  "per_pair": [
+    {
+      "pair": "Piriform area -> jubrain_159",
+      "n_mouse_parcels": 47,
+      "n_human_parcels": 5,
+      "rank": 5,
+      "score_true": 0.04230758909838702,
+      "fold_enrichment": 17.718418314404484,
+      "top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": true
+      },
+      "qualified_top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": true
+      },
+      "total_mass_in_candidates": 0.46978666843470634,
+      "is_anchor_overlapping": true
+    },
+    {
+      "pair": "Subiculum -> jubrain_80",
+      "n_mouse_parcels": 29,
+      "n_human_parcels": 4,
+      "rank": 56,
+      "score_true": 2.7020899969806533e-43,
+      "fold_enrichment": 1.414544113419372e-40,
+      "top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "qualified_top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "total_mass_in_candidates": 0.7935741631147359,
+      "is_anchor_overlapping": false
+    },
+    {
+      "pair": "Field CA1 -> jubrain_80",
+      "n_mouse_parcels": 15,
+      "n_human_parcels": 4,
+      "rank": 42,
+      "score_true": 0.0,
+      "fold_enrichment": 0.0,
+      "top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "qualified_top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "total_mass_in_candidates": 0.8104464853759936,
+      "is_anchor_overlapping": false
+    },
+    {
+      "pair": "Field CA3 -> jubrain_80",
+      "n_mouse_parcels": 26,
+      "n_human_parcels": 4,
+      "rank": 15,
+      "score_true": 6.510616199584172e-12,
+      "fold_enrichment": 3.4083075804823143e-09,
+      "top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "qualified_top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "total_mass_in_candidates": 0.5933551882117709,
+      "is_anchor_overlapping": false
+    },
+    {
+      "pair": "Dentate gyrus -> jubrain_80",
+      "n_mouse_parcels": 22,
+      "n_human_parcels": 4,
+      "rank": 48,
+      "score_true": 8.310973778286174e-43,
+      "fold_enrichment": 4.3507947729328124e-40,
+      "top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "qualified_top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "total_mass_in_candidates": 0.7370585496913877,
+      "is_anchor_overlapping": false
+    },
+    {
+      "pair": "Anterior cingulate area -> jubrain_18",
+      "n_mouse_parcels": 23,
+      "n_human_parcels": 11,
+      "rank": 2,
+      "score_true": 0.13013615214645471,
+      "fold_enrichment": 24.773191144970564,
+      "top_k_hits": {
+        "1": false,
+        "3": true,
+        "5": true
+      },
+      "qualified_top_k_hits": {
+        "1": false,
+        "3": true,
+        "5": true
+      },
+      "total_mass_in_candidates": 0.8772133399065541,
+      "is_anchor_overlapping": true
+    },
+    {
+      "pair": "Primary auditory area -> jubrain_15",
+      "n_mouse_parcels": 9,
+      "n_human_parcels": 5,
+      "rank": 17,
+      "score_true": 0.0,
+      "fold_enrichment": 0.0,
+      "top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "qualified_top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "total_mass_in_candidates": 0.7777777769944562,
+      "is_anchor_overlapping": true
+    },
+    {
+      "pair": "Primary motor area -> jubrain_92",
+      "n_mouse_parcels": 53,
+      "n_human_parcels": 10,
+      "rank": 17,
+      "score_true": 5.224412012795283e-33,
+      "fold_enrichment": 1.0939918754793321e-30,
+      "top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "qualified_top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "total_mass_in_candidates": 0.7735841935482437,
+      "is_anchor_overlapping": true
+    },
+    {
+      "pair": "Primary somatosensory area -> jubrain_124",
+      "n_mouse_parcels": 155,
+      "n_human_parcels": 18,
+      "rank": 5,
+      "score_true": 0.050958653759503945,
+      "fold_enrichment": 5.928190054022292,
+      "top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": true
+      },
+      "qualified_top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": true
+      },
+      "total_mass_in_candidates": 0.655486206054681,
+      "is_anchor_overlapping": true
+    },
+    {
+      "pair": "Visual areas -> jubrain_149",
+      "n_mouse_parcels": 54,
+      "n_human_parcels": 32,
+      "rank": 10,
+      "score_true": 0.037037037079152714,
+      "fold_enrichment": 2.423611113867056,
+      "top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "qualified_top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "total_mass_in_candidates": 1.0,
+      "is_anchor_overlapping": true
+    },
+    {
+      "pair": "Pallidum -> globus pallidus",
+      "n_mouse_parcels": 44,
+      "n_human_parcels": 6,
+      "rank": 7,
+      "score_true": 0.04545454551052437,
+      "fold_enrichment": 15.863636383173006,
+      "top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "qualified_top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "total_mass_in_candidates": 0.707049925963951,
+      "is_anchor_overlapping": true
+    },
+    {
+      "pair": "Striatum ventral region -> nucleus accumbens",
+      "n_mouse_parcels": 26,
+      "n_human_parcels": 2,
+      "rank": 4,
+      "score_true": 0.09492528392678191,
+      "fold_enrichment": 99.38677227134066,
+      "top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": true
+      },
+      "qualified_top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": true
+      },
+      "total_mass_in_candidates": 0.638426465460175,
+      "is_anchor_overlapping": true
+    },
+    {
+      "pair": "Caudoputamen -> caudate nucleus",
+      "n_mouse_parcels": 149,
+      "n_human_parcels": 24,
+      "rank": 1,
+      "score_true": 0.13376575682460942,
+      "fold_enrichment": 11.671062282947172,
+      "top_k_hits": {
+        "1": true,
+        "3": true,
+        "5": true
+      },
+      "qualified_top_k_hits": {
+        "1": true,
+        "3": true,
+        "5": true
+      },
+      "total_mass_in_candidates": 0.5789922158630083,
+      "is_anchor_overlapping": true
+    },
+    {
+      "pair": "Cortical subplate-other -> jubrain_159",
+      "n_mouse_parcels": 54,
+      "n_human_parcels": 5,
+      "rank": 19,
+      "score_true": 3.976670863611488e-29,
+      "fold_enrichment": 1.6654297576804909e-26,
+      "top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "qualified_top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "total_mass_in_candidates": 0.5558031861095701,
+      "is_anchor_overlapping": true
+    },
+    {
+      "pair": "Inferior colliculus -> inferior colliculus",
+      "n_mouse_parcels": 29,
+      "n_human_parcels": 4,
+      "rank": 25,
+      "score_true": 0.0,
+      "fold_enrichment": 0.0,
+      "top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "qualified_top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "total_mass_in_candidates": 1.0,
+      "is_anchor_overlapping": true
+    },
+    {
+      "pair": "Superior colliculus, sensory related -> superior colliculus",
+      "n_mouse_parcels": 53,
+      "n_human_parcels": 2,
+      "rank": 27,
+      "score_true": 0.0,
+      "fold_enrichment": 0.0,
+      "top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "qualified_top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "total_mass_in_candidates": 0.7169810425878729,
+      "is_anchor_overlapping": true
+    },
+    {
+      "pair": "Pons -> pons",
+      "n_mouse_parcels": 69,
+      "n_human_parcels": 6,
+      "rank": 8,
+      "score_true": 0.02898550729145575,
+      "fold_enrichment": 10.115942044718057,
+      "top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "qualified_top_k_hits": {
+        "1": false,
+        "3": false,
+        "5": false
+      },
+      "total_mass_in_candidates": 0.7684645056520829,
+      "is_anchor_overlapping": true
+    },
+    {
+      "pair": "Hypothalamus -> hypothalamus",
+      "n_mouse_parcels": 52,
+      "n_human_parcels": 4,
+      "rank": 2,
+      "score_true": 0.11538373872671671,
+      "fold_enrichment": 60.403387223436205,
+      "top_k_hits": {
+        "1": false,
+        "3": true,
+        "5": true
+      },
+      "qualified_top_k_hits": {
+        "1": false,
+        "3": true,
+        "5": true
+      },
+      "total_mass_in_candidates": 0.4468231334224791,
+      "is_anchor_overlapping": true
+    },
+    {
+      "pair": "Thalamus -> thalamus",
+      "n_mouse_parcels": 110,
+      "n_human_parcels": 22,
+      "rank": 1,
+      "score_true": 0.32760232890404345,
+      "fold_enrichment": 31.181785305684866,
+      "top_k_hits": {
+        "1": true,
+        "3": true,
+        "5": true
+      },
+      "qualified_top_k_hits": {
+        "1": true,
+        "3": true,
+        "5": true
+      },
+      "total_mass_in_candidates": 0.5794705573586484,
+      "is_anchor_overlapping": true
+    }
+  ],
+  "aggregate": {
+    "top_k": {
+      "1": 0.25417075564278707,
+      "3": 0.3277723258096173,
+      "5": 0.5515210991167812
+    },
+    "qualified_top_k": {
+      "1": 0.25417075564278707,
+      "3": 0.3277723258096173,
+      "5": 0.5515210991167812
+    },
+    "mean_rank": 10.656526005888125,
+    "median_rank": 10.0,
+    "mean_fold_enrichment": 14.467429240554845,
+    "median_fold_enrichment": 2.423611113867056,
+    "mean_total_mass_in_candidates": 0.6709148016426919
+  },
+  "n_candidates": 151,
+  "n_pairs_evaluated": 19,
+  "skipped": [
+    "Claustrum: empty mouse mask",
+    "Field CA2: empty mouse mask",
+    "myelencephalon: not in candidate set"
+  ],
+  "anchor_overlapping": {
+    "n_pairs": 15,
+    "n_parcels": 927,
+    "top_k": {
+      "1": 0.27939590075512405,
+      "3": 0.36030204962243795,
+      "5": 0.6062567421790723
+    },
+    "qualified_top_k": {
+      "1": 0.27939590075512405,
+      "3": 0.36030204962243795,
+      "5": 0.6062567421790723
+    },
+    "mean_rank": 7.722761596548004,
+    "mean_fold_enrichment": 15.903247460665341
+  },
+  "novel": {
+    "n_pairs": 4,
+    "n_parcels": 92,
+    "top_k": {
+      "1": 0.0,
+      "3": 0.0,
+      "5": 0.0
+    },
+    "qualified_top_k": {
+      "1": 0.0,
+      "3": 0.0,
+      "5": 0.0
+    },
+    "mean_rank": 40.21739130434783,
+    "mean_fold_enrichment": 9.632173597015236e-10
+  },
+  "candidate_set": "jubrain_union",
+  "null_column_permuted": {
+    "n_trials": 100,
+    "null_topk_mean": {
+      "1": 0.011265947006869479,
+      "3": 0.03844946025515211,
+      "5": 0.07928361138370951
+    },
+    "null_topk_std": {
+      "1": 0.03409990179622699,
+      "3": 0.06696020872357003,
+      "5": 0.08655926225347434
+    },
+    "null_fold_mean": 1.2755225380732027,
+    "null_fold_std": 0.9659819896695122
+  },
+  "null_source_permuted": {
+    "n_trials": 100,
+    "null_topk_mean": {
+      "1": 0.025289499509322865,
+      "3": 0.03287536800785084,
+      "5": 0.055191364082433754
+    },
+    "null_topk_std": {
+      "1": 0.04979226676954437,
+      "3": 0.051516425789263104,
+      "5": 0.06550995415524445
+    },
+    "null_fold_mean": 1.8168817839970737,
+    "null_fold_std": 1.824320684623648
+  }
+}

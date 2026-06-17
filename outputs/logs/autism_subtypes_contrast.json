@@ -1,0 +1,55 @@
+{
+  "metric": "abs_rowcol_sum",
+  "pi_file": "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy",
+  "mouse_delta": {
+    "Auditory": -76.0,
+    "BF": 17.0,
+    "Caudate Putamen": 61.0,
+    "DMN": -38.0,
+    "HC": 28.0,
+    "Salience": 14.0,
+    "Somatomotor": -44.0,
+    "Thalamus": 14.0,
+    "Visual": -49.0
+  },
+  "human_delta_observed": {
+    "Control": 55.709926184,
+    "DMN": 71.01568361,
+    "DorsAtten": 59.689279662,
+    "Limbic": 116.784566881,
+    "Salience": 121.465088035,
+    "SomatoMotor": 130.484142459,
+    "Visual": 105.31552274200001,
+    "Subcortical": 243.47989377
+  },
+  "human_delta_predicted": {
+    "Control": -0.004856290784817626,
+    "DMN": -0.002001061716322535,
+    "DorsAtten": -0.009952256281968495,
+    "Limbic": 0.01429032896543307,
+    "Salience": 0.0004713751731034656,
+    "SomatoMotor": -0.013916401334482022,
+    "Visual": 0.0005938788494319221,
+    "Subcortical": 0.00954043260757677
+  },
+  "pearson_r": 0.4944432559987693,
+  "pearson_p": 0.2129352452781152,
+  "spearman_r": 0.3333333333333334,
+  "spearman_p": 0.4197530864197531,
+  "null": {
+    "n_trials": 200,
+    "pearson_mean": -0.5133375840332478,
+    "pearson_ci95": [
+      -0.9133733770279907,
+      -0.0701399462866974
+    ],
+    "spearman_mean": -0.4746428571428572,
+    "spearman_ci95": [
+      -0.9047619047619048,
+      0.0005952380952382307
+    ],
+    "pearson_one_sided_p": 0.0,
+    "spearman_one_sided_p": 0.005
+  },
+  "verdict": "STRONG: real correlation above 95% null CI on both metrics"
+}

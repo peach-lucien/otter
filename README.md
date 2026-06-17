@@ -43,10 +43,17 @@ Skip this section if you just want to look at the couplings — use the [explore
 git clone <this-repo> homer && cd homer
 conda env create -f env.yml && conda activate homer
 pip install -e ".[dev]"
-pytest -q                            # ~10s, 176 tests
+pytest -q                            # ~10s, runs on a bare checkout (synthetic fixtures)
+python scripts/fetch_data.py         # pull the coupling + caches from Zenodo (~173 MB)
 ```
 
-Query a region after installation:
+The repository ships code only. The coupling, the processed AnnData caches, and
+the validation inputs live in a versioned Zenodo archive and are pulled by
+`scripts/fetch_data.py`; the committed result logs in `outputs/logs/` already let
+you read every headline number without downloading anything. See
+[`DATA.md`](DATA.md) for the tiers and what each contains. Data DOI: [10.5281/zenodo.20733163](https://doi.org/10.5281/zenodo.20733163).
+
+Query a region after installation (requires the fetched data):
 
 ```python
 import numpy as np

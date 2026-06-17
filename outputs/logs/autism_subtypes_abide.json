@@ -1,0 +1,46 @@
+{
+  "n_subjects": 871,
+  "n_valid": 817,
+  "n_asd": 377,
+  "n_control": 440,
+  "homer_template_dim": 2094,
+  "cc400_parcels": 116,
+  "by_feature": {
+    "abs": {
+      "asd_mean": 2.68757237185095e-05,
+      "asd_sd": 0.0006460988043093213,
+      "ctrl_mean": 4.538464095541938e-11,
+      "ctrl_sd": 0.0006229121868279494,
+      "u": 84514.0,
+      "p": 0.6398324796050301,
+      "cliffs": 0.01897757414998802,
+      "n_asd": 377,
+      "n_ctrl": 440
+    },
+    "signed": {
+      "asd_mean": 2.8006588912093694e-06,
+      "asd_sd": 0.0008006093952506691,
+      "ctrl_mean": -4.689311460049942e-11,
+      "ctrl_sd": 0.0007621647531318313,
+      "u": 83127.0,
+      "p": 0.9557703757232117,
+      "cliffs": 0.002254641909814392,
+      "n_asd": 377,
+      "n_ctrl": 440
+    }
+  },
+  "asd_score_mean": 2.8006588912093694e-06,
+  "asd_score_sd": 0.0008006093952506691,
+  "ctrl_score_mean": -4.689311460049942e-11,
+  "ctrl_score_sd": 0.0007621647531318313,
+  "mann_whitney_u": 83127.0,
+  "mann_whitney_p": 0.9557703757232117,
+  "cliffs_delta": 0.002254641909814392,
+  "within_asd_density_peaks": 1,
+  "gmm_bimodality": {
+    "delta_aic_2_minus_1": 5.99949987155469,
+    "delta_bic_2_minus_1": 17.7962354338988,
+    "two_comp_preferred_aic": false,
+    "two_comp_preferred_bic": false
+  }
+}

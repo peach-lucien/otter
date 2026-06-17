@@ -1,0 +1,5650 @@
+{
+  "random_pi": {
+    "auditory": [
+      {
+        "trial": 0,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 1,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 2,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 3,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 4,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 5,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 6,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 7,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 8,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 9,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 10,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8839594429176214
+      },
+      {
+        "trial": 11,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 12,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 13,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 14,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 15,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 16,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 17,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8839594429176214
+      },
+      {
+        "trial": 18,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8839594429176214
+      },
+      {
+        "trial": 19,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 20,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 21,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 22,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 23,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 24,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 25,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 26,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 27,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 28,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8839594429176214
+      },
+      {
+        "trial": 29,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 30,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8839594429176214
+      },
+      {
+        "trial": 31,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 32,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 33,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8839594429176214
+      },
+      {
+        "trial": 34,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 35,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 36,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8839594429176214
+      },
+      {
+        "trial": 37,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8839594429176214
+      },
+      {
+        "trial": 38,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 39,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 40,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 41,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 42,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 43,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 44,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8839594429176214
+      },
+      {
+        "trial": 45,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 46,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 47,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 48,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      },
+      {
+        "trial": 49,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107
+      }
+    ],
+    "brainstem": [
+      {
+        "trial": 0,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.0,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.20088636816013022
+      },
+      {
+        "trial": 1,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.16174988502750964
+      },
+      {
+        "trial": 2,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.13859327232831734
+      },
+      {
+        "trial": 3,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.25,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.13248644067147775
+      },
+      {
+        "trial": 4,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.5,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.11496069745341299
+      },
+      {
+        "trial": 5,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.25,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.19543912325574633
+      },
+      {
+        "trial": 6,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.12656256531288881
+      },
+      {
+        "trial": 7,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.5,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.16174988502750964
+      },
+      {
+        "trial": 8,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.75,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.15534871093622263
+      },
+      {
+        "trial": 9,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.08862656250336644
+      },
+      {
+        "trial": 10,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.75,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.1206373533973138
+      },
+      {
+        "trial": 11,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.5,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.08910386123606451
+      },
+      {
+        "trial": 12,
+        "top1": 0.75,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.75,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.056368552194730935
+      },
+      {
+        "trial": 13,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.25,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.18245315049642866
+      },
+      {
+        "trial": 14,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.0534392427887456
+      },
+      {
+        "trial": 15,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.5,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.11543732790761804
+      },
+      {
+        "trial": 16,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.25,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.10980779498347654
+      },
+      {
+        "trial": 17,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.75,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.15582467311193465
+      },
+      {
+        "trial": 18,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.5,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.18903728088596627
+      },
+      {
+        "trial": 19,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.0,
+        "hemisphere": 0.5,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.2112399643982555
+      },
+      {
+        "trial": 20,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.75,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.13266872869123536
+      },
+      {
+        "trial": 21,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.5,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.18856065043176123
+      },
+      {
+        "trial": 22,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.5,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.07659518720944489
+      },
+      {
+        "trial": 23,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.75,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.15487141220352454
+      },
+      {
+        "trial": 24,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.5,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.09137457731977494
+      },
+      {
+        "trial": 25,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.12656189703439577
+      },
+      {
+        "trial": 26,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.5,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.16222651548171468
+      },
+      {
+        "trial": 27,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.75,
+        "mean_rank": 1.75,
+        "mean_xyz_dist": 0.10585863156547679
+      },
+      {
+        "trial": 28,
+        "top1": 0.75,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 1.0,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.04949007937074584
+      },
+      {
+        "trial": 29,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.25,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.14499511469809737
+      },
+      {
+        "trial": 30,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.75,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.12016072294310876
+      },
+      {
+        "trial": 31,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.75,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.08270201886628446
+      },
+      {
+        "trial": 32,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.0,
+        "hemisphere": 1.0,
+        "mean_rank": 3.75,
+        "mean_xyz_dist": 0.19891357839139345
+      },
+      {
+        "trial": 33,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.25,
+        "mean_rank": 3.25,
+        "mean_xyz_dist": 0.19543912325574633
+      },
+      {
+        "trial": 34,
+        "top1": 0.75,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.75,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.055891253462032865
+      },
+      {
+        "trial": 35,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.0,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.20088636816013022
+      },
+      {
+        "trial": 36,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.25,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.18245381877492167
+      },
+      {
+        "trial": 37,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.0,
+        "hemisphere": 0.5,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.21123929611976247
+      },
+      {
+        "trial": 38,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.75,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.10585796328698376
+      },
+      {
+        "trial": 39,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.1765292751378397
+      },
+      {
+        "trial": 40,
+        "top1": 0.75,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.75,
+        "mean_rank": 1.25,
+        "mean_xyz_dist": 0.03273530904133357
+      },
+      {
+        "trial": 41,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.5,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.10340595261369649
+      },
+      {
+        "trial": 42,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.5,
+        "mean_rank": 1.75,
+        "mean_xyz_dist": 0.16174988502750964
+      },
+      {
+        "trial": 43,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.5,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.10340595261369649
+      },
+      {
+        "trial": 44,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.75,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.12016072294310876
+      },
+      {
+        "trial": 45,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.25,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.18245315049642866
+      },
+      {
+        "trial": 46,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.75,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.13266872869123536
+      },
+      {
+        "trial": 47,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 1.75,
+        "mean_xyz_dist": 0.11178250692406573
+      },
+      {
+        "trial": 48,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.5,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.18808335169906315
+      },
+      {
+        "trial": 49,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.75,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.08222538841207941
+      }
+    ],
+    "frontal_dmn": [
+      {
+        "trial": 0,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.11432147505250127
+      },
+      {
+        "trial": 1,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636
+      },
+      {
+        "trial": 2,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 3,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 4,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.11432147505250127
+      },
+      {
+        "trial": 5,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636
+      },
+      {
+        "trial": 6,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.11432147505250127
+      },
+      {
+        "trial": 7,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 8,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636
+      },
+      {
+        "trial": 9,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 10,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 11,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636
+      },
+      {
+        "trial": 12,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636
+      },
+      {
+        "trial": 13,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 14,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636
+      },
+      {
+        "trial": 15,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.11432147505250127
+      },
+      {
+        "trial": 16,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 17,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.11432147505250127
+      },
+      {
+        "trial": 18,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 19,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636
+      },
+      {
+        "trial": 20,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 21,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.11432147505250127
+      },
+      {
+        "trial": 22,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 23,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636
+      },
+      {
+        "trial": 24,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 25,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 26,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 27,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 28,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 29,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 30,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636
+      },
+      {
+        "trial": 31,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.11432147505250127
+      },
+      {
+        "trial": 32,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.11432147505250127
+      },
+      {
+        "trial": 33,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 34,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636
+      },
+      {
+        "trial": 35,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636
+      },
+      {
+        "trial": 36,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 37,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636
+      },
+      {
+        "trial": 38,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636
+      },
+      {
+        "trial": 39,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636
+      },
+      {
+        "trial": 40,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.11432147505250127
+      },
+      {
+        "trial": 41,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.11432147505250127
+      },
+      {
+        "trial": 42,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636
+      },
+      {
+        "trial": 43,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636
+      },
+      {
+        "trial": 44,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636
+      },
+      {
+        "trial": 45,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636
+      },
+      {
+        "trial": 46,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636
+      },
+      {
+        "trial": 47,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636
+      },
+      {
+        "trial": 48,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 49,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.11432147505250127
+      }
+    ],
+    "frontoparietal": [
+      {
+        "trial": 0,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 1,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.5691608563864703
+      },
+      {
+        "trial": 2,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 3,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 4,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 5,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 6,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 7,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 8,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.5691608563864703
+      },
+      {
+        "trial": 9,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 10,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 11,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 12,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 13,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 14,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 15,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 16,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 17,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.5691608563864703
+      },
+      {
+        "trial": 18,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 19,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 20,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.5691608563864703
+      },
+      {
+        "trial": 21,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 22,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 23,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 24,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.5691608563864703
+      },
+      {
+        "trial": 25,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 26,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.5691608563864703
+      },
+      {
+        "trial": 27,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.5691608563864703
+      },
+      {
+        "trial": 28,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 29,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 30,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 31,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 32,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 33,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.5691608563864703
+      },
+      {
+        "trial": 34,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 35,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 36,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 37,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 38,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 39,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 40,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 41,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 42,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 43,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 44,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 45,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 46,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.5691608563864703
+      },
+      {
+        "trial": 47,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 48,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      },
+      {
+        "trial": 49,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515
+      }
+    ],
+    "limbic": [
+      {
+        "trial": 0,
+        "top1": 0.16666666666666666,
+        "top5": 0.8333333333333334,
+        "pair_id": 0.16666666666666666,
+        "hemisphere": 0.5,
+        "mean_rank": 3.8333333333333335,
+        "mean_xyz_dist": 0.19936056059225407
+      },
+      {
+        "trial": 1,
+        "top1": 0.0,
+        "top5": 0.8333333333333334,
+        "pair_id": 0.5,
+        "hemisphere": 0.3333333333333333,
+        "mean_rank": 3.1666666666666665,
+        "mean_xyz_dist": 0.2105227389413786
+      },
+      {
+        "trial": 2,
+        "top1": 0.3333333333333333,
+        "top5": 1.0,
+        "pair_id": 0.3333333333333333,
+        "hemisphere": 0.5,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.15594066944282986
+      },
+      {
+        "trial": 3,
+        "top1": 0.16666666666666666,
+        "top5": 0.6666666666666666,
+        "pair_id": 0.6666666666666666,
+        "hemisphere": 0.5,
+        "mean_rank": 4.0,
+        "mean_xyz_dist": 0.13586726206654204
+      },
+      {
+        "trial": 4,
+        "top1": 0.3333333333333333,
+        "top5": 0.8333333333333334,
+        "pair_id": 0.3333333333333333,
+        "hemisphere": 0.6666666666666666,
+        "mean_rank": 3.1666666666666665,
+        "mean_xyz_dist": 0.1716261258403532
+      },
+      {
+        "trial": 5,
+        "top1": 0.0,
+        "top5": 0.8333333333333334,
+        "pair_id": 0.16666666666666666,
+        "hemisphere": 0.3333333333333333,
+        "mean_rank": 3.5,
+        "mean_xyz_dist": 0.1943070074485489
+      },
+      {
+        "trial": 6,
+        "top1": 0.5,
+        "top5": 0.8333333333333334,
+        "pair_id": 0.6666666666666666,
+        "hemisphere": 0.5,
+        "mean_rank": 2.8333333333333335,
+        "mean_xyz_dist": 0.11016924556705192
+      },
+      {
+        "trial": 7,
+        "top1": 0.0,
+        "top5": 0.6666666666666666,
+        "pair_id": 0.0,
+        "hemisphere": 0.5,
+        "mean_rank": 4.666666666666667,
+        "mean_xyz_dist": 0.19752861583158765
+      },
+      {
+        "trial": 8,
+        "top1": 0.5,
+        "top5": 0.8333333333333334,
+        "pair_id": 0.6666666666666666,
+        "hemisphere": 0.6666666666666666,
+        "mean_rank": 2.6666666666666665,
+        "mean_xyz_dist": 0.07010625236453087
+      },
+      {
+        "trial": 9,
+        "top1": 0.5,
+        "top5": 0.8333333333333334,
+        "pair_id": 0.6666666666666666,
+        "hemisphere": 0.5,
+        "mean_rank": 2.6666666666666665,
+        "mean_xyz_dist": 0.14063760045874835
+      },
+      {
+        "trial": 10,
+        "top1": 0.16666666666666666,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.3333333333333333,
+        "mean_rank": 3.5,
+        "mean_xyz_dist": 0.1400347451082213
+      },
+      {
+        "trial": 11,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.0,
+        "hemisphere": 0.6666666666666666,
+        "mean_rank": 3.1666666666666665,
+        "mean_xyz_dist": 0.16534514260110347
+      },
+      {
+        "trial": 12,
+        "top1": 0.16666666666666666,
+        "top5": 1.0,
+        "pair_id": 0.16666666666666666,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.1476128338424274
+      },
+      {
+        "trial": 13,
+        "top1": 0.3333333333333333,
+        "top5": 0.6666666666666666,
+        "pair_id": 0.3333333333333333,
+        "hemisphere": 0.5,
+        "mean_rank": 3.8333333333333335,
+        "mean_xyz_dist": 0.14683142256147017
+      },
+      {
+        "trial": 14,
+        "top1": 0.16666666666666666,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.6666666666666666,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.12868611146881784
+      },
+      {
+        "trial": 15,
+        "top1": 0.16666666666666666,
+        "top5": 0.6666666666666666,
+        "pair_id": 0.16666666666666666,
+        "hemisphere": 0.6666666666666666,
+        "mean_rank": 3.8333333333333335,
+        "mean_xyz_dist": 0.16862367018898516
+      },
+      {
+        "trial": 16,
+        "top1": 0.16666666666666666,
+        "top5": 0.8333333333333334,
+        "pair_id": 0.3333333333333333,
+        "hemisphere": 0.6666666666666666,
+        "mean_rank": 3.1666666666666665,
+        "mean_xyz_dist": 0.12883098467350987
+      },
+      {
+        "trial": 17,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 1.0,
+        "mean_rank": 2.1666666666666665,
+        "mean_xyz_dist": 0.09480965313744849
+      },
+      {
+        "trial": 18,
+        "top1": 0.3333333333333333,
+        "top5": 1.0,
+        "pair_id": 0.3333333333333333,
+        "hemisphere": 0.8333333333333334,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.11302049447936353
+      },
+      {
+        "trial": 19,
+        "top1": 0.16666666666666666,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.3333333333333333,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.17054212584873038
+      },
+      {
+        "trial": 20,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.16666666666666666,
+        "hemisphere": 0.8333333333333334,
+        "mean_rank": 3.3333333333333335,
+        "mean_xyz_dist": 0.17384851958592965
+      },
+      {
+        "trial": 21,
+        "top1": 0.0,
+        "top5": 0.6666666666666666,
+        "pair_id": 0.5,
+        "hemisphere": 0.16666666666666666,
+        "mean_rank": 3.6666666666666665,
+        "mean_xyz_dist": 0.166249648631916
+      },
+      {
+        "trial": 22,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.3333333333333333,
+        "hemisphere": 0.16666666666666666,
+        "mean_rank": 3.3333333333333335,
+        "mean_xyz_dist": 0.20203303544939355
+      },
+      {
+        "trial": 23,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.8333333333333334,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.08049291850314803
+      },
+      {
+        "trial": 24,
+        "top1": 0.3333333333333333,
+        "top5": 0.8333333333333334,
+        "pair_id": 0.5,
+        "hemisphere": 0.6666666666666666,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.12818713678631355
+      },
+      {
+        "trial": 25,
+        "top1": 0.0,
+        "top5": 0.6666666666666666,
+        "pair_id": 0.3333333333333333,
+        "hemisphere": 0.3333333333333333,
+        "mean_rank": 4.333333333333333,
+        "mean_xyz_dist": 0.19051729086550795
+      },
+      {
+        "trial": 26,
+        "top1": 0.16666666666666666,
+        "top5": 1.0,
+        "pair_id": 0.16666666666666666,
+        "hemisphere": 0.3333333333333333,
+        "mean_rank": 2.3333333333333335,
+        "mean_xyz_dist": 0.17088224219196801
+      },
+      {
+        "trial": 27,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.16666666666666666,
+        "mean_rank": 4.0,
+        "mean_xyz_dist": 0.17025512823882696
+      },
+      {
+        "trial": 28,
+        "top1": 0.16666666666666666,
+        "top5": 1.0,
+        "pair_id": 0.3333333333333333,
+        "hemisphere": 0.3333333333333333,
+        "mean_rank": 3.6666666666666665,
+        "mean_xyz_dist": 0.20168774005101323
+      },
+      {
+        "trial": 29,
+        "top1": 0.16666666666666666,
+        "top5": 0.6666666666666666,
+        "pair_id": 0.16666666666666666,
+        "hemisphere": 0.8333333333333334,
+        "mean_rank": 3.6666666666666665,
+        "mean_xyz_dist": 0.20350191715275537
+      },
+      {
+        "trial": 30,
+        "top1": 0.16666666666666666,
+        "top5": 0.6666666666666666,
+        "pair_id": 0.3333333333333333,
+        "hemisphere": 0.5,
+        "mean_rank": 3.6666666666666665,
+        "mean_xyz_dist": 0.1694971647858384
+      },
+      {
+        "trial": 31,
+        "top1": 0.16666666666666666,
+        "top5": 1.0,
+        "pair_id": 0.3333333333333333,
+        "hemisphere": 0.3333333333333333,
+        "mean_rank": 3.1666666666666665,
+        "mean_xyz_dist": 0.14184106183017697
+      },
+      {
+        "trial": 32,
+        "top1": 0.16666666666666666,
+        "top5": 0.8333333333333334,
+        "pair_id": 0.3333333333333333,
+        "hemisphere": 0.6666666666666666,
+        "mean_rank": 3.1666666666666665,
+        "mean_xyz_dist": 0.14707035441188399
+      },
+      {
+        "trial": 33,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.8333333333333334,
+        "hemisphere": 0.5,
+        "mean_rank": 2.3333333333333335,
+        "mean_xyz_dist": 0.052366585037977885
+      },
+      {
+        "trial": 34,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.16666666666666666,
+        "hemisphere": 0.16666666666666666,
+        "mean_rank": 3.8333333333333335,
+        "mean_xyz_dist": 0.18545861630411198
+      },
+      {
+        "trial": 35,
+        "top1": 0.16666666666666666,
+        "top5": 0.8333333333333334,
+        "pair_id": 0.5,
+        "hemisphere": 0.16666666666666666,
+        "mean_rank": 4.0,
+        "mean_xyz_dist": 0.14848874862524578
+      },
+      {
+        "trial": 36,
+        "top1": 0.16666666666666666,
+        "top5": 1.0,
+        "pair_id": 0.3333333333333333,
+        "hemisphere": 0.5,
+        "mean_rank": 2.6666666666666665,
+        "mean_xyz_dist": 0.16419065029991098
+      },
+      {
+        "trial": 37,
+        "top1": 0.16666666666666666,
+        "top5": 0.8333333333333334,
+        "pair_id": 0.3333333333333333,
+        "hemisphere": 0.16666666666666666,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.1607190206004187
+      },
+      {
+        "trial": 38,
+        "top1": 0.16666666666666666,
+        "top5": 0.8333333333333334,
+        "pair_id": 0.3333333333333333,
+        "hemisphere": 0.3333333333333333,
+        "mean_rank": 3.6666666666666665,
+        "mean_xyz_dist": 0.18211654711771194
+      },
+      {
+        "trial": 39,
+        "top1": 0.0,
+        "top5": 0.8333333333333334,
+        "pair_id": 0.16666666666666666,
+        "hemisphere": 0.16666666666666666,
+        "mean_rank": 4.0,
+        "mean_xyz_dist": 0.1814047140865367
+      },
+      {
+        "trial": 40,
+        "top1": 0.16666666666666666,
+        "top5": 0.6666666666666666,
+        "pair_id": 0.3333333333333333,
+        "hemisphere": 0.6666666666666666,
+        "mean_rank": 3.5,
+        "mean_xyz_dist": 0.14256394170166
+      },
+      {
+        "trial": 41,
+        "top1": 0.3333333333333333,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 3.1666666666666665,
+        "mean_xyz_dist": 0.13241426988069785
+      },
+      {
+        "trial": 42,
+        "top1": 0.3333333333333333,
+        "top5": 0.8333333333333334,
+        "pair_id": 0.6666666666666666,
+        "hemisphere": 0.5,
+        "mean_rank": 2.8333333333333335,
+        "mean_xyz_dist": 0.08830401203617992
+      },
+      {
+        "trial": 43,
+        "top1": 0.16666666666666666,
+        "top5": 1.0,
+        "pair_id": 0.16666666666666666,
+        "hemisphere": 0.6666666666666666,
+        "mean_rank": 2.8333333333333335,
+        "mean_xyz_dist": 0.15686706483226134
+      },
+      {
+        "trial": 44,
+        "top1": 0.5,
+        "top5": 0.8333333333333334,
+        "pair_id": 0.5,
+        "hemisphere": 0.8333333333333334,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.11643636173569948
+      },
+      {
+        "trial": 45,
+        "top1": 0.0,
+        "top5": 0.3333333333333333,
+        "pair_id": 0.16666666666666666,
+        "hemisphere": 0.5,
+        "mean_rank": 5.166666666666667,
+        "mean_xyz_dist": 0.1742163696261606
+      },
+      {
+        "trial": 46,
+        "top1": 0.3333333333333333,
+        "top5": 0.6666666666666666,
+        "pair_id": 0.5,
+        "hemisphere": 0.3333333333333333,
+        "mean_rank": 4.0,
+        "mean_xyz_dist": 0.15787654552048344
+      },
+      {
+        "trial": 47,
+        "top1": 0.16666666666666666,
+        "top5": 0.8333333333333334,
+        "pair_id": 0.5,
+        "hemisphere": 0.3333333333333333,
+        "mean_rank": 3.6666666666666665,
+        "mean_xyz_dist": 0.1588595892697067
+      },
+      {
+        "trial": 48,
+        "top1": 0.0,
+        "top5": 0.16666666666666666,
+        "pair_id": 0.5,
+        "hemisphere": 0.3333333333333333,
+        "mean_rank": 5.666666666666667,
+        "mean_xyz_dist": 0.20656478499630804
+      },
+      {
+        "trial": 49,
+        "top1": 0.16666666666666666,
+        "top5": 1.0,
+        "pair_id": 0.3333333333333333,
+        "hemisphere": 0.5,
+        "mean_rank": 2.3333333333333335,
+        "mean_xyz_dist": 0.1846272696310084
+      }
+    ],
+    "olfactory": [
+      {
+        "trial": 0,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.45065798407545365
+      },
+      {
+        "trial": 1,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683
+      },
+      {
+        "trial": 2,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683
+      },
+      {
+        "trial": 3,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683
+      },
+      {
+        "trial": 4,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683
+      },
+      {
+        "trial": 5,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 6,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.45065798407545365
+      },
+      {
+        "trial": 7,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 8,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.45065798407545365
+      },
+      {
+        "trial": 9,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 10,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 11,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683
+      },
+      {
+        "trial": 12,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.45065798407545365
+      },
+      {
+        "trial": 13,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 14,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 15,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 16,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683
+      },
+      {
+        "trial": 17,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683
+      },
+      {
+        "trial": 18,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683
+      },
+      {
+        "trial": 19,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 20,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683
+      },
+      {
+        "trial": 21,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.45065798407545365
+      },
+      {
+        "trial": 22,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 23,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683
+      },
+      {
+        "trial": 24,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.45065798407545365
+      },
+      {
+        "trial": 25,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.45065798407545365
+      },
+      {
+        "trial": 26,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 27,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 28,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.45065798407545365
+      },
+      {
+        "trial": 29,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683
+      },
+      {
+        "trial": 30,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683
+      },
+      {
+        "trial": 31,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683
+      },
+      {
+        "trial": 32,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 33,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 34,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683
+      },
+      {
+        "trial": 35,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683
+      },
+      {
+        "trial": 36,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.45065798407545365
+      },
+      {
+        "trial": 37,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683
+      },
+      {
+        "trial": 38,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 39,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.45065798407545365
+      },
+      {
+        "trial": 40,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.45065798407545365
+      },
+      {
+        "trial": 41,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.45065798407545365
+      },
+      {
+        "trial": 42,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683
+      },
+      {
+        "trial": 43,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 44,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683
+      },
+      {
+        "trial": 45,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 46,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.45065798407545365
+      },
+      {
+        "trial": 47,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683
+      },
+      {
+        "trial": 48,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 49,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      }
+    ],
+    "salience": [
+      {
+        "trial": 0,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.5,
+        "mean_rank": 1.75,
+        "mean_xyz_dist": 0.29357411724085125
+      },
+      {
+        "trial": 1,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.2817666796117714
+      },
+      {
+        "trial": 2,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.75,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.16630223600685923
+      },
+      {
+        "trial": 3,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.5,
+        "mean_rank": 1.75,
+        "mean_xyz_dist": 0.2928322415394355
+      },
+      {
+        "trial": 4,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.75,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.18909898272512418
+      },
+      {
+        "trial": 5,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.25,
+        "mean_rank": 3.75,
+        "mean_xyz_dist": 0.44568574144866147
+      },
+      {
+        "trial": 6,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.75,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.16570430129168875
+      },
+      {
+        "trial": 7,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.25,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.42146271467802887
+      },
+      {
+        "trial": 8,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.2818429324502504
+      },
+      {
+        "trial": 9,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.0,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.5511365515700053
+      },
+      {
+        "trial": 10,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.75,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.1651826194149973
+      },
+      {
+        "trial": 11,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.75,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.15397311650108794
+      },
+      {
+        "trial": 12,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.75,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.153212459311657
+      },
+      {
+        "trial": 13,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.75,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.16444074371358156
+      },
+      {
+        "trial": 14,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.5,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.2937368397151117
+      },
+      {
+        "trial": 15,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.5,
+        "mean_rank": 4.0,
+        "mean_xyz_dist": 0.31781592549949905
+      },
+      {
+        "trial": 16,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.25,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.39866596795976394
+      },
+      {
+        "trial": 17,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.0,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.5734116164115787
+      },
+      {
+        "trial": 18,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.5,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.293430176254606
+      },
+      {
+        "trial": 19,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.75,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.1414812745210562
+      },
+      {
+        "trial": 20,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.25,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.43395455665806065
+      },
+      {
+        "trial": 21,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.2818429324502504
+      },
+      {
+        "trial": 22,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.3048024016427758
+      },
+      {
+        "trial": 23,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.0,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.5734116164115787
+      },
+      {
+        "trial": 24,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.75,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.17676986321935287
+      },
+      {
+        "trial": 25,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.28124499773507994
+      },
+      {
+        "trial": 26,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.25,
+        "mean_rank": 3.75,
+        "mean_xyz_dist": 0.4111578099397957
+      },
+      {
+        "trial": 27,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.2817666796117714
+      },
+      {
+        "trial": 28,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.25,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.44620742332535296
+      },
+      {
+        "trial": 29,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.25,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.43447623853475215
+      },
+      {
+        "trial": 30,
+        "top1": 0.75,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.75,
+        "mean_rank": 1.25,
+        "mean_xyz_dist": 0.1519489017335498
+      },
+      {
+        "trial": 31,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.3051613610452068
+      },
+      {
+        "trial": 32,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.25,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.43447623853475215
+      },
+      {
+        "trial": 33,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.30532408351946727
+      },
+      {
+        "trial": 34,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.0,
+        "hemisphere": 0.5,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.30554427734419154
+      },
+      {
+        "trial": 35,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.25,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.4103971527503648
+      },
+      {
+        "trial": 36,
+        "top1": 0.75,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.75,
+        "mean_rank": 1.75,
+        "mean_xyz_dist": 0.1408833398058857
+      },
+      {
+        "trial": 37,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.5,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.29357411724085125
+      },
+      {
+        "trial": 38,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.0,
+        "mean_rank": 3.5,
+        "mean_xyz_dist": 0.5395493077656497
+      },
+      {
+        "trial": 39,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.25,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.4330499584823845
+      },
+      {
+        "trial": 40,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.25,
+        "mean_rank": 3.25,
+        "mean_xyz_dist": 0.41151676934222675
+      },
+      {
+        "trial": 41,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.2932151578384202
+      },
+      {
+        "trial": 42,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.30532408351946727
+      },
+      {
+        "trial": 43,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.75,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.15285349990922598
+      },
+      {
+        "trial": 44,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.3048024016427758
+      },
+      {
+        "trial": 45,
+        "top1": 0.75,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.75,
+        "mean_rank": 1.25,
+        "mean_xyz_dist": 0.1519489017335498
+      },
+      {
+        "trial": 46,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.0,
+        "hemisphere": 0.25,
+        "mean_rank": 3.25,
+        "mean_xyz_dist": 0.43409849764430586
+      },
+      {
+        "trial": 47,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.75,
+        "mean_rank": 1.75,
+        "mean_xyz_dist": 0.15285349990922598
+      },
+      {
+        "trial": 48,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.30532408351946727
+      },
+      {
+        "trial": 49,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.3046396791685153
+      }
+    ],
+    "sensorimotor": [
+      {
+        "trial": 0,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.75,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.24233964505955707
+      },
+      {
+        "trial": 1,
+        "top1": 0.75,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.75,
+        "mean_rank": 1.25,
+        "mean_xyz_dist": 0.1501918725924668
+      },
+      {
+        "trial": 2,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.75,
+        "mean_rank": 1.75,
+        "mean_xyz_dist": 0.2140424119847627
+      },
+      {
+        "trial": 3,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.25,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.4032473174771468
+      },
+      {
+        "trial": 4,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.31635487635349235
+      },
+      {
+        "trial": 5,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.2973476973826651
+      },
+      {
+        "trial": 6,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.31635487635349235
+      },
+      {
+        "trial": 7,
+        "top1": 0.75,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.75,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.1501918725924668
+      },
+      {
+        "trial": 8,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.0,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.620153122778333
+      },
+      {
+        "trial": 9,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.75,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.2042513244102913
+      },
+      {
+        "trial": 10,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.3039709009106856
+      },
+      {
+        "trial": 11,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.25,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.45774992922890445
+      },
+      {
+        "trial": 12,
+        "top1": 0.75,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 1.0,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.03808832064926575
+      },
+      {
+        "trial": 13,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.25,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.45112672570088397
+      },
+      {
+        "trial": 14,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.25,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.49900613392462106
+      },
+      {
+        "trial": 15,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.0,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.6013185982933507
+      },
+      {
+        "trial": 16,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.25,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.508049570835132
+      },
+      {
+        "trial": 17,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.25,
+        "mean_rank": 3.25,
+        "mean_xyz_dist": 0.48921504635014973
+      },
+      {
+        "trial": 18,
+        "top1": 0.75,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.75,
+        "mean_rank": 1.25,
+        "mean_xyz_dist": 0.124734144579464
+      },
+      {
+        "trial": 19,
+        "top1": 0.75,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.75,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.15377902831821882
+      },
+      {
+        "trial": 20,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.75,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.18828019324173256
+      },
+      {
+        "trial": 21,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.25,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.47658445371388675
+      },
+      {
+        "trial": 22,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.5,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.27492601717193077
+      },
+      {
+        "trial": 23,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.31994203207924443
+      },
+      {
+        "trial": 24,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 1.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.07951717983082734
+      },
+      {
+        "trial": 25,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.75,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.20759186294258716
+      },
+      {
+        "trial": 26,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 1.75,
+        "mean_xyz_dist": 0.3039709009106856
+      },
+      {
+        "trial": 27,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 1.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.0761766412985315
+      },
+      {
+        "trial": 28,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.5,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.3420592215599514
+      },
+      {
+        "trial": 29,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.25,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.4892150463501497
+      },
+      {
+        "trial": 30,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.0,
+        "hemisphere": 0.75,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.27138452879831193
+      },
+      {
+        "trial": 31,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.25,
+        "mean_rank": 1.75,
+        "mean_xyz_dist": 0.4699612501858662
+      },
+      {
+        "trial": 32,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.25,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.47038052186516743
+      },
+      {
+        "trial": 33,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.3608937460449337
+      },
+      {
+        "trial": 34,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.3580303527285102
+      },
+      {
+        "trial": 35,
+        "top1": 0.75,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.75,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.124734144579464
+      },
+      {
+        "trial": 36,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.3456463772857034
+      },
+      {
+        "trial": 37,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.75,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.22970905242329415
+      },
+      {
+        "trial": 38,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.27492601717193077
+      },
+      {
+        "trial": 39,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.75,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.18828019324173256
+      },
+      {
+        "trial": 40,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.36782144030298153
+      },
+      {
+        "trial": 41,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.5,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.3420592215599514
+      },
+      {
+        "trial": 42,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.25,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.42870504549014965
+      },
+      {
+        "trial": 43,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.0,
+        "hemisphere": 0.25,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.4922510941524182
+      },
+      {
+        "trial": 44,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.25,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.4220818419621291
+      },
+      {
+        "trial": 45,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.75,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.16282246522872973
+      },
+      {
+        "trial": 46,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.75,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.19162073177402839
+      },
+      {
+        "trial": 47,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.5,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.2908971483404896
+      },
+      {
+        "trial": 48,
+        "top1": 0.75,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 1.0,
+        "mean_rank": 1.75,
+        "mean_xyz_dist": 0.04142885918156159
+      },
+      {
+        "trial": 49,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.31301433782119653
+      }
+    ],
+    "subcortical": [
+      {
+        "trial": 0,
+        "top1": 0.1,
+        "top5": 0.4,
+        "pair_id": 0.1,
+        "hemisphere": 0.9,
+        "mean_rank": 5.9,
+        "mean_xyz_dist": 0.12677598418194122
+      },
+      {
+        "trial": 1,
+        "top1": 0.0,
+        "top5": 0.4,
+        "pair_id": 0.1,
+        "hemisphere": 0.1,
+        "mean_rank": 6.4,
+        "mean_xyz_dist": 0.21716859864622506
+      },
+      {
+        "trial": 2,
+        "top1": 0.3,
+        "top5": 0.8,
+        "pair_id": 0.4,
+        "hemisphere": 0.5,
+        "mean_rank": 3.5,
+        "mean_xyz_dist": 0.16175054911213071
+      },
+      {
+        "trial": 3,
+        "top1": 0.1,
+        "top5": 0.6,
+        "pair_id": 0.2,
+        "hemisphere": 0.4,
+        "mean_rank": 5.2,
+        "mean_xyz_dist": 0.1995763845988892
+      },
+      {
+        "trial": 4,
+        "top1": 0.0,
+        "top5": 0.6,
+        "pair_id": 0.3,
+        "hemisphere": 0.0,
+        "mean_rank": 5.8,
+        "mean_xyz_dist": 0.20805267523465237
+      },
+      {
+        "trial": 5,
+        "top1": 0.3,
+        "top5": 0.7,
+        "pair_id": 0.4,
+        "hemisphere": 0.4,
+        "mean_rank": 4.0,
+        "mean_xyz_dist": 0.19808085170519685
+      },
+      {
+        "trial": 6,
+        "top1": 0.1,
+        "top5": 0.6,
+        "pair_id": 0.1,
+        "hemisphere": 0.6,
+        "mean_rank": 5.0,
+        "mean_xyz_dist": 0.16747572458215176
+      },
+      {
+        "trial": 7,
+        "top1": 0.0,
+        "top5": 0.4,
+        "pair_id": 0.1,
+        "hemisphere": 0.3,
+        "mean_rank": 6.3,
+        "mean_xyz_dist": 0.20648495682340054
+      },
+      {
+        "trial": 8,
+        "top1": 0.2,
+        "top5": 0.6,
+        "pair_id": 0.3,
+        "hemisphere": 0.6,
+        "mean_rank": 5.0,
+        "mean_xyz_dist": 0.14249766637081107
+      },
+      {
+        "trial": 9,
+        "top1": 0.4,
+        "top5": 0.7,
+        "pair_id": 0.5,
+        "hemisphere": 0.6,
+        "mean_rank": 3.4,
+        "mean_xyz_dist": 0.11927485632443982
+      },
+      {
+        "trial": 10,
+        "top1": 0.1,
+        "top5": 0.5,
+        "pair_id": 0.1,
+        "hemisphere": 0.5,
+        "mean_rank": 5.1,
+        "mean_xyz_dist": 0.1629216708355064
+      },
+      {
+        "trial": 11,
+        "top1": 0.0,
+        "top5": 0.4,
+        "pair_id": 0.1,
+        "hemisphere": 0.5,
+        "mean_rank": 5.9,
+        "mean_xyz_dist": 0.20426060234795024
+      },
+      {
+        "trial": 12,
+        "top1": 0.1,
+        "top5": 0.3,
+        "pair_id": 0.2,
+        "hemisphere": 0.5,
+        "mean_rank": 5.8,
+        "mean_xyz_dist": 0.16821321011759435
+      },
+      {
+        "trial": 13,
+        "top1": 0.1,
+        "top5": 0.3,
+        "pair_id": 0.3,
+        "hemisphere": 0.3,
+        "mean_rank": 5.9,
+        "mean_xyz_dist": 0.20545862778043622
+      },
+      {
+        "trial": 14,
+        "top1": 0.0,
+        "top5": 0.7,
+        "pair_id": 0.0,
+        "hemisphere": 0.5,
+        "mean_rank": 4.7,
+        "mean_xyz_dist": 0.18098777319968345
+      },
+      {
+        "trial": 15,
+        "top1": 0.0,
+        "top5": 0.4,
+        "pair_id": 0.1,
+        "hemisphere": 0.4,
+        "mean_rank": 6.2,
+        "mean_xyz_dist": 0.18773371797450167
+      },
+      {
+        "trial": 16,
+        "top1": 0.1,
+        "top5": 0.7,
+        "pair_id": 0.3,
+        "hemisphere": 0.2,
+        "mean_rank": 4.8,
+        "mean_xyz_dist": 0.1942818267800372
+      },
+      {
+        "trial": 17,
+        "top1": 0.0,
+        "top5": 0.6,
+        "pair_id": 0.1,
+        "hemisphere": 0.4,
+        "mean_rank": 5.9,
+        "mean_xyz_dist": 0.20608082089585006
+      },
+      {
+        "trial": 18,
+        "top1": 0.0,
+        "top5": 0.5,
+        "pair_id": 0.0,
+        "hemisphere": 0.3,
+        "mean_rank": 5.9,
+        "mean_xyz_dist": 0.18797202857891143
+      },
+      {
+        "trial": 19,
+        "top1": 0.1,
+        "top5": 0.2,
+        "pair_id": 0.1,
+        "hemisphere": 0.7,
+        "mean_rank": 7.4,
+        "mean_xyz_dist": 0.14925164056623103
+      },
+      {
+        "trial": 20,
+        "top1": 0.1,
+        "top5": 0.4,
+        "pair_id": 0.2,
+        "hemisphere": 0.8,
+        "mean_rank": 5.7,
+        "mean_xyz_dist": 0.13212394255246468
+      },
+      {
+        "trial": 21,
+        "top1": 0.0,
+        "top5": 0.3,
+        "pair_id": 0.1,
+        "hemisphere": 0.2,
+        "mean_rank": 7.3,
+        "mean_xyz_dist": 0.20488366962782587
+      },
+      {
+        "trial": 22,
+        "top1": 0.0,
+        "top5": 0.6,
+        "pair_id": 0.1,
+        "hemisphere": 0.7,
+        "mean_rank": 5.4,
+        "mean_xyz_dist": 0.15233566853242836
+      },
+      {
+        "trial": 23,
+        "top1": 0.0,
+        "top5": 0.2,
+        "pair_id": 0.0,
+        "hemisphere": 0.4,
+        "mean_rank": 6.4,
+        "mean_xyz_dist": 0.21591847294450658
+      },
+      {
+        "trial": 24,
+        "top1": 0.2,
+        "top5": 0.6,
+        "pair_id": 0.5,
+        "hemisphere": 0.3,
+        "mean_rank": 4.4,
+        "mean_xyz_dist": 0.16740255703435875
+      },
+      {
+        "trial": 25,
+        "top1": 0.1,
+        "top5": 0.5,
+        "pair_id": 0.2,
+        "hemisphere": 0.4,
+        "mean_rank": 4.5,
+        "mean_xyz_dist": 0.19195575589973404
+      },
+      {
+        "trial": 26,
+        "top1": 0.2,
+        "top5": 0.5,
+        "pair_id": 0.5,
+        "hemisphere": 0.4,
+        "mean_rank": 5.2,
+        "mean_xyz_dist": 0.18742588156440415
+      },
+      {
+        "trial": 27,
+        "top1": 0.0,
+        "top5": 0.3,
+        "pair_id": 0.1,
+        "hemisphere": 0.6,
+        "mean_rank": 6.9,
+        "mean_xyz_dist": 0.15504827766891507
+      },
+      {
+        "trial": 28,
+        "top1": 0.2,
+        "top5": 0.5,
+        "pair_id": 0.2,
+        "hemisphere": 0.7,
+        "mean_rank": 4.3,
+        "mean_xyz_dist": 0.13999672920772235
+      },
+      {
+        "trial": 29,
+        "top1": 0.0,
+        "top5": 0.5,
+        "pair_id": 0.2,
+        "hemisphere": 0.5,
+        "mean_rank": 6.2,
+        "mean_xyz_dist": 0.19577058550395707
+      },
+      {
+        "trial": 30,
+        "top1": 0.0,
+        "top5": 0.5,
+        "pair_id": 0.3,
+        "hemisphere": 0.3,
+        "mean_rank": 5.8,
+        "mean_xyz_dist": 0.189816115599811
+      },
+      {
+        "trial": 31,
+        "top1": 0.2,
+        "top5": 0.5,
+        "pair_id": 0.3,
+        "hemisphere": 0.4,
+        "mean_rank": 5.3,
+        "mean_xyz_dist": 0.18509851189608476
+      },
+      {
+        "trial": 32,
+        "top1": 0.1,
+        "top5": 0.4,
+        "pair_id": 0.1,
+        "hemisphere": 0.7,
+        "mean_rank": 5.9,
+        "mean_xyz_dist": 0.142190298548935
+      },
+      {
+        "trial": 33,
+        "top1": 0.2,
+        "top5": 0.7,
+        "pair_id": 0.4,
+        "hemisphere": 0.5,
+        "mean_rank": 4.2,
+        "mean_xyz_dist": 0.17310144618346313
+      },
+      {
+        "trial": 34,
+        "top1": 0.0,
+        "top5": 0.4,
+        "pair_id": 0.2,
+        "hemisphere": 0.3,
+        "mean_rank": 6.1,
+        "mean_xyz_dist": 0.21527596468044807
+      },
+      {
+        "trial": 35,
+        "top1": 0.2,
+        "top5": 0.3,
+        "pair_id": 0.2,
+        "hemisphere": 0.7,
+        "mean_rank": 5.9,
+        "mean_xyz_dist": 0.12011946303117838
+      },
+      {
+        "trial": 36,
+        "top1": 0.0,
+        "top5": 0.6,
+        "pair_id": 0.0,
+        "hemisphere": 0.4,
+        "mean_rank": 4.8,
+        "mean_xyz_dist": 0.1932470937790785
+      },
+      {
+        "trial": 37,
+        "top1": 0.0,
+        "top5": 0.5,
+        "pair_id": 0.2,
+        "hemisphere": 0.2,
+        "mean_rank": 5.9,
+        "mean_xyz_dist": 0.21397139086770664
+      },
+      {
+        "trial": 38,
+        "top1": 0.0,
+        "top5": 0.3,
+        "pair_id": 0.0,
+        "hemisphere": 0.6,
+        "mean_rank": 6.6,
+        "mean_xyz_dist": 0.1809167729497807
+      },
+      {
+        "trial": 39,
+        "top1": 0.1,
+        "top5": 0.4,
+        "pair_id": 0.1,
+        "hemisphere": 0.7,
+        "mean_rank": 6.0,
+        "mean_xyz_dist": 0.14180022812837467
+      },
+      {
+        "trial": 40,
+        "top1": 0.2,
+        "top5": 0.3,
+        "pair_id": 0.3,
+        "hemisphere": 0.6,
+        "mean_rank": 6.5,
+        "mean_xyz_dist": 0.14592823877708194
+      },
+      {
+        "trial": 41,
+        "top1": 0.0,
+        "top5": 0.6,
+        "pair_id": 0.0,
+        "hemisphere": 0.4,
+        "mean_rank": 5.8,
+        "mean_xyz_dist": 0.1974540198295383
+      },
+      {
+        "trial": 42,
+        "top1": 0.0,
+        "top5": 0.3,
+        "pair_id": 0.1,
+        "hemisphere": 0.4,
+        "mean_rank": 6.7,
+        "mean_xyz_dist": 0.20645639515254705
+      },
+      {
+        "trial": 43,
+        "top1": 0.2,
+        "top5": 0.6,
+        "pair_id": 0.2,
+        "hemisphere": 0.7,
+        "mean_rank": 4.7,
+        "mean_xyz_dist": 0.13559976678919752
+      },
+      {
+        "trial": 44,
+        "top1": 0.1,
+        "top5": 0.5,
+        "pair_id": 0.2,
+        "hemisphere": 0.3,
+        "mean_rank": 6.1,
+        "mean_xyz_dist": 0.19348847182114542
+      },
+      {
+        "trial": 45,
+        "top1": 0.0,
+        "top5": 0.6,
+        "pair_id": 0.0,
+        "hemisphere": 0.6,
+        "mean_rank": 5.5,
+        "mean_xyz_dist": 0.15655813801433677
+      },
+      {
+        "trial": 46,
+        "top1": 0.2,
+        "top5": 0.5,
+        "pair_id": 0.2,
+        "hemisphere": 0.5,
+        "mean_rank": 4.7,
+        "mean_xyz_dist": 0.159155846494205
+      },
+      {
+        "trial": 47,
+        "top1": 0.1,
+        "top5": 0.2,
+        "pair_id": 0.6,
+        "hemisphere": 0.4,
+        "mean_rank": 6.7,
+        "mean_xyz_dist": 0.16624371541652325
+      },
+      {
+        "trial": 48,
+        "top1": 0.5,
+        "top5": 0.8,
+        "pair_id": 0.5,
+        "hemisphere": 0.6,
+        "mean_rank": 3.4,
+        "mean_xyz_dist": 0.11811460563177448
+      },
+      {
+        "trial": 49,
+        "top1": 0.2,
+        "top5": 0.5,
+        "pair_id": 0.2,
+        "hemisphere": 0.7,
+        "mean_rank": 4.3,
+        "mean_xyz_dist": 0.13261766316855766
+      }
+    ],
+    "temporal_dmn": [
+      {
+        "trial": 0,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002
+      },
+      {
+        "trial": 1,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002
+      },
+      {
+        "trial": 2,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 3,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002
+      },
+      {
+        "trial": 4,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8388373091902004
+      },
+      {
+        "trial": 5,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8388373091902004
+      },
+      {
+        "trial": 6,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002
+      },
+      {
+        "trial": 7,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 8,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002
+      },
+      {
+        "trial": 9,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8388373091902004
+      },
+      {
+        "trial": 10,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8388373091902004
+      },
+      {
+        "trial": 11,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8388373091902004
+      },
+      {
+        "trial": 12,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 13,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8388373091902004
+      },
+      {
+        "trial": 14,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002
+      },
+      {
+        "trial": 15,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002
+      },
+      {
+        "trial": 16,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 17,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8388373091902004
+      },
+      {
+        "trial": 18,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002
+      },
+      {
+        "trial": 19,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 20,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8388373091902004
+      },
+      {
+        "trial": 21,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8388373091902004
+      },
+      {
+        "trial": 22,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002
+      },
+      {
+        "trial": 23,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8388373091902004
+      },
+      {
+        "trial": 24,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 25,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002
+      },
+      {
+        "trial": 26,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8388373091902004
+      },
+      {
+        "trial": 27,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 28,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002
+      },
+      {
+        "trial": 29,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 30,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 31,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 32,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8388373091902004
+      },
+      {
+        "trial": 33,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 34,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 35,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 36,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8388373091902004
+      },
+      {
+        "trial": 37,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002
+      },
+      {
+        "trial": 38,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 39,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8388373091902004
+      },
+      {
+        "trial": 40,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002
+      },
+      {
+        "trial": 41,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002
+      },
+      {
+        "trial": 42,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002
+      },
+      {
+        "trial": 43,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002
+      },
+      {
+        "trial": 44,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 45,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8388373091902004
+      },
+      {
+        "trial": 46,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.8388373091902004
+      },
+      {
+        "trial": 47,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002
+      },
+      {
+        "trial": 48,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0
+      },
+      {
+        "trial": 49,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002
+      }
+    ],
+    "visual": [
+      {
+        "trial": 0,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.75,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.05531800405550877
+      },
+      {
+        "trial": 1,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.25,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.14012435839776735
+      },
+      {
+        "trial": 2,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.25,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.1422606149927467
+      },
+      {
+        "trial": 3,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.25,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.14041253727249975
+      },
+      {
+        "trial": 4,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.75,
+        "mean_rank": 3.25,
+        "mean_xyz_dist": 0.05787642969688333
+      },
+      {
+        "trial": 5,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.09908675474449133
+      },
+      {
+        "trial": 6,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.75,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.04822561737579097
+      },
+      {
+        "trial": 7,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 3.5,
+        "mean_xyz_dist": 0.18836197596987958
+      },
+      {
+        "trial": 8,
+        "top1": 0.75,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.75,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.04623154928755995
+      },
+      {
+        "trial": 9,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.25,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.13756593275639278
+      },
+      {
+        "trial": 10,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.75,
+        "mean_xyz_dist": 0.09133438346883282
+      },
+      {
+        "trial": 11,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.75,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.05303575709254533
+      },
+      {
+        "trial": 12,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.25,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.1398481797193562
+      },
+      {
+        "trial": 13,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.25,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.14047763142771327
+      },
+      {
+        "trial": 14,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.0,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.1866440865600597
+      },
+      {
+        "trial": 15,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.25,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.14297096291387434
+      },
+      {
+        "trial": 16,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.25,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.1398481797193562
+      },
+      {
+        "trial": 17,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.75,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.050784043017165534
+      },
+      {
+        "trial": 18,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.25,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.1409768948256433
+      },
+      {
+        "trial": 19,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.75,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.05502982518077635
+      },
+      {
+        "trial": 20,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.25,
+        "mean_rank": 3.25,
+        "mean_xyz_dist": 0.14475394647890774
+      },
+      {
+        "trial": 21,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.75,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.05447432579439064
+      },
+      {
+        "trial": 22,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.25,
+        "mean_rank": 3.75,
+        "mean_xyz_dist": 0.14247169951594432
+      },
+      {
+        "trial": 23,
+        "top1": 0.75,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.75,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.04566719173441641
+      },
+      {
+        "trial": 24,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.5,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.09764818604264601
+      },
+      {
+        "trial": 25,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.5,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.09958601814242135
+      },
+      {
+        "trial": 26,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.0,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.1861448231621297
+      },
+      {
+        "trial": 27,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.25,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.13991327387456975
+      },
+      {
+        "trial": 28,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.5,
+        "mean_rank": 3.25,
+        "mean_xyz_dist": 0.1016451803858659
+      },
+      {
+        "trial": 29,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.0,
+        "mean_rank": 3.75,
+        "mean_xyz_dist": 0.19021005369012656
+      },
+      {
+        "trial": 30,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 1.0,
+        "mean_rank": 1.75,
+        "mean_xyz_dist": 0.008518955185241811
+      },
+      {
+        "trial": 31,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.5,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.09474534553808334
+      },
+      {
+        "trial": 32,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.25,
+        "mean_rank": 3.25,
+        "mean_xyz_dist": 0.14666124569109942
+      },
+      {
+        "trial": 33,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.09445716666335094
+      },
+      {
+        "trial": 34,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.25,
+        "mean_rank": 2.0,
+        "mean_xyz_dist": 0.1422606149927467
+      },
+      {
+        "trial": 35,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.5,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.09764818604264602
+      },
+      {
+        "trial": 36,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.25,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.14381464117499243
+      },
+      {
+        "trial": 37,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.25,
+        "mean_rank": 3.25,
+        "mean_xyz_dist": 0.1422606149927467
+      },
+      {
+        "trial": 38,
+        "top1": 0.75,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.75,
+        "mean_rank": 1.25,
+        "mean_xyz_dist": 0.04623154928755995
+      },
+      {
+        "trial": 39,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.09758309188743249
+      },
+      {
+        "trial": 40,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.0,
+        "hemisphere": 0.25,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.14481904063412127
+      },
+      {
+        "trial": 41,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.09445716666335092
+      },
+      {
+        "trial": 42,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.0,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.18899142767823668
+      },
+      {
+        "trial": 43,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.0,
+        "mean_rank": 3.25,
+        "mean_xyz_dist": 0.18836197596987958
+      },
+      {
+        "trial": 44,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.5,
+        "mean_rank": 2.75,
+        "mean_xyz_dist": 0.09764818604264602
+      },
+      {
+        "trial": 45,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.25,
+        "hemisphere": 0.5,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.10048593239199516
+      },
+      {
+        "trial": 46,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.0,
+        "hemisphere": 0.25,
+        "mean_rank": 3.5,
+        "mean_xyz_dist": 0.14303605706908784
+      },
+      {
+        "trial": 47,
+        "top1": 0.0,
+        "top5": 1.0,
+        "pair_id": 0.75,
+        "hemisphere": 0.25,
+        "mean_rank": 3.0,
+        "mean_xyz_dist": 0.14525320987683776
+      },
+      {
+        "trial": 48,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 1.75,
+        "mean_xyz_dist": 0.09530084492446905
+      },
+      {
+        "trial": 49,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.09814744944057603
+      }
+    ]
+  },
+  "permuted_anchors": {
+    "visual": [
+      {
+        "trial": 0,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.09814744944057603,
+        "elapsed": 4.9
+      },
+      {
+        "trial": 1,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.09445716666335092,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 2,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.09445716666335092,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 3,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 1.0,
+        "mean_rank": 2.25,
+        "mean_xyz_dist": 0.005960529543867249,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 4,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.09445716666335092,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 5,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.09445716666335092,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 6,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.09708382848950248,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 7,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.09445716666335092,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 8,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.09445716666335092,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 9,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.09708382848950248,
+        "elapsed": 4.8
+      }
+    ],
+    "brainstem": [
+      {
+        "trial": 0,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.12656256531288881,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 1,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.13811664187411227,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 2,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.1265618970343958,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 3,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.13811664187411227,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 4,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.13811664187411227,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 5,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.13811664187411227,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 6,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.13811664187411227,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 7,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.13811664187411227,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 8,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.13811664187411227,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 9,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.13811664187411227,
+        "elapsed": 4.8
+      }
+    ],
+    "sensorimotor": [
+      {
+        "trial": 0,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.3166014935469486,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 1,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.3166014935469486,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 2,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.31635487635349235,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 3,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.31635487635349235,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 4,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.31635487635349235,
+        "elapsed": 4.8
+      }
+    ],
+    "salience": [
+      {
+        "trial": 0,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.3046396791685153,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 1,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.3046396791685153,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 2,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.3046396791685153,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 3,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.3046396791685153,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 4,
+        "top1": 0.25,
+        "top5": 1.0,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 2.5,
+        "mean_xyz_dist": 0.3046396791685153,
+        "elapsed": 4.8
+      }
+    ],
+    "subcortical": [
+      {
+        "trial": 0,
+        "top1": 0.2,
+        "top5": 0.5,
+        "pair_id": 0.4,
+        "hemisphere": 0.5,
+        "mean_rank": 5.4,
+        "mean_xyz_dist": 0.12078864699239089,
+        "elapsed": 4.9
+      },
+      {
+        "trial": 1,
+        "top1": 0.2,
+        "top5": 0.5,
+        "pair_id": 0.3,
+        "hemisphere": 0.5,
+        "mean_rank": 5.4,
+        "mean_xyz_dist": 0.16880463869893222,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 2,
+        "top1": 0.3,
+        "top5": 0.5,
+        "pair_id": 0.5,
+        "hemisphere": 0.5,
+        "mean_rank": 5.2,
+        "mean_xyz_dist": 0.1153035722178087,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 3,
+        "top1": 0.2,
+        "top5": 0.5,
+        "pair_id": 0.3,
+        "hemisphere": 0.5,
+        "mean_rank": 5.4,
+        "mean_xyz_dist": 0.16781818942636634,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 4,
+        "top1": 0.4,
+        "top5": 0.5,
+        "pair_id": 0.4,
+        "hemisphere": 1.0,
+        "mean_rank": 4.9,
+        "mean_xyz_dist": 0.0526269955518909,
+        "elapsed": 4.8
+      }
+    ],
+    "limbic": [
+      {
+        "trial": 0,
+        "top1": 0.16666666666666666,
+        "top5": 0.8333333333333334,
+        "pair_id": 0.3333333333333333,
+        "hemisphere": 0.5,
+        "mean_rank": 3.5,
+        "mean_xyz_dist": 0.13299045900901227,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 1,
+        "top1": 0.16666666666666666,
+        "top5": 0.8333333333333334,
+        "pair_id": 0.3333333333333333,
+        "hemisphere": 0.5,
+        "mean_rank": 3.5,
+        "mean_xyz_dist": 0.13299045900901227,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 2,
+        "top1": 0.3333333333333333,
+        "top5": 0.8333333333333334,
+        "pair_id": 0.6666666666666666,
+        "hemisphere": 0.5,
+        "mean_rank": 3.3333333333333335,
+        "mean_xyz_dist": 0.11115827590092076,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 3,
+        "top1": 0.16666666666666666,
+        "top5": 0.8333333333333334,
+        "pair_id": 0.3333333333333333,
+        "hemisphere": 0.5,
+        "mean_rank": 3.5,
+        "mean_xyz_dist": 0.13299045900901227,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 4,
+        "top1": 0.16666666666666666,
+        "top5": 0.8333333333333334,
+        "pair_id": 0.3333333333333333,
+        "hemisphere": 0.5,
+        "mean_rank": 3.5,
+        "mean_xyz_dist": 0.13299045900901227,
+        "elapsed": 4.8
+      }
+    ],
+    "olfactory": [
+      {
+        "trial": 0,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 1,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 2,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 3,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 4,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.22532899203772683,
+        "elapsed": 4.8
+      }
+    ],
+    "temporal_dmn": [
+      {
+        "trial": 0,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 1,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 2,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 3,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 4,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4194186545951002,
+        "elapsed": 4.8
+      }
+    ],
+    "auditory": [
+      {
+        "trial": 0,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 1,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 2,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 3,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.4419797214588107,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 4,
+        "top1": 1.0,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 1.0,
+        "mean_rank": 1.0,
+        "mean_xyz_dist": 0.0,
+        "elapsed": 4.8
+      }
+    ],
+    "frontal_dmn": [
+      {
+        "trial": 0,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 1,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636,
+        "elapsed": 4.9
+      },
+      {
+        "trial": 2,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 3,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 4,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.057160737526250636,
+        "elapsed": 4.8
+      }
+    ],
+    "frontoparietal": [
+      {
+        "trial": 0,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 1,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 2,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 3,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515,
+        "elapsed": 4.8
+      },
+      {
+        "trial": 4,
+        "top1": 0.5,
+        "top5": 1.0,
+        "pair_id": 1.0,
+        "hemisphere": 0.5,
+        "mean_rank": 1.5,
+        "mean_xyz_dist": 0.28458042819323515,
+        "elapsed": 6.2
+      }
+    ]
+  }
+}

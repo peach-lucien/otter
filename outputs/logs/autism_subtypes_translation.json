@@ -1,0 +1,89 @@
+{
+  "metric": "abs_rowcol_sum",
+  "pi_file": "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy",
+  "observed_human_hypo": {
+    "Control": 6.231663778,
+    "DMN": 5.072020365999999,
+    "DorsAtten": 4.353454858000001,
+    "Limbic": 3.2049821160000005,
+    "Salience": 1.366410587,
+    "SomatoMotor": 2.654320215,
+    "Visual": 3.13308533,
+    "Subcortical": 0.528043386
+  },
+  "observed_human_hyper": {
+    "Control": 61.941589961999995,
+    "DMN": 76.087703976,
+    "DorsAtten": 64.04273452,
+    "Limbic": 119.989548997,
+    "Salience": 122.831498622,
+    "SomatoMotor": 133.138462674,
+    "Visual": 108.44860807200001,
+    "Subcortical": 244.007937156
+  },
+  "predicted_human_hypo": {
+    "Control": 0.015083061307886695,
+    "DMN": 0.024239520191354152,
+    "DorsAtten": 0.021423844685125176,
+    "Limbic": 0.06626075496290458,
+    "Salience": 0.015380504256696334,
+    "SomatoMotor": 0.03860852417160116,
+    "Visual": 0.0052979384578960365,
+    "Subcortical": 0.0277282739723221
+  },
+  "predicted_human_hyper": {
+    "Control": 0.010226770523069069,
+    "DMN": 0.022238458475031624,
+    "DorsAtten": 0.011471588403156681,
+    "Limbic": 0.08055108392833764,
+    "Salience": 0.0158518794297998,
+    "SomatoMotor": 0.024692122837119145,
+    "Visual": 0.005891817307327958,
+    "Subcortical": 0.03726870657989887
+  },
+  "correlations": {
+    "pred_hypo_vs_obs_hypo": {
+      "pearson_r": -0.1330227146433768,
+      "pearson_p": 0.7535090940440501,
+      "spearman_r": -0.2380952380952381,
+      "spearman_p": 0.5701563208157683
+    },
+    "pred_hypo_vs_obs_hyper": {
+      "pearson_r": 0.20519374932683632,
+      "pearson_p": 0.6259247770237405,
+      "spearman_r": 0.523809523809524,
+      "spearman_p": 0.18272075053971484
+    },
+    "pred_hyper_vs_obs_hyper": {
+      "pearson_r": 0.3511066687406238,
+      "pearson_p": 0.393777825323079,
+      "spearman_r": 0.6428571428571429,
+      "spearman_p": 0.08555889101267318
+    },
+    "pred_hyper_vs_obs_hypo": {
+      "pearson_r": -0.2542894503426909,
+      "pearson_p": 0.5433624940523893,
+      "spearman_r": -0.38095238095238104,
+      "spearman_p": 0.35181255311756476
+    }
+  },
+  "subtype_specific": {
+    "hypo": false,
+    "hyper": true
+  },
+  "null": {
+    "pred_hypo_vs_obs_hypo": {
+      "mean_r": -0.45927140720956233,
+      "ci95_lo": -0.5182449462890875,
+      "ci95_hi": -0.4081495376548226
+    },
+    "pred_hyper_vs_obs_hyper": {
+      "mean_r": 0.6280581224099645,
+      "ci95_lo": 0.5620873130981714,
+      "ci95_hi": 0.6942203646254708
+    },
+    "n_trials": 50,
+    "subtype_specific_hypo": 0,
+    "subtype_specific_hyper": 50
+  }
+}

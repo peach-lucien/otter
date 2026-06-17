@@ -1,0 +1,42 @@
+{
+  "n_genes_total": 1713,
+  "n_hypo": 456,
+  "n_hyper": 1257,
+  "pearson_r": 0.4825569743062209,
+  "pearson_p_analytical": 0.22585431090229421,
+  "spearman_r": 0.6904761904761906,
+  "spearman_p_analytical": 0.057990318164572716,
+  "pearson_empirical_p": 0.08,
+  "spearman_empirical_p": 0.015,
+  "same_sign_count": 5,
+  "human_networks": [
+    "Control",
+    "DMN",
+    "DorsAtten",
+    "Limbic",
+    "Salience",
+    "SomatoMotor",
+    "Visual",
+    "Subcortical"
+  ],
+  "observed_delta": [
+    55.709926184,
+    71.01568361,
+    59.689279662,
+    116.784566881,
+    121.465088035,
+    130.484142459,
+    105.31552274200001,
+    243.47989377
+  ],
+  "predicted_delta": [
+    4.079188504304484e-06,
+    -1.4913111337775152e-05,
+    -2.772145452701429e-06,
+    1.9639630585230123e-05,
+    1.1420940241255651e-05,
+    1.7288268667845256e-05,
+    -3.5388160858012654e-05,
+    2.071028512470089e-05
+  ]
+}

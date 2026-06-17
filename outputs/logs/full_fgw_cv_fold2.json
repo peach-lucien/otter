@@ -1,0 +1,45 @@
+{
+  "fold": 2,
+  "visible": [
+    2,
+    3,
+    5,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    19,
+    20,
+    21
+  ],
+  "held_out": [
+    1,
+    4,
+    6,
+    18
+  ],
+  "top1": 0.75,
+  "pair_id": 0.75,
+  "hemisphere": 1.0,
+  "n": 8,
+  "fgw_dist": 0.03360059964950462,
+  "elapsed": 14.5,
+  "held_mouse_anchor_mass_total": 0.004291845493562231,
+  "held_mouse_anchor_mass_in_held_human_anchors": 3.5226787340424036e-05,
+  "config": {
+    "alpha": 0.5,
+    "epsilon": 0.005,
+    "lam": 1.0,
+    "xyz_weight": 0.5,
+    "max_iter": 25,
+    "n_splits": 5,
+    "seed": 42
+  }
+}

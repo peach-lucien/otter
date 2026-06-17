@@ -1,0 +1,30 @@
+{
+  "mouse": {
+    "species": "mouse",
+    "n_obs_min": 105.0,
+    "n_obs_max": 105.0,
+    "n_obs_mean": 105.0,
+    "frac_cells_at_max": 1.0,
+    "row_cov_min": 1.0,
+    "row_cov_median": 1.0,
+    "anchor_row_cov_min": 1.0,
+    "anchor_row_cov_max": 1.0,
+    "C_corr_orig_shrunk": 0.9999999999999999,
+    "C_diff_max": 0.0,
+    "C_diff_mean": 0.0
+  },
+  "human": {
+    "species": "human",
+    "n_obs_min": 100.0,
+    "n_obs_max": 113.0,
+    "n_obs_mean": 112.58683490837471,
+    "frac_cells_at_max": 0.8485810937536364,
+    "row_cov_min": 0.9284090236748908,
+    "row_cov_median": 0.9981531725705979,
+    "anchor_row_cov_min": 0.9981531725705979,
+    "anchor_row_cov_max": 0.9981531725705979,
+    "C_corr_orig_shrunk": 0.999965692433729,
+    "C_diff_max": 0.04490292283286035,
+    "C_diff_mean": 0.00017693403527630595
+  }
+}

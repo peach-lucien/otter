@@ -1,0 +1,45 @@
+{
+  "folds": [
+    {
+      "fold": 0,
+      "top1": 0.7,
+      "pair_id": 0.7,
+      "hemi": 1.0,
+      "elapsed": 4.8
+    },
+    {
+      "fold": 1,
+      "top1": 0.75,
+      "pair_id": 0.75,
+      "hemi": 1.0,
+      "elapsed": 4.9
+    },
+    {
+      "fold": 2,
+      "top1": 0.75,
+      "pair_id": 0.75,
+      "hemi": 1.0,
+      "elapsed": 4.8
+    },
+    {
+      "fold": 3,
+      "top1": 0.25,
+      "pair_id": 0.25,
+      "hemi": 1.0,
+      "elapsed": 4.8
+    },
+    {
+      "fold": 4,
+      "top1": 1.0,
+      "pair_id": 1.0,
+      "hemi": 1.0,
+      "elapsed": 4.8
+    }
+  ],
+  "top1_mean": 0.6900000000000001,
+  "top1_std": 0.2437211521390788,
+  "pair_mean": 0.6900000000000001,
+  "pair_std": 0.2437211521390788,
+  "hemi_mean": 1.0,
+  "hemi_std": 0.0
+}
