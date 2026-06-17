@@ -14,6 +14,8 @@
 set -uo pipefail
 
 VERSION="v1.0.0"
+# Stop macOS bsdtar from writing AppleDouble (._*) sidecars into the archives.
+export COPYFILE_DISABLE=1
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT" || exit 1
 OUT_DIR="$(dirname "$ROOT")"
