@@ -51,17 +51,17 @@ The repository ships code only. The coupling, the processed AnnData caches, and
 the validation inputs live in a versioned Zenodo archive and are pulled by
 `scripts/fetch_data.py`; the committed result logs in `outputs/logs/` already let
 you read every headline number without downloading anything. See
-[`DATA.md`](DATA.md) for the tiers and what each contains. Data DOI: [10.5281/zenodo.20733163](https://doi.org/10.5281/zenodo.20733163).
+[`DATA.md`](DATA.md) for the tiers and what each contains. Data DOI: [10.5281/zenodo.20733163](https://doi.org/10.5281/zenodo.20733163). If you call into the library before fetching, it prompts you to download then; set `HOMER_AUTO_FETCH=1` to fetch automatically whenever data is needed.
 
 Query a region after installation (requires the fetched data):
 
 ```python
 import numpy as np
-from homer.data import load_cached
+from homer.data import load_cached, load_pi
 
 M, _ = load_cached("mouse", cache_dir="outputs/anndata")
 H, _ = load_cached("human", cache_dir="outputs/anndata")
-pi = np.load("outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")    # (1864, 2094)
+pi = load_pi()    # recommended coupling (1864, 2094)
 
 # Top-5 human partners for mouse parcel 1234
 top5_idx = pi[1234].argsort()[::-1][:5]
