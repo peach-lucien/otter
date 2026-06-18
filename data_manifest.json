@@ -5,9 +5,9 @@
   "archives": {
     "reproduce": {
       "filename": "homer-reproduce-v1.2.0.tar.gz",
-      "url": "TODO_AFTER_REUPLOAD",
-      "md5": "TODO_AFTER_REUPLOAD",
-      "approx_size_mb": 620,
+      "url": "https://zenodo.org/api/records/20746024/files/homer-reproduce-v1.2.0.tar.gz/content",
+      "md5": "083269655e6f686876cccc3cdbbef1c8",
+      "approx_size_mb": 642,
       "unpacks_to": ["outputs/", "data_external/"],
       "description": "Every data file the notebooks/experiments load (verified by exhaustive audit) + processed caches + validation inputs. Re-run any notebook or experiment without rebuilding. (v1.2.0 adds full_costs.npz and a few couplings/atlas files v1.1.0 still omitted.)"
     },
