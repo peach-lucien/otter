@@ -4,12 +4,12 @@
   "version": "v1.0.0",
   "archives": {
     "reproduce": {
-      "filename": "homer-reproduce-v1.0.0.tar.gz",
-      "url": "https://zenodo.org/api/records/20733163/files/homer-reproduce-v1.0.0.tar.gz/content",
-      "md5": "3a3df8cfaf77c26368940ecdfbd2caaf",
-      "approx_size_mb": 173,
+      "filename": "homer-reproduce-v1.1.0.tar.gz",
+      "url": "TODO_AFTER_REUPLOAD",
+      "md5": "TODO_AFTER_REUPLOAD",
+      "approx_size_mb": 450,
       "unpacks_to": ["outputs/", "data_external/"],
-      "description": "Precomputed coupling + processed caches + validation inputs. Re-run any experiment or notebook without rebuilding."
+      "description": "All coupling files the notebooks/experiments load + processed caches + validation inputs. Re-run any notebook or experiment without rebuilding. (v1.1.0 adds the strict pi and ablation-variant couplings that v1.0.0 omitted.)"
     },
     "raw": {
       "filename": "homer-raw-inputs-v1.0.0.tar.gz",

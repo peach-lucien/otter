@@ -44,7 +44,7 @@ git clone <this-repo> homer && cd homer
 conda env create -f env.yml && conda activate homer
 pip install -e ".[dev]"
 pytest -q                            # ~10s, runs on a bare checkout (synthetic fixtures)
-python scripts/fetch_data.py         # pull the coupling + caches from Zenodo (~173 MB)
+python scripts/fetch_data.py         # pull the couplings + caches from Zenodo (~450 MB)
 ```
 
 The repository ships code only. The coupling, the processed AnnData caches, and

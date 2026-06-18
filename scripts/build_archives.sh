@@ -13,7 +13,8 @@
 # them cleanly at the repo root. Missing entries are skipped with a warning.
 set -uo pipefail
 
-VERSION="v1.0.0"
+REPRODUCE_VERSION="v1.1.0"   # bumped: now ships all couplings the notebooks load
+RAW_VERSION="v1.0.0"         # unchanged content
 # Stop macOS bsdtar from writing AppleDouble (._*) sidecars into the archives.
 export COPYFILE_DISABLE=1
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -22,9 +23,29 @@ OUT_DIR="$(dirname "$ROOT")"
 
 # ---- Archive 1: reproduce bundle -------------------------------------------
 REPRODUCE=(
-  # HOMER-generated (we own these)
+  # HOMER-generated (we own these) — all coupling files the notebooks +
+  # experiments load (recommended pi, strict pi, ablation variants, trust maps).
   outputs/coupling/pi_fc_plus_SC_with_all_packs.npy
+  outputs/coupling/pi_fc_plus_SC.npy
+  outputs/coupling/pi_fc_plus_SC_xyz_zero.npy
+  outputs/coupling/pi_fc_plus_SC_with_M1.npy
+  outputs/coupling/pi_fc_plus_SC_with_amygdala.npy
+  outputs/coupling/pi_fc_plus_SC_with_biccn_motor.npy
+  outputs/coupling/pi_fc_plus_SC_with_cingulate.npy
+  outputs/coupling/pi_fc_plus_SC_with_cingulate_rsc_only.npy
+  outputs/coupling/pi_fc_plus_SC_with_entorhinal.npy
+  outputs/coupling/pi_fc_plus_SC_with_hippocampal.npy
+  outputs/coupling/pi_fc_plus_SC_with_hippocampal_subi_only.npy
+  outputs/coupling/pi_fc_plus_SC_with_lateral_pfc.npy
+  outputs/coupling/pi_fc_plus_SC_with_olfactory.npy
+  outputs/coupling/pi_fc_plus_SC_with_olfactory_pir_only.npy
+  outputs/coupling/pi_fc_plus_SC_with_striatum.npy
+  outputs/coupling/pi_fc_plus_SC_with_tectum.npy
+  outputs/coupling/pi_fc_plus_SC_with_tectum_sc_only.npy
   outputs/coupling/trust_multisource_all_packs.npz
+  outputs/coupling/trust_score_fc_plus_SC.npz
+  outputs/coupling/trust_score_fc_plus_SC_with_M1_hippo.npz
+  outputs/coupling/bootstrap_aggregate_fc_plus_SC.npz
   outputs/coupling/per_disorder_predictions.npz
   outputs/anndata/mouse.h5ad
   outputs/anndata/human.h5ad
@@ -68,17 +89,22 @@ build () {
   shasum -a 256 "$OUT_DIR/$name"
 }
 
-build "homer-reproduce-${VERSION}.tar.gz" "${REPRODUCE[@]}"
+build "homer-reproduce-${REPRODUCE_VERSION}.tar.gz" "${REPRODUCE[@]}"
 
-# ---- Archive 2: full raw inputs (optional, for a from-scratch rebuild) ------
-# The whole data_external/ except the regeneratable Allen ISH download caches.
-echo ">> building homer-raw-inputs-${VERSION}.tar.gz (full data_external/)"
-tar --no-xattrs --exclude='.DS_Store' --exclude='data_external/_ish_cache' \
-    --exclude='data_external/_ish_cache_v2' \
-    -czf "$OUT_DIR/homer-raw-inputs-${VERSION}.tar.gz" data_external
-echo "   wrote $OUT_DIR/homer-raw-inputs-${VERSION}.tar.gz  ($(du -h "$OUT_DIR/homer-raw-inputs-${VERSION}.tar.gz" | cut -f1))"
-shasum -a 256 "$OUT_DIR/homer-raw-inputs-${VERSION}.tar.gz"
+# ---- Archive 2: full raw inputs (optional; content unchanged from v1.0.0) ----
+# Only rebuilt when BUILD_RAW=1, since the raw inputs haven't changed and the
+# existing v1.0.0 file on Zenodo is still valid.
+if [ "${BUILD_RAW:-0}" = "1" ]; then
+  echo ">> building homer-raw-inputs-${RAW_VERSION}.tar.gz (full data_external/)"
+  tar --no-xattrs --exclude='.DS_Store' --exclude='data_external/_ish_cache' \
+      --exclude='data_external/_ish_cache_v2' \
+      -czf "$OUT_DIR/homer-raw-inputs-${RAW_VERSION}.tar.gz" data_external
+  echo "   wrote $OUT_DIR/homer-raw-inputs-${RAW_VERSION}.tar.gz  ($(du -h "$OUT_DIR/homer-raw-inputs-${RAW_VERSION}.tar.gz" | cut -f1))"
+  shasum -a 256 "$OUT_DIR/homer-raw-inputs-${RAW_VERSION}.tar.gz"
+else
+  echo ">> skipping raw-inputs archive (unchanged; set BUILD_RAW=1 to rebuild it)"
+fi
 
 echo
-echo "Done. Upload both .tar.gz files to one Zenodo record, then paste the DOI,"
-echo "URLs and checksums into data_manifest.json (see DATA.md)."
+echo "Done. Upload homer-reproduce-${REPRODUCE_VERSION}.tar.gz as a NEW VERSION of the"
+echo "Zenodo record, then give the new record id so the manifest can be refreshed."
