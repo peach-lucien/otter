@@ -47,6 +47,15 @@ OCC = {
 }
 MASKDIR = PAGANI / "Region_masks"
 
+_SOURCE_DATA_MSG = (
+    "\n[pagani_2026_per_model] Required source data not found:\n  {path}\n\n"
+    "This experiment depends on raw Gozzi-lab Pagani 2026 inputs under\n"
+    "  data_crossspecies/pagani/\n"
+    "which are third-party source data and are NOT part of the public data\n"
+    "release. It is a maintainer / source-data-only experiment — contact the\n"
+    "authors for access. See experiments/pagani_2026_per_model/README.md.\n"
+)
+
 # Allen region-vote keyword rules → 13 conserved regions (verified bridge).
 RULES = {
     "amygdala":             ["amygdal"],
@@ -78,6 +87,8 @@ def parcel_to_region(var) -> np.ndarray:
 
 
 def region_occurrence(subtype: str) -> dict[str, float]:
+    if not OCC[subtype].exists():
+        raise SystemExit(_SOURCE_DATA_MSG.format(path=OCC[subtype]))
     occ = nib.load(str(OCC[subtype])).get_fdata()
     vals = {}
     for r in REGIONS:

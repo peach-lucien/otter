@@ -179,6 +179,15 @@ def compute_parcel_voxel_indices() -> list[np.ndarray]:
     one_based = diagnostics["mouse_voxel_index_check"]["likely_one_based"]
     order = diagnostics["mouse_voxel_index_check"]["recommended_order"]
 
+    if not MASK.exists():
+        raise SystemExit(
+            f"\n[allen_expansion] Required source mask not found:\n  {MASK}\n\n"
+            "This Allen-ISH download step needs the mouse resting-state mask under\n"
+            "  data_crossspecies/_mouse_mask/rsmask.nii\n"
+            "which is raw source data NOT included in the public data release. This\n"
+            "is a maintainer / source-data-only script (and a multi-day Allen API\n"
+            "download). See experiments/autism_subtypes/allen_expansion/README.md.\n"
+        )
     rsmask = nib.load(str(MASK))
     rsmask_affine = rsmask.affine; rsmask_shape = rsmask.shape
     meta = load_metadata("mouse"); df = parse_t_table(meta["t"], meta["ht"])
