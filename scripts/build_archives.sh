@@ -13,7 +13,7 @@
 # them cleanly at the repo root. Missing entries are skipped with a warning.
 set -uo pipefail
 
-REPRODUCE_VERSION="v1.1.0"   # bumped: now ships all couplings the notebooks load
+REPRODUCE_VERSION="v1.2.0"   # ships every data file the notebooks/experiments load (full audit)
 RAW_VERSION="v1.0.0"         # unchanged content
 # Stop macOS bsdtar from writing AppleDouble (._*) sidecars into the archives.
 export COPYFILE_DISABLE=1
@@ -42,6 +42,9 @@ REPRODUCE=(
   outputs/coupling/pi_fc_plus_SC_with_striatum.npy
   outputs/coupling/pi_fc_plus_SC_with_tectum.npy
   outputs/coupling/pi_fc_plus_SC_with_tectum_sc_only.npy
+  outputs/coupling/pi_fc_plus_SC_with_pag.npy
+  outputs/coupling/pi_fc_plus_SC_with_visual.npy
+  outputs/coupling/pi_fc_plus_SC_per_region_xyz_v2.npy
   outputs/coupling/trust_multisource_all_packs.npz
   outputs/coupling/trust_score_fc_plus_SC.npz
   outputs/coupling/trust_score_fc_plus_SC_with_M1_hippo.npz
@@ -52,6 +55,7 @@ REPRODUCE=(
   outputs/anndata/mouse.voxels.npz
   outputs/anndata/mouse_voxel_counts.npy
   outputs/anndata/human_voxel_counts.npy
+  outputs/anndata/full_costs.npz
   # third-party-derived validation inputs (confirm redistribution rights)
   data_external/human_genes.npy
   data_external/human_gene_list.csv
@@ -71,6 +75,7 @@ REPRODUCE=(
   data_external/_domhof_extracted
   data_external/_diagnostics
   data_external/MouseHumanTranscriptomicSimilarity/AMBA/data/imaging/DSURQE_CCFv3_labels_200um.mnc
+  data_external/MouseHumanTranscriptomicSimilarity/AMBA/data/imaging/DSURQE_40micron_R_mapping_long.csv
   data_external/MouseHumanTranscriptomicSimilarity/AMBA/data/DSURQE_tree.json
   data_external/p6ebec-hbp-d000038_SC-FC_HCP_eNKI_pub/Schaefer2018_400Parcels_17Networks.zip
 )

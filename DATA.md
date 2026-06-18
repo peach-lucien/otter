@@ -32,7 +32,7 @@ need the archive below.
 | Tier | Where | Lets you |
 |---|---|---|
 | 0 — small artifacts | committed to Git | run unit tests, read all result numbers |
-| 1 — reproduce bundle | Zenodo `homer-reproduce-v1.1.0.tar.gz` (~450 MB download) | re-run every experiment/notebook against the precomputed couplings |
+| 1 — reproduce bundle | Zenodo `homer-reproduce-v1.2.0.tar.gz` (~620 MB download) | re-run every experiment/notebook against the precomputed couplings |
 | 2 — raw inputs | Zenodo `homer-raw-inputs-v1.0.0.tar.gz` (606 MB download) | rebuild the coupling bitwise from raw data via `pipeline/` |
 
 You do **not** need Tier 2 to use HOMER — only to regenerate `π` from scratch.
@@ -46,7 +46,7 @@ root so the paths inside the tarball are repo-relative (the fetch script unpacks
 at the repo root). The exact `tar` commands are in
 [`scripts/build_archives.sh`](scripts/build_archives.sh).
 
-### Archive 1 — `homer-reproduce-v1.1.0.tar.gz` (~450 MB gzipped)
+### Archive 1 — `homer-reproduce-v1.2.0.tar.gz` (~620 MB gzipped)
 
 Everything needed to re-run the experiments **and all 15 notebooks** on the shipped
 couplings. The exact file list is in `scripts/build_archives.sh` (the `REPRODUCE`
