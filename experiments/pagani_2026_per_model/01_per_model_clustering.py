@@ -56,7 +56,20 @@ N_HYPER = 9  # rows 0..8
 # ---------------------------------------------------------------------------
 # 1. Load clean Fig 1c and derive + verify subtype labels
 # ---------------------------------------------------------------------------
+_SOURCE_DATA_MSG = (
+    "\n[pagani_2026_per_model] Required source data not found:\n  {path}\n\n"
+    "This experiment depends on raw Gozzi-lab Pagani 2026 inputs under\n"
+    "  data_crossspecies/pagani/\n"
+    "which are third-party source data and are NOT part of the public data\n"
+    "release (the Zenodo bundles ship HOMER's processed artifacts, not this raw\n"
+    "source). It is a maintainer / source-data-only experiment — contact the\n"
+    "authors for access. See experiments/pagani_2026_per_model/README.md.\n"
+)
+
+
 def load_clean_figura_1c() -> tuple[np.ndarray, list[str]]:
+    if not CLEAN_CSV.exists():
+        raise SystemExit(_SOURCE_DATA_MSG.format(path=CLEAN_CSV))
     labels, rows = [], []
     with open(CLEAN_CSV) as fh:
         for r in csv.reader(fh):

@@ -1,5 +1,12 @@
 # Pagani 2026 subtype translation through HOMER's π
 
+> **Source-data-dependent (not in the public release).** This experiment reads raw
+> Gozzi-lab Pagani 2026 inputs from `data_crossspecies/pagani/` (the clean Fig 1c
+> matrix, region masks, occurrence maps) — third-party source data that is **not**
+> shipped in the Zenodo bundles. The scripts exit with a clear message if it's
+> absent. Contact the authors for access; this is a maintainer/in-progress
+> experiment (see `email_draft_per_model_nifti.md`).
+
 How HOMER's π translates Pagani's autism connectivity **subtypes** from mouse to
 human, with each of the 20 mouse models placed on the hyper↔hypo axis. Frames a
 real biological question: *does the human ASD subtype HOMER predicts from a mouse

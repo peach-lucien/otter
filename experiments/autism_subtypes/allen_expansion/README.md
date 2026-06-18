@@ -1,5 +1,12 @@
 # Allen ISH expansion for Pagani 2026 Test 3
 
+> **Source-data-dependent (not in the public release).** `download_pagani_ish.py`
+> needs the mouse resting-state mask `data_crossspecies/_mouse_mask/rsmask.nii`
+> (raw source, not shipped in the Zenodo bundles) and performs a multi-day Allen
+> API download. It exits with a clear message if the mask is absent. This is a
+> maintainer/source-data-only script; the per-parcel result it produces
+> (`pagani_mouse_expr.npy`) is already committed so downstream steps don't need it.
+
 Standalone pipeline to expand HOMER's mouse Allen ISH atlas from 61 curated genes to **all 6,415 genes implicated by Pagani et al. 2026** (1,952 hypo-only + 4,463 hyper-only from MOESM4). Required to power Test 3 (gene-spatial translation) properly.
 
 ## Why this exists
