@@ -30,6 +30,7 @@ SENTINELS = {
         "outputs/coupling/pi_fc_plus_SC.npy",
         "outputs/anndata/mouse.h5ad",
         "outputs/anndata/human.h5ad",
+        "outputs/anndata/full_costs.npz",
         "data_external/human_genes.npy",
     ],
     "raw": [
