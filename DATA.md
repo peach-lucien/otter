@@ -11,7 +11,8 @@ python scripts/fetch_data.py --tier raw # add the full raw inputs (for a from-sc
 ```
 
 The DOI and download URLs are read from `data_manifest.json`.
-Data DOI: [10.5281/zenodo.20733163](https://doi.org/10.5281/zenodo.20733163).
+Data DOI: [10.5281/zenodo.20746024](https://doi.org/10.5281/zenodo.20746024) (latest;
+the raw-inputs archive remains in the prior version, [10.5281/zenodo.20733163](https://doi.org/10.5281/zenodo.20733163)).
 
 ## What a fresh clone can do *without* any download
 

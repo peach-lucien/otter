@@ -1,13 +1,13 @@
 {
-  "doi": "10.5281/zenodo.20733163",
-  "record_url": "https://doi.org/10.5281/zenodo.20733163",
-  "version": "v1.0.0",
+  "doi": "10.5281/zenodo.20746024",
+  "record_url": "https://doi.org/10.5281/zenodo.20746024",
+  "version": "v1.1.0",
   "archives": {
     "reproduce": {
       "filename": "homer-reproduce-v1.1.0.tar.gz",
-      "url": "TODO_AFTER_REUPLOAD",
-      "md5": "TODO_AFTER_REUPLOAD",
-      "approx_size_mb": 450,
+      "url": "https://zenodo.org/api/records/20746024/files/homer-reproduce-v1.1.0.tar.gz/content",
+      "md5": "fc0a4e236c04d5cdcd7db93e63cde6c4",
+      "approx_size_mb": 495,
       "unpacks_to": ["outputs/", "data_external/"],
       "description": "All coupling files the notebooks/experiments load + processed caches + validation inputs. Re-run any notebook or experiment without rebuilding. (v1.1.0 adds the strict pi and ablation-variant couplings that v1.0.0 omitted.)"
     },
