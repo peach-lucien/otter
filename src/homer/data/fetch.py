@@ -27,6 +27,7 @@ from pathlib import Path
 SENTINELS = {
     "reproduce": [
         "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy",
+        "outputs/coupling/pi_fc_plus_SC.npy",
         "outputs/anndata/mouse.h5ad",
         "outputs/anndata/human.h5ad",
         "data_external/human_genes.npy",

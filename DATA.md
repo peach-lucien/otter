@@ -31,7 +31,7 @@ need the archive below.
 | Tier | Where | Lets you |
 |---|---|---|
 | 0 — small artifacts | committed to Git | run unit tests, read all result numbers |
-| 1 — reproduce bundle | Zenodo `homer-reproduce-v1.0.0.tar.gz` (173 MB download) | re-run every experiment/notebook against the precomputed coupling |
+| 1 — reproduce bundle | Zenodo `homer-reproduce-v1.1.0.tar.gz` (~450 MB download) | re-run every experiment/notebook against the precomputed couplings |
 | 2 — raw inputs | Zenodo `homer-raw-inputs-v1.0.0.tar.gz` (606 MB download) | rebuild the coupling bitwise from raw data via `pipeline/` |
 
 You do **not** need Tier 2 to use HOMER — only to regenerate `π` from scratch.
@@ -45,16 +45,21 @@ root so the paths inside the tarball are repo-relative (the fetch script unpacks
 at the repo root). The exact `tar` commands are in
 [`scripts/build_archives.sh`](scripts/build_archives.sh).
 
-### Archive 1 — `homer-reproduce-v1.0.0.tar.gz` (173 MB gzipped, ~360 MB unpacked)
+### Archive 1 — `homer-reproduce-v1.1.0.tar.gz` (~450 MB gzipped)
 
-Everything needed to re-run the experiments and notebooks on the shipped coupling.
+Everything needed to re-run the experiments **and all 15 notebooks** on the shipped
+couplings. The exact file list is in `scripts/build_archives.sh` (the `REPRODUCE`
+array).
 
 **HOMER-generated (we own these — safe to redistribute):**
 
 | Path | Size | What |
 |---|---:|---|
 | `outputs/coupling/pi_fc_plus_SC_with_all_packs.npy` | 30 MB | the recommended coupling π (1864×2094) |
-| `outputs/coupling/trust_multisource_all_packs.npz` | 0.3 MB | per-parcel multi-source trust tiers |
+| `outputs/coupling/pi_fc_plus_SC.npy` | 15 MB | strict π (Garin anchors only); quickstart compares it to the recommended π |
+| `outputs/coupling/pi_fc_plus_SC_with_*.npy` (×15) + `pi_fc_plus_SC_xyz_zero.npy` | ~430 MB | ablation-variant couplings the advanced notebooks load (per-anchor-pack, xyz-zeroed, etc.) |
+| `outputs/coupling/trust_multisource_all_packs.npz`, `trust_score_fc_plus_SC*.npz` | ~0.5 MB | per-parcel trust tiers + scores |
+| `outputs/coupling/bootstrap_aggregate_fc_plus_SC.npz` | — | bootstrap stability aggregate |
 | `outputs/coupling/per_disorder_predictions.npz` | 0.07 MB | ENIGMA per-disorder predicted maps |
 | `outputs/anndata/mouse.h5ad` | 42 MB | processed mouse parcel table + features |
 | `outputs/anndata/human.h5ad` | 52 MB | processed human parcel table + features |
