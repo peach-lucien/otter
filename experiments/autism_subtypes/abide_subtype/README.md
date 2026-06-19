@@ -1,5 +1,41 @@
 # ABIDE per-subject HOMER-template subtype scoring (PAGANI-B)
 
+## Corrected, Pagani-faithful subtyping (05/06) — read this first
+
+The original script below (`abide_subtype_prediction.py`) scores subjects against a
+continuous Δ = hyper − hypo template — HOMER's *weak* (continuous-map) mode. Two
+newer scripts implement Pagani's *actual* discrete classification and a continuous
+extension, and supersede the framing of the older one:
+
+- **`05_abide_homer_subtyping.py`** reproduces Pagani's exact ±1 s.d. classification
+  on ABIDE, comparing HOMER-derived masks against name-matched masks head to head.
+  **Result (ran 2026):** HOMER masks subtype **21.3%** of ASD, name-matched **22.3%**
+  (Pagani report ~25%), with **93% label agreement**. So HOMER does *not* subtype more
+  individuals — it ≈equals the name-matched bridge and thereby **validates** it
+  (discrete homology survives; this is HOMER's strong mode). The ~78% unsubtyped is a
+  *hard-threshold* bottleneck, not a mapping failure. (NB: our pipeline uses AAL-116,
+  not Pagani's Schaefer-400+14, so absolute % isn't directly comparable; the
+  HOMER-vs-name comparison is internally consistent.)
+
+- **`06_continuous_subtype_score.py`** removes the hard threshold: every individual
+  gets a continuous position on the HOMER hyper↔hypo axis (projection of z-scored
+  regional global connectivity onto the hyper−hypo coupling contrast). This tests the
+  dose-response Pagani's binary scheme structurally can't. **Result (ran 2026-06-19):
+  NULL.** The axis *is* a valid construct (it orders the hard labels correctly:
+  hard-hyper mean +0.110 > hard-hypo +0.025), but it carries **no diagnostic signal**
+  (ASD vs control Mann-Whitney p=0.97) and **no severity dose-response** (axis vs ADOS:
+  every subscale |ρ|≤0.11, all n.s.; closest ADOS_SOCIAL ρ=−0.11, p=0.078). This is
+  consistent with HOMER's established dichotomy — discrete correspondence survives,
+  continuous/graded translation does not — and with Pagani themselves never having
+  shown a continuous ADOS dose-response. **Caveat (F-015):** the axis inherits π's
+  uneven human coverage (masks lean Subcortical/Salience/DMN), so the honest claim is
+  "no detectable continuous severity signal under the current coupling," not "the
+  continuum is flat." Output: `outputs/logs/abide_continuous_subtype.json`.
+
+**Bottom line for the manuscript:** the per-individual continuous subtype readout is a
+clean negative; the discrete HOMER↔name-match equivalence (05) is the positive result
+worth reporting. See `../../pagani_2026_per_model/README.md` for the mouse-side story.
+
 ## What this tests
 
 Pagani 2026's claim 1 is that ASD subjects cluster into hyper- and hypo-connected functional-connectivity subtypes. They derive those subtypes by an in-house clustering pipeline on FC perturbation features.
