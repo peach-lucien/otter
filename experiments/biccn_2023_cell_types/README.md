@@ -75,3 +75,22 @@ This test uses HOMER's curated 61-gene panel + AHBA microarray as proxies for ce
 4. Test cross-species correlations for actual transcriptomically-defined cell types, not gene-marker proxies
 
 This would extend from ~25 cell-type-marker proxies to thousands of actual cell types — closer to BICCN's intended use case. Tractable but a multi-day data engineering project.
+
+## Contrast reframe (2026-06-19) — `03_contrast_reframe.py`
+
+Per-gene smooth-map correlations are weak (mean r=0.089) and share cortical spatial
+autocorrelation. Testing cell-CLASS contrasts instead (magnitude-cancelling, like the
+Pagani contrast), against the fair translation-spin null:
+- **Excitatory − inhibitory** (Glut − interneuron): r=+0.262, **spin p=0.001 → SURVIVES.**
+- Neuronal − glial: r=+0.049, spin p=0.58 (n.s.) — glia aren't network-organised.
+- Dopaminergic subcortical hotspot: top-decile overlap 17/124, hypergeometric p=0.10
+  (marginal); full-map spin n.s.
+
+**The E/I axis is a genuine specific cross-species result** that the per-marker test
+missed — HOMER preserves where excitatory vs inhibitory neurons dominate, beyond
+spatial smoothness. Log: `outputs/logs/biccn_contrast_reframe.json`.
+
+A higher-resolution upgrade (real per-region cell-type *abundance* from Yao 2023 +
+Siletti 2023, not marker proxies) is scaffolded in `04_abundance_composition.py` —
+needs the two cell atlases + `abc_atlas_access`/`cellxgene-census`, so run locally
+(not feasible in the disk-limited sandbox).

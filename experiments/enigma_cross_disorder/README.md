@@ -84,3 +84,22 @@ Outputs:
 ## Showcase notebook
 
 See [`notebooks/11_enigma_cross_disorder.ipynb`](../../notebooks/11_enigma_cross_disorder.ipynb) for an interactive walkthrough.
+
+## Disorder-unique + transdiagnostic (2026-06-19) — `04_disorder_unique.py`, `05_transdiagnostic.py`
+
+**Is the r=0.988 "no specificity" just gene-set overlap?** No. `04_disorder_unique.py`
+strips each disorder to genes UNIQUE to it and re-routes. The non-autism sets turn out
+to be essentially *nested* in the 1,713-gene autism set, so we use a pairwise
+relative-unique test (genes in A-not-B vs B-not-A): even **fully disjoint** sets
+(bipolar-only 26 genes vs SCZ-only 447 genes) still route to near-identical human maps
+(r=+0.98). So the shared psychiatric geometry is **robust, not an overlap artifact**.
+
+**Does that shared geometry match real disease maps?** `05_transdiagnostic.py` compares
+HOMER's generic predicted map to ENIGMA observed cortical-thickness Cohen's d (DK-68),
+including a transdiagnostic average across ASD/SCZ/BD/ADHD and a spin null over DK
+centroids. Result: r=−0.27 vs the transdiagnostic average, **spin p=0.24 (n.s.)**, and
+n.s. for every individual disorder and the held-out MDD/OCD. So HOMER's shared geometry
+is a property of the gene→π routing and does **not** align with the observed ENIGMA
+thickness signature beyond spatial autocorrelation. Honest negative against external
+maps. (ENIGMA CSVs: ENIGMA Toolbox `summary_statistics`, staged in
+`data_external/enigma/`.) Logs: `enigma_disorder_unique.json`, `enigma_transdiagnostic.json`.

@@ -101,17 +101,22 @@ We tested HOMER against 12 cross-species neuroscience papers using completely in
 | Pagani 2026 | Continuous hyper↔hypo severity axis (per individual) | ASD vs ctrl p = 0.97; axis vs ADOS all n.s. (\|ρ\| ≤ 0.11) | Null (continuous) |
 | Pagani 2026 | ABIDE per-subject Δ-template scoring | null (signed p = 0.96, abs p = 0.64, δ ≈ 0); within-ASD unimodal | Null at subject level |
 | Pagani 2026 | Cross-disease gene-set spatial | autism r ≈ ADHD r ≈ SCZ r ≈ +0.43 | **No disorder-specificity** |
-| Margulies 2016 + Huntenburg 2021 | Principal connectivity gradient | \|r\| = 0.402 parcel (0.433 region); exceeds a permuted-π null but not a spatial spin null (p ≈ 0.16) | Modest |
+| Margulies 2016 + Huntenburg 2021 | Principal connectivity gradient (continuous) | \|r\| = 0.402 parcel (0.433 region); exceeds a permuted-π null but not a spatial spin null (p ≈ 0.16) | Modest |
+| Margulies (discrete reframe) | Gradient-tier classification + network rank-order | tier accuracy 50% vs 33% chance (spin p=0.09); network rank ρ=+0.73 (spin p=0.10) | Improved but n.s. |
 | **Fulcher 2019** (PNAS) | Mouse T1w:T2w + cytoarchitecture → human myelin | **r = +0.373 / +0.362** (205 regions); survives a spin null (p = 0.021 / 0.010) | **Strong (structural)** |
 | **Balsters 2020** (PNAS) | Falsification — does mouse MFC avoid human dlPFC? | **0 %** mouse-MFC mass → dlPFC (0/46 argmax); enrichment ×0.0, p = 0.985; mass goes to premotor / medial PFC / cingulate | **Pass (falsification)** |
 | **TransBrain 2025** (Nat Methods) | Head-to-head vs a sibling method + its homology benchmark | predicted-centroid **25.3 mm vs 39.8 mm null** (**p < 0.001**); top-3 **41 %**; head-to-head gradient \|r\| 0.393 (HOMER) vs 0.463 (TransBrain) | **Methods comparison** |
 | **Buckner & Krienen 2013** (TICS) | Negative control — is π sparsest over untethered association cortex? | sensorimotor−association coverage gap **6.7 log units** (p = 3.4×10⁻⁷, empirical p = 0.000) | **Pass (negative control)** |
 | **Coletta 2020** (Sci Adv) | Labeled mouse-net → Yeo-7 + coherence | **6/10 diagonal-argmax** (survives a spin null, p = 0.002), 9/11 nets compact vs null | **Robust (network-level)** |
-| **BICCN** (Yao 2023 + Siletti 2023) | Cell-type marker spatial | 13/23 markers significant, mean r = +0.089; glutamatergic 4/4, interneuron 4/7 (Drd1 +0.227, Slc17a7 +0.221, Vip +0.201, Pvalb +0.198) | Moderate |
+| **BICCN** (Yao 2023 + Siletti 2023) | Cell-type marker spatial (per-gene) | 13/23 markers significant, mean r = +0.089; glutamatergic 4/4, interneuron 4/7 (Drd1 +0.227, Slc17a7 +0.221, Vip +0.201, Pvalb +0.198) | Moderate |
+| **BICCN (contrast reframe)** | Excitatory−inhibitory class contrast | **r = +0.262, survives a spin null (p = 0.001)** | **Specific (E/I axis)** |
 | BICCN | Broadly-cortical interneurons | Pvalb, Sst, Vip null | Null — pan-cortical limit |
 | Whitesell 2021 (Neuron) | DMN refinement | Yeo-DMN 23.9 %; DMN-aligned cortical territory 54.5 % | Methodological note |
 | **ENIGMA Phase 1** | Cross-disorder predictions at parcel level | Off-diagonal r = +0.988 (autism ≈ SCZ ≈ ADHD ≈ bipolar) | **Confirms no disorder-specificity** |
-| Hodge 2019 (Nature) | Cortical layer markers | 6/7 markers significant, mean r = +0.119 (L2/3 +0.083/+0.176/+0.189, L4 +0.090, L5 +0.168, L6 +0.108) | Moderate |
+| ENIGMA (disorder-unique) | Disjoint per-disorder gene sets routed separately | even non-overlapping sets give r = +0.98 → shared geometry is NOT a gene-overlap artifact | **Robust shared geometry** |
+| ENIGMA Phase 2 (transdiagnostic) | HOMER generic map vs observed ENIGMA cortical-thickness | r = −0.27 vs transdiagnostic average; spin p = 0.24 (n.s.), incl. held-out MDD/OCD | Null vs observed maps |
+| Hodge 2019 (Nature) | Cortical layer markers (area-level) | 6/7 markers significant, mean r = +0.119 (L2/3 +0.083/+0.176/+0.189, L4 +0.090, L5 +0.168, L6 +0.108) | Moderate |
+| Hodge (areal-type reframe) | Supragranular−infragranular / granular contrasts vs spin | all n.s. (best L4-granular spin p=0.055) — gene contrasts don't recover areal type; Fulcher does structurally | n.s. (Fulcher owns it) |
 | Pagani per-model | 20 mouse models × 1,491 features | Per-voxel decode **debunked** (the wo-cerebellum mask has 10,111 voxels, no published feature→voxel key); subtype-level route unblocked from the clean Fig 1c | Subtype route done; per-voxel needs signed NIfTIs |
 
 Each validation has its own showcase notebook (see `notebooks/05–15`) with the full method, figure, and discussion. Brief snapshots below.

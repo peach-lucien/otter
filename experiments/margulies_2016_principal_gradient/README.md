@@ -96,3 +96,19 @@ Outputs:
 ## Showcase notebook
 
 See [`notebooks/07_margulies_huntenburg_gradient.ipynb`](../../notebooks/07_margulies_huntenburg_gradient.ipynb).
+
+## Discrete reframe (2026-06-19) — `03_discrete_reframe.py`
+
+The continuous correlation fails the spin null (|r|=0.40, p=0.16) for a structural
+reason: two smooth monotone gradients correlate by spatial autocorrelation alone. We
+asked the gradient question **categorically** instead (HOMER's strong mode):
+- **Gradient-tier classification** (3 tiers, n=1244): exact accuracy 50.3% vs 33%
+  chance, spin p=0.092; adjacent (±1) 82.8%, spin p=0.110.
+- **Network rank-order** (9 networks): Spearman ρ(predicted, observed network
+  gradient) = +0.73, spin p=0.098.
+
+So the discrete content of the gradient is **more** cross-species-specific than the
+raw smooth correlation suggested (p moves from 0.16 toward ~0.09–0.10), but it still
+does **not** clear significance, and the network test is underpowered (n=9). Honest
+read: HOMER carries some discrete gradient-ordering signal, not a significant one.
+Log: `outputs/logs/margulies_discrete_reframe.json`.
