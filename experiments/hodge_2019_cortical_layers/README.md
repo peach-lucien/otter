@@ -46,3 +46,20 @@ Outputs:
 ## Showcase notebook
 
 See [`notebooks/06_hodge_2019_layer_markers.ipynb`](../../notebooks/06_hodge_2019_layer_markers.ipynb) for an interactive walkthrough of the analysis.
+
+## Areal-type reframe (2026-06-19) — `03_areal_type_reframe.py`
+
+Schaefer-400 can't resolve layers, so a laminar test is impossible by construction.
+We recast it as the question it *can* answer — does π preserve cortical AREAL TYPE
+(the supragranular↔infragranular / eulaminate↔agranular axis)? Cortex-only, fair
+spin null:
+- supragranular − infragranular: r=−0.02, spin p=0.71 (n.s.)
+- granular L4 − infragranular: r=+0.09, spin p=0.055 (marginal, n.s.)
+- supragranular − granular: r=−0.04, spin p=0.52 (n.s.)
+
+So the layer-marker *gene* contrasts do not recover areal type through π. The
+cytoarchitectural axis DOES survive when measured **structurally** — that is the
+Fulcher 2019 T1w:T2w + Goulas-type result (spin p=0.021/0.010). Conclusion: Hodge is
+genuinely capped (laminar impossible at this parcellation, gene-contrast areal-type
+n.s.); cite Fulcher for cross-species cytoarchitecture, and keep Hodge as an honest
+area-level-only result. Log: `outputs/logs/hodge_areal_type_reframe.json`.
