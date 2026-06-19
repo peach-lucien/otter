@@ -62,7 +62,36 @@ come from Pagani's own published matrices.
   degree-centrality NIfTIs (see "remaining" below), not the 1,491-feature CSV.
 - The π routing is at network resolution (Pagani's 9 mouse / 8 human networks).
 
-## Direction 1 result — parcel-resolution spatial routing (occurrence maps)
+## Cross-species human subtyping via π (the corrected, paper-faithful analysis)
+
+Re-reading Pagani's Methods showed their human step is *not* a Δ-matrix
+correlation — it's a discrete **classification**: take the mouse "prominent"
+dysconnectivity regions (hypo = anterior + middle cingulate, insula, motor cortex,
+striatum; hyper = amygdala, hippocampus, striatum), map them to human regions **by
+name**, and label each individual hypo/hyper by ±1 s.d. of regional global
+connectivity. That mouse→human **name-matching is exactly what π replaces**, and
+it's HOMER's *validated* mode (discrete region correspondence survives spin nulls).
+
+- **`04_homer_human_masks.py`** — routes each mouse prominent region through π to a
+  data-driven human mask. **Region-by-region, π agrees with the name-matched
+  homologue for 4/7 regions** (insula→Salience, cingulate→Salience/DMN,
+  striatum→Subcortical); the disagreements are functionally meaningful, not errors —
+  e.g. **hippocampus→DMN** (the hippocampus is a human DMN hub, which the anatomical
+  name-match to "Subcortical" misses). Outputs the π-derived hypo/hyper human masks.
+  *(Caveat: the masks lean toward Subcortical/Salience/DMN partly because π's column
+  mass concentrates on ~half the human parcels — F-015.)*
+- **`../autism_subtypes/abide_subtype/05_abide_homer_subtyping.py`** — re-runs
+  Pagani's exact ±1 s.d. subtyping on ABIDE with the HOMER masks **and** the
+  name-matched masks, head to head: does the learned coupling subtype more than
+  Pagani's ~25 %, and how much do they agree? (Needs the ABIDE download — run as for
+  `04_subtype_translation`/the other ABIDE script.)
+
+## Direction 1 result — parcel-resolution spatial routing (occurrence maps) — SUPERSEDED
+
+> **Superseded by `04`/`05` above (2026-06-11).** This routing predicts the human
+> subtype Δ-*matrix* (a continuous-map correlation — HOMER's weak mode, n.s. under a
+> fair null) and aggregates over all 13 regions, neither of which is what Pagani do.
+> Kept for the honest negative result.
 
 `03_spatial_subtype_routing.py` drives the mouse side from the actual Fig 1d
 occurrence maps (aggregated to the 13 conserved regions via an Allen
@@ -96,7 +125,9 @@ quirk of the occurrence maps alone.)
 | File | What |
 |---|---|
 | `01_per_model_clustering.py` | Clean Fig 1c → verified subtype split → LOO membership → π subtype translation (signed networks; hyper specific, hypo not, under recommended π) |
-| `03_spatial_subtype_routing.py` | Occurrence-map → conserved-region → π routing (parcel resolution; hyper specific, hypo not) |
+| **`04_homer_human_masks.py`** | **π-derived human hypo/hyper subtype masks (replaces Pagani's name-matched bridge); region-by-region homology check** |
+| **`../autism_subtypes/abide_subtype/05_abide_homer_subtyping.py`** | **Re-subtype ABIDE with HOMER masks vs name-matched masks, Pagani-style (needs ABIDE download)** |
+| `03_spatial_subtype_routing.py` | SUPERSEDED — occurrence-map → Δ-matrix correlation (continuous, n.s.); see 04/05 |
 | `02_plot.py` | 3-panel figure for `01` |
 | `DATA_VALIDATION_2026-06-10.md` | Ingest/validation of the shared data package |
 | `email_draft_per_model_nifti.md` | Request to Silvia for the 20 signed per-model maps |
