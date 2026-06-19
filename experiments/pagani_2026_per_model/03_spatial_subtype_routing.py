@@ -1,5 +1,18 @@
 """Direction 1 — parcel-resolution spatial subtype routing through π.
 
+⚠️ SUPERSEDED (2026-06-11). This script tests a *continuous-map correlation*
+(route the occurrence maps → predict the human subtype Δ-matrix), which is
+HOMER's WEAK mode — it does not survive a fair spatial null (F-007/F-027), and it
+does NOT replicate what Pagani actually do. Two problems we found re-reading the
+paper: (1) it aggregates over all 13 conserved regions uniformly, but Pagani use
+only the 5 hypo-prominent / 3 hyper-prominent regions (Methods, Supp Fig 2b); and
+(2) Pagani's human step is a discrete *classification* (score each individual's
+regional global connectivity, threshold ±1 s.d.), not a Δ-matrix correlation.
+→ The corrected, Pagani-faithful analysis lives in:
+   `04_homer_human_masks.py`            (π-derived human hypo/hyper masks)
+   `../autism_subtypes/abide_subtype/05_abide_homer_subtyping.py`  (re-subtype ABIDE)
+This script is kept for provenance / the honest continuous-routing negative result.
+
 The earlier subtype translation (Test 2c / 01_per_model_clustering.py) drives the
 mouse side from Pagani's coarse 9-network matrices. Here we use the genuinely
 spatial **Fig 1d occurrence maps** instead: for each subtype, the per-voxel count
