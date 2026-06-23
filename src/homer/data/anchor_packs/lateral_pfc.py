@@ -8,11 +8,11 @@ published cross-species cytoarchitecture and connectivity correspondences:
   pid 46: Mouse Prelimbic area ↔ Human dlPFC (BA9/46)  [**see homology caveat**]
 
 This is the first pack added for regions with NO direct Beauchamp
-validation pair — purely anatomical-credibility-driven. Coverage of
+validation pair, purely anatomical-credibility-driven. Coverage of
 lateral PFC matters for downstream users studying decision-making,
 working memory, executive control, and reward processing.
 
-OFC homology (pid 45) — high confidence
+OFC homology (pid 45), high confidence
 ---------------------------------------
 Orbitofrontal cortex homology between rodents and primates is among the
 best-established in PFC. Both species have a cytoarchitecturally
@@ -25,7 +25,7 @@ part" maps cleanly onto human BA11/47.
   13-19. DOI: 10.1038/nn.2956. Note this paper is from 2011 / Nature
   Neuroscience, NOT 2012 / Nat Rev Neurosci as may appear elsewhere.
 
-dlPFC homology (pid 46) — *contested*
+dlPFC homology (pid 46), *contested*
 -------------------------------------
 Whether rodents have a direct homologue of primate dorsolateral PFC
 (BA9/46) is a long-running debate:
@@ -50,7 +50,7 @@ Human-side: MNI spheres at Petrides cytoarchitectural centroids.
   OFC BA11/47:    (±25, 35, -15) r=10 mm →  8 parcels
   dlPFC BA9/46:   (±40, 25,  35) r=10 mm → 12 parcels
 
-Composition caveat — overlap with Garin pid 1 (mPFC)
+Composition caveat, overlap with Garin pid 1 (mPFC)
 ----------------------------------------------------
 Mouse Prelimbic is anatomically close to the mouse mPFC parcel that
 hosts Garin pid 1 (Medial PFC). The Prelimbic anchor's mouse-side set
@@ -93,7 +93,7 @@ def build_lateral_pfc_region_anchors(
     ofc_human = human_parcels_in_mni_sphere(H_var, (-25, 35, -15), 10.0)
     if not (ofc_mouse and ofc_human):
         raise ValueError(
-            f"empty set for OFC anchor — check atlas alignment "
+            f"empty set for OFC anchor, check atlas alignment "
             f"(|ofc_m|={len(ofc_mouse)}, |ofc_h|={len(ofc_human)})"
         )
     entries = [
@@ -108,7 +108,7 @@ def build_lateral_pfc_region_anchors(
         dl_human = human_parcels_in_mni_sphere(H_var, (-40, 25, 35), 10.0)
         if not (pl_mouse and dl_human):
             raise ValueError(
-                f"empty set for dlPFC anchor — check atlas alignment "
+                f"empty set for dlPFC anchor, check atlas alignment "
                 f"(|pl_m|={len(pl_mouse)}, |dl_h|={len(dl_human)})"
             )
         entries.append(RegionAnchorEntry(

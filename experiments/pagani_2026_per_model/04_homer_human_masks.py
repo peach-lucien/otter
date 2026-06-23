@@ -1,8 +1,8 @@
-"""HOMER-derived human subtype masks — replace Pagani's name-matched bridge with π.
+"""HOMER-derived human subtype masks, replace Pagani's name-matched bridge with π.
 
 Pagani 2026 build the human hypo/hyper subtype masks by NAME: they pick the mouse
 "prominent" dysconnectivity regions (hypo = anterior+middle cingulate, insula,
-motor cortex, striatum; hyper = amygdala, hippocampus, striatum — Methods, Supp
+motor cortex, striatum; hyper = amygdala, hippocampus, striatum. Methods, Supp
 Fig 2b) and then score the *same-named* human regions. That mouse→human step is
 exactly what HOMER's learned coupling π replaces.
 
@@ -63,7 +63,7 @@ HYPO_PROMINENT = ["cingulate_anterior", "cingulate_middle", "insula",
 HYPER_PROMINENT = ["amygdala", "hippocampus", "caudoputamen"]
 
 # What name-matching would PREDICT each mouse region maps to on the human side
-# (Yeo-7 + Subcortical) — to score whether π agrees with the by-name assumption.
+# (Yeo-7 + Subcortical), to score whether π agrees with the by-name assumption.
 NAME_EXPECTED = {
     "cingulate_anterior": {"DMN", "Control", "Salience"},
     "cingulate_middle":   {"DMN", "Control", "Salience"},

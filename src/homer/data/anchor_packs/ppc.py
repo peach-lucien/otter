@@ -27,7 +27,7 @@ References (verified Consensus search 2026):
     14-22. DOI: 10.1016/j.neures.2018.10.008. Mouse-specific PPC
     review.
 
-Anatomical-credibility supervision — PPC isn't in Beauchamp's 22
+Anatomical-credibility supervision. PPC isn't in Beauchamp's 22
 pairs, so direct lift can't be measured. The Garin pid 4 anchor gets
 expanded supervision via the 10-parcel region anchor.
 """

@@ -18,7 +18,7 @@ def main():
 
     fig, axes = plt.subplots(1, 3, figsize=(16, 4.8))
 
-    # --- Panel 1: homology benchmark — centroid distance -------------------
+    # --- Panel 1: homology benchmark, centroid distance -------------------
     ax = axes[0]
     bars = ax.bar([0, 1], [a["centroid_dist_mm"], a["null_centroid_dist_mm"]],
                   color=["#2a9d8f", "#cccccc"], width=0.6)
@@ -48,7 +48,7 @@ def main():
     ax.set_xticklabels(labels)
     ax.set_ylabel("|Pearson r|  (Brainnetome regions)")
     ax.set_ylim(0, max(grad) * 1.25)
-    ax.set_title("2 · Head-to-head — resting-fMRI gradient\n"
+    ax.set_title("2 · Head-to-head, resting-fMRI gradient\n"
                  "both methods recover the human gradient;\n"
                  "TransBrain (region-level tool) scores higher", fontsize=9)
 
@@ -63,12 +63,12 @@ def main():
     ax.axvline(0, color="black", linewidth=0.4)
     ax.set_xlabel("TransBrain ASD risk score")
     ax.set_ylabel("HOMER ASD risk score")
-    ax.set_title(f"3 · Head-to-head — Magel2 autism pattern\n"
+    ax.set_title(f"3 · Head-to-head. Magel2 autism pattern\n"
                  f"per-individual risk scores, {au['n_individuals']} ASD subjects\n"
                  f"method concordance r = {au['risk_score_concordance']:+.2f} "
-                 f"(noisy phenotype — methods diverge)", fontsize=9)
+                 f"(noisy phenotype, methods diverge)", fontsize=9)
 
-    plt.suptitle("HOMER × TransBrain 2025 — honest methods-landscape comparison "
+    plt.suptitle("HOMER × TransBrain 2025, methods-landscape comparison "
                  "against a published sibling translator", fontsize=12, y=1.04)
     plt.tight_layout()
     out = ROOT / "outputs" / "figures" / "transbrain_2025_benchmark.png"

@@ -2,7 +2,7 @@
 coordinate system into Allen CCFv3 voxel space.
 
 .. note::
-    Experiment-only. The main pipeline does NOT use this transform —
+    Experiment-only. The main pipeline does NOT use this transform
     ``01_mouse_sc.py`` / ``02_mouse_genes.py`` read pre-warped CCFv3 voxel
     indices (``ns_center_ix`` / ``AS_ix``) directly from the mouse ``.mat``
     file. This script is retained only because the
@@ -10,7 +10,7 @@ coordinate system into Allen CCFv3 voxel space.
     transform JSON it produces (via ``_mouse_transform.py``).
 
 The colleague's mouse mask is in a bregma-centred stereotaxic convention
-(x symmetric around midline, y/z origin near a stereotaxic landmark) — not
+(x symmetric around midline, y/z origin near a stereotaxic landmark), not
 in raw CCFv3 coordinates. This script:
 
   1. Downloads CCFv3 100 µm annotation via AllenSDK.
@@ -24,7 +24,7 @@ in raw CCFv3 coordinates. This script:
 
 If the best transform achieves >90% brain coverage, you're done. If 50–90%,
 the transform is approximately right but a fine-tuning ANTs step is recommended.
-If <50%, the colleague's space is not a simple permutation of CCFv3 — proper
+If <50%, the colleague's space is not a simple permutation of CCFv3, proper
 registration required.
 
 Output: data_external/_diagnostics/mouse_to_ccf_transform.json
@@ -123,13 +123,13 @@ def main(min_coverage_pass: float = 0.9):
 
     if best["coverage"] >= min_coverage_pass:
         verdict = "ok_use_directly"
-        print("  ✓ transform is good — saved for use by 01_mouse_sc.py")
+        print("  ✓ transform is good, saved for use by 01_mouse_sc.py")
     elif best["coverage"] >= 0.5:
         verdict = "approximate_recommend_ants"
-        print("  ⚠ transform is approximate — usable but ANTs registration would be cleaner")
+        print("  ⚠ transform is approximate, usable but ANTs registration would be cleaner")
     else:
         verdict = "needs_ants"
-        print("  ✗ no simple transform works — proper registration required")
+        print("  ✗ no simple transform works, proper registration required")
 
     out = {**best, "verdict": verdict, "ccf_centroid_mm": ccf_centroid.tolist(),
            "rs_centroid_mm": rs_centroid.tolist()}

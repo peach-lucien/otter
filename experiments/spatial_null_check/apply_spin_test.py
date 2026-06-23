@@ -55,7 +55,7 @@ def _fulcher_spin():
     log = LOG / "fulcher_2019_gradient.json"
     order = ROOT / "outputs/anndata/_schaefer_order.txt"
     if not (log.exists() and order.exists()):
-        print("\nFulcher: log or _schaefer_order.txt missing — skip"); return {}
+        print("\nFulcher: log or _schaefer_order.txt missing, skip"); return {}
     d = json.loads(log.read_text())
     coords = np.array([[float(p[2]), float(p[3]), float(p[4])]
                        for p in (ln.split("\t") for ln in order.read_text().splitlines())])
@@ -100,12 +100,12 @@ def main():
     ]:
         p = LOG / fname
         if not p.exists():
-            print(f"\n{name}: log missing ({fname}) — skip"); continue
+            print(f"\n{name}: log missing ({fname}), skip"); continue
         d = json.loads(p.read_text())
         a = np.array(d[akey], dtype=float)
         b = np.array(d[bkey], dtype=float)
         if a.shape[0] != len(coords):
-            print(f"\n{name}: vector len {a.shape[0]} != {len(coords)} parcels — skip"); continue
+            print(f"\n{name}: vector len {a.shape[0]} != {len(coords)} parcels, skip"); continue
         res = spin_null(a, b, coords, n_trials=1000, seed=0)
         # permuted-π p from the log for comparison
         perm_p = None

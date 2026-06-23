@@ -83,7 +83,7 @@ def main(args):
     SC = pd.read_csv(sc_path, sep="\t", header=None).values
     print(f"  SC matrix shape: {SC.shape}")
     if SC.shape != (n_regions, n_regions):
-        # Some Domhof tsvs have a header row/column with parcel labels — try skipping
+        # Some Domhof tsvs have a header row/column with parcel labels, try skipping
         SC = pd.read_csv(sc_path, sep="\t").values
         print(f"  retried with header → shape: {SC.shape}")
         if SC.shape != (n_regions, n_regions):
@@ -153,7 +153,7 @@ def main(args):
     np.save(OUT / "human_sc.npy", SC_node)
 
     info = {
-        "source":      "Domhof et al. 2022 Sci Data — Schaefer400 17Networks averaged SC",
+        "source":      "Domhof et al. 2022 Sci Data. Schaefer400 17Networks averaged SC",
         "cohort":      args.cohort,
         "metric":      "streamline_count",
         "n_nodes":     int(n_nodes),

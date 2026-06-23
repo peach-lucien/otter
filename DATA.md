@@ -1,7 +1,7 @@
 # Data and artifacts
 
 The HOMER code lives in this Git repository. The data and generated artifacts do
-**not** — they are too large for Git, and most of the inputs are third-party data
+**not**. They are too large for Git, and most of the inputs are third-party data
 we are not the right party to redistribute. They are hosted as a versioned archive
 with a citable DOI, and fetched with `scripts/fetch_data.py`.
 
@@ -31,28 +31,28 @@ need the archive below.
 
 | Tier | Where | Lets you |
 |---|---|---|
-| 0 — small artifacts | committed to Git | run unit tests, read all result numbers |
-| 1 — reproduce bundle | Zenodo `homer-reproduce-v1.2.0.tar.gz` (~620 MB download) | re-run every experiment/notebook against the precomputed couplings |
-| 2 — raw inputs | Zenodo `homer-raw-inputs-v1.0.0.tar.gz` (606 MB download) | rebuild the coupling bitwise from raw data via `pipeline/` |
+| 0, small artifacts | committed to Git | run unit tests, read all result numbers |
+| 1, reproduce bundle | Zenodo `homer-reproduce-v1.2.0.tar.gz` (~620 MB download) | re-run every experiment/notebook against the precomputed couplings |
+| 2, raw inputs | Zenodo `homer-raw-inputs-v1.0.0.tar.gz` (606 MB download) | rebuild the coupling bitwise from raw data via `pipeline/` |
 
-You do **not** need Tier 2 to use HOMER — only to regenerate `π` from scratch.
+You do **not** need Tier 2 to use HOMER, only to regenerate `π` from scratch.
 
 ---
 
-## Zenodo record — exactly what to upload
+## Zenodo record, exactly what to upload
 
 Create **one Zenodo record** with **two archive files**. Build both from the repo
 root so the paths inside the tarball are repo-relative (the fetch script unpacks
 at the repo root). The exact `tar` commands are in
 [`scripts/build_archives.sh`](scripts/build_archives.sh).
 
-### Archive 1 — `homer-reproduce-v1.2.0.tar.gz` (~620 MB gzipped)
+### Archive 1, `homer-reproduce-v1.2.0.tar.gz` (~620 MB gzipped)
 
 Everything needed to re-run the experiments **and all 15 notebooks** on the shipped
 couplings. The exact file list is in `scripts/build_archives.sh` (the `REPRODUCE`
 array).
 
-**HOMER-generated (we own these — safe to redistribute):**
+**HOMER-generated (we own these, safe to redistribute):**
 
 | Path | Size | What |
 |---|---:|---|
@@ -60,7 +60,7 @@ array).
 | `outputs/coupling/pi_fc_plus_SC.npy` | 15 MB | strict π (Garin anchors only); quickstart compares it to the recommended π |
 | `outputs/coupling/pi_fc_plus_SC_with_*.npy` (×15) + `pi_fc_plus_SC_xyz_zero.npy` | ~430 MB | ablation-variant couplings the advanced notebooks load (per-anchor-pack, xyz-zeroed, etc.) |
 | `outputs/coupling/trust_multisource_all_packs.npz`, `trust_score_fc_plus_SC*.npz` | ~0.5 MB | per-parcel trust tiers + scores |
-| `outputs/coupling/bootstrap_aggregate_fc_plus_SC.npz` | — | bootstrap stability aggregate |
+| `outputs/coupling/bootstrap_aggregate_fc_plus_SC.npz` | | bootstrap stability aggregate |
 | `outputs/coupling/per_disorder_predictions.npz` | 0.07 MB | ENIGMA per-disorder predicted maps |
 | `outputs/anndata/mouse.h5ad` | 42 MB | processed mouse parcel table + features |
 | `outputs/anndata/human.h5ad` | 52 MB | processed human parcel table + features |
@@ -86,19 +86,19 @@ array).
 | `data_external/MouseHumanTranscriptomicSimilarity/AMBA/data/DSURQE_tree.json` | 0.1 MB | DSURQE label tree |
 | `data_external/p6ebec-hbp-d000038_SC-FC_HCP_eNKI_pub/Schaefer2018_400Parcels_17Networks.zip` | 7.8 MB | Schaefer parcellation |
 
-### Archive 2 — `homer-raw-inputs-v1.0.0.tar.gz` (606 MB gzipped, optional)
+### Archive 2, `homer-raw-inputs-v1.0.0.tar.gz` (606 MB gzipped, optional)
 
 The complete `data_external/` directory, for a bitwise rebuild of π through
 `pipeline/`. It is a superset of the inputs in Archive 1 plus the full
 587 MB `MouseHumanTranscriptomicSimilarity` atlas repo and the small ISH caches.
 The Allen ISH download cache for the gene-expansion experiment
-(`experiments/.../pagani_ish_cache/`, ~584 MB) is **not** included — it is
+(`experiments/.../pagani_ish_cache/`, ~584 MB) is **not** included. It is
 regeneratable via the Allen API (slow, 1–3 days) and documented in
 `pipeline/00_external/`.
 
 ---
 
-## Licensing — read before you publish the archives
+## Licensing, read before you publish the archives
 
 The files under `data_external/` are **derived from third-party datasets**, each
 with its own terms. Before making the archives public, confirm you may

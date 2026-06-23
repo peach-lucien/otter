@@ -2,14 +2,14 @@
 
 The set of default packs is defined once in
 :mod:`homer.data.anchor_packs.registry` (``DEFAULT_PACK_NAMES``) and built
-here via :func:`build_default_pack_entries` — this script no longer keeps
+here via :func:`build_default_pack_entries`, this script no longer keeps
 its own copy of the list. Currently the default packs are:
 
-  - biccn_motor (pid 30, 31) — Bakken 2021
-  - tectum      (pid 32, 33) — May 2006; Schreiner & Winer 2007
-  - olfactory   (pid 34, 35) — Mori 2014
-  - amygdala    (pid 38)     — Janak & Tye 2015
-  - hippocampal (pid 39-42)  — Strange et al. 2014
+  - biccn_motor (pid 30, 31). Bakken 2021
+  - tectum      (pid 32, 33). May 2006; Schreiner & Winer 2007
+  - olfactory   (pid 34, 35). Mori 2014
+  - amygdala    (pid 38). Janak & Tye 2015
+  - hippocampal (pid 39-42). Strange et al. 2014
 
 These are layered on top of the 21 Garin point anchors. Reports Beauchamp
 top-K across all 19 evaluable pairs, region-level eval (Beauchamp-22

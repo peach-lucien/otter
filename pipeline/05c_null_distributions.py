@@ -2,11 +2,11 @@
 
 Two null baselines per evaluation:
 
-  1. RANDOM π — sample π from uniform[0, 1], project to satisfy the mouse
+  1. RANDOM π, sample π from uniform[0, 1], project to satisfy the mouse
      marginal (semirelaxed: source marginal fixed, target free). No FGW solve.
      Tells us "what would these metrics be by pure chance?"
 
-  2. PERMUTED-ANCHOR — shuffle which mouse anchor pair maps to which human
+  2. PERMUTED-ANCHOR, shuffle which mouse anchor pair maps to which human
      anchor pair, then re-solve semirelaxed FGW with the same M, C_FC, etc.
      Tests whether anchor supervision is doing real work, or whether
      connectivity + xyz alone would give the same numbers.

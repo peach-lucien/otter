@@ -27,7 +27,7 @@ Test:
 
 If Whitesell-DMN produces a higher DMN row-mass than HOMER's PAIRID-derived
 DMN, that's evidence the current PAIRID scheme underspecifies the mouse DMN
-(missing PPC, RSC, dorsal hippocampus) — and an opportunity for a
+(missing PPC, RSC, dorsal hippocampus), and an opportunity for a
 whitesell_dmn anchor pack.
 """
 from __future__ import annotations
@@ -49,19 +49,19 @@ from homer.data.anchor_packs._dsurqe import mouse_parcels_in_dsurqe_region
 
 # Whitesell 2021 mouse DMN: union of these DSURQE regions
 WHITESELL_DMN_REGIONS = [
-    # Medial prefrontal — core DMN node
+    # Medial prefrontal, core DMN node
     "Prelimbic area",
     "Infralimbic area",
-    # Anterior cingulate — core DMN node
+    # Anterior cingulate, core DMN node
     "Anterior cingulate area",
-    # Retrosplenial — core posterior DMN node (analog of human PCC)
+    # Retrosplenial, core posterior DMN node (analog of human PCC)
     "Retrosplenial area",
-    # Posterior parietal — DMN posterior hub
+    # Posterior parietal. DMN posterior hub
     "Posterior parietal association areas",
     # Hippocampal formation (dorsal hippocampus + subiculum)
     "Field CA1",
     "Subiculum",
-    # Medial entorhinal — DMN-adjacent
+    # Medial entorhinal. DMN-adjacent
     "Entorhinal area, medial part, dorsal zone",
     "Entorhinal area, medial part, ventral zone",
 ]

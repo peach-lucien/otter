@@ -44,7 +44,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PIPELINE = ROOT / "pipeline"
 
-# Ordered stage names — `--start-from` / `--only` reference these.
+# Ordered stage names, `--start-from` / `--only` reference these.
 STAGES = ["solve", "compose", "bootstrap", "trust", "gui"]
 
 
@@ -72,12 +72,12 @@ def run(cmd: list[str], *, label: str) -> None:
 def stage_solve(args) -> None:
     run([sys.executable, str(PIPELINE / "04_solve_production.py"),
          "--config", "fc_plus_SC"],
-        label="solve — production FC+SC point-anchor π")
+        label="solve, production FC+SC point-anchor π")
 
 
 def stage_compose(args) -> None:
     run([sys.executable, str(ROOT / "experiments" / "anchor_packs" / "compose_all.py")],
-        label="compose — fit recommended π with the 5 default anchor packs")
+        label="compose, fit recommended π with the 5 default anchor packs")
 
 
 def stage_bootstrap(args) -> None:
@@ -90,25 +90,25 @@ def stage_bootstrap(args) -> None:
             state.unlink()
         run([sys.executable, str(boot), "--config", "fc_plus_SC",
              "--iters", str(args.bootstrap_iters)],
-            label=f"bootstrap — {args.bootstrap_iters} subject-level iterations")
+            label=f"bootstrap, {args.bootstrap_iters} subject-level iterations")
     else:
-        print("[recommended-model] bootstrap-iters=0 — reusing existing "
+        print("[recommended-model] bootstrap-iters=0, reusing existing "
               "bootstrap state, only regenerating the aggregate")
     # --report (re)builds bootstrap_aggregate_fc_plus_SC.npz from the state.
     run([sys.executable, str(boot), "--config", "fc_plus_SC", "--report"],
-        label="bootstrap — aggregate per-row stability")
+        label="bootstrap, aggregate per-row stability")
 
 
 def stage_trust(args) -> None:
     run([sys.executable, str(PIPELINE / "08a_multisource_trust.py")],
-        label="trust — multi-source per-parcel evidence map")
+        label="trust, multi-source per-parcel evidence map")
 
 
 def stage_gui(args) -> None:
     cmd = [sys.executable, str(PIPELINE / "08_build_gui.py")]
     if args.publish:
         cmd.append("--publish")
-    run(cmd, label="gui — build region-first mapping GUI"
+    run(cmd, label="gui, build region-first mapping GUI"
                     + (" (+ publish to docs/)" if args.publish else ""))
 
 

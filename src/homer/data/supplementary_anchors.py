@@ -1,4 +1,4 @@
-"""Supplementary anchor mechanism — promote existing parcels to anchors.
+"""Supplementary anchor mechanism, promote existing parcels to anchors.
 
 Original Garin atlas defines 21 pair_ids × 2 hemispheres = 42 anchors. We can
 add more anchors *without modifying the underlying FC matrix or parcellation*
@@ -6,7 +6,7 @@ by **promoting existing non-anchor parcels** to be anchors with new pair_ids
 (22, 23, ...).
 
 Why promote rather than add new rows: our 1864 mouse / 2094 human parcels are
-fixed by the FC processing pipeline. We can't add a new parcel — the FC
+fixed by the FC processing pipeline. We can't add a new parcel, the FC
 matrix would lack data for it. We can only *select* an existing parcel and
 designate it as anchor.
 
@@ -191,7 +191,7 @@ def summarize_supplementary_anchors(
     var_m: pd.DataFrame,
     var_h: pd.DataFrame,
 ) -> str:
-    """Human-readable summary of an entry list — useful for docs / logs."""
+    """Human-readable summary of an entry list, useful for docs / logs."""
     lines = []
     for e in entries:
         m_L = var_m.iloc[e.L_mouse_idx]

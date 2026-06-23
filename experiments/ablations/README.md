@@ -6,8 +6,8 @@ Three ablation experiments that motivated production design choices in HOMER. Al
 
 | Script | Tested | Outcome |
 |---|---|---|
-| `soft_region_anchors.py` | Soft anchors (λ_outside ≈ 0.15) vs hard anchors (λ_outside → 0) | Soft is the default — keeps anchor supervision honest about cases where structural cost disagrees with the prescribed pair |
-| `marginal_weighting.py` | Uniform mouse marginal (1/n) vs volume-weighted (parcel-volume proportional) | Uniform stayed in production — volume weighting biased the human-side mass distribution toward large parcels without improving Beauchamp top-K |
+| `soft_region_anchors.py` | Soft anchors (λ_outside ≈ 0.15) vs hard anchors (λ_outside → 0) | Soft is the default, keeps anchor supervision conservative about cases where structural cost disagrees with the prescribed pair |
+| `marginal_weighting.py` | Uniform mouse marginal (1/n) vs volume-weighted (parcel-volume proportional) | Uniform stayed in production, volume weighting biased the human-side mass distribution toward large parcels without improving Beauchamp top-K |
 | `per_region_xyz.py` | Per-region xyz weighting (downweight xyz cost in spatially-inverted regions like tectum) | Local intervention did not reproduce the global xyz effect; superseded by region-anchor packs for inverted regions |
 
 ## Reproduce

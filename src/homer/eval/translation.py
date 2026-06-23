@@ -1,4 +1,4 @@
-"""FC translation quality — anchor-independent evaluation of π.
+"""FC translation quality, anchor-independent evaluation of π.
 
 A coupling π pushes mass from mouse nodes to human nodes. If π is biologically
 meaningful, then *aggregating* mouse FC values via π should reproduce human FC.
@@ -11,7 +11,7 @@ correlation between Fh_pred[upper-tri] and the actual Fh[upper-tri].
 
 Why this matters: every other metric we have (anchor recovery, hemisphere
 preservation, spot-check) uses the 42 anchors in some form. This one uses the
-*entire* π and a held-out signal (the human FC matrix) — the closest thing to
+*entire* π and a held-out signal (the human FC matrix), the closest thing to
 "downstream task" validation.
 
 Public API:
@@ -132,7 +132,7 @@ def uniform_pi_baseline(
     *, p: np.ndarray, q: np.ndarray,
     network_labels_h: Optional[np.ndarray] = None,
 ) -> dict:
-    """π = p ⊗ q (independent marginals — every mouse node spreads uniformly).
+    """π = p ⊗ q (independent marginals, every mouse node spreads uniformly).
     Predicted human FC is constant; Pearson r should be 0.
     """
     pi_unif = np.outer(p, q)

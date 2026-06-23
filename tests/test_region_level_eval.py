@@ -225,7 +225,7 @@ def test_column_permuted_null_is_at_chance():
                                  k_list=(1, 2), n_trials=20)
     # Uniform pi has fold = 1 exactly regardless of permutation
     assert null["null_fold_mean"] == pytest.approx(1.0, abs=1e-6)
-    # Top-K hits driven by ties — all candidate regions get identical scores,
+    # Top-K hits driven by ties, all candidate regions get identical scores,
     # so the rank-1 hit happens for *every* call (ties favour truth).
     assert null["null_topk_mean"][1] == pytest.approx(1.0, abs=1e-6)
 

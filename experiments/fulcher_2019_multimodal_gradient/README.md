@@ -1,8 +1,8 @@
 # Fulcher 2019 multimodal-gradient validation
 
-Tests whether HOMER's π carries the **mouse multimodal cortical hierarchy** —
+Tests whether HOMER's π carries the **mouse multimodal cortical hierarchy**
 the sensorimotor → prefrontal axis that Fulcher et al. showed is shared across
-cytoarchitecture, gene expression, cell density and connectivity — across to
+cytoarchitecture, gene expression, cell density and connectivity, across to
 the human cortex.
 
 ## Why this experiment
@@ -16,8 +16,8 @@ proxy reported for 40 mouse isocortical areas; they also use Goulas et al.'s
 
 This is a Beauchamp-independent, anchor-orthogonal test on two counts: both
 mouse maps are *structural* (HOMER's π is built from FC + SC), and the human
-reference — the [HCP S1200 T1w/T2w myelin map](https://github.com/netneurolab/neuromaps)
-— is independent published data, not an anchor pair. If HOMER's π is
+reference, the [HCP S1200 T1w/T2w myelin map](https://github.com/netneurolab/neuromaps),
+is independent published data, not an anchor pair. If HOMER's π is
 anatomically faithful, translating the mouse myelin hierarchy through π should
 reproduce the human myelin map: heavily myelinated sensory cortex, lightly
 myelinated association cortex.
@@ -26,26 +26,26 @@ myelinated association cortex.
 
 Three panels (`outputs/figures/fulcher_2019_multimodal_gradient.png`):
 
-**1 — Mouse T1w:T2w → human myelin.** Translating the mouse T1w:T2w map through
+**1. Mouse T1w:T2w → human myelin.** Translating the mouse T1w:T2w map through
 π reproduces the human HCP myelin map at **Pearson r = +0.373, Spearman ρ =
 +0.321** (analytical p = 2.5×10⁻⁵, n = 174 Schaefer regions), with **empirical
 p = 0.000** against a 200-trial permuted-π null (null mean r ≈ 0). HOMER carries
-the cross-species cortical myelin hierarchy — a structural, Beauchamp-
+the cross-species cortical myelin hierarchy, a structural, Beauchamp-
 independent line of evidence alongside the Margulies principal-gradient test
 (|r| = 0.402).
 
-**2 — Routed territory is gradient-compressed.** π concentrates the whole mouse
+**2. Routed territory is gradient-compressed.** π concentrates the whole mouse
 brain onto a compact human territory: the 417 mouse isocortical parcels map onto
 just **174 of 400 Schaefer regions**. On the human principal connectivity
 gradient those 174 regions have **half the brain-wide spread** (SD 0.0108 vs
 0.0217, compression ×0.50). Mouse isocortex lands on a narrow middle slice of
-the human unimodal–transmodal axis — so the principal gradient is *not* a
+the human unimodal–transmodal axis, so the principal gradient is *not* a
 hierarchy ruler within this territory (predicted-vs-gradient r = −0.204), and
 the result echoes the disproportionate evolutionary expansion of human
 association cortex.
 
-**3 — Cytoarchitecture → human myelin (independent modality).** A second,
-independent mouse modality — Goulas cytoarchitectural type — routed through π
+**3. Cytoarchitecture → human myelin (independent modality).** A second,
+independent mouse modality. Goulas cytoarchitectural type, routed through π
 also predicts the human myelin map at **r = +0.362, ρ = +0.325** (p = 3.4×10⁻⁴,
 empirical p = 0.000). Two unrelated mouse structural modalities converge on the
 same human target: HOMER preserves the *multimodal* hierarchy, not an artefact
@@ -54,7 +54,7 @@ of one measurement.
 | Panel | Test | Pearson r | Empirical p |
 |---|---|---:|:---:|
 | 1 | mouse T1w:T2w → human myelin | **+0.373** | 0.000 |
-| 2 | routed territory gradient SD vs all-cortex | ×0.50 | — |
+| 2 | routed territory gradient SD vs all-cortex | ×0.50 | |
 | 3 | mouse cytoarchitecture → human myelin | **+0.362** | 0.000 |
 
 ## Method
@@ -72,7 +72,7 @@ of one measurement.
    territory.
 
 The human myelin map is the HCP S1200 T1w/T2w annotation (neuromaps), parcellated
-onto Domhof's Schaefer-400 17Networks parcellation — HOMER's exact human
+onto Domhof's Schaefer-400 17Networks parcellation. HOMER's exact human
 parcellation order. See `data_external/fulcher_2019_gradients/SOURCES.md`.
 
 ## Files

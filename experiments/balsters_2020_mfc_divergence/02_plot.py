@@ -38,11 +38,11 @@ def main():
     ax.set_xticklabels(["dlPFC\n(BA9/46)", "premotor", "medial PFC", "mid-cingulate"])
     ax.set_ylabel("Enrichment of mouse-MFC mass\n(observed ÷ permuted-π null)")
     ax.set_title("1 · Where π routes mouse medial frontal cortex\n"
-                 "dlPFC ×0.0 (avoided) — premotor / medial / cingulate ×4–10",
+                 "dlPFC ×0.0 (avoided), premotor / medial / cingulate ×4–10",
                  fontsize=9.5)
     ax.legend(fontsize=8)
 
-    # --- Panel 2: contrast — what the contested anchor does ----------------
+    # --- Panel 2: contrast, what the contested anchor does ----------------
     ax = axes[1]
     tags = ["baseline (Garin only)", "recommended", "+lateral_pfc pack"]
     mfc_dl = [j["contrast"][t]["mfc_to_dlpfc"] * 100 for t in tags]
@@ -55,7 +55,7 @@ def main():
                         "+lateral_pfc\n(contested anchor)"], fontsize=8.5)
     ax.set_ylabel("Mouse-frontal mass routed to human dlPFC (%)")
     ax.set_title("2 · The contested Prelimbic→dlPFC anchor is opt-in\n"
-                 "only forcing that anchor puts mass on dlPFC — "
+                 "only forcing that anchor puts mass on dlPFC, "
                  "Balsters 2020 argues it shouldn't", fontsize=9.5)
     ax.legend(fontsize=8)
 
@@ -78,13 +78,13 @@ def main():
                label=f"top-1 human partner of\nthe {len(amax)} mouse-MFC parcels")
     ax.set_xlabel("MNI x (mm)  ·  ←L   R→")
     ax.set_ylabel("MNI y (mm)  ·  posterior → anterior")
-    ax.set_title("3 · Top-1 landing of mouse MFC — 0 of 39 in dlPFC\n"
+    ax.set_title("3 · Top-1 landing of mouse MFC, 0 of 39 in dlPFC\n"
                  "(red = dlPFC target; teal/green = Balsters-consistent)",
                  fontsize=9.5)
     ax.legend(fontsize=7.5, loc="lower center")
     ax.set_aspect("equal")
 
-    plt.suptitle("HOMER × Balsters 2020 — π routes mouse medial frontal cortex "
+    plt.suptitle("HOMER × Balsters 2020, π routes mouse medial frontal cortex "
                  "away from human dlPFC, as the connectivity evidence predicts",
                  fontsize=12, y=1.04)
     plt.tight_layout()

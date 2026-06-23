@@ -4,21 +4,21 @@ Each pack is a small, self-contained module that exposes a single
 ``build_<name>_region_anchors(M_var, H_var, ...)`` function returning a
 list of :class:`RegionAnchorEntry` objects. Pack modules:
 
-  - ``biccn_motor`` — Bakken 2021 (BICCN) M1 / BA4 + M2 / PMd
-  - ``tectum``      — Superior + Inferior Colliculus (Isa 2021; Winer & Schreiner 2005)
-  - ``olfactory``   — Piriform cortex + Anterior olfactory nucleus (Mori 2014)
-  - ``cingulate``   — Subgenual ACC + Retrosplenial (Vogt 2012)
-  - ``amygdala``    — Cortical subplate / amygdala (Janak & Tye 2015)
-  - ``hippocampal`` — Subiculum + CA1 + CA3 + Dentate gyrus (Strange 2014)
-  - ``lateral_pfc`` — OFC + dlPFC (Wallis 2011; Carlén 2017; **dlPFC contested**)
-  - ``striatum``    — Caudoputamen dorsolateral/ventromedial (Voorn 2004)
-  - ``entorhinal``  — Entorhinal cortex (Franjic 2021)
-  - ``visual``      — Mouse LM ↔ Human V2 (Wang & Burkhalter 2007)
-  - ``pag``         — Periaqueductal gray (Ezra 2015; Kingsbury 2011)
-  - ``perirhinal``  — Perirhinal cortex (Burwell 1995)
-  - ``auditory``    — Mouse A1 + A2 ↔ human auditory core + belt (Hackett 2001)
-  - ``somatosensory`` — S1 face/hand/leg body-map (Penfield 1937; Seelke 2012)
-  - ``ppc``         — Posterior parietal cortex / BA7 (Whitlock 2017)
+  - ``biccn_motor``. Bakken 2021 (BICCN) M1 / BA4 + M2 / PMd
+  - ``tectum``. Superior + Inferior Colliculus (Isa 2021; Winer & Schreiner 2005)
+  - ``olfactory``. Piriform cortex + Anterior olfactory nucleus (Mori 2014)
+  - ``cingulate``. Subgenual ACC + Retrosplenial (Vogt 2012)
+  - ``amygdala``. Cortical subplate / amygdala (Janak & Tye 2015)
+  - ``hippocampal``. Subiculum + CA1 + CA3 + Dentate gyrus (Strange 2014)
+  - ``lateral_pfc``. OFC + dlPFC (Wallis 2011; Carlén 2017; **dlPFC contested**)
+  - ``striatum``. Caudoputamen dorsolateral/ventromedial (Voorn 2004)
+  - ``entorhinal``. Entorhinal cortex (Franjic 2021)
+  - ``visual``. Mouse LM ↔ Human V2 (Wang & Burkhalter 2007)
+  - ``pag``. Periaqueductal gray (Ezra 2015; Kingsbury 2011)
+  - ``perirhinal``. Perirhinal cortex (Burwell 1995)
+  - ``auditory``. Mouse A1 + A2 ↔ human auditory core + belt (Hackett 2001)
+  - ``somatosensory``. S1 face/hand/leg body-map (Penfield 1937; Seelke 2012)
+  - ``ppc``. Posterior parietal cortex / BA7 (Whitlock 2017)
 
 Packs are designed to compose: pass the concatenation of several packs as
 ``region_anchors=...`` to ``MultimodalFGW.fit`` to layer multiple sources
@@ -32,17 +32,17 @@ the entries stay distinguishable in logs and trust maps. Pid registry:
   30, 31        BICCN motor (M1, M2)
   32, 33        Tectum (Superior + Inferior Colliculus)
   34, 35        Olfactory (Piriform + Anterior olfactory nucleus)
-  36, 37        Cingulate (Subgenual ACC + Retrosplenial) — opt-in
+  36, 37        Cingulate (Subgenual ACC + Retrosplenial), opt-in
   38            Amygdala (Cortical subplate)
   39, 40, 41, 42  Hippocampal (Subiculum, CA1, CA3, Dentate gyrus)
-  45, 46        Lateral PFC (OFC + dlPFC) — opt-in for dlPFC
+  45, 46        Lateral PFC (OFC + dlPFC), opt-in for dlPFC
   47, 48        Striatum (CP dorsolateral, CP ventromedial)
   49            Entorhinal cortex
   52            Visual extrastriate (LM ↔ V2)
   54            Periaqueductal gray (PAG)
   55            Perirhinal cortex
   56, 57        Auditory core + belt
-  58, 59, 60    Somatosensory body-map (face, hand, leg) — opt-in (hurts Beauchamp S1 by 5 pp)
+  58, 59, 60    Somatosensory body-map (face, hand, leg), opt-in (hurts Beauchamp S1 by 5 pp)
   61            Posterior parietal cortex
   ============= ============================================
 
@@ -108,7 +108,7 @@ __all__ = [
     "build_auditory_region_anchors",
     "build_somatosensory_region_anchors",
     "build_ppc_region_anchors",
-    # Pack registry — single source of truth for the recommended composition.
+    # Pack registry, single source of truth for the recommended composition.
     "PACKS",
     "PackSpec",
     "DEFAULT_PACK_NAMES",

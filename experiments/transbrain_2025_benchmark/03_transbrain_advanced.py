@@ -1,16 +1,16 @@
-"""HOMER × TransBrain 2025 — advanced comparison (four follow-up analyses).
+"""HOMER × TransBrain 2025, advanced comparison (four follow-up analyses).
 
 Building on `01_transbrain_benchmark.py`, this digs past the head-line
 "moderate agreement" number into *where* and *why* HOMER and TransBrain agree.
 
-  1. Trust-stratified agreement — does HOMER↔TransBrain agreement on *where a
+  1. Trust-stratified agreement, does HOMER↔TransBrain agreement on *where a
      mouse region maps* track HOMER's own per-parcel trust score?
-  2. Optogenetic → human cognition — TransBrain's Case 2: route a mouse
+  2. Optogenetic → human cognition. TransBrain's Case 2: route a mouse
      optogenetic circuit through π, decode it with Neurosynth cognitive-term
      maps, compare the cognitive annotation against TransBrain's.
-  3. Bidirectional cycle-consistency — round-trip a phenotype
+  3. Bidirectional cycle-consistency, round-trip a phenotype
      mouse→human→mouse with each method; a fair, ground-truth-free metric.
-  4. Consensus + disagreement map — rank mouse regions by HOMER↔TransBrain
+  4. Consensus + disagreement map, rank mouse regions by HOMER↔TransBrain
      agreement: a consensus set and a flagged set of contested homologies.
 
 Agreement between the two methods is measured concentration-robustly: the
@@ -48,7 +48,7 @@ COUP = ROOT / "outputs" / "coupling"
 DATA = ROOT / "data_external" / "transbrain_2025"
 PI_FILE = COUP / "pi_fc_plus_SC_with_all_packs.npy"
 # Neurosynth cognitive-term maps for the optogenetic decoding. Not bundled with
-# the repo — place the TransBrain tutorial's neurosynth_data here (or point
+# the repo, place the TransBrain tutorial's neurosynth_data here (or point
 # NEUROSYNTH_DIR at it); if absent, the optogenetic analysis is skipped cleanly.
 NEUROSYNTH_DIR = Path(os.environ.get(
     "NEUROSYNTH_DIR", str(DATA / "neurosynth_data")))
@@ -123,7 +123,7 @@ def corr(a, b):
 
 def main():
     print("=" * 80)
-    print("HOMER × TransBrain 2025 — advanced comparison")
+    print("HOMER × TransBrain 2025, advanced comparison")
     print("=" * 80)
     pi = np.load(PI_FILE)
     mm = json.loads((ROOT / "data_external" / "mouse_sc_meta.json").read_text())
@@ -151,7 +151,7 @@ def main():
         vals, cnts = np.unique(tier[idx], return_counts=True)
         region_tier[X] = str(vals[cnts.argmax()])
 
-    # ===== 1 + 4 — per-region agreement (top-region distance) ===============
+    # ===== 1 + 4, per-region agreement (top-region distance) ===============
     print("\n[1+4] Per-region HOMER↔TransBrain agreement (top-region distance)")
     dist = {}
     for X in homer_map:
@@ -168,7 +168,7 @@ def main():
     r_trust = corr(tr, dd)
     rho_trust = float(spearmanr(tr, dd)[0])
     print(f"  top-region distance vs HOMER trust: r = {r_trust:+.3f}  ρ = {rho_trust:+.3f}"
-          f"  ({len(dist)} mouse regions) — negative = methods agree more where HOMER is confident")
+          f"  ({len(dist)} mouse regions), negative = methods agree more where HOMER is confident")
     tier_means = {}
     for tname in ["anchored_and_validated", "anchored_only", "validated_only",
                   "structural", "low_evidence"]:
@@ -179,7 +179,7 @@ def main():
     print(f"  consensus (closest 6): {', '.join(regs[:6])}")
     print(f"  contested (farthest 6): {', '.join(regs[-6:])}")
 
-    # ===== 3 — bidirectional cycle-consistency =============================
+    # ===== 3, bidirectional cycle-consistency =============================
     print("\n[3] Bidirectional cycle-consistency (mouse→human→mouse)")
     mg = json.loads((ROOT / "outputs/logs/margulies_2016_gradient.json").read_text())
     grad = {}
@@ -215,7 +215,7 @@ def main():
         cycle[name] = {"homer": homer_cyc, "transbrain": tb_cyc}
         print(f"  {name:10s} HOMER {homer_cyc:+.3f}   TransBrain {tb_cyc:+.3f}")
 
-    # ===== 2 — optogenetic circuit → human cognition (Neurosynth) ===========
+    # ===== 2, optogenetic circuit → human cognition (Neurosynth) ===========
     print("\n[2] Optogenetic AI circuit → human cognition (Neurosynth decode)")
     opto = {}
     if NEUROSYNTH_DIR.exists():
@@ -258,7 +258,7 @@ def main():
                 "term_rank_spearman": rank_r,
                 "homer_scores": sh, "transbrain_scores": st_}
     else:
-        print(f"  SKIPPED — Neurosynth maps not found at {NEUROSYNTH_DIR}")
+        print(f"  SKIPPED. Neurosynth maps not found at {NEUROSYNTH_DIR}")
 
     out = {
         "trust_stratified": {

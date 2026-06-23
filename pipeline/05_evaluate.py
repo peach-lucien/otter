@@ -1,4 +1,4 @@
-"""Pipeline step 05 — evaluate the production model end-to-end.
+"""Pipeline step 05, evaluate the production model end-to-end.
 
 Runs (in order):
     05a_anchor_cv.py            leave-one-network-out CV across all 13 configs
@@ -8,7 +8,7 @@ Runs (in order):
     05f_beauchamp_validation.py external validation against Beauchamp 2022
     05j_region_level_eval.py    region-level top-K (Beauchamp-22 candidate set)
 
-Each substep is resumable — already-cached cells are skipped. To force a full
+Each substep is resumable, already-cached cells are skipped. To force a full
 recompute, pass --recompute (forwards to each substep).
 
 Usage:

@@ -85,7 +85,7 @@ def main():
     fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04, label="Pearson r")
 
     plt.suptitle(
-        "HOMER × Pagani 2026 — corrected subtype translation "
+        "HOMER × Pagani 2026, corrected subtype translation "
         "(verified n=9 hyper / n=11 hypo; π routing, no 1,491-feature decode)",
         fontsize=13, y=1.03)
     plt.tight_layout()

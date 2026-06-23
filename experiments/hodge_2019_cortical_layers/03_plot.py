@@ -38,7 +38,7 @@ def main():
     ax.axhline(0, color="black", linewidth=0.5)
     ax.set_ylabel("Pearson r")
     ax.set_title(f"Per-marker cross-species translation (all 2,094 parcels)\n"
-                 f"Only RORB is above the null band — single significant marker")
+                 f"Only RORB is above the null band, single significant marker")
     ax.legend(loc="upper left", fontsize=8)
 
     # Right: layer-group composites (cortex only)
@@ -77,7 +77,7 @@ def main():
                  f"L4 (RORB) is the only group where HOMER signal beats null")
     ax.legend(loc="upper left", fontsize=8)
 
-    plt.suptitle("Hodge 2019 layer-marker cross-species test — HOMER works at area level, not at layer level",
+    plt.suptitle("Hodge 2019 layer-marker cross-species test. HOMER works at area level, not at layer level",
                  fontsize=12, y=1.02)
     plt.tight_layout()
     out = ROOT / "outputs" / "figures" / "hodge_2019_layer_markers.png"

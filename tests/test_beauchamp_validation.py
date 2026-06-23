@@ -1,4 +1,4 @@
-"""Smoke tests for pipeline/05f_beauchamp_validation.py — pure-Python pieces.
+"""Smoke tests for pipeline/05f_beauchamp_validation.py, pure-Python pieces.
 
 These tests exercise the data-side helpers without requiring the heavy
 DSURQE label volume or running the full pipeline. They should run in <1s.
@@ -54,10 +54,10 @@ def test_human_membership_centroid_radius(mod):
     out = mod.assign_human_region_membership(FakeH, name_to_mni)
     assert out["absent_region"] is None
     mask = out["precentral gyrus"]
-    # First two points are at the L and R centroids — should be in
+    # First two points are at the L and R centroids, should be in
     assert mask[0]
     assert mask[1]
-    # Third (origin) is ~70mm from either side — out
+    # Third (origin) is ~70mm from either side, out
     assert not mask[2]
     # Fourth (100,100,100) is well out
     assert not mask[3]
@@ -118,7 +118,7 @@ def test_dsurqe_offset_constant_is_a_3vector(mod):
     """Sanity: the calibration constant has the right shape + reasonable bounds."""
     d = mod.DSURQE_OFFSET_MM
     assert d.shape == (3,)
-    # Estimated from 6 anchor pairs (Visual/Motor/Auditory) — the y-shift is the
+    # Estimated from 6 anchor pairs (Visual/Motor/Auditory), the y-shift is the
     # dominant correction (~-2.3); x and z are both within ±2mm.
     assert abs(d[0]) < 2
     assert abs(d[1]) < 5

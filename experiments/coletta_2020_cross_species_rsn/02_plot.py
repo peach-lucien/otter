@@ -14,7 +14,7 @@ def main():
 
     fig, axes = plt.subplots(1, 3, figsize=(17, 5))
 
-    # Panel 1: Labeled correspondence — ratio over null per pair
+    # Panel 1: Labeled correspondence, ratio over null per pair
     ax = axes[0]
     A = j["sub_test_A_labeled_correspondence"]
     pairs = A["per_pair_scores"]
@@ -62,7 +62,7 @@ def main():
                  "(green = match anatomical label; weaker test because ICA components\n"
                  " don't cleanly partition into single anatomical networks)", fontsize=9)
 
-    # Panel 3: Network coherence — bar of real vs null spread
+    # Panel 3: Network coherence, bar of real vs null spread
     ax = axes[2]
     C = j["sub_test_C_network_coherence"]
     nets = [r["network"] for r in C["per_network"]]
@@ -75,14 +75,14 @@ def main():
             label="HOMER (real)")
     ax.barh(y + 0.2, nulls, 0.4, color="#aaaaaa", label="permuted-π null mean")
     ax.set_yticks(y); ax.set_yticklabels(nets, fontsize=9)
-    ax.set_xlabel("Centroid spread (mm) — smaller = more compact")
+    ax.set_xlabel("Centroid spread (mm), smaller = more compact")
     ax.set_title(f"Sub-test C: Network coherence\n"
                  f"{C['n_networks_more_compact_than_null']}/{len(C['per_network'])} networks "
                  f"are more compact than null")
     ax.legend(loc="lower right", fontsize=8)
 
     plt.suptitle(
-        "HOMER × Coletta 2020 — cross-species RSN correspondence + coherence",
+        "HOMER × Coletta 2020, cross-species RSN correspondence + coherence",
         fontsize=12, y=1.02,
     )
     plt.tight_layout()

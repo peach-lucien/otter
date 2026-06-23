@@ -8,7 +8,7 @@ This is the first thing to run. The downstream alignment of public datasets
   - Do the per-node `voxel_indices` from the t-table actually index into these
     masks correctly (i.e., 1-based MATLAB indexing or 0-based)?
 
-Output: data_external/_diagnostics/mask_info.json — a structured report that
+Output: data_external/_diagnostics/mask_info.json, a structured report that
 the other scripts can read to choose the right alignment strategy.
 """
 from __future__ import annotations
@@ -168,12 +168,12 @@ def main():
     print(f"\nsaved → {out}")
     print("\nNext steps:")
     if "mouse_mask" in info and "Allen CCFv3" in info["mouse_mask"]["best_guess_space"]:
-        print("  ✓ mouse mask is in Allen CCFv3 — script 01 should work directly")
+        print("  ✓ mouse mask is in Allen CCFv3, script 01 should work directly")
     elif "mouse_mask" in info:
         print(f"  ⚠ mouse mask is NOT identifiably CCFv3 ({info['mouse_mask']['best_guess_space']})")
         print("    → may need ANTs/FSL registration to CCFv3 before running 01")
     if "human_mask" in info and "MNI152" in info["human_mask"]["best_guess_space"]:
-        print("  ✓ human mask is in MNI152 — scripts 03/04 should work directly")
+        print("  ✓ human mask is in MNI152, scripts 03/04 should work directly")
     elif "human_mask" in info:
         print(f"  ⚠ human mask is NOT identifiably MNI152 ({info['human_mask']['best_guess_space']})")
         print("    → may need registration to MNI152 before running 03/04")

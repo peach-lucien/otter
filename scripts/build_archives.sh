@@ -23,7 +23,7 @@ OUT_DIR="$(dirname "$ROOT")"
 
 # ---- Archive 1: reproduce bundle -------------------------------------------
 REPRODUCE=(
-  # HOMER-generated (we own these) — all coupling files the notebooks +
+  # HOMER-generated (we own these), all coupling files the notebooks +
   # experiments load (recommended pi, strict pi, ablation variants, trust maps).
   outputs/coupling/pi_fc_plus_SC_with_all_packs.npy
   outputs/coupling/pi_fc_plus_SC.npy

@@ -58,7 +58,7 @@ IO = _load_io_module()
 
 
 # ===========================================================================
-# Unit tests — no external file dependency
+# Unit tests, no external file dependency
 # ===========================================================================
 
 def test_detect_schema_v1():
@@ -216,7 +216,7 @@ def test_parse_t_table_v2_rejects_out_of_range_index():
 
 
 def test_parse_t_table_v2_rejects_zero_index():
-    """A zero (0-based already?) input must crash — MATLAB 1-based."""
+    """A zero (0-based already?) input must crash. MATLAB 1-based."""
     t = [_build_v2_synthetic_row(1, as_ix=[0, 1, 2])]
     with pytest.raises(ValueError, match="must be >= 1"):
         IO.parse_t_table(t, IO._V2_HT)
@@ -252,7 +252,7 @@ def test_parse_t_table_v2_singleton_voxel_set():
 
 
 # ===========================================================================
-# Integration tests — gated on v2 file presence
+# Integration tests, gated on v2 file presence
 # ===========================================================================
 
 needs_v2 = pytest.mark.skipif(
@@ -308,10 +308,10 @@ def test_v2_indices_decode_to_ss_centres_within_threshold():
     """SS-frame round-trip: max ~0.77 mm by design.
 
     DS_center_mm is a continuous COM / warped centroid while DS_center_ix
-    is the closest member of the voxel set — the two disagree by up to one
+    is the closest member of the voxel set, the two disagree by up to one
     voxel diagonal in the worst case (12 of 1864 parcels at 70 µm
     voxel-diagonal ≈ 0.12 mm × √3 ≈ 0.21 mm). Larger residuals come from
-    parcels whose voxel set doesn't contain a voxel close to the COM —
+    parcels whose voxel set doesn't contain a voxel close to the COM
     empirical max is 0.7688 mm. Pin threshold at 0.8 mm with headroom.
 
     See B2/L16 in REVIEW.md for the semantic asymmetry.
@@ -383,7 +383,7 @@ def test_v2_xyz_compat_with_v1():
 def test_v2_numid_pairid_region_identical_to_v1():
     """Parcel ordering and identifiers must be unchanged between v1 and v2.
 
-    This is L14 in the design review — silently reordering rows would break
+    This is L14 in the design review, silently reordering rows would break
     every downstream consumer that indexes by row position.
     """
     v1_path = DATA_DIR / "corrs_mouse.mat"
@@ -420,7 +420,7 @@ def test_v2_numid_pairid_region_identical_to_v1():
 @needs_v2
 @pytest.mark.slow
 def test_v2_rr_unchanged_sampled():
-    """m.rr should be bit-identical between v1 and v2 — Paul did NOT recompute FC.
+    """m.rr should be bit-identical between v1 and v2. Paul did NOT recompute FC.
 
     Marked slow because reads two 1.3 GB files. Skip in fast runs with
     ``pytest -m 'not slow'`` or env var HOMER_TEST_FAST=1.

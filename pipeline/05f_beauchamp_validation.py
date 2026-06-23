@@ -1,4 +1,4 @@
-"""Pipeline 05f — external validation against Beauchamp 2022's curated mouse↔human pairs.
+"""Pipeline 05f, external validation against Beauchamp 2022's curated mouse↔human pairs.
 
 Tests whether the production π predicts homologies that match published
 cross-species region correspondences from Beauchamp et al. 2022 eLife.
@@ -244,7 +244,7 @@ def main(args):
     # ---- Mouse side: parcel -> DSURQE label -> Beauchamp region membership
     #
     # NB: regions are resolved via the live DSURQE atlas volume, not the
-    # parcel table's precomputed `region_vote_ss_dsq` labels — the vote
+    # parcel table's precomputed `region_vote_ss_dsq` labels, the vote
     # vocabulary uses different region names than the tree (striatum vs
     # Caudoputamen, British vs American spelling, etc.). See _dsurqe.py.
     name_to_dsurqe_labels = parse_dsurqe_tree(EXT / "AMBA/data/DSURQE_tree.json")
@@ -267,7 +267,7 @@ def main(args):
     # ---- Anchor-overlap tagging: hand-curated (Garin's 21 anchors largely
     # overlap Beauchamp's 22 canonical pairs, since both use well-known
     # cross-species homologies). Only hippocampal subfields and medulla are
-    # truly "novel" w.r.t. our supervision.
+    # "novel" w.r.t. our supervision.
     HIPPOCAMPAL_OR_MISSING = {
         "Subiculum",      # hippocampal formation, no Garin anchor
         "Field CA1", "Field CA2", "Field CA3", "Dentate gyrus",

@@ -18,15 +18,15 @@ search 2026):
   pid 41:  CA3
   pid 42:  Dentate gyrus
 
-We skip CA2 (not present in our DSURQE tree — its parcels likely fall
+We skip CA2 (not present in our DSURQE tree, its parcels likely fall
 into CA3 in this atlas resolution).
 
 Why this is HOMER's most-tested failure region
 ----------------------------------------------
 All five hippocampal subfields show 0 % Beauchamp top-1 under production
-point-anchor π — the cleanest documented evidence that HOMER's FC/SC
+point-anchor π, the cleanest documented evidence that HOMER's FC/SC
 structure does NOT recover hippocampal homology unsupervised. Earlier
-work (EXP-1 / SPLIT-1, docs/results §5.2) added four hippocampal *point*
+work (EXP-1 / SPLIT-1, docs/archive/iteration_log.md §5.2) added four hippocampal *point*
 anchors and moved 3 of 4 from 0 → 7-9 % top-1. This pack is the
 region-anchor analogue: each subfield's full DSURQE parcel set forced to
 map into the matching human subfield MNI ball.
@@ -45,7 +45,7 @@ Human-side: MNI spheres at canonical hippocampal subfield centroids
   CA3:           (±25, -22, -10) r=8 mm →  4 parcels
   Dentate gyrus: (±25, -28, -10) r=8 mm →  4 parcels
 
-Honest caveat: as with all other anchor packs, the mouse-side sets here
+Caveat: as with all other anchor packs, the mouse-side sets here
 are identical to Beauchamp's validation sets, so Beauchamp top-1 → 100 %
 for each anchored subfield is largely tautological. The pack's value is
 practical (HOMER queries for hippocampal subfield parcels become

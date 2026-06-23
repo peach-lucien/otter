@@ -6,9 +6,9 @@ expression, interneuron density and long-range connectivity all vary together
 along a single sensorimotor → prefrontal hierarchical axis of mouse cortex.
 Two of their modality maps are used here:
 
-  * **T1w:T2w ratio** — an intracortical-myelin / cytoarchitecture proxy, for
+  * **T1w:T2w ratio**, an intracortical-myelin / cytoarchitecture proxy, for
     40 mouse isocortical areas (`structInfoT1T2_ABAcortex40.csv`).
-  * **Cytoarchitectural type** — Goulas et al.'s ordinal eulamination scale
+  * **Cytoarchitectural type**. Goulas et al.'s ordinal eulamination scale
     1 (agranular) → 4 (eulaminate), for 38 areas (`CytoarchitectureTypes.txt`).
 
 The test is orthogonal to HOMER's inputs: both mouse modalities are
@@ -23,7 +23,7 @@ Three panels:
      onto a compact human territory. We quantify how that territory sits on
      the human principal connectivity gradient (Margulies/Huntenburg).
   3. **Cytoarchitecture → human myelin.** A second, independent mouse modality
-     routed through π — multimodal convergence in the spirit of Fulcher's paper.
+     routed through π, multimodal convergence in the spirit of Fulcher's paper.
 
 Routing is a transport-weighted average:
     predicted_h[j] = Σ_i m[i]·π[i,j] / Σ_i π[i,j]   over the assigned parcels.
@@ -100,7 +100,7 @@ def load_margulies_gradient() -> np.ndarray:
     p = ROOT / "outputs" / "logs" / "margulies_2016_gradient.json"
     if not p.exists():
         raise FileNotFoundError(
-            f"{p} not found — run experiments/margulies_2016_principal_gradient/"
+            f"{p} not found, run experiments/margulies_2016_principal_gradient/"
             "01_gradient_validation.py first (this experiment reuses its human gradient)."
         )
     return np.asarray(json.loads(p.read_text())["human_gradient"], dtype=float)
@@ -138,7 +138,7 @@ def aggregate_to_regions(node_vals: np.ndarray,
 
 
 def _corr(a: np.ndarray, b: np.ndarray) -> tuple[float, float, float, int]:
-    """Pearson r + analytical p, Spearman ρ, n — over entries finite in both."""
+    """Pearson r + analytical p, Spearman ρ, n, over entries finite in both."""
     m = np.isfinite(a) & np.isfinite(b)
     rp, pp = pearsonr(a[m], b[m])
     rs, _ = spearmanr(a[m], b[m])
@@ -147,7 +147,7 @@ def _corr(a: np.ndarray, b: np.ndarray) -> tuple[float, float, float, int]:
 
 def main():
     print("=" * 80)
-    print("HOMER × Fulcher 2019 — multimodal cortical-gradient validation")
+    print("HOMER × Fulcher 2019, multimodal cortical-gradient validation")
     print("=" * 80)
 
     pi = np.load(ROOT / PI_FILE)
@@ -168,7 +168,7 @@ def main():
         n_areas = len({a for a in parcel_acr if a in value_by_acr})
         return vec, mask, pred_reg, n_areas
 
-    # ===== Panel 1 — T1w:T2w → human myelin =================================
+    # ===== Panel 1. T1w:T2w → human myelin =================================
     t1t2_vec, t1t2_mask, pred_t1t2, n_t1t2_areas = route_modality(load_mouse_t1t2())
     r1, p1, rs1, n1 = _corr(pred_t1t2, myelin_reg)
     territory = np.isfinite(pred_t1t2)  # the routed human territory (regions)
@@ -178,7 +178,7 @@ def main():
     print(f"  Pearson r = {r1:+.3f}  Spearman ρ = {rs1:+.3f}  "
           f"p = {p1:.2e}  (n = {n1})")
 
-    # ===== Panel 3 — cytoarchitecture → human myelin ========================
+    # ===== Panel 3, cytoarchitecture → human myelin ========================
     cyto_vec, cyto_mask, pred_cyto, n_cyto_areas = route_modality(load_mouse_cytoarch())
     r3, p3, rs3, n3 = _corr(pred_cyto, myelin_reg)
     print(f"\n[Panel 3] Cytoarchitectural type → human myelin")
@@ -186,7 +186,7 @@ def main():
     print(f"  Pearson r = {r3:+.3f}  Spearman ρ = {rs3:+.3f}  "
           f"p = {p3:.2e}  (n = {n3})")
 
-    # ===== Panel 2 — routed-territory characterisation ======================
+    # ===== Panel 2, routed-territory characterisation ======================
     grad_reg = aggregate_to_regions(load_margulies_gradient(), node_region)
     # orient principal gradient so high end = heavily myelinated (sensorimotor)
     if _corr(grad_reg, myelin_reg)[0] < 0:
@@ -197,9 +197,9 @@ def main():
     std_all, std_terr = float(np.std(g_all)), float(np.std(g_terr))
     r_pg, _, _, n_pg = _corr(pred_t1t2, grad_reg)
     print(f"\n[Panel 2] Routed-territory position on the principal gradient")
-    print(f"  gradient SD — all cortex: {std_all:.4f}   routed territory: "
+    print(f"  gradient SD, all cortex: {std_all:.4f}   routed territory: "
           f"{std_terr:.4f}   (compression ×{std_terr/std_all:.2f})")
-    print(f"  predicted-vs-gradient r = {r_pg:+.3f}  — territory is "
+    print(f"  predicted-vs-gradient r = {r_pg:+.3f}, territory is "
           f"gradient-degenerate, not a hierarchy ruler here")
 
     # ===== permuted-π null for panels 1 & 3 =================================

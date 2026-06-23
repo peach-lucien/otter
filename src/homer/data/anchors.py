@@ -21,7 +21,7 @@ class AnchorIndex:
     pos: np.ndarray            # positional index into adata.var / fc_mean (0-based)
     pair_ids: np.ndarray       # length-N anchor pair ids (1..21)
     hemispheres: np.ndarray    # length-N strings 'L'/'R'
-    keys: list[tuple[int, str]]  # length-N (pair_id, hemi) — sorted
+    keys: list[tuple[int, str]]  # length-N (pair_id, hemi), sorted
 
     def __len__(self) -> int:
         return len(self.pos)
@@ -81,7 +81,7 @@ def assign_parcels_to_nearest_anchor_region(
     Distance is computed in xyz mm. Each parcel is assigned to the pair_id of
     its single nearest anchor across both hemispheres. General-purpose helper
     for region-level operations on parcels (e.g. building per-region weight
-    arrays for the TOPO-1 ablation — see docs/results §5.11).
+    arrays for the TOPO-1 ablation, see docs/archive/iteration_log.md §5.11).
 
     Parameters
     ----------
@@ -92,7 +92,7 @@ def assign_parcels_to_nearest_anchor_region(
 
     Returns
     -------
-    (n_parcels,) ndarray of int — pair_id of the nearest anchor for each parcel.
+    (n_parcels,) ndarray of int, pair_id of the nearest anchor for each parcel.
     """
     parcel_xyz = var[["x", "y", "z"]].to_numpy()
     anchor_xyz = parcel_xyz[anchor_index.pos]
@@ -133,7 +133,7 @@ def build_xyz_weight_array(
 
     Returns
     -------
-    (n_parcels,) ndarray of float — the xyz weight for each parcel's row in M.
+    (n_parcels,) ndarray of float, the xyz weight for each parcel's row in M.
     """
     pair_ids = assign_parcels_to_nearest_anchor_region(var, anchor_index)
     out = np.full(len(pair_ids), float(default_weight), dtype=np.float64)
@@ -194,7 +194,7 @@ def held_out_indices(
     visible_pair_ids: Sequence[int],
 ) -> tuple[np.ndarray, np.ndarray]:
     """Return (mouse_idx, human_idx) of held-out anchors (positional, into the
-    42-anchor array — NOT into the full adata.var)."""
+    42-anchor array. NOT into the full adata.var)."""
     visible = set(int(p) for p in visible_pair_ids)
     m_held = np.where(np.array([int(p) not in visible for p in idx_m.pair_ids]))[0]
     h_held = np.where(np.array([int(p) not in visible for p in idx_h.pair_ids]))[0]
@@ -212,11 +212,11 @@ def held_out_metrics_graded(
     alongside binary top-1.
 
     Adds:
-        top5            — fraction of held-out anchors whose correct partner is
+        top5, fraction of held-out anchors whose correct partner is
                           in the top-5 of argsort(π[i, :]) restricted to held-out.
-        mean_rank       — mean rank of correct partner (1 = perfect; max = #held).
-        median_rank     — median of the same.
-        mean_xyz_dist   — mean per-species-normalised xyz distance between the
+        mean_rank, mean rank of correct partner (1 = perfect; max = #held).
+        median_rank, median of the same.
+        mean_xyz_dist, mean per-species-normalised xyz distance between the
                           predicted argmax and the correct held-out anchor.
     """
     visible_pair_ids = [p for p in idx_m.pair_ids

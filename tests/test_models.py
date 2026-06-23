@@ -1,4 +1,4 @@
-"""Tests for homer.models — the four FGW model classes."""
+"""Tests for homer.models, the four FGW model classes."""
 import numpy as np
 import pytest
 
@@ -119,7 +119,7 @@ def test_unfit_model_raises_on_pi_access():
 
 
 def test_supervised_holdout_anchor(mouse_ad, human_ad):
-    """Withhold pair_id 1 — the model still solves but those anchors aren't
+    """Withhold pair_id 1, the model still solves but those anchors aren't
     forced to align."""
     m = SupervisedFGW(epsilon=1e-2).fit(
         mouse_ad, human_ad, holdout_pair_ids=[1],

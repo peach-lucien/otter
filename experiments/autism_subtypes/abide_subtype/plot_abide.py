@@ -57,14 +57,14 @@ def main():
     ax.fill_between(xs, asd_density, color="#e76f51", alpha=0.5)
     ax.plot(xs, asd_density, color="#e76f51", linewidth=1.5)
     gmm = j["gmm_bimodality"]
-    ax.set_title(f"ASD only — bimodality check\n"
+    ax.set_title(f"ASD only, bimodality check\n"
                  f"Δ BIC (2-comp − 1-comp) = {gmm['delta_bic_2_minus_1']:+.1f} "
                  f"({'2-comp' if gmm['two_comp_preferred_bic'] else '1-comp'} preferred)")
     ax.set_xlabel("HOMER template score (ASD subjects)")
     ax.set_yticks([])
 
     plt.suptitle(
-        f"PAGANI-B — HOMER cross-species template does NOT classify ASD at individual level\n"
+        f"PAGANI-B. HOMER cross-species template does NOT classify ASD at individual level\n"
         f"(n={j['n_valid']} valid subjects across 24 sites, AAL-116 parcellation)",
         fontsize=12, y=1.02,
     )

@@ -1,4 +1,4 @@
-"""Pipeline 05d — full-space LONO recovery metrics.
+"""Pipeline 05d, full-space LONO recovery metrics.
 
 Companion to ``05a_anchor_cv.py``. The 05a script reports recovery using the
 held-out anchor sub-block as the search space (restricted top-1 ~81%); this
@@ -6,7 +6,7 @@ script reports the SAME folds but using the full ``n_h`` human node space
 (typically 0–5% top-1 because the model lands on a non-anchor grid node near
 the correct anchor rather than the anchor itself).
 
-Both numbers matter and answer different questions; this script is the honest
+Both numbers matter and answer different questions; this script is the
 "per-voxel mapping" metric your colleague asked for.
 
 Resumable: outputs/logs/full_space_eval.json caches per-(config, network).

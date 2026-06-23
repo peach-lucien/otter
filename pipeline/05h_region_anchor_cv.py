@@ -1,6 +1,6 @@
-"""Pipeline 05h — held-out region-anchor cross-validation.
+"""Pipeline 05h, held-out region-anchor cross-validation.
 
-The honest evaluation for region anchors. For each region anchor we test:
+The held-out evaluation for region anchors. For each region anchor we test:
 hold it out (don't pass it to the solver as a constraint), solve with the
 remaining anchors, then score recovery: do mouse parcels in the held-out
 region's mouse-set argmax to parcels in the held-out region's human-set?
@@ -8,11 +8,11 @@ region's mouse-set argmax to parcels in the held-out region's human-set?
 If the answer is "yes" without supervision → the model has captured the
 homology from FC/SC structure (real generalisation).
 If the answer is "no" without supervision → the supervision is what was
-giving us the appearance of recovery (which is fine — we built region
-anchors with that purpose — but the headline claim should be qualified).
+giving us the appearance of recovery (which is fine, we built region
+anchors with that purpose, but the headline claim should be qualified).
 
 This avoids the circularity exposed in S4: declaring + testing the same
-region gives 100% by construction. Held-out CV gives the honest number.
+region gives 100% by construction. Held-out CV gives the generalisation number.
 
 Usage:
     PYTHONPATH=src python pipeline/05h_region_anchor_cv.py
@@ -86,7 +86,7 @@ def main(args):
     print(f"Building region anchors from atlases...")
     all_entries = build_garin_region_anchors_from_atlases(M.var, H.var)
     if not all_entries:
-        print("No region anchors built — can't run hold-out CV. Exiting.")
+        print("No region anchors built, can't run hold-out CV. Exiting.")
         sys.exit(1)
     print(f"Have {len(all_entries)} region anchors to hold out one at a time.")
 

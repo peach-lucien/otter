@@ -1,4 +1,4 @@
-"""HierarchicalFGW — per-network sub-FGW solves, assembled into a block-sparse π.
+"""HierarchicalFGW, per-network sub-FGW solves, assembled into a block-sparse π.
 
 Motivation
 ----------
@@ -13,9 +13,9 @@ supervision. For *standard* CV where some anchors of every network are visible,
 hierarchical can do better on within-network FC translation.
 
 Headline results from the comparison table:
-    Anchor CV (LONO):   45% top-1 (HURTS — the held network has no supervision)
+    Anchor CV (LONO):   45% top-1 (HURTS, the held network has no supervision)
     FC translation:    r=0.39 overall, r=0.55 within-network (HELPS)
-    Coverage:          787 human nodes kept (vs 1450 for flat — HALVED)
+    Coverage:          787 human nodes kept (vs 1450 for flat. HALVED)
 
 Use this when: full anchor supervision is available AND you care more about
 within-network FC fidelity than cross-network coverage.

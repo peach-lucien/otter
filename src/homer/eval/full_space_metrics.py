@@ -1,4 +1,4 @@
-"""Full-space recovery metrics for held-out anchors — the honest version.
+"""Full-space recovery metrics for held-out anchors.
 
 The companion :func:`homer.data.anchors.held_out_metrics_graded` restricts the
 ``argmax`` search to the held-out human anchor columns only, so its top-1
@@ -142,7 +142,7 @@ def full_space_metrics_per_anchor(
     var_m=None,
     var_h=None,
 ):
-    """Per-held-anchor breakdown — useful for spotting which anchors fail
+    """Per-held-anchor breakdown, useful for spotting which anchors fail
     catastrophically vs which are merely off by a neighbouring node.
 
     Returns a pandas DataFrame, one row per held-out mouse anchor.

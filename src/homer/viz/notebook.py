@@ -20,7 +20,7 @@ from homer.data.anchors import get_anchor_index
 from homer.data.networks import NETWORKS, assign_networks
 
 
-# Network colour palette — distinguishable on light + dark backgrounds.
+# Network colour palette, distinguishable on light + dark backgrounds.
 NET_COLORS: dict[str, str] = {
     "auditory":        "#FF6B6B", "brainstem":    "#A78BFA", "frontal_dmn":    "#38BDF8",
     "frontoparietal":  "#34D399", "limbic":       "#FBBF24", "olfactory":      "#FACC15",
@@ -44,10 +44,10 @@ def _import_plotly():
 # 3D scatter for one species' brain
 # ---------------------------------------------------------------------------
 TRUST_COLORS = {
-    "high":    "#10B981",   # emerald — top-1 ≥15% on Beauchamp validation
-    "medium":  "#F59E0B",   # amber — 3-15%
-    "low":     "#EF4444",   # red — <3%
-    "unknown": "#6B7280",   # grey — outside the validated regions
+    "high":    "#10B981",   # emerald, top-1 ≥15% on Beauchamp validation
+    "medium":  "#F59E0B",   # amber, 3-15%
+    "low":     "#EF4444",   # red, <3%
+    "unknown": "#6B7280",   # grey, outside the validated regions
 }
 
 
@@ -68,15 +68,15 @@ def plot_brain_3d(ad, *,
     ad : AnnData
         The species' AnnData with x/y/z + region columns in ``var``.
     color_by : str
-        ``"network"``  — colour by functional-network assignment (default)
-        ``"hemisphere"`` — L vs R
-        ``"is_anchor"`` — anchors red, grid grey
-        ``"highlight"`` — colour the ``highlight_idx`` nodes by ``highlight_values``
+        ``"network"``, colour by functional-network assignment (default)
+        ``"hemisphere"``. L vs R
+        ``"is_anchor"``, anchors red, grid grey
+        ``"highlight"``, colour the ``highlight_idx`` nodes by ``highlight_values``
                           on a viridis scale (everything else dim grey).
-        ``"trust_tier"`` — colour by tier (high/medium/low/unknown) from a
+        ``"trust_tier"``, colour by tier (high/medium/low/unknown) from a
                           ``trust_score_*.npz`` file. Pass ``trust_tier=``
                           (an array of strings).
-        ``"trust_score"`` — colour by continuous trust score (red→amber→green
+        ``"trust_score"``, colour by continuous trust score (red→amber→green
                           gradient, NaN → grey). Pass ``trust_score=``.
     highlight_idx, highlight_values
         Used only when color_by="highlight". Same length; values are mapped to
@@ -96,7 +96,7 @@ def plot_brain_3d(ad, *,
         trust_tier_arr = np.asarray(trust_tier)
         colors = [TRUST_COLORS.get(str(t), "#6B7280") for t in trust_tier_arr]
         sizes = np.where(is_anchor, 9, 4)
-        text = [f"{r} — tier: {trust_tier_arr[i]}"
+        text = [f"{r}, tier: {trust_tier_arr[i]}"
                 for i, r in enumerate(var["region"].values)]
     elif color_by == "trust_score":
         if trust_score is None:
@@ -121,7 +121,7 @@ def plot_brain_3d(ad, *,
                     b = int(0x0B + (0x81 - 0x0B) * t)
                 colors.append(f"rgb({r},{g},{b})")
         sizes = np.where(is_anchor, 9, 4)
-        text = [f"{r} — score: {ts[i]:.2f}" if not is_nan[i] else f"{r} — unknown"
+        text = [f"{r}, score: {ts[i]:.2f}" if not is_nan[i] else f"{r}, unknown"
                 for i, r in enumerate(var["region"].values)]
     elif color_by == "network":
         idx_anchor = get_anchor_index(var)
@@ -165,7 +165,7 @@ def plot_brain_3d(ad, *,
         hovertemplate="%{text}<extra></extra>",
     )])
     fig.update_layout(
-        title=title or f"{ad.uns.get('species', 'unknown')} — {n} nodes",
+        title=title or f"{ad.uns.get('species', 'unknown')}, {n} nodes",
         scene=_dark_scene() if dark else dict(aspectmode="data",
                                                 xaxis_title="x",
                                                 yaxis_title="y",
@@ -178,7 +178,7 @@ def plot_brain_3d(ad, *,
 
 
 def _dark_scene() -> dict:
-    """Plotly 3D scene config with a dark background — markers pop better."""
+    """Plotly 3D scene config with a dark background, markers pop better."""
     return dict(
         aspectmode="data",
         bgcolor="#111",
@@ -194,7 +194,7 @@ def _dark_layout() -> dict:
 
 
 # ---------------------------------------------------------------------------
-# π partner highlight — given a fitted model + source node index
+# π partner highlight, given a fitted model + source node index
 # ---------------------------------------------------------------------------
 def plot_pi_partners(model, source_idx: int, *,
                       source: str = "mouse",
@@ -266,7 +266,7 @@ def plot_pi_partners_pair(model, source_idx: int, *,
     top_k : int, default 20
         How many partners to highlight on the other side.
     dark : bool, default True
-        Black background — easier to see small markers.
+        Black background, easier to see small markers.
     """
     go = _import_plotly()
     from plotly.subplots import make_subplots
@@ -428,7 +428,7 @@ def plot_per_network_heatmap(long_df, *,
         colorscale="RdYlGn",
         zmin=0, zmax=1,
         colorbar=dict(title=value_col),
-        text=[[f"{v:.0%}" if np.isfinite(v) else "—" for v in row]
+        text=[[f"{v:.0%}" if np.isfinite(v) else ", " for v in row]
                for row in pivot.values],
         texttemplate="%{text}",
         textfont=dict(size=10),
@@ -453,7 +453,7 @@ def plot_comparison_bars(table_df, *,
                           width: int = 1100, height: int = 700):
     """Multi-panel bar chart: one panel per metric, bars per config.
 
-    Expects ``table_df`` with columns ``config, label, anchor_top1, ...`` —
+    Expects ``table_df`` with columns ``config, label, anchor_top1, ...``
     the wide-form table produced by ``homer.viz.reports.build_comparison_table``.
     """
     go = _import_plotly()
@@ -479,12 +479,12 @@ def plot_comparison_bars(table_df, *,
             x=vals, y=labels, orientation="h",
             marker_color=colors,
             text=[f"{v*100:.0f}%" if is_pct else f"{v:.3f}"
-                   if np.isfinite(v) else "—" for v in vals],
+                   if np.isfinite(v) else ", " for v in vals],
             textposition="outside",
             showlegend=False,
         ), row=r, col=c)
     fig.update_layout(
-        title="Comprehensive comparison — all configs (production = orange)",
+        title="Comprehensive comparison, all configs (production = orange)",
         width=width, height=height,
         margin=dict(l=200, r=40, t=80, b=40),
     )
@@ -518,7 +518,7 @@ def _aggregate_region_pi(model, region_query=None, *, network=None,
           against source region names. Useful for anchor regions (e.g.
           ``"thalamus"``, ``"amygdala"``).
         - ``network`` (str, optional): exact match against the source node's
-          functional-network assignment. Use this for non-anchor regions —
+          functional-network assignment. Use this for non-anchor regions
           e.g. ``network="visual"`` selects all 88 mouse visual-network nodes,
           not just the 4 visual anchors.
 
@@ -781,7 +781,7 @@ def plot_pi_heatmap_ordered(
     show_boundaries : bool, default True
         White lines at network boundaries on the main heatmap.
     log_scale : bool, default False
-        Plot log1p(π * scale) instead of raw π — useful when the production
+        Plot log1p(π * scale) instead of raw π, useful when the production
         solve is mostly one-hot and the off-diagonal structure would otherwise
         be invisible.
     dark : bool, default True
@@ -807,7 +807,7 @@ def plot_pi_heatmap_ordered(
         m_order = np.argsort(net_m, kind="stable")
         h_order = np.argsort(net_h, kind="stable")
     elif sort_by == "hemisphere":
-        # Sort by (hemisphere, network) — useful for spotting L/R asymmetries
+        # Sort by (hemisphere, network), useful for spotting L/R asymmetries
         hemi_m = (mouse_ad.var["hemisphere"].values == "R").astype(int)
         hemi_h = (human_ad.var["hemisphere"].values == "R").astype(int)
         m_order = np.lexsort((net_m, hemi_m))
@@ -861,7 +861,7 @@ def plot_pi_heatmap_ordered(
             shared_xaxes=False, shared_yaxes=False,
             horizontal_spacing=0.005, vertical_spacing=0.005,
         )
-        # TOP — human network bar (1 row, n_h cols)
+        # TOP, human network bar (1 row, n_h cols)
         fig.add_trace(go.Heatmap(
             z=[net_h_render.tolist()],
             colorscale=network_cscale,
@@ -870,7 +870,7 @@ def plot_pi_heatmap_ordered(
             hovertemplate="Human · %{customdata}<extra></extra>",
             customdata=[[NETWORKS[i] for i in net_h_render]],
         ), row=1, col=2)
-        # LEFT — mouse network bar (n_m rows, 1 col)
+        # LEFT, mouse network bar (n_m rows, 1 col)
         fig.add_trace(go.Heatmap(
             z=[[v] for v in net_m_render],
             colorscale=network_cscale,
@@ -879,7 +879,7 @@ def plot_pi_heatmap_ordered(
             hovertemplate="Mouse · %{customdata}<extra></extra>",
             customdata=[[NETWORKS[i]] for i in net_m_render],
         ), row=2, col=1)
-        # MAIN — π heatmap
+        # MAIN, π heatmap
         main_row, main_col = 2, 2
         fig.add_trace(go.Heatmap(
             z=z, colorscale="Viridis",
@@ -911,7 +911,7 @@ def plot_pi_heatmap_ordered(
 
     # ---- 7. Layout polish ----
     if title is None:
-        title = (f"π — sorted by {sort_by} "
+        title = (f"π, sorted by {sort_by} "
                   f"(rows: {n_m} mouse, cols: {n_h} human"
                   + (f"; downsampled {bm}×{bh}" if (bm > 1 or bh > 1) else "")
                   + (")" if not log_scale else ", log scale)"))

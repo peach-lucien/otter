@@ -1,4 +1,4 @@
-"""Tests for homer.viz — viewer + notebook plotters + reports."""
+"""Tests for homer.viz, viewer + notebook plotters + reports."""
 import json
 
 import numpy as np
@@ -79,7 +79,7 @@ def test_build_viewer_html_contains_data(mouse_ad, human_ad):
     assert "plot-mouse" in html and "plot-human" in html
     # Embedded payload should be present
     assert "test_label" in html
-    # JS isn't double-escaped — should NOT see e.g. "{{" in JS bodies
+    # JS isn't double-escaped, should NOT see e.g. "{{" in JS bodies
     assert "{{ EMBEDDED_DATA }}" not in html
 
 
@@ -158,11 +158,11 @@ def test_write_gui_creates_files(mouse_ad, human_ad, tmp_path):
 
 
 # ---------------------------------------------------------------------------
-# Notebook plotters — verify they return Plotly Figure objects
+# Notebook plotters, verify they return Plotly Figure objects
 # ---------------------------------------------------------------------------
 @pytest.fixture
 def go():
-    """Plotly graph_objects — skip viz tests if plotly isn't installed."""
+    """Plotly graph_objects, skip viz tests if plotly isn't installed."""
     pytest.importorskip("plotly")
     import plotly.graph_objects as go
     return go
@@ -218,7 +218,7 @@ def test_plot_pi_heatmap_small(go):
     pi = np.eye(10)
     fig = plot_pi_heatmap(pi)
     assert isinstance(fig, go.Figure)
-    # Small enough that no downsampling — z is 10×10
+    # Small enough that no downsampling, z is 10×10
     assert fig.data[0].z.shape == (10, 10)
 
 

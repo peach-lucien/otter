@@ -6,7 +6,7 @@ anchors via the relational + spatial signal alone.
 
 Public API:
     anchor_loo_cv(model, mouse_ad, human_ad, *, networks=None) -> dict per network
-    held_out_metrics_graded — re-export from homer.data.anchors
+    held_out_metrics_graded, re-export from homer.data.anchors
 """
 from __future__ import annotations
 

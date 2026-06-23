@@ -8,7 +8,7 @@ parcellation as a NIfTI volume in MNI152 space.
 Pipeline:
   1. Build a parcellation NIfTI from rsmask_human.nii where each node's voxels
      are labelled with the node's numid (1..2094). (We have the voxel_indices
-     for every node — assemble them into a 3D label volume.)
+     for every node, assemble them into a 3D label volume.)
   2. Call abagen.get_expression_data(parcellation_nifti).
   3. Save the (2094, n_genes) matrix and gene metadata.
 
@@ -74,7 +74,7 @@ def main(args):
     parc_path = build_parcellation_volume()
 
     print("running abagen (this is the slow step, ~30 min on first run)...")
-    # abagen API has shifted across versions — keep this call minimal so it works
+    # abagen API has shifted across versions, keep this call minimal so it works
     # on both the 0.1.x and 0.2.x lines. All of these kwargs are stable across
     # versions and use abagen's recommended defaults for cross-species work.
     expr_df = abagen.get_expression_data(

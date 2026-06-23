@@ -53,7 +53,7 @@ def load_pathway_genes() -> dict[str, set]:
 
 def main():
     print("=" * 80)
-    print("Pagani 2026 — diagnostic checks on the expanded gene matrix")
+    print("Pagani 2026, diagnostic checks on the expanded gene matrix")
     print("=" * 80)
 
     expr = np.load(ROOT / "experiments/autism_subtypes/allen_expansion/pagani_mouse_expr.npy")

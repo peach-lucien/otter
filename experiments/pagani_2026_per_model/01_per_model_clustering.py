@@ -5,7 +5,7 @@ The per-model hyper/hypo subtype labels come from the Gozzi lab's clean data
 
   1. The clean Fig 1c matrix `sorted_etiology_by_feature_matrix.csv`
      (20 models × 1,491 voxelwise weighted-degree-centrality features) is loaded
-     directly — no outlier masking.
+     directly, no outlier masking.
 
   2. The CSV is *sorted* by Pagani's hierarchical clustering, so the subtype
      split falls exactly on row order: rows 1–9 = hyperconnectivity (n=9),
@@ -15,7 +15,7 @@ The per-model hyper/hypo subtype labels come from the Gozzi lab's clean data
 
 The translation itself (mouse subtype signature → human-parcel prediction via π)
 reuses the validated Test 2 machinery in `04_subtype_translation.py`. It does NOT
-depend on decoding the 1,491 features to voxels (which is not robustly possible —
+depend on decoding the 1,491 features to voxels (which is not robustly possible
 see the validation note); the per-subtype network signatures come from Pagani's
 own ED Fig 1 / Fig 4e network matrices.
 
@@ -62,7 +62,7 @@ _SOURCE_DATA_MSG = (
     "  data_crossspecies/pagani/\n"
     "which are third-party source data and are NOT part of the public data\n"
     "release (the Zenodo bundles ship HOMER's processed artifacts, not this raw\n"
-    "source). It is a maintainer / source-data-only experiment — contact the\n"
+    "source). It is a maintainer / source-data-only experiment, contact the\n"
     "authors for access. See experiments/pagani_2026_per_model/README.md.\n"
 )
 
@@ -101,7 +101,7 @@ def derive_and_verify_subtypes(X: np.ndarray, labels: list[str]) -> list[str]:
 # ---------------------------------------------------------------------------
 def loo_membership(X: np.ndarray, subtype: list[str]) -> list[dict]:
     """For each model, correlate its 1,491-feature vector with the mean
-    signature of each subtype — *excluding the model itself* from the mean, so
+    signature of each subtype, *excluding the model itself* from the mean, so
     the placement isn't circular. Returns hyper/hypo correlations and a signed
     membership score (hyper minus hypo correlation)."""
     sub = np.array(subtype)
@@ -183,7 +183,7 @@ def subtype_translation_through_pi() -> dict:
 
 def main():
     print("=" * 78)
-    print("Pagani 2026 — corrected per-model subtype translation through π")
+    print("Pagani 2026, corrected per-model subtype translation through π")
     print("=" * 78)
 
     X, labels = load_clean_figura_1c()

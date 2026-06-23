@@ -3,11 +3,11 @@ fMRI-friendly downsampled resolutions), so we can avoid running ANTs/FSL
 registration.
 
 The 200 µm voxel size + (62, 94, 47) shape strongly suggests the mouse mask is
-the AIBS Average Template (RS_AVGT) — a downsampled version of Allen CCFv3 used
+the AIBS Average Template (RS_AVGT), a downsampled version of Allen CCFv3 used
 in mouse rs-fMRI pipelines (Grandjean, Coletta, etc).
 
 The 3 mm voxel size + (61, 73, 61) shape strongly suggests FSL's MNI152_T1_3mm
-template — the standard for human rs-fMRI.
+template, the standard for human rs-fMRI.
 
 This script:
   1. Downloads the canonical reference templates (Allen CCFv3 100µm, MNI152 2mm).
@@ -77,7 +77,7 @@ def verify_mouse():
     try:
         from allensdk.core.mouse_connectivity_cache import MouseConnectivityCache
     except ImportError:
-        print("  (allensdk not installed — skipping reference fetch; install for the full check)")
+        print("  (allensdk not installed, skipping reference fetch; install for the full check)")
         return {"colleague_bbox": rsmask_bbox, "verified": False, "reason": "no allensdk"}
 
     mcc = MouseConnectivityCache(resolution=100, manifest_file=str(CACHE / "allen_manifest.json"))
@@ -121,16 +121,16 @@ def verify_mouse():
         print(f"node centres landing in CCFv3 brain (direct lookup): "
               f"{in_brain}/{len(centres)} ({in_brain/len(centres):.1%})")
         if in_brain / len(centres) > 0.8:
-            print("  ✓ STRONG match — direct projection should work")
+            print("  ✓ STRONG match, direct projection should work")
             verdict = "direct_projection_ok"
         elif in_brain / len(centres) > 0.4:
-            print("  ⚠ PARTIAL match — origin/orientation may differ; investigate")
+            print("  ⚠ PARTIAL match, origin/orientation may differ; investigate")
             verdict = "partial_match"
         else:
-            print("  ✗ POOR match — registration needed")
+            print("  ✗ POOR match, registration needed")
             verdict = "needs_registration"
     else:
-        print("  ✗ no node centres land in CCFv3 grid — definite misalignment")
+        print("  ✗ no node centres land in CCFv3 grid, definite misalignment")
         verdict = "needs_registration"
 
     return {"colleague_bbox": rsmask_bbox, "ccf_bbox": ccf_bbox,
@@ -170,13 +170,13 @@ def verify_human():
     centred = bool(np.all(np.abs(ctr) < 30))
     if centred and extent_match:
         verdict = "mni152_likely"
-        print("  ✓ likely MNI152 — direct projection should work")
+        print("  ✓ likely MNI152, direct projection should work")
     elif extent_match:
         verdict = "mni_orientation_offset"
-        print("  ⚠ extent matches MNI but centroid is offset — may need translation")
+        print("  ⚠ extent matches MNI but centroid is offset, may need translation")
     else:
         verdict = "needs_registration"
-        print("  ✗ extent does NOT match MNI152 — registration needed")
+        print("  ✗ extent does NOT match MNI152, registration needed")
 
     return {"colleague_bbox": rsmask_bbox,
             "extent_ratio_vs_mni": extent_ratio.tolist(),

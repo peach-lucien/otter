@@ -34,7 +34,7 @@ from homer.data import load_cached
 
 def main():
     print("=" * 80)
-    print("Pagani 2026 Test 3 — gene-spatial translation, EXPANDED gene panel")
+    print("Pagani 2026 Test 3, gene-spatial translation, EXPANDED gene panel")
     print("=" * 80)
 
     expr_path = Path(__file__).parent / "pagani_mouse_expr.npy"

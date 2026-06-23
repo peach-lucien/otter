@@ -49,7 +49,7 @@ PAGANI_CACHE = ROOT / "experiments/autism_subtypes/allen_expansion/pagani_ish_ca
 ALLENSDK_CACHE = Path.home() / ".allensdk_cache" / "ish_energy"
 
 
-# Bypass the homer package __init__ (which requires `ot`) — load io.py directly.
+# Bypass the homer package __init__ (which requires `ot`), load io.py directly.
 def _load_io():
     pkg_homer = importlib.util.module_from_spec(importlib.machinery.ModuleSpec("homer", None))
     pkg_data  = importlib.util.module_from_spec(importlib.machinery.ModuleSpec("homer.data", None))

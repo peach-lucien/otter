@@ -57,7 +57,7 @@ def main():
                  f"empirical p = {j['null']['empirical_p']:.3f}")
     ax.legend(loc="upper right", fontsize=8)
 
-    plt.suptitle("HOMER × Margulies/Huntenburg — π preserves the cross-species "
+    plt.suptitle("HOMER × Margulies/Huntenburg, π preserves the cross-species "
                  "principal connectivity gradient", fontsize=12, y=1.02)
     plt.tight_layout()
     out = ROOT / "outputs" / "figures" / "margulies_2016_gradient.png"

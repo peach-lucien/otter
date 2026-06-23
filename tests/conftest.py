@@ -57,7 +57,7 @@ def _build_var(n_nodes: int, n_anchors: int, *, seed: int) -> pd.DataFrame:
         pairids[i] = pid
         regions.append(f"{hemi}_test_anchor_{pid}")
         hemis.append(hemi)
-    # Grid nodes — random pair_ids, alternating hemis
+    # Grid nodes, random pair_ids, alternating hemis
     for i in range(n_anchors, n_nodes):
         pid = int(rng.integers(N_PAIRS + 1, 12))   # non-anchor pair_id
         hemi = "L" if (i % 2 == 0) else "R"

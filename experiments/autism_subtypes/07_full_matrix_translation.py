@@ -1,4 +1,4 @@
-"""Test 2c — Full per-network-pair Δ-matrix translation through π.
+"""Test 2c. Full per-network-pair Δ-matrix translation through π.
 
 Sharper version of Test 2b: instead of collapsing each subtype matrix to per-network
 intensity (a length-9 / length-8 vector), use the full per-network-PAIR perturbation
@@ -9,7 +9,7 @@ Procedure:
   1. Read mouse 9×9 hypo + hyper matrices; symmetrize; compute Δ_mouse = hyper − hypo.
   2. Read human 8×8 hypo + hyper matrices; symmetrize; compute Δ_human_obs = hyper − hypo.
   3. Build a translation operator T (n_mouse_net × n_human_net) from π, where
-     T[mi, hi] = P(human net hi | mouse net mi) — row-normalised aggregated π.
+     T[mi, hi] = P(human net hi | mouse net mi), row-normalised aggregated π.
   4. Predicted Δ_human[hi, hj] = Σ_mi Σ_mj T[mi, hi] · T[mj, hj] · Δ_mouse[mi, mj]
      (T · Δ_mouse · T.T using matrix form).
   5. Correlate predicted vs observed over the 36 upper-triangle entries.
@@ -48,7 +48,7 @@ GARIN_PID_TO_PAGANI_MOUSE = {
     # Pagani: Auditory, BF, Caudate Putamen, DMN, HC, Salience, Somatomotor, Thalamus, Visual
     1:  "DMN",             # mPFC
     2:  "Somatomotor",     # Motor / premotor
-    3:  "Somatomotor",     # Somatosensory (S1) — collapse to Somatomotor like the paper does
+    3:  "Somatomotor",     # Somatosensory (S1), collapse to Somatomotor like the paper does
     4:  "DMN",             # Posterior parietal (parietal cortex; in mouse FC, often DMN/PCC-aligned)
     5:  "Visual",          # V1
     6:  "Visual",          # V2 / extrastriate
@@ -56,26 +56,26 @@ GARIN_PID_TO_PAGANI_MOUSE = {
     8:  "DMN",             # MIPT (medial temporal, DMN-aligned)
     9:  "Salience",        # Insula
     10: "BF",              # Septum
-    11: "BF",              # Olfactory cortex (piriform/AON) — Pagani's BF is broader basal-forebrain
+    11: "BF",              # Olfactory cortex (piriform/AON). Pagani's BF is broader basal-forebrain
     12: "HC",              # Periarchicortex (hippocampal allocortex)
     13: "Caudate Putamen", # Striatum (CPu) ← KEY for splitting subcortical
     14: "BF",              # Basal forebrain (NBM)
     15: "Caudate Putamen", # Pallidum (sits at ventral striatum / GP); Pagani lumps into "CaudatePutamen"
     16: "Salience",        # Claustrum
     17: "HC",              # Amygdala (limbic; Pagani lumps into HC)
-    18: None,              # Hypothalamus — Pagani's mouse atlas (Liska 2015) excludes
+    18: None,              # Hypothalamus. Pagani's mouse atlas (Liska 2015) excludes
                            # hypothalamus from its 9-net partition. Lumping into "Thalamus"
                            # biases the Thalamus row of T toward subcortical/hypothalamic
                            # routing. Drop it like pons/tectum (audit fix M4).
     19: "Thalamus",        # Thalamus ← KEY for splitting subcortical
-    20: None,              # Pons — Pagani has no brainstem
-    21: None,              # Tectum — Pagani has no brainstem
+    20: None,              # Pons. Pagani has no brainstem
+    21: None,              # Tectum. Pagani has no brainstem
 }
 
 
 def assign_mouse_pagani_networks(M_var: pd.DataFrame) -> tuple[np.ndarray, list[str]]:
     """Assign each of 1864 mouse parcels to one of Pagani's 9 mouse networks
-    (plus a -1 sentinel for parcels that don't map cleanly — Pons/Tectum).
+    (plus a -1 sentinel for parcels that don't map cleanly. Pons/Tectum).
 
     Uses the same nearest-anchor-by-normalised-xyz logic as
     homer.data.networks.assign_networks, but maps to Pagani names via
@@ -143,7 +143,7 @@ def upper_triangle_flat(M: np.ndarray) -> np.ndarray:
 
 def main():
     print("=" * 80)
-    print("Pagani 2026 Test 2c — full 64-element matrix translation through π")
+    print("Pagani 2026 Test 2c, full 64-element matrix translation through π")
     print("=" * 80)
 
     M, _ = load_cached("mouse", cache_dir="outputs/anndata")
@@ -185,7 +185,7 @@ def main():
         pi_kept, mouse_net[keep_m], len(mouse_pagani_names),
         new_human_net, len(pagani_human_names),
     )
-    print(f"\nTranslation operator T ({len(mouse_pagani_names)} x {len(pagani_human_names)}) — "
+    print(f"\nTranslation operator T ({len(mouse_pagani_names)} x {len(pagani_human_names)}), "
           f"each row sums to ~1:")
     print(f"  {' '*18}" + " ".join(f"{n[:6]:>6s}" for n in pagani_human_names))
     for i, mn in enumerate(mouse_pagani_names):
@@ -200,7 +200,7 @@ def main():
     H_hyper_obs = symmetrise(data["human_hyper"])
 
     # Order rows/cols of Pagani matrices to match our mouse_pagani_names + pagani_human_names
-    # — Pagani's order matches ours by construction.
+    #. Pagani's order matches ours by construction.
     Δ_mouse = M_hyper - M_hypo                  # 9×9 signed
     Δ_human_obs = H_hyper_obs - H_hypo_obs      # 8×8 signed
 
@@ -231,7 +231,7 @@ def main():
     # NB: permute rows WITHIN the kept 1613 mouse parcels (i.e., shuffle the
     # mouse-parcel-to-network assignment among kept parcels). Earlier version
     # permuted all 1864 rows then re-selected via keep_m, which mixed in
-    # brainstem rows whose coupling structure differs from forebrain — that
+    # brainstem rows whose coupling structure differs from forebrain, that
     # null was wider than it should have been. (Audit fix B1.)
     print(f"\nPermuted-π null (200 trials, within-kept-rows):")
     rng = np.random.default_rng(seed=42)

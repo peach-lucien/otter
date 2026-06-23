@@ -1,11 +1,11 @@
 """Network-level cross-species validation against Pagani 2026.
 
-Pagani et al. (2026), *Nat Neurosci* — "Autism subtypes identified using cross-species
-functional connectivity analyses" — establish a mouse↔human translation that operates at
+Pagani et al. (2026), *Nat Neurosci*, "Autism subtypes identified using cross-species
+functional connectivity analyses", establish a mouse↔human translation that operates at
 **network level**. They define 9 mouse networks (Auditory, BF, Caudate Putamen, DMN,
 HC, Salience, Somatomotor, Thalamus, Visual; ED Fig 1) and 8 human networks (Control,
 DMN, DorsAtten, Limbic, Salience, SomatoMotor, Visual, Subcortical; Fig 4e). Their
-cross-species correspondence is **by name** — Somatomotor in mouse ↔ Somatomotor in
+cross-species correspondence is **by name**. Somatomotor in mouse ↔ Somatomotor in
 human, etc.
 
 HOMER provides a quantitative π (1864 mouse × 2094 human) that can be aggregated to a
@@ -29,7 +29,7 @@ Method:
   5. Score diagonal-dominance: trace(N̂) where N̂ is row-normalised, and per-network
      "is the diagonal the argmax?" check.
   6. Compare against expected-by-area baseline (Σ π[m,*] is uniform 1/1864 in our
-     setup, so column-sum is just human-net size — the question is whether mouse-net
+     setup, so column-sum is just human-net size, the question is whether mouse-net
      i preferentially loads on human-net j=i vs other human-nets weighted by their
      sizes).
 
@@ -76,7 +76,7 @@ SCHAEFER17_TO_YEO7: dict[str, str] = {
     "VisCent":     "Visual",
     "VisPeri":     "Visual",
     "SomMotA":     "SomatoMotor",
-    "SomMotB":     "SomatoMotor",   # SomMotB_Aud + SomMotB_S2 — Yeo-7 collapses auditory
+    "SomMotB":     "SomatoMotor",   # SomMotB_Aud + SomMotB_S2. Yeo-7 collapses auditory
     "DorsAttnA":   "DorsAtten",
     "DorsAttnB":   "DorsAtten",
     "SalVentAttnA": "Salience",
@@ -104,7 +104,7 @@ def _load_schaefer17_labels() -> dict[int, str]:
     order_path = Path("outputs/anndata/_schaefer_order.txt")
     if not order_path.exists():
         raise FileNotFoundError(
-            f"{order_path} missing — extract from "
+            f"{order_path} missing, extract from "
             f"data_external/p6ebec-hbp-d000038_SC-FC_HCP_eNKI_pub/"
             f"Schaefer2018_400Parcels_17Networks.zip first."
         )
@@ -216,7 +216,7 @@ def score_mapping(N: np.ndarray, mouse_names: list[str], human_names: list[str],
     """
     # Sizes
     # Mouse uniform marginal: row-sum of N[i, :] is the fraction of mouse parcels
-    # in mouse-net i — sums to 1 across mouse nets.
+    # in mouse-net i, sums to 1 across mouse nets.
     row_sum = N.sum(axis=1)
     col_sum = N.sum(axis=0)
     total = N.sum()

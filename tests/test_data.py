@@ -61,7 +61,7 @@ def test_anchor_pairing_consistent(adatas):
     m_anchor_pairs = set(M.var.loc[M.var["garin_anchor"], "anchor_pair_id"].dropna().astype(int))
     # 21 paired regions (Garin atlas), with both L and R present in each species
     assert h_anchor_pairs == m_anchor_pairs == set(range(1, 22)), (
-        f"anchor pair ids differ — human={sorted(h_anchor_pairs)} "
+        f"anchor pair ids differ, human={sorted(h_anchor_pairs)} "
         f"mouse={sorted(m_anchor_pairs)}"
     )
     # Each pair id should appear exactly twice (once L, once R) in each species' anchors
@@ -130,7 +130,7 @@ def test_fc_finite_and_in_range(adatas):
         vals = fc[off_diag_mask]
         assert vals.min() >= -1.0 - 1e-5
         assert vals.max() <=  1.0 + 1e-5
-        # NaN budget — sanity report (not a hard fail)
+        # NaN budget, sanity report (not a hard fail)
         nan_pct = float(np.isnan(fc).mean() * 100)
         assert nan_pct <= 2.0, f"{sp}: surprising NaN rate in fc_mean: {nan_pct:.2f}%"
 

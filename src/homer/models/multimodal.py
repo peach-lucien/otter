@@ -1,10 +1,10 @@
-"""MultimodalFGW — the production model.
+"""MultimodalFGW, the production model.
 
 Adds optional modalities on top of SupervisedFGW (anchors + xyz):
-  - SC (structural connectivity) — mixed into the relational cost C
-  - gene-expression GW          — mixed into C as a separate within-species cost
-  - M_gene                       — cross-species cosine cost on ortholog vectors
-  - M_anchor                     — cross-species cost on anchor-relationship FC features
+  - SC (structural connectivity), mixed into the relational cost C
+  - gene-expression GW, mixed into C as a separate within-species cost
+  - M_gene, cross-species cosine cost on ortholog vectors
+  - M_anchor, cross-species cost on anchor-relationship FC features
 
 The headline production config (from the comparison table) is:
     MultimodalFGW(use_sc=True, sc_weight=0.3, fc_weight=0.7,
@@ -12,7 +12,7 @@ The headline production config (from the comparison table) is:
 
 This achieves 81% top-1 on leave-one-network-out CV and r=0.36 FC translation
 quality. Other modality switches (gene, M_gene, M_anchor) are opt-in for
-ablations / experiments — see the comprehensive_table.csv for their per-config
+ablations / experiments, see the comprehensive_table.csv for their per-config
 results.
 """
 from __future__ import annotations
@@ -110,7 +110,7 @@ class MultimodalFGW(SupervisedFGW):
 
     def _solve(self, *, mouse_ad, human_ad,
                holdout_pair_ids: Optional[Sequence[int]] = None,
-               # Pre-built cost matrices — anything not given is computed
+               # Pre-built cost matrices, anything not given is computed
                Cm_FC: Optional[np.ndarray] = None,
                Ch_FC: Optional[np.ndarray] = None,
                Cm_SC: Optional[np.ndarray] = None,
@@ -127,22 +127,22 @@ class MultimodalFGW(SupervisedFGW):
                # in the supervised human set (lam elsewhere).
                region_anchors: Optional[Sequence] = None,
                # Soft region anchors (SOFT-1): outside-region penalty for
-               # region anchor constraints. Default 0.15 is soft — gives
+               # region anchor constraints. Default 0.15 is soft, gives
                # better-calibrated probability distributions at no cost to
                # argmax / top-K predictions. Pass 1.0 (or None) for the
                # original hard 0/1 wall behaviour.
                region_lam_outside: float = 0.15,
                region_beta_in: float = 0.0,
-               # Source marginal — defaults to uniform 1/n_m. Override with a
+               # Source marginal, defaults to uniform 1/n_m. Override with a
                # length-n_m probability vector for volume/stability weighting.
                p: Optional[np.ndarray] = None,
                # Per-mouse-parcel xyz weighting (TOPO-1). If provided, this
                # length-n_m array OVERRIDES self.config["xyz_weight"] row-wise
                # in M. General-purpose hook for cost-matrix experiments. We
-               # tested its primary motivating use-case — zeroing xyz for
-               # topology-inverted regions (Motor / Tectum / Piriform) — and
+               # tested its primary motivating use-case, zeroing xyz for
+               # topology-inverted regions (Motor / Tectum / Piriform), and
                # found per-row weighting cannot reproduce the global xyz
-               # effect (the FGW equilibrium is non-local). See docs/results
+               # effect (the FGW equilibrium is non-local). See docs/archive/iteration_log.md
                # §5.11 for the convergent negative. Pass None (default) for
                # the uniform scalar behaviour.
                xyz_weight_per_mouse_parcel: Optional[np.ndarray] = None,
@@ -244,7 +244,7 @@ class MultimodalFGW(SupervisedFGW):
         # Anchor supervision (point anchors)
         M = _apply_anchor_supervision(M, idx_m, idx_h, visible,
                                        lam=self.config["lam_anchor"])
-        # Region-anchor supervision (S4) — applied after point anchors. The
+        # Region-anchor supervision (S4), applied after point anchors. The
         # `protect` mask flags the point-anchor "allowed" cells so the
         # conflict-aware region layer cannot clobber point-anchor supervision.
         if region_anchors:

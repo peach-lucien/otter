@@ -26,11 +26,11 @@ experiments/
 
 Each subdirectory has its own `README.md` documenting its scripts, inputs, and outputs.
 
-## anchor_packs/ — region-anchor experiments
+## anchor_packs/, region-anchor experiments
 
 12 per-pack runners that fit production-with-pack π and report Beauchamp + region-level deltas. `compose_all.py` produces the recommended `pi_fc_plus_SC_with_all_packs.npy`. See [`anchor_packs/README.md`](anchor_packs/README.md) for the per-pack table and citations.
 
-## ablations/ — methodology ablations
+## ablations/, methodology ablations
 
 Three ablations that justify production design choices (soft anchors, uniform marginal, area-level xyz weighting). All three converged to the same direction: the production defaults outperform variants. See [`ablations/README.md`](ablations/README.md).
 
@@ -38,6 +38,6 @@ Three ablations that justify production design choices (soft anchors, uniform ma
 
 Each `<paper>_*/` subdirectory takes a published cross-species paper and tests whether HOMER's π reproduces or refines its findings. Outputs feed `notebooks/05-15`. See `docs/03_results.md` §"Independent third-party validation" for the consolidated result table.
 
-## archive/ — older detours
+## archive/, older detours
 
 Stepping-stone experiments from earlier iterations. Kept for reproducibility but not part of the current narrative. See `docs/archive/iteration_log.md` for context.

@@ -1,4 +1,4 @@
-"""Pipeline 05g — compute per-parcel trust score for the production π.
+"""Pipeline 05g, compute per-parcel trust score for the production π.
 
 Two independent trust signals, both saved as outputs/coupling/trust_score_<config>.npz:
 
@@ -7,7 +7,7 @@ Two independent trust signals, both saved as outputs/coupling/trust_score_<confi
    nearest anchor → composite score in [0, 1] + tier {high, medium, low}.
 
 2. **Regional-empirical trust** (discrete by validation region):
-   per Beauchamp 2022 region — what is the actual top-1 accuracy of the
+   per Beauchamp 2022 region, what is the actual top-1 accuracy of the
    model in this region? Each parcel gets the accuracy of its region. Tier
    is set by absolute thresholds (high ≥ 15%, low < 3%, else medium,
    `unknown` if not in any validated region).
@@ -48,7 +48,7 @@ COUP = ROOT / "outputs" / "coupling"
 EXT  = ROOT / "data_external" / "MouseHumanTranscriptomicSimilarity"
 
 
-# Beauchamp pair list — kept in lockstep with `pipeline/05f_beauchamp_validation.py`
+# Beauchamp pair list, kept in lockstep with `pipeline/05f_beauchamp_validation.py`
 # HUMAN_REGION_MNI. Format: (mouse_DSURQE_region_name, x_left, y, z, radius_mm).
 BEAUCHAMP_REGIONS = [
     ("Anterior cingulate area",            -5,  25,  25, 15),
@@ -66,7 +66,7 @@ BEAUCHAMP_REGIONS = [
     ("Superior colliculus, sensory related",-5, -30, -2,  6),
     ("Striatum ventral region",            -10,  10,-10,  6),
     ("Primary auditory area",              -50, -20,  5, 10),
-    # Hippocampal — match centroids used in pipeline/05f_*.py exactly
+    # Hippocampal, match centroids used in pipeline/05f_*.py exactly
     ("Field CA1",                          -30, -25, -10,  8),
     ("Field CA3",                          -25, -22, -10,  8),
     ("Dentate gyrus",                      -25, -28, -10,  8),
@@ -139,7 +139,7 @@ def main(args):
     # 1. Model-confidence trust
     boot_path = COUP / args.bootstrap_file
     if not boot_path.exists():
-        print(f"  ⚠ {boot_path} missing — bootstrap component will be 0.5")
+        print(f"  ⚠ {boot_path} missing, bootstrap component will be 0.5")
         boot_path = None
     ts = compute_trust_score(M, H, pi, bootstrap_path=boot_path)
     print(f"\nModel-confidence trust:")

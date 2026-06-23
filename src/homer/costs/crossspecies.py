@@ -1,8 +1,8 @@
 """Cross-species cost matrices M used by the FGW W-term.
 
 Public:
-    cross_species_anchor_M  — cosine distance over anchor-relationship features
-    cross_species_gene_cost — cosine distance over ortholog-aligned gene vectors
+    cross_species_anchor_M, cosine distance over anchor-relationship features
+    cross_species_gene_cost, cosine distance over ortholog-aligned gene vectors
 
 The xyz cross-species cost is computed inline in pipeline scripts (it's a
 straightforward Euclidean distance between per-species-normalised xyz coordinates

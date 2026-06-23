@@ -6,7 +6,7 @@ Why a wrapper instead of calling POT directly:
   - Insulation point: lets us swap in OTT-JAX or moscot later without touching
     the model classes.
 
-This module is internal — model classes in homer.models import from it.
+This module is internal, model classes in homer.models import from it.
 """
 from __future__ import annotations
 
@@ -63,7 +63,7 @@ def gw_loss(C1: np.ndarray, C2: np.ndarray, pi: np.ndarray,
     q = pi.sum(axis=0)                           # (n2,)
     term1 = float((C1 * C1 * np.outer(p, p)).sum())
     term2 = float((C2 * C2 * np.outer(q, q)).sum())
-    # trace(C1 @ π @ C2 @ π.T) — cyclic: trace((π.T @ C1 @ π) @ C2)
+    # trace(C1 @ π @ C2 @ π.T), cyclic: trace((π.T @ C1 @ π) @ C2)
     cross = float((C1 @ pi @ C2 * pi).sum())
     return term1 + term2 - 2.0 * cross
 

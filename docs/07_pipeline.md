@@ -62,8 +62,8 @@ PYTHONPATH=src python pipeline/04_solve_production.py --multistart       # 5-ini
 ```
 
 Saves:
-- `outputs/coupling/pi_fc_plus_SC.npy` — production coupling (1864 × 2094)
-- `outputs/coupling/pi_fc_plus_SC.json` — config + fit info sidecar
+- `outputs/coupling/pi_fc_plus_SC.npy`, production coupling (1864 × 2094)
+- `outputs/coupling/pi_fc_plus_SC.json`, config + fit info sidecar
 
 ## 5. Evaluate
 
@@ -72,13 +72,13 @@ PYTHONPATH=src python pipeline/05_evaluate.py            # orchestrator (runs al
 ```
 
 Or individually:
-- `05a_anchor_cv.py` — leave-one-network-out CV across 13 configs (~5 min, resumable)
-- `05b_fc_translation.py` — FC-translation Pearson r per production config
-- `05c_null_distributions.py` — random_pi (50 trials) + permuted_anchors (5 trials) per network
-- `05d_full_space_eval.py` — full-space (n_h=2094) recovery for production configs
-- `05e_knox_vs_standard_sc.py` — comparative: Knox leaf-level vs Allen summary-structure SC LONO
-- `05f_beauchamp_validation.py` — external validation against Beauchamp 2022's 22 mouse↔human pairs
-- `05g_compute_trust.py` — per-parcel model-confidence + regional-empirical trust score
+- `05a_anchor_cv.py`, leave-one-network-out CV across 13 configs (~5 min, resumable)
+- `05b_fc_translation.py`. FC-translation Pearson r per production config
+- `05c_null_distributions.py`, random_pi (50 trials) + permuted_anchors (5 trials) per network
+- `05d_full_space_eval.py`, full-space (n_h=2094) recovery for production configs
+- `05e_knox_vs_standard_sc.py`, comparative: Knox leaf-level vs Allen summary-structure SC LONO
+- `05f_beauchamp_validation.py`, external validation against Beauchamp 2022's 22 mouse↔human pairs
+- `05g_compute_trust.py`, per-parcel model-confidence + regional-empirical trust score
 
 Outputs land in `outputs/logs/*.json`. Already-cached cells are skipped;
 pass `--recompute` to force a full recompute.
@@ -102,12 +102,12 @@ PYTHONPATH=src python pipeline/07_build_artefacts.py --viewer-only       # inter
 ```
 
 Produces:
-- `outputs/comparison/comprehensive_table.csv` — wide table of all configs
-- `outputs/comparison/per_network_top1.csv` — long form, configs × networks
-- `outputs/comparison/comparison_summary.md` — markdown summary
-- `outputs/figures/13_comprehensive_comparison.png` — 4-panel headline bars
-- `outputs/figures/14_config_x_network_heatmap.png` — full heatmap
-- `outputs/viewer/index.html` — self-contained interactive viewer
+- `outputs/comparison/comprehensive_table.csv`, wide table of all configs
+- `outputs/comparison/per_network_top1.csv`, long form, configs × networks
+- `outputs/comparison/comparison_summary.md`, markdown summary
+- `outputs/figures/13_comprehensive_comparison.png`, 4-panel headline bars
+- `outputs/figures/14_config_x_network_heatmap.png`, full heatmap
+- `outputs/viewer/index.html`, self-contained interactive viewer
 
 ## 8. Multi-source trust map + GUI
 

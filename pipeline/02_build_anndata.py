@@ -58,7 +58,7 @@ def main(species_arg: str) -> None:
             "h5ad_path":        str(CACHE / f"{sp}.h5ad"),
         }
         print(
-            f"[{sp}] done in {elapsed:.1f}s — n_subj={A.uns['n_subjects']} "
+            f"[{sp}] done in {elapsed:.1f}s, n_subj={A.uns['n_subjects']} "
             f"n_nodes={A.uns['n_nodes']} fc_n_obs∈[{n_obs.min()},{n_obs.max()}] "
             f"zero-coverage cells={zero_cov}",
             flush=True,

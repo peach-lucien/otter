@@ -1,7 +1,7 @@
 """HOMER × Margulies 2016 + Huntenburg 2021 principal-gradient validation.
 
 [Margulies et al. 2016, PNAS](https://www.pnas.org/doi/10.1073/pnas.1608282113)
-introduced the principal connectivity gradient — derived by diffusion-map
+introduced the principal connectivity gradient, derived by diffusion-map
 embedding of the resting-state FC matrix, the first non-trivial component
 spans from primary sensorimotor cortex (unimodal end) to default-mode network
 (transmodal end) and is the dominant organisational axis of human cortex.
@@ -63,7 +63,7 @@ def principal_gradient(fc: np.ndarray, *, top_pct: float = 10.0) -> np.ndarray:
 
 
 def route_normalized(mouse_vec: np.ndarray, pi: np.ndarray) -> np.ndarray:
-    """Transport-weighted average — translate a mouse map to human space.
+    """Transport-weighted average, translate a mouse map to human space.
 
     predicted[j] = Σ_i mouse_vec[i]·π[i,j] / Σ_i π[i,j].  Human parcels that
     receive negligible π mass (HOMER's coupling is concentrated) are NaN.
@@ -77,7 +77,7 @@ def route_normalized(mouse_vec: np.ndarray, pi: np.ndarray) -> np.ndarray:
 
 
 def _corr(a: np.ndarray, b: np.ndarray) -> tuple[float, float, int]:
-    """Pearson r, Spearman ρ, n — over entries finite in both."""
+    """Pearson r, Spearman ρ, n, over entries finite in both."""
     m = np.isfinite(a) & np.isfinite(b)
     return (float(pearsonr(a[m], b[m])[0]), float(spearmanr(a[m], b[m])[0]),
             int(m.sum()))

@@ -24,7 +24,7 @@ Both helpers are tolerant of:
   - whitespace-trimmed match
   - case-insensitive match (last resort)
 
-Returning ``None`` on unresolved labels — never raises. Empty-string and
+Returning ``None`` on unresolved labels, never raises. Empty-string and
 None inputs return None.
 """
 from __future__ import annotations
@@ -192,7 +192,7 @@ def dsurqe_label_to_id(name: str | None) -> list[int] | None:
         table = _dsurqe_name_to_labels()
     except FileNotFoundError:
         # If the DSURQE tree isn't available, return None rather than crash.
-        # Callers that genuinely need the resolution can catch the
+        # Callers that need the resolution can catch the
         # FileNotFoundError by calling _load_dsurqe_tree_raw() directly.
         return None
     if s in table:                       return list(table[s])
@@ -211,7 +211,7 @@ def unravel_ns(idx: int | np.ndarray) -> np.ndarray:
     """Convenience: unravel a 0-based linear NS index → (i, j, k) ijk in NS grid.
 
     Returned shape: (3,) if input scalar; (n, 3) if input array. Always
-    int64. Uses Fortran (column-major) order — the convention the parcel
+    int64. Uses Fortran (column-major) order, the convention the parcel
     voxel indices follow.
     """
     from homer.data.io import _NS_SHAPE

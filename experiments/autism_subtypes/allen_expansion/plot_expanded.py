@@ -19,7 +19,7 @@ def main():
     fig = plt.figure(figsize=(15, 9))
     gs = fig.add_gridspec(2, 2, hspace=0.4, wspace=0.3)
     axes = [fig.add_subplot(gs[i // 2, i % 2]) for i in range(4)]
-    fig.suptitle(f"Pagani 2026 Test 3 — expanded {j_diag['n_genes']} genes "
+    fig.suptitle(f"Pagani 2026 Test 3, expanded {j_diag['n_genes']} genes "
                  f"(vs 36 in proof-of-concept)", fontsize=13, y=0.98)
 
     # Panel 1: Bootstrap distribution
@@ -58,7 +58,7 @@ def main():
         ax.text(rs[i] + 0.01, i, f"n={n}", va="center", fontsize=7.5)
     ax.set_xlabel("Pearson r (pathway-spatial Δ vs observed Δ)")
     ax.set_title("Every pathway shows the same direction (no subtype separation)\n"
-                 "— driven by hyper signal being much larger than hypo in Pagani data")
+                 ", driven by hyper signal being much larger than hypo in Pagani data")
 
     # Panel 3: Per-parcel gene-vs-FC translation scatter
     # We don't have the raw vectors in json, just the r. Plot the summary as text.
@@ -67,7 +67,7 @@ def main():
     r_gf_p = j_diag["per_parcel_gene_vs_fc_translation"]["pearson_r"]
     r_gf_s = j_diag["per_parcel_gene_vs_fc_translation"]["spearman_r"]
     lines = [
-        "$\\bf{Diagnostic\\ 1}$ — gene-translation vs FC-translation agreement",
+        "$\\bf{Diagnostic\\ 1}$, gene-translation vs FC-translation agreement",
         "",
         f"  Per-parcel correlation (n=2,094 human parcels):",
         f"    Pearson r  = {r_gf_p:+.3f}",

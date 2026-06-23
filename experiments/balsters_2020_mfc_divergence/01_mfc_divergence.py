@@ -1,12 +1,12 @@
-"""HOMER × Balsters 2020 — rodent medial frontal cortex divergence (falsification test).
+"""HOMER × Balsters 2020, rodent medial frontal cortex divergence (falsification test).
 
-[Balsters, Zerbi, Sallet, Wenderoth & Mars 2020, PNAS](https://doi.org/10.1073/pnas.2003181117)
-— "Divergence of rodent and primate medial frontal cortex functional
-connectivity" — compared whole-brain FC of the medial frontal cortex (MFC)
+[Balsters, Zerbi, Sallet, Wenderoth & Mars 2020, PNAS](https://doi.org/10.1073/pnas.2003181117),
+"Divergence of rodent and primate medial frontal cortex functional
+connectivity", compared whole-brain FC of the medial frontal cortex (MFC)
 across rodent, marmoset and human. Their headline, data-backed claim:
 
   * Rodent MFC does **NOT** correspond to primate **lateral / dorsolateral
-    prefrontal cortex** — contradicting the common proposal that rat MFC is
+    prefrontal cortex**, contradicting the common proposal that rat MFC is
     the functional analogue of primate LFC.
   * Rodent MFC connectivity instead most resembles **premotor** cortex.
 
@@ -14,9 +14,9 @@ This is a *falsification* test, not a confirmation test. It states, with a
 specific direction, where a faithful mouse↔human mapping should and should
 NOT send mouse MFC:
 
-  PASS  — mouse MFC routes to human medial-frontal / cingulate / premotor
+  PASS, mouse MFC routes to human medial-frontal / cingulate / premotor
           cortex, and **avoids** dorsolateral PFC (BA9/46).
-  FAIL  — mouse MFC routes confidently onto human dlPFC.
+  FAIL, mouse MFC routes confidently onto human dlPFC.
 
 HOMER already encodes a falsifiable design choice here: the Garin point
 anchor for mPFC pairs mouse mPFC with human *medial* frontal cortex, and
@@ -25,14 +25,14 @@ Preuss 1995) is shipped as the **opt-in** `lateral_pfc` pack, not in the
 recommended π. Balsters 2020 is independent FC evidence adjudicating that
 choice. We test three couplings:
 
-  * `pi_fc_plus_SC.npy`              — Garin anchors only (strict baseline)
-  * `pi_fc_plus_SC_with_all_packs`  — recommended (no lateral_pfc pack)
-  * `pi_fc_plus_SC_with_lateral_pfc`— adds the contested Prelimbic→dlPFC anchor
+  * `pi_fc_plus_SC.npy`. Garin anchors only (strict baseline)
+  * `pi_fc_plus_SC_with_all_packs`, recommended (no lateral_pfc pack)
+  * `pi_fc_plus_SC_with_lateral_pfc`, adds the contested Prelimbic→dlPFC anchor
 
 Note on species: Balsters used rat + marmoset + human; HOMER is mouse +
 human. Rodent MFC (anterior cingulate + prelimbic + infralimbic) is the
 comparable structure. The test compares HOMER's π against Balsters'
-*published directional conclusion*, not their FC matrices — the rat/mouse
+*published directional conclusion*, not their FC matrices, the rat/mouse
 and marmoset/human mismatches make re-routing their data unjustified.
 """
 from __future__ import annotations
@@ -53,13 +53,13 @@ COUP = ROOT / "outputs" / "coupling"
 N_NULL = 200
 SEED = 42
 
-# Human target ROIs — bilateral MNI spheres (|x|, y, z, radius_mm).
+# Human target ROIs, bilateral MNI spheres (|x|, y, z, radius_mm).
 # dlPFC reuses the lateral_pfc anchor pack's own BA9/46 centroid.
 ROIS = {
-    "dlPFC":         (40, 25, 35, 12),   # BA9/46 — the contested "should NOT"
-    "premotor":      (28,  0, 54, 14),   # BA6 / PMd — Balsters' "instead"
-    "medial_PFC":    ( 7, 34, 22, 16),   # mPFC / pregenual ACC — conventional homologue
-    "mid_cingulate": ( 5,  8, 40, 14),   # mid-cingulate — conventional homologue
+    "dlPFC":         (40, 25, 35, 12),   # BA9/46, the contested "should NOT"
+    "premotor":      (28,  0, 54, 14),   # BA6 / PMd. Balsters' "instead"
+    "medial_PFC":    ( 7, 34, 22, 16),   # mPFC / pregenual ACC, conventional homologue
+    "mid_cingulate": ( 5,  8, 40, 14),   # mid-cingulate, conventional homologue
 }
 # Rodent MFC = the medial frontal wall (Balsters' "rat MFC").
 MFC_ACRONYMS = ["ACAd", "ACAv", "PL", "ILA"]
@@ -92,7 +92,7 @@ def mass_fractions(pi: np.ndarray, rows: np.ndarray,
 
 def main():
     print("=" * 80)
-    print("HOMER × Balsters 2020 — rodent MFC divergence (falsification test)")
+    print("HOMER × Balsters 2020, rodent MFC divergence (falsification test)")
     print("=" * 80)
 
     # ---- human ROIs ---------------------------------------------------------
@@ -173,7 +173,7 @@ def main():
     passed = (null_stats["dlPFC"]["enrichment"] <= 1.5
               and frac["dlPFC"] < 0.10
               and balsters_consistent > frac["dlPFC"])
-    verdict = "PASS — Balsters-consistent" if passed else "FAIL"
+    verdict = "PASS. Balsters-consistent" if passed else "FAIL"
     print(f"\nVERDICT: {verdict}")
     print(f"  mouse MFC → dlPFC = {frac['dlPFC'] * 100:.1f}% "
           f"(enrichment ×{null_stats['dlPFC']['enrichment']:.1f}, not favoured)")

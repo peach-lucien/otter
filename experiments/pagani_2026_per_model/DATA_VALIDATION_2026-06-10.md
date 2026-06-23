@@ -1,8 +1,8 @@
-# Pagani data ingest & validation — 2026-06-10
+# Pagani data ingest & validation, 2026-06-10
 
 Validation of the files Silvia (Gozzi lab) shared, now in `data_crossspecies/pagani/`.
 Goal: confirm the new data is what we think it is, and determine whether it
-unblocks the per-model translation — **before** building on it.
+unblocks the per-model translation, **before** building on it.
 
 This pass went deeper after a first round was (rightly) challenged: I checked the
 full file inventory, all six template/mask NIfTIs, every sheet of MOESM6
@@ -11,12 +11,12 @@ tests. Findings below supersede the first-round note.
 
 ## TL;DR
 
-- **Fig 1c CSV, subtype maps, region masks, templates — all check out.**
-- **Per-model hyper/hypo labels are NOT a gap** — they're fully recoverable from
+- **Fig 1c CSV, subtype maps, region masks, templates, all check out.**
+- **Per-model hyper/hypo labels are NOT a gap**, they're fully recoverable from
   the CSV row order (verified against the paper). The old experiment's prior was
   *inverted*.
 - **The 1,491-feature → voxel mapping cannot be robustly reconstructed** from any
-  delivered or published file. But that mapping is the *wrong thing to chase* —
+  delivered or published file. But that mapping is the *wrong thing to chase*
   see "the real per-model ask" below.
 
 ## What each file is, and whether it's usable
@@ -54,16 +54,16 @@ tests. Findings below supersede the first-round note.
 - **No delivered or published file carries the feature-index → voxel key.** I
   checked: the 6 templates (none = 1,491), and every MOESM6 sheet. `Figure1a` is
   the long-format source (29,821 rows = 1 header + 20×1,491) but holds only
-  `(etiology, value)` pairs — **no coordinate, no voxel index**.
+  `(etiology, value)` pairs, **no coordinate, no voxel index**.
 - Block-downsampling the wo-cerebellum mask lands *near* 1,491 only at arbitrary
-  anisotropic factors (4×2×1 → 1,482; 2×4×1 → 1,507) — neither exact nor
+  anisotropic factors (4×2×1 → 1,482; 2×4×1 → 1,507), neither exact nor
   principled. The retained-voxel set and the column ordering (the matrix is
   *sorted* by the dendrogram, not by voxel index) are unrecoverable.
 
 **Conclusion:** inverting 10,111 → 1,491 is lossy and cannot be done robustly
-from what exists. Crucially, it's also unnecessary (next section).
+from what exists. It is also unnecessary (next section).
 
-## Per-model subtype labels — recovered, not missing
+## Per-model subtype labels, recovered, not missing
 
 The CSV is *sorted* by the clustering, and the split falls exactly on row order:
 
@@ -74,7 +74,7 @@ The CSV is *sorted* by the clustering, and the split falls exactly on row order:
 
 This reproduces the paper's n=9 / n=11 split and every named example
 (hyper: Cdkl5[ko], Fmr1, Chd8, Tsc2, Il6; hypo: En2, Shank3, 22q11.2, 16p11.2,
-Ube3A, Sgsh). **⚠️ The old `01_per_model_clustering.py` prior is inverted** — it
+Ube3A, Sgsh). **⚠️ The old `01_per_model_clustering.py` prior is inverted**, it
 labels Fmr1/Chd8/Tsc2 as *hypo* and 16p11.2/Sgsh/Ube3a as *hyper*; the truth is
 the reverse. That prior must be replaced with this row-order assignment.
 
@@ -82,9 +82,9 @@ the reverse. That prior must be replaced with this row-order assignment.
 
 - **Subtype-level translation: fully unblocked.** We have correct per-model
   hyper/hypo labels *and* the Allen-space occurrence maps. No decode needed.
-- **Per-model voxelwise translation: still needs one specific thing — but it is
+- **Per-model voxelwise translation: still needs one specific thing, but it is
   NOT a "1,491 lookup."** The right object is the **20 per-model
-  weighted-degree-centrality maps as NIfTIs in functional (or Allen) space** —
+  weighted-degree-centrality maps as NIfTIs in functional (or Allen) space**
   the full-resolution Fig 1a/b maps. Those register to HOMER's mouse atlas and
   route through π directly. The lab's pipeline produces these natively, so it's a
   clean ask. Trying to reconstruct them from the 1,491-feature CSV is the wrong

@@ -3,19 +3,19 @@
 Generate per-parcel predicted human spatial patterns for each of 5 psychiatric
 disorders + autism, using HOMER's π applied to each disorder's gene set:
 
-  - Autism (Pagani MOESM4 'subtypes' — hypo + hyper combined)
+  - Autism (Pagani MOESM4 'subtypes', hypo + hyper combined)
   - Bipolar disorder (MOESM5)
   - Schizophrenia (MOESM5)
   - ADHD (MOESM5)
   - Dementia (MOESM5)
-  - Psoriasis (MOESM5 — non-brain control)
+  - Psoriasis (MOESM5, non-brain control)
 
 For each disorder, intersect its gene list with HOMER's 1,713-gene Allen ISH
 panel, compute the mouse-parcel mean expression score, route through π →
 predicted human-parcel score (2094-vec). Save these as `predicted_pattern.npy`
 for Phase 2 comparison against ENIGMA observed disease spatial maps.
 
-Also: compute pairwise cross-disorder correlation matrix at parcel level —
+Also: compute pairwise cross-disorder correlation matrix at parcel level
 this tells us how disorder-specific HOMER's predictions are even before we
 get to ENIGMA. If all disorders predict highly similar patterns, that confirms
 the shared-geometry result we found in the per-network specificity test
@@ -109,7 +109,7 @@ def main():
         cond_idx = [gene_to_idx[g] for g in cond_lower if g in gene_to_idx]
         n_overlap[disorder] = len(cond_idx)
         if len(cond_idx) < 10:
-            print(f"  {disorder:<22s}: {len(cond_idx)} overlap genes — skipped (insufficient)")
+            print(f"  {disorder:<22s}: {len(cond_idx)} overlap genes, skipped (insufficient)")
             continue
         # Mouse-parcel score = mean of z-scored marker genes
         mouse_score = z[:, cond_idx].mean(axis=1)

@@ -2,7 +2,7 @@
 
 This module wraps the 48-permutation + centroid-translation alignment
 produced by ``00c_align_mouse_to_ccf.py``. The main pipeline does NOT use
-it — ``01_mouse_sc.py`` / ``02_mouse_genes.py`` read pre-warped CCFv3 voxel
+it, ``01_mouse_sc.py`` / ``02_mouse_genes.py`` read pre-warped CCFv3 voxel
 indices (``ns_center_ix`` / ``AS_ix``) directly from the mouse ``.mat``
 file, so no coordinate transform is applied there.
 
@@ -64,7 +64,7 @@ def colleague_voxel_to_ccf_world(rsmask_affine: np.ndarray,
     # Out-of-bounds indices are a hard error. This function expects indices
     # into the rsmask 200 µm grid; the pre-warped CCFv3/DSURQE voxel indices
     # carried in the mouse .mat file are on different grids and must NOT be
-    # passed here — use ns_voxel_indices with the NS affine, or
+    # passed here, use ns_voxel_indices with the NS affine, or
     # ss_voxel_indices with the SS affine, instead. (Silently filtering
     # would propagate as a NaN-filled gene matrix downstream.)
     if idx.size > 0 and ((idx < 0).any() or (idx >= grid_size).any()):
@@ -74,7 +74,7 @@ def colleague_voxel_to_ccf_world(rsmask_affine: np.ndarray,
             f"colleague_voxel_to_ccf_world received {n_oob} out-of-bounds "
             f"indices for rsmask grid {rsmask_shape} (size {grid_size}). "
             f"First bad index at position {first_bad}: value {int(idx[first_bad])}. "
-            f"Pre-warped CCFv3/DSURQE voxel indices must not be passed here — use "
+            f"Pre-warped CCFv3/DSURQE voxel indices must not be passed here, use "
             f"ns_voxel_indices with the NS affine, or ss_voxel_indices "
             f"with the SS affine, instead."
         )

@@ -1,6 +1,6 @@
 """OLFACTORY-1: Add Piriform + AON sub-region anchors.
 
-Olfactory cortex is a documented HOMER failure region — Beauchamp gives
+Olfactory cortex is a documented HOMER failure region. Beauchamp gives
 0 % top-1 for "Piriform area → piriform cortex" under the production
 point-anchor π (mean rank 657 / 2094). The Garin pair_id 11 (Olfactory
 cortex) is a single point anchor in the Piriform parcel.
@@ -10,7 +10,7 @@ This experiment adds the two olfactory anchor-pack entries:
   pid 34: Mouse Piriform area ↔ Human Piriform cortex (Mori 2014; Carlén 2017)
   pid 35: Mouse Anterior olfactory nucleus ↔ Human AON (Mori 2014)
 
-Tests three configurations on Beauchamp top-1 with the same honest pattern
+Tests three configurations on Beauchamp top-1 with the same pattern
 as §5.12-§5.13:
 
   1. Production fc_plus_SC point-anchor π          (baseline)

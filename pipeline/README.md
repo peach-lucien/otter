@@ -28,7 +28,7 @@ PYTHONPATH=src python pipeline/08_build_gui.py
 | `02_build_anndata.py` | Build mouse + human AnnData caches | `outputs/anndata/*.h5ad` |
 | `03_build_costs.py` | Precompute all FC + SC + xyz + gene cost matrices | `outputs/anndata/full_costs.npz` |
 | `04_solve_production.py` | Fit production fc_plus_SC point-anchor π | `outputs/coupling/pi_fc_plus_SC.npy` |
-| `05_evaluate.py` | **Orchestrator** — runs the substeps below in order | — |
+| `05_evaluate.py` | **Orchestrator**, runs the substeps below in order | |
 | `05g_compute_trust.py` | Per-parcel multi-source trust map | `outputs/coupling/trust_score_*.npz` |
 | `06_bootstrap.py` | 40-iter subject-level bootstrap stability | `outputs/coupling/bootstrap_*.npz` |
 | `07_build_artefacts.py` | Comparison table + figures + interactive viewer | `outputs/comparison/`, `outputs/figures/`, viewer HTML |
@@ -51,7 +51,7 @@ These are run automatically by `05_evaluate.py`. You can also invoke them indivi
 
 ## Fitting with anchor packs (after running 04_solve_production)
 
-The production fc_plus_SC π uses only the 21 Garin point anchors. To produce the recommended **production-with-packs** π — described in `docs/03_results.md` and `docs/04_anchor_packs.md` — run:
+The production fc_plus_SC π uses only the 21 Garin point anchors. To produce the recommended **production-with-packs** π, described in `docs/03_results.md` and `docs/04_anchor_packs.md`, run:
 
 ```bash
 PYTHONPATH=src python experiments/anchor_packs/compose_all.py

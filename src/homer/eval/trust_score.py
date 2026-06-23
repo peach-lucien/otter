@@ -20,7 +20,7 @@ The composite score is in [0, 1] (higher = more trustworthy).  Three tiers
 (high / medium / low) are assigned by quantile cuts.
 
 Note: "distance to nearest mouse anchor in mm" is deliberately not used as a
-component — it is uninformative because every mouse parcel is within ~4mm of
+component, it is uninformative because every mouse parcel is within ~4mm of
 *some* anchor (the mouse brain is small). Argmax mass concentration is a much
 better signal of model confidence.
 
@@ -123,7 +123,7 @@ def compute_trust_score(
         concentration_norm : (n_m,) ditto, normalised to [0, 1]
         fc_sim        : (n_m,) Pearson r to nearest anchor FC profile
         fc_sim_norm   : (n_m,) ditto, normalized to [0, 1]
-        n_anchors     : int — number of anchors used
+        n_anchors     : int, number of anchors used
     """
     assert sum(weights) > 0, "weights must sum to >0"
     weights = np.array(weights, dtype=np.float64)
@@ -193,17 +193,17 @@ def compute_multisource_trust(
     region-validation) on top of the existing internal ``compute_trust_score``
     composite. Produces a multi-tier classification:
 
-      ``"anchored_and_validated"`` — parcel is in an anchor pack AND its
+      ``"anchored_and_validated"``, parcel is in an anchor pack AND its
         Beauchamp region has top-1 > 0
-      ``"anchored_only"``         — parcel is in an anchor pack but its
+      ``"anchored_only"``, parcel is in an anchor pack but its
         Beauchamp region (if any) is still 0 % or it's outside any
         Beauchamp region
-      ``"validated_only"``        — parcel is in a Beauchamp region with
+      ``"validated_only"``, parcel is in a Beauchamp region with
         top-1 > 0 but is not in any anchor pack
-      ``"structural"``            — parcel has high internal trust
+      ``"structural"``, parcel has high internal trust
         (bootstrap + concentration + FC) but no anchor and no Beauchamp
         validation: pure structural confidence
-      ``"low_evidence"``          — none of the above
+      ``"low_evidence"``, none of the above
 
     Parameters
     ----------
@@ -223,10 +223,10 @@ def compute_multisource_trust(
     Returns
     -------
     dict with all keys from ``compute_trust_score`` plus:
-        garin_anchored   : (n_m,) bool — parcel is one of the 42 Garin anchors
-        pack_anchored    : (n_m,) bool — in any region_anchor entry
-        beauchamp_top1   : (n_m,) float — its Beauchamp pair's top-1 (NaN if N/A)
-        evidence_tier    : (n_m,) of strings (5 tiers — see above)
+        garin_anchored   : (n_m,) bool, parcel is one of the 42 Garin anchors
+        pack_anchored    : (n_m,) bool, in any region_anchor entry
+        beauchamp_top1   : (n_m,) float, its Beauchamp pair's top-1 (NaN if N/A)
+        evidence_tier    : (n_m,) of strings (5 tiers, see above)
     """
     # Start with the internal composite trust score
     base = compute_trust_score(
@@ -294,9 +294,9 @@ def calibrate_trust_against_validation(
 
     Parameters
     ----------
-    trust : (n_m,) — composite trust score
-    tier  : (n_m,) — 'low' / 'medium' / 'high'
-    pi    : (n_m, n_h) — coupling matrix
+    trust : (n_m,), composite trust score
+    tier  : (n_m,), 'low' / 'medium' / 'high'
+    pi    : (n_m, n_h), coupling matrix
     expected_h_indices : {mouse_parcel_idx: set of expected human parcel indices}
         Validation ground truth. Only mouse parcels in this dict are scored.
 
@@ -325,7 +325,7 @@ def regional_empirical_accuracy(
 ) -> dict[str, dict]:
     """Per-region empirical Beauchamp top-1 accuracy for each region.
 
-    This is the honest "trust signal" — for each region, how often does
+    This is the "trust signal", for each region, how often does
     the model's argmax fall in the published-correct human region. A
     parcel's trust is then the accuracy of its region.
 
@@ -376,14 +376,14 @@ def assign_regional_trust(
 
     Parameters
     ----------
-    high_threshold : float — top-1 ≥ this → 'high' tier (default 15%).
-    low_threshold  : float — top-1 < this → 'low' tier (default 3% — about
+    high_threshold : float, top-1 ≥ this → 'high' tier (default 15%).
+    low_threshold  : float, top-1 < this → 'low' tier (default 3%, about
         3× chance for typical region size). Between → 'medium'.
 
     Returns
     -------
-    score : (n_m,) — empirical accuracy of the parcel's region, NaN if unknown.
-    tier  : (n_m,) — 'high' / 'medium' / 'low' / 'unknown'.
+    score : (n_m,), empirical accuracy of the parcel's region, NaN if unknown.
+    tier  : (n_m,), 'high' / 'medium' / 'low' / 'unknown'.
     """
     score = np.full(n_m, np.nan, dtype=np.float64)
     tier = np.full(n_m, "unknown", dtype=object)

@@ -1,9 +1,9 @@
-"""Test 3 — Gene-set spatial-pattern translation through π (proof of concept).
+"""Test 3. Gene-set spatial-pattern translation through π (proof of concept).
 
 Pagani 2026 claim 4: the gene/pathway signature of each FC subtype recurs
 cross-species. They report this as parallel observations (mouse-subtype gene set
 is enriched for synaptic pathways; human-subtype gene set is enriched for the
-same pathways) — without explicitly linking the *spatial* expression patterns
+same pathways), without explicitly linking the *spatial* expression patterns
 through a cross-species mapping. HOMER's π lets us do that explicit linking:
 translate the mouse spatial expression map of the hypo/hyper gene sets through
 π and check whether the predicted human map aligns with the observed human
@@ -68,7 +68,7 @@ def load_pagani_gene_sets() -> tuple[set, set]:
 
 def main():
     print("=" * 80)
-    print("Pagani 2026 Test 3 — gene-set spatial translation through π")
+    print("Pagani 2026 Test 3, gene-set spatial translation through π")
     print("=" * 80)
 
     M, _ = load_cached("mouse", cache_dir="outputs/anndata")

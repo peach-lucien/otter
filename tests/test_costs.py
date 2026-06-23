@@ -68,7 +68,7 @@ def test_gene_correlation_distance():
 
 
 def test_gene_correlation_with_nan_rows():
-    """NaN rows get filled with median distance — no NaNs in output."""
+    """NaN rows get filled with median distance, no NaNs in output."""
     rng = np.random.default_rng(0)
     expr = rng.uniform(0, 10, size=(15, 50))
     expr[2, :] = np.nan        # one all-NaN row

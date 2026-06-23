@@ -6,8 +6,8 @@ This module makes the registry canonical: every consumer imports
 :data:`DEFAULT_PACK_NAMES` / :func:`build_default_pack_entries` from here, so
 the recommended composition can never silently disagree with itself again.
 
-The **recommended model** — ``outputs/coupling/pi_fc_plus_SC_with_all_packs.npy``
-— is composed from every pack flagged ``default=True`` below: **all 15 packs**
+The **recommended model**, ``outputs/coupling/pi_fc_plus_SC_with_all_packs.npy``,
+is composed from every pack flagged ``default=True`` below: **all 15 packs**
 (26 region-anchor entries). A multi-benchmark
 comparison showed that the full set wins the TransBrain literature-homology
 benchmark decisively and ties for best on Beauchamp, while a smaller set only
@@ -15,8 +15,8 @@ ever wins Beauchamp narrowly by exploiting that benchmark's coarse validation
 balls.
 
 Adding or removing a pack from the recommended model is a one-line change here
-(flip ``default``), and every consumer — the compose script, the GUI builder,
-the multi-source trust step — picks it up automatically.
+(flip ``default``), and every consumer, the compose script, the GUI builder,
+the multi-source trust step, picks it up automatically.
 
 NOTE: changing :data:`DEFAULT_PACK_NAMES` changes which packs the recommended
 π is fitted with. After any such change, re-run
@@ -59,7 +59,7 @@ class PackSpec:
         Whether this pack is part of the recommended all-packs composition
         (``pi_fc_plus_SC_with_all_packs.npy``).
     note : str
-        Short rationale — what the pack covers and any metric trade-off.
+        Short rationale, what the pack covers and any metric trade-off.
     """
     name: str
     builder: Callable
@@ -69,11 +69,11 @@ class PackSpec:
 
 # ---------------------------------------------------------------------------
 # The registry. ``default=True`` packs, IN THIS ORDER, are composed into the
-# recommended π. The order is load-bearing: it determines pair_id ordering in
+# recommended π. The order matters here. It determines pair_id ordering in
 # the fit, so keep it stable unless you intend to re-fit.
 #
-# All 15 packs are currently in the recommended composition — see the module
-# docstring for the multi-benchmark rationale. A few carry honest trade-offs
+# All 15 packs are currently in the recommended composition, see the module
+# docstring for the multi-benchmark rationale. A few carry trade-offs
 # (noted below); they are kept because the broader evidence favours inclusion.
 # ---------------------------------------------------------------------------
 PACKS: dict[str, PackSpec] = {
@@ -99,7 +99,7 @@ PACKS: dict[str, PackSpec] = {
     "lateral_pfc": PackSpec(
         "lateral_pfc", build_lateral_pfc_region_anchors, default=True,
         note="OFC only (Wallis 2011). The Prelimbic->dlPFC entry is excluded by "
-             "default — contested (Preuss 1995) and contradicted by the Balsters "
+             "default, contested (Preuss 1995) and contradicted by the Balsters "
              "2020 falsification test; pass include_dlpfc=True for ablations."),
     "striatum": PackSpec(
         "striatum", build_striatum_region_anchors, default=True,
@@ -138,7 +138,7 @@ def build_default_pack_entries(M_var, H_var, *, atlas_root="."):
     """Build the region-anchor entries for the recommended all-packs π.
 
     Concatenates, in registry order, the entries from every pack with
-    ``default=True``. This is exactly the composition fitted into
+    ``default=True``. This is the composition fitted into
     ``outputs/coupling/pi_fc_plus_SC_with_all_packs.npy``.
 
     Parameters

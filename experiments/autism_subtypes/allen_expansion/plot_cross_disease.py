@@ -43,7 +43,7 @@ def main():
     ax.axvline(0, color="black", linewidth=0.5)
     ax.set_title(
         "HOMER cross-species translation produces equal correlation\n"
-        "with the human ASD pattern for ALL brain-disorder gene sets — "
+        "with the human ASD pattern for ALL brain-disorder gene sets, "
         "signal is NOT autism-specific",
         fontsize=11,
     )

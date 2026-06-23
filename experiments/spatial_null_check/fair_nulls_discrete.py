@@ -3,12 +3,12 @@ spatially-fair nulls (audit, after the Margulies spin finding).
 
 Two checks:
   1. Margulies gradient via the fair TRANSLATION null (spin the mouse input,
-     route through the real π) — confirms the gradient is n.s. (~p=0.22).
+     route through the real π), confirms the gradient is n.s. (~p=0.22).
   2. Test 1 network bridge (4/8 diagonal-argmax) via a mouse-parcel SPIN null:
      rotate the mouse parcels (so mouse networks keep their spatial shape but
      move location), re-aggregate π, recount diagonal-argmax. Tests whether the
      SPECIFIC mouse-network→human-network correspondence beats spatially-rotated
-     network assignments — the discrete analogue of a spin test.
+     network assignments, the discrete analogue of a spin test.
 
 Usage:
     PYTHONPATH=src python experiments/spatial_null_check/fair_nulls_discrete.py
@@ -57,17 +57,17 @@ def main():
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
     pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy").astype(np.float64)
 
-    # ---- 1. Margulies gradient — fair translation null ----
+    # ---- 1. Margulies gradient, fair translation null ----
     d = json.loads((ROOT / "outputs/logs/margulies_2016_gradient.json").read_text())
     mouse_g = np.array(d["mouse_gradient"], float)
     human_g = np.array(d["human_gradient"], float)
     mc = M.var[["x", "y", "z"]].to_numpy(float)
     res = translation_spin_null(mouse_g, human_g, pi, mc, n_trials=1000, seed=0)
-    print("1. Margulies gradient — fair TRANSLATION null (spin mouse input, real π):")
+    print("1. Margulies gradient, fair TRANSLATION null (spin mouse input, real π):")
     print(f"   observed |r| = {abs(res['r_observed']):.3f}   null |r| mean {res['null_abs_mean']:.3f} "
           f"(95th {res['null_abs_p95']:.3f})   p = {res['p_translation_spin']:.3f}")
 
-    # ---- 2. Network bridge — mouse-parcel spin null ----
+    # ---- 2. Network bridge, mouse-parcel spin null ----
     mnet, mnames = ncv.assign_mouse_paper_networks(M.var, separate_aud=True)
     hnet, hnames = ncv.assign_human_paper_networks(H.var, separate_aud=True)
     obs = _diag_count(pi, mnet, mnames, hnet, hnames)
@@ -80,7 +80,7 @@ def main():
         _, perm = cKDTree(rot).query(sph)
         null[t] = _diag_count(pi, mnet[perm], mnames, hnet, hnames)
     p = (np.sum(null >= obs) + 1) / (n_trials + 1)
-    print("\n2. Network bridge — mouse-parcel SPIN null (rotate mouse networks):")
+    print("\n2. Network bridge, mouse-parcel SPIN null (rotate mouse networks):")
     print(f"   observed diagonal-argmax = {obs}/8")
     print(f"   spin null: mean {null.mean():.2f}/8, 95th pct {np.percentile(null,95):.0f}/8, max {null.max()}/8")
     print(f"   p (observed >= spin null) = {p:.3f}  → "

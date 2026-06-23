@@ -1,4 +1,4 @@
-"""Phase 2 — Compare HOMER per-disorder predictions to ENIGMA observed maps.
+"""Phase 2. Compare HOMER per-disorder predictions to ENIGMA observed maps.
 
 REQUIRES external data: ENIGMA per-region Cohen's d cortical-thickness effect
 sizes per disorder. Easiest source is the ENIGMA Toolbox repository:
@@ -162,7 +162,7 @@ def main():
         col_d = next((c for c in df.columns
                        if c.lower().startswith("d_") or "cohen" in c.lower()), None)
         if col_d is None:
-            print(f"  {disorder}: no Cohen's d column found — skipping")
+            print(f"  {disorder}: no Cohen's d column found, skipping")
             continue
         # Normalize region names
         d_dict = {}

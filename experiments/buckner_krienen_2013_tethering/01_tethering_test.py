@@ -1,7 +1,7 @@
-"""HOMER × Buckner & Krienen 2013 — the tethering hypothesis (negative control).
+"""HOMER × Buckner & Krienen 2013, the tethering hypothesis (negative control).
 
-[Buckner & Krienen 2013, Trends Cogn Sci](https://doi.org/10.1016/j.tics.2013.09.017)
-— "The evolution of distributed association networks in the human brain" — argue
+[Buckner & Krienen 2013, Trends Cogn Sci](https://doi.org/10.1016/j.tics.2013.09.017),
+"The evolution of distributed association networks in the human brain", argue
 that human association cortex expanded so much it became evolutionarily
 **"untethered"** from the sensory hierarchies and molecular gradients that
 organise primary cortex. Implication for a mouse↔human mapping: there is no
@@ -10,16 +10,16 @@ faithful coupling should be **confident over sensorimotor cortex and sparse /
 unconfident over association cortex**.
 
 This is a negative-control / falsification test: if HOMER's π were uniformly
-confident everywhere — including over association cortex that the field says
-has no clear mouse homologue — that would signal over-fitting.
+confident everywhere, including over association cortex that the field says
+has no clear mouse homologue, that would signal over-fitting.
 
-Test: for every human cortical parcel, measure HOMER's **coverage** — the total
-π mass it receives from the mouse brain (the per-column mass of the coupling) —
+Test: for every human cortical parcel, measure HOMER's **coverage**, the total
+π mass it receives from the mouse brain (the per-column mass of the coupling)
 and ask whether it collapses toward association cortex along the sensorimotor →
 association axis (the HCP T1w/T2w myelin map; high myelin = sensorimotor).
 
 Note: π's per-parcel *entropy* (the diffuseness of a parcel's mouse origin) is
-reported too but is flat — it is the *amount* of coverage, not its diffuseness,
+reported too but is flat, it is the *amount* of coverage, not its diffuseness,
 that carries the tethering signal.
 """
 from __future__ import annotations
@@ -43,7 +43,7 @@ SEED = 42
 
 def main():
     print("=" * 80)
-    print("HOMER × Buckner & Krienen 2013 — tethering-hypothesis negative control")
+    print("HOMER × Buckner & Krienen 2013, tethering-hypothesis negative control")
     print("=" * 80)
 
     pi = np.load(ROOT / PI_FILE)
@@ -71,8 +71,8 @@ def main():
     # ---- correlation with the sensorimotor→association axis ---------------
     rho_cov, p_cov = spearmanr(cov, mye)
     rho_ent, _ = spearmanr(ent, mye)
-    print(f"\n  Spearman ρ — coverage vs myelin axis = {rho_cov:+.3f}  (p = {p_cov:.1e})")
-    print(f"  Spearman ρ — entropy  vs myelin axis = {rho_ent:+.3f}  (flat — see docstring)")
+    print(f"\n  Spearman ρ, coverage vs myelin axis = {rho_cov:+.3f}  (p = {p_cov:.1e})")
+    print(f"  Spearman ρ, entropy  vs myelin axis = {rho_ent:+.3f}  (flat, see docstring)")
 
     # ---- decile curve along the sensorimotor→association axis -------------
     order = np.argsort(mye)               # ascending myelin: association → sensorimotor
@@ -105,7 +105,7 @@ def main():
           f"{np.percentile(np.abs(null), 95):.2f}  →  empirical p = {emp_p:.3f}")
 
     passed = mw.pvalue < 1e-3 and obs_diff > 1.0
-    verdict = ("PASS — HOMER is sparsest over association cortex, "
+    verdict = ("PASS. HOMER is sparsest over association cortex, "
                "consistent with tethering") if passed else "INCONCLUSIVE"
     print(f"\nVERDICT: {verdict}")
 

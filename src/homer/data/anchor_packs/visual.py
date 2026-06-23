@@ -2,14 +2,14 @@
 
 The classic Wang & Burkhalter 2007 (*J Comp Neurol*, 481 cit) cortical map
 of mouse visual areas established that **mouse Lateral Visual area (LM) is
-the homologue of primate V2** — based on retinotopic mapping, V1 input
+the homologue of primate V2**, based on retinotopic mapping, V1 input
 patterns, and laminar organisation. Additional extrastriate areas (AL,
 AM, P, RL, A) are higher-order visual regions whose primate homologues
 are less unambiguous.
 
   pid 52: Mouse Lateral Visual area (LM) ↔ Human V2
 
-We deliberately skip the more debated mappings (AL ↔ V3, AM ↔ V4) — those
+We deliberately skip the more debated mappings (AL ↔ V3, AM ↔ V4), those
 remain reserved at pid 53 for a future extension.
 
 Mouse-side: DSURQE atlas overlay.
@@ -22,7 +22,7 @@ Note on Garin overlap: Garin pid 5 (Visual striate) and pid 6 (Visual
 extra-striate) are existing point anchors. Pid 6's mouse-side point parcel
 is at "Visual extra-striate" region, but the Garin V2 anchor constrains
 ONE specific parcel; the LM region anchor here constrains 9 LM parcels.
-They're compatible — different rows of M get different constraints.
+They're compatible, different rows of M get different constraints.
 
 Reference (verified Consensus search 2026):
   Wang, Q. & Burkhalter, A. (2007). Area map of mouse visual cortex.

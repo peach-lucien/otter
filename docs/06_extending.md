@@ -73,7 +73,7 @@ runs.
 ## Add a new species
 
 Suppose you want to add macaque alongside mouse and human. Most of the codebase
-is species-agnostic — the work is in the data layer.
+is species-agnostic, the work is in the data layer.
 
 ### 1. Update the I/O constants
 
@@ -133,9 +133,9 @@ Then in code:
 from homer.data.region_anchors import parse_region_anchors_config, apply_region_supervision
 
 entries = parse_region_anchors_config("config/my_region.yaml", M.var, H.var)
-# Soft constraint (default 0.15) — gives room for FC/SC structure to push back
+# Soft constraint (default 0.15), gives room for FC/SC structure to push back
 M_cost = apply_region_supervision(M_cost, entries)
-# Hard constraint (legacy 0/1 wall) — use when you want strict enforcement
+# Hard constraint (legacy 0/1 wall), use when you want strict enforcement
 M_cost = apply_region_supervision(M_cost, entries, lam_outside=1.0)
 ```
 
