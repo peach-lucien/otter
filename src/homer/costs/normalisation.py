@@ -8,10 +8,10 @@ def normalise_cost(d: np.ndarray, *, scheme: str = "max") -> np.ndarray:
     """Normalise a cost matrix to [0, 1] for stability across species.
 
     Schemes:
-        "max"    — divide by max off-diagonal value
-        "mean"   — divide by mean off-diagonal value (so mean→1)
-        "median" — divide by median off-diagonal value
-        "none"   — no-op
+        "max", divide by max off-diagonal value
+        "mean", divide by mean off-diagonal value (so mean→1)
+        "median", divide by median off-diagonal value
+        "none", no-op
     """
     if scheme == "none":
         return d

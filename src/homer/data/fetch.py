@@ -6,7 +6,7 @@ repository root) and unpacks it in place. It is used two ways:
 
 * as a CLI, via ``scripts/fetch_data.py`` (a thin wrapper around :func:`main`);
 * as a guard, via :func:`ensure_data`, which library functions call before they
-  read a data file — so a user who forgot to fetch gets a clear prompt (or a
+  read a data file, so a user who forgot to fetch gets a clear prompt (or a
   clear error in non-interactive use) instead of a bare ``FileNotFoundError``.
 
 Set ``HOMER_AUTO_FETCH=1`` to download missing data without prompting.
@@ -115,7 +115,7 @@ def fetch_tier(tier: str, *, root: Path | None = None, force: bool = False) -> N
     manifest = _load_manifest(root)
 
     if _is_present(tier, root) and not force:
-        print(f"[{tier}] already present — skipping (force=True to re-download)")
+        print(f"[{tier}] already present, skipping (force=True to re-download)")
         return
 
     spec = manifest["archives"].get(tier)
@@ -141,7 +141,7 @@ def fetch_tier(tier: str, *, root: Path | None = None, force: bool = False) -> N
             raise DataNotFound(f"  checksum mismatch: expected {expected}, got {got}")
         print("  checksum OK")
     else:
-        print("  (no md5 in manifest — skipping verification)")
+        print("  (no md5 in manifest, skipping verification)")
 
     print("  unpacking at repo root...")
     with tarfile.open(archive, "r:gz") as tar:

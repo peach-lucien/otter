@@ -1,10 +1,10 @@
-# Methods — Cross-species brain region mapping via Fused Gromov–Wasserstein
+# Methods. Cross-species brain region mapping via Fused Gromov–Wasserstein
 
 ## Problem
 
-We have two distinct brain atlases — the **Garin mouse** atlas (1864 nodes
+We have two distinct brain atlases, the **Garin mouse** atlas (1864 nodes
 in CCFv3 voxel space, 105 subjects) and a **human** atlas (2094 nodes in
-MNI152 voxel space, 113 subjects) — and resting-state functional connectivity
+MNI152 voxel space, 113 subjects), and resting-state functional connectivity
 (FC) matrices for each. The 42 **Garin anchors** (21 pair_ids × 2 hemispheres)
 are putative cross-species homologues.
 
@@ -19,7 +19,7 @@ Mapping atlases of different sizes and modalities is a classic OT setup:
 - We have *intrinsic structure* on each side (FC matrix = pairwise relational
   information) but no node-to-node correspondence outside the 42 anchors.
 - We want a probability distribution, not a hard one-to-one map, because
-  cross-species mapping is genuinely uncertain in many regions.
+  cross-species mapping is uncertain in many regions.
 
 **Gromov-Wasserstein** matches *intrinsic distance matrices* (FC-derived costs
 in our case). **Fused** GW adds a cross-species feature cost matrix M
@@ -31,12 +31,12 @@ mouse parcel naturally maps there).
 ## Formulation
 
 Given:
-- `C_m, C_h` — within-species relational cost matrices (here `1 - FC`, optionally
+- `C_m, C_h`, within-species relational cost matrices (here `1 - FC`, optionally
   combined with structural-connectivity costs)
-- `M` — (n_m × n_h) cross-species feature cost (xyz, network mask, optional gene)
-- `p` — fixed mouse marginal `1/n_m`
-- α ∈ [0, 1] — FGW mixing weight (1 = pure relational, 0 = pure feature)
-- ε > 0 — entropic regularisation strength
+- `M`, (n_m × n_h) cross-species feature cost (xyz, network mask, optional gene)
+- `p`, fixed mouse marginal `1/n_m`
+- α ∈ [0, 1]. FGW mixing weight (1 = pure relational, 0 = pure feature)
+- ε > 0, entropic regularisation strength
 
 We solve:
 
@@ -82,7 +82,7 @@ each region anchor with mouse-set `Mset` and human-set `Hset`:
 `lam_outside = 0.15` is the default ("soft region anchor"). Compared to the
 legacy hard variant (`lam_outside = 1.0`), the soft constraint produces
 better-calibrated probability tails (held-out region CV mean rank ↓ 43 %)
-while leaving the trained-π argmax unchanged — see
+while leaving the trained-π argmax unchanged, see
 [iteration log §5.6.0a](archive/iteration_log.md)
 for the sweep. Pass `region_lam_outside=1.0` to recover the hard wall.
 
@@ -99,10 +99,10 @@ M (cross-species). The four model levels in `homer.models`:
 | `HierarchicalFGW`       | per-network FC + SC       | per-network xyz + anchors   | 45% (LONO) but 0.55 within-net FC |
 
 Optional terms (off by default in the production config, available as ablations):
-- `gene_gw_weight` — gene-coexpression-derived within-species GW cost
-- `M_gene_weight` — cross-species cosine cost on ortholog-aligned gene vectors
-- `M_anchor_weight` — cross-species cost on anchor-relationship FC features
-- `network_mask_weight` — cross-network penalty in M
+- `gene_gw_weight`, gene-coexpression-derived within-species GW cost
+- `M_gene_weight`, cross-species cosine cost on ortholog-aligned gene vectors
+- `M_anchor_weight`, cross-species cost on anchor-relationship FC features
+- `network_mask_weight`, cross-network penalty in M
 
 ## Hyperparameters used in production
 
@@ -112,7 +112,7 @@ Optional terms (off by default in the production config, available as ablations)
 | ε                | 5e-3     | Small → mostly-deterministic π. Larger ε softens π but loses anchor-CV accuracy. |
 | `xyz_weight`     | 0.5      | Spatial prior strong enough to disambiguate, not so strong it swamps FC |
 | `lam_anchor`     | 1.0      | Point-anchor forbidden-cell penalty; large vs the [0, 1] cost scale |
-| `region_lam_outside` | 0.15 | Region-anchor outside-region penalty (soft default — see results §5.6.0a) |
+| `region_lam_outside` | 0.15 | Region-anchor outside-region penalty (soft default, see archive/iteration_log.md §5.6.0a) |
 | `fc_weight`      | 0.7      | Production FC + SC mix                                 |
 | `sc_weight`      | 0.3      | Production FC + SC mix                                 |
 | `cost_normalisation` | "max" | Each cost matrix divided by its max off-diagonal entry |
@@ -143,7 +143,7 @@ combination so weighting parameters are interpretable as relative shares.
 ## Why semirelaxed (not balanced)
 
 With balanced FGW, the human marginal is fixed at uniform `1/n_h`, forcing the
-solver to assign positive mass to every human node — including the ~20% of
+solver to assign positive mass to every human node, including the ~20% of
 human parcels that don't have a clear mouse counterpart. This produces a
 "smeared" π with no clean per-mouse-row interpretation.
 
@@ -158,7 +158,7 @@ Three independent metrics, each described in [`docs/03_results.md`](03_results.m
 
 1. **Held-out anchor CV** (binary `top-k`, graded `mean_rank`, `mean_xyz_dist`):
    leave-one-network-out, model gets all anchors except those in the held-out
-   network. Most stringent — held-out anchors have *no* M signal pulling them
+   network. Most stringent, held-out anchors have *no* M signal pulling them
    to the correct partner. 79–81% top-1 in production.
 
 2. **FC translation quality**: anchor-independent. Push mouse FC through π:
@@ -174,11 +174,11 @@ Plus null distributions (random π, permuted anchors) for z-score reporting.
 ## Citations
 
 - Vayer et al. 2019, *Optimal Transport for structured data with application
-  on graphs* — the FGW formulation.
+  on graphs*, the FGW formulation.
 - Sejourne et al. 2021, *Unbalanced Optimal Transport, from Theory to
-  Numerics* — semirelaxed variant.
-- Flamary et al. 2021, *POT: Python Optimal Transport* — the solver library.
-- Garin et al. 2021, *MICCAI* — the 21 cross-species anchor pairs.
-- Cutuli, Schaefer, Domhof 2024 — Domhof human structural connectivity dataset.
-- Knox et al. 2019, *Network Neuroscience* — Allen mouse SC voxel model
+  Numerics*, semirelaxed variant.
+- Flamary et al. 2021, *POT: Python Optimal Transport*, the solver library.
+- Garin et al. 2021, *MICCAI*, the 21 cross-species anchor pairs.
+- Cutuli, Schaefer, Domhof 2024. Domhof human structural connectivity dataset.
+- Knox et al. 2019, *Network Neuroscience*. Allen mouse SC voxel model
   (planned for future M5 work; currently we use Allen *summary structure* SC).

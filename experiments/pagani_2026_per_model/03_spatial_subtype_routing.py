@@ -1,8 +1,8 @@
-"""Direction 1 — parcel-resolution spatial subtype routing through π.
+"""Direction 1, parcel-resolution spatial subtype routing through π.
 
 ⚠️ SUPERSEDED (2026-06-11). This script tests a *continuous-map correlation*
 (route the occurrence maps → predict the human subtype Δ-matrix), which is
-HOMER's WEAK mode — it does not survive a fair spatial null (F-007/F-027), and it
+HOMER's WEAK mode, it does not survive a fair spatial null (F-007/F-027), and it
 does NOT replicate what Pagani actually do. Two problems we found re-reading the
 paper: (1) it aggregates over all 13 conserved regions uniformly, but Pagani use
 only the 5 hypo-prominent / 3 hyper-prominent regions (Methods, Supp Fig 2b); and
@@ -11,10 +11,10 @@ regional global connectivity, threshold ±1 s.d.), not a Δ-matrix correlation.
 → The corrected, Pagani-faithful analysis lives in:
    `04_homer_human_masks.py`            (π-derived human hypo/hyper masks)
    `../autism_subtypes/abide_subtype/05_abide_homer_subtyping.py`  (re-subtype ABIDE)
-This script is kept for provenance / the honest continuous-routing negative result.
+This script is kept for provenance / the continuous-routing negative result.
 
 The earlier subtype translation (Test 2c / 01_per_model_clustering.py) drives the
-mouse side from Pagani's coarse 9-network matrices. Here we use the genuinely
+mouse side from Pagani's coarse 9-network matrices. Here we use the
 spatial **Fig 1d occurrence maps** instead: for each subtype, the per-voxel count
 (0–5) of how many models show a consistent hyper/hypo effect.
 
@@ -65,7 +65,7 @@ _SOURCE_DATA_MSG = (
     "This experiment depends on raw Gozzi-lab Pagani 2026 inputs under\n"
     "  data_crossspecies/pagani/\n"
     "which are third-party source data and are NOT part of the public data\n"
-    "release. It is a maintainer / source-data-only experiment — contact the\n"
+    "release. It is a maintainer / source-data-only experiment, contact the\n"
     "authors for access. See experiments/pagani_2026_per_model/README.md.\n"
 )
 
@@ -141,7 +141,7 @@ def human_aggregator(H):
 
 def main():
     print("=" * 78)
-    print("Direction 1 — parcel-resolution spatial subtype routing (occurrence maps)")
+    print("Direction 1, parcel-resolution spatial subtype routing (occurrence maps)")
     print("=" * 78)
 
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))

@@ -1,8 +1,8 @@
 """Null distributions for held-out anchor CV.
 
 Two principled nulls:
-  - random_pi_null      — sample uniform random π satisfying mouse marginal
-  - permuted_anchor_null — shuffle anchor pair_ids before solving FGW
+  - random_pi_null, sample uniform random π satisfying mouse marginal
+  - permuted_anchor_null, shuffle anchor pair_ids before solving FGW
 
 These give the reference distributions for z-scores on the real top-1.
 Headline numbers from the comparison table:
@@ -228,8 +228,8 @@ def translation_spin_null(
          align beyond spatial autocorrelation?". Spatially fair but ignores π's
          structure in the null.
       B. **Spin the mouse input and route it through the REAL π** (this function)
-         → tests "is it *this specific* mouse spatial pattern — not a rotated one
-         — that, through HOMER's actual coupling, predicts the human map?". This
+         → tests "is it *this specific* mouse spatial pattern, not a rotated one,
+         that, through HOMER's actual coupling, predicts the human map?". This
          keeps both the spatial autocorrelation AND π, breaking only the specific
          mouse→human correspondence. It is the appropriate null for a translation
          claim.

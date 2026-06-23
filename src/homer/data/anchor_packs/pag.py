@@ -5,17 +5,17 @@ involved in pain modulation, autonomic function, and defensive behaviour.
 Its columnar organisation (dorsolateral, lateral, ventrolateral) is
 conserved from rodent through human:
 
-  - Bandler & Shipley 1994 *TINS* — established the columnar functional
+  - Bandler & Shipley 1994 *TINS*, established the columnar functional
     model in rodent.
-  - Ezra et al. 2015, *Human Brain Mapping* — diffusion-MRI-based
+  - Ezra et al. 2015, *Human Brain Mapping*, diffusion-MRI-based
     segmentation of human PAG into 4 columns concordant with the
     rodent model (76 cit).
-  - Kingsbury et al. 2011, *PLOS ONE* — extends the columnar model to
+  - Kingsbury et al. 2011, *PLOS ONE*, extends the columnar model to
     birds, confirming pan-amniote conservation (93 cit).
 
   pid 54: Mouse Periaqueductal gray ↔ Human PAG
 
-Caveat from Ezra 2015 — columnar *structure* is conserved but cortical
+Caveat from Ezra 2015, columnar *structure* is conserved but cortical
 connectivity differs between humans and other mammals. So the gross
 PAG↔PAG anchor is defensible; sub-column splits (dorsolateral vs lateral
 vs ventrolateral) are *not* attempted here. They could be added if a

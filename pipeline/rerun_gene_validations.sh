@@ -47,7 +47,7 @@ Next:
     gene-validation docs are intentionally left in a "pending re-run" holding
     state until these complete; update them from the refreshed logs.
 
-OPTIONAL (separate methodology decision — NOT applied here):
+OPTIONAL (separate methodology decision. NOT applied here):
   The gene validations route mouse->human with the bare un-normalised sum
   `score @ pi`, whereas Margulies/TransBrain use the coverage-normalised
   transport-weighted average. To make routing consistent, divide by the column

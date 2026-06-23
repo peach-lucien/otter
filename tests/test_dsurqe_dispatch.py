@@ -4,12 +4,12 @@ This test locks in the reason ``mouse_parcels_in_dsurqe_region`` resolves
 regions via the live DSURQE atlas volume rather than the parcel table's
 precomputed DSURQE vote labels:
 
-  - The mouse parcel table ships ``region_vote_ss_dsq`` — precomputed
+  - The mouse parcel table ships ``region_vote_ss_dsq``, precomputed
     DSURQE vote labels per parcel.
   - HOMER's anchor packs query ``mouse_parcels_in_dsurqe_region(M, NAME)``
     with names like "Caudoputamen", "Periaqueductal gray", "Lateral
     visual area".
-  - The vote vocabulary uses DIFFERENT NAMES — coarser-grained and with
+  - The vote vocabulary uses DIFFERENT NAMES, coarser-grained and with
     different conventions (e.g. "striatum" instead of "Caudoputamen";
     British "periaqueductal grey" instead of American "Periaqueductal
     gray"; "Secondary visual cortex,lateral area" instead of "Lateral
@@ -62,7 +62,7 @@ def _load_io():
 
 @needs_v2
 def test_paul_vote_vocabulary_smaller_than_pack_query_vocabulary():
-    """Paul's vote vocabulary is coarser than pack queries — they don't align.
+    """Paul's vote vocabulary is coarser than pack queries, they don't align.
 
     Empirically: Paul ships ~114 unique vote strings, the DSURQE tree
     has ~590 named nodes, and the anchor-pack query names include
@@ -80,7 +80,7 @@ def test_paul_vote_vocabulary_smaller_than_pack_query_vocabulary():
         f"v2 baseline was 114 distinct votes."
     )
 
-    # Common anchor-pack query names — none should be in Paul's vote
+    # Common anchor-pack query names, none should be in Paul's vote
     # vocabulary, demonstrating the naming mismatch.
     pack_query_names_that_dont_appear = {
         "Caudoputamen",        # Paul has 'striatum' (parent)

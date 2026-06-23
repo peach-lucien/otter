@@ -8,21 +8,21 @@ packs query against via the Beauchamp 2022 ``DSURQE_tree.json``.
 This module supplies the alignment in three layers, with decreasing
 automated coverage and increasing manual review:
 
-  (A) **Direct tree match** — 23 of the 114 vote strings appear verbatim
+  (A) **Direct tree match**, 23 of the 114 vote strings appear verbatim
       in ``DSURQE_tree.json``. No lookup needed.
 
-  (B) **Beauchamp CSV mapping** — 77 more are bridged via
+  (B) **Beauchamp CSV mapping**, 77 more are bridged via
       ``DSURQE_40micron_R_mapping_long.csv`` (also shipped in the
       Beauchamp 2022 repo). The CSV has columns ``Structure`` (the vote
       naming convention with left/right prefixes) and ``ABI`` (the
       DSURQE_tree.json name). Strip the left/right prefix and look up.
 
-  (C) **Hand-authored bridge** (this file) — 8 votes remain after (A)
+  (C) **Hand-authored bridge** (this file), 8 votes remain after (A)
       and (B). 6 cerebellar entries are out of scope for HOMER's
       parcellation. The 8 entries below are hand-authored from
       neuroanatomical interpretation and checked against the DSURQE atlas.
       Note the cingulate ``24aPrime`` / ``24bPrime`` votes are the distinct
-      midcingulate (MCC) areas ``24a'`` / ``24b'`` — separate regions from
+      midcingulate (MCC) areas ``24a'`` / ``24b'``, separate regions from
       the anterior-cingulate ``24a`` / ``24b``, mapped to their own tree nodes.
 
 These mappings cover ~5 % of the 1864 parcels. The production
@@ -31,22 +31,22 @@ informational; if the dispatch is ever switched to consume these labels
 directly, it should consult this table.
 
 Confidence column conventions:
-    CONFIRMED — checked against the DSURQE atlas.
-    HIGH      — anatomical mapping is unambiguous.
-    MEDIUM    — high prior, worth a second check.
-    LOW       — ambiguous; multiple plausible mappings.
+    CONFIRMED, checked against the DSURQE atlas.
+    HIGH, anatomical mapping is unambiguous.
+    MEDIUM, high prior, worth a second check.
+    LOW, ambiguous; multiple plausible mappings.
 """
 from __future__ import annotations
 
 
-# Hand-authored mappings — Paul's vote string → DSURQE_tree.json node name.
+# Hand-authored mappings. Paul's vote string → DSURQE_tree.json node name.
 #
 # When Paul's vote covers multiple tree nodes (e.g., multiple hippocampal
 # layers all belong to Field CA1), map to the most specific common
 # ancestor in the tree. The CONFIDENCE column flags the level of
 # certainty.
 PAUL_TO_TREE_HAND_MAPPED: dict[str, str] = {
-    # Hippocampal subfield layers — these code the stratum oriens layer
+    # Hippocampal subfield layers, these code the stratum oriens layer
     # within CA1/CA2/CA3. The tree has "Field CAx" at parent level (with
     # a "Field CAx, stratum oriens" leaf beneath). Mapping to the parent
     # field is exactly right because anchor packs query at the "Field CAx"
@@ -57,12 +57,12 @@ PAUL_TO_TREE_HAND_MAPPED: dict[str, str] = {
     "CA3Or":  "Field CA3",   # CA3 stratum oriens
     # NOTE: CA1Rad/CA1Py/CA2Rad/CA3Rad/LMol/MoDG/SLu also appear in
     # Paul's votes. They're already mapped via the CSV but are also
-    # candidates for this table if the CSV lookup ever fails — left
+    # candidates for this table if the CSV lookup ever fails, left
     # commented out for now.
     # "CA1Rad":  "Field CA1",  # CA1 stratum radiatum (via CSV)
     # "CA1Py":   "Field CA1",  # CA1 stratum pyramidale (via CSV)
 
-    # Cingulate "Prime" subdivisions — the 24a' / 24b' variants are the
+    # Cingulate "Prime" subdivisions, the 24a' / 24b' variants are the
     # midcingulate (MCC) areas, distinct regions from the anterior-cingulate
     # 24a/24b in both the DSURQE atlas and the tree; they must not be folded
     # into 24a/24b. The tree carries them as separate nodes
@@ -73,17 +73,17 @@ PAUL_TO_TREE_HAND_MAPPED: dict[str, str] = {
     # Compound accessory-olfactory-bulb layers (glomerular, external
     # plexiform, mitral). Tree groups them under "Accessory olfactory
     # bulb". This compound label is specific to the accessory olfactory
-    # bulb only — it does not include the main bulb — so the AOB parent is
+    # bulb only, it does not include the main bulb, so the AOB parent is
     # the correct target.
     "Accessory olfactory bulb,glomerular,external plexiform and mitral cell layer":
         "Accessory olfactory bulb",
 
-    # "olfactory bulbs" (plural) — the bulb as a whole. Maps to the main
+    # "olfactory bulbs" (plural), the bulb as a whole. Maps to the main
     # olfactory bulb only (the atlas carries several separate OB regions;
     # the accessory bulb is not implied by this label).
     "olfactory bulbs": "Main olfactory bulb",
 
-    # Compound brainstem fibre tract — a single region in the DSURQE atlas
+    # Compound brainstem fibre tract, a single region in the DSURQE atlas
     # (the two named tracts share one label), so the single tree node
     # "medial lemniscus" is the correct target.
     "medial lemniscus,medial longitudinal fasciculus":

@@ -1,7 +1,7 @@
 """Look up atlas labels for each parcel and build region-anchor specs.
 
 Two principled atlases for the human side, both already in
-``data_external/_domhof_extracted/`` (extracted from the Domhof bundle —
+``data_external/_domhof_extracted/`` (extracted from the Domhof bundle
 the same source as our human FC + SC + parcellation):
 
   - **Schaefer-400** (cortical): 400 cortical parcels in 17-network order,
@@ -19,7 +19,7 @@ Beauchamp 2022 repo (see ``pipeline/05f_beauchamp_validation.py``).
 
 Critical: we **only** define region anchors where the atlas gives us
 labels. Regions without atlas coverage (Septum, Striatum, Pallidum,
-Thalamus, Pons, Tectum, etc.) stay as *point* anchors — we don't
+Thalamus, Pons, Tectum, etc.) stay as *point* anchors, we don't
 fabricate ground truth.
 
 Public:
@@ -157,7 +157,7 @@ def build_garin_region_anchors_from_atlases(
     for k, mp in enumerate(idx_m.pos):
         pid = int(idx_m.pair_ids[k])
         hemi = idx_m.hemispheres[k]
-        # Build one region per (pid, hemi) — but skip if we already did this
+        # Build one region per (pid, hemi), but skip if we already did this
         # (we'll do L and R separately and combine in the entry)
         pass
 
@@ -205,7 +205,7 @@ def build_garin_region_anchors_from_atlases(
         anchor_name = M_var.iloc[pair_to_pos_m[pid][0][1]]["region"].lstrip("LR_")
         out.append(RegionAnchorEntry(
             pair_id=pid_offset + pid,
-            label=f"Garin pair_id={pid} ({anchor_name}) — mouse=DSURQE, human={human_atlas_used}",
+            label=f"Garin pair_id={pid} ({anchor_name}), mouse=DSURQE, human={human_atlas_used}",
             mouse_indices=mouse_set,
             human_indices=human_set,
         ))
@@ -228,13 +228,13 @@ def build_garin_region_anchors_from_atlases(
                     print(f"  ⚠ overlap: pid={out[i].pair_id} & {out[j].pair_id} share "
                           f"{len(sh_h)} human parcels (atlas resolution limit)")
     if n_overlap:
-        print(f"  total {n_overlap} pid-pair overlaps — region constraints are ambiguous "
+        print(f"  total {n_overlap} pid-pair overlaps, region constraints are ambiguous "
               f"in those cases (held-out CV will reveal effects)")
     print(f"Built {n_built} region anchors from atlas labels (pid {pid_offset+1}..{pid_offset+max(pair_to_pos_m)}).")
     return out
 
 
 # Curated per-region anchor packs (BICCN motor, Tectum, etc.) live in
-# ``homer.data.anchor_packs.*`` — each pack is a small self-contained module.
+# ``homer.data.anchor_packs.*``, each pack is a small self-contained module.
 # This file keeps only the systematic atlas-derived pack
 # (``build_garin_region_anchors_from_atlases``).

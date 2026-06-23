@@ -2,20 +2,20 @@
 
 Three modules:
 
-  ``homer.viz.viewer``   — the standalone HTML viewer (mouse + human 3D
+  ``homer.viz.viewer``, the standalone HTML viewer (mouse + human 3D
                             scatters with click-to-highlight cross-species
                             partners). Produces a self-contained .html file.
 
-  ``homer.viz.notebook`` — Plotly figures intended for inline display in
+  ``homer.viz.notebook``. Plotly figures intended for inline display in
                             Jupyter notebooks (3D scatter, partner highlight,
                             per-network heatmaps, multi-metric bars).
 
-  ``homer.viz.reports``  — comparison-table generator that pulls all the
+  ``homer.viz.reports``, comparison-table generator that pulls all the
                             ``outputs/logs/*.json`` results and produces a
                             wide CSV / long CSV / markdown summary +
                             comparison figures.
 
-  ``homer.viz.gui``      — region-first static GUI builder for
+  ``homer.viz.gui``, region-first static GUI builder for
                             ``outputs/gui/index.html``.
 
 Public:

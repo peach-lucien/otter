@@ -1,9 +1,9 @@
 # ABIDE per-subject HOMER-template subtype scoring (PAGANI-B)
 
-## Corrected, Pagani-faithful subtyping (05/06) — read this first
+## Corrected, Pagani-faithful subtyping (05/06), read this first
 
 The original script below (`abide_subtype_prediction.py`) scores subjects against a
-continuous Δ = hyper − hypo template — HOMER's *weak* (continuous-map) mode. Two
+continuous Δ = hyper − hypo template. HOMER's *weak* (continuous-map) mode. Two
 newer scripts implement Pagani's *actual* discrete classification and a continuous
 extension, and supersede the framing of the older one:
 
@@ -11,7 +11,7 @@ extension, and supersede the framing of the older one:
   on ABIDE, comparing HOMER-derived masks against name-matched masks head to head.
   **Result (ran 2026):** HOMER masks subtype **21.3%** of ASD, name-matched **22.3%**
   (Pagani report ~25%), with **93% label agreement**. So HOMER does *not* subtype more
-  individuals — it ≈equals the name-matched bridge and thereby **validates** it
+  individuals, it ≈equals the name-matched bridge and thereby **validates** it
   (discrete homology survives; this is HOMER's strong mode). The ~78% unsubtyped is a
   *hard-threshold* bottleneck, not a mapping failure. (NB: our pipeline uses AAL-116,
   not Pagani's Schaefer-400+14, so absolute % isn't directly comparable; the
@@ -25,10 +25,10 @@ extension, and supersede the framing of the older one:
   hard-hyper mean +0.110 > hard-hypo +0.025), but it carries **no diagnostic signal**
   (ASD vs control Mann-Whitney p=0.97) and **no severity dose-response** (axis vs ADOS:
   every subscale |ρ|≤0.11, all n.s.; closest ADOS_SOCIAL ρ=−0.11, p=0.078). This is
-  consistent with HOMER's established dichotomy — discrete correspondence survives,
-  continuous/graded translation does not — and with Pagani themselves never having
+  consistent with HOMER's established dichotomy, discrete correspondence survives,
+  continuous/graded translation does not, and with Pagani themselves never having
   shown a continuous ADOS dose-response. **Caveat (F-015):** the axis inherits π's
-  uneven human coverage (masks lean Subcortical/Salience/DMN), so the honest claim is
+  uneven human coverage (masks lean Subcortical/Salience/DMN), so the claim is
   "no detectable continuous severity signal under the current coupling," not "the
   continuum is flat." Output: `outputs/logs/abide_continuous_subtype.json`.
 
@@ -42,13 +42,13 @@ Pagani 2026's claim 1 is that ASD subjects cluster into hyper- and hypo-connecte
 
 We don't re-implement their clustering. Instead we ask a sharper question that uses HOMER's contribution directly: **does HOMER's translation of mouse subtype patterns produce a feature that distinguishes ASD from controls at the individual level?** And: **does that feature reveal hyper-vs-hypo bimodality within ASD?**
 
-If yes — HOMER's quantitative cross-species translation can serve as an automatic, biologically-grounded subtype classifier for human ASD, replacing the name-based bridge Pagani uses with a structural one.
+If yes. HOMER's quantitative cross-species translation can serve as an automatic, biologically-grounded subtype classifier for human ASD, replacing the name-based bridge Pagani uses with a structural one.
 
 ## Pipeline
 
 1. **Build HOMER human templates.** Translate Pagani's mouse 9×9 hypo and hyper perturbation matrices (ED Fig 1) through π → 2,094-parcel human templates. Take Δ = hyper − hypo as the *subtype-contrast* template.
 
-2. **Fetch ABIDE preprocessed FC.** Via `nilearn.datasets.fetch_abide_pcp` — uses CPAC pipeline, CC400 parcellation, ~1,000 ASD + ~1,100 control subjects across ~24 sites.
+2. **Fetch ABIDE preprocessed FC.** Via `nilearn.datasets.fetch_abide_pcp`, uses CPAC pipeline, CC400 parcellation, ~1,000 ASD + ~1,100 control subjects across ~24 sites.
 
 3. **Map CC400 → HOMER's 2,094 parcels.** Nearest-MNI-centroid (Craddock 2012 atlas, 400-cluster level).
 
@@ -91,8 +91,8 @@ PYTHONPATH=src python ... --abide-data-dir /path/to/big/disk/abide_cache
 
 ## Outputs
 
-- `outputs/logs/autism_subtypes_abide.json` — summary stats (Mann-Whitney p, Cliff's δ, GMM bimodality verdict, n_asd/n_ctrl)
-- `outputs/logs/abide_per_subject_scores.csv` — every subject's HOMER score + phenotype (for downstream plotting / replication)
+- `outputs/logs/autism_subtypes_abide.json`, summary stats (Mann-Whitney p, Cliff's δ, GMM bimodality verdict, n_asd/n_ctrl)
+- `outputs/logs/abide_per_subject_scores.csv`, every subject's HOMER score + phenotype (for downstream plotting / replication)
 
 ## Expected outcome (priors)
 
@@ -100,7 +100,7 @@ If HOMER's translation is biologically meaningful:
 - ASD score mean should differ from control (Mann-Whitney p < 0.05; Cliff's δ ≠ 0).
 - Within-ASD GMM should marginally prefer 2-component fit (BIC verdict).
 
-If neither: HOMER's translation captures cross-species pattern at the network-aggregate level (Test 2c) but not at the subject-resolution noise level — useful information either way for the manuscript.
+If neither: HOMER's translation captures cross-species pattern at the network-aggregate level (Test 2c) but not at the subject-resolution noise level, useful information either way for the manuscript.
 
 ## Caveats
 
@@ -112,4 +112,4 @@ If results look promising (Cliff's δ > 0.1, p < 0.05) the natural next iteratio
 
 ## What HOMER contributes
 
-The HOMER score is **the only feature in this pipeline derived from mouse data**. Every other feature is human-only (ABIDE FC, Craddock parcellation). If HOMER's translation of mouse subtype patterns generates a feature that classifies human ASD vs controls, that's a direct demonstration that the cross-species mouse model literature carries clinically-relevant signal — operationalized through HOMER's π rather than through the name-based bridge Pagani uses.
+The HOMER score is **the only feature in this pipeline derived from mouse data**. Every other feature is human-only (ABIDE FC, Craddock parcellation). If HOMER's translation of mouse subtype patterns generates a feature that classifies human ASD vs controls, that's a direct demonstration that the cross-species mouse model literature carries clinically-relevant signal, operationalized through HOMER's π rather than through the name-based bridge Pagani uses.

@@ -45,14 +45,14 @@ except ImportError:
     pass
 
 # If env-level CA fix isn't enough (very old certifi), allow opting in to
-# skipping SSL verification via env var. This is OPT-IN — the user has to
+# skipping SSL verification via env var. This is OPT-IN, the user has to
 # explicitly set it, never on by default. Must monkey-patch BOTH stdlib ssl
 # (used by urllib) AND requests.Session (used by nilearn), since they have
 # independent SSL configurations.
 if os.environ.get("HOMER_ALLOW_INSECURE_SSL", "").lower() in {"1", "true", "yes"}:
     import ssl
     ssl._create_default_https_context = ssl._create_unverified_context
-    # Patch requests.Session BEFORE nilearn imports — set verify=False as
+    # Patch requests.Session BEFORE nilearn imports, set verify=False as
     # default on every Session instance constructed thereafter.
     import requests
     import urllib3
@@ -68,7 +68,7 @@ if os.environ.get("HOMER_ALLOW_INSECURE_SSL", "").lower() in {"1", "true", "yes"
         kw.setdefault("verify", False)
         return _orig_send(self, request, **kw)
     requests.Session.send = _patched_send
-    warnings.warn("HOMER_ALLOW_INSECURE_SSL is set — SSL verification "
+    warnings.warn("HOMER_ALLOW_INSECURE_SSL is set. SSL verification "
                   "is DISABLED for this run. Re-enable for production use.")
 
 import numpy as np
@@ -113,7 +113,7 @@ def map_cc400_to_homer_parcels(H_var, cc400_centroids):
 
 
 def _phenotypic_field(pheno, name):
-    """Robust phenotype access — handles structured array, DataFrame, or recarray."""
+    """Robust phenotype access, handles structured array, DataFrame, or recarray."""
     if hasattr(pheno, "columns") and name in pheno.columns:
         return pheno[name].values
     if hasattr(pheno, "dtype") and name in pheno.dtype.names:
@@ -221,8 +221,8 @@ def main():
 
     # First pass: discover what column count the timeseries actually have.
     # nilearn 0.13 returns rois as an iterable that yields either:
-    #   - numpy.ndarray (already loaded) — most common
-    #   - str (file path to .1D) — older versions
+    #   - numpy.ndarray (already loaded), most common
+    #   - str (file path to .1D), older versions
     # Handle both.
     from collections import Counter
 
@@ -272,8 +272,8 @@ def main():
               f"centroids ({len(cc_centroids)}); this is unexpected.")
 
     # Compute TWO per-subject features in parallel:
-    #   "abs"    — mean(|FC|) per parcel (weighted degree; loses sign — same for hyper/hypo)
-    #   "signed" — mean(FC) per parcel (signed degree; positive = locally hyperconnected,
+    #   "abs", mean(|FC|) per parcel (weighted degree; loses sign, same for hyper/hypo)
+    #   "signed", mean(FC) per parcel (signed degree; positive = locally hyperconnected,
     #             negative = locally hypoconnected). This is what Pagani's signal lives in.
     # Audit M1: original abs-only feature destroyed the hyper/hypo distinction.
     subject_pat_abs    = np.full((len(rois), n_h), np.nan, dtype=np.float32)

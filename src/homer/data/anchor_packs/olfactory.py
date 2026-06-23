@@ -31,9 +31,9 @@ larger failures. The Garin pair_id 11 (Olfactory cortex) gives a single
 point anchor; sub-region region anchors let HOMER target the bulk of mouse
 piriform → human piriform directly. The AON entry is included because the
 anatomy is clean and both species have a well-defined AON region in our
-atlases — it's a small but cheap supplementary constraint.
+atlases, it's a small but cheap supplementary constraint.
 
-Same honest caveat as the other packs (see docs/results §5.12.2 and §5.13):
+Same caveat as the other packs (see docs/archive/iteration_log.md §5.12.2 and §5.13):
 the mouse Piriform set used here is identical to Beauchamp's validation
 set, so any improvement on the Beauchamp Piriform pair is partly
 tautological. The pack's value is *practical* (HOMER queries for olfactory
@@ -74,7 +74,7 @@ def build_olfactory_region_anchors(
 
     if not (pir_mouse and pir_human and aon_mouse and aon_human):
         raise ValueError(
-            f"empty set for olfactory anchor — check atlas alignment "
+            f"empty set for olfactory anchor, check atlas alignment "
             f"(|pir_m|={len(pir_mouse)}, |pir_h|={len(pir_human)}, "
             f"|aon_m|={len(aon_mouse)}, |aon_h|={len(aon_human)})"
         )

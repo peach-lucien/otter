@@ -6,10 +6,10 @@ dorsal-ventral divide of the striatum" (1198 citations, DOI:
 striatum divide as a **mediolateral functional gradient**:
 
   - **Dorsolateral striatum** (sensorimotor) maps onto primate dorsal/
-    lateral putamen — processes sensorimotor information from motor and
+    lateral putamen, processes sensorimotor information from motor and
     somatosensory cortex.
   - **Ventromedial striatum** (limbic/associative) maps onto primate
-    medial/anterior caudate — processes limbic and prefrontal input.
+    medial/anterior caudate, processes limbic and prefrontal input.
 
 This pack implements that distinction at HOMER's parcel granularity:
 
@@ -30,7 +30,7 @@ existing Caudoputamen → caudate validation covers all 149 CP parcels,
 so the unselected parcels fall back to the Garin pid 13 (Striatum)
 point anchor.
 
-Empirical effect — default pack
+Empirical effect, default pack
 -------------------------------
 The pack was initially considered opt-in (theoretical concern: would the
 medial/lateral split drop the Beauchamp Caudoputamen → caudate metric).
@@ -72,7 +72,7 @@ def build_striatum_region_anchors(
     """
     cp_all = mouse_parcels_in_dsurqe_region(M_var, "Caudoputamen", atlas_root)
     if not cp_all:
-        raise ValueError("mouse Caudoputamen empty — check DSURQE atlas")
+        raise ValueError("mouse Caudoputamen empty, check DSURQE atlas")
 
     # Spatial subdivision: dorsolateral vs ventromedial by (|x|, z) thresholds
     cp_var = M_var.iloc[cp_all]

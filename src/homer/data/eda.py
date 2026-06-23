@@ -1,4 +1,4 @@
-"""Exploratory analysis helpers — streaming-friendly so they fit on the sandbox.
+"""Exploratory analysis helpers, streaming-friendly so they fit on the sandbox.
 
 Lightweight functions used by the EDA notebook + FC-translation evaluation. The
 main job is to compute things over the per-subject FC tensor *without* ever
@@ -85,7 +85,7 @@ def cross_species_anchor_spearman(
     sub_m, pairs_m = anchor_submatrix(fc_m, var_m)
     if pairs_h != pairs_m:
         raise ValueError(
-            f"anchor ordering mismatch — human={pairs_h[:3]} mouse={pairs_m[:3]}"
+            f"anchor ordering mismatch, human={pairs_h[:3]} mouse={pairs_m[:3]}"
         )
     n = sub_h.shape[0]
     iu = np.triu_indices(n, k=1)

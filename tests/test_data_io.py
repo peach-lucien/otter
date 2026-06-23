@@ -1,4 +1,4 @@
-"""Tests for homer.data.io — parse_t_table is the unit testable bit.
+"""Tests for homer.data.io, parse_t_table is the unit testable bit.
 
 Streaming + raw mat73 loading is integration-tested via the real h5ad cache;
 those tests would need ~100 MB external data, so are skipped here.

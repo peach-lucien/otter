@@ -1,4 +1,4 @@
-"""Visualise Test 2c — full per-network-pair matrix translation."""
+"""Visualise Test 2c, full per-network-pair matrix translation."""
 from __future__ import annotations
 
 import json
@@ -16,7 +16,7 @@ def main():
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13, 5))
 
-    # Left: scatter — predicted vs observed per matrix element
+    # Left: scatter, predicted vs observed per matrix element
     # Color by quadrant: agree on sign (green) vs disagree (red); zero-obs are gray
     same_sign = np.sign(pred) == np.sign(obs)
     nonzero = (np.abs(pred) > 1e-6) & (np.abs(obs) > 1e-6)

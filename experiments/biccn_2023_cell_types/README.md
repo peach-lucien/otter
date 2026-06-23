@@ -4,7 +4,7 @@ Tests whether HOMER's π preserves cell-type-defining marker spatial patterns ac
 
 ## Why this experiment
 
-BICCN's atlases establish cross-species conservation of cell types with their defining markers (Pvalb interneurons, Sst interneurons, Vip interneurons, Camk2a glutamatergic neurons, Gfap astrocytes, Th dopaminergic neurons, etc.). This is a parallel test to Hodge 2019 layer-marker validation — but tests *cell-type-defining* markers (mostly area-level distributions) rather than *cortical-layer* markers (within-area structure).
+BICCN's atlases establish cross-species conservation of cell types with their defining markers (Pvalb interneurons, Sst interneurons, Vip interneurons, Camk2a glutamatergic neurons, Gfap astrocytes, Th dopaminergic neurons, etc.). This is a parallel test to Hodge 2019 layer-marker validation, but tests *cell-type-defining* markers (mostly area-level distributions) rather than *cortical-layer* markers (within-area structure).
 
 **Hypothesis**: HOMER should preserve cell-type markers that have area-specific spatial distributions (interneuron class preferences across cortex, glia density variation, subcortical neuromodulator localisation).
 
@@ -66,7 +66,7 @@ Outputs:
 
 See [`notebooks/10_biccn_cell_type_markers.ipynb`](../../notebooks/10_biccn_cell_type_markers.ipynb) for an interactive walkthrough.
 
-## Future work — full BICCN atlas data
+## Future work, full BICCN atlas data
 
 This test uses HOMER's curated 61-gene panel + AHBA microarray as proxies for cell types. A full integration would:
 1. Pull Yao 2023's per-CCFv3-region cell-type abundance tables (~5,000 cell types × ~700 regions, tens of GB)
@@ -74,23 +74,23 @@ This test uses HOMER's curated 61-gene panel + AHBA microarray as proxies for ce
 3. Map both to HOMER's parcellations via centroid alignment
 4. Test cross-species correlations for actual transcriptomically-defined cell types, not gene-marker proxies
 
-This would extend from ~25 cell-type-marker proxies to thousands of actual cell types — closer to BICCN's intended use case. Tractable but a multi-day data engineering project.
+This would extend from ~25 cell-type-marker proxies to thousands of actual cell types, closer to BICCN's intended use case. Tractable but a multi-day data engineering project.
 
-## Contrast reframe (2026-06-19) — `03_contrast_reframe.py`
+## Contrast reframe (2026-06-19), `03_contrast_reframe.py`
 
 Per-gene smooth-map correlations are weak (mean r=0.089) and share cortical spatial
 autocorrelation. Testing cell-CLASS contrasts instead (magnitude-cancelling, like the
 Pagani contrast), against the fair translation-spin null:
 - **Excitatory − inhibitory** (Glut − interneuron): r=+0.262, **spin p=0.001 → SURVIVES.**
-- Neuronal − glial: r=+0.049, spin p=0.58 (n.s.) — glia aren't network-organised.
+- Neuronal − glial: r=+0.049, spin p=0.58 (n.s.), glia aren't network-organised.
 - Dopaminergic subcortical hotspot: top-decile overlap 17/124, hypergeometric p=0.10
   (marginal); full-map spin n.s.
 
 **The E/I axis is a genuine specific cross-species result** that the per-marker test
-missed — HOMER preserves where excitatory vs inhibitory neurons dominate, beyond
+missed. HOMER preserves where excitatory vs inhibitory neurons dominate, beyond
 spatial smoothness. Log: `outputs/logs/biccn_contrast_reframe.json`.
 
 A higher-resolution upgrade (real per-region cell-type *abundance* from Yao 2023 +
-Siletti 2023, not marker proxies) is scaffolded in `04_abundance_composition.py` —
+Siletti 2023, not marker proxies) is scaffolded in `04_abundance_composition.py`
 needs the two cell atlases + `abc_atlas_access`/`cellxgene-census`, so run locally
 (not feasible in the disk-limited sandbox).

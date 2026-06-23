@@ -1,4 +1,4 @@
-"""UnsupervisedGW — plain entropic GW on FC alone.
+"""UnsupervisedGW, plain entropic GW on FC alone.
 
 The simplest possible model: no anchor supervision, no spatial prior, no SC.
 Just Gromov-Wasserstein matching of the two species' FC distance matrices.

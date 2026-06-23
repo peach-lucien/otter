@@ -1,12 +1,12 @@
-"""Per-region xyz ablation (TOPO-1) — honest report.
+"""Per-region xyz ablation (TOPO-1) report.
 
 Tests whether the failure of motor/tectum/piriform under production
-(documented in docs/diagnostics.md as spatial-topology inversion) can be
+(documented in docs/archive/diagnostics.md as spatial-topology inversion) can be
 fixed by zeroing the xyz cost for parcels in those regions.
 
 Two configurations are fit and compared against production:
-  1. ``xyz=0 globally``           — xyz cost removed entirely
-  2. ``xyz=0 per-region``         — xyz removed only for parcels nearest
+  1. ``xyz=0 globally``, xyz cost removed entirely
+  2. ``xyz=0 per-region``, xyz removed only for parcels nearest
                                      pair_ids {2 (Motor), 11 (Piriform),
                                      21 (Tectum)}
 
@@ -18,7 +18,7 @@ beauchamp_validation_per_region_xyz_v2.json):
       NAc (-8pp), ACG (-4pp); helps Piriform (+13pp), Tectum/SC (+6pp),
       Motor (+4pp). Net: xyz overall *helps* more than it hurts.
   - **Per-region xyz=0** targeting {Motor, Piriform, Tectum} does *not*
-      reproduce the global effect — those regions stay at 0% top-1.
+      reproduce the global effect, those regions stay at 0% top-1.
       The xyz contribution interacts non-locally via the FGW equilibrium,
       so per-row weighting cannot replicate a global xyz change.
 
@@ -51,7 +51,7 @@ LOG  = ROOT / "outputs" / "logs"
 LOG.mkdir(parents=True, exist_ok=True)
 
 
-# Topology-inversion candidates from docs/diagnostics.md
+# Topology-inversion candidates from docs/archive/diagnostics.md
 XYZ_OFF_PAIR_IDS = {2, 11, 21}    # Motor, Piriform/Olfactory, Tectum
 KEY_PAIRS = [
     ('Hyp',  'Hypothalamus -> hypothalamus'),
@@ -140,7 +140,7 @@ def main():
               f"g={gd:+4.0f}  r={rd:+4.0f}{targ}")
 
     print(f"\n{'-'*75}")
-    print("Conclusion (see docs/results.md §5.11):")
+    print("Conclusion (see docs/archive/iteration_log.md §5.11):")
     print("  - Global xyz=0 is mixed (net negative); xyz helps most regions overall.")
     print("  - Per-region xyz=0 targeting topology-inversion candidates does NOT")
     print("    reproduce the (modest) global gains on those regions. The xyz effect")

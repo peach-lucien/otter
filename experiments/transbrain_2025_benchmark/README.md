@@ -1,53 +1,53 @@
-# TransBrain 2025 — sibling-method benchmark
+# TransBrain 2025, sibling-method benchmark
 
-An honest **methods-landscape** comparison — not a validation "pass". It
+A **methods-landscape** comparison, not a validation "pass". It
 positions HOMER against the current state-of-the-art mouse↔human translator.
 
 ## Why this experiment
 
-[Huang et al. 2025, Nature Methods](https://doi.org/10.1038/s41592-025-02961-3)
-— [TransBrain](https://github.com/ibpshangzheng/transbrain) — is a published
+[Huang et al. 2025, Nature Methods](https://doi.org/10.1038/s41592-025-02961-3),
+[TransBrain](https://github.com/ibpshangzheng/transbrain), is a published
 mouse↔human phenotype-translation framework, a direct sibling of HOMER. It
 works at **region level** (68-region mouse atlas; Brainnetome / DK / AAL human
 atlases) via graph embeddings + dual regression, where HOMER produces a soft
 parcel-level coupling π via Fused Gromov-Wasserstein optimal transport. Two
-methods, different principles — this experiment asks how they compare.
+methods, different principles, this experiment asks how they compare.
 
 ## Result
 
 `outputs/figures/transbrain_2025_benchmark.png`, 3 panels.
 
-**Part A — Homology benchmark.** TransBrain ships a literature-curated set of
+**Part A. Homology benchmark.** TransBrain ships a literature-curated set of
 classic mouse↔human homologous region pairs (`homo_cortex.csv`,
-`homo_subcortex.csv`) — a benchmark HOMER has never seen, independent of the
+`homo_subcortex.csv`), a benchmark HOMER has never seen, independent of the
 Garin anchors and the Beauchamp set. Routing HOMER's π for the 17 scorable
 cortical mouse regions: the literature-homolog Brainnetome region lands in
 HOMER's **top-3 41 %** of the time (permuted-π null 4 %, p < 0.001) and top-5
-47 % — modest on a fine 127-region atlas. The resolution-fair metric is
+47 %, modest on a fine 127-region atlas. The resolution-fair metric is
 clearer: HOMER's predicted human centroid sits **25.3 mm** from the literature
 homolog vs **39.8 mm** for the null (p < 0.001). HOMER places mouse regions in
-the right neighbourhood — and 25.3 mm is squarely within its own stated
-~25–45 mm resolution — but does not pinpoint the exact Brainnetome parcel. The
+the right neighbourhood, and 25.3 mm is squarely within its own stated
+~25–45 mm resolution, but does not pinpoint the exact Brainnetome parcel. The
 7-region subcortical benchmark comes out at chance.
 
-**Part B — Head-to-head.** The same mouse phenotype translated by both methods,
+**Part B. Head-to-head.** The same mouse phenotype translated by both methods,
 compared at Brainnetome-region level:
 
 | Phenotype | HOMER vs human | TransBrain vs human | HOMER ↔ TransBrain |
 |---|---:|---:|---:|
 | resting-fMRI gradient | \|r\| = 0.393 | \|r\| = 0.463 | \|r\| = 0.23 |
-| Magel2 autism pattern | — | — | r = 0.10 (maps); 0.05 (risk scores) |
+| Magel2 autism pattern | | | r = 0.10 (maps); 0.05 (risk scores) |
 
 On the smooth gradient both methods recover the human reference, with
-TransBrain — a tool purpose-built for region-level phenotype translation —
+TransBrain, a tool purpose-built for region-level phenotype translation
 scoring higher. On the noisy Magel2 autism mutation pattern the two methods
 diverge. The per-individual ASD risk-score workflow (TransBrain's own case 3,
 reproduced) gives near-zero concordance: the autism phenotype is noisy for
 both methods.
 
-**Honest read.** HOMER and TransBrain are genuinely different tools that agree
+**Assessment.** HOMER and TransBrain are different tools that agree
 only moderately (\|r\| ≈ 0.2–0.3). TransBrain is stronger for region-level
-phenotype translation — its home turf. HOMER's complementary contribution is a
+phenotype translation, its home turf. HOMER's complementary contribution is a
 *soft, parcel-level* coupling with per-parcel trust tiers and explicit anchor
 supervision. This experiment is best read as positioning, not a contest.
 
@@ -57,22 +57,22 @@ Four follow-ups (`03_transbrain_advanced.py`, figure `transbrain_2025_advanced.p
 dig past the average.
 
 **Bidirectional cycle-consistency.** Round-tripping a phenotype
-mouse→human→mouse — an even-handed, ground-truth-free metric with no home-turf
-advantage — HOMER recovers the original at **r ≈ 0.98** across all three test
+mouse→human→mouse, an even-handed, ground-truth-free metric with no home-turf
+advantage. HOMER recovers the original at **r ≈ 0.98** across all three test
 phenotypes (gradient, optogenetic circuit, autism pattern) versus **0.81–0.91**
 for TransBrain. HOMER's soft optimal-transport coupling is more internally
-coherent in both directions — a genuine HOMER strength.
+coherent in both directions, a genuine HOMER strength.
 
 **Optogenetic circuit → human cognition.** Reproducing TransBrain's Case 2: a
 mouse anterior-insula optogenetic circuit routed through π and decoded against
 114 Neurosynth cognitive-term maps. HOMER's top terms emphasise language /
-cognitive-control; TransBrain's emphasise interoception / reward — both genuine
+cognitive-control; TransBrain's emphasise interoception / reward, both genuine
 insula functions, overlapping 2/10.
 
-**Trust-stratified agreement — an honest negative.** HOMER↔TransBrain agreement
+**Trust-stratified agreement, a negative result.** HOMER↔TransBrain agreement
 does *not* track HOMER's trust tiers (r ≈ 0, flat across all five). HOMER's
 trust map reflects its own anchor/validation evidence, not inter-method
-consensus — so the methods' disagreement is not explained by HOMER's confidence.
+consensus, so the methods' disagreement is not explained by HOMER's confidence.
 
 **Consensus / disagreement map.** Mouse regions ranked by HOMER↔TransBrain
 top-region distance flag which homologies the two methods concur on versus
@@ -91,10 +91,10 @@ NIfTI files not bundled in the TransBrain repo.
 
 1. Build a HOMER-parcel → Brainnetome-region map by sampling TransBrain's BN
    atlas at each HOMER human parcel's MNI centroid (3×3×3 fallback).
-2. Part A — for each benchmarked mouse region, route π and rank BN regions by
+2. Part A, for each benchmarked mouse region, route π and rank BN regions by
    received mass; also measure the predicted-centroid distance to the
    literature homolog. Permuted-π null (200 trials).
-3. Part B — translate the mouse principal gradient and the Magel2 mutation
+3. Part B, translate the mouse principal gradient and the Magel2 mutation
    pattern with both methods; compare at BN-region level.
 
 ## Files

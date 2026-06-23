@@ -7,7 +7,7 @@ working memory, executive control).
   pid 45: Mouse Orbital area lateral ↔ Human OFC BA11/47 (Wallis 2012)
   pid 46: Mouse Prelimbic ↔ Human dlPFC BA9/46 (Carlén 2017; *contested*)
 
-dlPFC homology is opt-in — see docs/04_anchor_packs.md for the
+dlPFC homology is opt-in, see docs/04_anchor_packs.md for the
 Preuss 1995 vs Carlén 2017 debate. The script fits with both anchors
 together but logs them separately so a user can drop the dlPFC entry
 if they reject the homology.
@@ -71,13 +71,13 @@ def main():
         src.rename(dst)
     print(f"Saved {dst}")
 
-    # No Beauchamp pair for OFC or dlPFC — confirm zero off-target side effect
+    # No Beauchamp pair for OFC or dlPFC, confirm zero off-target side effect
     d_pfc = json.loads(dst.read_text())
     subprocess.run(["python", str(ROOT / "pipeline" / "05f_beauchamp_validation.py"),
                      "--pi-file", "pi_fc_plus_SC.npy"], env=env, check=True, capture_output=True)
     d_prod = json.loads((LOG / "beauchamp_validation.json").read_text())
 
-    print("\nOff-target check (no direct gain expected — no OFC/dlPFC in Beauchamp):")
+    print("\nOff-target check (no direct gain expected, no OFC/dlPFC in Beauchamp):")
     for short, name in [
         ('Mot', 'Primary motor area -> precentral gyrus'),
         ('ACG', 'Anterior cingulate area -> cingulate gyrus'),

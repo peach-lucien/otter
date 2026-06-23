@@ -107,7 +107,7 @@ def build_M_full(M_xyz, idx_m, idx_h, *, lam=1.0, xyz_w=0.5):
 
 def solve_one(seed: int, idx_m, idx_h, M_xyz_norm, Cm_SC, Ch_SC,
               cfg: dict) -> np.ndarray:
-    """One bootstrap iter — uses production FC + SC if cfg['use_sc'] else FC only."""
+    """One bootstrap iter, uses production FC + SC if cfg['use_sc'] else FC only."""
     rng = np.random.default_rng(seed)
     n_h_subj = 113; n_m_subj = 105
     h_idx = rng.choice(n_h_subj, size=n_h_subj, replace=True)
@@ -194,7 +194,7 @@ def main(args):
             "argmax_row_frac_above_0.8":   float((per_row_stability > 0.8).mean()),
             "argmax_row_frac_above_0.5":   float((per_row_stability > 0.5).mean()),
             "argmax_row_frac_perfect":     float((per_row_stability == 1.0).mean()),
-            # Per-cell stability (the previous "mean stability" definition, re-computed honestly)
+            # Per-cell stability (the previous "mean stability" definition, re-computed)
             "cell_stability_mean":         float(cell_stability.mean()),
             "cell_stability_median":       float(np.median(cell_stability)),
             "cell_frac_stable_above_0.8":  float((cell_stability > 0.8).mean()),

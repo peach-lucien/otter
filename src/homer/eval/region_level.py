@@ -89,7 +89,7 @@ def aggregate_pi_over_mouse_region(
     pi_M = pi_sub.sum(axis=0)
     total = pi_M.sum()
     if total <= 0:
-        raise ValueError("pi_M total mass is non-positive — degenerate region")
+        raise ValueError("pi_M total mass is non-positive, degenerate region")
     return pi_M / total
 
 
@@ -124,7 +124,7 @@ def rank_candidate_regions(
     if true_region not in scores:
         raise KeyError(f"true_region {true_region!r} not in candidate set")
     s_true = scores[true_region]
-    # "<" not "<=" — ties favour the true region (conservative against false hits;
+    # "<" not "<=", ties favour the true region (conservative against false hits;
     # if two regions tie, we still consider the truth to be at the better rank)
     n_strictly_better = sum(1 for n, s in scores.items() if n != true_region and s > s_true)
     return n_strictly_better + 1
@@ -174,7 +174,7 @@ def region_topk(
     Also reports ``total_mass_in_candidates``: how much of the model's
     aggregated π over the mouse region lands inside *any* candidate
     region. If this is small (say < 0.2), the candidate set is too sparse
-    for region-level evaluation to be reliable — the model is putting
+    for region-level evaluation to be reliable, the model is putting
     mass on parcels outside the candidate vocabulary.
     """
     pi_M = aggregate_pi_over_mouse_region(pi, mouse_mask)
@@ -221,14 +221,14 @@ def evaluate_region_level(
     Parameters
     ----------
     pi : (n_m, n_h) ndarray
-    pairs : list of (mouse_name, human_name) — the canonical homologue pairs
+    pairs : list of (mouse_name, human_name), the canonical homologue pairs
     mouse_masks : {mouse_name: (n_m,) bool ndarray}
     candidate_masks : {candidate_human_name: (n_h,) bool ndarray}
         Must include every ``human_name`` in ``pairs`` plus any other
         candidates we want to rank against. Larger candidate sets make the
         task harder (chance top-1 ≈ 1/|candidate set|).
     k_list : K values to report (top-1, top-3, top-5, ...).
-    anchor_overlap : optional {mouse_name: bool} — whether this pair overlaps
+    anchor_overlap : optional {mouse_name: bool}, whether this pair overlaps
         with our anchor supervision (for the anchor-vs-novel breakdown).
 
     Returns
@@ -387,7 +387,7 @@ def column_permuted_null(
     re-score the candidate regions, re-rank. Report null mean / std of
     top-K hit rate and fold enrichment.
 
-    This null preserves total mass but destroys *where* mass falls — so it
+    This null preserves total mass but destroys *where* mass falls, so it
     tells you the chance of the model's mass-magnitude landing in a region
     of that size by accident.
     """
@@ -452,7 +452,7 @@ def source_permuted_null(
     For each trial, shuffle the (mouse_name -> human_name) mapping. Tests
     whether the mass-on-H_true is specific to the matching M_true, vs being
     a generic model bias toward H_true that any mouse region would also
-    produce. The stronger of the two nulls — it requires the model to be
+    produce. The stronger of the two nulls, it requires the model to be
     *selective*, not just non-uniform.
     """
     rng = rng or np.random.default_rng(0)
@@ -483,7 +483,7 @@ def source_permuted_null(
         per_pair_weights = []
         for i, (m_true, h_true) in enumerate(valid_pairs):
             # Use pi_M from a *permuted* mouse region but score against the
-            # original h_true. If perm[i] == i it's the real pairing — accept
+            # original h_true. If perm[i] == i it's the real pairing, accept
             # it (this is bounded by the # fixed points which is small for
             # large permutations).
             m_other = m_names[perm[i]]

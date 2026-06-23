@@ -11,7 +11,7 @@ Tests whether HOMER's π preserves cortical-layer-marker spatial patterns across
 - **FEZF2** → infragranular L5
 - **TBR1, FOXP2** → deep layers (L6)
 
-This is a Beauchamp-independent test — Hodge's data comes from Allen ISH (mouse) and AHBA microarray (human), which are different platforms from Beauchamp 2022's transcriptomic-similarity dataset. Agreement here is genuinely independent evidence.
+This is a Beauchamp-independent test. Hodge's data comes from Allen ISH (mouse) and AHBA microarray (human), which are different platforms from Beauchamp 2022's transcriptomic-similarity dataset. Agreement here is independent evidence.
 
 ## Result
 
@@ -19,7 +19,7 @@ Six of the seven layer markers translate at parcel resolution. The three upper-l
 
 ## What this means
 
-The Schaefer-400 parcellation does not separate layers within an area — each mouse parcel mixes the cortical layers — so this test measures the area-level spatial distribution of the layer-marker genes, not within-area lamination. At that level six of seven markers carry cross-species signal that π routes, at a strength (mean +0.119) comparable to the BICCN cell-type markers and below the region-level tests (~0.4). It does not show that HOMER resolves laminar geometry; the parcellation has no information at that scale.
+The Schaefer-400 parcellation does not separate layers within an area, each mouse parcel mixes the cortical layers, so this test measures the area-level spatial distribution of the layer-marker genes, not within-area lamination. At that level six of seven markers carry cross-species signal that π routes, at a strength (mean +0.119) comparable to the BICCN cell-type markers and below the region-level tests (~0.4). It does not show that HOMER resolves laminar geometry; the parcellation has no information at that scale.
 
 ## Files
 
@@ -47,10 +47,10 @@ Outputs:
 
 See [`notebooks/06_hodge_2019_layer_markers.ipynb`](../../notebooks/06_hodge_2019_layer_markers.ipynb) for an interactive walkthrough of the analysis.
 
-## Areal-type reframe (2026-06-19) — `03_areal_type_reframe.py`
+## Areal-type reframe (2026-06-19), `03_areal_type_reframe.py`
 
 Schaefer-400 can't resolve layers, so a laminar test is impossible by construction.
-We recast it as the question it *can* answer — does π preserve cortical AREAL TYPE
+We recast it as the question it *can* answer, does π preserve cortical AREAL TYPE
 (the supragranular↔infragranular / eulaminate↔agranular axis)? Cortex-only, fair
 spin null:
 - supragranular − infragranular: r=−0.02, spin p=0.71 (n.s.)
@@ -58,8 +58,8 @@ spin null:
 - supragranular − granular: r=−0.04, spin p=0.52 (n.s.)
 
 So the layer-marker *gene* contrasts do not recover areal type through π. The
-cytoarchitectural axis DOES survive when measured **structurally** — that is the
+cytoarchitectural axis DOES survive when measured **structurally**, that is the
 Fulcher 2019 T1w:T2w + Goulas-type result (spin p=0.021/0.010). Conclusion: Hodge is
-genuinely capped (laminar impossible at this parcellation, gene-contrast areal-type
-n.s.); cite Fulcher for cross-species cytoarchitecture, and keep Hodge as an honest
+capped (laminar impossible at this parcellation, gene-contrast areal-type
+n.s.); cite Fulcher for cross-species cytoarchitecture, and keep Hodge as an
 area-level-only result. Log: `outputs/logs/hodge_areal_type_reframe.json`.

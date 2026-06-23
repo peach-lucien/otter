@@ -12,7 +12,7 @@ Why region anchors:
     preprocessing does) loses the within-region structure: every
     sub-parcel of motor cortex is forced to map to a single human anchor
     that's the centroid of motor + premotor + FEF + ... ~14mm anterior of
-    canonical M1 (see `docs/diagnostics.md`).
+    canonical M1 (see `docs/archive/diagnostics.md`).
   - With a region anchor instead, each mouse motor sub-parcel is free to
     map to any human precentral parcel, letting the FC/SC structure pick
     the right one within the supervised set.
@@ -25,7 +25,7 @@ Cost-matrix encoding (in cross-species M), conflict-aware across all entries:
       M[mp, hp] = lam_outside   if supervised but incompatible
       M[mp, hp] = unchanged     if unsupervised, or point-anchor-protected
     A mouse parcel in several entries is allowed to map to the *union* of
-    their human sets — the application is order-independent.
+    their human sets, the application is order-independent.
 
 Usage::
 
@@ -183,7 +183,7 @@ def apply_region_supervision(
     entries before anything is written, so the result is *order-independent*.
     A mouse parcel appearing in several entries is allowed to map to the
     *union* of those entries' human sets (and symmetrically for human
-    parcels) — earlier work applied entries sequentially, which let a later
+    parcels), earlier work applied entries sequentially, which let a later
     overlapping entry overwrite an earlier one's allowed (0-cost) cells.
 
     Modifies a copy and returns it.
@@ -199,11 +199,11 @@ def apply_region_supervision(
         with the original hard behaviour).
     lam_outside : float, default 0.15
         Cost assigned to a supervised-but-incompatible cell. The *soft* 0.15
-        default gives better-calibrated π distributions (see docs/results).
+        default gives better-calibrated π distributions (see docs/03_results.md).
     beta_in : float, default 0.0
         Cost assigned to a compatible (allowed) mouse-human pair.
     protect : (n_m, n_h) bool ndarray, optional
-        Cells that must never be raised to ``lam_outside`` — typically the
+        Cells that must never be raised to ``lam_outside``, typically the
         point-anchor "allowed" cells, so region anchors layered on top of
         point-anchor supervision do not clobber it.
 

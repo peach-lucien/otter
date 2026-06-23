@@ -1,27 +1,27 @@
-"""HOMER × TransBrain 2025 — benchmark against a sibling method.
+"""HOMER × TransBrain 2025, benchmark against a sibling method.
 
-[Huang et al. 2025, Nature Methods](https://doi.org/10.1038/s41592-025-02961-3)
-— "TransBrain: a computational framework for translating brain-wide
-phenotypes between humans and mice" — is a published mouse↔human phenotype-
+[Huang et al. 2025, Nature Methods](https://doi.org/10.1038/s41592-025-02961-3),
+"TransBrain: a computational framework for translating brain-wide
+phenotypes between humans and mice", is a published mouse↔human phenotype-
 translation framework, a direct sibling/competitor to HOMER. It works at
 region level (68-region mouse atlas; Brainnetome / DK / AAL human atlases)
 via graph embeddings + dual regression.
 
-This is an honest **methods-landscape** comparison, not a validation "pass".
+This is a **methods-landscape** comparison, not a validation "pass".
 
-**Part A — Homology benchmark.** TransBrain validated its mapping against a
+**Part A. Homology benchmark.** TransBrain validated its mapping against a
 literature-curated set of classic mouse↔human homologous region pairs
-(`homo_cortex.csv`, `homo_subcortex.csv`) — a set HOMER has never seen
+(`homo_cortex.csv`, `homo_subcortex.csv`), a set HOMER has never seen
 (independent of the Garin anchors and the Beauchamp benchmark). For each
 benchmarked mouse region we route HOMER's π and measure (1) whether the
 literature-homolog human Brainnetome region is in the top-K, and (2) how
-far HOMER's predicted human centroid is from the homolog (mm) — the
+far HOMER's predicted human centroid is from the homolog (mm), the
 resolution-fair metric.
 
-**Part B — Head-to-head.** We translate the same mouse phenotype with BOTH
+**Part B. Head-to-head.** We translate the same mouse phenotype with BOTH
 methods, on two phenotypes from TransBrain's own case studies:
-  * a **smooth** one — the resting-fMRI principal gradient (expect convergence);
-  * a **noisy** one — the Magel2 autism-model mutation pattern, with
+  * a **smooth** one, the resting-fMRI principal gradient (expect convergence);
+  * a **noisy** one, the Magel2 autism-model mutation pattern, with
     TransBrain's per-individual ASD risk-score workflow (expect divergence).
 
 Requires `pip install transbrain` (Apache-2.0). The human Brainnetome atlas
@@ -127,7 +127,7 @@ def transbrain_translate(value_by_acr, region_type, col="phenotype"):
 
 
 # ---------------------------------------------------------------------------
-# Part A — homology benchmark
+# Part A, homology benchmark
 # ---------------------------------------------------------------------------
 def homology_benchmark(pi, parcel_acr, H_var, bn_id, id2name, centroid,
                        csv_path, label):
@@ -178,7 +178,7 @@ def homology_benchmark(pi, parcel_acr, H_var, bn_id, id2name, centroid,
     null_top3 = np.array(null_top3)
     null_dist = np.array(null_dist)
 
-    print(f"\n[Part A] Homology benchmark — {label}  ({len(rows)} mouse regions, "
+    print(f"\n[Part A] Homology benchmark, {label}  ({len(rows)} mouse regions, "
           f"{n_bn} BN regions)")
     print(f"  top-1 {top1:.0%}  top-3 {top3:.0%}  top-5 {top5:.0%}   "
           f"(chance top-1 ≈ {chance1:.1%})")
@@ -199,7 +199,7 @@ def homology_benchmark(pi, parcel_acr, H_var, bn_id, id2name, centroid,
 
 
 # ---------------------------------------------------------------------------
-# Part B — head-to-head
+# Part B, head-to-head
 # ---------------------------------------------------------------------------
 def head_to_head_gradient(pi, parcel_acr, bn_id, id2name):
     """Smooth phenotype: the resting-fMRI principal gradient."""
@@ -226,11 +226,11 @@ def head_to_head_gradient(pi, parcel_acr, bn_id, id2name):
     h = np.array([homer[r] for r in shared])
     t = np.array([tb[r] for r in shared])
     rf = np.array([ref[r] for r in shared])
-    # gradients are sign-ambiguous — report |r|
+    # gradients are sign-ambiguous, report |r|
     r_h = abs(pearsonr(h, rf)[0])
     r_t = abs(pearsonr(t, rf)[0])
     r_ht = abs(pearsonr(h, t)[0])
-    print(f"\n[Part B-1] Head-to-head — resting-fMRI gradient "
+    print(f"\n[Part B-1] Head-to-head, resting-fMRI gradient "
           f"({len(shared)} BN cortical regions)")
     print(f"  HOMER vs observed human gradient:      |r| = {r_h:.3f}")
     print(f"  TransBrain vs observed human gradient: |r| = {r_t:.3f}")
@@ -257,7 +257,7 @@ def head_to_head_autism(pi, parcel_acr, bn_id, id2name):
     risk_h = np.array([pearsonr(zmat[i], h)[0] for i in range(len(zmat))])
     risk_t = np.array([pearsonr(zmat[i], t)[0] for i in range(len(zmat))])
     concord = pearsonr(risk_h, risk_t)[0]
-    print(f"\n[Part B-2] Head-to-head — Magel2 autism mutation pattern "
+    print(f"\n[Part B-2] Head-to-head. Magel2 autism mutation pattern "
           f"({len(shared)} BN regions, {len(zmat)} ASD individuals)")
     print(f"  HOMER vs TransBrain translated maps:   r = {map_agree:+.3f}")
     print(f"  per-individual ASD risk-score concord: r = {concord:+.3f}")
@@ -272,7 +272,7 @@ def head_to_head_autism(pi, parcel_acr, bn_id, id2name):
 
 def main():
     print("=" * 80)
-    print("HOMER × TransBrain 2025 — sibling-method benchmark")
+    print("HOMER × TransBrain 2025, sibling-method benchmark")
     print("=" * 80)
 
     pi = np.load(ROOT / PI_FILE)

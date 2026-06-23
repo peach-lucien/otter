@@ -1,6 +1,6 @@
 """ENTORHINAL-1: Add entorhinal cortex anchor (Franjic 2021).
 
-Single-entry pack — DSURQE doesn't expose medial entorhinal. The whole-EC
+Single-entry pack. DSURQE doesn't expose medial entorhinal. The whole-EC
 anchor captures the broad cross-species EC homology documented by Franjic
 2021 (transcriptomic taxonomy across human, macaque, pig).
 

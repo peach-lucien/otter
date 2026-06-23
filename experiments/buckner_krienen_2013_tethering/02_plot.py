@@ -50,7 +50,7 @@ def main():
                  f"Mann–Whitney p = {j['mannwhitney_p']:.0e}", fontsize=9.5)
     ax.legend(fontsize=8, loc="lower right")
 
-    # --- Panel 3: entropy is flat (honest negative) ----------------------
+    # --- Panel 3: entropy is flat (negative result) ----------------------
     ax = axes[2]
     ax.scatter(mye, ent, s=10, alpha=0.4, color="#9c9c9c", edgecolor="none")
     z = np.polyfit(mye, ent, 1)
@@ -62,7 +62,7 @@ def main():
                  f"it is the *amount* of coverage, not its diffuseness,\n"
                  f"that carries the tethering signal", fontsize=9.5)
 
-    plt.suptitle("HOMER × Buckner & Krienen 2013 — π is sparsest over human "
+    plt.suptitle("HOMER × Buckner & Krienen 2013, π is sparsest over human "
                  "association cortex, as the tethering hypothesis predicts",
                  fontsize=12, y=1.04)
     plt.tight_layout()

@@ -1,8 +1,8 @@
 """TECTUM-1: Add Superior + Inferior Colliculus sub-region anchors.
 
 The tectum (midbrain colliculi) is one of HOMER's documented failure
-regions — both SC and IC have 0 % Beauchamp top-1 under the production
-point-anchor π. ``docs/diagnostics.md`` calls out tectum's spatial
+regions, both SC and IC have 0 % Beauchamp top-1 under the production
+point-anchor π. ``docs/archive/diagnostics.md`` calls out tectum's spatial
 inversion as the failure mechanism: mouse SC is dorsal whereas human SC
 is ventral in MNI space, so the xyz cross-species cost actively misleads
 non-anchor tectum parcels.
@@ -12,8 +12,8 @@ This experiment adds the two tectum-pack region anchors:
   pid 32: Mouse Superior Colliculus ↔ Human SC (Mai/Paxinos, May 2006)
   pid 33: Mouse Inferior Colliculus ↔ Human IC (Mai/Paxinos, Schreiner 2007)
 
-Tests three configurations on Beauchamp top-1 (with the same honest caveat
-as BICCN motor — see docs/results §5.12.2):
+Tests three configurations on Beauchamp top-1 (with the same caveat
+as BICCN motor, see docs/archive/iteration_log.md §5.12.2):
 
   1. Production fc_plus_SC point-anchor π        (baseline)
   2. Production + tectum pack                     (full)
@@ -91,7 +91,7 @@ def main():
         val_filename="beauchamp_validation_tectum.json",
     )
 
-    # Config 2: SC only — hold IC out for generalization test
+    # Config 2: SC only, hold IC out for generalization test
     print("\n[2/3] Fitting production + SC anchor only (IC held out) ...")
     d_sc_only = fit_and_validate(
         M, H, costs, region_anchors=[entries[0]],   # SC entry only
@@ -139,7 +139,7 @@ def main():
     print(f"\n{'-' * 90}")
     print("Reading: Δ full = production → +tectum (both anchors).")
     print("         Δ SC-only = production → +SC anchor only (IC held out).")
-    print("Honest generalization signal: 'SC-only' delta for IC.")
+    print("Generalization signal: 'SC-only' delta for IC.")
 
 
 if __name__ == "__main__":

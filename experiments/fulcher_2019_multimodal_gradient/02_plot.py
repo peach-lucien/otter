@@ -75,7 +75,7 @@ def main():
         axes[2], myelin, pred_cyto, "#264653",
         "Observed human T1w/T2w myelin (Schaefer-400 region)",
         "Predicted via HOMER π\n(mouse cytoarchitecture translated)",
-        f"3 · Independent modality — cytoarchitecture → human myelin\n"
+        f"3 · Independent modality, cytoarchitecture → human myelin\n"
         f"Pearson r = {p3['pearson_r']:+.3f}   ρ = {p3['spearman_r']:+.3f}   "
         f"p = {p3['pearson_p_analytical']:.1e}\n"
         f"n = {p3['n_regions']} regions   empirical p = "
@@ -83,7 +83,7 @@ def main():
     )
 
     plt.suptitle(
-        "HOMER × Fulcher 2019 — π translates the mouse multimodal cortical "
+        "HOMER × Fulcher 2019, π translates the mouse multimodal cortical "
         "hierarchy onto the human cortex",
         fontsize=12, y=1.04,
     )

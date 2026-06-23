@@ -1,17 +1,17 @@
 """Data layer: load mat73-formatted v7.3 .mat files into AnnData.
 
 Public API:
-    DATA_DIR             — default location of the data subfolder.
-    load_struct(species) — return the raw dict for a species.
-    parse_t_table(...)   — turn the cell-array t into a tidy DataFrame.
-    build_anndata(...)   — assemble an AnnData per species, optionally cache to disk.
-    load_cached(...)     — reload a previously cached AnnData + FC tensor.
-    stream_mean_fc(...)  — chunked compute of the mean FC matrix without
+    DATA_DIR, default location of the data subfolder.
+    load_struct(species), return the raw dict for a species.
+    parse_t_table(...), turn the cell-array t into a tidy DataFrame.
+    build_anndata(...), assemble an AnnData per species, optionally cache to disk.
+    load_cached(...), reload a previously cached AnnData + FC tensor.
+    stream_mean_fc(...), chunked compute of the mean FC matrix without
                             materialising the full per-subject tensor.
 
 The file naming convention on disk is:
-    <species>.h5ad        — AnnData (no FC tensor inside)
-    <species>.fc.npy      — float32 FC tensor (n_nodes, n_nodes, n_subjects)
+    <species>.h5ad. AnnData (no FC tensor inside)
+    <species>.fc.npy, float32 FC tensor (n_nodes, n_nodes, n_subjects)
 """
 from __future__ import annotations
 
@@ -37,7 +37,7 @@ _MAT_TOPKEY = {"mouse": "m", "human": "h"}
 # The mouse parcel table comes in two column layouts. The richer layout adds
 # full Allen NAME labels in `*_ABA` columns and DSURQE atlas labels (e.g.
 # "CA1Or") in `*_DSURQUE` columns (note the source spelling "DSURQUE", with an
-# extra U — case-sensitive), plus pre-warped CCFv3 (NS) and DSURQE (SS) voxel
+# extra U, case-sensitive), plus pre-warped CCFv3 (NS) and DSURQE (SS) voxel
 # indices. Schema detection branches on exact-equality of the ht column list;
 # files with permuted or extra columns are rejected so the loader never
 # silently mis-decodes an unexpected layout. The two layouts are tagged
@@ -55,7 +55,7 @@ _V2_HT = [
     "DS_region_vote_DSURQUE",   "DS_region_vote_ABA",
 ]
 
-# Mouse grid shapes — used both for index-bound validation and for documenting
+# Mouse grid shapes, used both for index-bound validation and for documenting
 # what `np.unravel_index(..., order='F')` expects from downstream consumers.
 #
 # NS = "Native Space" = Allen CCFv3-2017 25 µm.
@@ -75,7 +75,7 @@ _V2_MOUSE_FILENAME = "corrs_mouse_v2.mat"
 def _detect_schema(ht: list[str]) -> str:
     """Return 'v1' or 'v2' based on exact equality of the ht column list.
 
-    Raises ValueError on any other arrangement — including a 19-column list
+    Raises ValueError on any other arrangement, including a 19-column list
     with a 20th column appended or columns reordered. The strictness is
     intentional: silently mis-decoding an unexpected column layout would be
     much worse than a loud failure here.
@@ -102,7 +102,7 @@ def _mat_path(species: str, data_dir: Path | None) -> Path:
     _V2_MOUSE_FILENAME``, then falls back to v1 ``data_dir / corrs_mouse.mat``.
     For ``"human"`` it returns ``data_dir / corrs_human.mat``.
 
-    Signature unchanged — still returns ``Path`` only. The schema detected at
+    Signature unchanged, still returns ``Path`` only. The schema detected at
     that path is available via the sibling helper ``_mat_path_and_schema``.
     """
     p, _schema = _mat_path_and_schema(species, data_dir)
@@ -191,7 +191,7 @@ def load_metadata(species: str, *, data_dir: Path | None = None) -> dict[str, An
                 row.append(val)
             out["t"].append(row)
 
-        # Schema is a function of the ht column list — record alongside
+        # Schema is a function of the ht column list, record alongside
         # so downstream consumers can dispatch without re-deriving.
         out["_schema"] = _detect_schema(out["ht"])
 
@@ -312,7 +312,7 @@ def parse_t_table(t: list[list[Any]], ht: list[str]) -> pd.DataFrame:
 
     Two schemas supported (detected from `ht`):
 
-    v1 — 7 columns: ``type, numid, pairid, region, subregion, center, indices``.
+    v1, 7 columns: ``type, numid, pairid, region, subregion, center, indices``.
         Produced columns:
             type, numid, pairid (ints)
             region, subregion (str)
@@ -322,49 +322,49 @@ def parse_t_table(t: list[list[Any]], ht: list[str]) -> pd.DataFrame:
             anchor_pair_id (Int64; same value for the L/R partners of an anchor pair)
             voxel_indices (object, 1D int64 arrays into the rsmask 200 µm grid)
 
-    v2 — 19 columns (mouse-only). Same identifier columns, but coordinates
+    v2, 19 columns (mouse-only). Same identifier columns, but coordinates
         and indices are split into Native Space (NS = Allen CCFv3 25 µm,
         axcodes PIR, affine origin (0,0,0)) and Standard Space (SS = DSURQE
         70 µm, axcodes RAS, affine origin (-6.27, -8.19, -4.20)) variants.
 
         Produced columns (in addition to v1's identifier columns):
-            x, y, z                      — populated from DS_center_mm (SS frame)
+            x, y, z, populated from DS_center_mm (SS frame)
                                             for v1 backward compatibility.
                                             Differs from v1 `center` by ≤ 0.16 mm.
-            voxel_indices                — populated from DS_ix (SS grid, 0-based,
+            voxel_indices, populated from DS_ix (SS grid, 0-based,
                                             F-order). DIFFERENT GRID from v1
                                             (181×274×139 at 70 µm vs 62×94×47
                                             at 200 µm). Consumers that previously
                                             unravelled into the rsmask grid must
                                             migrate to SS or NS grid.
-            centre_ns_x/y/z              — AS_center_mm, NS world mm.
-            centre_ss_x/y/z              — DS_center_mm, SS world mm.
-            ns_center_ix                 — scalar 0-based linear index into NS
+            centre_ns_x/y/z. AS_center_mm, NS world mm.
+            centre_ss_x/y/z. DS_center_mm, SS world mm.
+            ns_center_ix, scalar 0-based linear index into NS
                                             grid, F-order.
-            ss_center_ix                 — scalar 0-based linear index into SS
+            ss_center_ix, scalar 0-based linear index into SS
                                             grid, F-order.
-            ns_voxel_indices             — 1D 0-based int64 arrays into NS grid.
-            ss_voxel_indices             — 1D 0-based int64 arrays into SS grid
+            ns_voxel_indices, 1D 0-based int64 arrays into NS grid.
+            ss_voxel_indices, 1D 0-based int64 arrays into SS grid
                                             (same content as voxel_indices).
-            region_center_ns_aba         — Allen full NAME (not acronym) at NS
+            region_center_ns_aba. Allen full NAME (not acronym) at NS
                                             centre voxel.
-            region_center_ns_dsq         — DSURQE atlas full label at NS centre.
-            region_center_ss_aba         — Allen full NAME at SS centre.
-            region_center_ss_dsq         — DSURQE atlas full label at SS centre.
-            region_vote_ns_aba           — majority-vote Allen full NAME over
+            region_center_ns_dsq. DSURQE atlas full label at NS centre.
+            region_center_ss_aba. Allen full NAME at SS centre.
+            region_center_ss_dsq. DSURQE atlas full label at SS centre.
+            region_vote_ns_aba, majority-vote Allen full NAME over
                                             NS voxel set.
-            region_vote_ns_dsq           — majority-vote DSURQE label over
+            region_vote_ns_dsq, majority-vote DSURQE label over
                                             NS voxel set.
-            region_vote_ss_aba           — majority-vote Allen full NAME over
+            region_vote_ss_aba, majority-vote Allen full NAME over
                                             SS voxel set.
-            region_vote_ss_dsq           — majority-vote DSURQE label over
+            region_vote_ss_dsq, majority-vote DSURQE label over
                                             SS voxel set.
 
         IMPORTANT CONVENTIONS for v2 indices:
             - Stored on disk as MATLAB 1-based, Fortran (column-major) linear
               indices. This loader CONVERTS TO 0-BASED at parse time. The
               resulting values are int64 and ready for
-              ``np.unravel_index(idx, shape, order='F')`` directly — do NOT
+              ``np.unravel_index(idx, shape, order='F')`` directly, do NOT
               subtract 1 again downstream.
             - Order convention (F) lives in consumers; not encoded in the value.
             - Grid shape is ``_NS_SHAPE`` for ``ns_*`` / ``AS_*``, ``_SS_SHAPE``
@@ -380,12 +380,12 @@ def parse_t_table(t: list[list[Any]], ht: list[str]) -> pd.DataFrame:
         return _parse_t_table_v1(t)
     elif schema == "v2":
         return _parse_t_table_v2(t)
-    else:  # pragma: no cover — _detect_schema raises before reaching here
+    else:  # pragma: no cover, _detect_schema raises before reaching here
         raise ValueError(f"unsupported schema: {schema!r}")
 
 
 def _parse_t_table_v1(t: list[list[Any]]) -> pd.DataFrame:
-    """v1 path — unchanged from the original implementation. Kept verbatim."""
+    """v1 path, unchanged from the original implementation. Kept verbatim."""
     types     = np.fromiter((int(row[0]) for row in t), dtype=np.int8,  count=len(t))
     numids    = np.fromiter((int(row[1]) for row in t), dtype=np.int32, count=len(t))
     pairids   = np.fromiter((int(row[2]) for row in t), dtype=np.int32, count=len(t))
@@ -419,7 +419,7 @@ def _parse_t_table_v1(t: list[list[Any]]) -> pd.DataFrame:
     df.index.name = "node_id"
 
     # Tag schema on the DataFrame for runtime introspection. Note: df.attrs
-    # does NOT survive serialisation — used only for in-process loader→consumer
+    # does NOT survive serialisation, used only for in-process loader→consumer
     # hand-off. AnnData equivalents are populated by build_anndata into A.uns.
     df.attrs.update({
         "schema": "v1",
@@ -447,7 +447,7 @@ def _decode_matlab_linear_indices(raw, *, grid_shape: tuple[int, int, int],
         nearest; values must be exactly integer-valued).
     """
     arr = np.atleast_1d(np.asarray(raw, dtype=np.float64)).ravel()
-    # IEEE round-to-nearest before cast — guards against 1234.9999 artefacts.
+    # IEEE round-to-nearest before cast, guards against 1234.9999 artefacts.
     arr_int = np.rint(arr).astype(np.int64)
     if not np.array_equal(arr_int.astype(np.float64), arr):
         # Find first non-integer value for the error message
@@ -464,24 +464,24 @@ def _decode_matlab_linear_indices(raw, *, grid_shape: tuple[int, int, int],
             bad = int(np.argmin(arr_int))
             raise ValueError(
                 f"{field_name!r} value at position {bad} is {int(arr_int[bad])} "
-                f"— MATLAB 1-based indices must be >= 1."
+                f". MATLAB 1-based indices must be >= 1."
             )
         if arr_int.max() > grid_size:
             bad = int(np.argmax(arr_int))
             raise ValueError(
                 f"{field_name!r} value at position {bad} is {int(arr_int[bad])} "
-                f"— exceeds grid size {grid_size} (shape {grid_shape})."
+                f", exceeds grid size {grid_size} (shape {grid_shape})."
             )
     return arr_int - 1  # 0-based
 
 
 def _parse_t_table_v2(t: list[list[Any]]) -> pd.DataFrame:
-    """v2 path — 19 columns, see ``parse_t_table`` docstring for the schema."""
+    """v2 path, 19 columns, see ``parse_t_table`` docstring for the schema."""
     n = len(t)
     if n == 0:
         raise ValueError("v2 t-table is empty")
 
-    # Validate row width — every row must have exactly 19 cells.
+    # Validate row width, every row must have exactly 19 cells.
     for j, row in enumerate(t):
         if len(row) != 19:
             raise ValueError(
@@ -547,7 +547,7 @@ def _parse_t_table_v2(t: list[list[Any]]) -> pd.DataFrame:
 
     # Backward-compat: x/y/z = DS_center_mm (SS frame, matches v1 frame to
     # sub-voxel precision). voxel_indices = ss_voxel_indices (distinct list
-    # copy to avoid aliasing — see I8 in the design review).
+    # copy to avoid aliasing, see I8 in the design review).
     df = pd.DataFrame({
         "type":      types,
         "numid":     numids,
@@ -694,7 +694,7 @@ def build_anndata(
         A.uns["ns_voxel_indices"] = [v.astype(np.int64).copy() for v in var["ns_voxel_indices"]]
         A.uns["ss_voxel_indices"] = [v.astype(np.int64).copy() for v in var["ss_voxel_indices"]]
         # Strip the new ragged columns from var (anndata can't serialise ragged
-        # object arrays) — the data lives in A.uns instead. The scalar
+        # object arrays), the data lives in A.uns instead. The scalar
         # ns_center_ix / ss_center_ix DO stay in var (scalar int64).
         for col in ("ns_voxel_indices", "ss_voxel_indices"):
             if col in A.var.columns:
@@ -706,7 +706,7 @@ def build_anndata(
         h5_path = cache_dir / f"{species}.h5ad"
         if h5_path.exists() and not overwrite:
             raise FileExistsError(f"{h5_path} exists; pass overwrite=True to replace")
-        # Pop all ragged voxel lists before writing — anndata can't serialise
+        # Pop all ragged voxel lists before writing, anndata can't serialise
         # object-dtype arrays of unequal length. Restore after.
         popped: dict[str, Any] = {}
         for key in ("voxel_indices", "ns_voxel_indices", "ss_voxel_indices"):
@@ -787,7 +787,7 @@ def load_cached(
         if expected_schema is not None:
             schema_key = "mouse_schema" if species == "mouse" else f"{species}_schema"
             cached_schema = A.uns.get(schema_key)
-            # Treat a missing schema key as legacy v1 cache — accept silently
+            # Treat a missing schema key as legacy v1 cache, accept silently
             # if the on-disk file is also v1. The schema key was added when
             # we introduced v2 support; pre-existing v1 caches don't have it
             # but their content is still correct under v1 semantics.

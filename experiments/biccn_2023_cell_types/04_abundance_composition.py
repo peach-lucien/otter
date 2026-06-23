@@ -1,15 +1,15 @@
 """Cell-type ABUNDANCE / composition test through π (real cell types, not markers).
 
 The marker test correlates single-gene smooth maps (weak, mean r=0.089). The
-contrast reframe (03) already recovered a real positive — the excitatory↔inhibitory
+contrast reframe (03) already recovered a real positive, the excitatory↔inhibitory
 axis survives a spin null (r=+0.262, p=0.001). This script is the higher-resolution
 upgrade flagged as future work: instead of ~23 gene-marker proxies, use the ACTUAL
 per-region cell-type ABUNDANCE tables and ask whether π maps mouse regions to human
 regions of matching cell-type *composition*.
 
-  Mouse  : Yao 2023 Allen Brain Cell (ABC) atlas — per-CCFv3-region class/subclass
+  Mouse  : Yao 2023 Allen Brain Cell (ABC) atlas, per-CCFv3-region class/subclass
            abundance (fraction of cells per type).  Access via `abc_atlas_access`.
-  Human  : Siletti 2023 human brain cell atlas — per-dissection-region class/subclass
+  Human  : Siletti 2023 human brain cell atlas, per-dissection-region class/subclass
            abundance.  Access via `cellxgene-census` (CELLxGENE) or the published
            supplementary cell-metadata table.
 
@@ -19,9 +19,9 @@ Pipeline (once the two abundance tables are present):
   2. Map each abundance table's regions to HOMER's parcels (CCFv3 centroids for mouse;
      MNI/dissection centroids for human) → per-parcel composition.
   3. For each cell type t: route the mouse abundance map of t through π and correlate
-     with the human abundance map of t — but TEST THE CONTRAST/COMPOSITION, not the
+     with the human abundance map of t, but TEST THE CONTRAST/COMPOSITION, not the
      single smooth map: (a) per-type, against the fair translation-spin null; and
-     (b) compositional — does π map mouse parcels to human parcels whose dominant
+     (b) compositional, does π map mouse parcels to human parcels whose dominant
      cell class matches (argmax-class agreement, scored vs a spin null)?
 
 ENVIRONMENT NOTE: this needs the two cell atlases (multi-GB) + abc_atlas_access /

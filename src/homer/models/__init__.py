@@ -1,10 +1,10 @@
-"""FGW model classes — sklearn-style fit/pi/predict/save/load API.
+"""FGW model classes, sklearn-style fit/pi/predict/save/load API.
 
 Four production levels (in order of complexity):
-    UnsupervisedGW   — plain entropic GW on FC, no anchors, no spatial
-    SupervisedFGW    — anchor-supervised semirelaxed FGW + xyz spatial
-    MultimodalFGW    — adds SC, gene, M_anchor terms (the production winner)
-    HierarchicalFGW  — per-network sub-solves (cleaner WN, hurts global CV)
+    UnsupervisedGW, plain entropic GW on FC, no anchors, no spatial
+    SupervisedFGW, anchor-supervised semirelaxed FGW + xyz spatial
+    MultimodalFGW, adds SC, gene, M_anchor terms (the production winner)
+    HierarchicalFGW, per-network sub-solves (cleaner WN, hurts global CV)
 
 Plus the underlying solver helpers in `homer.models._solver`.
 """
@@ -22,7 +22,7 @@ from homer.models.supervised import SupervisedFGW
 from homer.models.multimodal import MultimodalFGW
 from homer.models.hierarchical import HierarchicalFGW, hierarchical_semirelaxed_fgw
 
-# FUGW is a comparative addition — requires fugw + torch optional deps.
+# FUGW is a comparative addition, requires fugw + torch optional deps.
 # Lazy-load so importing homer.models doesn't pull in the heavy chain when
 # the user hasn't installed them.
 try:

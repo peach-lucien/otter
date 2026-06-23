@@ -2,15 +2,15 @@
 
 Schaefer-400 cannot separate layers within an area, so the per-marker test
 (mean r=+0.119) can only ever measure the *area-level* distribution of layer
-genes, not lamination — the README says as much. Rather than present it as a
+genes, not lamination, the README says as much. Rather than present it as a
 (impossible) laminar test, we recast it as the question it CAN answer and that
-HOMER is good at: does π preserve cortical AREAL TYPE — the supragranular↔
+HOMER is good at: does π preserve cortical AREAL TYPE, the supragranular↔
 infragranular (eulaminate↔agranular) axis that distinguishes sensory/granular
 from limbic/agranular cortex? This is the same cytoarchitectural hierarchy that
 Fulcher's T1w:T2w + Goulas type test captured and that DID survive a spin null.
 
 We build the supragranular−infragranular contrast (upper L2/3 markers minus deep
-L5/6 markers) — high in granular sensory cortex, low in agranular cortex — and
+L5/6 markers), high in granular sensory cortex, low in agranular cortex, and
 the granular-L4 axis, route the mouse contrast through π, and test against the
 FAIR translation-spin null, cortex-only.
 
@@ -55,7 +55,7 @@ def score(expr, genes_df, genes, upper):
 
 def main():
     print("=" * 78)
-    print("Hodge layers — AREAL-TYPE reframe (supragranular↔infragranular) vs spin")
+    print("Hodge layers. AREAL-TYPE reframe (supragranular↔infragranular) vs spin")
     print("=" * 78)
 
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))

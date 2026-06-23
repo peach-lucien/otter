@@ -1,7 +1,7 @@
 """HIPPOCAMPAL-1: Add Subiculum + CA1 + CA3 + Dentate gyrus region anchors.
 
 All five hippocampal subfields show 0 % Beauchamp top-1 under production
-point-anchor π — HOMER's cleanest documented failure region. Earlier
+point-anchor π. HOMER's cleanest documented failure region. Earlier
 EXP-1 / SPLIT-1 added four hippocampal *point* anchors and moved 3 of 4
 from 0 → 7-9 % top-1. This experiment is the region-anchor analogue:
 each subfield's full DSURQE parcel set is forced into the matching human

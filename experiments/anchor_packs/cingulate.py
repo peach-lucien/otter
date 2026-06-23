@@ -1,11 +1,11 @@
 """CINGULATE-1: Add subgenual ACC + Retrosplenial region anchors (Vogt 2019).
 
 Beauchamp validation gives 13 % top-1 for "Anterior cingulate area →
-cingulate gyrus" — better than the other failure regions but well below
+cingulate gyrus", better than the other failure regions but well below
 where it could be. We add Vogt 2019's two best-conserved cingulate
-sub-domains. Importantly, this is the first pack whose mouse-side set
+sub-domains. This is the first pack whose mouse-side set
 DIFFERS from the corresponding Beauchamp validation set, so the
-Beauchamp comparison is genuinely informative rather than tautological.
+Beauchamp comparison is informative rather than tautological.
 
   pid 36: Mouse ACA ventral (15 parcels)   ↔ Human subgenual ACC (6 parcels)
   pid 37: Mouse Retrosplenial (27 parcels) ↔ Human RSC (8 parcels)

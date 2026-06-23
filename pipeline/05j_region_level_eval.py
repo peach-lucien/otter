@@ -1,4 +1,4 @@
-"""Pipeline 05j — region-level evaluation of π.
+"""Pipeline 05j, region-level evaluation of π.
 
 The parcel-level Beauchamp validation (05f) asks "is the right human *parcel*
 in the top-K of π[m, :]?". This script asks the region-level analogue:
@@ -7,7 +7,7 @@ in the top-K of π[m, :]?". This script asks the region-level analogue:
     model predict, out of a candidate set of named human regions?
 
 This is the right question for a downstream user who thinks in regions, and
-it's much more aligned with what π actually is — a soft probabilistic mapping
+it's much more aligned with what π actually is, a soft probabilistic mapping
 that spreads mass across multiple human parcels in a region.
 
 Pipeline

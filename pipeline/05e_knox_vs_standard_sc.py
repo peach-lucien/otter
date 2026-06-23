@@ -1,4 +1,4 @@
-"""Pipeline 05e — Knox-leaf-level SC vs. Allen summary-structure SC LONO comparison.
+"""Pipeline 05e. Knox-leaf-level SC vs. Allen summary-structure SC LONO comparison.
 
 Tests whether replacing the Allen summary-structure SC fingerprints for the
 22 cortical Garin anchors with Knox 2019 leaf-level SC fingerprints improves
@@ -48,7 +48,7 @@ def main(args):
 
     # Sanity: confirm both SC matrices are on the same scale before we use them
     for k in CONFIGS.values():
-        assert k in costs.files, f"missing {k} in full_costs.npz — run 06_knox_sc.py"
+        assert k in costs.files, f"missing {k} in full_costs.npz, run 06_knox_sc.py"
         a = costs[k]
         assert a.min() >= 0 and a.max() <= 1.001, (
             f"{k} not on [0,1] scale (range=[{a.min():.4f}, {a.max():.4f}]); "
@@ -62,7 +62,7 @@ def main(args):
     # Confirm Knox actually differs from Allen on cortical anchors
     diff = np.abs(costs["Cm_SC_knox"] - costs["Cm_SC"]).mean()
     print(f"|Cm_SC_knox - Cm_SC|.mean() = {diff:.4f} "
-          f"(should be > 0 — Knox replaces ~22 cortical fingerprints)")
+          f"(should be > 0. Knox replaces ~22 cortical fingerprints)")
 
     net_to_pairs = {n: [] for n in NETWORKS}
     for pid, name in PAIRID_TO_NETWORK.items():

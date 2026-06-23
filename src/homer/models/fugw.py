@@ -1,8 +1,8 @@
-"""FUGWModel — Fused Unbalanced Gromov–Wasserstein wrapper for cross-species coupling.
+"""FUGWModel. Fused Unbalanced Gromov–Wasserstein wrapper for cross-species coupling.
 
 Wraps the [Thual et al. 2022 NeurIPS](https://proceedings.neurips.cc/paper_files/paper/2022/hash/8906cac4ca58dcaf17e97a0486ad57ca-Abstract-Conference.html)
 implementation from the ``fugw`` PyPI package as a drop-in alternative to
-`MultimodalFGW`. **Comparative method, not a replacement** — fits into the
+`MultimodalFGW`. **Comparative method, not a replacement**, fits into the
 existing `FGWModel` API so the same anchor CV / FC translation / null
 distribution / bootstrap evaluation works without modification.
 
@@ -10,7 +10,7 @@ Why FUGW (vs our existing semirelaxed FGW):
 
 The semirelaxed solver fixes the mouse marginal at uniform and lets the human
 marginal float freely. This is *why* held-out anchors usually land on
-non-anchor grid nodes near the correct anchor rather than the anchor itself —
+non-anchor grid nodes near the correct anchor rather than the anchor itself
 the solver has no incentive to spread mass evenly across human nodes.
 
 FUGW formulates the problem as **unbalanced** in both directions, with two
@@ -49,7 +49,7 @@ class FUGWModel(FGWModel):
     """Fused Unbalanced Gromov–Wasserstein wrapper.
 
     Drop-in alternative to `MultimodalFGW` for comparative experiments. Uses
-    the `fugw` PyPI package's ``FUGWSolver`` under the hood.
+    the `fugw` PyPI package's ``FUGWSolver``.
 
     Parameters
     ----------
@@ -65,7 +65,7 @@ class FUGWModel(FGWModel):
         source side.
     rho_t : float, default 1.0
         Target-marginal relaxation (human). Setting ``rho_t = float('inf')``
-        forces uniform human coverage — the opposite of our current
+        forces uniform human coverage, the opposite of our current
         semirelaxed config which lets the human marginal float entirely free.
     fc_weight, sc_weight, use_sc : as in MultimodalFGW.
     xyz_weight, lam_anchor : as in SupervisedFGW.
@@ -110,7 +110,7 @@ class FUGWModel(FGWModel):
                Cm_SC: Optional[np.ndarray] = None,
                Ch_SC: Optional[np.ndarray] = None,
                M_xyz: Optional[np.ndarray] = None, **kw):
-        # Lazy import — torch + fugw are heavy
+        # Lazy import, torch + fugw are heavy
         from fugw.solvers.dense import FUGWSolver
         import torch
 

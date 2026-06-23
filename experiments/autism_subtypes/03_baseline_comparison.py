@@ -1,7 +1,7 @@
 """Robustness checks for the network cross-validation test.
 
-For each of three π variants — production-with-packs (recommended), production
-point-anchor-only, and a permuted-anchor null — recompute the diagonal-
+For each of three π variants, production-with-packs (recommended), production
+point-anchor-only, and a permuted-anchor null, recompute the diagonal-
 dominance summary stats.
 
 Goal: verify that the diagonal concentration is (a) not an artefact of pack

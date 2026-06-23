@@ -2,20 +2,20 @@
 
 When two configs both report e.g. 81% top-1 across 42 anchors, "Config A is
 better than Config B" is unjustified without a paired test. The differences
-are typically a single anchor (~Bernoulli SE 0.06 for n=42) — well within
+are typically a single anchor (~Bernoulli SE 0.06 for n=42), well within
 random variation.
 
 Public:
     mcnemar_paired_anchors(correct_a, correct_b)
-        — exact-binomial McNemar on the discordant pairs (anchors A got right
+        exact-binomial McNemar on the discordant pairs (anchors A got right
           but B got wrong, vs vice versa).
 
     paired_bootstrap_diff(correct_a, correct_b, *, n_boot=10000, seed=0)
-        — bootstrap CI on the difference in means + p-value via the
+        bootstrap CI on the difference in means + p-value via the
           permutation-style test on resampled paired differences.
 
     compare_configs(per_anchor_a, per_anchor_b)
-        — convenience: takes two boolean arrays of per-anchor correctness
+        convenience: takes two boolean arrays of per-anchor correctness
           and returns a dict with both tests + summary.
 """
 from __future__ import annotations
@@ -36,12 +36,12 @@ def mcnemar_paired_anchors(correct_a, correct_b) -> dict:
     the exact binomial tail sum.
 
     Returns dict:
-        n_concordant_correct, n_concordant_wrong  — both got it right / both wrong
-        n_a_only_correct, n_b_only_correct        — discordant counts (b, c)
-        n_discordant                               — b + c
-        chi2                                       — McNemar χ² statistic
-        p_value                                    — exact binomial p-value (two-sided)
-        better                                     — "A" / "B" / "neither" (effect direction)
+        n_concordant_correct, n_concordant_wrong, both got it right / both wrong
+        n_a_only_correct, n_b_only_correct, discordant counts (b, c)
+        n_discordant, b + c
+        chi2. McNemar χ² statistic
+        p_value, exact binomial p-value (two-sided)
+        better, "A" / "B" / "neither" (effect direction)
     """
     a = np.asarray(correct_a).astype(bool)
     b_arr = np.asarray(correct_b).astype(bool)
@@ -148,10 +148,10 @@ def compare_configs(per_anchor_correct_a, per_anchor_correct_b,
 def _verdict(mc: dict, bp: dict, alpha: float = 0.05) -> str:
     """Plain-English summary."""
     if mc["n_discordant"] == 0:
-        return "identical performance — every anchor classified the same way"
+        return "identical performance, every anchor classified the same way"
     if mc["p_value"] < alpha and bp["p_value"] < alpha:
         return f"{mc['better']} significantly better (p < {alpha})"
     elif min(mc["p_value"], bp["p_value"]) < alpha:
-        return f"weak signal — only one test < {alpha}; treat as tied"
+        return f"weak signal, only one test < {alpha}; treat as tied"
     else:
-        return f"no significant difference (both p ≥ {alpha}) — treat as tied"
+        return f"no significant difference (both p ≥ {alpha}), treat as tied"

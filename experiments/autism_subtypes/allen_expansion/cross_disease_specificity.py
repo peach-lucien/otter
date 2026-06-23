@@ -9,7 +9,7 @@ ANY brain-disorder gene set? Pagani's MOESM5 supplementary lists 4,822 genes
 implicated in five comparison conditions:
   - bipolar_disorder
   - schizophrenia
-  - psoriasis      (non-brain control — strong negative control)
+  - psoriasis      (non-brain control, strong negative control)
   - dementia
   - adhd
 
@@ -26,7 +26,7 @@ Hypothesis under autism-specificity:
   - Autism: r ≈ +0.43 (replicates Test 3)
   - Brain psych conditions (bipolar, schizophrenia, adhd, dementia): possibly
     moderate correlations because they share neural gene biology with autism
-  - Psoriasis: r ≈ 0 (skin disease, no brain-relevance — pure negative control)
+  - Psoriasis: r ≈ 0 (skin disease, no brain-relevance, pure negative control)
 
 If autism's r is similar to schizophrenia's, the signal isn't autism-specific.
 If psoriasis ALSO produces r ≈ +0.4, the signal is a brain-geometry artifact
@@ -161,7 +161,7 @@ def main():
         cond_lower = {g.lower() for g in gene_set}
         cond_idx = [gene_to_idx[g] for g in cond_lower if g in gene_to_idx]
         if len(cond_idx) < 10:
-            print(f"  {cond:<22s} | {len(cond_idx):>7d} | (too few overlapping genes — skipped)")
+            print(f"  {cond:<22s} | {len(cond_idx):>7d} | (too few overlapping genes, skipped)")
             results[cond] = {"n_overlap": len(cond_idx), "skipped": True}
             continue
         # Per-parcel score

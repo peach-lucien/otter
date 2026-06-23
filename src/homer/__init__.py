@@ -1,4 +1,4 @@
-"""homer — cross-species brain region mapping via Fused Gromov–Wasserstein.
+"""homer, cross-species brain region mapping via Fused Gromov–Wasserstein.
 
 The high-level public API:
 

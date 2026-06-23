@@ -44,7 +44,7 @@ warnings.filterwarnings("ignore")
 # Named configs to try. Each is (relational_weights, m_weights).
 # relational_weights: dict modality → weight in the combined C_m, C_h
 # m_weights:          dict modality → weight in the combined M
-#                     (anchor_lam is always 1.0 — that's the supervision strength)
+#                     (anchor_lam is always 1.0, that's the supervision strength)
 # ---------------------------------------------------------------------------
 CONFIGS: dict[str, dict] = {
     "baseline_fc_only": {
@@ -128,7 +128,7 @@ def _anchor_M_visible_only(fc_m, fc_h, idx_m, idx_h, visible_pair_ids, eps=1e-6)
     if not visible_local:                                    # no visible anchors
         return np.zeros((fc_m.shape[0], fc_h.shape[0]), dtype=np.float64)
     pos_m = np.asarray(idx_m.pos)[visible_local]
-    pos_h = np.asarray(idx_h.pos)[visible_local]            # same order — anchor pairing
+    pos_h = np.asarray(idx_h.pos)[visible_local]            # same order, anchor pairing
     af_m = fc_m[:, pos_m].astype(np.float64)                # (n_m, k)
     af_h = fc_h[:, pos_h].astype(np.float64)                # (n_h, k)
     af_m = (af_m - af_m.mean(0, keepdims=True)) / af_m.std(0, keepdims=True).clip(min=eps)
@@ -144,7 +144,7 @@ def build_M(M_weights: dict, costs: dict, idx_m, idx_h, visible_pair_ids,
             fc_m=None, fc_h=None) -> np.ndarray:
     """Build the cross-species M with combined modalities + anchor supervision.
 
-    M_weights['gene_selective'] (bool) — if True, M_gene is multiplied by the
+    M_weights['gene_selective'] (bool), if True, M_gene is multiplied by the
     M_gene_valid coverage mask, so it contributes 0 wherever either species
     lacks ortholog data (vs. the default which adds a max-cost penalty there).
     """
@@ -159,7 +159,7 @@ def build_M(M_weights: dict, costs: dict, idx_m, idx_h, visible_pair_ids,
             gene_term = np.where(valid, gene_term - mean_valid, 0.0)
         M += M_weights["gene"] * gene_term
     if M_weights.get("anchor_feat", 0):
-        # Anchor-relationship cost — recomputed per-fold using only VISIBLE
+        # Anchor-relationship cost, recomputed per-fold using only VISIBLE
         # anchors so we don't leak held-out anchor identities into the cost.
         if fc_m is None or fc_h is None:
             raise ValueError("anchor_feat requires fc_m, fc_h passed to build_M")
@@ -308,6 +308,6 @@ if __name__ == "__main__":
                     help="if >0, use multistart FGW with this many random inits "
                          "(plus default uniform + anchor-warm)")
     ap.add_argument("--cache-suffix", default="",
-                    help="append a suffix to the JSON cache key — useful when "
+                    help="append a suffix to the JSON cache key, useful when "
                          "comparing single-shot vs multistart (e.g. '_ms5')")
     main(ap.parse_args())

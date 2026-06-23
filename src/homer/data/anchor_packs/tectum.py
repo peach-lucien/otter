@@ -3,10 +3,10 @@
 Both Superior Colliculus and Inferior Colliculus are anatomically homologous
 across mouse and primate brains, with conserved layered organisation:
 
-  - SC: Isa et al. 2021, *Current Biology* — "The tectum/superior colliculus
+  - SC: Isa et al. 2021, *Current Biology*, "The tectum/superior colliculus
     as the vertebrate solution for spatial sensory integration and action"
     (cross-species SC review across vertebrates).
-  - IC: Winer & Schreiner 2005 — "The inferior colliculus" (Springer book;
+  - IC: Winer & Schreiner 2005, "The inferior colliculus" (Springer book;
     the canonical IC reference covering cross-species anatomy).
 
   pid 32:  Mouse Superior Colliculus (sensory) ↔ Human Superior Colliculus
@@ -14,7 +14,7 @@ across mouse and primate brains, with conserved layered organisation:
 
 Mouse-side sets come from the DSURQE atlas overlay (53 parcels for the
 sensory SC; 29 for IC). Human-side sets are *tight* MNI spheres at canonical
-Mai/Paxinos centroids (these are small brainstem structures — broader balls
+Mai/Paxinos centroids (these are small brainstem structures, broader balls
 would capture unrelated midbrain parcels):
 
   SC: (±5, -30, -2) r=6 mm  →  2 human parcels
@@ -29,7 +29,7 @@ References (verified Consensus search 2026):
 
 Why this targets a documented failure
 -------------------------------------
-``docs/diagnostics.md`` calls out tectum as spatially-inverted between
+``docs/archive/diagnostics.md`` calls out tectum as spatially-inverted between
 species: mouse SC is dorsal whereas human SC is ventral in MNI space, so
 the xyz cross-species cost actively misleads non-anchor tectum parcels.
 The Garin pair_id 21 (Tectum) gives a single point anchor for both
@@ -37,7 +37,7 @@ colliculi combined; sub-region anchors let HOMER target SC↔SC and IC↔IC
 distinctly. Beauchamp validation gives 0 % top-1 for both colliculi under
 the production point-anchor π, and we expect this pack to lift those.
 
-Same honest caveat as biccn_motor: the mouse-side set for each anchor is
+Same caveat as biccn_motor: the mouse-side set for each anchor is
 identical to the set Beauchamp 2022's validation uses, so any improvement
 on the Beauchamp Tectum pairs is partly *tautological*. The pack's value
 is practical (HOMER queries for tectum parcels become trustworthy), not
@@ -79,7 +79,7 @@ def build_tectum_region_anchors(
 
     if not (sc_mouse and sc_human and ic_mouse and ic_human):
         raise ValueError(
-            f"empty set for tectum anchor — check atlas alignment "
+            f"empty set for tectum anchor, check atlas alignment "
             f"(|sc_m|={len(sc_mouse)}, |sc_h|={len(sc_human)}, "
             f"|ic_m|={len(ic_mouse)}, |ic_h|={len(ic_human)})"
         )

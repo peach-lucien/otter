@@ -122,7 +122,7 @@ def main(resolution_um: int = 100):
     n_nodes = len(df)
 
     # ns_center_ix is 0-based linear index into the 25 µm NS grid (528, 320, 456).
-    # AllenSDK gives us the 100 µm version (132, 80, 114) — same PIR layout
+    # AllenSDK gives us the 100 µm version (132, 80, 114), same PIR layout
     # but 4× coarser per axis. Downsample by integer division.
     ns_ix_25um = df["ns_center_ix"].to_numpy().astype(np.int64)
     ijk_25 = np.column_stack(np.unravel_index(ns_ix_25um, IO._NS_SHAPE, order="F"))

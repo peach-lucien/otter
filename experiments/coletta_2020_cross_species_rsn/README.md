@@ -4,13 +4,13 @@ Tests whether HOMER's π preserves the cross-species network correspondence unde
 
 ## Why this experiment
 
-[Coletta et al. 2020 (Sci Adv)](https://www.science.org/doi/10.1126/sciadv.abb7187) characterised mouse resting-state networks via group-ICA on mouse rsfMRI and showed they broadly correspond to canonical human Yeo networks. Their cross-species correspondence is foundational — subsequent papers (Pagani 2026 included) build on it.
+[Coletta et al. 2020 (Sci Adv)](https://www.science.org/doi/10.1126/sciadv.abb7187) characterised mouse resting-state networks via group-ICA on mouse rsfMRI and showed they broadly correspond to canonical human Yeo networks. Their cross-species correspondence is foundational, subsequent papers (Pagani 2026 included) build on it.
 
 This is a stricter version of Pagani's Test 1, with three improvements: (i) uses the canonical Yeo-7 partition rather than Pagani's bespoke 8-net scheme; (ii) adds a data-driven ICA-based version mirroring Coletta's actual methodology; (iii) adds a network-coherence metric measuring spatial compactness of the human-side image.
 
 ## Results
 
-### Sub-test A — Labeled correspondence
+### Sub-test A. Labeled correspondence
 
 **6/10 canonical pairs are diagonal-argmax**, with up to 7.5× over null:
 
@@ -29,13 +29,13 @@ This is a stricter version of Pagani's Test 1, with three improvements: (i) uses
 | limbic → Limbic | 6.6% | 4.8% | 1.4× | (argmax: Subcortical) |
 | auditory → Auditory | 0.0% | 0.0% | 0.0× | (merged into SomMot) |
 
-Same Schaefer-definition misses as Pagani's Test 1 — Schaefer-17's "Visual" is V1-only and higher-order mouse visual maps to DorsAttn; hippocampus has no cortical Schaefer label so HC routes to Subcortical.
+Same Schaefer-definition misses as Pagani's Test 1. Schaefer-17's "Visual" is V1-only and higher-order mouse visual maps to DorsAttn; hippocampus has no cortical Schaefer label so HC routes to Subcortical.
 
-### Sub-test B — Data-driven ICA
+### Sub-test B. Data-driven ICA
 
-2/7 ICA components map cleanly to their expected Yeo-7 network (Salience, sensorimotor). The others are noisier because ICA decomposition mixes anatomical regions — each component is a *mode of FC variation*, not a clean network. This is an inherent property of ICA, not a HOMER failure.
+2/7 ICA components map cleanly to their expected Yeo-7 network (Salience, sensorimotor). The others are noisier because ICA decomposition mixes anatomical regions, each component is a *mode of FC variation*, not a clean network. This is an inherent property of ICA, not a HOMER failure.
 
-### Sub-test C — Network coherence
+### Sub-test C. Network coherence
 
 **9/11 networks have HOMER-mapped images MORE compact than permuted-π null.** Best compression: frontoparietal (0.58× null), frontal_dmn (0.63×), brainstem (0.68×), subcortical (0.70×). The two networks that don't beat null (auditory, temporal_dmn) are the smallest in HOMER's PAIRID scheme (62 + 66 parcels) and the most spatially distributed.
 

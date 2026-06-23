@@ -1,12 +1,12 @@
-"""Test 2 — Subtype spatial-pattern translation through HOMER's π.
+"""Test 2. Subtype spatial-pattern translation through HOMER's π.
 
 Pagani et al. 2026 report per-subtype network connectivity matrices in both
 species (ED Fig 1 for mouse, Fig 4e for human). Each subtype (hyper, hypo) has
-a spatial signature — which networks carry the strongest connectivity
+a spatial signature, which networks carry the strongest connectivity
 perturbation in that subtype.
 
 Their claim: "the FC subtypes recur cross-species in matching anatomical
-locations" (their claim 3 — supported by **name-based** matching of mouse
+locations" (their claim 3, supported by **name-based** matching of mouse
 Somatomotor to human Somatomotor, etc.).
 
 This test replaces the name-based bridge with HOMER's quantitative π:
@@ -18,7 +18,7 @@ This test replaces the name-based bridge with HOMER's quantitative π:
   5. Compare to the observed human 8-network intensity vector from Fig 4e
      using Pearson correlation.
   6. **Subtype-specificity check**: corr(pred_hypo, obs_hypo) should exceed
-     corr(pred_hypo, obs_hyper) — if π is informative, the mouse hypo
+     corr(pred_hypo, obs_hyper), if π is informative, the mouse hypo
      spatial pattern should predict the *human hypo* pattern better than
      the *human hyper* pattern.
 
@@ -91,8 +91,8 @@ HOMER_MOUSENET_TO_PAGANI_MOUSE: dict[str, str] = {
     "HC_Limbic":     "HC",
     "BF_Olfactory":  "BF",
     "Subcortical":   "Thalamus",          # HOMER subcortical (pids 13/14/15/18/19) → split below
-    "Frontoparietal": None,               # not in Pagani 9-net — drop
-    "Brainstem":     None,                # not in Pagani 9-net — drop
+    "Frontoparietal": None,               # not in Pagani 9-net, drop
+    "Brainstem":     None,                # not in Pagani 9-net, drop
     "Limbic":        None,                # never populated in our scheme (legacy slot)
     "Control":       None,
     "DorsAtten":     None,
@@ -115,7 +115,7 @@ def _read_subtype_matrix(ws, header_row: int, data_start_row: int, n_nets: int,
 def load_pagani_subtype_matrices() -> dict:
     wb = openpyxl.load_workbook(PAGANI_XLSX, data_only=True)
 
-    # ED Fig 1 — mouse, 9 networks
+    # ED Fig 1, mouse, 9 networks
     ws = wb["ED - Figure 1"]
     # Hypo block: header row 2, data rows 3..11 (9 nets), columns B..J (2..10)
     mouse_hypo = _read_subtype_matrix(ws, header_row=2, data_start_row=3,
@@ -124,7 +124,7 @@ def load_pagani_subtype_matrices() -> dict:
     mouse_hyper = _read_subtype_matrix(ws, header_row=15, data_start_row=16,
                                         n_nets=9, col_start=2)
 
-    # Fig 4e — human, 8 networks
+    # Fig 4e, human, 8 networks
     ws = wb["Figure 4e"]
     # Hypo block: header row 3, data rows 4..11, cols B..I (2..9)
     human_hypo = _read_subtype_matrix(ws, header_row=3, data_start_row=4,
@@ -148,7 +148,7 @@ def network_intensity(M: np.ndarray, metric: str = "abs_rowcol_sum") -> np.ndarr
 
     metric:
       - "rowcol_sum": row + column sum (symmetrize then sum)
-      - "abs_rowcol_sum": |M|.sum(axis=0) + |M|.sum(axis=1) — magnitude only
+      - "abs_rowcol_sum": |M|.sum(axis=0) + |M|.sum(axis=1), magnitude only
       - "rms": sqrt(mean(M**2)) per network row
     """
     if metric == "rowcol_sum":
@@ -190,7 +190,7 @@ def aggregate_human_parcels_to_networks(values: np.ndarray,
         # Map paper-network name → our internal name; "Subcortical" matches directly.
         # Our human_paper_networks uses ['Visual','Auditory','SomatoMotor','DorsAtten',
         #   'Salience','Limbic','Control','DMN','Subcortical']
-        # If target is "DorsAtten" — same. "SomatoMotor" — same (modulo case). etc.
+        # If target is "DorsAtten", same. "SomatoMotor", same (modulo case). etc.
         if tname not in human_net_names:
             out[tname] = float("nan")
             continue
@@ -202,7 +202,7 @@ def aggregate_human_parcels_to_networks(values: np.ndarray,
 
 def main():
     print("=" * 80)
-    print("Pagani 2026 Test 2 — subtype spatial-pattern translation through π")
+    print("Pagani 2026 Test 2, subtype spatial-pattern translation through π")
     print("=" * 80)
 
     M, _ = load_cached("mouse", cache_dir="outputs/anndata")
@@ -211,7 +211,7 @@ def main():
     print(f"π: {pi.shape}, total mass: {pi.sum():.4f}")
 
     # Per-parcel network assignments (separate_aud=True gives 9 human nets here
-    # but the paper only names 8 — we'll merge Auditory into SomatoMotor for the
+    # but the paper only names 8, we'll merge Auditory into SomatoMotor for the
     # human comparison since Pagani's "SomatoMotor" Yeo-7 collapses auditory back in).
     mouse_paper_net, mouse_net_names = assign_mouse_paper_networks(M.var, separate_aud=True)
     human_paper_net, human_net_names = assign_human_paper_networks(H.var, separate_aud=True)

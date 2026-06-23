@@ -1,4 +1,4 @@
-"""Tests for homer.eval — translation, anchor CV, nulls."""
+"""Tests for homer.eval, translation, anchor CV, nulls."""
 import numpy as np
 import pytest
 
@@ -82,7 +82,7 @@ def test_random_pi_null_smoke(mouse_ad, human_ad):
 
 
 # ---------------------------------------------------------------------------
-# Multi-source trust (v1) — augments compute_trust_score
+# Multi-source trust (v1), augments compute_trust_score
 
 
 def test_compute_multisource_trust_returns_evidence_tiers(mouse_ad, human_ad):

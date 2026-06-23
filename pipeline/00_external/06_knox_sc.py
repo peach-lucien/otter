@@ -13,7 +13,7 @@ gives 43 distinct cortical fingerprints. For each Garin anchor mapped to a
 Knox cortical leaf set, we replace its SC fingerprint with a Knox-derived
 average of the relevant leaves' rows.
 
-Output: `data_external/mouse_sc_knox.npy` — same shape as `mouse_sc.npy`
+Output: `data_external/mouse_sc_knox.npy`, same shape as `mouse_sc.npy`
 (1864, 1864), but with cortical-anchor rows/columns recomputed using Knox
 leaf-level data.
 
@@ -82,7 +82,7 @@ def main():
     for garin_name, knox_codes in GARIN_TO_KNOX.items():
         valid_codes = [c for c in knox_codes if c in knox.columns]
         if not valid_codes:
-            print(f"  ⚠ no Knox columns for '{garin_name}' — skipping")
+            print(f"  ⚠ no Knox columns for '{garin_name}', skipping")
             continue
         rows = named[named["clean"] == garin_name]
         if len(rows) == 0:
@@ -142,7 +142,7 @@ def main():
     # Then sc_correlation_distance(fingerprints) gives a 1864×1864 cost matrix
     # that uses Knox info for cortical anchors and existing SC for everything.
     fp = np.zeros((n_parcels, knox.shape[1] + n_parcels), dtype=np.float64)
-    # Existing SC rows in the second half — every parcel gets this signal
+    # Existing SC rows in the second half, every parcel gets this signal
     fp[:, knox.shape[1]:] = sc_old
     # Knox in the first half for the cortical anchors
     for i, pos in enumerate(cortical_pos):
@@ -160,7 +160,7 @@ def main():
     # apply the same `normalise_cost(scheme="max")` step the production
     # pipeline applies to Cm_SC (see pipeline/03c_build_multimodal_costs.py).
     # Without this, Cm_SC_knox lives in [0, ~1.32] while every other cost
-    # matrix in the cache lives in [0, 1] — that scale mismatch silently
+    # matrix in the cache lives in [0, 1], that scale mismatch silently
     # over-weights SC by ~30% in any FGW solve that uses Cm_SC_knox.
     from homer.costs.normalisation import normalise_cost
 

@@ -16,9 +16,9 @@ Public API
         ``output_dir/viewer_data.json`` and ``output_dir/index.html``.
 
 Architecture (v2):
-  - Two separate Plotly divs (no subplots) — each renders independently
+  - Two separate Plotly divs (no subplots), each renders independently
   - Three traces per side: base (static, network-coloured), overlay (partners),
-    selected (1 point in orange) — clicks only restyle the small overlay
+    selected (1 point in orange), clicks only restyle the small overlay
   - Click handler uses curveNumber + pointNumber for robust scatter3d events
 """
 from __future__ import annotations
@@ -233,7 +233,7 @@ _HTML_TEMPLATE = """<!DOCTYPE html>
 </style>
 </head>
 <body>
-<h1>Cross-species brain region map — interactive viewer</h1>
+<h1>Cross-species brain region map, interactive viewer</h1>
 <div class="meta">
   Production π = <code id="pilabel"></code> · 1864 mouse nodes (CCFv3) ↔ 2094 human nodes (MNI152) ·
   larger dot = Garin anchor · <span style="color:#FFAA00">orange</span> = currently selected ·
@@ -248,7 +248,7 @@ _HTML_TEMPLATE = """<!DOCTYPE html>
       <b style="color:#fff">What this shows.</b><br>
       Two 3D point clouds: each dot is a <i>parcel</i> (small brain region) in either the mouse or human atlas.
       The model maps each mouse parcel to a probability distribution over human parcels.
-      Larger dots are the 42 Garin anchors — known cross-species correspondences.
+      Larger dots are the 42 Garin anchors, known cross-species correspondences.
       <br><br>
       <b style="color:#fff">Cameras.</b>
       Drag = rotate · scroll = zoom · <kbd>shift</kbd>+drag = pan.
@@ -260,9 +260,9 @@ _HTML_TEMPLATE = """<!DOCTYPE html>
       <br><br>
       <b style="color:#fff">View modes</b> (top-left toggle):
       <ul style="margin:4px 0 0; padding-left:18px;">
-        <li><b>By network</b> — color by the 11 functional networks.</li>
-        <li><b>Mapping entropy</b> — bright = soft mapping; dark = one-hot.</li>
-        <li><b>Coverage</b> — for the human side, brightness = mouse mass landed there.</li>
+        <li><b>By network</b>, color by the 11 functional networks.</li>
+        <li><b>Mapping entropy</b>, bright = soft mapping; dark = one-hot.</li>
+        <li><b>Coverage</b>, for the human side, brightness = mouse mass landed there.</li>
       </ul>
     </div>
   </div>
@@ -295,11 +295,11 @@ _HTML_TEMPLATE = """<!DOCTYPE html>
 
 <div id="info">
   <div class="panel" id="mouse-panel">
-    <h2>🐭 Mouse — click a node</h2>
+    <h2>🐭 Mouse, click a node</h2>
     <div>Click a node on the left side.</div>
   </div>
   <div class="panel" id="human-panel">
-    <h2>🧠 Human — click a node</h2>
+    <h2>🧠 Human, click a node</h2>
     <div>Click a node on the right side.</div>
   </div>
 </div>
@@ -431,7 +431,7 @@ const layoutFor = (species) => ({
     zaxis: { title: 'z', backgroundcolor: '#1a1a1a', gridcolor: '#333' },
   },
   annotations: [{
-    text: species === 'mouse' ? '🐭 Mouse — 1864 nodes (CCFv3)' : '🧠 Human — 2094 nodes (MNI152)',
+    text: species === 'mouse' ? '🐭 Mouse, 1864 nodes (CCFv3)' : '🧠 Human, 2094 nodes (MNI152)',
     x: 0.5, y: 1.0, xref: 'paper', yref: 'paper',
     showarrow: false, font: { size: 13, color: '#fff' },
   }],
@@ -533,7 +533,7 @@ function fmtPanel(species, i) {
     const bar = '█'.repeat(Math.max(1, Math.round(val * 12)));
     lines.push(`<li><span style="color:#${val > 0.5 ? 'fde725' : (val > 0.1 ? '34d399' : '888')};">${bar}</span> <b>${(val*100).toFixed(1)}%</b> ${isA} → ${r} <span style="color:#888">(${net})</span></li>`);
   }
-  if (!lines.length) lines.push('<li><i>(no concentrated partners — diffuse mapping)</i></li>');
+  if (!lines.length) lines.push('<li><i>(no concentrated partners, diffuse mapping)</i></li>');
   return `
     <h2>${species === 'mouse' ? '🐭' : '🧠'} ${species[0].toUpperCase()+species.slice(1)} node #${d.ids[i]}</h2>
     <div><b>Region:</b> ${d.regions[i]}</div>
@@ -573,8 +573,8 @@ document.getElementById('reset').addEventListener('click', () => {
     }, [1]);
     Plotly.restyle(PLOT_IDS[sp], { x: [[]], y: [[]], z: [[]], text: [[]] }, [2]);
   });
-  document.getElementById('mouse-panel').innerHTML = '<h2>🐭 Mouse — click a node</h2><div>Click a node on the left side.</div>';
-  document.getElementById('human-panel').innerHTML = '<h2>🧠 Human — click a node</h2><div>Click a node on the right side.</div>';
+  document.getElementById('mouse-panel').innerHTML = '<h2>🐭 Mouse, click a node</h2><div>Click a node on the left side.</div>';
+  document.getElementById('human-panel').innerHTML = '<h2>🧠 Human, click a node</h2><div>Click a node on the right side.</div>';
   refreshAllBases();
 });
 

@@ -33,7 +33,7 @@ def main():
     ax.set_ylim(0, 1.12)
     ax.legend(fontsize=8, loc="lower right")
     ax.set_title("1 · Bidirectional cycle-consistency\n"
-                 "HOMER's round-trip is more self-consistent —\n"
+                 "HOMER's round-trip is more self-consistent. \n"
                  "a fair, ground-truth-free metric", fontsize=9.5)
 
     # --- Panel 2: optogenetic AI circuit → human cognition ----------------
@@ -55,9 +55,9 @@ def main():
                      f"{opto['top10_overlap']}/10 overlap)", fontsize=9.5)
     else:
         ax.axis("off")
-        ax.set_title("2 · Optogenetic decode — Neurosynth maps unavailable")
+        ax.set_title("2 · Optogenetic decode. Neurosynth maps unavailable")
 
-    # --- Panel 3: trust-stratified agreement (honest flat result) ---------
+    # --- Panel 3: trust-stratified agreement (flat result) ---------
     ax = axes[2]
     ts = j["trust_stratified"]
     tm = ts["tier_mean_topdist_mm"]
@@ -72,10 +72,10 @@ def main():
     ax.set_xticklabels([t.replace("_", "\n") for t in order], fontsize=7)
     ax.set_ylabel("HOMER↔TransBrain top-region distance (mm)")
     ax.set_title(f"3 · Agreement vs HOMER's trust tiers\n"
-                 f"flat (r = {ts['topdist_vs_trust_pearson']:+.2f}) — the two methods\n"
+                 f"flat (r = {ts['topdist_vs_trust_pearson']:+.2f}), the two methods\n"
                  f"differ for reasons unrelated to HOMER's confidence", fontsize=9.5)
 
-    plt.suptitle("HOMER × TransBrain 2025 — advanced comparison: cycle-consistency, "
+    plt.suptitle("HOMER × TransBrain 2025, advanced comparison: cycle-consistency, "
                  "circuit annotation, and where the methods differ", fontsize=12, y=1.04)
     plt.tight_layout()
     out = ROOT / "outputs" / "figures" / "transbrain_2025_advanced.png"

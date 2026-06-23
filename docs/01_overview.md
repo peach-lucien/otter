@@ -4,7 +4,7 @@
 
 HOMER (**Hom**ology **E**stimation across species via **R**egional optimal transport) is a Python package that learns probabilistic correspondences between mouse and human brain parcels. The output is a coupling matrix **π** of shape (1864 mouse parcels × 2094 human parcels) where `π[i, j]` is interpretable as "probability that mouse parcel *i* corresponds to human parcel *j*".
 
-> **Note on sharpness and coverage.** At the production regularisation (ε=0.005) the coupling is sharp/peaked, not broadly soft: ~67 % of mouse rows place essentially all mass on a single human parcel (median effective targets ≈ 1; an intended low-entropy regime, tunable via ε — raising ε softens it). Because the human marginal is free (semirelaxed FGW), the coupling maps the mouse atlas onto a subset of human parcels: ~53 % of human parcels receive negligible mass, so reverse (human→mouse) queries have no source for about half of human parcels.
+> **Note on sharpness and coverage.** At the production regularisation (ε=0.005) the coupling is sharp/peaked, not broadly soft: ~67 % of mouse rows place essentially all mass on a single human parcel (median effective targets ≈ 1; an intended low-entropy regime, tunable via ε, raising ε softens it). Because the human marginal is free (semirelaxed FGW), the coupling maps the mouse atlas onto a subset of human parcels: ~53 % of human parcels receive negligible mass, so reverse (human→mouse) queries have no source for about half of human parcels.
 
 The method is **Fused Gromov-Wasserstein optimal transport** (POT's `entropic_semirelaxed_fused_gromov_wasserstein`), supervised by published mouse↔human anchor pairs.
 
@@ -39,9 +39,9 @@ See `03_results.md` for what each tier means and how to read the headline number
 
 ## What HOMER *is not*
 
-- Not an unsupervised method — it requires anchor pairs (we ship 21 Garin point anchors + 26 region-anchor entries from 15 anchor packs).
-- Not a voxel-level mapping — π is parcel-to-parcel. Mouse parcels span ~12-2837 voxels each.
-- Not a cellular-resolution tool — it's spatial and connectivity-based; cell-type homology (BICCN, Allen Brain Cell Atlas) is a separate problem.
+- Not an unsupervised method. It requires anchor pairs (we ship 21 Garin point anchors + 26 region-anchor entries from 15 anchor packs).
+- Not a voxel-level mapping. π is parcel-to-parcel. Mouse parcels span ~12-2837 voxels each.
+- Not a cellular-resolution tool. It is spatial and connectivity-based; cell-type homology (BICCN, Allen Brain Cell Atlas) is a separate problem.
 - Not validated for cerebellum or medulla (excluded from our parcellation).
 
 ## Headline number
@@ -56,7 +56,7 @@ For the **recommended π** (`pi_fc_plus_SC_with_all_packs.npy`):
 | z-score vs permuted-anchor null | **+17.8** |
 | Multi-source trust tier "anchored_and_validated" | 31 % of parcels |
 
-See `03_results.md` for the full per-region breakdown, the third-party validation table across twelve cross-species papers, and the honest caveats. See `04_anchor_packs.md` for the per-pack contribution.
+See `03_results.md` for the full per-region breakdown, the third-party validation table across twelve cross-species papers, and the caveats. See `04_anchor_packs.md` for the per-pack contribution.
 
 ## Project structure at a glance
 

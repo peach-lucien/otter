@@ -1,10 +1,10 @@
-# Draft email to Silvia — request for per-model connectivity maps
+# Draft email to Silvia, request for per-model connectivity maps
 
-Subject: HOMER follow-up — per-model degree-centrality maps?
+Subject: HOMER follow-up, per-model degree-centrality maps?
 
 Dear Silvia,
 
-Thank you very much — the package was exactly what we needed. For the record, on
+Thank you very much, the package was exactly what we needed. For the record, on
 our side everything checked out: the clean `sorted_etiology_by_feature_matrix.csv`
 matched your Fig 1c and let us recover the hyper/hypo subtype split directly from
 the data (n=9 hyper / n=11 hypo), the Fig 1d occurrence maps and the 13
@@ -13,10 +13,10 @@ the chd8 functional templates registered cleanly.
 
 We've now reproduced the subtype-level cross-species mapping with our
 optimal-transport coupling, and the mouse hyper/hypo signatures translate to the
-matching human subtypes — so we'd love to push to the **per-model** level next.
+matching human subtypes, so we'd love to push to the **per-model** level next.
 
 For that, the one thing that would unblock us is the **per-model voxelwise
-weighted-degree-centrality maps** — i.e. the mutant-vs-WT global connectivity
+weighted-degree-centrality maps**, i.e. the mutant-vs-WT global connectivity
 maps behind Fig 1a/b, one NIfTI per model (all 20), in the chd8 functional space
 (or Allen space, whichever is native to your pipeline).
 

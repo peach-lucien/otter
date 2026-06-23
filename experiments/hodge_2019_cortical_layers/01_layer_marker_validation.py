@@ -1,7 +1,7 @@
 """Hodge et al. 2019 cortical-layer-marker cross-species validation.
 
-[Hodge et al. 2019, Nature](https://www.nature.com/articles/s41586-019-1506-7) —
-"Conserved cell types with divergent features in human versus mouse cortex" —
+[Hodge et al. 2019, Nature](https://www.nature.com/articles/s41586-019-1506-7)
+"Conserved cell types with divergent features in human versus mouse cortex"
 showed that the canonical layer-defining transcription factors maintain their
 layer-specific spatial expression across mouse and human cortex:
 
@@ -17,7 +17,7 @@ with high CUX2 expression**, and the same should hold for the other markers.
 
 This is a Beauchamp-independent test: Hodge's data comes from Allen ISH (mouse)
 and AHBA microarray (human), which are different platforms from Beauchamp's
-Mouse-Human Transcriptomic Similarity dataset. So agreement here is genuinely
+Mouse-Human Transcriptomic Similarity dataset. So agreement here is
 independent evidence about π's anatomical fidelity.
 
 Procedure:
@@ -119,7 +119,7 @@ def main():
         # Human column (case-insensitive match against the FULL human gene list)
         h_match = human_genes[human_genes["gene_symbol"].str.upper() == symbol.upper()]
         if len(h_match) == 0:
-            print(f"  {symbol:<8s} | (not in human AHBA — skipped)")
+            print(f"  {symbol:<8s} | (not in human AHBA, skipped)")
             continue
         h_idx = int(h_match.iloc[0].name)
         h_obs = human_expr[:, h_idx]   # (2094,)

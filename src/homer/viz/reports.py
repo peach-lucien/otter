@@ -198,7 +198,7 @@ def build_comparison_table(logs_dir: str | Path) -> tuple:
         ft = (fct or {}).get(ft_key, {}) if ft_key else {}
         scv_key = _SUBJECT_CV_KEYS.get(cfg_key)
         scv = subject_cv.get(scv_key, {}) if scv_key else {}
-        # NEW — full-space metrics from outputs/logs/full_space_eval.json
+        # NEW, full-space metrics from outputs/logs/full_space_eval.json
         # Aggregate weighted across networks if data exists for this config.
         fs_per_net = (full_space or {}).get(cfg_key, {})
         fs = aggregate_full_space(fs_per_net) if fs_per_net else {}
@@ -271,13 +271,13 @@ def render_summary_md(wide_df: pd.DataFrame, long_df: pd.DataFrame,
                        null_z: dict, bootstrap: dict) -> str:
     """Render the markdown summary as a single string."""
     md = []
-    md.append("# Comprehensive comparison — all configs, all metrics\n")
+    md.append("# Comprehensive comparison, all configs, all metrics\n")
     md.append(
         f"Generated from results in `outputs/logs/` on data of "
         f"{bootstrap.get('n_iterations', '?')}-iter bootstrap and 11-network "
         f"leave-one-network-out CV. Production config marked **bold**.\n"
     )
-    md.append("## Headline table — restricted-anchor CV (the 'ranking' metric)\n")
+    md.append("## Headline table, restricted-anchor CV (the 'ranking' metric)\n")
     md.append("Top-1 here is **argmax restricted to the held-out anchor candidates**, "
               "NOT global argmax over all 2094 human nodes (which is in the next table).\n")
     md.append("FC-translation r is **in-sample** (uses the same fc_mean to build C_h that it evaluates).\n")
@@ -286,12 +286,12 @@ def render_summary_md(wide_df: pd.DataFrame, long_df: pd.DataFrame,
     md.append("|---|---|---|---|---|---|---|---|---|---|---|---|")
 
     def _fmt(x, fs="%.2f"):
-        try: return "—" if not np.isfinite(x) else fs % x
-        except Exception: return "—"
+        try: return ", " if not np.isfinite(x) else fs % x
+        except Exception: return ", "
 
     def _pct(x):
-        try: return "—" if not np.isfinite(x) else f"{x:.0%}"
-        except Exception: return "—"
+        try: return ", " if not np.isfinite(x) else f"{x:.0%}"
+        except Exception: return ", "
 
     for _, r in wide_df.iterrows():
         if (not np.isfinite(r["anchor_top1"])
@@ -316,9 +316,9 @@ def render_summary_md(wide_df: pd.DataFrame, long_df: pd.DataFrame,
     # Only show the full-space table for configs that have data
     has_fs = any(np.isfinite(r) for r in wide_df["full_top1"].values)
     if has_fs:
-        md.append("## Full-space recovery — global argmax over all 2094 human nodes\n")
+        md.append("## Full-space recovery, global argmax over all 2094 human nodes\n")
         md.append(
-            "The HONEST per-voxel metric. The model's full-space argmax typically lands "
+            "The conservative per-voxel metric. The model's full-space argmax typically lands "
             "on a non-anchor *grid* node near the correct anchor rather than the anchor "
             "itself. Full-top-1 is much smaller than restricted-top-1 because the search "
             "space is 2094× larger.\n"
@@ -358,7 +358,7 @@ def render_summary_md(wide_df: pd.DataFrame, long_df: pd.DataFrame,
 
     md.append("## Per-network top-1 heatmap (see fig 14)\n")
     md.append(
-        "Variance across networks is the story — most configs land 100% on the easy "
+        "Variance across networks is the story, most configs land 100% on the easy "
         "networks (auditory, frontoparietal, frontal_dmn, etc.) and 25-50% on visual / "
         "brainstem / sensorimotor.\n"
     )
@@ -409,7 +409,7 @@ def make_comparison_bars_figure(wide_df: pd.DataFrame, *,
                 ax.text(b.get_width() * 1.02 if v > 0 else 0.01,
                          b.get_y() + b.get_height() / 2,
                          fmt % disp, va="center", fontsize=8)
-    fig.suptitle("Comprehensive comparison — all configs (production = orange)",
+    fig.suptitle("Comprehensive comparison, all configs (production = orange)",
                   fontsize=13)
     fig.tight_layout()
     return fig

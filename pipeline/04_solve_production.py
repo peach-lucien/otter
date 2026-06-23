@@ -1,11 +1,11 @@
-"""Pipeline step 04 — solve the production model and save π.
+"""Pipeline step 04, solve the production model and save π.
 
 Uses the new sklearn-style API to fit MultimodalFGW (FC + SC, anchor +
 xyz supervision) on full data and save the resulting coupling.
 
 Outputs:
-    outputs/coupling/pi_fc_plus_SC.npy      — production π (1864 × 2094)
-    outputs/coupling/pi_fc_plus_SC.json     — config + fit info sidecar
+    outputs/coupling/pi_fc_plus_SC.npy, production π (1864 × 2094)
+    outputs/coupling/pi_fc_plus_SC.json, config + fit info sidecar
 
 Usage:
     python pipeline/04_solve_production.py
@@ -63,7 +63,7 @@ def main(args):
     model = cls(**kwargs)
     t0 = time.time()
     model.fit(M, H, **fit_kwargs)
-    print(f"  done in {time.time() - t0:.1f}s — {model!r}")
+    print(f"  done in {time.time() - t0:.1f}s, {model!r}")
 
     out_path = COUP / f"pi_{args.config}.npy"
     model.save(out_path)

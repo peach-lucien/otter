@@ -1,4 +1,4 @@
-"""FGWModel — base class for all cross-species coupling models.
+"""FGWModel, base class for all cross-species coupling models.
 
 The four production subclasses (UnsupervisedGW, SupervisedFGW, MultimodalFGW,
 HierarchicalFGW) all inherit from this. Their :meth:`fit` solves the underlying
@@ -42,7 +42,7 @@ class FGWModel:
     """Base class for cross-species FGW models.
 
     Subclasses set their own __init__ defaults and implement :meth:`_solve`.
-    Use :meth:`fit` (which internally calls _solve and stores results) — never
+    Use :meth:`fit` (which internally calls _solve and stores results), never
     override fit directly.
     """
 
@@ -74,7 +74,7 @@ class FGWModel:
     def pi(self) -> np.ndarray:
         """The (n_m, n_h) cross-species coupling. Raises if not yet fit."""
         if self.pi_ is None:
-            raise RuntimeError("Model not fit yet — call .fit(mouse_ad, human_ad) first.")
+            raise RuntimeError("Model not fit yet, call .fit(mouse_ad, human_ad) first.")
         return self.pi_
 
     def predict_human_fc(self, mouse_fc: Optional[np.ndarray] = None,
@@ -148,7 +148,7 @@ class FGWModel:
     def load(cls, path: str | Path) -> "FGWModel":
         """Load a saved π file (and optional sidecar) into a model instance.
 
-        Note: the loaded model is "reconstituted" — it has self.pi_ but no
+        Note: the loaded model is "reconstituted", it has self.pi_ but no
         adata refs, so .predict_human_fc and .evaluate will require explicit
         arguments (mouse_fc, mouse_ad, human_ad).
         """
@@ -184,7 +184,7 @@ class FGWModel:
 
 
 def _all_subclasses(cls):
-    """All transitive subclasses of cls — for save/load class lookup."""
+    """All transitive subclasses of cls, for save/load class lookup."""
     out = set(cls.__subclasses__())
     for sub in list(out):
         out |= _all_subclasses(sub)

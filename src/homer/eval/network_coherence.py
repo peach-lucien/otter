@@ -1,10 +1,10 @@
-"""Within-network compactness — Coletta-style multi-source check.
+"""Within-network compactness. Coletta-style multi-source check.
 
 For each Garin functional network, measures how tightly the predicted human
 partners cluster in MNI space. Network-preserving mapping means mouse
 parcels in network X end up close to each other in human space.
 
-This is an *internal* multi-source check — it doesn't rely on Beauchamp
+This is an *internal* multi-source check, it doesn't rely on Beauchamp
 validation. Two complementary metrics per network:
 
   - median_pairwise_distance_mm: median pairwise Euclidean distance among

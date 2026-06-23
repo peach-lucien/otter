@@ -5,7 +5,7 @@ but does NOT survive a spatial spin null (p=0.16): two smooth monotone maps
 correlate by spatial autocorrelation alone (see 01_gradient_validation.py and
 experiments/spatial_null_check/). HOMER's *strong* mode is discrete correspondence
 (the network bridge and Coletta RSNs survive spin), so here we ask the gradient
-question categorically — does π preserve the discrete content of the gradient? —
+question categorically, does π preserve the discrete content of the gradient?
 and test it against the fair spin null.
 
 Two tests:
@@ -65,7 +65,7 @@ def tier_accuracy(pred_vals, human_tier, edges):
 
 def main():
     print("=" * 78)
-    print("Margulies gradient — DISCRETE reframes vs a fair spin null")
+    print("Margulies gradient. DISCRETE reframes vs a fair spin null")
     print("=" * 78)
 
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))

@@ -1,4 +1,4 @@
-"""Pipeline step 03 — build all cost matrices for the FGW solver.
+"""Pipeline step 03, build all cost matrices for the FGW solver.
 
 Produces a single output that the production solve and every CV / validation
 script reads:
@@ -7,21 +7,21 @@ script reads:
 
 Contains:
     Within-species relational (used as C in the FGW objective):
-      Cm, Ch          (n×n)  — FC distance, log1p + 1−r, max-normalised
-      Cm_xyz, Ch_xyz  (n×n)  — pairwise xyz distance in [0,1] cube
-      Cm_SC, Ch_SC    (n×n)  — SC log1p + 1−r distance (Allen summary-structure)
-      Cm_gene, Ch_gene(n×n)  — gene-coexpression distance (full per-species)
-      Cm_SC_knox      (1864,1864) — Knox-augmented SC (comparative; populated
+      Cm, Ch          (n×n). FC distance, log1p + 1−r, max-normalised
+      Cm_xyz, Ch_xyz  (n×n), pairwise xyz distance in [0,1] cube
+      Cm_SC, Ch_SC    (n×n). SC log1p + 1−r distance (Allen summary-structure)
+      Cm_gene, Ch_gene(n×n), gene-coexpression distance (full per-species)
+      Cm_SC_knox      (1864,1864). Knox-augmented SC (comparative; populated
                                     by `pipeline/00_external/06_knox_sc.py`)
 
     Cross-species (used as M in the FGW objective):
-      M_xyz   (n_m, n_h)  — per-species-normalised xyz distance
-      M_gene  (n_m, n_h)  — ortholog-cosine distance
-      M_gene_valid (n_m, n_h) bool — both species have ortholog data
-      M_anchor (n_m, n_h) — distance in anchor-relationship FC vector
+      M_xyz   (n_m, n_h), per-species-normalised xyz distance
+      M_gene  (n_m, n_h), ortholog-cosine distance
+      M_gene_valid (n_m, n_h) bool, both species have ortholog data
+      M_anchor (n_m, n_h), distance in anchor-relationship FC vector
 
     Scalars:
-      n_m, n_h        — node counts
+      n_m, n_h, node counts
 
 Usage:
     PYTHONPATH=src python pipeline/03_build_costs.py

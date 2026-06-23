@@ -163,7 +163,7 @@ def test_overlapping_entries_do_not_clobber():
     b = RegionAnchorEntry(pair_id=23, label="B",
                           mouse_indices=[5, 6], human_indices=[4, 7])  # shares h=4
     out = apply_region_supervision(M, [a, b], lam_outside=1.0)
-    # A's allowed cells — including the shared column 4 — stay free
+    # A's allowed cells, including the shared column 4, stay free
     for mp in (1, 2):
         for hp in (3, 4):
             assert out[mp, hp] == 0.0, f"A cell ({mp},{hp}) was clobbered"
@@ -205,7 +205,7 @@ def test_protect_mask_preserves_point_anchors():
 
 
 # ---------------------------------------------------------------------------
-# BICCN motor region anchors (integration test — needs real DSURQE atlas)
+# BICCN motor region anchors (integration test, needs real DSURQE atlas)
 
 
 def _skip_if_no_atlas():

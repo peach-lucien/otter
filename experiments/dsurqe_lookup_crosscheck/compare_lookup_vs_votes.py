@@ -7,7 +7,7 @@ placed into the Beauchamp DSURQE label volume and the majority label in a
 ``src/homer/data/anchor_packs/_dsurqe.py::assign_dsurqe_labels``).
 
 The mouse parcel table also ships a **precomputed vote** per parcel
-(``region_vote_ss_dsq`` — the majority DSURQE label over the parcel's full
+(``region_vote_ss_dsq``, the majority DSURQE label over the parcel's full
 voxel set, computed upstream). This script quantifies how the two compare,
 so the choice of default is grounded in numbers rather than intuition.
 
@@ -17,7 +17,7 @@ pandas / anndata / POT), so it runs without the full solver stack.
 
 What it reports
 ---------------
-* vote-resolution coverage — what fraction of votes can even be mapped to a
+* vote-resolution coverage, what fraction of votes can even be mapped to a
   DSURQE_tree.json node (via direct match, the Beauchamp CSV bridge, and the
   hand-authored ``_paul_vote_bridge`` table);
 * per anchor-pack region query: |live set|, |vote set|, intersection, Jaccard;

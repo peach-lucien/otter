@@ -1,12 +1,12 @@
 """AMYGDALA-1: Add the amygdala / cortical subplate region anchor.
 
-This is the closing anchor pack — it covers the last remaining 0 %
+This is the closing anchor pack, it covers the last remaining 0 %
 Beauchamp top-1 failure pair without dedicated sub-region supervision
 ("Cortical subplate-other → amygdala").
 
   pid 38: Mouse Cortical subplate (54 parcels) ↔ Human amygdala (6 parcels)
 
-Single-entry pack — DSURQE doesn't distinguish amygdala sub-nuclei. No
+Single-entry pack. DSURQE doesn't distinguish amygdala sub-nuclei. No
 held-out test possible for the same reason: with only one entry, there's
 nothing to hold out and compare against the FC/SC-driven recovery.
 

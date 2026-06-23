@@ -7,8 +7,8 @@ autocorrelation. Here we ask sharper, HOMER-strong-mode questions:
 
   1. CLASS CONTRASTS (magnitude-cancelling, like the Pagani contrast). Build a
      per-parcel class score (mean z over a class's markers) for both species and
-     test the *contrast* between classes — excitatory−inhibitory (Glut − Intern)
-     and neuronal−glial — which removes the shared "everything is high in cortex"
+     test the *contrast* between classes, excitatory−inhibitory (Glut − Intern)
+     and neuronal−glial, which removes the shared "everything is high in cortex"
      baseline. Scored against the FAIR translation-spin null (spin the mouse map
      on the mouse sphere, route through the real π).
   2. SUBCORTICAL HOTSPOT (discrete). Dopaminergic markers (Th/Drd1/Drd2/Slc6a3)
@@ -63,7 +63,7 @@ def class_score(expr, gene_df, genes, sym_col, upper):
 
 def main():
     print("=" * 78)
-    print("BICCN cell types — CONTRAST + HOTSPOT reframe vs a fair spin null")
+    print("BICCN cell types. CONTRAST + HOTSPOT reframe vs a fair spin null")
     print("=" * 78)
 
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))

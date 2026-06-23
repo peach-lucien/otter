@@ -1,4 +1,4 @@
-"""E1: FC translation quality — evaluate π via downstream FC prediction.
+"""E1: FC translation quality, evaluate π via downstream FC prediction.
 
 For each named config in CONFIGS:
   1. Solve the production semirelaxed FGW (no held-out anchors).
@@ -72,7 +72,7 @@ def build_cost(rel_weights: dict, costs: dict) -> tuple[np.ndarray, np.ndarray]:
 
 
 def build_M_full(M_weights: dict, costs: dict, idx_m, idx_h, net_mask, lam=1.0):
-    """Full anchor supervision — every anchor visible."""
+    """Full anchor supervision, every anchor visible."""
     M = np.zeros_like(costs["M_xyz"], dtype=np.float64)
     if M_weights.get("xyz", 0): M += M_weights["xyz"] * costs["M_xyz"].astype(np.float64)
     if M_weights.get("network", 0) > 0:

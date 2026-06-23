@@ -1,7 +1,7 @@
 """Somatosensory body-map anchor pack (Penfield 1937; Roe et al. 2007).
 
 Primary somatosensory cortex (S1, BA3b) has a well-conserved somatotopic
-organization across mammals — a body map with foot/leg medial, trunk
+organization across mammals, a body map with foot/leg medial, trunk
 adjacent, hand/forelimb mid-lateral, and face/lips most lateral.
 Penfield 1937 (canonical homunculus) established this in humans; modern
 electrophysiology + fMRI confirmed similar organization in rodents,
@@ -12,13 +12,13 @@ non-human primates, and other mammals (Freire 2024; Seelke 2012; Gordon
   pid 59: Mouse Upper limb S1 ↔ Human Hand S1 (BA3b mid)
   pid 60: Mouse Lower limb S1 ↔ Human Leg S1 (BA3b medial / paracentral)
 
-The mouse Barrel field is the vibrissa (whisker) representation — a
+The mouse Barrel field is the vibrissa (whisker) representation, a
 specialised face-related sensory map. Cross-species, the barrel field
 maps onto the primate face/lip region of S1 (the mouse whisker
 representation occupies the cortical space that primate face S1 occupies).
 We combine barrel field + nose for the face anchor.
 
-Mouse trunk has only 1 DSURQE parcel — too small to anchor; the trunk
+Mouse trunk has only 1 DSURQE parcel, too small to anchor; the trunk
 representation falls under the Beauchamp-level "Primary somatosensory
 area" anchor (Garin pid 3) and is not split out here.
 
@@ -33,7 +33,7 @@ Human-side: MNI spheres at Penfield-aligned body-map centroids.
   Hand S1 (BA3b mid):      (±40, –25, 55) r=8 mm
   Leg S1 (paracentral):    (±10, –40, 70) r=10 mm
 
-Empirical effect — opt-in
+Empirical effect, opt-in
 -------------------------
 Beauchamp validates "Primary somatosensory area → postcentral gyrus"
 using all 155 mouse S1 parcels onto a *single broad* postcentral ball
@@ -45,8 +45,8 @@ concentrated there counts as a Beauchamp miss. Empirically Beauchamp
 S1 drops from 20 % → 15 %.
 
 This is the same dynamic as the cingulate pack (anchor target ≠
-validation target). The pack remains **anatomically defensible** —
-Penfield's homunculus is uncontested cross-species anatomy — but
+validation target). The pack remains **anatomically defensible**
+Penfield's homunculus is uncontested cross-species anatomy, but
 ships as **opt-in** because it hurts the Beauchamp metric. Use it
 when you want body-map-specific S1 queries and don't care about
 Beauchamp's broad-ball validation.

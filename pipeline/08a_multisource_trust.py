@@ -1,12 +1,12 @@
-"""Pipeline step 08a — multi-source per-parcel trust map for the recommended π.
+"""Pipeline step 08a, multi-source per-parcel trust map for the recommended π.
 
 This step is the missing link between the trust machinery and the GUI.
 
-  * ``05g_compute_trust.py`` writes ``trust_score_<config>.npz`` — the
+  * ``05g_compute_trust.py`` writes ``trust_score_<config>.npz``, the
     *internal* composite (bootstrap stability + argmax concentration + FC
     similarity) plus the regional-empirical Beauchamp accuracy. Useful, but
     not the file the GUI reads.
-  * ``08_build_gui.py`` reads ``trust_multisource_all_packs.npz`` — the
+  * ``08_build_gui.py`` reads ``trust_multisource_all_packs.npz``, the
     *multi-source evidence map* (five evidence tiers) produced by
     :func:`homer.eval.trust_score.compute_multisource_trust`.
 
@@ -19,11 +19,11 @@ It layers external supervision (anchor-pack membership, Beauchamp region
 validation) on top of the internal composite and classifies every mouse
 parcel into one of five evidence tiers:
 
-    anchored_and_validated  — in an anchor pack AND Beauchamp top-1 > 0
-    anchored_only           — in an anchor pack, no Beauchamp validation
-    validated_only          — Beauchamp top-1 > 0, not in any anchor pack
-    structural              — high internal trust, no external evidence
-    low_evidence            — none of the above (use predictions with caution)
+    anchored_and_validated, in an anchor pack AND Beauchamp top-1 > 0
+    anchored_only, in an anchor pack, no Beauchamp validation
+    validated_only. Beauchamp top-1 > 0, not in any anchor pack
+    structural, high internal trust, no external evidence
+    low_evidence, none of the above (use predictions with caution)
 
 Outputs:
     outputs/coupling/trust_multisource_all_packs.npz with:
@@ -33,9 +33,9 @@ Outputs:
         concentration  : (n_m,) argmax mass / row sum
         fc_sim         : (n_m,) Pearson r to nearest anchor FC profile
         weights        : (3,)   the (boot, concentration, fc) component weights
-        garin_anchored : (n_m,) bool — one of the Garin point anchors
-        pack_anchored  : (n_m,) bool — in any default region-anchor pack
-        beauchamp_top1 : (n_m,) float — its Beauchamp pair's top-1 (NaN if N/A)
+        garin_anchored : (n_m,) bool, one of the Garin point anchors
+        pack_anchored  : (n_m,) bool, in any default region-anchor pack
+        beauchamp_top1 : (n_m,) float, its Beauchamp pair's top-1 (NaN if N/A)
         evidence_tier  : (n_m,) {anchored_and_validated, anchored_only,
                                  validated_only, structural, low_evidence}
 
@@ -96,13 +96,13 @@ def main(args):
 
     boot_path = COUP / args.bootstrap_file
     if not boot_path.exists():
-        print(f"  ⚠ bootstrap aggregate {boot_path.name} missing — "
+        print(f"  ⚠ bootstrap aggregate {boot_path.name} missing, "
               f"bootstrap component will be a constant 0.5")
         boot_path = None
 
     # ---- Region-anchor packs (external supervision signal #1).
     # The pack registry is the single source of truth for the recommended
-    # composition — this stays in lockstep with compose_all.py automatically.
+    # composition, this stays in lockstep with compose_all.py automatically.
     print(f"\nBuilding default region-anchor packs "
           f"({', '.join(DEFAULT_PACK_NAMES)}) ...")
     entries = build_default_pack_entries(M.var, H.var, atlas_root=ROOT)

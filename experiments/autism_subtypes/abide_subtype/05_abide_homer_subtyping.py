@@ -13,7 +13,7 @@ mouse→human mask-definition step:
 It runs BOTH and compares: does the learned coupling subtype MORE than Pagani's
 ~25 % of individuals, and how much do the two subtypings agree?
 
-Needs the ABIDE-pcp download (nilearn) — run on a machine with the data, e.g.:
+Needs the ABIDE-pcp download (nilearn), run on a machine with the data, e.g.:
     HOMER_ALLOW_INSECURE_SSL=1 PYTHONPATH=src python \
         experiments/autism_subtypes/abide_subtype/05_abide_homer_subtyping.py \
         --abide-data-dir /tmp/abide_cache

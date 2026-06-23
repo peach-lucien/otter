@@ -8,19 +8,19 @@ Yeo networks (Somatomotor, Visual, DMN, Salience, Limbic, etc.).
 This is a stricter version of Pagani's Test 1 ("does HOMER's name-bridge hold")
 in three ways:
 
-  (A) **Labeled correspondence** — aggregate π over (HOMER mouse network ×
+  (A) **Labeled correspondence**, aggregate π over (HOMER mouse network ×
       Schaefer-Yeo7 human network), score diagonal-argmax, ratio over null.
       Re-runs the test with the canonical Yeo-7 partition (rather than
       Pagani's bespoke 8-net scheme) to check robustness of the bridge.
 
-  (B) **Data-driven mouse RSNs via ICA** — Coletta's own methodology.
+  (B) **Data-driven mouse RSNs via ICA**. Coletta's own methodology.
       Decompose the mouse FC matrix into independent components, route each
       through π, and ask which Yeo-7 network the predicted human spatial
       pattern best matches. Tests whether the cross-species correspondence
       survives when mouse networks are defined data-driven rather than from
       HOMER's anchor-derived PAIRID_TO_NETWORK.
 
-  (C) **Network coherence (compactness)** — for each mouse network, how
+  (C) **Network coherence (compactness)**, for each mouse network, how
       spatially compact is its predicted human-side image? A coherent mapping
       yields tight clusters; an incoherent one scatters mass across human
       space. Compared against permuted-π null.
@@ -111,8 +111,8 @@ def ica_mouse_rsns(fc_mouse, n_components=7, top_pct=10.0, seed=42):
     Procedure:
       1. Fisher-z + diagonal-blank
       2. Row-wise threshold (keep top top_pct)
-      3. FastICA on the (n_parcels, n_features=n_parcels) matrix
-         — each row treated as a "subject" view of the connectivity
+      3. FastICA on the (n_parcels, n_features=n_parcels) matrix,
+         each row treated as a "subject" view of the connectivity
       4. Sign-flip each component so the most-positive parcel is positive
     Returns (n_components, n_parcels) spatial maps.
     """
@@ -122,7 +122,7 @@ def ica_mouse_rsns(fc_mouse, n_components=7, top_pct=10.0, seed=42):
     # Threshold
     thresh = np.percentile(fcz, 100.0 - top_pct, axis=1, keepdims=True)
     fcz_thr = np.where(fcz >= thresh, fcz, 0.0)
-    # ICA — each parcel's connectivity row treated as an observation
+    # ICA, each parcel's connectivity row treated as an observation
     ica = FastICA(n_components=n_components, random_state=seed, max_iter=2000)
     # FastICA expects (n_samples, n_features); we want each parcel to be a sample
     components = ica.fit_transform(fcz_thr).T   # (n_components, n_parcels)
@@ -182,7 +182,7 @@ def network_coherence(pi, mouse_net, n_mouse_nets, H_var):
 
 def main():
     print("=" * 80)
-    print("HOMER × Coletta 2020 — cross-species RSN correspondence validation")
+    print("HOMER × Coletta 2020, cross-species RSN correspondence validation")
     print("=" * 80)
 
     # ---- Load HOMER + atlas labels ----
@@ -211,7 +211,7 @@ def main():
     # Sub-test A: Labeled correspondence
     # ========================================================================
     print("\n" + "=" * 80)
-    print("SUB-TEST A — Labeled correspondence (HOMER mouse-nets × Yeo-7 human-nets)")
+    print("SUB-TEST A. Labeled correspondence (HOMER mouse-nets × Yeo-7 human-nets)")
     print("=" * 80)
 
     # HOMER → Yeo-7 canonical pairings (best mapping each direction can be matched)
@@ -250,7 +250,7 @@ def main():
     # Sub-test B: Data-driven mouse RSNs via ICA
     # ========================================================================
     print("\n" + "=" * 80)
-    print("SUB-TEST B — Data-driven mouse RSNs via ICA on mouse FC")
+    print("SUB-TEST B. Data-driven mouse RSNs via ICA on mouse FC")
     print("=" * 80)
 
     fc_mouse = M.uns["fc_mean"]
@@ -295,7 +295,7 @@ def main():
     # Sub-test C: Network coherence (compactness in human space)
     # ========================================================================
     print("\n" + "=" * 80)
-    print("SUB-TEST C — Network coherence (spatial compactness in human space)")
+    print("SUB-TEST C. Network coherence (spatial compactness in human space)")
     print("=" * 80)
 
     real_coh = network_coherence(pi, mouse_net_homer, len(NETWORKS), H.var)

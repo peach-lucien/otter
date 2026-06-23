@@ -1,9 +1,9 @@
-"""Transdiagnostic test — turn the 'no disorder-specificity' negative into a positive.
+"""Transdiagnostic test, turn the 'no disorder-specificity' negative into a positive.
 
 Phase 1 + the disorder-unique test (04) showed HOMER's per-disorder predictions are
 near-identical (even disjoint gene sets give r≈0.98): HOMER carries a single SHARED
 psychiatric spatial geometry, not disorder-specific biology. That is a real claim if
-HOMER's generic map matches the actual transdiagnostic cortical signature — the
+HOMER's generic map matches the actual transdiagnostic cortical signature, the
 "p-factor" pattern of shared cortical vulnerability across disorders.
 
 We test exactly that against ENIGMA observed cortical-thickness Cohen's d maps:
@@ -12,7 +12,7 @@ We test exactly that against ENIGMA observed cortical-thickness Cohen's d maps:
   • HOMER's GENERIC prediction = mean of its per-disorder routed maps (they're
     near-identical anyway), aggregated to the same DK regions.
   • Correlate HOMER-generic vs the ENIGMA transdiagnostic average, vs each disorder,
-    and vs two held-out disorders not in HOMER's gene sets (MDD, OCD) — and test
+    and vs two held-out disorders not in HOMER's gene sets (MDD, OCD), and test
     significance with a spin null over the 34 DK region centroids.
 
 ENIGMA CSVs expected in data_external/enigma/cortical_thickness_<disorder>.csv
@@ -63,7 +63,7 @@ def enigma_region_d(path):
 
 def main():
     print("=" * 78)
-    print("ENIGMA — TRANSDIAGNOSTIC test (HOMER generic map vs shared cortical signature)")
+    print("ENIGMA. TRANSDIAGNOSTIC test (HOMER generic map vs shared cortical signature)")
     print("=" * 78)
 
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))

@@ -5,8 +5,8 @@ functional network atlases (Yeo 7 / 17, Glasser 360) and mouse-rat homologue
 work (Stafford 2014 mouse DMN, Grandjean atlases).
 
 Public API:
-    NETWORKS                — sorted list of unique network names
-    PAIRID_TO_NETWORK       — dict pair_id (1..21) → network name
+    NETWORKS, sorted list of unique network names
+    PAIRID_TO_NETWORK, dict pair_id (1..21) → network name
     assign_networks(var, idx_anchor) -> int array of network ids per node
     network_mismatch_mask(net_m, net_h) -> bool (n_m, n_h) cross-network mask
 """
@@ -20,7 +20,7 @@ from homer.data.anchors import AnchorIndex
 
 
 # Hand-curated mapping from anchor pair_id (1..21) → coarse functional network.
-# Intentionally coarse — the labels are a *prior*, not a relabel of anchor identity.
+# Intentionally coarse, the labels are a *prior*, not a relabel of anchor identity.
 PAIRID_TO_NETWORK: dict[int, str] = {
     1:  "frontal_dmn",      # Medial PFC
     2:  "sensorimotor",     # Motor & premotor

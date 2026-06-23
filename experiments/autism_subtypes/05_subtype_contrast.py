@@ -1,4 +1,4 @@
-"""Test 2b — Subtype CONTRAST translation through π.
+"""Test 2b. Subtype CONTRAST translation through π.
 
 Test 2 (script 04) had a confound: per-subtype absolute intensity per network is
 dominated by network-size (large human networks like Subcortical collect most of
@@ -21,7 +21,7 @@ Procedure:
   5. Permuted-π null: shuffle π rows, repeat.
 
 If pred_human_delta correlates with human_delta_obs significantly above null,
-HOMER's π replicates the per-subtype spatial *contrast* — a real Pagani finding.
+HOMER's π replicates the per-subtype spatial *contrast*, a real Pagani finding.
 """
 from __future__ import annotations
 
@@ -48,7 +48,7 @@ from homer.data import load_cached
 
 def main():
     print("=" * 80)
-    print("Pagani 2026 Test 2b — subtype CONTRAST (hyper − hypo) translation through π")
+    print("Pagani 2026 Test 2b, subtype CONTRAST (hyper − hypo) translation through π")
     print("=" * 80)
 
     M, _ = load_cached("mouse", cache_dir="outputs/anndata")

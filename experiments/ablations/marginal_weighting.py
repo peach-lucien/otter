@@ -3,7 +3,7 @@
 By default, MultimodalFGW uses ``p = 1/n_m`` for every mouse parcel
 (uniform). This experiment tests two non-uniform alternatives:
 
-  - **volume**: p_i ∝ # voxels in parcel i  (anatomically natural — bigger
+  - **volume**: p_i ∝ # voxels in parcel i  (anatomically natural, bigger
     parcels carry more brain content)
   - **stability**: p_i ∝ bootstrap-stability of row i in the production π
     (more reliable parcels carry more weight)

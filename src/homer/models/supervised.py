@@ -1,4 +1,4 @@
-"""SupervisedFGW — anchor-supervised semirelaxed FGW with optional xyz spatial prior.
+"""SupervisedFGW, anchor-supervised semirelaxed FGW with optional xyz spatial prior.
 
 The "FC + anchors + xyz" recipe. Adds two things over UnsupervisedGW:
   1. Anchor supervision via the M cost matrix: forbidden cells (lam=1.0) for
@@ -11,7 +11,7 @@ at uniform; human marginal floats (semirelaxed). Use this when you have anchor
 correspondences but no other modality (no SC, no gene expression).
 
 Headline result on the 1864×2094 production data:
-    top-1 = 79% (with all 42 anchors visible) — the "fc + xyz_M + anchors"
+    top-1 = 79% (with all 42 anchors visible), the "fc + xyz_M + anchors"
     baseline against which multimodal extensions are measured.
 
 Held-out anchor CV: pass `holdout_pair_ids=[5, 6]` (visual) to fit() to

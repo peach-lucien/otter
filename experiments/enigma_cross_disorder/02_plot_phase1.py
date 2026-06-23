@@ -39,11 +39,11 @@ def main():
     ax.set_xlabel("HOMER-predicted per-parcel score")
     ax.set_ylabel("Count")
     ax.set_title(f"Distribution of HOMER predictions per disorder\n"
-                 f"(distributions overlap heavily — confirms predictions are similar)")
+                 f"(distributions overlap heavily, confirms predictions are similar)")
     ax.legend(fontsize=8)
 
     plt.suptitle(
-        "Phase 1 — HOMER per-disorder spatial predictions\n"
+        "Phase 1. HOMER per-disorder spatial predictions\n"
         "(autism / bipolar / schizophrenia / ADHD genes from MOESM4 + MOESM5)",
         fontsize=12, y=1.02,
     )

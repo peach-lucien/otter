@@ -50,31 +50,31 @@ from homer.data import load_cached
 # BICCN-aligned cell-type markers, grouped by class.
 # All markers present in HOMER's 61-gene curated panel + AHBA microarray.
 CELL_TYPE_MARKERS = {
-    "Interneuron — Pvalb (parvalbumin)":   {"genes": ["Pvalb"],         "class": "interneuron"},
-    "Interneuron — Sst (somatostatin)":    {"genes": ["Sst"],           "class": "interneuron"},
-    "Interneuron — Vip (VIP+)":            {"genes": ["Vip"],           "class": "interneuron"},
-    "Interneuron — Calb1 (calbindin)":     {"genes": ["Calb1"],         "class": "interneuron"},
-    "Interneuron — Calb2 (calretinin)":    {"genes": ["Calb2"],         "class": "interneuron"},
-    "Interneuron — Reln (reelin)":         {"genes": ["Reln"],          "class": "interneuron"},
-    "Interneuron — Lhx6 (MGE TF)":         {"genes": ["Lhx6"],          "class": "interneuron"},
-    "GABA synthesis — Gad1+Gad2":          {"genes": ["Gad1", "Gad2"],  "class": "gabaergic_synth"},
-    "Glutamatergic — Camk2a":              {"genes": ["Camk2a"],        "class": "glutamatergic"},
-    "Glutamatergic — Slc17a7 (Vglut1)":    {"genes": ["Slc17a7"],       "class": "glutamatergic"},
-    "Glutamatergic — Slc17a6 (Vglut2)":    {"genes": ["Slc17a6"],       "class": "glutamatergic"},
-    "NMDA — Grin1+Grin2a+Grin2b":          {"genes": ["Grin1", "Grin2a", "Grin2b"], "class": "glutamatergic"},
-    "Astrocyte — Gfap":                    {"genes": ["Gfap"],          "class": "astrocyte"},
-    "Astrocyte — Aqp4":                    {"genes": ["Aqp4"],          "class": "astrocyte"},
-    "Oligodendrocyte — Mbp":               {"genes": ["Mbp"],           "class": "oligodendrocyte"},
-    "Oligodendrocyte — Plp1":              {"genes": ["Plp1"],          "class": "oligodendrocyte"},
-    "Oligodendrocyte TF — Olig2":          {"genes": ["Olig2"],         "class": "oligodendrocyte"},
-    "Oligodendrocyte TF — Sox10":          {"genes": ["Sox10"],         "class": "oligodendrocyte"},
-    "Microglia — Cx3cr1":                  {"genes": ["Cx3cr1"],        "class": "microglia"},
-    "Dopaminergic — Th":                   {"genes": ["Th"],            "class": "dopaminergic"},
-    "Dopaminergic — Slc6a3 (DAT)":         {"genes": ["Slc6a3"],        "class": "dopaminergic"},
-    "Dopaminergic — Drd1":                 {"genes": ["Drd1"],          "class": "dopaminergic"},
-    "Dopaminergic — Drd2":                 {"genes": ["Drd2"],          "class": "dopaminergic"},
-    "Serotonergic — Tph2":                 {"genes": ["Tph2"],          "class": "serotonergic"},
-    "Serotonergic — Slc6a4 (SERT)":        {"genes": ["Slc6a4"],        "class": "serotonergic"},
+    "Interneuron. Pvalb (parvalbumin)":   {"genes": ["Pvalb"],         "class": "interneuron"},
+    "Interneuron. Sst (somatostatin)":    {"genes": ["Sst"],           "class": "interneuron"},
+    "Interneuron. Vip (VIP+)":            {"genes": ["Vip"],           "class": "interneuron"},
+    "Interneuron. Calb1 (calbindin)":     {"genes": ["Calb1"],         "class": "interneuron"},
+    "Interneuron. Calb2 (calretinin)":    {"genes": ["Calb2"],         "class": "interneuron"},
+    "Interneuron. Reln (reelin)":         {"genes": ["Reln"],          "class": "interneuron"},
+    "Interneuron. Lhx6 (MGE TF)":         {"genes": ["Lhx6"],          "class": "interneuron"},
+    "GABA synthesis. Gad1+Gad2":          {"genes": ["Gad1", "Gad2"],  "class": "gabaergic_synth"},
+    "Glutamatergic. Camk2a":              {"genes": ["Camk2a"],        "class": "glutamatergic"},
+    "Glutamatergic. Slc17a7 (Vglut1)":    {"genes": ["Slc17a7"],       "class": "glutamatergic"},
+    "Glutamatergic. Slc17a6 (Vglut2)":    {"genes": ["Slc17a6"],       "class": "glutamatergic"},
+    "NMDA. Grin1+Grin2a+Grin2b":          {"genes": ["Grin1", "Grin2a", "Grin2b"], "class": "glutamatergic"},
+    "Astrocyte. Gfap":                    {"genes": ["Gfap"],          "class": "astrocyte"},
+    "Astrocyte. Aqp4":                    {"genes": ["Aqp4"],          "class": "astrocyte"},
+    "Oligodendrocyte. Mbp":               {"genes": ["Mbp"],           "class": "oligodendrocyte"},
+    "Oligodendrocyte. Plp1":              {"genes": ["Plp1"],          "class": "oligodendrocyte"},
+    "Oligodendrocyte TF. Olig2":          {"genes": ["Olig2"],         "class": "oligodendrocyte"},
+    "Oligodendrocyte TF. Sox10":          {"genes": ["Sox10"],         "class": "oligodendrocyte"},
+    "Microglia. Cx3cr1":                  {"genes": ["Cx3cr1"],        "class": "microglia"},
+    "Dopaminergic. Th":                   {"genes": ["Th"],            "class": "dopaminergic"},
+    "Dopaminergic. Slc6a3 (DAT)":         {"genes": ["Slc6a3"],        "class": "dopaminergic"},
+    "Dopaminergic. Drd1":                 {"genes": ["Drd1"],          "class": "dopaminergic"},
+    "Dopaminergic. Drd2":                 {"genes": ["Drd2"],          "class": "dopaminergic"},
+    "Serotonergic. Tph2":                 {"genes": ["Tph2"],          "class": "serotonergic"},
+    "Serotonergic. Slc6a4 (SERT)":        {"genes": ["Slc6a4"],        "class": "serotonergic"},
 }
 
 
@@ -126,7 +126,7 @@ def main():
             if len(mm) > 0:
                 m_idxs.append(int(mm.iloc[0].name))
         if not m_idxs:
-            print(f"  {marker_name:<40s} | (no mouse data — skip)")
+            print(f"  {marker_name:<40s} | (no mouse data, skip)")
             continue
         m_score = np.column_stack([_z(mouse_expr[:, i]) for i in m_idxs]).mean(axis=1)
 
@@ -137,7 +137,7 @@ def main():
             if len(hh) > 0:
                 h_idxs.append(int(hh.iloc[0].name))
         if not h_idxs:
-            print(f"  {marker_name:<40s} | (no human data — skip)")
+            print(f"  {marker_name:<40s} | (no human data, skip)")
             continue
         h_score = np.column_stack([_z(human_expr[:, i]) for i in h_idxs]).mean(axis=1)
         h_obs = _z(h_score)

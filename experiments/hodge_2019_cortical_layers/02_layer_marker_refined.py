@@ -1,4 +1,4 @@
-"""Refined Hodge 2019 validation — restrict to cortex, combine layer-group markers.
+"""Refined Hodge 2019 validation, restrict to cortex, combine layer-group markers.
 
 Test 1 (single-marker, all 2094 parcels) gave null results. Two issues to address:
   (a) Subcortical parcels dilute the layer-marker signal (Hodge's findings are
@@ -12,7 +12,7 @@ Refinement:
     into a single z-scored composite score before testing.
 
 Hypothesis: if HOMER's π preserves cortical layer-marker geometry at the area
-level (not the layer level — π has no layer awareness), then the area-level
+level (not the layer level, π has no layer awareness), then the area-level
 spatial pattern of "where is upper-layer expression highest" should agree
 between species after π translation.
 """
@@ -55,7 +55,7 @@ def _zscore_safe(v):
 
 def main():
     print("=" * 80)
-    print("Hodge 2019 — refined (cortex-only, layer-group composites)")
+    print("Hodge 2019, refined (cortex-only, layer-group composites)")
     print("=" * 80)
 
     pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")
@@ -231,7 +231,7 @@ def main():
         pred_full = m_composite @ pi
 
         # Mean per Yeo7 network (cortical only). Some networks may have zero
-        # cortical parcels — drop those to avoid NaN.
+        # cortical parcels, drop those to avoid NaN.
         pred_per_net = []
         obs_per_net = []
         kept_nets = []

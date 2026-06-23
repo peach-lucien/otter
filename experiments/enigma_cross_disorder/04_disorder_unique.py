@@ -1,16 +1,16 @@
-"""Disorder-UNIQUE gene-set test — a fair probe of cross-species specificity.
+"""Disorder-UNIQUE gene-set test, a fair probe of cross-species specificity.
 
 Phase 1 found that routing each disorder's FULL gene set through π gives
 near-identical human predictions (off-diagonal r = +0.988), concluding "shared
 psychiatric geometry, not disorder-specific". But the full sets overlap heavily
-(autism 1,713 genes; SCZ 530; bipolar 109; ADHD 30 — with large pairwise
+(autism 1,713 genes; SCZ 530; bipolar 109; ADHD 30, with large pairwise
 intersections), so identical inputs trivially give identical outputs. That does
 not actually test specificity.
 
 Here we strip each disorder to the genes UNIQUE to it (present in that disorder's
 set and NO other), route those through the same π, and recompute the
 cross-disorder correlation matrix. If the unique predictions still correlate at
-~0.99, the shared-geometry conclusion is genuinely robust. If they diverge, there
+~0.99, the shared-geometry conclusion is robust. If they diverge, there
 IS disorder-specific spatial information that the overlapping full sets washed out.
 
 Usage:
@@ -46,7 +46,7 @@ def corr_matrix(preds, names):
 
 def main():
     print("=" * 78)
-    print("ENIGMA cross-disorder — DISORDER-UNIQUE gene-set specificity test")
+    print("ENIGMA cross-disorder. DISORDER-UNIQUE gene-set specificity test")
     print("=" * 78)
 
     expr = np.load(ROOT / "experiments/autism_subtypes/allen_expansion/pagani_mouse_expr.npy")
@@ -85,7 +85,7 @@ def main():
           " so the full-set similarity partly reflects gene-set OVERLAP, not just smooth routing.)")
 
     # PAIRWISE relative-unique test: genes in A-not-B vs B-not-A, routed separately.
-    # This is the fair specificity probe — it removes the shared genes for each pair.
+    # This is the fair specificity probe, it removes the shared genes for each pair.
     print(f"\nPairwise relative-unique test  (r of A-only vs B-only predicted maps):")
     pairwise = {}
     big = [d for d in names_full]

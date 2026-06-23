@@ -6,7 +6,7 @@ at MNI(±20, –85, 10) r=10 mm (12 parcels).
 Beauchamp validates "Visual areas → cuneus" using all 54 mouse Visual
 parcels → human cuneus at (±10, -85, 5). Our pack uses a subset (just
 LM, 9 of 54) → a slightly different human target (V2 lateral, not
-cuneus). So the pack's effect on Beauchamp Visual→cuneus is null —
+cuneus). So the pack's effect on Beauchamp Visual→cuneus is null
 empirically 7 % → 7 %. The value is making LM↔V2 queries explicitly
 trustworthy.
 

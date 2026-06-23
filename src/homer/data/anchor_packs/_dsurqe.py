@@ -104,9 +104,9 @@ def mouse_parcels_in_dsurqe_region(
        We resolve regions via the live DSURQE atlas volume rather than the
        parcel table's precomputed DSURQE vote labels (``region_vote_ss_dsq``).
        The precomputed vote vocabulary uses different region names than the
-       anchor packs query for — e.g. packs ask for "Caudoputamen" but the
+       anchor packs query for, e.g. packs ask for "Caudoputamen" but the
        votes say "striatum" (a parent in the tree), and "Periaqueductal gray"
-       (American) vs "periaqueductal grey" (British) — so a direct
+       (American) vs "periaqueductal grey" (British), so a direct
        subtree-membership check against those labels returns empty sets for
        most queries. Consuming them directly would first require a
        name-mapping table from pack names to the vote vocabulary (see
@@ -162,7 +162,7 @@ def mouse_parcels_in_mouse_sphere(
 ) -> list[int]:
     """Return positional indices of *mouse* parcels within ``radius_mm`` of
     the centroid, expressed in M_var's coordinate system (NOT bregma-centered
-    CCFv3 — apply the DSURQE_OFFSET_MM correction first if your reference
+    CCFv3, apply the DSURQE_OFFSET_MM correction first if your reference
     centroid is in bregma coords).
 
     Symmetric to ``human_parcels_in_mni_sphere``. Use this for structures
