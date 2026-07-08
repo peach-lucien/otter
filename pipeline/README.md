@@ -12,7 +12,9 @@ pip install -e ".[dev]"
 # Run the full pipeline (in order)
 PYTHONPATH=src python pipeline/02_build_anndata.py
 PYTHONPATH=src python pipeline/03_build_costs.py
+PYTHONPATH=src python pipeline/05i_weight_selection.py  # optional: select FC/SC/xyz weights
 PYTHONPATH=src python pipeline/04_solve_production.py
+PYTHONPATH=src python pipeline/04_solve_production.py --config fc_plus_SC_selected
 PYTHONPATH=src python pipeline/05_evaluate.py        # orchestrator for 05a-05j
 PYTHONPATH=src python pipeline/05g_compute_trust.py
 PYTHONPATH=src python pipeline/06_bootstrap.py
@@ -27,7 +29,7 @@ PYTHONPATH=src python pipeline/08_build_gui.py
 | `00_external/` | External data downloads (Allen, Domhof, Knox, Beauchamp) | `data_external/` |
 | `02_build_anndata.py` | Build mouse + human AnnData caches | `outputs/anndata/*.h5ad` |
 | `03_build_costs.py` | Precompute all FC + SC + xyz + gene cost matrices | `outputs/anndata/full_costs.npz` |
-| `04_solve_production.py` | Fit production fc_plus_SC point-anchor π | `outputs/coupling/pi_fc_plus_SC.npy` |
+| `04_solve_production.py` | Fit production fc_plus_SC point-anchor π; can consume validation-selected weights with `--config fc_plus_SC_selected` | `outputs/coupling/pi_fc_plus_SC.npy` |
 | `05_evaluate.py` | **Orchestrator**, runs the substeps below in order | |
 | `05g_compute_trust.py` | Per-parcel multi-source trust map | `outputs/coupling/trust_score_*.npz` |
 | `06_bootstrap.py` | 40-iter subject-level bootstrap stability | `outputs/coupling/bootstrap_*.npz` |
@@ -46,8 +48,33 @@ These are run automatically by `05_evaluate.py`. You can also invoke them indivi
 | `05d_full_space_eval.py` | Full-space top-K + mean rank over all 2094 human parcels |
 | `05f_beauchamp_validation.py` | External validation against Beauchamp 2022's 22 pairs |
 | `05h_region_anchor_cv.py` | Held-out region-anchor CV (validates region-anchor mechanism) |
+| `05i_weight_selection.py` | Validation-based FC/SC/xyz weight selection for production |
 | `05j_region_level_eval.py` | Region-level top-K (Beauchamp-22 + JuBrain candidate sets) |
 | `05e_knox_vs_standard_sc.py` | Comparative: Knox 2019 voxel SC vs default summary SC |
+
+## Selecting FC/SC/xyz production weights
+
+The fixed production recipe uses `fc_weight=0.7`, `sc_weight=0.3`, and
+`xyz_weight=0.5`. To select these weights by validation instead, run:
+
+```bash
+PYTHONPATH=src python pipeline/05i_weight_selection.py
+```
+
+This sweeps FC/SC ratios and xyz weights, evaluates leave-one-network-out
+anchor CV, and by default also evaluates brain-wide FC translation. It writes:
+
+```text
+outputs/logs/weight_selection.json
+outputs/logs/weight_selection.csv
+outputs/logs/weight_selection_selected.json
+```
+
+Then fit production using the selected weights:
+
+```bash
+PYTHONPATH=src python pipeline/04_solve_production.py --config fc_plus_SC_selected
+```
 
 ## Fitting with anchor packs (after running 04_solve_production)
 

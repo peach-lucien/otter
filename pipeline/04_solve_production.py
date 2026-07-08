@@ -10,11 +10,13 @@ Outputs:
 Usage:
     python pipeline/04_solve_production.py
     python pipeline/04_solve_production.py --config fc_only       # baseline
+    python pipeline/04_solve_production.py --config fc_plus_SC_selected
     python pipeline/04_solve_production.py --multistart            # 4 random + uniform inits
 """
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 import time
 from pathlib import Path
@@ -28,6 +30,8 @@ from homer.models import MultimodalFGW, SupervisedFGW       # noqa: E402
 
 ANN  = ROOT / "outputs" / "anndata"
 COUP = ROOT / "outputs" / "coupling"; COUP.mkdir(parents=True, exist_ok=True)
+LOGS = ROOT / "outputs" / "logs"
+SELECTED_WEIGHTS = LOGS / "weight_selection_selected.json"
 
 
 CONFIGS = {
@@ -36,13 +40,39 @@ CONFIGS = {
     "fc_plus_SC":       dict(model_cls=MultimodalFGW,
                               kwargs=dict(use_sc=True, sc_weight=0.3, fc_weight=0.7,
                                           epsilon=5e-3, xyz_weight=0.5)),
+    "fc_plus_SC_selected": dict(model_cls=MultimodalFGW, kwargs=None),
 }
+
+
+def load_selected_weights(path: Path) -> dict:
+    """Load validation-selected production weights from 05i_weight_selection."""
+    if not path.exists():
+        raise FileNotFoundError(
+            f"selected weights not found: {path}\n"
+            "Run `python pipeline/05i_weight_selection.py` first, or pass "
+            "`--selected-weights PATH`."
+        )
+    payload = json.loads(path.read_text())
+    required = {"fc_weight", "sc_weight", "xyz_weight", "use_sc"}
+    missing = sorted(required - set(payload))
+    if missing:
+        raise ValueError(f"selected weights file missing keys: {missing}")
+    return {
+        "use_sc": bool(payload["use_sc"]),
+        "fc_weight": float(payload["fc_weight"]),
+        "sc_weight": float(payload["sc_weight"]),
+        "xyz_weight": float(payload["xyz_weight"]),
+        "epsilon": 5e-3,
+    }
 
 
 def main(args):
     cfg = CONFIGS[args.config]
     cls = cfg["model_cls"]
-    kwargs = dict(cfg["kwargs"])
+    if args.config == "fc_plus_SC_selected":
+        kwargs = load_selected_weights(Path(args.selected_weights))
+    else:
+        kwargs = dict(cfg["kwargs"])
     if args.multistart:
         kwargs["use_multistart"] = True
         kwargs["n_restarts"] = args.n_restarts
@@ -79,6 +109,8 @@ def main(args):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default="fc_plus_SC", choices=list(CONFIGS.keys()))
+    ap.add_argument("--selected-weights", default=str(SELECTED_WEIGHTS),
+                    help="JSON produced by pipeline/05i_weight_selection.py")
     ap.add_argument("--multistart", action="store_true")
     ap.add_argument("--n-restarts", type=int, default=4)
     main(ap.parse_args())

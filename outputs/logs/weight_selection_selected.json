@@ -1,0 +1,32 @@
+{
+  "source": "outputs/logs/weight_selection.json",
+  "selection_key": "fc0.800_sc0.200_xyz0.250",
+  "selection_score": 0.5810479682716212,
+  "score_weights": {
+    "anchor_top1": 0.45,
+    "fc_translation_r": 0.35,
+    "fc_within_r": 0.2
+  },
+  "fc_weight": 0.8,
+  "sc_weight": 0.19999999999999996,
+  "xyz_weight": 0.25,
+  "use_sc": true,
+  "metrics": {
+    "key": "fc0.800_sc0.200_xyz0.250",
+    "fc_ratio": 0.8,
+    "fc_weight": 0.8,
+    "sc_weight": 0.19999999999999996,
+    "xyz_weight": 0.25,
+    "anchor_top1": 0.8095238095238095,
+    "anchor_top5": 1.0,
+    "anchor_pair_id": 0.8095238095238095,
+    "anchor_mean_rank": 1.2380952380952381,
+    "anchor_mean_xyz_dist": 0.01997671048154232,
+    "fc_translation_r": 0.3683929162422512,
+    "fc_within_r": 0.43912366650559476,
+    "fc_cross_r": 0.2067634288276855,
+    "n_human_nodes_kept": 1461,
+    "elapsed_s": 43.8,
+    "score": 0.5810479682716212
+  }
+}
