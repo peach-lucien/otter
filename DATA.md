@@ -48,7 +48,7 @@ at the repo root). The exact `tar` commands are in
 
 ### Archive 1, `homer-reproduce-v1.2.0.tar.gz` (~620 MB gzipped)
 
-Everything needed to re-run the experiments **and all 15 notebooks** on the shipped
+Everything needed to re-run the experiments **and all the notebooks** on the shipped
 couplings. The exact file list is in `scripts/build_archives.sh` (the `REPRODUCE`
 array).
 

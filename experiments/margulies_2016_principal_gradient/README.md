@@ -22,30 +22,57 @@ correlation.
 
 ## Result
 
-**|r| = 0.402 (parcel-level), 0.433 (region-level)**
-**Permuted-π null |r| mean = 0.026; empirical p = 0.000, 16× the null.**
+**|r| = 0.54 (parcel-level, n = 1,244), |r| = 0.62 (region-level)**
+**Permuted-π null |r| mean = 0.03 (p < 0.001). Spin null: p = 0.004 — it SURVIVES.**
 
-HOMER preserves the broad cross-species cortical organisation gradient, well
-clear of the permuted-π null. Combined with the other validations:
+The principal functional-connectivity gradient — the unimodal→transmodal axis —
+translates across species through π. It also survives reduction to discrete
+structure: the rank order of the nine human networks along the gradient is
+recovered at ρ = 0.73 (spin p = 0.043), and a three-tier discretisation is
+classified at 52 % against 33 % chance and a 34 % spin null (p = 0.001).
 
-| Test | Granularity | \|r\| | Status |
+| Test | Granularity | \|r\| | Spin null |
 |---|---|---:|:---:|
-| Pagani Test 2c | Network-pair Δ (36 elements) | +0.55 (leverage-driven; Spearman n.s.) | Partial |
-| **Margulies/Huntenburg gradient** | **Brain-wide ordering** | **0.402** | **n.s. by spin test** ¹ |
-| Fulcher 2019 T1w:T2w → myelin | Cortical region | +0.373 | Survives spin test (p = 0.02) ¹ |
-| Hodge layer markers | Within-area lamination | ~0 | Null |
+| **Margulies/Huntenburg gradient** | **Brain-wide ordering** | **0.54** | **p = 0.004 — survives** |
+| Coletta 2020 resting-state networks | Network correspondence | 6/10 vs 1.2 expected | p = 0.002 — survives |
+| Fulcher 2019 T1w:T2w → myelin | Cortical region | +0.37 | p = 0.11 — **does NOT survive** |
+| Fulcher 2019 cytoarchitecture → myelin | Cortical region | +0.36 | p = 0.10 — **does NOT survive** |
 
-> ¹ A permuted-π null destroys spatial autocorrelation and over-states
-> significance for a smooth target like a gradient. Under a proper **spin test**
-> (rotate parcel centroids on a sphere; `homer.eval.nulls.spin_null`, run via
-> `experiments/spatial_null_check/apply_spin_test.py`), the Margulies correlation
-> **does not survive**: |r|=0.402, spin p=**0.16** (spin-null |r| mean 0.25, 95th
-> pct 0.51). So this is a *modest, spatially-unexceptional* correspondence. Re-rate
-> any spatial-map correlation with the spin null before claiming significance.
+The pattern is the point: **connectional organisation transfers through π;
+microstructure does not.** π was fitted on connectivity. See `docs/03_results.md` §3.
 
 A *brain-wide* organisational test, not driven by anchor pairs, establishing
-that HOMER's cross-species fidelity isn't only at the 22 Beauchamp anchor pairs
+that HOMER's cross-species fidelity isn't only at the Beauchamp anchor pairs
 or the network-aggregated level.
+
+---
+
+## ⚠️ THE BUG THIS EXPERIMENT ONCE HAD — read before changing the code
+
+This README previously reported **|r| = 0.402, spin p = 0.16, "does not survive"**,
+and the method section below told you to take the **second-smallest eigenvalue's
+eigenvector** as the principal gradient.
+
+That instruction is **wrong for this data**. The first non-trivial component here is
+an **anterior–posterior spatial axis**; the unimodal→transmodal hierarchy is the
+**second**. Verified in both species:
+
+| component | vs published Margulies G1 | vs that species' own T1w:T2w |
+|---|---:|---:|
+| comp 1 (what the old code took) | \|ρ\| = 0.12 | human −0.13 / mouse −0.28 |
+| **comp 2 (correct)** | **\|ρ\| = 0.93** | **human +0.59 / mouse +0.57** |
+
+The consequence was severe and self-concealing: routing an A–P **spatial** axis and
+then testing it against a **spatial-autocorrelation-preserving** spin null is close to
+tautological. It manufactured a confident *false negative* that the project believed
+for months — and the negative was never scrutinised, because the narrative at the time
+wanted the gradient to fail.
+
+**Do not hard-code a component index.** `principal_gradient()` in
+`01_gradient_validation.py` now *selects* the component by its correlation with an
+external hierarchy reference (that species' own T1w:T2w map), and
+`experiments/validation/00_validate_published_maps.py` asserts that every named
+"published" map still matches the source it is named after. Run it.
 
 ### Routing note
 
@@ -67,7 +94,11 @@ Standard Margulies-style diffusion-map embedding per species:
 2. Threshold (keep top 10% per row)
 3. Cosine similarity of row-profiles → affinity W
 4. Symmetric-normalised graph Laplacian L = I − D^{−½} W D^{−½}
-5. Second-smallest eigenvalue's eigenvector = principal gradient
+5. Take the first `n_comp` non-trivial diffusion components (D^-1/2 · u_k, NOT the
+   raw symmetric-Laplacian eigenvector — the two differ by a degree weighting)
+6. **SELECT** the unimodal→transmodal component by its |ρ| with that species' own
+   T1w:T2w myelin map, a reference external to the FC data. Both species select
+   component 2. Never assume it is the first — see the bug note above.
 
 Then route the mouse gradient through π as a transport-weighted average,
 compare to the observed human gradient (Pearson + Spearman, parcel level and
@@ -93,9 +124,6 @@ Outputs:
 - `outputs/logs/margulies_2016_gradient.json` (per-parcel gradients + stats)
 - `outputs/figures/margulies_2016_gradient.png` (3-panel figure)
 
-## Showcase notebook
-
-See [`notebooks/07_margulies_huntenburg_gradient.ipynb`](../../notebooks/07_margulies_huntenburg_gradient.ipynb).
 
 ## Discrete reframe (2026-06-19), `03_discrete_reframe.py`
 

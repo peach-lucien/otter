@@ -12,7 +12,7 @@ experiments/
 ├── hodge_2019_cortical_layers/     # Hodge 2019 cortical-layer marker translation
 ├── margulies_2016_principal_gradient/  # Margulies 2016 + Huntenburg 2021 brain-wide gradient
 ├── fulcher_2019_multimodal_gradient/   # Fulcher 2019 multimodal mouse-cortex hierarchy → human myelin
-├── balsters_2020_mfc_divergence/   # Balsters 2020 frontal-cortex falsification test
+├── balsters_2020_mfc_divergence/   # Schaeffer et al. 2020 frontal-cortex falsification test
 ├── transbrain_2025_benchmark/      # TransBrain 2025 sibling-method head-to-head
 ├── buckner_krienen_2013_tethering/ # Buckner & Krienen 2013 tethering negative control
 ├── coletta_2020_cross_species_rsn/ # Coletta 2020 cross-species RSN correspondence
@@ -36,7 +36,7 @@ Three ablations that justify production design choices (soft anchors, uniform ma
 
 ## Third-party validations
 
-Each `<paper>_*/` subdirectory takes a published cross-species paper and tests whether HOMER's π reproduces or refines its findings. Outputs feed `notebooks/05-15`. See `docs/03_results.md` §"Independent third-party validation" for the consolidated result table.
+Each `<paper>_*/` subdirectory takes a published cross-species paper and tests whether HOMER's π reproduces or refines its findings. Outputs are consumed by the per-figure notebooks in `notebooks/` and are the source of the numbers in `docs/03_results.md`.
 
 ## archive/, older detours
 

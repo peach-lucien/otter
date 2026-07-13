@@ -6,7 +6,7 @@ Navigation hub. Read in order if new to the project; jump around once oriented.
 
 1. **[01_overview.md](01_overview.md)**. What HOMER does, who it's for, the headline number
 2. **[02_methods.md](02_methods.md)**. Fused Gromov-Wasserstein formulation, the anchor mechanism, hyperparameters
-3. **[03_results.md](03_results.md)**. Headline numbers, per-region trust map, what works and what doesn't
+3. **[03_results.md](03_results.md)**. The six results, the trust map, what transfers through π and what does not
 4. **[04_anchor_packs.md](04_anchor_packs.md)**. The anchor packs, citations, composition recipe, pid registry
 5. **[05_limitations.md](05_limitations.md)**. What HOMER can't tell you
 6. **[06_extending.md](06_extending.md)**. Adding a new modality / anchor pack / species

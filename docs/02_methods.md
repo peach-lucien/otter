@@ -147,8 +147,12 @@ solver to assign positive mass to every human node, including the ~20% of
 human parcels that don't have a clear mouse counterpart. This produces a
 "smeared" π with no clean per-mouse-row interpretation.
 
-Semirelaxed lets the human marginal float. The cost: ~36% of human nodes end up
-with `col_mass ≈ 0` in our production solve (we call them "uncovered"). The
+Semirelaxed lets the human marginal float. The cost: ~53% of human nodes end up
+with negligible column mass in our production solve (< 1e-6; we call them
+"uncovered"). The figure is threshold-dependent — 41% at machine zero, 58% at
+1e-4 — so always state the threshold when quoting it. This is not only a cost:
+it is what lets the coupling report that a human parcel has NO mouse
+counterpart, which is the measurement §5 of `03_results.md` is built on. The
 benefit: every mouse row has a sharp, interpretable distribution over human
 nodes, and we don't force fake correspondences.
 

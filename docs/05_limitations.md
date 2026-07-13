@@ -2,11 +2,13 @@
 
 What HOMER can't tell you. Read this before claiming HOMER predictions in published work.
 
-## 1. Structural recovery is weak
+## 1. Parcel-exact recovery depends on supervision; region-level recovery does not
 
-Held-out region CV (drop one region's supervision, re-fit) recovers the correct human partner at **3.4 % top-1, 5.5 % top-5, 6.6 % top-10**, about 7× chance, but well below the supervised numbers. Three regions recover meaningfully without their anchor (mPFC 33 %, Auditory 22 %, Somatosensory 11 %); the rest recover at or near chance.
+Hold out each of the 41 supervision units (15 Garin homology classes + 26 region packs) in turn and re-fit. **Region-level recovery holds at AUROC 0.73** (chance 0.5), while **parcel-exact recovery collapses to ~2 % top-1**.
 
-**Implication**: HOMER is not an unsupervised cross-species translator. Predictions for un-anchored regions are unreliable. The recommended `pi_fc_plus_SC_with_all_packs.npy` is good *because* it has 26 region-anchor entries on top of the 21 Garin point anchors, not because the FGW solver discovered the homologies.
+**Implication**: curation buys *parcel precision*, not region-level correspondence. Connectivity and spatial position reconstruct *which human region* a mouse region corresponds to without any anchor at all; the anchors sharpen that to *which parcel*. So HOMER is not a landmark look-up — but neither is it an unsupervised translator, and a prediction in an un-anchored region should be read at region granularity, not parcel granularity.
+
+Note also that top-1 is the wrong metric for a held-out unit: scored by displacement instead, the held-out coupling is displaced (median 34 mm vs 17 mm for the full model) but not lost. Reporting the top-1 collapse alone overstates the failure.
 
 ## 2. Anchor packs work by construction
 
@@ -34,7 +36,7 @@ The parcellation we work with (1864 mouse / 2094 human parcels from the colleagu
 
 ## 6. dlPFC homology is contested
 
-The lateral PFC pack can supply a Prelimbic ↔ dlPFC entry (Carlén 2017, Laubach 2018), but Preuss 1995 argues rodents lack a true dlPFC homologue. That entry is **excluded from the recommended composition**, the `lateral_pfc` pack ships OFC-only, because the homology is contested and HOMER's own Balsters 2020 falsification test contradicts it. Pass `include_dlpfc=True` to add it back for ablations.
+The lateral PFC pack can supply a Prelimbic ↔ dlPFC entry (Carlén 2017, Laubach 2018), but Preuss 1995 argues rodents lack a true dlPFC homologue. That entry is **excluded from the recommended composition**, the `lateral_pfc` pack ships OFC-only, because the homology is contested and HOMER's own Schaeffer et al. 2020 falsification test contradicts it. Pass `include_dlpfc=True` to add it back for ablations.
 
 **Implication**: claims about rodent dlPFC homology should cite both sides of the debate.
 
@@ -42,7 +44,7 @@ The lateral PFC pack can supply a Prelimbic ↔ dlPFC entry (Carlén 2017, Lauba
 
 Most validation in this codebase uses Beauchamp 2022's 22 published mouse-human region pairs (gene-expression-derived). We also have:
 - Internal held-out anchor CV (above)
-- Bootstrap stability (97.8 % argmax stability across 40 subject resamples)
+- Bootstrap stability (98.2 % argmax stability across 40 subject resamples)
 - Network coherence (Coletta-style, see [archive/iteration_log.md §5.21](archive/iteration_log.md))
 
 Other independent sources we identified but did not integrate:
@@ -84,6 +86,6 @@ We've curated 15 anchor packs covering ~22 named brain regions beyond the Garin 
 
 ## What HOMER *can* tell you reliably
 
-Use the multi-source trust map (`outputs/coupling/trust_multisource_all_packs.npz`) to gate queries. For parcels in the `anchored_and_validated` tier (31 % of the brain), top-K queries are reliable. For `validated_only` (24 %), top-K is moderately reliable. For `structural` (13 %) treat as a research starting point. For `low_evidence` (20 %), assume no signal.
+Use the multi-source trust map (`outputs/coupling/trust_multisource_all_packs.npz`) to gate queries. For parcels in the `anchored_and_validated` tier (31 % of the brain), top-K queries are reliable at *parcel* granularity. For `validated_only` (22 %), region-level recovery is just as good (AUROC 0.88 vs 0.87) but parcel-exact recovery is not (top-1 0.18 vs 0.69) — so query these at *region* granularity. For `anchored_only` (13 %) and `structural` (14 %), treat as a research starting point. For `low_evidence` (21 %), assume no signal.
 
 For region-level queries on any anchored region, the predictions are essentially correct by construction. That's worth a lot for the ~22 sub-regions covered by packs + the 21 Garin regions, well over 40 well-defined cross-species region predictions, which is more than any prior method we're aware of.
