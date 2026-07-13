@@ -37,7 +37,7 @@ Cell-type marker spatial patterns translate across species at moderate strength.
 | Test | Spatial structure | Translation result |
 |---|---|---|
 | Beauchamp 2022 | 22 specific region pairs | 45.7 % top-1, 100 % qualified top-3 |
-| Margulies/Huntenburg | Brain-wide gradient | \|r\| = 0.402, empirical p = 0.000 |
+| Margulies/Huntenburg | Brain-wide gradient | \|r\| = 0.54, spin p = 0.004 (survives) |
 | BICCN cell-type markers | Cell-class spatial distributions | 13/23 significant, mean r +0.089 |
 | Hodge layer markers | Cortical layer markers | 6/7 significant, mean r +0.119 |
 
@@ -62,9 +62,6 @@ Outputs:
 - `outputs/logs/biccn_2023_cell_types.json`
 - `outputs/figures/biccn_2023_cell_types.png`
 
-## Showcase notebook
-
-See [`notebooks/10_biccn_cell_type_markers.ipynb`](../../notebooks/10_biccn_cell_type_markers.ipynb) for an interactive walkthrough.
 
 ## Future work, full BICCN atlas data
 

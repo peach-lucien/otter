@@ -58,9 +58,18 @@ dig past the average.
 
 **Bidirectional cycle-consistency.** Round-tripping a phenotype
 mouse→human→mouse, an even-handed, ground-truth-free metric with no home-turf
-advantage. HOMER recovers the original at **r ≈ 0.98** across all three test
-phenotypes (gradient, optogenetic circuit, autism pattern) versus **0.81–0.91**
-for TransBrain. HOMER's soft optimal-transport coupling is more internally
+advantage. HOMER recovers the original at **0.98 / 0.95 / 0.97** (gradient, optogenetic
+circuit, Magel2 autism pattern) versus **0.89 / 0.82 / 0.83** for TransBrain, both
+scored over the same 52 mouse regions in which the phenotype is measured.
+
+> ⚠️ **Corrected July 2026.** This previously read "0.81–0.91 for TransBrain". Those
+> numbers scored HOMER on the 52 regions its parcellation covers but TransBrain on all
+> 68 of `Config.MOUSE_REGIONS` — 16 of them **mean-filled** for the gradient. The two
+> were not comparable, and the error did not even bias consistently (it inflated
+> TransBrain on the optogenetic map, 0.82 → 0.91, and deflated it on the gradient,
+> 0.89 → 0.87). Both are now scored on the identical region set. HOMER still leads all
+> three; the margin is narrowest on the smooth gradient (+0.09) and widest on the two
+> focal maps (+0.13 each). HOMER's soft optimal-transport coupling is more internally
 coherent in both directions, a genuine HOMER strength.
 
 **Optogenetic circuit → human cognition.** Reproducing TransBrain's Case 2: a
@@ -123,6 +132,3 @@ Depends on the Margulies experiment's output (`outputs/logs/margulies_2016_gradi
 for the gradient head-to-head. TransBrain benchmark + case data are staged in
 `data_external/transbrain_2025/`.
 
-## Showcase notebook
-
-See [`notebooks/14_transbrain_2025_benchmark.ipynb`](../../notebooks/14_transbrain_2025_benchmark.ipynb).

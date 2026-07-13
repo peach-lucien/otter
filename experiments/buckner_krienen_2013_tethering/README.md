@@ -24,14 +24,25 @@ map.
 
 **VERDICT: PASS.** Three panels (`outputs/figures/buckner_krienen_2013_tethering.png`).
 
-For every human cortical parcel we measure HOMER's **coverage**, the total π
-mass it receives from the mouse brain (the per-column mass of the coupling)
-and place it on the sensorimotor → association axis (the HCP T1w/T2w myelin
-map; high myelin = sensorimotor).
+For every human cortical parcel we measure HOMER's **coverage**, the π mass it
+receives from the mouse brain (the per-column mass of the coupling), and place it on
+the sensorimotor → association axis (the HCP T1w/T2w myelin map; high myelin =
+sensorimotor).
+
+> ⚠️ **Coverage must be aggregated as a MASS-NORMALISED MEAN, never a sum.** Summing
+> makes coverage scale with *how many parcels a region happens to contain* — a
+> parcellation artefact, not biology. It is not a free parameter: the downstream
+> disorder result is ρ = **+0.64** with the mean and ρ = **+0.05** with the sum. The
+> numbers below are from the original summed analysis and are **superseded**; the
+> canonical figures are in `outputs/logs/section5_coverage_nulls.json` and
+> `docs/03_results.md` §5 — a **6.7 log-unit** sensorimotor−association tertile gap
+> (spin p = 0.002), with the *continuous* correlation spin-fragile (r = 0.13,
+> p = 0.076) and therefore not claimed.
 
 HOMER's coverage **collapses toward association cortex**. The sensorimotor
 tertile receives a mean log₁₀ coverage of −8.5; the association tertile −18.8
-a gap of **10.3 log units** (~10 orders of magnitude less π mass). The contrast
+a gap of **10.3 log units** [SUPERSEDED — summed; the mass-normalised gap is
+**6.7 log units**, spin p = 0.002]. The contrast
 is overwhelming (Mann-Whitney p = 2.5×10⁻¹⁶) and far beyond a permuted-axis
 null (95th-percentile gap 1.8 log units; empirical p = 0.000). The decile curve
 shows a monotone-ish collapse from sensorimotor to association cortex; Spearman
@@ -41,7 +52,8 @@ shows a monotone-ish collapse from sensorimotor to association cortex; Spearman
 |---|---|
 | sensorimotor-tertile coverage | log₁₀ −8.5 |
 | association-tertile coverage | log₁₀ −18.8 |
-| coverage gap | **10.3 log units**, p = 2.5×10⁻¹⁶, empirical p = 0.000 |
+| coverage gap (summed — SUPERSEDED) | 10.3 log units, p = 2.5×10⁻¹⁶ |
+| **coverage gap (mass-normalised mean — canonical)** | **6.7 log units, spin p = 0.002** |
 
 **HOMER is not confident everywhere**, it is dramatically sparser over human
 association cortex, exactly as the tethering hypothesis predicts. The coupling
@@ -89,6 +101,3 @@ PYTHONPATH=src python experiments/buckner_krienen_2013_tethering/02_plot.py
 Outputs: `outputs/logs/buckner_krienen_2013_tethering.json`,
 `outputs/figures/buckner_krienen_2013_tethering.png`.
 
-## Showcase notebook
-
-See [`notebooks/15_buckner_krienen_2013_tethering.ipynb`](../../notebooks/15_buckner_krienen_2013_tethering.ipynb).

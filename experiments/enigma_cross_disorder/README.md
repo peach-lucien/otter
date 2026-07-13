@@ -81,9 +81,6 @@ Outputs:
 - `outputs/figures/enigma_phase1_per_disorder.png`
 - `outputs/coupling/per_disorder_predictions.npz`
 
-## Showcase notebook
-
-See [`notebooks/11_enigma_cross_disorder.ipynb`](../../notebooks/11_enigma_cross_disorder.ipynb) for an interactive walkthrough.
 
 ## Disorder-unique + transdiagnostic (2026-06-19), `04_disorder_unique.py`, `05_transdiagnostic.py`
 

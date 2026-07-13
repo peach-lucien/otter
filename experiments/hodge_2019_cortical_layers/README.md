@@ -43,9 +43,6 @@ Outputs:
 - `outputs/logs/hodge_2019_layer_markers_refined.json`
 - `outputs/figures/hodge_2019_layer_markers.png`
 
-## Showcase notebook
-
-See [`notebooks/06_hodge_2019_layer_markers.ipynb`](../../notebooks/06_hodge_2019_layer_markers.ipynb) for an interactive walkthrough of the analysis.
 
 ## Areal-type reframe (2026-06-19), `03_areal_type_reframe.py`
 
@@ -57,9 +54,18 @@ spin null:
 - granular L4 − infragranular: r=+0.09, spin p=0.055 (marginal, n.s.)
 - supragranular − granular: r=−0.04, spin p=0.52 (n.s.)
 
-So the layer-marker *gene* contrasts do not recover areal type through π. The
-cytoarchitectural axis DOES survive when measured **structurally**, that is the
-Fulcher 2019 T1w:T2w + Goulas-type result (spin p=0.021/0.010). Conclusion: Hodge is
-capped (laminar impossible at this parcellation, gene-contrast areal-type
-n.s.); cite Fulcher for cross-species cytoarchitecture, and keep Hodge as an
-area-level-only result. Log: `outputs/logs/hodge_areal_type_reframe.json`.
+So the layer-marker *gene* contrasts do not recover areal type through π.
+
+> ⚠️ **This section used to end by saying the cytoarchitectural axis "DOES survive
+> when measured structurally (spin p = 0.021/0.010)" and telling you to cite Fulcher
+> for cross-species cytoarchitecture. Both halves were wrong.** Those p-values were
+> hardcoded literals that existed in no output file; the real values are **0.11 and
+> 0.10**, i.e. the Fulcher structural test does **not** clear a spatial null either.
+> Do not cite it as positive evidence.
+
+**Conclusion.** Microstructure does not transfer through π — not as layer-marker gene
+contrasts (here) and not as myelin or cytoarchitecture (Fulcher). This is consistent,
+not contradictory: π was fitted on connectivity and carries connectivity. Conservation
+does reach *broad* cell classes (excitatory − inhibitory, r = 0.26, spin p = 0.001) but
+not finer composition or lamination. See `docs/03_results.md` §3.
+Log: `outputs/logs/hodge_areal_type_reframe.json`.

@@ -62,6 +62,3 @@ Outputs:
 - `outputs/logs/coletta_2020_cross_species_rsn.json` (full per-network + per-pair stats)
 - `outputs/figures/coletta_2020_cross_species_rsn.png` (3-panel figure)
 
-## Showcase notebook
-
-See [`notebooks/08_coletta_2020_cross_species_rsn.ipynb`](../../notebooks/08_coletta_2020_cross_species_rsn.ipynb) for an interactive walkthrough.

@@ -144,9 +144,6 @@ Outputs:
 - `outputs/logs/pagani_subtype_translation_corrected.json`
 - `outputs/figures/pagani_subtype_translation_corrected.png`
 
-## Showcase notebook
-
-[`notebooks/09_pagani_per_model_translation.ipynb`](../../notebooks/09_pagani_per_model_translation.ipynb), interactive walkthrough of the analysis (verified subtype split, LOO membership, π subtype-specificity, and the Direction 1 spatial-routing limit).
 
 ## To make this a real validation, we would need
 

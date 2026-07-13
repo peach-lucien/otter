@@ -117,7 +117,7 @@ PYTHONPATH=src python pipeline/08_build_gui.py --publish    # region-first explo
 ```
 
 `08a` writes `outputs/coupling/trust_multisource_all_packs.npz` (the evidence
-map the GUI and `notebooks/02_trust_map.ipynb` read); `08_build_gui.py` builds
+map the GUI and `notebooks/fig1_coupling.ipynb` read); `08_build_gui.py` builds
 `outputs/gui/index.html` and, with `--publish`, copies it to `docs/index.html`
 for GitHub Pages.
 
