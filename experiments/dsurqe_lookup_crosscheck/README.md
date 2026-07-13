@@ -10,7 +10,7 @@ parcels sit in DSURQE region R?"*:
   in the mouse table (majority over the parcel's full voxel set), resolved to
   tree names via the Beauchamp CSV + the hand-authored `_paul_vote_bridge`.
 
-This is **not** a user-facing notebook, it exists to justify the default.
+This is **not** a user-facing notebook; it exists to justify the default.
 
 ## Run
 
@@ -39,4 +39,4 @@ Jaccard. The pattern is consistent:
 Net: roughly **half** the anchor-pack queries are at a granularity the votes
 cannot reach, so the live atlas lookup stays the default. The votes are best
 used as a cross-check, or as a selective fallback only where a vote name lines
-up 1:1 with a pack query (and you'd gain the full-voxel-set robustness).
+up 1:1 with a pack query, which would also gain the full-voxel-set robustness.

@@ -1,6 +1,6 @@
 # TransBrain 2025, sibling-method benchmark
 
-A **methods-landscape** comparison, not a validation "pass". It
+A **methods-landscape** comparison rather than a validation "pass". It
 positions HOMER against the current state-of-the-art mouse↔human translator.
 
 ## Why this experiment
@@ -49,7 +49,7 @@ both methods.
 only moderately (\|r\| ≈ 0.2–0.3). TransBrain is stronger for region-level
 phenotype translation, its home turf. HOMER's complementary contribution is a
 *soft, parcel-level* coupling with per-parcel trust tiers and explicit anchor
-supervision. This experiment is best read as positioning, not a contest.
+supervision. This experiment is best read as positioning rather than as a contest.
 
 ## Advanced comparison
 
@@ -64,13 +64,13 @@ scored over the same 52 mouse regions in which the phenotype is measured.
 
 > ⚠️ **Corrected July 2026.** This previously read "0.81–0.91 for TransBrain". Those
 > numbers scored HOMER on the 52 regions its parcellation covers but TransBrain on all
-> 68 of `Config.MOUSE_REGIONS` — 16 of them **mean-filled** for the gradient. The two
-> were not comparable, and the error did not even bias consistently (it inflated
-> TransBrain on the optogenetic map, 0.82 → 0.91, and deflated it on the gradient,
-> 0.89 → 0.87). Both are now scored on the identical region set. HOMER still leads all
+> 68 of `Config.MOUSE_REGIONS`, 16 of them **mean-filled** for the gradient. The two
+> were not comparable, and the error did not bias consistently: it inflated
+> TransBrain on the optogenetic map (0.82 → 0.91) and deflated it on the gradient
+> (0.89 → 0.87). Both are now scored on the identical region set. HOMER still leads all
 > three; the margin is narrowest on the smooth gradient (+0.09) and widest on the two
 > focal maps (+0.13 each). HOMER's soft optimal-transport coupling is more internally
-coherent in both directions, a genuine HOMER strength.
+> coherent in both directions, which is a real strength of the method.
 
 **Optogenetic circuit → human cognition.** Reproducing TransBrain's Case 2: a
 mouse anterior-insula optogenetic circuit routed through π and decoded against

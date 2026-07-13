@@ -73,8 +73,16 @@ def main():
     pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")
     mouse_coords = M.var[["x", "y", "z"]].to_numpy(float)
 
-    mouse_grad = grad_mod.principal_gradient(M.uns["fc_mean"], top_pct=10.0)
-    human_grad = grad_mod.principal_gradient(H.uns["fc_mean"], top_pct=10.0)
+    # Read the gradients from 01_gradient_validation.py's output rather than recomputing.
+    # principal_gradient() now requires an external hierarchy reference to select the
+    # correct diffusion component (it used to take the wrong one; see its docstring),
+    # so recomputing here would duplicate that logic and risk it drifting out of sync.
+    _g = json.loads((ROOT / "outputs/logs/margulies_2016_gradient.json").read_text())
+    mouse_grad = np.asarray(_g["mouse_gradient"], float)
+    human_grad = np.asarray(_g["human_gradient"], float)
+    print(f"  using components mouse={_g['component_selection']['mouse']['selected_component']}, "
+          f"human={_g['component_selection']['human']['selected_component']} "
+          f"(selected against each species' T1w/T2w map)")
     pred = _route_normalized(mouse_grad, pi)
     # resolve eigenvector sign against the observed human gradient
     mfin = np.isfinite(pred) & np.isfinite(human_grad)

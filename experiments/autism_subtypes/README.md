@@ -1,4 +1,4 @@
-# Autism subtypes (Pagani 2026). HOMER applications
+# Autism subtypes (Pagani 2026): HOMER applications
 
 Cross-species network validation against [Pagani et al. 2026 *Nat Neurosci*](https://www.nature.com/articles/s41593-026-02287-z), "Autism subtypes identified using cross-species functional connectivity analyses".
 
@@ -18,7 +18,7 @@ The paper's central claim is that autism is best understood as **two functional-
 
 **Step 5. Human FC dataset.** Pool 1,029 ASD participants and 1,141 controls from ABIDE-style multi-site rsfMRI collections (Fig 4a source data; 39 collections). Parcellate using Schaefer-400 + subcortical regions; compute per-subject FC. Apply the same subtype clustering procedure.
 
-**Step 6. Human subtype recovery.** Hypoconnected and hyperconnected groups re-emerge in human ASD (Fig 4d). For each subtype, summarise the perturbed connectivity on the Yeo-7 + Subcortical 8-network atlas (Fig 4e). The paper's cross-species correspondence is then **by network name**, they argue mouse Somatomotor disruption recurs as human Somatomotor disruption, etc.
+**Step 6. Human subtype recovery.** Hypoconnected and hyperconnected groups re-emerge in human ASD (Fig 4d). For each subtype, summarise the perturbed connectivity on the Yeo-7 + Subcortical 8-network atlas (Fig 4e). The paper's cross-species correspondence is then **by network name**: they argue that mouse Somatomotor disruption recurs as human Somatomotor disruption, and so on.
 
 **Step 7. Cross-species pathway replication.** Use ENIGMA-style human gene-imaging maps + SFARI autism genes to recover pathway enrichment in *human* ASD by subtype (Fig 5). Find that the same pattern holds: human hypoconnectivity is enriched for synaptic genes; human hyperconnectivity for immune genes. The biology travels cross-species.
 
@@ -26,7 +26,7 @@ The conclusion: autism's two FC subtypes have **the same gene-pathway signature 
 
 ## What this has to do with HOMER
 
-The paper's cross-species link in **step 6** is by name: mouse-Somatomotor ↔ human-Somatomotor. That correspondence is a strong assumption, it works only if the two species' networks are biologically the same things. HOMER's quantitative π provides an independent, parcel-level evidence base for that assumption. Specifically:
+The paper's cross-species link in **step 6** is by name: mouse-Somatomotor ↔ human-Somatomotor. That correspondence is a strong assumption; it works only if the two species' networks are biologically the same things. HOMER's quantitative π provides an independent, parcel-level evidence base for that assumption. Specifically:
 
 - **Validation use** (this directory, `01_network_crossvalidation.py`): aggregate HOMER's π to a mouse-network × human-network matrix. If π preferentially links like-named networks across species, that supports the paper's name-based correspondence. If it doesn't, the workflow may be over-confident in places HOMER thinks the structural evidence disagrees.
 
@@ -47,11 +47,11 @@ The paper's cross-species link in **step 6** is by name: mouse-Somatomotor ↔ h
 | Auditory → Auditory | 0 % | 2 % | 0.0× | argmax: Control |
 | BF_Olfactory → Subcortical | 14 % | 29 % | 0.5× | argmax: Limbic |
 
-**4/8 diagonal-argmax with mean 2.69× over null. Permuted-π null: 1.95/8 and 0.97×**, exactly chance, confirming the signal is structural.
+**4/8 diagonal-argmax with mean 2.69× over null. Permuted-π null: 1.95/8 and 0.97×**, which is chance, confirming the signal is structural.
 
-> **Fair-null confirmation.** Unlike the smooth-gradient tests, this discrete result **survives a spatially-fair null**: under a *mouse-parcel spin* (rotate the mouse networks on a sphere so they keep their spatial shape but change location, then re-aggregate π), the diagonal-argmax count drops to **mean 1.78/8** (95th pct 3/8) and the observed 4/8 beats it at **p=0.026**. So the mouse→human network correspondence is *specific*, not an artifact of spatial autocorrelation. (Run: `experiments/spatial_null_check/fair_nulls_discrete.py`.)
+> **Fair-null confirmation.** Unlike the smooth-gradient tests, this discrete result **survives a spatially-fair null**: under a *mouse-parcel spin* (rotate the mouse networks on a sphere so they keep their spatial shape but change location, then re-aggregate π), the diagonal-argmax count drops to **mean 1.78/8** (95th pct 3/8) and the observed 4/8 beats it at **p=0.026**. The mouse→human network correspondence is therefore *specific* rather than an artifact of spatial autocorrelation. (Run: `experiments/spatial_null_check/fair_nulls_discrete.py`.)
 
-Misses are interpretable: mouse visual cortex covers higher-order visual regions that Schaefer-17 places in DorsAttn; mouse HC routes to "Subcortical" because hippocampus *is* subcortical in cortical-only parcellations; Auditory is limited by Schaefer's narrow auditory label; BF/Olfactory has no clean cortical counterpart in Yeo-7. None of these are HOMER failures, they're Schaefer/Yeo definition limits.
+Misses are interpretable: mouse visual cortex covers higher-order visual regions that Schaefer-17 places in DorsAttn; mouse HC routes to "Subcortical" because hippocampus *is* subcortical in cortical-only parcellations; Auditory is limited by Schaefer's narrow auditory label; BF/Olfactory has no clean cortical counterpart in Yeo-7. None of these are HOMER failures; they are Schaefer/Yeo definition limits.
 
 ## Robustness. Test 1b
 
@@ -64,7 +64,7 @@ Misses are interpretable: mouse visual cortex covers higher-order visual regions
 | fc_plus_SC_xyz_zero (no spatial prior) | 3/8 | 2.02× |
 | permuted-π null (20 trials) | ~2/8 | 0.97× |
 
-The network-level correspondence is **not driven by the anchor packs**, it's already in the bare-Garin π. Even removing the xyz prior keeps it. The signal originates in FC + SC + the 21 Garin point anchors, propagated through FGW. Permuted π sits at chance.
+The network-level correspondence is **not driven by the anchor packs**: it is already present in the bare-Garin π. Even removing the xyz prior keeps it. The signal originates in FC + SC + the 21 Garin point anchors, propagated through FGW. Permuted π sits at chance.
 
 ## Reproduce
 
@@ -110,13 +110,13 @@ The pattern HOMER predicts (in z-scored terms): Limbic and Subcortical preferent
 | DMN         | −0.74 | −0.15 | ★ |
 | Control     | −1.05 | −0.84 | ★ |
 
-This **is a replication of one of Pagani's claims**, not just a check on their assumption. The mouse → human translation via HOMER's quantitative π, without name-matching, without any access to Pagani's data during fitting, produces a per-network subtype-contrast pattern that significantly resembles Pagani's observed human pattern.
+This **is a replication of one of Pagani's claims** rather than just a check on their assumption. The mouse → human translation via HOMER's quantitative π, without name-matching, and without any access to Pagani's data during fitting, produces a per-network subtype-contrast pattern that significantly resembles Pagani's observed human pattern.
 
 The two misses (SomatoMotor, Visual) are interpretable: both have small observed contrasts (z ≈ ±0.2), so the test's discriminant power for them is weak; HOMER's prediction is in the wrong direction but only by a small amount in absolute terms.
 
 ### Earlier failed design. Test 2a (per-subtype absolute intensity)
 
-Test 2a (`04_subtype_translation.py`) tried correlating predicted vs observed *absolute* per-network intensity for each subtype separately. That failed because the predictions are dominated by human-network size effects (the largest network, Subcortical with 326 parcels, sucks up mass regardless of mouse pattern). Permuted-π null had non-zero mean (≈ +0.79 for hyper), so the test lacked power. Test 2b (`05_subtype_contrast.py`) uses the subtype difference, which cancels size effects, and works.
+Test 2a (`04_subtype_translation.py`) tried correlating predicted vs observed *absolute* per-network intensity for each subtype separately. That failed because the predictions are dominated by human-network size effects (the largest network, Subcortical with 326 parcels, absorbs mass regardless of the mouse pattern). The permuted-π null had a non-zero mean (≈ +0.79 for hyper), so the test lacked power. Test 2b (`05_subtype_contrast.py`) uses the subtype difference, which cancels size effects, and works.
 
 ## Test 2c. Full per-network-pair Δ-matrix translation (sharpest)
 
@@ -126,17 +126,17 @@ Key methodological improvement: splits HOMER's coarse "subcortical" into Caudate
 
 ### Result
 
-**Pearson r = +0.550 over 36 paired matrix elements (analytical p = 0.0005; empirical p = 0.000 vs 200 permuted-π row-shuffles, null mean −0.47). Spearman ρ = +0.228 (p = 0.18, NOT significant). 22 of 36 entries (61 %) agree in sign.**
+**Pearson r = +0.550 over 36 paired matrix elements (analytical p = 0.0005; empirical p = 0.000 vs 200 permuted-π row-shuffles, null mean −0.47). Spearman ρ = +0.228 (p = 0.18, not significant). 22 of 36 entries (61 %) agree in sign.**
 
 > **Caveat.** Under the recommended π the subtype Δ-matrix gives Spearman ρ = **+0.23** (base π ρ = +0.27). The result is **leverage-dominated by a single element**: Subcortical–Subcortical (observed Δ +33.7, predicted +15.6, the strongest network-pair signal of hyperconnected ASD). Removing it drops Pearson to **0.34** and Spearman to **0.16**. Several mid-magnitude cells are predicted with the wrong sign (e.g. observed +22.4 → predicted −3.2). **And it does not survive a spatially-fair mouse-parcel spin null** (observed r=+0.55 vs spin-null |r| mean 0.37, 95th 0.62, **p=0.19**, n.s., unlike the *categorical* network-bridge/Coletta tests which do survive). So Test 2c shows that HOMER **correctly recovers the dominant cross-species signal** (Subcortical hyperconnectivity), but does **not** demonstrate strong rank-concordance across the full matrix or survive a fair null.
 
-The largest positive observed Δ. Subcortical–Subcortical, is also the largest positive Δ HOMER predicts. Several large negative observed Δ entries (hypo-dominant) are also predicted negative; but the rank concordance across the weaker cells is poor, which is why the Spearman is non-significant.
+The largest positive observed Δ, Subcortical–Subcortical, is also the largest positive Δ HOMER predicts. Several large negative observed Δ entries (hypo-dominant) are also predicted negative, but the rank concordance across the weaker cells is poor, which is why the Spearman is non-significant.
 
 This is the finest-grained test we have (36 matrix elements vs 8). But as the caveat above shows, the recovered signal is concentrated in the single dominant Subcortical–Subcortical element rather than distributed across the joint network-pair structure: the magnitude correlation (Pearson) is carried by that one point, and the rank correlation (Spearman) across the full matrix is non-significant. So Test 2c supports "HOMER recovers the dominant cross-species Δ" but not the stronger "HOMER reproduces the full joint network-pair structure."
 
 ## Test 3. Gene-set spatial translation
 
-Pagani claim 4: hypo/hyper subtypes have distinct gene/pathway signatures that recur cross-species. Pagani treats this as parallel findings, synaptic genes are enriched in mouse-hypo regions AND synaptic genes are enriched in human-hypo regions, without explicitly bridging the two through a spatial mapping. HOMER's π lets us bridge them.
+Pagani claim 4: hypo/hyper subtypes have distinct gene/pathway signatures that recur cross-species. Pagani treats this as two parallel findings, that synaptic genes are enriched in mouse-hypo regions and that synaptic genes are enriched in human-hypo regions, without explicitly bridging the two through a spatial mapping. HOMER's π lets us bridge them.
 
 **Pipeline**: download parcel-level mouse Allen ISH expression for Pagani's implicated genes → compute per-mouse-parcel mean expression score for each subtype gene set → translate via π → aggregate predicted human-parcel scores to 8 Pagani networks → compute predicted human Δ = hyper-spatial − hypo-spatial → correlate against observed human Δ from Fig 4e. Diagnostic: gene-bootstrap (1,000 resamples of the gene pool), per-parcel agreement between gene-translation and FC-translation, per-pathway breakdown.
 
@@ -154,19 +154,19 @@ Built `allen_expansion/download_pagani_ish.py` to pull parcel-level expression f
 | Spearman ρ | +0.619 | +0.619 |
 | Same-sign per network | 4/8 | 5/8 |
 
-The point estimate barely moved because the **8-network aggregation is the bottleneck, not gene coverage**, we're correlating two 8-element vectors regardless of how cleanly each is estimated.
+The point estimate barely moved because the **8-network aggregation is the bottleneck rather than gene coverage**: we are correlating two 8-element vectors regardless of how cleanly each is estimated.
 
 The bootstrap is where the expansion pays off:
 
-**Pearson r mean = +0.428, 95 % CI (+0.349, +0.497), with 100 % of 1,000 gene-resamples positive and 99.7 % above r = +0.3.** The signal is exceptionally stable across which subset of genes you draw; it just can't reach a low Pearson p with only n=8 network averages. The bootstrap addresses the "is this correlation a one-off" question directly (it is not), permutation-π is the wrong null at n=8.
+**Pearson r mean = +0.428, 95 % CI (+0.349, +0.497), with 100 % of 1,000 gene-resamples positive and 99.7 % above r = +0.3.** The signal is stable across which subset of genes is drawn; it cannot reach a low Pearson p with only n=8 network averages. The bootstrap addresses the "is this correlation a one-off" question directly (it is not); permutation-π is the wrong null at n=8.
 
 ### Per-parcel diagnostic (n = 2,094)
 
-Predicted Δ from Test 3 (gene-derived) vs predicted Δ from Test 2c (FC-derived) correlate at Pearson r = +0.154, Spearman ρ = +0.058 across all 2,094 human parcels. **The two HOMER translation routes are complementary, not redundant**, gene-spatial encodes "which regions express the implicated genes"; FC-spatial encodes "which networks are functionally perturbed." Both correlate with Pagani's observed pattern through π but capture different cross-species signals.
+Predicted Δ from Test 3 (gene-derived) vs predicted Δ from Test 2c (FC-derived) correlate at Pearson r = +0.154, Spearman ρ = +0.058 across all 2,094 human parcels. **The two HOMER translation routes are complementary rather than redundant.** Gene-spatial encodes "which regions express the implicated genes"; FC-spatial encodes "which networks are functionally perturbed." Both correlate with Pagani's observed pattern through π but capture different cross-species signals.
 
 ### Per-pathway breakdown (14 pathways from MOESM3)
 
-Every pathway tested, synaptic AND immune AND mTOR AND WNT AND chromatin AND GPCR AND MAPK, shows the **same direction**: positive r ≈ +0.35 to +0.51 with observed hyper Δ, negative r with observed hypo Δ. The direction-by-pathway split that Pagani's claim 4 requires (synaptic → hypo; immune → hyper) doesn't separate cleanly through HOMER. Reason: **Pagani's published "hypo" matrix in Fig 4e has tiny magnitudes** (range 0–1.5) compared to "hyper" (range 0–33), so the Δ test is dominated by the hyper side regardless of which pathway you feed in. We can confirm Pagani's *overall* cross-species spatial replication (every pathway translates positively to human hyper-side ASD perturbation) but their *direction-by-pathway* claim isn't testable from the published source data alone, that would need per-parcel human pathway-spatial maps, which Pagani didn't ship.
+Every pathway tested (synaptic, immune, mTOR, WNT, chromatin, GPCR and MAPK) shows the **same direction**: positive r ≈ +0.35 to +0.51 with observed hyper Δ, negative r with observed hypo Δ. The direction-by-pathway split that Pagani's claim 4 requires (synaptic → hypo; immune → hyper) doesn't separate cleanly through HOMER. Reason: **Pagani's published "hypo" matrix in Fig 4e has tiny magnitudes** (range 0–1.5) compared to "hyper" (range 0–33), so the Δ test is dominated by the hyper side whichever pathway is fed in. We can confirm Pagani's *overall* cross-species spatial replication (every pathway translates positively to human hyper-side ASD perturbation), but their *direction-by-pathway* claim is not testable from the published source data alone: that would need per-parcel human pathway-spatial maps, which Pagani didn't ship.
 
 ## Test 4. ABIDE per-subject HOMER-template scoring (null result)
 
@@ -187,7 +187,7 @@ HOMER's cross-species template does **not** distinguish ASD from control at the 
 
 ### Where HOMER's signal lives
 
-Tests 2c and 3 show HOMER's translation carries genuine signal at the **population/network-aggregate level**. Test 4 shows the same signal does NOT survive as a per-subject classifier on noisy individual FC, a natural granularity boundary: HOMER carries cross-species signal at the level Pagani actually publishes (per-subtype averages on networks), not at single-subject diagnostic resolution.
+Tests 2c and 3 show HOMER's translation carries real signal at the **population/network-aggregate level**. Test 4 shows the same signal does **not** survive as a per-subject classifier on noisy individual FC. That is a natural granularity boundary: HOMER carries cross-species signal at the level Pagani publishes (per-subtype averages on networks), and not at single-subject diagnostic resolution.
 
 Possible mitigations that might improve power: replicating Pagani's exact per-cell FC perturbation pipeline; a finer parcellation (Schaefer-400 / CC400 instead of AAL-116); richer site/age/motion regression. The negligible, sign-inconsistent δ suggests there isn't a strong subject-level signal to recover regardless of feature engineering.
 
@@ -198,11 +198,11 @@ Possible mitigations that might improve power: replicating Pagani's exact per-ce
 | **Test 1** | Pagani's name-based network bridge has biological substance | 4/8 canonical pairs diagonal-argmax; mean 2.69× over null | Bridge OK for 4 networks; 4 misses are atlas-label artefacts |
 | **Test 2c** | Pagani claim 3 (FC subtypes recur cross-species at matching anatomical locations) | r=+0.550 (p=0.0005, empirical p=0.000); Spearman ρ=+0.228 (n.s.); leverage-driven by Subcortical–Subcortical (drop-one r=0.34) | **Partial**, recovers the dominant cross-species signal, but full-matrix rank concordance is weak |
 | **Test 3** | Pagani claim 4 (gene/pathway signature recurs cross-species spatially) | Bootstrap r=+0.428, 95% CI (+0.349, +0.497), 100% of resamples positive | **Supports overall claim**; per-pathway direction-by-subtype not testable from published source |
-| **Test 4** | Pagani claim 1, individual-subject level (HOMER as ASD classifier feature) | Mann-Whitney p=0.96 (signed) / 0.64 (abs), Cliff's δ≈0, ASD unimodal | **Null**. HOMER signal is population-level, not subject-level (under recommended π) |
+| **Test 4** | Pagani claim 1, individual-subject level (HOMER as ASD classifier feature) | Mann-Whitney p=0.96 (signed) / 0.64 (abs), Cliff's δ≈0, ASD unimodal | **Null**. HOMER signal is population-level rather than subject-level (under recommended π) |
 
 ## Statistical caveats
 
-- **Permuted-π null is negative-mean.** The row-shuffle null sits well below 0 for the contrast/matrix tests (Test 2b mean −0.51, Test 2c −0.47), so "empirical p = 0.000" partly reflects the observed value clearing a downward-biased null rather than a strong positive effect. Read significance from the **effect size + analytical p**, not the empirical p alone. Results that clear the bar with margin *and* a small analytical p (Test 1, the gradients, the negative controls, Test 2c-Pearson) are robust; **borderline ones that pass only via the biased null. Test 2c-Spearman, the per-model Direction-1 routing, and the expanded gene-spatial Pearson, should be read as suggestive / n.s.**
+- **Permuted-π null is negative-mean.** The row-shuffle null sits well below 0 for the contrast/matrix tests (Test 2b mean −0.51, Test 2c −0.47), so "empirical p = 0.000" partly reflects the observed value clearing a downward-biased null rather than a strong positive effect. Read significance from the **effect size + analytical p** rather than the empirical p alone. Results that clear the bar with margin *and* a small analytical p (Test 1, the gradients, the negative controls, Test 2c-Pearson) are robust; **the borderline ones that pass only via the biased null (Test 2c-Spearman, the per-model Direction-1 routing, and the expanded gene-spatial Pearson) should be read as suggestive / n.s.**
 - **Multiple comparisons.** ~12 validations × sub-tests, no family-wise correction stated. The strong results survive Bonferroni (α≈0.0025); the borderline ones do not.
 - **Researcher degrees of freedom.** The subtype test formulation was refined 2a (absolute, failed) → 2b (contrast) → 2c (full matrix); metric choices were partly post-hoc. Treat 2a→2c as exploratory-then-confirmatory.
 

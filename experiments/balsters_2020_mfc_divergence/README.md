@@ -14,7 +14,7 @@ rodent, marmoset and human. Their data-backed conclusion: rodent MFC does
 proposal that rat MFC is the analogue of primate lateral PFC); its
 connectivity instead most resembles **premotor** cortex.
 
-That is a specific, directional, published "where it should NOT go"
+That is a specific, directional, published "where it should *not* go"
 prediction. Most HOMER validations test for a *positive* signal; this one
 tests whether HOMER avoids a *wrong* answer:
 
@@ -35,11 +35,11 @@ marmoset/human mismatches make re-routing their data unjustified.
 
 ## Result
 
-**VERDICT: PASS. Schaeffer-consistent.** Three panels
+**HOMER passes, and its π is Schaeffer-consistent.** Three panels
 (`outputs/figures/balsters_2020_mfc_divergence.png`):
 
 **1. Where π routes mouse MFC.** Of the coupling mass leaving HOMER's 39
-mouse rodent-MFC parcels (ACAd/ACAv/PL/ILA), **0.0 %** reaches human dlPFC
+mouse rodent-MFC parcels (ACAd/ACAv/PL/ILA), **0.0 %** reaches human dlPFC,
 an enrichment of **×0.0** against the permuted-π null (empirical p = 0.99,
 i.e. observed mass is at the *bottom* of the null distribution). The
 Schaeffer-consistent territories are strongly favoured: medial PFC ×10.1,
@@ -55,9 +55,9 @@ Prelimbic→dlPFC anchor is forced in. Schaeffer et al. 2020 is the independent 
 evidence that this anchor encodes a homology the data argues against, and
 supports HOMER's decision to keep it opt-in.
 
-**3, dlPFC is a low-homology territory.** Human dlPFC receives only 0.6 %
-of *all* mouse→human coupling mass while occupying 1.1 % of human parcels
-under-represented relative to chance. HOMER finds no confident rodent
+**3. dlPFC is a low-homology territory.** Human dlPFC receives only 0.6 %
+of *all* mouse→human coupling mass while occupying 1.1 % of human parcels, so it
+is under-represented relative to chance. HOMER finds no confident rodent
 homologue of dorsolateral PFC from anywhere in the mouse brain, consistent
 with the evolutionary expansion of human lateral PFC.
 

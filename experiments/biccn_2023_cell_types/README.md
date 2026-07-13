@@ -1,6 +1,6 @@
 # BICCN cell-type marker cross-species validation
 
-Tests whether HOMER's π preserves cell-type-defining marker spatial patterns across mouse and human, using markers aligned to BICCN's cross-species cell-type atlases ([Yao 2023, Nature](https://www.nature.com/articles/s41586-023-06812-z); [Siletti 2023, Science](https://www.science.org/doi/10.1126/science.add7046)).
+We asked whether HOMER's π preserves cell-type-defining marker spatial patterns across mouse and human, using markers aligned to BICCN's cross-species cell-type atlases ([Yao 2023, Nature](https://www.nature.com/articles/s41586-023-06812-z); [Siletti 2023, Science](https://www.science.org/doi/10.1126/science.add7046)).
 
 ## Why this experiment
 
@@ -10,7 +10,7 @@ BICCN's atlases establish cross-species conservation of cell types with their de
 
 ## Result
 
-23 cell-type markers tested across 7 classes. 13 of 23 translate at empirical p < 0.05, with a mean Pearson r of +0.089 across all markers. The class breakdown:
+We routed each mouse marker-expression map through π and correlated the predicted human map with the observed AHBA map. 23 cell-type markers were tested across 7 classes. 13 of 23 translate at empirical p < 0.05, with a mean Pearson r of +0.089 across all markers. The class breakdown:
 
 | Class | n markers | n significant | Mean r |
 |---|---:|---:|---:|
@@ -76,15 +76,15 @@ This would extend from ~25 cell-type-marker proxies to thousands of actual cell 
 ## Contrast reframe (2026-06-19), `03_contrast_reframe.py`
 
 Per-gene smooth-map correlations are weak (mean r=0.089) and share cortical spatial
-autocorrelation. Testing cell-CLASS contrasts instead (magnitude-cancelling, like the
-Pagani contrast), against the fair translation-spin null:
-- **Excitatory − inhibitory** (Glut − interneuron): r=+0.262, **spin p=0.001 → SURVIVES.**
-- Neuronal − glial: r=+0.049, spin p=0.58 (n.s.), glia aren't network-organised.
+autocorrelation. We therefore tested cell-class contrasts instead (magnitude-cancelling,
+like the Pagani contrast), against the fair translation-spin null:
+- **Excitatory − inhibitory** (Glut − interneuron): r=+0.262, **spin p=0.001, survives.**
+- Neuronal − glial: r=+0.049, spin p=0.58 (n.s.); glia aren't network-organised.
 - Dopaminergic subcortical hotspot: top-decile overlap 17/124, hypergeometric p=0.10
   (marginal); full-map spin n.s.
 
-**The E/I axis is a genuine specific cross-species result** that the per-marker test
-missed. HOMER preserves where excitatory vs inhibitory neurons dominate, beyond
+**The E/I axis is a specific cross-species result** that the per-marker test
+missed. HOMER preserves where excitatory versus inhibitory neurons dominate, beyond
 spatial smoothness. Log: `outputs/logs/biccn_contrast_reframe.json`.
 
 A higher-resolution upgrade (real per-region cell-type *abundance* from Yao 2023 +

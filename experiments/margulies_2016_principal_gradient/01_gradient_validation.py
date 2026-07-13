@@ -42,8 +42,13 @@ sys.path.insert(0, str(ROOT / "src"))
 from homer.data import load_cached
 
 
-def principal_gradient(fc: np.ndarray, *, top_pct: float = 10.0) -> np.ndarray:
-    """Margulies-style principal gradient from an (N, N) FC correlation matrix."""
+def diffusion_components(fc: np.ndarray, *, top_pct: float = 10.0,
+                         n_comp: int = 3) -> np.ndarray:
+    """First ``n_comp`` non-trivial diffusion-map components of an (N, N) FC matrix.
+
+    Returns an (n_comp, N) array. The embedding coordinate is D^(-1/2) u_k, not the
+    raw symmetric-Laplacian eigenvector u_k (the two differ by a degree weighting).
+    """
     n = fc.shape[0]
     fc = np.clip(fc, -0.9999, 0.9999).astype(np.float64)
     fcz = np.arctanh(fc)
@@ -58,8 +63,50 @@ def principal_gradient(fc: np.ndarray, *, top_pct: float = 10.0) -> np.ndarray:
     d_inv_sqrt = 1.0 / np.sqrt(degree)
     L_sym = np.eye(n) - (d_inv_sqrt[:, None] * affinity * d_inv_sqrt[None, :])
     L_sym = 0.5 * (L_sym + L_sym.T)
-    eigvals, eigvecs = eigh(L_sym, subset_by_index=[0, 1])
-    return eigvecs[:, 1]
+    _, eigvecs = eigh(L_sym, subset_by_index=[0, n_comp])
+    return np.array([d_inv_sqrt * eigvecs[:, i] for i in range(1, n_comp + 1)])
+
+
+def principal_gradient(fc: np.ndarray, hierarchy_ref: np.ndarray, *,
+                       top_pct: float = 10.0, n_comp: int = 3):
+    """The unimodal->transmodal (Margulies) gradient, selected against an EXTERNAL
+    hierarchy reference (that species' own T1w/T2w myelin map).
+
+    BUG HISTORY -- read before changing this.
+    ----------------------------------------
+    This function used to return ``eigvecs[:, 1]``, i.e. it ASSUMED the first
+    non-trivial component is the unimodal->transmodal gradient. That assumption is
+    true of Margulies' HCP dense connectome; it is FALSE for this FC data. Here the
+    leading component is an ANTERIOR-POSTERIOR spatial axis, and the hierarchy
+    gradient is the second. Independently verified in both species:
+
+        component        vs published Margulies G1   vs that species' T1w/T2w
+        comp 1 (old)              |rho| = 0.12          human -0.13 / mouse -0.28
+        comp 2 (correct)          |rho| = 0.93          human +0.59 / mouse +0.57
+
+    The consequence was severe: routing an A-P *spatial* axis and then testing it
+    against a spatial-autocorrelation-preserving spin null is close to tautological,
+    which manufactured a false negative ("the gradient does not translate",
+    |r| = 0.41, p = 0.15). With the correct component the gradient DOES translate
+    (|r| = 0.54, spin p = 0.004).
+
+    So do not hard-code an index. Select the component that actually carries the
+    hierarchy, using a reference that is external to the FC data.
+
+    Returns (gradient, diagnostics).
+    """
+    comps = diffusion_components(fc, top_pct=top_pct, n_comp=n_comp)
+    m = np.isfinite(hierarchy_ref)
+    rhos = [float(spearmanr(c[m], hierarchy_ref[m]).statistic) for c in comps]
+    k = int(np.argmax(np.abs(rhos)))
+    grad = comps[k] * np.sign(rhos[k])        # orient so high = transmodal (low myelin)
+    diag = {"selected_component": k + 1,
+            "spearman_with_t1w_t2w_per_component": rhos,
+            "n_ref_parcels": int(m.sum())}
+    if abs(rhos[k]) < 0.3:
+        print(f"  WARNING: best component correlates with the hierarchy reference at "
+              f"only rho = {rhos[k]:+.2f}; the gradient may not be identifiable here.")
+    return grad, diag
 
 
 def route_normalized(mouse_vec: np.ndarray, pi: np.ndarray) -> np.ndarray:
@@ -109,10 +156,28 @@ def main():
         (ROOT / "data_external/human_sc_meta.json").read_text())["node_region"], int)
     print(f"  π: {pi.shape}, total mass {pi.sum():.4f}")
 
+    # ---- external hierarchy references, used to SELECT the right component ----
+    human_ref = np.asarray(json.loads(
+        (ROOT / "outputs/logs/buckner_krienen_2013_tethering.json").read_text()
+    )["myelin_per_parcel"], float)                                   # human T1w/T2w
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "fu", ROOT / "experiments/fulcher_2019_multimodal_gradient/01_gradient_validation.py")
+    fu = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(fu)
+    t1t2 = fu.load_mouse_t1t2()
+    mouse_ref = np.array([t1t2.get(a, np.nan) for a in fu.load_mouse_parcel_acronyms()],
+                         float)                                      # mouse T1w/T2w
+
     print("\nComputing principal gradients (diffusion-map embedding)...")
-    mouse_grad = principal_gradient(fc_mouse, top_pct=10.0)
-    human_grad = principal_gradient(fc_human, top_pct=10.0)
-    print(f"  mouse_grad {mouse_grad.shape}   human_grad {human_grad.shape}")
+    mouse_grad, mouse_diag = principal_gradient(fc_mouse, mouse_ref, top_pct=10.0)
+    human_grad, human_diag = principal_gradient(fc_human, human_ref, top_pct=10.0)
+    print(f"  mouse: selected component {mouse_diag['selected_component']} "
+          f"(rho with mouse T1w/T2w per component: "
+          f"{[round(r, 2) for r in mouse_diag['spearman_with_t1w_t2w_per_component']]})")
+    print(f"  human: selected component {human_diag['selected_component']} "
+          f"(rho with human T1w/T2w per component: "
+          f"{[round(r, 2) for r in human_diag['spearman_with_t1w_t2w_per_component']]})")
 
     # ---- translate mouse gradient through π (transport-weighted average) ----
     pred = route_normalized(mouse_grad, pi)
@@ -143,10 +208,25 @@ def main():
     print(f"  empirical p = {emp_p:.3f}   (observed |r| = {abs(r_p):.3f}, "
           f"{abs(r_p) / max(null_abs.mean(), 1e-6):.0f}× null mean)")
 
+    # ---- spatial-autocorrelation-preserving null (the permuted-π null above is
+    #      too lenient; see homer.eval.nulls docstring) --------------------------
+    from homer.eval.nulls import spin_null
+    hx = H.var[["x", "y", "z"]].to_numpy(float)
+    fin = np.isfinite(pred) & np.isfinite(human_grad)
+    sp = spin_null(pred[fin], human_grad[fin], hx[fin], n_trials=1000, seed=0)
+    print(f"\nSpin null (spatial-autocorrelation-preserving):")
+    print(f"  |r| = {abs(r_p):.3f}   spin p = {sp['p_spin']:.4f}")
+
     out = {
         "pi_file": "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy",
         "routing": "transport-weighted average (normalised)",
         "top_pct_threshold": 10.0,
+        "component_selection": {"mouse": mouse_diag, "human": human_diag,
+                                "note": "component chosen by |rho| with that species' "
+                                        "T1w/T2w map; see principal_gradient docstring "
+                                        "for the bug this fixes"},
+        "spin": {"p_spin": sp["p_spin"], "r_observed": sp["r_observed"],
+                 "n_trials": 1000},
         "parcel_level": {"abs_pearson_r": abs(r_p), "abs_spearman_r": abs(rho_p),
                          "n": n_p},
         "region_level": {"abs_pearson_r": abs(r_r), "abs_spearman_r": abs(rho_r),
