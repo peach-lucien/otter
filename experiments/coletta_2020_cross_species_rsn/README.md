@@ -1,6 +1,6 @@
 # Coletta 2020 cross-species RSN correspondence validation
 
-Tests whether HOMER's π preserves the cross-species network correspondence under multiple operationalisations of "network": (A) HOMER's PAIRID-derived mouse networks vs canonical Yeo-7 human networks, (B) data-driven ICA-derived mouse RSNs, (C) spatial coherence of network images in human space.
+We asked whether HOMER's π preserves the cross-species network correspondence under multiple operationalisations of "network": (A) HOMER's PAIRID-derived mouse networks vs canonical Yeo-7 human networks, (B) data-driven ICA-derived mouse RSNs, (C) spatial coherence of network images in human space.
 
 ## Why this experiment
 
@@ -14,7 +14,7 @@ This is a stricter version of Pagani's Test 1, with three improvements: (i) uses
 
 **6/10 canonical pairs are diagonal-argmax**, with up to 7.5× over null:
 
-> **Fair-null confirmation.** This discrete result **survives a spatially-fair mouse-parcel spin null**: rotating the mouse networks on a sphere and re-aggregating π drops the diagonal-argmax count to **mean 1.23/10** (95th pct 2); the observed 6/10 beats it at **p=0.002**. So the mouse↔human RSN correspondence is specific, not spatial autocorrelation. (Run `experiments/spatial_null_check/fair_nulls_coletta_test2c.py`.)
+> **Fair-null confirmation.** This discrete result **survives a spatially-fair mouse-parcel spin null**: rotating the mouse networks on a sphere and re-aggregating π drops the diagonal-argmax count to **mean 1.23/10** (95th pct 2); the observed 6/10 beats it at **p=0.002**. The mouse↔human RSN correspondence is therefore specific rather than a product of spatial autocorrelation. (Run `experiments/spatial_null_check/fair_nulls_coletta_test2c.py`.)
 
 | Pair | HOMER mass | Null | Ratio | Argmax? |
 |---|---:|---:|---:|:---:|
@@ -33,7 +33,7 @@ Same Schaefer-definition misses as Pagani's Test 1. Schaefer-17's "Visual" is V1
 
 ### Sub-test B. Data-driven ICA
 
-2/7 ICA components map cleanly to their expected Yeo-7 network (Salience, sensorimotor). The others are noisier because ICA decomposition mixes anatomical regions, each component is a *mode of FC variation*, not a clean network. This is an inherent property of ICA, not a HOMER failure.
+2/7 ICA components map cleanly to their expected Yeo-7 network (Salience, sensorimotor). The others are noisier because ICA decomposition mixes anatomical regions: each component is a *mode of FC variation* rather than a clean network. This is an inherent property of ICA rather than a HOMER failure.
 
 ### Sub-test C. Network coherence
 
@@ -41,7 +41,7 @@ Same Schaefer-definition misses as Pagani's Test 1. Schaefer-17's "Visual" is V1
 
 ## What this tells us
 
-HOMER's π preserves the cross-species network structure under both labeled-correspondence (A) and spatial-coherence (C) tests. The data-driven ICA test (B) is noisier because of an inherent ambiguity in ICA decomposition, not a HOMER failure. Together, A + C provide robust evidence that HOMER captures the cross-species RSN topology.
+HOMER's π preserves the cross-species network structure under both labeled-correspondence (A) and spatial-coherence (C) tests. The data-driven ICA test (B) is noisier because of an inherent ambiguity in ICA decomposition rather than a HOMER failure. Together, A + C provide robust evidence that HOMER captures the cross-species RSN topology.
 
 ## Files
 

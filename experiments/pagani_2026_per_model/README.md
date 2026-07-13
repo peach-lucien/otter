@@ -30,8 +30,8 @@ Background: [`DATA_VALIDATION_2026-06-10.md`](DATA_VALIDATION_2026-06-10.md).
 4. **Subtype translation through π.** Each subtype's mouse network signature
    (Pagani ED Fig 1) is routed through π to human-parcel space and aggregated to
    human networks, then compared to the observed human subtype pattern (Fig 4e).
-   **Result (recommended π): apparent "hyper translates, hypo doesn't", but the
-   specificity is NOT inferential (do not headline it).** Predicted-hyper correlates
+   **Result (recommended π): apparently "hyper translates, hypo doesn't", but the
+   specificity is not inferential and should not be headlined.** Predicted-hyper correlates
    with observed-hyper (r = +0.351) better than observed-hypo (−0.254); predicted-hypo
    does not match observed-hypo (−0.133).
    > **⚠️ Critical caveat.** The "subtype-specific" flag here
@@ -41,11 +41,11 @@ Background: [`DATA_VALIDATION_2026-06-10.md`](DATA_VALIDATION_2026-06-10.md).
    > *below* the null mean. This is the confounded **"Test 2a" absolute-
    > correlation approach**: it is forced by the magnitude structure of the observed
    > human maps (hyper network intensities are large, 60–244; hypo are tiny, 0.5–6), so
-   > any non-negative routing correlates with hyper and not hypo *by construction*. **So
-   > this does NOT demonstrate cross-species hyper translation.** The valid, magnitude-
+   > any non-negative routing correlates with hyper and not hypo *by construction*. **This
+   > therefore does not demonstrate cross-species hyper translation.** The valid, magnitude-
    > cancelling result is the contrast-based **Test 2b/2c** in `../autism_subtypes/`
    > (still only "partial"). Treat this per-model subtype result as
-   > illustrative of the pipeline, not as evidence.
+   > illustrative of the pipeline rather than as evidence.
 
    > **Note:** the *base* coupling `pi_fc_plus_SC.npy` reports both subtypes as specific
    > (hyper +0.52, hypo +0.25). That is an artifact of the wrong π, the base
@@ -56,10 +56,10 @@ This deliberately does **not** depend on decoding the 1,491 features to voxels
 (not robustly possible, see the validation note); the subtype network signatures
 come from Pagani's own published matrices.
 
-## What it's NOT
+## What it is not
 
-- Not a *per-voxel* per-model translation, that needs the 20 per-model
-  degree-centrality NIfTIs (see "remaining" below), not the 1,491-feature CSV.
+- Not a *per-voxel* per-model translation. That needs the 20 per-model
+  degree-centrality NIfTIs (see "remaining" below) rather than the 1,491-feature CSV.
 - The π routing is at network resolution (Pagani's 9 mouse / 8 human networks).
 
 ## Cross-species human subtyping via π (the corrected, paper-faithful analysis)
@@ -69,15 +69,16 @@ correlation, it's a discrete **classification**: take the mouse "prominent"
 dysconnectivity regions (hypo = anterior + middle cingulate, insula, motor cortex,
 striatum; hyper = amygdala, hippocampus, striatum), map them to human regions **by
 name**, and label each individual hypo/hyper by ±1 s.d. of regional global
-connectivity. That mouse→human **name-matching is exactly what π replaces**, and
-it's HOMER's *validated* mode (discrete region correspondence survives spin nulls).
+connectivity. That mouse→human **name-matching is the step π replaces**, and
+it is HOMER's *validated* mode (discrete region correspondence survives spin nulls).
 
 - **`04_homer_human_masks.py`**, routes each mouse prominent region through π to a
   data-driven human mask. **Region-by-region, π agrees with the name-matched
   homologue for 4/7 regions** (insula→Salience, cingulate→Salience/DMN,
-  striatum→Subcortical); the disagreements are functionally meaningful, not errors
-  e.g. **hippocampus→DMN** (the hippocampus is a human DMN hub, which the anatomical
-  name-match to "Subcortical" misses). Outputs the π-derived hypo/hyper human masks.
+  striatum→Subcortical); the disagreements are functionally meaningful rather than
+  errors, e.g. **hippocampus→DMN** (the hippocampus is a human DMN hub, which the
+  anatomical name-match to "Subcortical" misses). Outputs the π-derived hypo/hyper
+  human masks.
   *(Caveat: the masks lean toward Subcortical/Salience/DMN partly because π's column
   mass concentrates on ~half the human parcels. F-015.)*
 - **`../autism_subtypes/abide_subtype/05_abide_homer_subtyping.py`**, re-runs
@@ -89,22 +90,22 @@ it's HOMER's *validated* mode (discrete region correspondence survives spin null
 ## Direction 1 result, parcel-resolution spatial routing (occurrence maps). SUPERSEDED
 
 > **Superseded by `04`/`05` above (2026-06-11).** This routing predicts the human
-> subtype Δ-*matrix* (a continuous-map correlation. HOMER's weak mode, n.s. under a
+> subtype Δ-*matrix* (a continuous-map correlation, HOMER's weak mode, n.s. under a
 > fair null) and aggregates over all 13 regions, neither of which is what Pagani do.
 > Kept for the negative result.
 
 `03_spatial_subtype_routing.py` drives the mouse side from the actual Fig 1d
 occurrence maps (aggregated to the 13 conserved regions via an Allen
 region-name bridge; 1,052/1,864 parcels matched) instead of the 9-network
-matrices. **Bridge caveat:** the AMBA↔CCFv3 transform is anatomically valid, but
-spatially imprecise, name-matched parcels fall inside the corresponding Pagani
-mask 85–94 % of the time for cortex but only 61–77 % subcortically and **30 % for
+matrices. **Bridge caveat:** the AMBA↔CCFv3 transform is anatomically valid but
+spatially imprecise. Name-matched parcels fall inside the corresponding Pagani
+mask 85–94 % of the time for cortex, but only 61–77 % subcortically and **30 % for
 amygdala** (boundary/definition differences). The contrast p-value here also rides
 a strongly negative permuted-π null, so treat this routing as exploratory. Finding:
 
 - **Hyper subtype translates cross-species** (pred-hyper ↔ obs-hyper r=+0.78 vs
   obs-hypo −0.57).
-- **Hypo subtype does NOT** (pred-hypo ↔ obs-hypo −0.50; it actually leans toward
+- **Hypo subtype does not** (pred-hypo ↔ obs-hypo −0.50; it leans toward
   obs-hyper +0.69).
 
 (Values under the recommended `_with_all_packs` coupling; the base-π run gave the
@@ -161,7 +162,7 @@ Outputs:
 
 2. **The mask file itself**, **RECEIVED** (`rsfMRI-templates-main/`, functional grid 100×100×18 @ 2.3×2.3×6 mm). Necessary but, per (1), **not sufficient** to decode the 1,491 features.
 
-3. **The 20 per-model voxelwise degree-centrality maps as NIfTIs** *(the real per-model blocker. NOT a "1,491 key")*, the full-resolution Fig 1a/b maps in functional or Allen space, one per model. These register to HOMER's mouse atlas and route through π directly. The 1,491-feature CSV cannot substitute: it is a downsampled, dendrogram-sorted reduction with no published feature-index → voxel key, so it can't be inverted robustly (see `DATA_VALIDATION_2026-06-10.md`).
+3. **The 20 per-model voxelwise degree-centrality maps as NIfTIs** *(the real per-model blocker, and not a "1,491 key")*: the full-resolution Fig 1a/b maps in functional or Allen space, one per model. These register to HOMER's mouse atlas and route through π directly. The 1,491-feature CSV cannot substitute: it is a downsampled, dendrogram-sorted reduction with no published feature-index → voxel key, so it can't be inverted robustly (see `DATA_VALIDATION_2026-06-10.md`).
 
 4. **Per-model human ASD FC**. ABIDE doesn't disaggregate by genetic subtype, but ENIGMA-ASD or SFARI's per-cohort data might.
 
@@ -172,5 +173,5 @@ labels are recoverable** straight from the CSV row order, rows 1–9 (mean globa
 connectivity +0.19) = hyperconnectivity (n=9), rows 10–20 (−0.26) =
 hypoconnectivity (n=11), matching the paper. **⚠️ This is inverted relative to the
 `PAGANI_KNOWN_HYPER/HYPO` prior currently hard-coded in
-`01_per_model_clustering.py`** (which wrongly lists Fmr1/Chd8/Tsc2 as hypo), that
+`01_per_model_clustering.py`** (which wrongly lists Fmr1/Chd8/Tsc2 as hypo); that
 prior must be replaced.

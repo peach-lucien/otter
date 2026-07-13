@@ -1,6 +1,6 @@
 # Experiments
 
-Reproducible one-off experiments. The `src/homer/` library is the production code; everything here is research scripts that produced a specific result documented in `docs/`.
+Reproducible one-off experiments. The `src/homer/` library is the production code; every file here is a research script that produced a specific result documented in `docs/`.
 
 ## Layout
 

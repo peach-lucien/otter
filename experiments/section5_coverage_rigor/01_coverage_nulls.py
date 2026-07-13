@@ -1,0 +1,92 @@
+"""§5 coverage collapse, re-tested with the repo's spatial-autocorrelation (spin) null.
+
+The manuscript's Fig 5b reports the sensorimotor->association coverage gap under a
+*permuted-axis* null (shuffle the myelin labels), which does NOT preserve spatial
+autocorrelation and therefore over-states significance (p = 3.4e-7). Here we re-test
+the SAME statistic with `homer.eval.nulls.spin_null` (Alexander-Bloch / Vazquez-
+Rodriguez), which rotates parcel centroids on a sphere and so keeps spatial
+smoothness in the null. Two statistics are reported:
+
+  (1) continuous Pearson r between per-parcel coverage and the myelin axis
+  (2) the sensorimotor-tertile minus association-tertile coverage gap (Fig 5b)
+
+both with a proper spin p. Expectation (verified in-sandbox): the continuous
+correlation is spin-FRAGILE (r~0.13, p~0.08) but the tertile contrast is spin-
+ROBUST (~6.7 log units, p~0.002). Report the tertile contrast and the honest spin p.
+
+Run: cd homer && PYTHONPATH=src python experiments/section5_coverage_rigor/01_coverage_nulls.py
+Writes outputs/logs/section5_coverage_nulls.json
+"""
+from __future__ import annotations
+import csv, json, sys
+from pathlib import Path
+import numpy as np
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "src"))
+from homer.data import load_cached, load_pi
+from homer.eval.nulls import spin_null, _haar_rotation
+
+DATA = ROOT / "data_external"
+N_SPIN = 1000
+SEED = 0
+
+
+def tertile_gap_spin(cov, axis, xyz, n_trials=N_SPIN, seed=SEED):
+    """Spin p for the (high-axis tertile - low-axis tertile) coverage gap, using
+    the same Haar-rotation scheme as homer.eval.nulls.spin_null. Tertiles are fixed
+    by `axis`; only `cov` is spun, so the null preserves spatial autocorrelation."""
+    from scipy.spatial import cKDTree
+    o = np.argsort(axis); t = len(o) // 3
+    lo, hi = o[:t], o[-t:]                       # lo axis (association) vs hi axis (sensorimotor)
+    obs = cov[hi].mean() - cov[lo].mean()
+    c = xyz - np.nanmean(xyz, 0)
+    sph = c / np.clip(np.linalg.norm(c, axis=1, keepdims=True), 1e-12, None)
+    rng = np.random.default_rng(seed); null = np.empty(n_trials)
+    for i in range(n_trials):
+        _, perm = cKDTree(sph @ _haar_rotation(rng).T).query(sph)
+        cp = cov[perm]; null[i] = cp[hi].mean() - cp[lo].mean()
+    an = np.abs(null)
+    return {"gap_observed": float(obs),
+            "p_spin": float((np.sum(an >= abs(obs)) + 1) / (n_trials + 1)),
+            "null_abs_mean": float(an.mean()), "null_abs_p95": float(np.percentile(an, 95))}
+
+
+def main():
+    pi = load_pi()
+    H, _ = load_cached("human", cache_dir=ROOT / "outputs/anndata")
+    xyz = H.var[["x", "y", "z"]].to_numpy(float)
+    node_region = np.asarray(json.loads((DATA / "human_sc_meta.json").read_text())["node_region"], int)
+
+    coverage = np.log10(np.maximum(pi.sum(0), 1e-300))
+
+    # sensorimotor->association axis: HCP T1w/T2w myelin per Schaefer region
+    myelin_reg = {}
+    with open(DATA / "fulcher_2019_gradients/human_myelinmap_schaefer400_HOMERorder.csv") as f:
+        for row in csv.DictReader(f):
+            myelin_reg[int(row["homer_region_id"])] = float(row["t1t2_myelin"])
+    myelin = np.array([myelin_reg.get(r, np.nan) for r in node_region])
+
+    ctx = np.isfinite(myelin)
+    cov, mye, xyzc = coverage[ctx], myelin[ctx], xyz[ctx]
+
+    cont = spin_null(cov, mye, xyzc, n_trials=N_SPIN, seed=SEED)          # continuous r
+    tert = tertile_gap_spin(cov, mye, xyzc)                               # Fig 5b statistic
+
+    print(f"n cortical parcels = {ctx.sum()}")
+    print(f"[continuous]  coverage vs myelin: r = {cont['r_observed']:+.3f}   "
+          f"spin p = {cont['p_spin']:.4f}  (null|r|95 = {cont['null_abs_p95']:.3f})")
+    print(f"[tertile]     sensorimotor - association gap = {tert['gap_observed']:.2f} log units   "
+          f"spin p = {tert['p_spin']:.4f}  (null|gap|95 = {tert['null_abs_p95']:.2f})")
+
+    out = {"pi_file": "pi_fc_plus_SC_with_all_packs.npy", "n_cortical_parcels": int(ctx.sum()),
+           "n_spin": N_SPIN, "coverage_vs_myelin_continuous": cont,
+           "coverage_collapse_tertile": tert,
+           "note": ("Fig 5b claim = the tertile gap; report its spin p (robust). The "
+                    "continuous correlation is spin-fragile and should NOT be the headline.")}
+    (ROOT / "outputs/logs/section5_coverage_nulls.json").write_text(json.dumps(out, indent=2))
+    print("wrote outputs/logs/section5_coverage_nulls.json")
+
+
+if __name__ == "__main__":
+    main()

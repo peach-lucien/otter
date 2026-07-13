@@ -8,7 +8,7 @@ See `docs/04_anchor_packs.md` for the citations and biological motivation behind
 
 The **recommended model** (`outputs/coupling/pi_fc_plus_SC_with_all_packs.npy`) is composed from the packs flagged `default=True` in the pack registry, `src/homer/data/anchor_packs/registry.py`, the single source of truth. `compose_all.py`, the GUI builder (`pipeline/08_build_gui.py`), and the multi-source trust step (`pipeline/08a_multisource_trust.py`) all read that registry, so it cannot drift from what is actually fitted.
 
-**All 15 packs are in the recommended composition** (26 region-anchor entries), a multi-benchmark comparison favoured the full set. To change which packs are composed, flip the `default` flag in the registry and re-run `compose_all.py` (or `pipeline/run_recommended_model.py`).
+**All 15 packs are in the recommended composition** (26 region-anchor entries); a multi-benchmark comparison favoured the full set. To change which packs are composed, flip the `default` flag in the registry and re-run `compose_all.py` (or `pipeline/run_recommended_model.py`).
 
 ## Per-pack runners
 

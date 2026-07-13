@@ -1,6 +1,6 @@
 # Fulcher 2019 multimodal-gradient validation
 
-Tests whether HOMER's π carries the **mouse multimodal cortical hierarchy**
+We asked whether HOMER's π carries the **mouse multimodal cortical hierarchy**,
 the sensorimotor → prefrontal axis that Fulcher et al. showed is shared across
 cytoarchitecture, gene expression, cell density and connectivity, across to
 the human cortex.
@@ -17,7 +17,7 @@ proxy reported for 40 mouse isocortical areas; they also use Goulas et al.'s
 This is a Beauchamp-independent, anchor-orthogonal test on two counts: both
 mouse maps are *structural* (HOMER's π is built from FC + SC), and the human
 reference, the [HCP S1200 T1w/T2w myelin map](https://github.com/netneurolab/neuromaps),
-is independent published data, not an anchor pair. If HOMER's π is
+is independent published data rather than an anchor pair. If HOMER's π is
 anatomically faithful, translating the mouse myelin hierarchy through π should
 reproduce the human myelin map: heavily myelinated sensory cortex, lightly
 myelinated association cortex.
@@ -26,16 +26,17 @@ myelinated association cortex.
 
 Three panels (`outputs/figures/fulcher_2019_multimodal_gradient.png`):
 
-**1. Mouse T1w:T2w → human myelin.** Translating the mouse T1w:T2w map through
-π reproduces the human HCP myelin map at **Pearson r = +0.373, Spearman ρ =
-+0.321** (analytical p = 2.5×10⁻⁵, n = 174 Schaefer regions), with **empirical
-p = 0.000** against a 200-trial permuted-π null (null mean r ≈ 0).
+**1. Mouse T1w:T2w → human myelin.** We routed the mouse T1w:T2w myelin proxy
+through π and correlated the resulting predicted map with the observed human HCP
+myelin map. Across 174 Schaefer regions the two agree at **Pearson r = +0.373,
+Spearman ρ = +0.321** (analytical p = 2.5×10⁻⁵), with **empirical p = 0.000**
+against a 200-trial permuted-π null (null mean r ≈ 0).
 
-> ⚠️ **But a permuted-π null is the wrong null for a smooth map.** Under a
-> spatial-autocorrelation-preserving **spin null**, this correlation **does NOT
+> ⚠️ **A permuted-π null is the wrong null for a smooth map.** Under a
+> spatial-autocorrelation-preserving **spin null**, this correlation **does not
 > survive: spin p = 0.11**. The same is true of the cytoarchitecture panel below
 > (spin p = 0.10). Earlier versions of this README and of `docs/03_results.md`
-> reported spin p = 0.021 / 0.010 and called the correspondence "specific" — those
+> reported spin p = 0.021 / 0.010 and called the correspondence "specific". Those
 > p-values were **hardcoded literals in a figure script** and existed in no output
 > file. **We do not claim that microstructure translates.** The routed maps are
 > consistent with the human myelin map, but not beyond what the spatial smoothness
@@ -46,23 +47,23 @@ brain onto a compact human territory: the 417 mouse isocortical parcels map onto
 just **174 of 400 Schaefer regions**. On the human principal connectivity
 gradient those 174 regions have **half the brain-wide spread** (SD 0.0108 vs
 0.0217, compression ×0.50). Mouse isocortex lands on a narrow middle slice of
-the human unimodal–transmodal axis, so the principal gradient is *not* a
-hierarchy ruler within this territory (predicted-vs-gradient r = −0.204), and
-the result echoes the disproportionate evolutionary expansion of human
+the human unimodal–transmodal axis, so within this territory the principal
+gradient does not act as a hierarchy ruler (predicted-vs-gradient r = −0.204),
+and the result echoes the disproportionate evolutionary expansion of human
 association cortex.
 
-**3. Cytoarchitecture → human myelin (independent modality).** A second,
-independent mouse modality. Goulas cytoarchitectural type, routed through π
-also predicts the human myelin map at **r = +0.362, ρ = +0.325** (p = 3.4×10⁻⁴,
-empirical p = 0.000). Two unrelated mouse structural modalities converge on the
-same human target — but neither clears a spin null, so this convergence rules out a
-single-measurement artefact **without** establishing that π carries the hierarchy.
-Two smooth maps agreeing at the level spatial smoothness already predicts is not a
-correspondence.
+**3. Cytoarchitecture → human myelin (independent modality).** We repeated the
+routing with a second, independent mouse modality. Goulas cytoarchitectural type,
+routed through π, also predicts the human myelin map at **r = +0.362, ρ = +0.325**
+(p = 3.4×10⁻⁴, empirical p = 0.000). Two unrelated mouse structural modalities
+converge on the same human target. Neither clears a spin null, so the convergence
+rules out a single-measurement artefact **without** establishing that π carries the
+hierarchy. Two smooth maps agreeing at the level spatial smoothness already predicts
+do not constitute a correspondence.
 
-**What this experiment actually shows.** π was fitted on connectivity. Microstructure
-is the modality it never saw, and it does not transfer. That is not a failure of the
-method — it is the negative half of the paper's organising claim (`docs/03_results.md`
+**What this experiment shows.** π was fitted on connectivity. Microstructure
+is the modality it never saw, and it does not transfer. The method has not failed
+here. This is the negative half of the paper's organising claim (`docs/03_results.md`
 §3): *connectional organisation transfers through π; microstructure does not.*
 
 | Panel | Test | Pearson r | Empirical p |
@@ -86,7 +87,7 @@ method — it is the negative half of the paper's organising claim (`docs/03_res
    territory.
 
 The human myelin map is the HCP S1200 T1w/T2w annotation (neuromaps), parcellated
-onto Domhof's Schaefer-400 17Networks parcellation. HOMER's exact human
+onto Domhof's Schaefer-400 17Networks parcellation, in HOMER's human
 parcellation order. See `data_external/fulcher_2019_gradients/SOURCES.md`.
 
 ## Files
@@ -109,4 +110,3 @@ PYTHONPATH=src python experiments/fulcher_2019_multimodal_gradient/02_plot.py
 Outputs:
 - `outputs/logs/fulcher_2019_gradient.json` (per-region predicted/observed maps + stats)
 - `outputs/figures/fulcher_2019_multimodal_gradient.png` (3-panel figure)
-

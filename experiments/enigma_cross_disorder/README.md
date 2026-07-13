@@ -4,7 +4,7 @@ Two-phase pipeline: Phase 1 generates HOMER's per-disorder predicted human spati
 
 ## Why this experiment
 
-The Pagani-based cross-disease specificity check (autism vs schizophrenia vs ADHD vs bipolar gene sets routed through π) found at network resolution that **HOMER's predictions are not disorder-specific**, all 4 disorders gave r ≈ +0.4 against Pagani's observed autism Δ. This experiment sharpens that test by:
+The Pagani-based cross-disease specificity check (autism vs schizophrenia vs ADHD vs bipolar gene sets routed through π) found at network resolution that **HOMER's predictions are not disorder-specific**: all 4 disorders gave r ≈ +0.4 against Pagani's observed autism Δ. This experiment sharpens that test by:
 
 1. Generating HOMER's predicted human spatial patterns at full **parcel resolution** (2,094 parcels) for each disorder
 2. Computing the **cross-disorder correlation matrix** to quantify how similar HOMER's predictions are
@@ -26,9 +26,9 @@ Cross-disorder correlation matrix (mean off-diagonal r):
 | schizophrenia ↔ ADHD | +0.987 |
 | **Mean off-diagonal** | **+0.987** |
 
-**HOMER's per-disorder predictions are essentially identical at parcel resolution.** This confirms the cross-disease specificity finding from earlier, and is even stronger at parcel level (mean off-diagonal +0.987) than at network level. HOMER captures a *generic brain-disorder spatial geometry*, not disorder-specific signals.
+**HOMER's per-disorder predictions are essentially identical at parcel resolution.** This confirms the cross-disease specificity finding from earlier, and is even stronger at parcel level (mean off-diagonal +0.987) than at network level. HOMER captures a *generic brain-disorder spatial geometry* rather than disorder-specific signals.
 
-Implication: psoriasis (skin disease, non-brain) was excluded because only 2 of its 18 genes overlap with HOMER's panel. We can't directly test the non-brain control. But the consistency across the 4 brain-disorders we CAN test is strong evidence that HOMER doesn't discriminate at this level.
+Implication: psoriasis (skin disease, non-brain) was excluded because only 2 of its 18 genes overlap with HOMER's panel, so the non-brain control cannot be tested directly. The consistency across the 4 brain disorders that can be tested is nonetheless strong evidence that HOMER doesn't discriminate at this level.
 
 ## Phase 2. ENIGMA comparison (needs external data)
 
@@ -50,7 +50,7 @@ The script:
 3. Computes Pearson r between HOMER-predicted and ENIGMA-observed per-disorder
 4. Reports diagonal (HOMER-X vs ENIGMA-X) vs off-diagonal (HOMER-X vs ENIGMA-Y) correlation
 
-**Expected outcome given Phase 1's result**: HOMER-predicted patterns will correlate similarly with ALL ENIGMA disease maps (diagonal ≈ off-diagonal), because the predictions themselves don't differ between disorders. The interesting question Phase 2 answers: **how strongly does HOMER's generic brain-disorder geometry match what's actually observed across psychiatric ENIGMA disorders?** A strong overall correlation would mean HOMER captures the shared "psychiatric perturbation territory" in human cortex.
+**Expected outcome given Phase 1's result**: HOMER-predicted patterns will correlate similarly with every ENIGMA disease map (diagonal ≈ off-diagonal), because the predictions themselves don't differ between disorders. The question Phase 2 answers is a different one: **how strongly does HOMER's generic brain-disorder geometry match what is observed across psychiatric ENIGMA disorders?** A strong overall correlation would mean HOMER captures the shared "psychiatric perturbation territory" in human cortex.
 
 ## Files
 
@@ -85,11 +85,12 @@ Outputs:
 ## Disorder-unique + transdiagnostic (2026-06-19), `04_disorder_unique.py`, `05_transdiagnostic.py`
 
 **Is the r=0.988 "no specificity" just gene-set overlap?** No. `04_disorder_unique.py`
-strips each disorder to genes UNIQUE to it and re-routes. The non-autism sets turn out
+strips each disorder to the genes unique to it and re-routes. The non-autism sets turn out
 to be essentially *nested* in the 1,713-gene autism set, so we use a pairwise
 relative-unique test (genes in A-not-B vs B-not-A): even **fully disjoint** sets
 (bipolar-only 26 genes vs SCZ-only 447 genes) still route to near-identical human maps
-(r=+0.98). So the shared psychiatric geometry is **robust, not an overlap artifact**.
+(r=+0.98). The shared psychiatric geometry is therefore **robust rather than an overlap
+artifact**.
 
 **Does that shared geometry match real disease maps?** `05_transdiagnostic.py` compares
 HOMER's generic predicted map to ENIGMA observed cortical-thickness Cohen's d (DK-68),

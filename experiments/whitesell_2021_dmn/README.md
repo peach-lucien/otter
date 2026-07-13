@@ -33,15 +33,15 @@ Whitesell defines mouse-DMN to include PPC, dorsal hippocampus, and medial entor
 
 **HOMER preserves Whitesell's mouse-DMN at the cortical-territory level. The Yeo-7 partition then fragments this territory across three of its categories.** Schaefer-17 places PPC in DorsAttn following the [Yeo / Krienen 2011 consensus](https://journals.physiology.org/doi/full/10.1152/jn.00338.2011) (cytoarchitectural + FC-clustering arguments). Hippocampus + subiculum get labeled "Subcortical" because they have no Schaefer cortical label.
 
-**This isn't HOMER doing something wrong**, it's two principled definitions of "mouse DMN" (Whitesell's broad anatomical version, including parietal + hippocampal nodes; Yeo's narrow FC-clustered cortical version) intersecting in different places. Both are defensible biology.
+**This is not a HOMER error.** Two principled definitions of "mouse DMN" (Whitesell's broad anatomical version, including parietal + hippocampal nodes; Yeo's narrow FC-clustered cortical version) intersect in different places. Both are defensible biology.
 
 ## Why we didn't build a whitesell_dmn anchor pack
 
-The original plan was a two-step refinement: (1) validation, then (2) anchor pack if motivated. After running the validation, the anchor pack didn't make sense:
+The original plan was a two-step refinement: (1) validation, then (2) anchor pack if motivated. The validation removed the case for the anchor pack:
 
-1. **HOMER's current routing IS biologically correct.** Mouse-PPC → Yeo-DorsAttn is what Schaefer-17's consensus parcellation says it should be. Forcing PPC mass into Yeo-DMN via an anchor pack would override that consensus.
-2. **Existing packs already cover the cortical-midline core.** The cingulate pack anchors subgenual ACC + RSC to Yeo-DMN territory, the lateral PFC pack covers mPFC. A narrow Whitesell pack would re-anchor regions already supervised.
-3. **The result is more useful as a methodological note than as a model change.** It tells us where the DMN definition boundary lies between Whitesell and Yeo-7, useful for any downstream user asking "which mouse-DMN definition is HOMER using?"
+1. **HOMER's current routing is biologically correct.** Mouse-PPC → Yeo-DorsAttn is what Schaefer-17's consensus parcellation says it should be. Forcing PPC mass into Yeo-DMN via an anchor pack would override that consensus.
+2. **Existing packs already cover the cortical-midline core.** The cingulate pack anchors subgenual ACC + RSC to Yeo-DMN territory, and the lateral PFC pack covers mPFC. A narrow Whitesell pack would re-anchor regions already supervised.
+3. **The result is more useful as a methodological note than as a model change.** It locates the DMN-definition boundary between Whitesell and Yeo-7, which is useful for any downstream user asking "which mouse-DMN definition is HOMER using?"
 
 ## Files
 
