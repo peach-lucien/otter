@@ -1,40 +1,104 @@
-# Notebooks
+# HOMER notebooks
 
-Fifteen interactive walkthroughs. None re-fit the model from scratch, they load pre-computed outputs from `outputs/`. Run `pipeline/04_solve_production.py` + `experiments/anchor_packs/compose_all.py` first if you need to regenerate.
+Nine notebooks. Six of them correspond one-to-one with the six figures of the paper, and each
+**produces that figure's results and its panels** — so the notebook is where to go if you want to know
+where a number came from.
 
-## Reading order
+| notebook | what it establishes |
+|---|---|
+| [`01_quickstart.ipynb`](01_quickstart.ipynb) | Query π. Get a human distribution for a mouse region, with its confidence grade. |
+| [`02_methodology.ipynb`](02_methodology.ipynb) | How the coupling is built: data → cost matrices → the semi-relaxed FGW solve. |
+| [`fig1_coupling.ipynb`](fig1_coupling.ipynb) | **Fig 1 + ED1.** π is sharp, homology-respecting, topographically faithful and confidence-graded. |
+| [`fig2_what_carries_homology.ipynb`](fig2_what_carries_homology.ipynb) | **Fig 2 + ED2.** Connectivity and space carry *which region*; curation carries *which parcel*. |
+| [`fig3_what_transfers.ipynb`](fig3_what_transfers.ipynb) | **Fig 3 + ED3.** Connectional organisation transfers through π; microstructure does not. |
+| [`fig4_vs_transbrain.ipynb`](fig4_vs_transbrain.ipynb) | **Fig 4 + ED4.** Each method wins on the modality it encodes. |
+| [`fig5_coverage.ipynb`](fig5_coverage.ipynb) | **Fig 5 + ED5.** Where π has no support, the deficit is connectional, not molecular. |
+| [`fig6_disease.ipynb`](fig6_disease.ipynb) | **Fig 6 + ED6.** Which component of a human disorder a mouse can reach. |
+| [`discussion_pagani.ipynb`](discussion_pagani.ipynb) | The Discussion's worked application: re-subtyping autism mouse models. |
 
-| # | Notebook | What it does | Time |
-|---|---|---|---|
-| 01 | [`01_quickstart.ipynb`](01_quickstart.ipynb) | Interactive: pick a mouse region, see top-K human partners. Compare strict-π vs packed-π. | 5 min |
-| 02 | [`02_trust_map.ipynb`](02_trust_map.ipynb) | Per-parcel multi-source evidence tier. Interactive filter by tier. Which parts of the brain to trust. | 5 min |
-| 03 | [`03_anchor_packs.ipynb`](03_anchor_packs.ipynb) | Side-by-side Beauchamp comparison: production vs production+all-packs. Per-region lift table + bar plot. | 5 min |
-| 04 | [`04_methodology.ipynb`](04_methodology.ipynb) | Step-by-step FGW: raw FC → costs → M → solver → eval. For people who want to see what's inside. | 15 min |
-| 05 | [`05_pagani_2026_validation.ipynb`](05_pagani_2026_validation.ipynb) | HOMER × Pagani 2026 (Nat Neurosci autism subtypes), four-hypothesis arc validating their cross-species claims through HOMER's π. | 10 min |
-| 06 | [`06_hodge_2019_layer_markers.ipynb`](06_hodge_2019_layer_markers.ipynb) | HOMER × Hodge 2019 (Nature cortical-layer markers). Beauchamp-independent test of HOMER's anatomical fidelity using cross-species gene expression. | 10 min |
-| 07 | [`07_margulies_huntenburg_gradient.ipynb`](07_margulies_huntenburg_gradient.ipynb) | HOMER × Margulies 2016 + Huntenburg 2021, brain-wide principal connectivity gradient. Single global organisational test orthogonal to anchor pairs. | 10 min |
-| 08 | [`08_coletta_2020_cross_species_rsn.ipynb`](08_coletta_2020_cross_species_rsn.ipynb) | HOMER × Coletta 2020, cross-species RSN correspondence + ICA-derived data-driven check + network coherence. Stricter version of Pagani Test 1 with the canonical Yeo-7 atlas. | 10 min |
-| 09 | [`09_pagani_per_model_translation.ipynb`](09_pagani_per_model_translation.ipynb) | HOMER × Pagani per-mouse-model, exploratory showcase of which human ASD subtype each of 20 mouse autism models translates to via HOMER's π. Limited to subtype-resolution because 1,491-feature decoding wasn't possible. | 10 min |
-| 10 | [`10_biccn_cell_type_markers.ipynb`](10_biccn_cell_type_markers.ipynb) | HOMER × BICCN (Yao 2023 + Siletti 2023) cell-type markers. Pvalb, Sst, Th, Gfap, etc. Establishes that HOMER preserves regionally-concentrated cell-type signals (Th, Gfap, Plp1) but not broadly-cortical class markers (interneurons). Side-by-side with Hodge layer markers. | 10 min |
-| 11 | [`11_enigma_cross_disorder.ipynb`](11_enigma_cross_disorder.ipynb) | HOMER × ENIGMA cross-disorder spatial validation. Phase 1 (in-notebook): per-disorder predictions at parcel resolution show HOMER's cross-disorder correlations at r > 0.97, confirming no disorder-specificity. Phase 2 (needs external ENIGMA Toolbox download): comparison against published Cohen's d maps. | 10 min |
-| 12 | [`12_fulcher_2019_multimodal_gradient.ipynb`](12_fulcher_2019_multimodal_gradient.ipynb) | HOMER × Fulcher 2019 (PNAS multimodal mouse-cortex gradients), routes mouse T1w:T2w + cytoarchitecture through π; both reproduce the human HCP myelin map. Structural, Beauchamp-independent, 3-panel figure. | 5 min |
-| 13 | [`13_balsters_2020_mfc_divergence.ipynb`](13_balsters_2020_mfc_divergence.ipynb) | HOMER × Balsters 2020 (PNAS), falsification test: mouse medial frontal cortex routes to human medial/premotor/cingulate cortex and avoids dlPFC, as the connectivity evidence predicts. | 5 min |
-| 14 | [`14_transbrain_2025_benchmark.ipynb`](14_transbrain_2025_benchmark.ipynb) | HOMER × TransBrain 2025 (Nature Methods), head-to-head against a sibling mouse↔human translation method, plus scoring HOMER on TransBrain's literature homology benchmark. | 5 min |
-| 15 | [`15_buckner_krienen_2013_tethering.ipynb`](15_buckner_krienen_2013_tethering.ipynb) | HOMER × Buckner & Krienen 2013 (TICS), negative control: HOMER's π is dramatically sparsest over human association cortex, as the tethering hypothesis predicts. | 5 min |
+`archive/` holds the previous notebook set, kept for provenance. **Do not run anything in it** — several
+of those notebooks contain the errors this rebuild exists to correct.
 
-Notebooks 05-15 are **third-party showcases**, each takes a published cross-species paper and tests whether HOMER's π reproduces (or refines) its findings. The template (load HOMER, load paper's source data, route through π, compare, interpret) generalises to any future paper with usable cross-species supplementary data.
+## The organising principle
 
-## Required widgets
+**π is a connectional correspondence: connectional organisation transfers through it; microstructure
+does not.** That sentence is what Figs 3–6 are about, and it is why the notebooks are ordered as they
+are. Fig 3 establishes it. Fig 4 applies it to a competing method. Fig 5 pushes it to the limit — what
+happens where π has *no* mass. Fig 6 turns that limit into a prediction about human disease.
 
-Notebooks 01 and 02 use `ipywidgets` for interactivity. If you see a static-looking output, install:
+## How the notebooks are written
+
+Each notebook is close to standalone. Between them they import only four things from the package
+(`load_pi`, `load_cached`, `spin_null`, `coarse_region`) and inline everything else, so you can read one
+top-to-bottom without chasing helpers through `src/`.
+
+The exception is the handful of experiments that re-fit the FGW model dozens of times — the 41-unit
+leave-one-region-out, the 125-cell weight scan. Those are hours of compute, so the notebook reads their
+persisted results and names the script that produced them.
+
+**Two rules run through every notebook.** They exist because of a July 2026 audit that found a
+dispiriting number of errors, and they are the guardrails that keep them out.
+
+### 1. Never type a statistic into prose or a figure title — read it from a JSON
+
+Every headline number is either read from the canonical log that `manuscript/results_section.md` cites,
+or **recomputed in the notebook and asserted against that log**. If a notebook's arithmetic drifts from
+the manuscript, it fails loudly instead of quietly disagreeing.
+
+This is not hypothetical caution. Two spin p-values in §3 (`0.021`, `0.010`) were **hardcoded literals**
+in a figure script and existed in no output file anywhere. The real values are `0.11` and `0.10` — which
+reverses the conclusion.
+
+`homer/tools/check_manuscript_numbers.py` enforces the same rule across the manuscript: every numeral in
+`results_section.md` must match a value in a JSON *that its own section cites*, at the written precision.
+
+### 2. Match the definition before you change a number
+
+Most of the audit's near-misses were not wrong numbers. They were **two right numbers that answer
+different questions**, placed side by side. In this repo alone:
+
+- `centroid_disp_mm` (17 mm) versus `expected_disp_mm` (34 mm) — both real, a factor of two apart.
+- Parcel-count-**weighted** held-out AUROC (0.73) versus unweighted (0.72).
+- Coverage as a mass-normalised **mean** versus a **sum** — the difference between ρ = +0.64 and
+  ρ = +0.05, which is to say between the result and a null.
+
+**The script that builds a panel owns that panel's numbers.** If a value looks wrong, find the script
+that produced it before recomputing it a different way.
+
+## What this rebuild corrects
+
+The old notebooks did not merely go stale; several taught the wrong thing.
+
+- **`07_margulies_huntenburg_gradient`** took the **first** non-trivial eigenvector of the FC Laplacian as
+  the principal gradient. In this data that is an **anterior–posterior spatial axis**; the
+  unimodal→transmodal hierarchy is the **second** component. Routing an A–P spatial axis and then testing
+  it against a *spatial-autocorrelation-preserving* null is close to tautological — it manufactured a
+  confident false negative ("the gradient does not translate") that the paper believed for months. It
+  does translate: |r| = 0.54, spin p = 0.004. `fig3_what_transfers.ipynb` **selects** the component
+  against an external reference and never hard-codes an index.
+- **`11_enigma_cross_disorder`** summed coverage instead of taking the mass-normalised mean, and reported
+  a null.
+- **`14_transbrain_2025_benchmark`** scored HOMER's round-trip on 52 mouse regions and TransBrain's on 68,
+  16 of them mean-filled. The two numbers were not comparable.
+- **`05_pagani_2026_validation`** had the hyper/hypo subtype labels **inverted**.
+
+Every one of those produced clean, coherent, publishable-looking output. That is precisely the point, and
+it is why the two rules above are not bureaucracy.
+
+## Running them
+
+The notebooks need the data bundle (Zenodo, DOI 10.5281/zenodo.20746024). Fetch it first:
+
+```bash
+cd homer && python scripts/fetch_data.py
+```
+
+Then run any notebook from this directory. `load_pi()` defaults to
+`pi_fc_plus_SC_with_all_packs.npy`, the recommended coupling — not `pi_fc_plus_SC.npy`, which is a
+different matrix and gives different answers.
+
+Notebook 01 uses `ipywidgets` for interactivity:
 
 ```bash
 pip install ipywidgets
-jupyter nbextension enable --py widgetsnbextension
 ```
-
-## Archive
-
-`archive/` keeps two older notebooks from the iteration period:
-- `02_explore_results.ipynb`, the historical "comprehensive comparison" notebook (superseded by `03_anchor_packs.ipynb` + `02_trust_map.ipynb`).
-- `03_compare_model_levels.ipynb`, fits all four model levels side-by-side (UnsupervisedGW / SupervisedFGW / MultimodalFGW / HierarchicalFGW). Re-fits from scratch (~5 min), so it's slow but instructive.
