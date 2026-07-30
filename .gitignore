@@ -72,3 +72,15 @@ nb_runs/
 
 # Dated audit reports (rebuild on demand if needed)
 docs/audit_*.md
+
+# Split-half FC caches (58 MB; rebuild with pipeline/02b_build_splithalf_fc.py)
+outputs/splithalf/
+
+# neuromaps download cache (~110 MB; refetched by reverse_translation/00_fetch_maps.py)
+experiments/reverse_translation/neuromaps_cache/
+
+# Review-round scratch; the analyses have been ported into experiments/
+_review_scratch/
+
+# ABIDE phenotypic data: per-subject clinical detail, not ours to redistribute
+outputs/logs/abide_per_subject_scores.csv
