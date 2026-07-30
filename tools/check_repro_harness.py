@@ -38,11 +38,16 @@ reverse_translation_symptom_dissociation fig7h_homologue_transfer""".split()
 
 # Inputs that live outside outputs/ and that an analysis would break without.
 EXTERNAL_INPUTS = [
-    ("split-half FC (section 1)", "_review_scratch/human_splithalf.npz"),
-    ("split-half FC (section 1)", "_review_scratch/mouse_splithalf.npz"),
-    ("split-half producer",       "_review_scratch/splithalf.py"),
-    ("ABIDE per-subject scores",  "homer/outputs/logs/abide_per_subject_scores.csv"),
+    ("split-half FC (section 1)",   "homer/outputs/splithalf/human_splithalf.npz"),
+    ("split-half FC (section 1)",   "homer/outputs/splithalf/mouse_splithalf.npz"),
+    ("split-half producer",         "homer/pipeline/02b_build_splithalf_fc.py"),
+    ("ABIDE scores, de-identified", "homer/outputs/logs/abide_homer_scores_deidentified.csv"),
 ]
+
+# The split-half caches are gitignored because they are large and rebuildable, so a fresh clone
+# reports them missing until pipeline/02b_build_splithalf_fc.py has been run once.
+REBUILDABLE = {"homer/outputs/splithalf/human_splithalf.npz",
+               "homer/outputs/splithalf/mouse_splithalf.npz"}
 
 ok = True
 
@@ -134,6 +139,10 @@ if shas:
 print("\n4. external inputs an analysis would break without")
 for label, rel in EXTERNAL_INPUTS:
     path = ROOT.parent / rel
+    if not path.exists() and rel in REBUILDABLE:
+        print(f"  [ -- ] {label}: {rel}  not built yet, "
+              f"run pipeline/02b_build_splithalf_fc.py")
+        continue
     report(f"{label}: {rel}", path.exists())
 
 print("\n5. packages the ported analyses need")
