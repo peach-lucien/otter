@@ -1,23 +1,30 @@
 {
-  "doi": "10.5281/zenodo.20746024",
-  "record_url": "https://doi.org/10.5281/zenodo.20746024",
-  "version": "v1.2.0",
-  "archives": {
-    "reproduce": {
-      "filename": "homer-reproduce-v1.2.0.tar.gz",
-      "url": "https://zenodo.org/api/records/20746024/files/homer-reproduce-v1.2.0.tar.gz/content",
-      "md5": "083269655e6f686876cccc3cdbbef1c8",
-      "approx_size_mb": 642,
-      "unpacks_to": ["outputs/", "data_external/"],
-      "description": "Every data file the notebooks/experiments load (verified by exhaustive audit) + processed caches + validation inputs. Re-run any notebook or experiment without rebuilding. (v1.2.0 adds full_costs.npz and a few couplings/atlas files v1.1.0 still omitted.)"
-    },
-    "raw": {
-      "filename": "homer-raw-inputs-v1.0.0.tar.gz",
-      "url": "https://zenodo.org/api/records/20733163/files/homer-raw-inputs-v1.0.0.tar.gz/content",
-      "md5": "f965f0d569c7b5796c1a0cb93f4f9a46",
-      "approx_size_mb": 606,
-      "unpacks_to": ["data_external/"],
-      "description": "Full raw data_external/ for a bitwise rebuild of the coupling via pipeline/."
-    }
+ "doi": "10.5281/zenodo.21458106",
+ "record_url": "https://doi.org/10.5281/zenodo.21458106",
+ "version": "v1.3.0",
+ "archives": {
+  "reproduce": {
+   "filename": "homer-reproduce-v1.3.0.tar.gz",
+   "url": "https://zenodo.org/api/records/21458106/files/homer-reproduce-v1.3.0.tar.gz/content",
+   "md5": "2a7d1a6476857b497c9d335c2d1daabb",
+   "approx_size_mb": 735,
+   "unpacks_to": [
+    "outputs/",
+    "data_external/"
+   ],
+   "description": "Every data file the notebooks and experiments load, plus processed caches and validation inputs. Re-run any notebook or experiment without rebuilding. v1.3.0 adds the canonical coupling (pi_canonical.npy, pi_canonical_sharp.npy, trust_multisource_canonical.npz), which load_pi() returns, together with _schaefer_order.txt and the three mouse reference volumes the glass-brain panels need. v1.2.0 and earlier omitted all seven."
+  },
+  "raw": {
+   "filename": "homer-raw-inputs-v1.0.0.tar.gz",
+   "url": "https://zenodo.org/api/records/20733163/files/homer-raw-inputs-v1.0.0.tar.gz/content",
+   "md5": "f965f0d569c7b5796c1a0cb93f4f9a46",
+   "approx_size_mb": 636,
+   "unpacks_to": [
+    "data_external/"
+   ],
+   "description": "Full raw data_external/ for a bitwise rebuild of the coupling via pipeline/. Hosted on the original record 20733163; unchanged since v1.0.0 and deliberately not re-uploaded with each version."
   }
+ },
+ "concept_doi": "10.5281/zenodo.20733162",
+ "_concept_doi_note": "Version-independent DOI: always resolves to the latest version. Cite this one in papers; the version DOI above pins the exact bundle this manifest fetches."
 }

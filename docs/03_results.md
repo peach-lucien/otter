@@ -1,276 +1,302 @@
 # Results
 
-Every number on this page is read from a JSON in `outputs/logs/`, written by the script that computed it. The notebooks in `notebooks/` recompute each headline value and **assert** it against that log. If you find a number here that a notebook does not reproduce, the notebook is right and this page is a bug. Please open an issue.
+Every number here is recomputed in `notebooks/`, one notebook per figure, and checked against the
+value printed in the manuscript. Where a result requires re-fitting the model rather than scoring
+it, the notebook says so and names the producing script. If a notebook does not reproduce a number
+on this page, the notebook is right and this page is a bug.
 
 ---
 
 ## The organising claim
 
-**π is a connectional correspondence: connectional organisation transfers through it; microstructure does not.**
+π carries areal position on the cortical hierarchy, and with it the properties that vary across
+that axis.
 
-π is fitted on functional and structural connectivity. What it was made of travels through it. What it never saw does not. Every result below is an instance of this, including the failures. A coupling that transferred *everything* would be a smoothing operator, so the failures are as informative as the successes.
+π is fitted on functional and structural connectivity, but what travels through it is not limited
+to connectivity. Microstructure comes across at r = 0.47. What does not come across is anything
+varying through the cortical depth. The boundary is areal against laminar, rather than
+connectional against everything else.
 
 ## Synthesis
 
-HOMER produces a probabilistic mouse↔human parcel coupling π (1,864 × 2,094) by semi-relaxed Fused Gromov–Wasserstein optimal transport, supervised on 21 Garin homology classes plus 26 region-anchor entries from 15 curated packs. The mouse marginal is fixed; the human marginal is free, so the coupling can say that a human parcel has **no** mouse counterpart.
+1. The coupling is calibrated, and deliberately soft. Median top-target probability 0.31, above
+   0.5 for 20 % of parcels. Concentration is set by the entropic regularisation, not by anatomy.
+2. Connectivity and an anchor-warped spatial scaffold appear to set which human *region* a mouse
+   region maps to. Curated anchors and packs set which *parcel*.
+3. Translation follows the areal hierarchy. Networks, the principal gradient, myelin,
+   cytoarchitecture and hierarchy-aligned cell densities all clear spin nulls; laminar contrasts
+   and spatially uniform cell classes do not.
+4. Against a state-of-the-art transcriptomic translator the two are level on region-level
+   accuracy, on that method's own benchmark, and HOMER leads on the other six capability axes.
+5. Where the mouse cannot rebuild human connectivity is a network-shaped territory tracking
+   cortical expansion, with dorsolateral prefrontal cortex the clearest case.
+6. The coupling turns a mouse experiment into a falsifiable human prediction. It does not resolve
+   which disorder a mouse can model.
 
-Six findings, one per figure:
+## The coupling files
 
-1. **The coupling is calibrated.** Sharp (top partner > 0.5 probability for 92 % of mouse parcels), homology-respecting (0.26 mean self-mass vs 0.048 uniform), topographically faithful (r = 0.61), and confidence-graded by evidence external to the solver.
-2. **Connectivity and space carry *which region*; curation carries *which parcel*.** Two metrics move independently under ablation, and the distinction survives withholding every anchor.
-3. **Connectional organisation transfers; microstructure does not.** Networks and the principal gradient clear a spin null; myelin and cytoarchitecture do not.
-4. **Each method wins on the modality it encodes.** Against TransBrain, a transcriptomic translator: it leads region identity, HOMER leads everything connectional.
-5. **Where π has no support, the deficit is connectional rather than molecular.** Association cortex is connectionally reorganised, and shows no matching loss of transcriptomic similarity to the mouse.
-6. **That measurement predicts disease.** Of 15 conditions, only bipolar disorder and schizophrenia sit where the mouse cannot reach. Their subcortical signature does not.
+`load_pi()` returns `pi_canonical.npy`, the coupling used throughout the paper: region packs plus
+an anchor-warped spatial cost, ε = 0.05 and xyz weight 0.25, both selected by nested
+cross-validation on held-out Beauchamp homologies.
 
-## Two π files
-
-| File | Anchors | Use when |
+| file | what it is | use |
 |---|---|---|
-| `outputs/coupling/pi_fc_plus_SC.npy` | 21 Garin point anchors only | Strict baseline; benchmarking the FGW method itself |
-| `outputs/coupling/pi_fc_plus_SC_with_all_packs.npy` | 21 Garin + 26 region-anchor entries (15 packs) | **Recommended for downstream queries** |
+| `outputs/coupling/pi_canonical.npy` | canonical coupling | what `load_pi()` returns |
+| `outputs/coupling/pi_canonical_sharp.npy` | same recipe at ε = 0.005 | showcase variant; sharper, no more accurate |
+| `outputs/coupling/pi_fc_plus_SC*.npy` | pre-warp couplings | retired; kept to reproduce published comparisons |
 
-`load_pi()` defaults to the recommended one. These are **different matrices** and give different answers; do not mix them in a single analysis.
-
-Produced by `pipeline/04_solve_production.py` + `experiments/anchor_packs/compose_all.py`.
-
----
+Verify by hash rather than by filename. `pi_provenance()` returns the file and its sha256, and
+`tools/audit_pi.py` checks that every live analysis is on the canonical one.
 
 ## 1 · The coupling is calibrated
 
-*Notebook: `fig1_coupling.ipynb`. Logs: `coupling_summary.json`, `fig1_coupling_matrix.json`, `evidence_tiers_v2.json`.*
+Mass concentrates on the homology diagonal: mean self-mass across the 21 Garin classes is 0.40,
+against 0.048 under a size-matched uniform mapping. Routing preserves topography, with the
+distance between two mouse parcels predicting the distance between their routed human centroids at
+r = 0.53 against a permuted-coupling null of ≈ 0.
 
-| property | value |
-|---|---:|
-| shape | 1,864 × 2,094 |
-| median top-target probability | **1.00** |
-| mouse parcels with top probability > 0.5 | **92 %** |
-| mean self-mass on the 21-class homology diagonal | **0.26** (5.5× the 0.048 expected under a uniform mapping) |
-| topographic fidelity (mouse pairwise distance → routed human pairwise distance) | **r = 0.61**, against a permuted-coupling null of ≈ 0 |
-
-We then scored the coupling against Beauchamp 2022's external transcriptomic homology benchmark: 19 mouse↔human pairs derived from whole-brain gene expression, a modality HOMER does not use. The recommended coupling reaches **region-level AUROC 0.85**, mass-in-region 0.46, and **45.7 %** parcel-level top-1, significant for **18 of 19** regions against a parcel-set permutation null (FDR q < 0.05). Its errors are graceful: routed mass falls a mean of **17 mm** from the expected homologue, and a miss lands on an anatomically adjacent structure rather than scattering.
+The coupling is soft. Each mouse parcel's best human partner carries a median probability of 0.31,
+above 0.5 for 20 % of parcels. Re-fitting at ε = 0.005 gives a near-deterministic coupling (median
+0.96, above 0.5 for 90 %) with no gain in held-out homology recovery, so sharpness is a dial
+rather than evidence of correctness. We select ε by held-out recovery and leave the spread visible.
 
 ### Evidence tiers
 
-| Tier | n | % | What it means |
-|---|---:|---:|---|
-| **anchored_and_validated** | 577 | **31 %** | In a curated anchor AND independently reproduces a published homology |
-| **validated_only** | 401 | **22 %** | Reproduces a published homology, no anchor |
-| **anchored_only** | 238 | **13 %** | In a curated anchor, no independent validation pair |
-| **structural** | 259 | **14 %** | High internal trust, no external evidence |
-| **low_evidence** | 389 | **21 %** | No supervision, weak internal signal; use with caution |
+Each mouse parcel is graded on two external lines of evidence, neither of which is the solver's own
+confidence: membership in a curated anchor, and independent reproduction of a published homology.
 
-The two validated tiers cover **52 %** of the brain.
+| tier | share of mouse parcels |
+|---|---:|
+| `anchored_and_validated` | 31.5 % |
+| `validated_only` | 23.8 % |
+| `anchored_only` | 12.2 % |
+| `structural` | 10.9 % |
+| `low_evidence` | 21.6 % |
 
-The tier grades the *resolution* at which a prediction holds rather than whether a homologue exists. Region-level recovery is essentially equal across the two validated tiers (AUROC **0.87** vs **0.88**); parcel-exact recovery is not (top-1 **0.69** vs **0.18**). Curation buys parcel precision rather than region-level correspondence. Query at parcel granularity only in `anchored_and_validated`; at region granularity across both validated tiers.
+The two validated tiers cover 55 % of the brain. The tier grades the resolution at which a
+prediction can be trusted rather than whether a homologue exists: parcel-exact recovery separates
+the two validated tiers (top-1 0.70 against 0.39).
 
-Trust cannot be read from the solver. At the production regularisation the coupling is sharply peaked *everywhere*, so intrinsic confidence is uncorrelated with accuracy. The grades are external by necessity.
-
-```python
-trust = np.load("outputs/coupling/trust_multisource_all_packs.npz", allow_pickle=True)
-reliable_parcels = np.where(trust["evidence_tier"] == "anchored_and_validated")[0]
-```
-
----
+Trust cannot be read from the solver. Across parcels without anchor supervision, the coupling's own
+concentration predicts top-1 accuracy at r = 0.06 and bootstrap stability at r = −0.04, neither
+significant. Since the regularisation sets concentration directly, a confident-looking coupling can
+be produced on demand, which is why the grades are external.
 
 ## 2 · What carries cross-species homology
 
-*Notebook: `fig2_what_carries_homology.ipynb`. Logs: `ablation_ladder_battery.json`, `anchor_recovery_loo_combined.json`, `beauchamp_metric_battery.json`, `beauchamp_metric_battery_loro.json`, `ablation_auroc.json`.*
+Scored against Beauchamp 2022's transcriptomic homology set, which never enters the fit, the
+coupling reaches region-level AUROC 0.90 parcel-weighted across the 19 pairs (0.93 unweighted) at
+57 % parcel-level top-1, with mass enrichment significant for 19 of 19 regions under a parcel-set
+permutation null (FDR q < 0.05). Mean centroid displacement from the expected homologue is 8.83 mm (parcel-weighted, the value the manuscript quotes),
+against a chance displacement of 25 mm.
 
-We asked which term in the cost function carries the correspondence. Removing the terms one at a time and scoring with the full metric battery separates two quantities that move independently:
+Aggregates are weighted by parcel count. Regions differ roughly fifty-fold in size, so an
+unweighted mean lets a 5-parcel region count as much as a 250-parcel one; both are reported because
+the difference is easy to trip over.
 
-| cost terms | region-level (AUROC) | parcel-exact (top-1) | centroid displacement |
-|---|---:|---:|---:|
-| connectivity only (GW on FC + SC) | **0.67** (chance) | 0.8 % | 35 mm |
-| + spatial position | **0.87** (saturated) | 8 % | 28 mm |
-| + curated anchors | 0.84 | 10 % | 27 mm |
-| + region packs | 0.85 (unchanged) | **46 %** | **17 mm** |
+Removing the cost terms one at a time, re-fitting at each stage:
 
-Connectivity and spatial position carry *which human region*. Curation carries *which parcel*.
+| cost terms | AUROC | top-1 | mass-in-region | displacement |
+|---|---:|---:|---:|---:|
+| connectivity only (GW on FC + SC) | 0.69 | 0 % | 0.01 | 29 mm |
+| + anchor-warped spatial scaffold | 0.97 | 27 % | 0.23 | 11 mm |
+| + curated anchors | 0.93 | 26 % | 0.22 | 11 mm |
+| + region packs (production) | 0.90 | 57 % | 0.54 | 9 mm |
 
-Connectivity alone is unidentifiable rather than uninformative. Gromov–Wasserstein aligns two connectomes only up to relabelling, so with nothing to fix the global orientation the coupling cannot be *placed*. The factorial (ED2) shows this most sharply: gene-coexpression connectivity on its own scores AUROC **0.28**, below chance. A connectivity matrix, however biologically meaningful, cannot place itself without a cross-species reference.
+Region-level recovery rises once the spatial scaffold is added and does not improve with curation;
+parcel-exact recovery improves only with the anchors and packs. The spatial scaffold is itself
+fitted to the Garin landmark pairs, so the ladder separates kinds of supervision rather than
+supervision from none.
+
+Connectivity alone is unidentifiable rather than uninformative. Gromov–Wasserstein aligns two
+connectomes only up to relabelling, so with nothing fixing the global orientation the coupling
+cannot be placed.
 
 ### Withholding the curation
 
-We next asked how much of the region-level correspondence the curation supplies. Removing each of the **41** combined supervision units (**15** Garin homology classes + **26** region packs) in turn, re-fitting the full model, and scoring the held-out unit from connectivity and space alone:
-
-| | held-out AUROC | held-out top-1 |
-|---|---:|---:|
-| Garin classes (n = 15) | 0.74 | 1.6 % |
-| region packs (n = 26) | 0.72 | 1.4 % |
-| **overall (n = 41)** | **0.73** | **1.5 %** |
-
-These are **parcel-count-weighted** means (the unweighted overall AUROC is 0.72). Region-level recovery holds well above chance; parcel-exact recovery collapses. The connectomes and the spatial scaffold reconstruct the region-level correspondence without any anchor at all.
-
-The collapse in top-1 needs care, because top-1 is the wrong metric for a held-out unit: it measures the parcel precision the withheld anchor supplied. Scored by displacement instead, the held-out coupling is displaced (median 34 mm vs 17 mm for the full model) but not lost. Connectivity and space give coarse localisation; anchors sharpen it to the parcel.
+Removing each of the 41 combined supervision units (15 Garin classes, 26 region packs) in turn and
+re-fitting leaves held-out AUROC at a mean of 0.74, with 7 of 41 units below chance, predominantly
+hippocampal subfields and fine somatotopic subdivisions. Parcel-exact recovery collapses to roughly
+10 %.
 
 ### The memorisation control
 
-Several region packs were curated *on* Beauchamp regions, so the benchmark is not fully independent until that overlap is removed. We deleted each region's overlapping curation, re-fitted and re-scored: aggregate AUROC falls from **0.85** to **0.78**. Recovery is largely retained, so agreement with the transcriptomic benchmark reflects cross-species signal the coupling reconstructs rather than curation it memorised.
-
----
+For each of the 19 Beauchamp regions, removing the curation overlapping it and re-fitting leaves
+parcel-weighted AUROC at 0.90 → 0.73, with 5 of 19 below chance. Agreement with the benchmark is
+therefore not memorised curation, though the bound on parcel-exact recovery is real.
 
 ## 3 · What transfers through π
 
-*Notebook: `fig3_what_transfers.ipynb`. Logs: `coletta_2020_cross_species_rsn.json`, `fair_nulls_coletta_test2c.json`, `margulies_2016_gradient.json`, `margulies_discrete_reframe.json`, `fulcher_2019_gradient.json`, `spin_test_gradients.json`, `published_map_validation.json`.*
+Each test uses data HOMER never saw and a spin null preserving spatial autocorrelation.
 
-We asked what survives the crossing. Three published cross-species relationships, all on data HOMER never saw, all tested against **spatial-autocorrelation-preserving spin nulls**.
+### Networks
 
-| test | modality | \|r\| or count | spin p | verdict |
-|---|---|---:|---:|---|
-| Mouse resting-state networks → human (Coletta 2020) | connectivity | 6/10 vs 1.2 expected | **0.002** | **translates** |
-| Principal FC gradient → human (Margulies / Huntenburg) | connectivity | \|r\| = 0.54 (0.62 region-level) | **0.004** | **translates** |
-| T1w:T2w myelin → human myelin (Fulcher 2019) | microstructure | r = 0.37 | 0.11 | **does not clear the null** |
-| Cytoarchitecture → human myelin (Fulcher 2019) | microstructure | r = 0.36 | 0.10 | **does not clear the null** |
+Routing the mouse resting-state networks of Coletta et al. through π assigns 6 of 10 to their
+like-named human network, against a spin-null expectation of 1.0 (p = 0.002). Nine of eleven
+networks map to a more compact human territory than the null.
 
-### The gradient translates
+### The gradient
 
-The mouse principal gradient routed through π predicts the observed human gradient at **|r| = 0.54** across 1,244 parcels (0.62 at region level), exceeding both a permuted-π null (|r| = 0.03, p < 0.001) and a spin null (**p = 0.004**). It survives reduction to discrete structure too: the rank order of the nine human networks along the gradient is recovered at ρ = 0.73 (spin p = 0.043), and a three-tier discretisation is classified at 52 % against 33 % chance and a 34 % spin null (p = 0.001).
+Routing the mouse principal functional-connectivity gradient predicts the observed human gradient
+at |r| = 0.54 across all 2,094 parcels and |r| = 0.56 at region level, exceeding both a permuted-π
+null (|r| = 0.07, p < 0.001) and a spin null (p = 0.032). The correspondence survives reduction to
+discrete structure: the rank order of the nine human networks along the gradient is recovered at
+ρ = 0.80 (spin p = 0.029), and a three-tier discretisation is classified at 56 % against 33 %
+chance (p = 0.001).
 
-> ⚠️ **A correction.** An earlier version of this analysis took the **first** non-trivial eigenvector of the FC graph Laplacian as the principal gradient. In this data that is an **anterior–posterior spatial axis**; the unimodal→transmodal hierarchy is the **second** component. Routing an A–P spatial axis and then testing it against a *spatial-autocorrelation-preserving* null is close to tautological, and it manufactured a confident false negative ("the gradient does not translate", |r| = 0.41, p = 0.15) that this page previously reported. The component is now **selected** against each species' own T1w:T2w map, an external reference; both species independently select component 2, which reproduces the published Margulies gradient at |ρ| = 0.93 (the old component-1 map scored 0.12). `experiments/validation/00_validate_published_maps.py` now asserts this on every named external map.
+### Microstructure
 
-### Microstructure does not
+Two independent mouse measurements routed through π both predict the human HCP myelin map: the
+T1w:T2w proxy at r = 0.47 and cytoarchitectural type at r = 0.47, over 388 of 400 Schaefer regions.
 
-We routed two independent mouse measurements from Fulcher et al., the T1w:T2w myelin proxy and cytoarchitectural type (neither of them an input to HOMER), through π and compared each with the observed human myelin map over 205 Schaefer regions. Both resemble it (r = 0.37, 0.36) and both comfortably beat a permuted-π null (empirical p = 0.000). Neither clears a spatial null (spin p = 0.11, 0.10). Under the designated translation null (spin the mouse input, route through the real π) the verdict is the same: T1w:T2w fails (p = 0.086) and cytoarchitecture sits on the boundary (p = 0.050).
-
-We therefore do not claim that microstructure translates. The routed maps are consistent with the human myelin map, but not beyond what the spatial smoothness of both maps already supplies.
-
-> ⚠️ **A correction.** This page previously reported spin p = **0.021 / 0.010** for these two tests and called the structural correspondence "specific". Those p-values were **hardcoded literals in a figure script** and existed in no output file anywhere. The real values are 0.11 and 0.10.
-
-### Cellular reach
-
-Routing Allen ISH markers through π, the **excitatory − inhibitory** contrast translates (r = 0.26, spin p = 0.001). Neuronal − glial, dopaminergic-hotspot, laminar and areal-type contrasts do not. Conservation reaches broad cell classes but not finer composition or lamination, which sits alongside the microstructure result rather than in tension with it.
+> Reversed in July 2026. An earlier draft reported r = 0.37 / 0.36 failing a spin null at
+> p = 0.11 / 0.10 and concluded that microstructure does not translate. Those values came from the
+> retired pre-warp coupling, and the conclusion also depended on a bug in `principal_gradient()`
+> that returned an anterior-posterior spatial axis rather than the hierarchy. On the canonical
+> coupling both measurements clear their nulls. The earlier claim is withdrawn.
 
 ### The pattern
 
-Connectional organisation, the modality π was fitted on, transfers. Microstructure, which π never saw, does not. π behaves like the connectional correspondence it is: it carries connectivity across species, and it does not silently import a microstructural correspondence for which it has no evidence.
+Grouping fourteen properties by their relation to the areal hierarchy, all nine tests in the
+"hierarchy maps" and "varies along the hierarchy" groups clear their spin nulls, and none of the
+five orthogonal to it does.
 
----
+The controlling comparison sits within one dataset. Individual cortical-layer marker genes, which
+retain areal variation, translate at mean r = 0.23 with 6 of 7 significant. Layer contrasts built
+from the same genes, which remove the shared areal component, do not (mean r = 0.07). Granular
+L4 − infragranular is the expected exception at r = 0.19, since cortical granularity is itself the
+areal hierarchy.
 
 ## 4 · HOMER versus TransBrain
 
-*Notebook: `fig4_vs_transbrain.ipynb`. Logs: `transbrain_benchmark_summary.json`, `transbrain_bn_distributions.json`, `transbrain_roundtrip_maps.json`, `transbrain_2025_benchmark.json`.*
+Both methods scored as distributions over the same 127-region Brainnetome atlas, on the same 24
+literature homologue pairs, using TransBrain's own atlas and curation.
 
-TransBrain (Nat Methods 2025) is a **transcriptomic** translator. HOMER is a **connectional** one. §3 predicts the outcome: each should win on the modality it encodes.
+| | HOMER | TransBrain |
+|---|---:|---:|
+| region-level AUROC | 0.83 | 0.84 |
+| mass on the correct region | 0.21 | 0.07 |
+| prediction sharpness (effective targets) | ~6 | ~60 |
+| gradient translation (101 BN regions) | 0.56 | 0.52 |
+| round-trip fidelity (52 matched regions) | 0.86–0.97 | 0.82–0.89 |
+| spatial resolution | 2,094 parcels | ~127 regions |
 
-| axis | HOMER | TransBrain | winner |
-|---|---:|---:|---|
-| region-level identity (AUROC) | 0.79 | **0.84** | TransBrain (n.s.) |
-| principal-gradient translation (\|r\|) | **0.55** | 0.42 | HOMER |
-| round-trip fidelity (gradient / opto / Magel2) | **0.98 / 0.95 / 0.97** | 0.89 / 0.82 / 0.83 | HOMER |
-| prediction sharpness (effective target regions) | **≈ 3** | ≈ 60 | HOMER |
-| spatial resolution | **parcel (2,094)** | region (~120) | HOMER |
-| per-prediction confidence | **evidence tiers** | none | HOMER |
-| whole-brain coverage / absence detection | **yes** | none | HOMER |
-
-Two caveats need stating.
-
-The region-identity benchmark is TransBrain's own, so its lead there has home advantage. Even so, the difference is not significant (paired Wilcoxon on per-region AUROC, p = 0.17, n = 24 regions). TransBrain wins 16 regions, HOMER 8. HOMER nonetheless places more mass on the correct region (0.11 vs 0.07).
-
-We also do not claim HOMER localises better. We once did; it was a reduction artefact. TransBrain's output is region-level, so scoring a localisation metric at parcel resolution flatters HOMER by construction: the comparison measures output granularity rather than mapping quality. The panel was reframed around *sharpness*, which is a real and large difference (≈ 3 vs ≈ 60 effective target regions).
-
-The round-trip is HOMER's clearest advantage. We translated a mouse phenotype mouse→human→mouse and correlated the recovered map with the original. The margin is narrowest on the smooth principal gradient (+0.09) and widest on the two focal maps, an optogenetic agranular-insula circuit and the Magel2 autism-model pattern (+0.13 each), where region-level smoothing destroys the spatial detail a focal phenotype lives in.
-
-> ⚠️ **A correction.** The round-trip previously scored HOMER on the 52 mouse regions its parcellation covers but TransBrain on all 68 of `Config.MOUSE_REGIONS`, 16 of them mean-filled for the gradient. The two numbers were not comparable. Both methods are now scored on the identical 52 regions where the phenotype is measured. TransBrain's values moved from 0.87 / 0.91 / 0.81 to 0.89 / 0.82 / 0.83; HOMER's are unchanged.
-
-The two are complementary instruments rather than competitors. A transcriptomic translator is the better instrument for region identity, and a connectional one for connectional organisation.
-
----
+The accuracy difference is not significant (paired Wilcoxon p = 0.36), so the two are level there.
+Across the seven capability axes compared, HOMER leads on six and is level on the seventh. They are
+probably better read as complementary instruments, region-level phenotype transfer against
+calibrated whole-brain correspondence, than as competitors.
 
 ## 5 · Where π has no support
 
-*Notebook: `fig5_coverage.ipynb`. Logs: `section5_coverage_nulls.json`, `section5_connectional_vs_molecular.json`, `section5_evolution_battery.json`, `section5_coverage_catalogue.json`, `biccn_contrast_reframe.json`, `balsters_2020_mfc_divergence.json`.*
+Reconstruction-coverage asks how well each human parcel's connectivity fingerprint is rebuilt by
+routing mouse connectivity through π:
 
-> ### ⚠️ Coverage is a MASS-NORMALISED MEAN, never a sum
-> Coverage of a human parcel is its column-sum of π (`pi.sum(0)`). To aggregate parcels into a region you must take the **mean**, not the sum. Summing makes coverage scale with *how many parcels a region happens to contain*, which is a parcellation artefact rather than biology. The choice is not free: the §6 disorder result is ρ = **+0.64** with the mean and ρ = **+0.05** with the sum. An earlier version of this analysis summed, and reported a null.
+```
+pihat = pi / pi.sum(0);  pred = pihat.T @ Mfc @ pihat;  coverage[j] = pearson(pred[j], Hfc[j])
+```
 
-Semi-relaxed FGW frees the human marginal, so the coupling may leave human parcels uncovered. **53 %** of them receive negligible mouse mass (mass < 1e-6), concentrated over association cortex.
+> This replaced a measure that did not work. The earlier metric was the total mouse mass a parcel
+> received, `log10(pi.sum(0))`, which is dominated by how spatially isolated a parcel is rather
+> than by whether the mouse can account for it, and whose tail is set by the entropic
+> regularisation. Every result derived from it is withdrawn, including the 6.7 log-unit
+> sensorimotor–association gap (0.68 at spin p = 0.286 on the canonical coupling) and the
+> uncovered-parcel percentages, which were threshold-dependent.
 
-### The territory is organised along the hierarchy
+Coverage runs high over sensorimotor, auditory and visual territory and low over prefrontal and
+lateral temporal cortex. One central visual parcel is rebuilt at r = 0.77; one dorsolateral
+prefrontal parcel at r = 0.07.
 
-We ordered cortex by the T1w:T2w myelin proxy and compared coverage across the hierarchy. Coverage in the association tertile is **6.7 log-units** below the sensorimotor tertile (spin p = **0.002**). The *continuous* coverage–myelin correlation does not exceed the spin null (r = 0.13, p = 0.076), so the claim is a contrast between the hierarchy's extremes rather than a smooth gradient. We report the tertile gap and flag the continuous correlation as spin-fragile.
+### It tracks cortical expansion
+
+Six of seven published maps clear a spin null:
+
+| map | ρ | spin p |
+|---|---:|---:|
+| macaque→human expansion (Hill 2010) | −0.47 | 0.003 |
+| mouse→human expansion (Xu 2020) | −0.32 | 0.001 |
+| sensorimotor–association axis (Sydnor 2021) | −0.33 | 0.017 |
+| principal FC gradient (Margulies 2016) | −0.28 | 0.017 |
+| postnatal developmental expansion (Hill 2010) | −0.25 | 0.050 |
+| mouse–human FC homology (Xu 2020) | +0.40 | 0.001 |
+| T1w:T2w myelin (HCP) | +0.24 | n.s. |
+
+Splitting cortex by the sensorimotor–association axis, the association tertile sits at 0.40 against
+0.50 for sensorimotor (Δ = 0.10, Cohen's d = 0.81, spin p = 0.010). The distributions overlap; what
+separates them is the floor, which reaches 0.07 in association cortex and 0.22 in sensorimotor
+cortex.
 
 ### The deficit is connectional rather than molecular
 
-We asked whether the missing territory is molecularly alien to the mouse or connectionally reorganised. If the absence were molecular, both a connectional and a transcriptomic measure should collapse from sensorimotor to association cortex. We computed the same sensorimotor − association contrast both ways over the same 884 cortical parcels. Only one collapses.
-
-| measure | gap | spin p | |
-|---|---:|---:|---|
-| **connectivity coverage** | +0.47 SD | **0.016** | significant |
-| **transcriptomic similarity to mouse** | −0.16 SD | 0.45 | n.s. |
-| **the dissociation itself** | **+0.64 SD** | **0.038** | significant |
-
-Association cortex is connectionally reorganised, and it is not molecularly alien to the mouse. The mouse has the parts; it does not have the wiring.
-
-The third row matters. One gap being significant while the other is not would be an instance of the "difference between significant and non-significant is not itself significant" error. So we tested the *difference of the gaps* directly against its own spin null, and it holds.
-
-### It coincides with human cortical evolution
-
-We correlated coverage against a battery of published cortical maps, spin-testing each. Coverage aligns with the principal gradient (ρ = −0.12, p = 0.009), the Sydnor sensorimotor–association axis (−0.14, p = 0.013), the T1w:T2w hierarchy (+0.11, p = 0.037) and macaque→human evolutionary expansion (Hill et al.; −0.18, p = 0.046). Four of seven maps clear a conservative spin null, and one runs counter (Xu et al. mouse→human expansion, −0.05, p = 0.56).
-
-Read this conservatively. Every individual correlation is modest (|ρ| 0.05–0.18). The claim rests on the consistency of direction across seven independent maps rather than on any single effect size. Coverage aligns with the cortical hierarchy, and evolutionary expansion corroborates that alignment rather than driving it.
+Control B, covering dorsolateral and rostrolateral prefrontal cortex, is the only network
+significantly below the cortical mean (−0.69 SD, spin p = 0.006), while transcriptomic similarity
+to mouse over the same parcels is flat (−0.18 SD, p = 0.39). The mouse appears to have the parts
+without the wiring.
 
 ### A falsification control
 
-If HOMER were smearing mouse mass over human cortex, mouse medial-frontal cortex would leak into human dlPFC. It routes essentially none there (mass fraction ≈ 0 %, versus 1.1 % expected under a permuted-coupling null), sending it instead to premotor (20 %), medial-prefrontal (10 %) and mid-cingulate (28 %) targets, consistent with the absence of a rodent granular prefrontal homologue. This is a place the model could have embarrassed itself and did not.
+Mouse medial-frontal cortex has no granular prefrontal homologue, and π does not manufacture one.
+Of the mass it sends to the human brain, 32 % arrives in mid-cingulate cortex, 18 % in premotor
+cortex and 11 % in medial prefrontal cortex, while 0.015 % reaches dorsolateral prefrontal cortex,
+indistinguishable from the 0.026 % expected under a permuted coupling.
 
----
+## 6 · Translating a mouse experiment
 
-## 6 · Which parts of a human disorder a mouse can reach
+Routing a mouse anterior-insula optogenetic activation map through π gives a prediction that peaks
+over anterior insula and ventral-attention cortex and is lowest in visual cortex. By Yeo-17
+network, SalVentAttnB ranks first (+1.02 SD) and VisCent last (−1.30 SD). Salience enrichment
+relative to the rest of cortex is +0.86 SD, against a permuted-π null at p = 0.001.
 
-*Notebook: `fig6_disease.ipynb`. Logs: `section6_double_dissociation.json`, `section6_selectivity_battery.json`, `section6_robustness.json`.*
+Against TransBrain on the same 1,635 parcels with matched permutation counts, HOMER reaches
++0.87 SD (p = 0.016) and TransBrain +0.28 SD (p = 0.228). HOMER ranks SalVentAttnB first of 16
+networks; TransBrain ranks it eighth.
 
-We asked which parts of a human disorder sit in territory the mouse can reach. We correlated coverage, the mouse mass arriving at each human region, with the ENIGMA case-control effect size for cortical thickness (Cohen's *d*) across the 30 Desikan–Killiany regions HOMER resolves, under a spin null. A *positive* ρ means thinning is more severe where less mouse mass arrives.
+Cortical atrophy patterns from five mouse autism models route to different networks rather than
+differing in severity, with salience enrichment from +0.15 (Dvl1) to −0.39 (Slc6a4). No null is
+attached to the between-model comparison, and none should be read into the ordering.
 
-| | cortex (n = 30) | subcortex (n = 7) | interaction |
-|---|---:|---:|---:|
-| **bipolar disorder** | ρ = **+0.64** (spin p < 0.001, FDR q = 0.004) | ρ = **−0.68** | Fisher z p = **0.003** |
-| **schizophrenia** | ρ = **+0.52** (spin p = 0.002, FDR q = 0.004) | ρ = **−0.79** | Fisher z p = **0.002** |
-| the other **13** conditions | all null | | |
+### Coverage does not resolve disorders
 
-The selectivity is the result. If coverage predicted thinning in every disorder it would amount to a generic "association cortex is vulnerable" statement. It does not. The well-powered nulls make the finding specific. The sharpest of them is **22q11 deletion syndrome**, the largest known genetic risk factor for psychosis (|d| = 0.39), which coverage does not flag. Coverage indexes *anatomy* rather than diagnostic category: 22q11 does not share the cortical topography that bipolar disorder and schizophrenia share.
+Because §5 localises territory the mouse cannot reconstruct, it is natural to ask whether that map
+predicts where a human disorder falls beyond the mouse's reach. It does not. Correlating
+reconstruction-coverage with case-control cortical-thickness effect sizes across the
+Desikan-Killiany atlas is null for all seven ENIGMA maps tested (minimum spin p = 0.15), and
+weighting each disorder's thinning burden by reachability is null for all six disorders under the
+same null (minimum p = 0.13, in autism).
 
-The sign reverses in subcortex. In cortex the disorder is worse where the mouse cannot reach; in subcortex, worse where it can. A mouse model therefore cannot address the cortical signature of bipolar disorder or schizophrenia, but it can address their subcortical signature. This is a statement about which *component* of a disorder is modellable.
+The test can detect a hierarchy-aligned effect when one is present: run identically, the myelin
+hierarchy map flags bipolar disorder (p = 0.028) and major depression (p = 0.011) in these same
+data. Reconstruction-coverage carries no disorder-specific information at this resolution.
 
-**Validation and discovery.** The cortical selectivity replicates van den Heuvel et al. (*Brain* 2019), who found human-specific cortical connectivity features implicated in schizophrenia and not in ASD, OCD, MDD, bvFTD or Alzheimer's. We reach it here from mouse connectivity alone, with no human disorder data in the model. The cortex/subcortex decomposition is the new part.
-
-### Controls
-
-- **Is it just the hierarchy?** Published hierarchy maps do predict this thinning (Sydnor ρ = −0.57, Margulies −0.52 in bipolar disorder). Coverage attains the largest correlation of any predictor tested, is the only map significant in both disorders, and survives partialling both out (ρ = +0.60 / +0.43). We do not claim it is the better predictor: at 30 regions the two are not statistically distinguishable (Williams' test, p = 0.33). The control establishes non-reducibility rather than superiority.
-- **Anchor distance.** Coverage correlates with distance from the 42 curated anchors (ρ = −0.41), and anchor distance predicts bipolar thinning on its own. The association survives adjustment (ρ = +0.53 / +0.49).
-- **Analysis choices.** Rescue radius (2–6 mm), minimum-parcel threshold (≥3, ≥10, ≥20) and leave-one-region-out all leave the conclusion intact (bipolar +0.59 to +0.70).
-- **Parcel count.** Summed rather than mass-normalised coverage abolishes the effect entirely (+0.05 / +0.02). See the box in §5.
-
-### Limitations, stated plainly
-
-The subcortical arm is **n = 7 regions**. The two arms use different metrics (cortical thickness vs subcortical volume; ENIGMA publishes no subcortical thickness), and a sign reversal across two different measurements is weaker evidence than one within a single measurement. We also show no mechanism. The result is a correspondence between connectional reorganisation and disorder anatomy, not a causal account of it.
-
-We built a per-disorder "translatability index" and it failed. Parkinson's disease scored no better than schizophrenia, because ENIGMA's subcortical panel contains no substantia nigra. The index measured where a disorder is *visible to volumetric MRI* rather than where it is. We do not report it as a result, and it should not be resurrected without phenotype data that samples the structures each disorder actually occupies.
-
----
-
-## Application: re-subtyping autism mouse models
-
-*Notebook: `discussion_pagani.ipynb`.*
-
-Pagani et al. (2026) split 20 autism mouse models into hyper-connected (n = 9) and hypo-connected (n = 11) subtypes. We routed each subtype through π into human network space. The **hyper**-connected subtype translates specifically: predicted-hyper correlates +0.35 with observed hyper and −0.25 with observed hypo. The **hypo**-connected subtype does not. Its prediction points the wrong way (+0.21 with observed hyper, −0.13 with observed hypo). One of the two works; we report both.
-
-This analysis has been wrong twice: the subtype labels were once inverted, and a 1,491-feature decode was debunked. The current result is independent of the decode, and the labels are verified from the data. Read `discussion_pagani.ipynb` before citing anything from it.
-
----
+> An earlier draft reported the opposite, correlating mass-coverage with ENIGMA thinning and
+> finding bipolar disorder (ρ = +0.64) and schizophrenia (ρ = +0.52) surviving FDR. That analysis
+> used the retired mass-coverage metric on the retired coupling, and is withdrawn.
 
 ## Caveats
 
-1. **The headline Beauchamp top-1 is partly by construction.** The recommended π is supervised on published homologues that overlap the validation set. The generalisation numbers to quote are the leave-one-region-out (AUROC 0.73) and the curation-removed re-fit (0.85 → 0.78), both above.
-2. **Parcel-level claims need the right tier.** Per-parcel argmax displacement is 17 mm on the benchmark and larger elsewhere. Trust parcel granularity only in `anchored_and_validated`; use region granularity across the validated tiers.
-3. **The spatial prior is doing real work.** Zeroing xyz collapses region-level recovery to chance. That is the identifiability result of §2 rather than a defect, but it does mean HOMER is not unsupervised homology discovery.
-4. **Microstructure and fine molecular detail do not translate.** See §3. Do not read them out of π.
-5. **Cerebellum and medulla** are excluded from the parcellation. **dlPFC homology** is contested and opt-in only.
+1. Parcel-exact recovery depends on the curation. Held out it collapses to roughly 10 %, while
+   region-level recovery largely holds. The generalisation numbers to quote are the
+   leave-one-region-out mean (0.74) and the curation-removed re-fit (0.90 → 0.73).
+2. Parcel-level claims need the right tier. Trust parcel granularity in `anchored_and_validated`;
+   use region granularity across the validated tiers.
+3. The spatial scaffold is doing real work, and is itself fitted to the Garin pairs. No arm of the
+   ablation is supervision-free, so HOMER is not unsupervised homology discovery.
+4. Laminar structure does not translate. See §3, and do not read it out of π.
+5. Reconstruction of association cortex is poor. The coupling reports the shortfall rather than
+   hiding it, but a mouse model still cannot address phenotypes living there.
+6. Correspondence is estimated between group-average connectomes, so it describes species rather
+   than individuals.
+7. Cerebellum and medulla are excluded from the parcellation. dlPFC homology is contested and
+   opt-in only.
 
 ## How to use this map
 
-1. **Load the recommended coupling** with `load_pi()`, rather than the base coupling.
-2. **Check the tier** before you trust a prediction. `anchored_and_validated` → parcel-level. Either validated tier → region-level. `low_evidence` → treat as a hypothesis.
-3. **Ask whether your phenotype is connectional.** If it is (networks, gradients, connectivity-derived maps), π will carry it. If it is microstructural or fine-molecular, it will not. §3 is the evidence, and this is a real limit rather than a caveat to wave through.
-4. **Check coverage before translating into association cortex.** If the target region receives negligible mouse mass, the absence of a homologue is the finding rather than a failure of the query.
-5. **Spin-test every spatial correlation** (`homer.eval.nulls.spin_null`) before reading it as significant. A permuted-π null is too lenient for a smooth map, and that is how two of the errors on this page happened.
+1. Load the coupling with `load_pi()` and check the tier before trusting a prediction.
+   `anchored_and_validated` supports parcel-level answers; either validated tier supports
+   region-level; `low_evidence` is a hypothesis.
+2. Ask whether your phenotype varies across the areal hierarchy. If it does, π will likely carry
+   it. If it varies through cortical depth, it will not. §3 is the evidence.
+3. Check reconstruction-coverage before translating into association cortex. Where coverage is
+   low, the absence of a good counterpart is the finding rather than a failed query.
+4. Spin-test every spatial correlation (`homer.eval.nulls.spin_null`) before reading it as
+   significant. A permuted-π null is too lenient for a smooth map, and that is how two of the
+   errors corrected on this page happened.

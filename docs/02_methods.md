@@ -109,8 +109,8 @@ Optional terms (off by default in the production config, available as ablations)
 | Parameter        | Value    | Rationale                                             |
 |------------------|----------|-------------------------------------------------------|
 | α                | 0.5      | Equal weight to relational + feature terms            |
-| ε                | 5e-3     | Small → mostly-deterministic π. Larger ε softens π but loses anchor-CV accuracy. |
-| `xyz_weight`     | 0.5      | Spatial prior strong enough to disambiguate, not so strong it swamps FC |
+| ε                | 0.05     | Selected by nested CV on held-out Beauchamp homologies. 5e-3 gives a near-deterministic π with no gain in held-out recovery. |
+| `xyz_weight`     | 0.25     | Selected by the same nested CV. Applied in an anchor-warped frame: a thin-plate spline fitted to the 42 Garin coordinate pairs carries mouse coordinates into human space, and the cross-species spatial cost is computed there. |
 | `lam_anchor`     | 1.0      | Point-anchor forbidden-cell penalty; large vs the [0, 1] cost scale |
 | `region_lam_outside` | 0.15 | Region-anchor outside-region penalty (soft default, see archive/iteration_log.md §5.6.0a) |
 | `fc_weight`      | 0.7      | Production FC + SC mix                                 |
@@ -147,13 +147,14 @@ solver to assign positive mass to every human node, including the ~20% of
 human parcels that don't have a clear mouse counterpart. This produces a
 "smeared" π with no clean per-mouse-row interpretation.
 
-Semirelaxed lets the human marginal float. The cost: ~53% of human nodes end up
-with negligible column mass in our production solve (< 1e-6; we call them
-"uncovered"). The figure is threshold-dependent (41% at machine zero, 58% at
-1e-4), so always state the threshold when quoting it. That same freedom lets the
+Semirelaxed lets the human marginal float, so the coupling can leave human parcels poorly
+reconstructed rather than forcing mass onto them. How much territory that amounts to depends on
+the threshold chosen, so we report reconstruction-coverage (docs/03_results.md §5) rather than an
+uncovered-parcel percentage.
+
 coupling report that a human parcel has NO mouse counterpart, and §5 of
 `03_results.md` builds its central measurement on that report. The benefit:
-every mouse row has a sharp, interpretable distribution over human nodes, and we
+every mouse row has an interpretable distribution over human nodes, and we
 don't force fake correspondences.
 
 ## Validation pipeline

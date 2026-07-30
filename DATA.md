@@ -1,4 +1,8 @@
-# Data and artifacts
+# Data
+
+> The published v1.2.0 archive predates `pi_canonical.npy` and does not contain it.
+> `scripts/build_archives.sh` now includes it; the bundle needs re-cutting as v1.3.0.
+> See the `_canonical_coupling_note` in `data_manifest.json`. and artifacts
 
 The HOMER code lives in this Git repository. The data and generated artifacts do
 **not**. They are too large for Git, and most of the inputs are third-party data
@@ -11,7 +15,7 @@ python scripts/fetch_data.py --tier raw # add the full raw inputs (for a from-sc
 ```
 
 The DOI and download URLs are read from `data_manifest.json`.
-Data DOI: [10.5281/zenodo.20746024](https://doi.org/10.5281/zenodo.20746024) (latest;
+Data DOI: [10.5281/zenodo.21458106](https://doi.org/10.5281/zenodo.21458106) (latest;
 the raw-inputs archive remains in the prior version, [10.5281/zenodo.20733163](https://doi.org/10.5281/zenodo.20733163)).
 
 ## What a fresh clone can do *without* any download
@@ -32,7 +36,7 @@ need the archive below.
 | Tier | Where | Lets you |
 |---|---|---|
 | 0, small artifacts | committed to Git | run unit tests, read all result numbers |
-| 1, reproduce bundle | Zenodo `homer-reproduce-v1.2.0.tar.gz` (~620 MB download) | re-run every experiment/notebook against the precomputed couplings |
+| 1, reproduce bundle | Zenodo `homer-reproduce-v1.3.0.tar.gz` (~735 MB download) | re-run every experiment/notebook against the precomputed couplings |
 | 2, raw inputs | Zenodo `homer-raw-inputs-v1.0.0.tar.gz` (606 MB download) | rebuild the coupling bitwise from raw data via `pipeline/` |
 
 You do **not** need Tier 2 to use HOMER, only to regenerate `π` from scratch.
@@ -46,7 +50,7 @@ root so the paths inside the tarball are repo-relative (the fetch script unpacks
 at the repo root). The exact `tar` commands are in
 [`scripts/build_archives.sh`](scripts/build_archives.sh).
 
-### Archive 1, `homer-reproduce-v1.2.0.tar.gz` (~620 MB gzipped)
+### Archive 1, `homer-reproduce-v1.3.0.tar.gz` (~735 MB gzipped)
 
 Everything needed to re-run the experiments **and all the notebooks** on the shipped
 couplings. The exact file list is in `scripts/build_archives.sh` (the `REPRODUCE`
@@ -56,8 +60,10 @@ array).
 
 | Path | Size | What |
 |---|---:|---|
-| `outputs/coupling/pi_fc_plus_SC_with_all_packs.npy` | 30 MB | the recommended coupling π (1864×2094) |
-| `outputs/coupling/pi_fc_plus_SC.npy` | 15 MB | strict π (Garin anchors only); quickstart compares it to the recommended π |
+| `outputs/coupling/pi_canonical.npy` | 30 MB | the canonical coupling π (1864×2094), what `load_pi()` returns |
+| `outputs/coupling/pi_canonical_sharp.npy` | 30 MB | same recipe at ε = 0.005; sharper, no more accurate |
+| `outputs/coupling/pi_fc_plus_SC_with_all_packs.npy` | 30 MB | pre-warp coupling, retired 2026-07 |
+| `outputs/coupling/pi_fc_plus_SC.npy` | 15 MB | pre-warp point-anchor coupling, retired 2026-07 |
 | `outputs/coupling/pi_fc_plus_SC_with_*.npy` (×15) + `pi_fc_plus_SC_xyz_zero.npy` | ~430 MB | ablation-variant couplings the advanced notebooks load (per-anchor-pack, xyz-zeroed, etc.) |
 | `outputs/coupling/trust_multisource_all_packs.npz`, `trust_score_fc_plus_SC*.npz` | ~0.5 MB | per-parcel trust tiers + scores |
 | `outputs/coupling/bootstrap_aggregate_fc_plus_SC.npz` | | bootstrap stability aggregate |

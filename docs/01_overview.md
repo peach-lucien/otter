@@ -4,7 +4,7 @@
 
 HOMER (**Hom**ology **E**stimation across species via **R**egional optimal transport) is a Python package that learns probabilistic correspondences between mouse and human brain parcels. The output is a coupling matrix **π** of shape (1864 mouse parcels × 2094 human parcels) where `π[i, j]` is interpretable as "probability that mouse parcel *i* corresponds to human parcel *j*".
 
-> **Note on sharpness and coverage.** At the production regularisation (ε=0.005) the coupling is sharp and peaked rather than broadly soft: ~67 % of mouse rows place essentially all mass on a single human parcel (median effective targets ≈ 1). The low-entropy regime is intended, and it is tunable: raising ε softens the coupling. Because the human marginal is free (semirelaxed FGW), the coupling maps the mouse atlas onto a subset of human parcels. ~53 % of human parcels receive negligible mass (< 1e-6; the figure is threshold-dependent, 41 % at machine zero), so reverse (human→mouse) queries have no source for about half of human parcels.
+> **Note on sharpness and coverage.** The canonical coupling is fitted at ε = 0.05 and is deliberately soft: the median top-target probability is 0.31, above 0.5 for 20 % of parcels. Concentration is set by the regularisation rather than by anatomy, and re-fitting at ε = 0.005 gives a near-deterministic coupling with no gain in held-out recovery. Because the human marginal is free (semirelaxed FGW), the coupling can leave human parcels poorly reconstructed rather than forcing mass onto them. How much territory that amounts to depends entirely on the threshold chosen, which is why we report reconstruction-coverage (docs/03_results.md §5) instead of an uncovered-parcel percentage. Reverse (human→mouse) queries are correspondingly weak wherever reconstruction-coverage is low.
 
 The method is **Fused Gromov-Wasserstein optimal transport** (POT's `entropic_semirelaxed_fused_gromov_wasserstein`), supervised by published mouse↔human anchor pairs.
 
@@ -22,7 +22,8 @@ For any mouse parcel, HOMER returns a probability distribution over 2094 human p
 import numpy as np
 from homer.data import load_cached
 
-pi = np.load("outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")    # 1864 × 2094
+from homer.data import load_pi
+pi = load_pi()                                   # pi_canonical.npy, 1864 × 2094
 
 # Top-5 human partners for mouse parcel 1234
 top5 = pi[1234].argsort()[::-1][:5]
@@ -46,17 +47,17 @@ See `03_results.md` for what each tier means and how to read the headline number
 
 ## Headline number
 
-For the **recommended π** (`pi_fc_plus_SC_with_all_packs.npy`):
+For the **canonical π** (`pi_canonical.npy`, what `load_pi()` returns):
 
 | Metric | Value |
 |---|---:|
-| Beauchamp 2022 region-level AUROC | **0.85** (18/19 regions significant, FDR q < 0.05) |
-| Beauchamp 2022 parcel-level top-1 | **45.7 %** (enrichment 50.6× over null) |
-| Held-out recovery (41 units removed in turn, re-fit) | **AUROC 0.73** region-level; top-1 collapses to ~2 % |
-| Region-level qualified top-3 (Beauchamp-22 set) | **100 %** |
-| Bootstrap argmax stability (40 subject-resamples) | **98.2 %** |
-| z-score vs permuted-anchor null | **+17.8** |
-| Multi-source trust tier "anchored_and_validated" | 31 % of parcels |
+| Beauchamp 2022 region-level AUROC | **0.90** parcel-weighted, 0.93 unweighted (19/19 regions significant, FDR q < 0.05) |
+| Beauchamp 2022 parcel-level top-1 | **57 %** |
+| Mean centroid displacement from the expected homologue | **7.7 mm** (chance 25 mm) |
+| Held-out recovery (41 units removed in turn, re-fit) | **AUROC 0.74** region-level; parcel-exact collapses to ~10 % |
+| Memorisation control (curation overlapping each benchmark region removed) | 0.90 → **0.73**, 5/19 below chance |
+| Median top-target probability | **0.31** (> 0.5 for 20 % of parcels) |
+| Multi-source trust tier `anchored_and_validated` | **31.5 %** of parcels (validated tiers 55 %) |
 
 See `03_results.md` for the full six-section results, the third-party validation table, and the caveats. See `04_anchor_packs.md` for the per-pack contribution.
 

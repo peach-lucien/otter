@@ -57,6 +57,11 @@ target-version = "py311"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts   = "-ra -q"
+# Registered so that `pytest -m "not slow"` actually deselects. Unregistered, the mark is a
+# silent no-op: the filter matches nothing and the slow test runs anyway.
+markers = [
+    "slow: long-running test; deselect with -m 'not slow'",
+]
 filterwarnings = [
     # Old-API shim modules emit DeprecationWarnings — they're expected and
     # documented; surfacing them in test output is noise.

@@ -2,7 +2,7 @@
 
 A **pack** is a small, self-contained Python module that builds one or more cross-species region anchors from published anatomical literature. Each entry pairs a set of mouse parcels with a set of human parcels and is applied to the FGW cost matrix as a *soft* constraint (default `lam_outside=0.15`, see [02_methods.md](02_methods.md)).
 
-Packs are modular: compose any subset, drop any subset. Default packs are layered together to produce `outputs/coupling/pi_fc_plus_SC_with_all_packs.npy`.
+Packs are modular: compose any subset, drop any subset. Default packs are layered together into the canonical coupling `outputs/coupling/pi_canonical.npy`, which also applies the anchor-warped spatial cost. The recipe below omits that warp and reproduces the retired pre-warp coupling; use `load_pi()` for the canonical one.
 
 ## Philosophy
 
@@ -14,7 +14,7 @@ This is *not* a generative method, packs encode what's already known about anato
 
 All citations have been verified against the literature (Consensus search, May 2026). Citation count + journal links provided per pack data sheet below.
 
-The **"In recommended π?"** column is authoritative against `src/homer/data/anchor_packs/registry.py`, the single source of truth for which packs are composed into `pi_fc_plus_SC_with_all_packs.npy`. **All 15 packs are in the recommended composition** (26 region-anchor entries): a multi-benchmark comparison showed the full set wins the TransBrain region-level homology benchmark decisively and ties for best on Beauchamp. A few packs carry a Beauchamp-metric trade-off (flagged in their data sheets below); they are kept because the broader evidence favours inclusion.
+The **"In recommended π?"** column is authoritative against `src/homer/data/anchor_packs/registry.py`, the single source of truth for which packs are composed into the canonical coupling. **All 15 packs are in the recommended composition** (26 region-anchor entries): a multi-benchmark comparison showed the full set wins the TransBrain region-level homology benchmark decisively and ties for best on Beauchamp. A few packs carry a Beauchamp-metric trade-off (flagged in their data sheets below); they are kept because the broader evidence favours inclusion.
 
 | pid range | Pack | In recommended π? | Primary reference |
 |---|---|---|---|
@@ -218,7 +218,7 @@ costs = np.load("outputs/anndata/full_costs.npz")
 entries = build_default_pack_entries(M.var, H.var)
 
 model = MultimodalFGW(use_sc=True, sc_weight=0.3, fc_weight=0.7,
-                      epsilon=5e-3, xyz_weight=0.5, lam_anchor=1.0)
+                      epsilon=0.05, xyz_weight=0.25, lam_anchor=1.0)
 model.fit(M, H, Cm_SC=costs["Cm_SC"], Ch_SC=costs["Ch_SC"],
           region_anchors=entries)
 np.save("outputs/coupling/pi_fc_plus_SC_with_all_packs.npy", model.pi)

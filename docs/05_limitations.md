@@ -4,7 +4,7 @@ What HOMER can't tell you. Read this before claiming HOMER predictions in publis
 
 ## 1. Parcel-exact recovery depends on supervision; region-level recovery does not
 
-Hold out each of the 41 supervision units (15 Garin homology classes + 26 region packs) in turn and re-fit. **Region-level recovery holds at AUROC 0.73** (chance 0.5), while **parcel-exact recovery collapses to ~2 % top-1**.
+Hold out each of the 41 supervision units (15 Garin homology classes + 26 region packs) in turn and re-fit. Region-level recovery holds at a held-out mean AUROC of 0.74 (chance 0.5), while parcel-exact recovery collapses to roughly 10 % top-1. Seven of the 41 units fall below chance, predominantly hippocampal subfields and fine somatotopic subdivisions.
 
 **Implication**: curation buys *parcel precision* rather than region-level correspondence. Connectivity and spatial position reconstruct *which human region* a mouse region corresponds to without any anchor at all; the anchors sharpen that to *which parcel*. HOMER is therefore not a landmark look-up. Neither is it an unsupervised translator, and a prediction in an un-anchored region should be read at region granularity rather than parcel granularity.
 
@@ -86,6 +86,8 @@ We've curated 15 anchor packs covering ~22 named brain regions beyond the Garin 
 
 ## What HOMER *can* tell you reliably
 
-Use the multi-source trust map (`outputs/coupling/trust_multisource_all_packs.npz`) to gate queries. For parcels in the `anchored_and_validated` tier (31 % of the brain), top-K queries are reliable at *parcel* granularity. For `validated_only` (22 %), region-level recovery is just as good (AUROC 0.88 vs 0.87) but parcel-exact recovery is not (top-1 0.18 vs 0.69), so query these at *region* granularity. For `anchored_only` (13 %) and `structural` (14 %), treat the prediction as a research starting point. For `low_evidence` (21 %), assume no signal.
+Use the multi-source trust map (`outputs/coupling/trust_multisource_canonical.npz`) to gate queries. For parcels in the `anchored_and_validated` tier (31.5 % of the brain), top-K queries are reliable at *parcel* granularity. For `validated_only` (23.8 %), parcel-exact recovery is much weaker (top-1 0.391 against 0.700), so query these at *region* granularity. For `anchored_only` (12.2 %) and `structural` (10.9 %), treat the prediction as a research starting point. For `low_evidence` (21.6 %), assume no signal. The two validated tiers cover 55.3 % of the brain.
+
+> Corrected 2026-07-29. The previous figures (31/22/13/14 %, top-1 0.18 against 0.69) came from the superseded 8 July grading. Region-level AUROC by tier is no longer quoted here: the canonical trust map carries `beauchamp_top1` but no `region_auroc`, so the old "AUROC 0.88 against 0.87" has no canonical source and has been removed rather than carried over.
 
 For region-level queries on any anchored region, the predictions are essentially correct by construction. That covers the ~22 sub-regions supplied by packs plus the 21 Garin regions, well over 40 well-defined cross-species region predictions, which is more than any prior method we are aware of.

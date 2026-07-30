@@ -13,7 +13,9 @@
 # them cleanly at the repo root. Missing entries are skipped with a warning.
 set -uo pipefail
 
-REPRODUCE_VERSION="v1.2.0"   # ships every data file the notebooks/experiments load (full audit)
+REPRODUCE_VERSION="v1.3.0"   # ships every data file the notebooks/experiments load (full audit).
+# v1.3.0 adds pi_canonical.npy, pi_canonical_sharp.npy and
+# trust_multisource_canonical.npz, which v1.2.0 omitted.
 RAW_VERSION="v1.0.0"         # unchanged content
 # Stop macOS bsdtar from writing AppleDouble (._*) sidecars into the archives.
 export COPYFILE_DISABLE=1
@@ -23,6 +25,12 @@ OUT_DIR="$(dirname "$ROOT")"
 
 # ---- Archive 1: reproduce bundle -------------------------------------------
 REPRODUCE=(
+  # --- canonical: what load_pi() returns and what every notebook needs. Added 2026-07-20;
+  # the bundle previously shipped only the retired pre-warp couplings, so a fresh user who ran
+  # fetch_data.py and opened any notebook hit FileNotFoundError on the first cell.
+  outputs/coupling/pi_canonical.npy
+  outputs/coupling/pi_canonical_sharp.npy
+  outputs/coupling/trust_multisource_canonical.npz
   # HOMER-generated (we own these), all coupling files the notebooks +
   # experiments load (recommended pi, strict pi, ablation variants, trust maps).
   outputs/coupling/pi_fc_plus_SC_with_all_packs.npy
@@ -56,6 +64,13 @@ REPRODUCE=(
   outputs/anndata/mouse_voxel_counts.npy
   outputs/anndata/human_voxel_counts.npy
   outputs/anndata/full_costs.npz
+  outputs/anndata/_schaefer_order.txt
+  # volumetric references for the glass-brain panels (Fig 1a-c/g, Fig 3b). outputs/coupling/ is
+  # gitignored, so these are only available through the archive; without them the volumetric
+  # panel scripts fail even though every statistic still computes.
+  outputs/coupling/mouse_parcel_filled_100um.nii.gz
+  outputs/coupling/mouse_parcel_labels_25um.nii.gz
+  outputs/coupling/mouse_tpl_100um.nii.gz
   # third-party-derived validation inputs (confirm redistribution rights)
   data_external/human_genes.npy
   data_external/human_gene_list.csv

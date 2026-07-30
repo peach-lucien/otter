@@ -16,6 +16,7 @@ from homer.data.io import (
     load_pi,
     load_struct,
     parse_t_table,
+    pi_provenance,
     stream_mean_fc,
     stream_mean_fc_subset,
     stream_subject_nan_stats,
@@ -45,7 +46,7 @@ from homer.data.networks import (
 __all__ = [
     # io
     "DATA_DIR", "build_anndata", "load_cached", "load_metadata", "load_pi",
-    "load_struct", "parse_t_table", "stream_mean_fc", "stream_mean_fc_subset",
+    "load_struct", "pi_provenance", "parse_t_table", "stream_mean_fc", "stream_mean_fc_subset",
     "stream_subject_nan_stats",
     # fetch
     "DataNotFound", "ensure_data", "fetch_tier",

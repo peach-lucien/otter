@@ -813,11 +813,15 @@ def load_cached(
     return A, rr
 
 
-def load_pi(name: str = "pi_fc_plus_SC_with_all_packs.npy",
+def load_pi(name: str = "pi_canonical.npy",
             *, coupling_dir: Path | None = None) -> np.ndarray:
     """Load a coupling matrix, fetching the data bundle first if it's absent.
 
-    Defaults to the recommended coupling. Prefer this over a bare
+    Defaults to the recommended coupling: ``pi_canonical.npy`` (anchor-warped
+    spatial cost + region packs, xyz_weight=0.25, epsilon=0.05; selected by
+    held-out Beauchamp CV). For the sharp confidence-graded showcase pass
+    ``pi_canonical_sharp.npy`` (epsilon=0.005); the pre-warp coupling is
+    ``pi_fc_plus_SC_with_all_packs.npy``. Prefer this over a bare
     ``np.load("outputs/coupling/...")`` so a fresh user is prompted to fetch the
     data (or gets a clear error) rather than a bare ``FileNotFoundError``.
     """
@@ -827,3 +831,24 @@ def load_pi(name: str = "pi_fc_plus_SC_with_all_packs.npy",
     if not (coupling_dir / name).exists():
         ensure_data([f"outputs/coupling/{name}"], what=f"load_pi({name!r})")
     return np.load(coupling_dir / name)
+
+
+def pi_provenance(name: str = "pi_canonical.npy",
+                  *, coupling_dir: Path | None = None) -> dict:
+    """Provenance stamp for a coupling file: ``{"pi_file", "pi_sha256"}``.
+
+    Every script that writes a log MUST record this alongside its results, so an
+    audit can tell which coupling produced the numbers. A re-run proves nothing
+    about which input was used; the sha256 does.
+    """
+    import hashlib
+
+    from homer.data.fetch import find_root
+    root = find_root()
+    coupling_dir = Path(coupling_dir) if coupling_dir is not None else root / "outputs" / "coupling"
+    path = coupling_dir / name
+    h = hashlib.sha256()
+    with open(path, "rb") as fh:
+        for chunk in iter(lambda: fh.read(1 << 20), b""):
+            h.update(chunk)
+    return {"pi_file": f"outputs/coupling/{name}", "pi_sha256": h.hexdigest()}

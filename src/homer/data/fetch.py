@@ -24,8 +24,19 @@ import urllib.request
 from pathlib import Path
 
 # Representative files per tier: if these exist, the tier is already unpacked.
+# Files whose presence means a tier is already unpacked. These decide whether fetch_tier()
+# skips the download, so they must include anything a NEWER archive added: a user who fetched
+# v1.2.0 has every pre-warp file on disk, and if the canonical coupling is not listed here they
+# are told "already present, skipping" and never receive v1.3.0. Add an entry whenever the
+# archive gains a file the notebooks require.
 SENTINELS = {
     "reproduce": [
+        # added in v1.3.0 - what load_pi() returns and what every notebook needs
+        "outputs/coupling/pi_canonical.npy",
+        "outputs/coupling/trust_multisource_canonical.npz",
+        "outputs/anndata/_schaefer_order.txt",
+        "outputs/coupling/mouse_tpl_100um.nii.gz",
+        # present since v1.0.0
         "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy",
         "outputs/coupling/pi_fc_plus_SC.npy",
         "outputs/anndata/mouse.h5ad",

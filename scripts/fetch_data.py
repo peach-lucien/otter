@@ -20,5 +20,19 @@ if _SRC.exists() and str(_SRC) not in sys.path:
 
 from homer.data.fetch import main  # noqa: E402
 
+# The coupling load_pi() returns. Checked after fetching so that an incomplete or stale archive
+# reports itself here, rather than surfacing as a bare FileNotFoundError in the first cell of a
+# notebook with no indication that the archive, rather than the code, is at fault. Archives up to
+# v1.2.0 did not contain this file; v1.3.0 onwards do.
+CANONICAL = Path(__file__).resolve().parents[1] / "outputs" / "coupling" / "pi_canonical.npy"
+
 if __name__ == "__main__":
     main()
+    if not CANONICAL.exists():
+        print(
+            f"\nWARNING: {CANONICAL.relative_to(CANONICAL.parents[2])} is not present after "
+            f"fetching.\n"
+            "load_pi() returns this file, so the notebooks will not run. Check that the archive "
+            "in data_manifest.json is v1.3.0 or later.",
+            file=sys.stderr,
+        )
