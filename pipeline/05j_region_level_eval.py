@@ -285,7 +285,7 @@ def main(args):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--pi-file", default="pi_fc_plus_SC.npy",
+    ap.add_argument("--pi-file", default="pi_canonical.npy",
                     help="filename in outputs/coupling/")
     ap.add_argument("--output", default="region_level_eval.json",
                     help="output filename in outputs/logs/")

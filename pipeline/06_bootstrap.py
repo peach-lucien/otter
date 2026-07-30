@@ -56,6 +56,9 @@ CONFIGS = {
     "fc_only":    dict(use_sc=False, fc_weight=1.0, sc_weight=0.0,
                         xyz_weight=0.5, alpha=0.5, epsilon=5e-3,
                         max_iter=25, tol=1e-5),
+    "canonical":  dict(use_sc=True,  fc_weight=0.7, sc_weight=0.3,
+                        xyz_weight=0.25, alpha=0.5, epsilon=0.05,
+                        max_iter=25, tol=1e-5),   # warp injected in main()
 }
 
 
@@ -216,6 +219,17 @@ def main(args):
     # Build M_xyz_norm + SC costs once
     d = np.load(ANN / "full_costs.npz")
     M_xyz_norm = d["M_xyz"].astype(np.float64)
+    if args.config == "canonical":                      # anchor-driven TPS warp (canonical spatial cost)
+        from scipy.interpolate import RBFInterpolator
+        im = get_anchor_index(M_.var); ih = get_anchor_index(H.var)
+        hl = {(int(p), str(h)): int(k) for k, p, h in zip(ih.pos, ih.pair_ids, ih.hemispheres)}
+        trip = [(int(mp), hl[(int(pid), str(hm))]) for mp, pid, hm in zip(im.pos, im.pair_ids, im.hemispheres)
+                if (int(pid), str(hm)) in hl]
+        mx = M_.var[["x", "y", "z"]].to_numpy(float); hx = H.var[["x", "y", "z"]].to_numpy(float)
+        warp = RBFInterpolator(mx[[a for a, b in trip]], hx[[b for a, b in trip]],
+                               kernel="thin_plate_spline", smoothing=1e-3)
+        dd = np.sqrt(((warp(mx)[:, None, :] - hx[None, :, :]) ** 2).sum(-1))
+        M_xyz_norm = (dd / max(dd.max(), 1e-9)).astype(np.float64)
     Cm_SC = d["Cm_SC"] if cfg["use_sc"] else None
     Ch_SC = d["Ch_SC"] if cfg["use_sc"] else None
 

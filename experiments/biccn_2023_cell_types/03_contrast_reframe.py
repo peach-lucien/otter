@@ -31,7 +31,7 @@ from scipy.stats import pearsonr, hypergeom
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached                              # noqa: E402
+from homer.data import load_cached, load_pi, pi_provenance      # noqa: E402
 from homer.eval.nulls import translation_spin_null, _route_normalized  # noqa: E402
 
 CLASS_MARKERS = {
@@ -67,7 +67,9 @@ def main():
     print("=" * 78)
 
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))
-    pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")
+    pi = load_pi()                      # canonical coupling (pi_canonical.npy)
+    prov = pi_provenance()
+    print(f"π file: {prov['pi_file']}  sha256 {prov['pi_sha256']}")
     mouse_coords = M.var[["x", "y", "z"]].to_numpy(float)
 
     mouse_expr = np.load(ROOT / "data_external/mouse_genes.npy")
@@ -91,7 +93,7 @@ def main():
         "neuronal_minus_glial": (["glutamatergic", "interneuron"],
                                   ["astrocyte", "oligodendrocyte", "microglia"]),
     }
-    results = {}
+    results = dict(prov)
     print(f"\n[1] Class contrasts (routed mouse contrast vs human contrast):")
     for name, (pos, neg) in contrasts.items():
         pos = [pos] if isinstance(pos, str) else pos

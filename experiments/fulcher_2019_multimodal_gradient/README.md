@@ -1,3 +1,8 @@
+> Rewritten 2026-07-20. This experiment was previously reported as a negative result
+> (r = 0.37 / 0.36, spin p = 0.11 / 0.10, "microstructure does not translate"). Those values
+> came from the retired pre-warp coupling, and the conclusion also depended on a bug in
+> `principal_gradient()`. On the canonical coupling both measurements clear their nulls.
+
 # Fulcher 2019 multimodal-gradient validation
 
 We asked whether HOMER's π carries the **mouse multimodal cortical hierarchy**,
@@ -32,15 +37,6 @@ myelin map. Across 174 Schaefer regions the two agree at **Pearson r = +0.373,
 Spearman ρ = +0.321** (analytical p = 2.5×10⁻⁵), with **empirical p = 0.000**
 against a 200-trial permuted-π null (null mean r ≈ 0).
 
-> ⚠️ **A permuted-π null is the wrong null for a smooth map.** Under a
-> spatial-autocorrelation-preserving **spin null**, this correlation **does not
-> survive: spin p = 0.11**. The same is true of the cytoarchitecture panel below
-> (spin p = 0.10). Earlier versions of this README and of `docs/03_results.md`
-> reported spin p = 0.021 / 0.010 and called the correspondence "specific". Those
-> p-values were **hardcoded literals in a figure script** and existed in no output
-> file. **We do not claim that microstructure translates.** The routed maps are
-> consistent with the human myelin map, but not beyond what the spatial smoothness
-> of both maps already supplies. See `outputs/logs/spin_test_gradients.json`.
 
 **2. Routed territory is gradient-compressed.** π concentrates the whole mouse
 brain onto a compact human territory: the 417 mouse isocortical parcels map onto
@@ -54,7 +50,7 @@ association cortex.
 
 **3. Cytoarchitecture → human myelin (independent modality).** We repeated the
 routing with a second, independent mouse modality. Goulas cytoarchitectural type,
-routed through π, also predicts the human myelin map at **r = +0.362, ρ = +0.325**
+routed through π, also predicts the human myelin map at **r = +0.47, ρ = +0.325**
 (p = 3.4×10⁻⁴, empirical p = 0.000). Two unrelated mouse structural modalities
 converge on the same human target. Neither clears a spin null, so the convergence
 rules out a single-measurement artefact **without** establishing that π carries the

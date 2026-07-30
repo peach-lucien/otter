@@ -52,7 +52,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached                              # noqa: E402
+from homer.data import load_cached, load_pi, pi_provenance      # noqa: E402
 from homer.eval.nulls import translation_spin_null, _route_normalized  # noqa: E402
 from scipy.spatial import cKDTree                               # noqa: E402
 from scipy.stats import pearsonr                                # noqa: E402
@@ -85,7 +85,9 @@ def main():
 
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
-    pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")
+    pi = load_pi()                      # canonical coupling (pi_canonical.npy)
+    prov = pi_provenance()
+    print(f"π file: {prov['pi_file']}  sha256 {prov['pi_sha256']}")
     m_xyz = M.var[["x", "y", "z"]].to_numpy(float)
     h_xyz = H.var[["x", "y", "z"]].to_numpy(float)
 
@@ -112,7 +114,8 @@ def main():
     ok = np.isfinite(pred_dom)
     agree = float((pred_dom == obs_dom).mean())
     print(f"\ndominant-class argmax agreement: {agree:.3f}")
-    out = {"shared_types": shared, "per_type": results, "argmax_class_agreement": agree}
+    out = {**prov, "shared_types": shared, "per_type": results,
+           "argmax_class_agreement": agree}
     (ROOT / "outputs/logs/biccn_abundance_composition.json").write_text(json.dumps(out, indent=2))
     print("Wrote outputs/logs/biccn_abundance_composition.json")
 

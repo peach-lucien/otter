@@ -46,7 +46,7 @@ except ImportError as e:  # pragma: no cover
 ANN = ROOT / "outputs" / "anndata"
 COUP = ROOT / "outputs" / "coupling"
 DATA = ROOT / "data_external" / "transbrain_2025"
-PI_FILE = COUP / "pi_fc_plus_SC_with_all_packs.npy"
+PI_FILE = COUP / "pi_canonical.npy"
 # Neurosynth cognitive-term maps for the optogenetic decoding. Not bundled with
 # the repo, place the TransBrain tutorial's neurosynth_data here (or point
 # NEUROSYNTH_DIR at it); if absent, the optogenetic analysis is skipped cleanly.

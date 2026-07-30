@@ -10,24 +10,37 @@ with parcel count), which is a size confound rather than a biological signal. Ev
 conclusion in the battery is unchanged under mass-normalisation, but the rho values move
 slightly, so this is the version the figures must be built from.
 
-Requires: neuromaps, netneurotools.
+PI PROVENANCE (2026-07-18)
+--------------------------
+The stored correlations were previously computed on an unrecorded coupling, and the log
+carried no pi_file / pi_sha256. Coverage now comes from ``load_pi()`` (canonical) and the
+run stamps ``pi_file`` / ``pi_sha256`` into ``_meta``. The stored ``schaefer_ids`` and
+``map_values`` are PUBLISHED MAPS: they are pi-independent and are preserved byte-for-byte
+by default (``--reuse-maps``), so a re-run changes only the pi-dependent quantities.
+
+The manuscript's Figure 5 does NOT use the ``spearman`` / ``spin_p`` stored here. Fig 5
+correlates RECONSTRUCTION-coverage (see 22_reconstruction_coverage.py and the reference
+implementation 37_fig5_gallery.py) against these maps, computed live; it reads only
+``schaefer_ids`` and ``map_values`` from this log. The correlations below are the legacy
+MASS-coverage battery, kept for the record and now on the canonical coupling.
+
+Requires: neuromaps, netneurotools (only when re-fetching the maps).
 Run: cd homer && PYTHONPATH=src python experiments/section5_coverage_rigor/07_evolution_battery.py
+     add --refetch-maps to re-download the published annotations instead of reusing them.
 Writes outputs/logs/section5_evolution_battery.json
 """
 from __future__ import annotations
-import json, os, sys
+import argparse, json, os, sys
 from pathlib import Path
 
 import numpy as np
 import nibabel as nib
 from scipy.spatial import cKDTree
 from scipy.stats import spearmanr
-from neuromaps.datasets import fetch_annotation, fetch_atlas
-from netneurotools.datasets import fetch_schaefer2018
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi          # noqa: E402
+from homer.data import load_cached, load_pi, pi_provenance   # noqa: E402
 from homer.eval.nulls import spin_null               # noqa: E402
 
 N_SPIN = 1000
@@ -45,6 +58,7 @@ MAPS = {
 
 
 def _sphere(hemi, den):
+    from neuromaps.datasets import fetch_atlas
     atl = fetch_atlas("fsLR", den)
     p = [f for f in atl["sphere"] if f"hemi-{hemi}" in str(f)][0]
     return np.asarray(nib.load(p).agg_data()[0])
@@ -56,6 +70,7 @@ def _values(path):
 
 
 def schaefer_labels():
+    from netneurotools.datasets import fetch_schaefer2018
     # netneurotools ignores NNT_DATA_DIR; pass it explicitly so the cache is redirectable
     kw = {"data_dir": os.environ["NNT_DATA_DIR"]} if os.environ.get("NNT_DATA_DIR") else {}
     dl = fetch_schaefer2018("fslr32k", **kw)["400Parcels17Networks"]
@@ -66,6 +81,7 @@ def schaefer_labels():
 
 def map_to_schaefer(source, desc, labs):
     """{schaefer_id: mean value}, resampling each available hemisphere to fsLR-32k."""
+    from neuromaps.datasets import fetch_annotation
     out = {}
     for hemi in ("L", "R"):
         try:
@@ -90,8 +106,16 @@ def map_to_schaefer(source, desc, labs):
 
 
 def main():
-    labs = schaefer_labels()
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--refetch-maps", action="store_true",
+                    help="re-download the published annotations instead of reusing the "
+                         "schaefer_ids / map_values already stored in the log")
+    a = ap.parse_args()
+
+    prov = pi_provenance()                       # canonical coupling, by name + sha256
     pi = load_pi()
+    print(f"coupling loaded: {prov['pi_file']}\n    sha256 {prov['pi_sha256']}")
+
     H, _ = load_cached("human", cache_dir=ROOT / "outputs/anndata")
     node_region = np.asarray(json.loads(
         (ROOT / "data_external/human_sc_meta.json").read_text())["node_region"], int)
@@ -102,26 +126,53 @@ def main():
     cov = {k: np.log10(col[node_region == k].mean() + 1e-300) for k in ids}   # MEAN, not sum
     cen = {k: xyz[node_region == k].mean(0) for k in ids}
 
-    res = json.loads(OUT.read_text()) if OUT.exists() else {}
+    prev = json.loads(OUT.read_text()) if OUT.exists() else {}
+    labs = schaefer_labels() if a.refetch_maps else None
+    res = {}
     for label, (src, desc) in MAPS.items():
         try:
-            mp = map_to_schaefer(src, desc, labs)
+            if a.refetch_maps:
+                mp = map_to_schaefer(src, desc, labs)
+            else:
+                old = prev.get(label, {})
+                if "schaefer_ids" not in old or "map_values" not in old:
+                    raise RuntimeError("no stored map values; re-run with --refetch-maps")
+                # published map, pi-independent: preserved byte-for-byte
+                mp = dict(zip((int(k) for k in old["schaefer_ids"]),
+                              (float(v) for v in old["map_values"])))
             keep = [k for k in ids if k in mp]
             c = np.array([cov[k] for k in keep])
             m = np.array([mp[k] for k in keep])
             C = np.array([cen[k] for k in keep])
             s = spin_null(c, m, C, n_trials=N_SPIN, seed=0)
             res[label] = {"n": len(keep), "spearman": float(spearmanr(c, m).statistic),
-                          "pearson_spin_r": s["r_observed"], "spin_p": s["p_spin"]}
+                          "pearson_spin_r": s["r_observed"], "spin_p": s["p_spin"],
+                          # NB spin_p above is a PEARSON p attached to a SPEARMAN rho. Do not
+                          # quote them together. 09_evolution_battery_v2.py recomputes a
+                          # Spearman spin p, and needs these arrays to do it.
+                          "schaefer_ids": [int(k) for k in keep],
+                          "coverage_values": [float(x) for x in c],
+                          "map_values": [float(x) for x in m]}
+            o = prev.get(label, {})
             print(f"{label:38s} n={len(keep):3d} rho={res[label]['spearman']:+.3f} "
-                  f"spin_p={s['p_spin']:.4f}")
+                  f"spin_p={s['p_spin']:.4f}   (was rho={o.get('spearman', float('nan')):+.3f} "
+                  f"spin_p={o.get('spin_p', float('nan')):.4f})")
         except Exception as e:                       # a missing annotation must not kill the run
             print("FAIL", label, repr(e)[:90])
-            res[label] = {"error": repr(e)[:200]}
+            res[label] = prev.get(label, {"error": repr(e)[:200]})
         OUT.write_text(json.dumps(res, indent=2))
 
     res["_meta"] = {"coverage": "log10 mass-normalised MEAN pi column-sum per Schaefer-400 region",
-                    "n_spin": N_SPIN}
+                    "n_spin": N_SPIN,
+                    "maps_source": "re-fetched from neuromaps" if a.refetch_maps else
+                                   "schaefer_ids / map_values preserved from the previous log "
+                                   "(published maps are pi-independent)",
+                    "not_used_by_fig5": (
+                        "Figure 5 uses RECONSTRUCTION-coverage computed live (see "
+                        "37_fig5_gallery.py); it reads only schaefer_ids and map_values from "
+                        "this log. The spearman / spin_p stored here are the legacy "
+                        "MASS-coverage battery."),
+                    **prov}
     OUT.write_text(json.dumps(res, indent=2))
     print("wrote", OUT)
 

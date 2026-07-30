@@ -397,6 +397,6 @@ def main(args):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--pi-file", default="pi_fc_plus_SC.npy",
+    ap.add_argument("--pi-file", default="pi_canonical.npy",
                     help="filename in outputs/coupling/")
     main(ap.parse_args())

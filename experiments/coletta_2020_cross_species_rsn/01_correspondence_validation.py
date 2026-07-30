@@ -43,7 +43,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "autism_subtypes"))
 
-from homer.data import load_cached
+from homer.data import load_cached, load_pi, pi_provenance
 from homer.data.networks import PAIRID_TO_NETWORK, NETWORKS, assign_networks
 from homer.data.anchors import get_anchor_index
 
@@ -186,9 +186,11 @@ def main():
     print("=" * 80)
 
     # ---- Load HOMER + atlas labels ----
-    pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")
+    pi = load_pi()
+    prov = pi_provenance()
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
+    print(f"  π: {prov['pi_file']}  sha256 {prov['pi_sha256']}")
     print(f"  π: {pi.shape}, total mass {pi.sum():.4f}")
 
     # Mouse network assignment via HOMER's PAIRID_TO_NETWORK (anchor-derived)
@@ -339,7 +341,7 @@ def main():
 
     # Save
     out = {
-        "pi_file": "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy",
+        **prov,
         "sub_test_A_labeled_correspondence": {
             "mouse_networks": list(NETWORKS),
             "human_networks": list(human_paper_names),

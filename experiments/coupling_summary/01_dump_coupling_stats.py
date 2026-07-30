@@ -1,3 +1,4 @@
+
 """Persist every headline statistic in section 1 so the method's own numbers are checkable.
 
 WHY THIS EXISTS
@@ -29,13 +30,17 @@ from scipy.stats import pearsonr
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi                  # noqa: E402
+from homer.data import load_cached, load_pi, pi_provenance  # noqa: E402
 from homer.data.anchors import get_anchor_index              # noqa: E402
 
 OUT = ROOT / "outputs/logs/coupling_summary.json"
 SEED = 0
 
 
+# NOTE 2026-07-29: this hardcoded trust_multisource_all_packs_v2.npz (the 8 July
+# grading) while stamping its output with the canonical pi, so coupling_summary.json
+# looked verified and carried superseded tier numbers. Repointed to the canonical
+# trust map. RE-RUN THIS SCRIPT to regenerate outputs/logs/coupling_summary.json.
 def main():
     pi = load_pi()
     M, _ = load_cached("mouse", cache_dir=ROOT / "outputs/anndata")
@@ -92,7 +97,7 @@ def main():
         k: round(100 * v / n_tier, 1) for k, v in tiers["tiers"].items()}
     out["evidence_tiers_percent"]["_n"] = n_tier
 
-    npz = np.load(ROOT / "outputs/coupling/trust_multisource_all_packs_v2.npz", allow_pickle=True)
+    npz = np.load(ROOT / "outputs/coupling/trust_multisource_canonical.npz", allow_pickle=True)
     tier, top1, auroc = npz["evidence_tier"], npz["region_top1"], npz["region_auroc"]
     out["per_tier_recovery"] = {
         t: {"n": int((tier == t).sum()),
@@ -104,6 +109,7 @@ def main():
     out["per_tier_recovery"]["_validated_tiers_percent_of_brain"] = round(
         100 * float(validated.mean()), 1)
 
+    out.update(pi_provenance())   # which coupling produced these numbers
     OUT.write_text(json.dumps(out, indent=2))
     print(f"pi {n_m} x {n_h}")
     print(f"  top-target prob: median {out['top_target_probability']['median']:.2f}, "

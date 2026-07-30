@@ -19,9 +19,12 @@ Three panels:
 
   1. **T1w:T2w → human myelin.** Translate the mouse T1w:T2w map through π and
      compare to the human myelin map. Apples-to-apples, same modality.
-  2. **Routed-territory characterisation.** π concentrates the mouse brain
-     onto a compact human territory. We quantify how that territory sits on
-     the human principal connectivity gradient (Margulies/Huntenburg).
+  2. **Routed-territory characterisation.** We quantify how the human territory
+     π actually reaches sits on the human principal connectivity gradient
+     (Margulies/Huntenburg). Under the retired coupling that territory was a
+     compact 205 of 400 Schaefer regions; the canonical coupling reaches 388,
+     so the "concentration" framing no longer describes it, and the gradient-SD
+     compression ratio is now ~1.00.
   3. **Cytoarchitecture → human myelin.** A second, independent mouse modality
      routed through π, multimodal convergence in the spirit of Fulcher's paper.
 
@@ -33,14 +36,20 @@ from __future__ import annotations
 
 import csv
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
 from scipy.stats import pearsonr, spearmanr
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "src"))
 DATA = ROOT / "data_external" / "fulcher_2019_gradients"
-PI_FILE = "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy"
+# The canonical coupling is whatever homer.data.load_pi() defaults to
+# (pi_canonical.npy). Do NOT hard-code a path here: this script previously
+# pinned pi_fc_plus_SC_with_all_packs.npy and so kept using the RETIRED
+# coupling after the 2026-07-17 switch, silently, through several re-runs.
+RETIRED_PI_FILE = "pi_fc_plus_SC_with_all_packs.npy"   # for the coverage control only
 N_NULL = 200
 SEED = 42
 
@@ -150,7 +159,10 @@ def main():
     print("HOMER × Fulcher 2019, multimodal cortical-gradient validation")
     print("=" * 80)
 
-    pi = np.load(ROOT / PI_FILE)
+    from homer.data import load_pi, pi_provenance
+    pi = load_pi()
+    prov = pi_provenance()
+    print(f"  π: {prov['pi_file']}  sha256 {prov['pi_sha256']}")
     parcel_acr = load_mouse_parcel_acronyms()
     node_region = load_human_node_region()
     if len(parcel_acr) != pi.shape[0]:
@@ -202,6 +214,41 @@ def main():
     print(f"  predicted-vs-gradient r = {r_pg:+.3f}, territory is "
           f"gradient-degenerate, not a hierarchy ruler here")
 
+    # ===== coverage control =================================================
+    # The canonical coupling reaches a LARGER human territory than the retired
+    # one. Any gain in panels 1/3 could therefore be territory size rather than
+    # a better coupling. Re-score the canonical prediction on exactly the region
+    # set the retired coupling reached, so the two are compared on equal ground.
+    from homer.data import load_pi as _load_pi, pi_provenance as _prov
+    pi_retired = _load_pi(RETIRED_PI_FILE)
+    prov_retired = _prov(RETIRED_PI_FILE)
+    ret_t1t2 = aggregate_to_regions(
+        route_through_pi(t1t2_vec, pi_retired, t1t2_mask), node_region)
+    ret_cyto = aggregate_to_regions(
+        route_through_pi(cyto_vec, pi_retired, cyto_mask), node_region)
+    ret_territory = np.isfinite(ret_t1t2)
+
+    def _restrict(vec, mask):
+        out = np.full_like(vec, np.nan)
+        out[mask] = vec[mask]
+        return out
+
+    r1_cov, p1_cov, rs1_cov, n1_cov = _corr(_restrict(pred_t1t2, ret_territory),
+                                            myelin_reg)
+    r3_cov, p3_cov, rs3_cov, n3_cov = _corr(_restrict(pred_cyto, ret_territory),
+                                            myelin_reg)
+    # and the retired coupling's own numbers, on its own territory, for reference
+    r1_ret, _, _, n1_ret = _corr(ret_t1t2, myelin_reg)
+    r3_ret, _, _, n3_ret = _corr(ret_cyto, myelin_reg)
+
+    print(f"\n[Coverage control] canonical π scored on the RETIRED π's territory")
+    print(f"  retired territory: {int(ret_territory.sum())} regions   "
+          f"canonical territory: {int(territory.sum())} regions")
+    print(f"  panel 1  full {r1:+.3f} (n={n1})  →  restricted {r1_cov:+.3f} "
+          f"(n={n1_cov})   [retired π on its own territory {r1_ret:+.3f}]")
+    print(f"  panel 3  full {r3:+.3f} (n={n3})  →  restricted {r3_cov:+.3f} "
+          f"(n={n3_cov})   [retired π on its own territory {r3_ret:+.3f}]")
+
     # ===== permuted-π null for panels 1 & 3 =================================
     print(f"\nPermuted-π null ({N_NULL} trials)...")
     rng = np.random.default_rng(SEED)
@@ -231,8 +278,27 @@ def main():
                            float(np.percentile(null, 97.5))]}
 
     out = {
-        "pi_file": PI_FILE,
+        **prov,
         "granularity": "Schaefer-400 cortical regions",
+        "coverage_control": {
+            "note": "canonical π re-scored on exactly the human regions the "
+                    "retired coupling reached, isolating territory size from "
+                    "the coupling itself",
+            "retired_pi_file": prov_retired["pi_file"],
+            "retired_pi_sha256": prov_retired["pi_sha256"],
+            "n_regions_retired_territory": int(ret_territory.sum()),
+            "n_regions_canonical_territory": int(territory.sum()),
+            "panel1_t1t2": {
+                "canonical_full_r": r1, "canonical_full_n": n1,
+                "canonical_restricted_r": r1_cov, "canonical_restricted_n": n1_cov,
+                "retired_r": r1_ret, "retired_n": n1_ret,
+            },
+            "panel3_cytoarch": {
+                "canonical_full_r": r3, "canonical_full_n": n3,
+                "canonical_restricted_r": r3_cov, "canonical_restricted_n": n3_cov,
+                "retired_r": r3_ret, "retired_n": n3_ret,
+            },
+        },
         "routed_territory": {
             "n_mouse_parcels": int(t1t2_mask.sum()),
             "n_human_regions": int(territory.sum()),

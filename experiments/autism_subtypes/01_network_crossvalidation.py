@@ -44,7 +44,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from homer.data import load_cached
+from homer.data import load_cached, load_pi, pi_provenance
 from homer.data.anchors import get_anchor_index
 from homer.data.atlas_regions import (
     ATLAS_PATHS,
@@ -264,9 +264,14 @@ def main():
     M, _ = load_cached("mouse", cache_dir="outputs/anndata")
     H, _ = load_cached("human", cache_dir="outputs/anndata")
 
-    pi_path = "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy"
-    print(f"\nLoading π: {pi_path}")
-    pi = np.load(pi_path)
+    # Canonical coupling. This log is the BASELINE that experiments/whitesell_2021_dmn
+    # compares against, so it must be on the same coupling as that experiment or the
+    # comparison is not like-for-like. Print the sha256: a re-run proves nothing about
+    # which input was used.
+    pi = load_pi()
+    prov = pi_provenance()
+    print(f"\nLoading π: {prov['pi_file']}")
+    print(f"  sha256: {prov['pi_sha256']}")
     print(f"  shape: {pi.shape}, sum: {pi.sum():.4f}")
 
     print("\nAssigning networks...")
@@ -334,7 +339,7 @@ def main():
     print(f"  mean ratio over null: {mean_ratio:.2f}×")
 
     out = {
-        "pi_file": pi_path,
+        **prov,
         "mouse_networks": mouse_names,
         "human_networks": human_names,
         "mouse_net_sizes": {n: int((mouse_net == i).sum()) for i, n in enumerate(mouse_names)},

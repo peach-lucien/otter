@@ -114,7 +114,7 @@ if __name__ == "__main__":
                     help="also build the interactive 3D viewer")
     ap.add_argument("--viewer-only", action="store_true",
                     help="skip the comparison table; build viewer only")
-    ap.add_argument("--pi-file", default="pi_fc_plus_SC.npy",
+    ap.add_argument("--pi-file", default="pi_canonical.npy",
                     help="which π in outputs/coupling/ to visualise (with --viewer)")
     ap.add_argument("--top-k", type=int, default=30,
                     help="how many top partners to embed per node (with --viewer)")

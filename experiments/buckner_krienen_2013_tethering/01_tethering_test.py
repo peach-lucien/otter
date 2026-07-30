@@ -35,8 +35,11 @@ from scipy.stats import entropy, mannwhitneyu, spearmanr
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
+from homer.data import load_pi, pi_provenance                    # noqa: E402
+
 DATA = ROOT / "data_external"
-PI_FILE = "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy"
+PI_NAME = "pi_canonical.npy"                       # canonical coupling
+PI_FILE = f"outputs/coupling/{PI_NAME}"
 N_NULL = 1000
 SEED = 42
 
@@ -46,7 +49,9 @@ def main():
     print("HOMER × Buckner & Krienen 2013, tethering-hypothesis negative control")
     print("=" * 80)
 
-    pi = np.load(ROOT / PI_FILE)
+    pi = load_pi(PI_NAME)
+    prov = pi_provenance(PI_NAME)
+    print(f"π file: {prov['pi_file']}  sha256 {prov['pi_sha256']}")
     node_region = np.asarray(json.loads(
         (DATA / "human_sc_meta.json").read_text())["node_region"], int)
 
@@ -110,7 +115,7 @@ def main():
     print(f"\nVERDICT: {verdict}")
 
     out = {
-        "pi_file": PI_FILE,
+        **prov,
         "n_cortical_parcels": int(ctx.sum()),
         "spearman_coverage_vs_myelin": float(rho_cov),
         "spearman_entropy_vs_myelin": float(rho_ent),

@@ -16,17 +16,19 @@ For each disorder in Pagani MOESM4 (autism) + MOESM5 (bipolar, schizophrenia, AD
 
 Cross-disorder correlation matrix (mean off-diagonal r):
 
+On the canonical coupling (`pi_canonical.npy`, sha256 `bb4cae00…`):
+
 | HOMER-disorder pair | Pearson r |
 |---|---:|
 | autism ↔ schizophrenia | +0.999 |
-| autism ↔ bipolar | +0.988 |
-| autism ↔ ADHD | +0.986 |
-| bipolar ↔ schizophrenia | +0.987 |
-| bipolar ↔ ADHD | +0.973 |
-| schizophrenia ↔ ADHD | +0.987 |
-| **Mean off-diagonal** | **+0.987** |
+| autism ↔ bipolar | +0.993 |
+| autism ↔ ADHD | +0.993 |
+| bipolar ↔ schizophrenia | +0.992 |
+| bipolar ↔ ADHD | +0.985 |
+| schizophrenia ↔ ADHD | +0.994 |
+| **Mean off-diagonal** | **+0.993** |
 
-**HOMER's per-disorder predictions are essentially identical at parcel resolution.** This confirms the cross-disease specificity finding from earlier, and is even stronger at parcel level (mean off-diagonal +0.987) than at network level. HOMER captures a *generic brain-disorder spatial geometry* rather than disorder-specific signals.
+**HOMER's per-disorder predictions are essentially identical at parcel resolution.** This confirms the cross-disease specificity finding from earlier, and is even stronger at parcel level (mean off-diagonal +0.993) than at network level. HOMER captures a *generic brain-disorder spatial geometry* rather than disorder-specific signals.
 
 Implication: psoriasis (skin disease, non-brain) was excluded because only 2 of its 18 genes overlap with HOMER's panel, so the non-brain control cannot be tested directly. The consistency across the 4 brain disorders that can be tested is nonetheless strong evidence that HOMER doesn't discriminate at this level.
 

@@ -21,7 +21,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi
+from homer.data import load_cached, load_pi, pi_provenance
 from homer.eval.nulls import spin_null, _haar_rotation
 from scipy.spatial import cKDTree
 from scipy.stats import spearmanr
@@ -85,6 +85,7 @@ def main():
            "convergence_vs_myelin_tertile": conv_axis,
            "convergence_vs_coverage_spearman": float(rho_cc),
            "note": "Convergence is the reverse-direction complement of coverage; test if it is spatially organised."}
+    out.update(pi_provenance())   # which coupling produced these numbers
     (ROOT / "outputs/logs/section5_convergence_asymmetry.json").write_text(json.dumps(out, indent=2))
     print("wrote outputs/logs/section5_convergence_asymmetry.json")
 

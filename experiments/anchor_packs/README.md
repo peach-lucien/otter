@@ -27,7 +27,7 @@ Each runner below fits a single-pack ablation variant. All of these packs are al
 | `striatum.py` | Mouse CPu dorsolateral/ventromedial → human putamen + caudate (Voorn 2004) | |
 | `visual.py` | Mouse LM → human V2 (Wang & Burkhalter 2007) | Beauchamp cuneus trade-off |
 | `pag.py` | Mouse PAG → human PAG (Ezra 2015) | |
-| `compose_all.py` | All 15 registry packs in one fit | builds the recommended π |
+| `compose_all.py` | All 15 registry packs in one fit | builds the pre-warp coupling (retired) |
 
 The trade-offs (cingulate, somatosensory, visual lower a coarse Beauchamp metric for one region; the dlPFC entry is anatomically contested) are documented per pack in `docs/04_anchor_packs.md`. Four further packs, `perirhinal`, `auditory`, `somatosensory`, `ppc`, are in the recommended composition and exist as builders in `src/homer/data/anchor_packs/` but have no standalone runner here; compose them programmatically via the registry.
 
@@ -37,7 +37,7 @@ The trade-offs (cingulate, somatosensory, visual lower a coarse Beauchamp metric
 PYTHONPATH=src python experiments/anchor_packs/compose_all.py
 ```
 
-This produces `outputs/coupling/pi_fc_plus_SC_with_all_packs.npy`, the recommended π for downstream queries. To run the whole recommended-model pipeline (solve → compose → bootstrap → trust → GUI) end to end:
+This produces `outputs/coupling/pi_fc_plus_SC_with_all_packs.npy`, the **pre-warp** coupling. It was superseded in 2026-07 by `pi_canonical.npy`, which adds the anchor-warped spatial cost; `load_pi()` returns the canonical one. Use this recipe only to reproduce the pre-warp comparison. To run the whole recommended-model pipeline (solve → compose → bootstrap → trust → GUI) end to end:
 
 ```bash
 PYTHONPATH=src python pipeline/run_recommended_model.py

@@ -10,9 +10,14 @@ smoothness in the null. Two statistics are reported:
   (1) continuous Pearson r between per-parcel coverage and the myelin axis
   (2) the sensorimotor-tertile minus association-tertile coverage gap (Fig 5b)
 
-both with a proper spin p. Expectation (verified in-sandbox): the continuous
-correlation is spin-FRAGILE (r~0.13, p~0.08) but the tertile contrast is spin-
-ROBUST (~6.7 log units, p~0.002). Report the tertile contrast and the honest spin p.
+both with a proper spin p.
+
+RESULT ON THE CANONICAL COUPLING (pi_canonical.npy, 2026-07-18): BOTH statistics are
+null. Continuous r = +0.14 (spin p = 0.17); tertile gap = 0.68 log units (spin p = 0.29).
+On the RETIRED pre-warp coupling (pi_fc_plus_SC_with_all_packs.npy) the tertile gap was
+6.74 log units at spin p = 0.002, and that is what the earlier "spin-ROBUST tertile
+contrast" note in this file described. It does not survive the canonical coupling. Do
+not reinstate the tertile contrast as a positive result without re-deriving it here.
 
 Run: cd homer && PYTHONPATH=src python experiments/section5_coverage_rigor/01_coverage_nulls.py
 Writes outputs/logs/section5_coverage_nulls.json
@@ -24,7 +29,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi
+from homer.data import load_cached, load_pi, pi_provenance
 from homer.eval.nulls import spin_null, _haar_rotation
 
 DATA = ROOT / "data_external"
@@ -54,6 +59,8 @@ def tertile_gap_spin(cov, axis, xyz, n_trials=N_SPIN, seed=SEED):
 
 def main():
     pi = load_pi()
+    prov = pi_provenance()
+    print(f"π: {prov['pi_file']}  sha256={prov['pi_sha256']}")
     H, _ = load_cached("human", cache_dir=ROOT / "outputs/anndata")
     xyz = H.var[["x", "y", "z"]].to_numpy(float)
     node_region = np.asarray(json.loads((DATA / "human_sc_meta.json").read_text())["node_region"], int)
@@ -79,11 +86,13 @@ def main():
     print(f"[tertile]     sensorimotor - association gap = {tert['gap_observed']:.2f} log units   "
           f"spin p = {tert['p_spin']:.4f}  (null|gap|95 = {tert['null_abs_p95']:.2f})")
 
-    out = {"pi_file": "pi_fc_plus_SC_with_all_packs.npy", "n_cortical_parcels": int(ctx.sum()),
+    out = {**prov, "n_cortical_parcels": int(ctx.sum()),
            "n_spin": N_SPIN, "coverage_vs_myelin_continuous": cont,
            "coverage_collapse_tertile": tert,
-           "note": ("Fig 5b claim = the tertile gap; report its spin p (robust). The "
-                    "continuous correlation is spin-fragile and should NOT be the headline.")}
+           "note": ("On the canonical coupling BOTH statistics are null under the spin: "
+                    "continuous r spin p ~ 0.17, tertile gap spin p ~ 0.29. The 6.7-log-unit "
+                    "tertile gap (spin p ~ 0.002) was a property of the retired pre-warp "
+                    "coupling pi_fc_plus_SC_with_all_packs.npy, not of the canonical one.")}
     (ROOT / "outputs/logs/section5_coverage_nulls.json").write_text(json.dumps(out, indent=2))
     print("wrote outputs/logs/section5_coverage_nulls.json")
 

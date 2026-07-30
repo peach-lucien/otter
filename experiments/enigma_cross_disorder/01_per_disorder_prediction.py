@@ -35,7 +35,7 @@ from scipy.stats import pearsonr, spearmanr
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached
+from homer.data import load_cached, load_pi, pi_provenance
 
 MOESM4 = ROOT / "data_external" / "pagani_2026" / "41593_2026_2287_MOESM4_ESM.xlsx"
 MOESM5 = ROOT / "data_external" / "pagani_2026" / "41593_2026_2287_MOESM5_ESM.xlsx"
@@ -77,10 +77,11 @@ def main():
     # ---- Load HOMER expanded gene matrix ----
     expr = np.load(ROOT / "experiments/autism_subtypes/allen_expansion/pagani_mouse_expr.npy")
     meta = pd.read_csv(ROOT / "experiments/autism_subtypes/allen_expansion/pagani_gene_list_resolved.csv")
-    pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")
+    pi = load_pi()
+    prov = pi_provenance()
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
     print(f"HOMER expanded matrix: {expr.shape}")
-    print(f"π: {pi.shape}")
+    print(f"π: {pi.shape}  {prov['pi_file']}  sha256={prov['pi_sha256']}")
 
     # NaN-fill + z-score
     expr = expr.copy()
@@ -147,6 +148,7 @@ def main():
     np.savez(ROOT / "outputs/coupling/per_disorder_predictions.npz",
              **{f"{d}": predicted[d] for d in valid})
     out = {
+        **prov,
         "n_disorders":      len(valid),
         "disorders":        valid,
         "n_gene_overlap":   {d: int(n) for d, n in n_overlap.items()},

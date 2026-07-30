@@ -51,7 +51,10 @@ except ImportError as e:  # pragma: no cover
 
 ANN = ROOT / "outputs" / "anndata"
 DATA = ROOT / "data_external" / "transbrain_2025"
-PI_FILE = "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy"
+# Resolved through load_pi() rather than hardcoded: the name is right today, but a
+# hardcoded path is how the July 2026 mix-up survived a re-run. pi_provenance() then
+# records the sha256 actually loaded, so the log states which coupling it used rather
+# than which one it intended to use.
 N_NULL = 200
 SEED = 42
 
@@ -275,7 +278,8 @@ def main():
     print("HOMER × TransBrain 2025, sibling-method benchmark")
     print("=" * 80)
 
-    pi = np.load(ROOT / PI_FILE)
+    from homer.data import load_pi, pi_provenance
+    pi = load_pi()
     mm = json.loads((ROOT / "data_external" / "mouse_sc_meta.json").read_text())
     parcel_acr = [mm["structure_acronyms"][i] for i in mm["node_struct_idx"]]
     H, _ = load_cached("human", cache_dir=ANN)
@@ -284,7 +288,7 @@ def main():
           f"{int((bn_id > 0).sum())} / {len(bn_id)}")
 
     out = {
-        "pi_file": PI_FILE,
+        **pi_provenance(),
         "homology_benchmark_cortex": homology_benchmark(
             pi, parcel_acr, H.var, bn_id, id2name, centroid,
             DATA / "homo_cortex.csv", "cortex"),

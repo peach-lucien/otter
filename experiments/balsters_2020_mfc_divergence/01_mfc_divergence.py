@@ -26,8 +26,12 @@ recommended π. Balsters 2020 is independent FC evidence adjudicating that
 choice. We test three couplings:
 
   * `pi_fc_plus_SC.npy`. Garin anchors only (strict baseline)
-  * `pi_fc_plus_SC_with_all_packs`, recommended (no lateral_pfc pack)
+  * `pi_canonical.npy`, the canonical coupling (no lateral_pfc pack). All
+    headline numbers come from this one.
+  * `pi_fc_plus_SC_with_all_packs.npy`, the retired pre-warp coupling, kept in
+    the contrast only to show the conclusion does not depend on the warp
   * `pi_fc_plus_SC_with_lateral_pfc`, adds the contested Prelimbic→dlPFC anchor
+    (pre-warp variant, so compare it against the pre-warp row)
 
 Note on species: Balsters used rat + marmoset + human; HOMER is mouse +
 human. Rodent MFC (anterior cingulate + prelimbic + infralimbic) is the
@@ -46,7 +50,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached
+from homer.data import load_cached, load_pi, pi_provenance
 
 ANN = ROOT / "outputs" / "anndata"
 COUP = ROOT / "outputs" / "coupling"
@@ -111,9 +115,11 @@ def main():
     print(f"Mouse Prelimbic (PL) parcels:                {len(pl)}")
 
     # ---- recommended π: where does mouse MFC land? -------------------------
-    pi = np.load(COUP / "pi_fc_plus_SC_with_all_packs.npy")
+    pi = load_pi()                      # canonical coupling (pi_canonical.npy)
+    prov = pi_provenance()
+    print(f"\nπ file: {prov['pi_file']}  sha256 {prov['pi_sha256']}")
     frac = mass_fractions(pi, mfc, roi_labels)
-    print("\n[Recommended π] mouse-MFC coupling mass by human territory:")
+    print("\n[Canonical π] mouse-MFC coupling mass by human territory:")
     for name in list(ROIS) + ["other"]:
         print(f"  {name:14s} {frac[name] * 100:5.1f} %")
 
@@ -152,7 +158,8 @@ def main():
     dl = roi_labels == "dlPFC"
     contrast = {}
     for tag, fname in [("baseline (Garin only)", "pi_fc_plus_SC.npy"),
-                       ("recommended", "pi_fc_plus_SC_with_all_packs.npy"),
+                       ("canonical", "pi_canonical.npy"),
+                       ("pre-warp (retired)", "pi_fc_plus_SC_with_all_packs.npy"),
                        ("+lateral_pfc pack", "pi_fc_plus_SC_with_lateral_pfc.npy")]:
         p = np.load(COUP / fname)
         mfc_dl = float(p[mfc][:, dl].sum() / p[mfc].sum())
@@ -182,6 +189,7 @@ def main():
 
     # ---- save ---------------------------------------------------------------
     out = {
+        **prov,
         "rois": {n: {"center_mni": ROIS[n][:3], "radius_mm": ROIS[n][3],
                      "n_parcels": int((roi_labels == n).sum())} for n in ROIS},
         "n_mouse_mfc_parcels": int(len(mfc)),

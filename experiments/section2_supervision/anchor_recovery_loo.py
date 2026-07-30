@@ -1,0 +1,104 @@
+#!/usr/bin/env python3
+"""VALIDATION 1 (self-contained, no Beauchamp): anchor-recovery leave-one-out.
+
+The supervision is a set of curated mouse<->human correspondences (42 Garin point
+anchors + 26 region-anchor packs). For each pack correspondence we hold it out --
+plus the Garin points and any other pack overlapping its mouse territory -- re-fit
+the full model, and ask whether connectivity + the REMAINING anchors recover the
+held-out correspondence (its own mouse-set -> its own human-set). No benchmark.
+
+Scored with the full battery (AUROC/top-k/displacement/mass + nulls). Resumable.
+-> outputs/logs/anchor_recovery_loo.json
+Run: cd homer && PYTHONPATH=src python ../manuscript/figures/fig_2_ED/anchor_recovery_loo.py
+"""
+import sys, json, time, importlib.util
+from pathlib import Path
+import numpy as np
+import pandas as pd
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "src"))
+BBspec = importlib.util.spec_from_file_location("bb", Path(__file__).resolve().parent / "beauchamp_battery.py")
+BB = importlib.util.module_from_spec(BBspec); BBspec.loader.exec_module(BB)
+from homer.data import load_cached
+from homer.data.anchor_packs import build_default_pack_entries
+from homer.data.atlas_regions import build_garin_region_anchors_from_atlases
+from homer.models import MultimodalFGW
+
+CACHE = ROOT / "outputs/logs/anchor_recovery_loo_combined.json"
+GUARD = 34.0
+
+def main():
+    t0 = time.time()
+    M, _ = load_cached("mouse", cache_dir=ROOT / "outputs/anndata")
+    H, _ = load_cached("human", cache_dir=ROOT / "outputs/anndata")
+    costs = np.load(ROOT / "outputs/anndata/full_costs.npz")
+    entries = build_default_pack_entries(M.var, H.var, atlas_root=str(ROOT))   # 26 packs (supervision)
+    garin_regs = build_garin_region_anchors_from_atlases(M.var, H.var)          # Garin-class test masks
+    nH = len(H.var); h_xyz = H.var[["x", "y", "z"]].to_numpy(); brain_c = h_xyz.mean(0)
+
+    def mm_of(e): b = np.zeros(len(M.var), bool); b[list(e.mouse_indices)] = True; return b
+    def hm_of(e): b = np.zeros(nH, bool); b[list(e.human_indices)] = True; return b
+    # TEST UNITS = every supervised region: Garin classes AND packs (the combined set)
+    units = []
+    for e in garin_regs:
+        mm, hm = mm_of(e), hm_of(e)
+        if mm.sum() and hm.sum(): units.append((f"Garin:{getattr(e,'label','')}"[:36], mm, hm, "garin"))
+    for e in entries:
+        mm, hm = mm_of(e), hm_of(e)
+        if mm.sum() and hm.sum(): units.append((f"Pack:{getattr(e,'label','')}"[:36], mm, hm, "pack"))
+    reg_cents = {k: h_xyz[np.where(hm)[0]].mean(0) for k, mm, hm, kind in units}
+    reg_masks = {k: hm for k, mm, hm, kind in units}
+    keys = [u[0] for u in units]
+
+    g0m = M.var["garin_anchor"].fillna(False).to_numpy().astype(bool)
+    g0h = H.var["garin_anchor"].fillna(False).to_numpy().astype(bool)
+    apm = pd.to_numeric(M.var["anchor_pair_id"], errors="coerce").to_numpy("float64", na_value=np.nan)
+    aph = pd.to_numeric(H.var["anchor_pair_id"], errors="coerce").to_numpy("float64", na_value=np.nan)
+    emi = [np.asarray(e.mouse_indices, int) for e in entries]
+
+    res = json.loads(CACHE.read_text()) if CACHE.exists() else {}
+    todo = [k for k in keys if k not in res]
+    print(f"combined anchor-recovery LOO ({len(keys)} units = {sum(u[3]=='garin' for u in units)} Garin + "
+          f"{sum(u[3]=='pack' for u in units)} packs): {len(res)} done; remaining {len(todo)}")
+    for key, mm, hm, kind in units:
+        if key in res: continue
+        if time.time() - t0 > GUARD:
+            print("guard -> re-run to continue"); break
+        # hold out ALL supervision in this territory: Garin points AND packs overlapping it
+        pids = set(apm[g0m & mm & np.isfinite(apm)].astype(int).tolist()) or {-999}
+        dm = g0m & np.isin(np.nan_to_num(apm, nan=-1).astype(int), list(pids))
+        dh = g0h & np.isin(np.nan_to_num(aph, nan=-1).astype(int), list(pids))
+        M.var["garin_anchor"] = g0m & ~dm; H.var["garin_anchor"] = g0h & ~dh
+        keep = [ent for ent, mi in zip(entries, emi) if (mm[mi].mean() if len(mi) else 0.0) <= 0.5]
+        m = MultimodalFGW(use_sc=True, sc_weight=0.3, fc_weight=0.7, epsilon=5e-3,
+                          xyz_weight=0.5, lam_anchor=1.0, alpha=0.5)
+        m.fit(M, H, Cm_SC=costs["Cm_SC"], Ch_SC=costs["Ch_SC"], region_anchors=keep)
+        M.var["garin_anchor"] = g0m; H.var["garin_anchor"] = g0h
+        res[key] = BB.battery(m.pi.astype(np.float64), mm, hm, h_xyz, reg_cents, reg_masks, key, brain_c)
+        res[key]["kind"] = kind
+        res[key]["n_garin_pids_removed"] = len(pids if pids != {-999} else [])
+        res[key]["n_packs_removed"] = len(entries) - len(keep)
+        CACHE.write_text(json.dumps(res, indent=2, default=float))
+        v = res[key]
+        print(f"  {key[:34]:34s} auroc={v['auroc']:.2f} disp={v['centroid_disp_mm']:.0f} "
+              f"(-{v['n_garin_pids_removed']}g/-{v['n_packs_removed']}pk) {time.time()-t0:.0f}s", flush=True)
+    if not todo:
+        ks = list(res); w = np.array([res[k]["n_mouse"] for k in ks])
+        for pk, qk in (("perm_p_mass", "perm_q_mass"), ("spin_p_disp", "spin_q_disp")):
+            q = BB.bh_fdr([res[k][pk] for k in ks])
+            for k, qq in zip(ks, q): res[k][qk] = float(qq)
+        CACHE.write_text(json.dumps(res, indent=2, default=float))
+        def agg(sub):
+            if not sub: return "n/a"
+            ww = np.array([res[k]["n_mouse"] for k in sub])
+            return "AUROC=%.2f disp=%.0fmm top1=%.2f (n=%d)" % (
+                np.average([res[k]["auroc"] for k in sub], weights=ww),
+                np.average([res[k]["centroid_disp_mm"] for k in sub], weights=ww),
+                np.average([res[k]["top1"] for k in sub], weights=ww), len(sub))
+        gk = [k for k in ks if res[k].get("kind") == "garin"]; pkk = [k for k in ks if res[k].get("kind") == "pack"]
+        print("COMBINED:", agg(ks)); print("  Garin regions:", agg(gk)); print("  Packs:", agg(pkk))
+        print("ALL DONE")
+
+if __name__ == "__main__":
+    main()

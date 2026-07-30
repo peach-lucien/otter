@@ -23,7 +23,7 @@ sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "autism_subtypes"))
 sys.path.insert(0, str(ROOT / "experiments" / "coletta_2020_cross_species_rsn"))
 
-from homer.data import load_cached                          # noqa: E402
+from homer.data import load_cached, load_pi, pi_provenance                          # noqa: E402
 from homer.data.anchors import get_anchor_index             # noqa: E402
 from homer.data.networks import assign_networks, NETWORKS   # noqa: E402
 from homer.eval.nulls import _haar_rotation                 # noqa: E402
@@ -50,7 +50,9 @@ def _spin_perms(coords, n, seed=0):
 def main():
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
-    pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy").astype(np.float64)
+    pi = load_pi().astype(np.float64)   # canonical coupling. Repointed 2026-07-20: this was
+    # hardcoded to the retired pi, so the spin null behind Fig 3a was computed on a
+    # different coupling than the observed statistic it was compared against.
     mc = M.var[["x", "y", "z"]].to_numpy(float)
     out = {}
 
@@ -114,6 +116,7 @@ def main():
     out["test_2c"] = {"observed_r": float(obs_r), "spin_null_abs_mean": float(null_r.mean()),
                        "spin_p": float(p_t)}
 
+    out.update(pi_provenance())   # which coupling produced these nulls
     (ROOT / "outputs/logs/fair_nulls_coletta_test2c.json").write_text(json.dumps(out, indent=2))
 
 

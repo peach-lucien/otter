@@ -25,7 +25,7 @@ import numpy as np, nibabel as nib
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi
+from homer.data import load_cached, load_pi, pi_provenance
 from homer.eval.nulls import spin_null, _haar_rotation
 from scipy.spatial import cKDTree
 from scipy.stats import spearmanr
@@ -100,6 +100,7 @@ def main():
            "coverage_vs_expansion_tertile": tert,
            "caveats": ["macaque->human vs mouse->human", "right hemisphere only",
                        "Schaefer-400 resolution; nearest-vertex resample"]}
+    out.update(pi_provenance())   # which coupling produced these numbers
     (ROOT / "outputs/logs/section5_hill_expansion.json").write_text(json.dumps(out, indent=2))
     print("wrote outputs/logs/section5_hill_expansion.json")
 

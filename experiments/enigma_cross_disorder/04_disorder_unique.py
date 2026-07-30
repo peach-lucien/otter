@@ -31,6 +31,8 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "enigma_cross_disorder"))
 
+from homer.data import load_pi, pi_provenance  # noqa: E402
+
 pd_mod = import_module("01_per_disorder_prediction")
 
 
@@ -51,7 +53,9 @@ def main():
 
     expr = np.load(ROOT / "experiments/autism_subtypes/allen_expansion/pagani_mouse_expr.npy")
     meta = pd.read_csv(ROOT / "experiments/autism_subtypes/allen_expansion/pagani_gene_list_resolved.csv")
-    pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")
+    pi = load_pi()
+    prov = pi_provenance()
+    print(f"π: {pi.shape}  {prov['pi_file']}  sha256={prov['pi_sha256']}")
     expr = expr.copy()
     cmean = np.nanmean(expr, 0); nz = np.where(np.isnan(expr)); expr[nz] = np.take(cmean, nz[1])
     z = (expr - expr.mean(0, keepdims=True)) / (expr.std(0, keepdims=True) + 1e-9)
@@ -103,6 +107,7 @@ def main():
             print(f"  {A[:10]:>10} vs {B[:10]:<10}  A-only={na:>4}  B-only={nb:>4}  r={r:+.3f}  → {tag}")
 
     out = {
+        **prov,
         "n_full_overlap": n_full,
         "full_disorders": names_full,
         "full_offdiag_mean": float(Cf[iu_f].mean()),

@@ -191,7 +191,7 @@ def main(args):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--pi-file",        default="pi_fc_plus_SC.npy")
+    ap.add_argument("--pi-file",        default="pi_canonical.npy")
     ap.add_argument("--bootstrap-file", default="bootstrap_aggregate_fc_plus_SC.npz")
     ap.add_argument("--high-threshold", type=float, default=0.15)
     ap.add_argument("--low-threshold",  type=float, default=0.03)

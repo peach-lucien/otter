@@ -36,10 +36,10 @@ Cell-type marker spatial patterns translate across species at moderate strength.
 
 | Test | Spatial structure | Translation result |
 |---|---|---|
-| Beauchamp 2022 | 22 specific region pairs | 45.7 % top-1, 100 % qualified top-3 |
+| Beauchamp 2022 | 22 specific region pairs | 57 % top-1, AUROC 0.90 |
 | Margulies/Huntenburg | Brain-wide gradient | \|r\| = 0.54, spin p = 0.004 (survives) |
 | BICCN cell-type markers | Cell-class spatial distributions | 13/23 significant, mean r +0.089 |
-| Hodge layer markers | Cortical layer markers | 6/7 significant, mean r +0.119 |
+| Hodge layer markers | Cortical layer markers | 6/7 significant, mean r +0.23 |
 
 Both cell-type and layer markers translate at moderate strength (mean r ≈ 0.1), below the region-level signal. The Schaefer-400 parcellation does not separate layers within an area, so the layer-marker result reflects the area-level distribution of those genes rather than within-area lamination.
 

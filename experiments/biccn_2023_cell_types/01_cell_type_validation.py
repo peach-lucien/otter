@@ -44,7 +44,7 @@ from scipy.stats import pearsonr, spearmanr
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached
+from homer.data import load_cached, load_pi, pi_provenance
 
 
 # BICCN-aligned cell-type markers, grouped by class.
@@ -88,8 +88,10 @@ def main():
     print("HOMER × BICCN cell-type marker cross-species validation")
     print("=" * 80)
 
-    pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")
+    pi = load_pi()                      # canonical coupling (pi_canonical.npy)
+    prov = pi_provenance()
     print(f"π: {pi.shape}, mass {pi.sum():.4f}")
+    print(f"π file: {prov['pi_file']}  sha256 {prov['pi_sha256']}")
 
     # Mouse Allen ISH (1864 × 61 genes)
     mouse_expr = np.load(ROOT / "data_external/mouse_genes.npy")
@@ -225,6 +227,7 @@ def main():
     print(f"\nVerdict: {verdict}")
 
     out = {
+        **prov,
         "n_markers": len(results),
         "per_marker": results,
         "per_class": class_summary,

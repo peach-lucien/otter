@@ -1,12 +1,17 @@
 """Discrete reframes of the Margulies/Huntenburg principal-gradient test.
 
-The continuous correlation (routed mouse gradient vs human gradient) is |r|=0.40
-but does NOT survive a spatial spin null (p=0.16): two smooth monotone maps
-correlate by spatial autocorrelation alone (see 01_gradient_validation.py and
-experiments/spatial_null_check/). HOMER's *strong* mode is discrete correspondence
-(the network bridge and Coletta RSNs survive spin), so here we ask the gradient
-question categorically, does π preserve the discrete content of the gradient?
-and test it against the fair spin null.
+Under the canonical coupling the continuous correlation (routed mouse gradient
+vs human gradient) is |r|=0.54 and clears a spatial spin null at p=0.032 -- but
+only just, and it weakened relative to the retired coupling (p=0.004). Two
+smooth monotone maps can correlate by spatial autocorrelation alone (see
+01_gradient_validation.py and experiments/spatial_null_check/), so the
+continuous number should not carry the claim on its own. HOMER's *strong* mode
+is discrete correspondence (the network bridge and Coletta RSNs survive spin),
+so here we ask the gradient question categorically, does π preserve the
+discrete content of the gradient? and test it against the fair spin null.
+The continuous reference numbers are read live from
+outputs/logs/margulies_2016_gradient.json rather than quoted here, so they
+cannot go stale when the coupling changes.
 
 Two tests:
   A. Gradient-TIER classification. Bin the human gradient into 3 tiers
@@ -39,7 +44,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "autism_subtypes"))
 
-from homer.data import load_cached                       # noqa: E402
+from homer.data import load_cached, load_pi, pi_provenance   # noqa: E402
 from homer.eval.nulls import _haar_rotation, _route_normalized  # noqa: E402
 
 grad_mod = import_module("01_gradient_validation")
@@ -70,7 +75,9 @@ def main():
 
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
-    pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")
+    pi = load_pi()
+    prov = pi_provenance()
+    print(f"  π: {prov['pi_file']}  sha256 {prov['pi_sha256']}")
     mouse_coords = M.var[["x", "y", "z"]].to_numpy(float)
 
     # Read the gradients from 01_gradient_validation.py's output rather than recomputing.
@@ -165,8 +172,14 @@ def main():
     print(f"    predicted unimodal→transmodal: {order_pred}")
 
     out = {
-        "pi_file": "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy",
-        "continuous_reference": {"abs_pearson_r": 0.402, "spin_p": 0.16},
+        **prov,
+        # read live from 01_gradient_validation.py's log rather than hard-coded,
+        # a hard-coded copy silently goes stale when the coupling changes
+        "continuous_reference": {
+            "abs_pearson_r": float(_g["parcel_level"]["abs_pearson_r"]),
+            "spin_p": float(_g["spin"]["p_spin"]),
+            "source": "outputs/logs/margulies_2016_gradient.json",
+        },
         "tier_classification": {
             "n_tiers": NT, "n_parcels": n, "exact_accuracy": exact,
             "adjacent_accuracy": adj, "chance": chance,

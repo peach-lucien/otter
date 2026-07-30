@@ -1,3 +1,7 @@
+> Numbers refreshed 2026-07-20 against the canonical coupling
+> (`outputs/logs/balsters_2020_mfc_divergence.json`, sha bb4cae00…). This result is cited in
+> §5 of the manuscript as the falsification control.
+
 # Schaeffer et al. 2020, rodent MFC divergence (falsification test)
 
 A **falsification** test: it states, with a direction, where a faithful
@@ -24,7 +28,7 @@ tests whether HOMER avoids a *wrong* answer:
 HOMER already makes a falsifiable design choice here. Its Garin point anchor
 pairs mouse mPFC with human *medial* frontal cortex, and the contested
 mouse-Prelimbic ↔ human-dlPFC homology (Carlén 2017 vs Preuss 1995) ships as
-the **opt-in** `lateral_pfc` pack, not in the recommended π. Schaeffer et al. 2020
+the **opt-in** `lateral_pfc` pack, not in the production coupling. Schaeffer et al. 2020
 is independent FC evidence adjudicating that choice.
 
 *Species note:* Schaeffer et al. used rat + marmoset + human; HOMER is mouse + human.
@@ -49,7 +53,7 @@ premotor, 2 in mid-cingulate.
 
 **2. The contested anchor is correctly quarantined.** Mouse-MFC mass onto
 human dlPFC is 0.0 % under the Garin-only baseline and 0.0 % under the
-recommended π. It only appears, jumping to **23.1 %** (and 18.2 % for
+production coupling. It only appears, jumping to **23.1 %** (and 18.2 % for
 Prelimbic specifically), when the opt-in `lateral_pfc` pack's contested
 Prelimbic→dlPFC anchor is forced in. Schaeffer et al. 2020 is the independent FC
 evidence that this anchor encodes a homology the data argues against, and
@@ -61,7 +65,7 @@ is under-represented relative to chance. HOMER finds no confident rodent
 homologue of dorsolateral PFC from anywhere in the mouse brain, consistent
 with the evolutionary expansion of human lateral PFC.
 
-| Test (recommended π) | Result |
+| Test (canonical coupling) | Result |
 |---|---|
 | mouse MFC → human dlPFC | **0.0 %** mass, **0/39** argmax, enrichment ×0.0 |
 | mouse MFC → premotor / medial PFC / mid-cingulate | 16.3 / 17.9 / 5.1 %, enrichment ×6–10 |

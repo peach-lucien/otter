@@ -41,10 +41,11 @@ Outputs:
 
 Usage:
     PYTHONPATH=src python pipeline/08a_multisource_trust.py
-    PYTHONPATH=src python pipeline/08a_multisource_trust.py \
-        --pi-file pi_fc_plus_SC_with_all_packs.npy \
-        --beauchamp-file beauchamp_validation_all_packs.json \
-        --bootstrap-file bootstrap_aggregate_fc_plus_SC.npz
+
+The defaults are the canonical coupling; run it with no arguments unless you are deliberately
+regrading a comparison coupling. The worked example that used to sit here passed
+--pi-file pi_fc_plus_SC_with_all_packs.npy, which is RETIRED -- copying it would silently
+regrade the evidence tiers on the wrong coupling, which is how the 2026-07 tier mix-up happened.
 """
 from __future__ import annotations
 
@@ -182,7 +183,7 @@ def main(args):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--pi-file", default="pi_fc_plus_SC_with_all_packs.npy",
+    ap.add_argument("--pi-file", default="pi_canonical.npy",
                     help="recommended π filename in outputs/coupling/")
     ap.add_argument("--beauchamp-file", default="beauchamp_validation_all_packs.json",
                     help="Beauchamp validation log filename in outputs/logs/")

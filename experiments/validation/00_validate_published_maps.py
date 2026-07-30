@@ -39,11 +39,14 @@ from scipy.stats import spearmanr, pearsonr
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi              # noqa: E402
+from homer.data import load_cached, load_pi, pi_provenance   # noqa: E402
 from homer.eval.nulls import _haar_rotation              # noqa: E402
 
 OUT = ROOT / "outputs/logs/published_map_validation.json"
 N_TRIALS = 1000
+# The coupling retired on 2026-07-17, kept only to define the smaller human
+# territory it reached, so the canonical result can be scored on equal ground.
+RETIRED_PI_FILE = "pi_fc_plus_SC_with_all_packs.npy"
 
 # map name -> (neuromaps source, desc, repo array, minimum |rho| we require)
 MIN_RHO = {"margulies_gradient": 0.80, "hcp_myelin": 0.90}
@@ -151,51 +154,80 @@ def main():
     spec.loader.exec_module(fu)
     M, _ = load_cached("mouse", cache_dir=ROOT / "outputs/anndata")
     pi = load_pi()
+    prov = pi_provenance()
+    print(f"\n  pi: {prov['pi_file']}  sha256 {prov['pi_sha256']}")
+    pi_retired = load_pi(RETIRED_PI_FILE)
+    prov_retired = pi_provenance(RETIRED_PI_FILE)
     acr = fu.load_mouse_parcel_acronyms()
     mouse_xyz = M.var[["x", "y", "z"]].to_numpy(float)
     maps = {"t1w_t2w": np.array([fu.load_mouse_t1t2().get(a, np.nan) for a in acr], float),
             "cytoarchitecture": np.array([fu.load_mouse_cytoarch().get(a, np.nan) for a in acr], float)}
 
-    def route(v):
+    def route(v, pi_use):
         m = np.isfinite(v)
-        num = v[m] @ pi[m]
-        den = pi[m].sum(0)
-        o = np.full(pi.shape[1], np.nan)
+        num = v[m] @ pi_use[m]
+        den = pi_use[m].sum(0)
+        o = np.full(pi_use.shape[1], np.nan)
         good = den > 1e-12
         o[good] = num[good] / den[good]
         return o
 
-    def obs_r(v):
-        p = route(v)
+    def obs_r(v, pi_use, restrict=None):
+        p = route(v, pi_use)
         m = np.isfinite(p) & np.isfinite(repo_myelin)
+        if restrict is not None:
+            m &= restrict
         return abs(pearsonr(p[m], repo_myelin[m])[0]), int(m.sum())
 
-    rng = np.random.default_rng(0)
-    print("\nFULCHER STRUCTURAL TRANSLATION, null B (spin the mouse input, route through the real pi)")
-    res["fulcher_translation_null_b"] = {}
-    for name, v in maps.items():
-        r, n = obs_r(v)
+    # The retired coupling reached a smaller human territory. Score the canonical
+    # coupling on exactly that territory too, so a change in |r| cannot be
+    # attributed to territory size alone.
+    retired_territory = np.isfinite(route(maps["t1w_t2w"], pi_retired))
+
+    def spin_test(v, pi_use, restrict, tag):
+        r, n = obs_r(v, pi_use, restrict)
         idx = np.where(np.isfinite(v))[0]
         C = mouse_xyz[idx]
         tree = cKDTree(C)
         vals = v[idx]
+        rng = np.random.default_rng(0)     # same spin sequence for every variant
         null = []
         for _ in range(N_TRIALS):
             R = _haar_rotation(rng)
             _, nn = tree.query(C @ R.T)
             vv = np.full(len(v), np.nan)
             vv[idx] = vals[nn]
-            null.append(obs_r(vv)[0])
+            null.append(obs_r(vv, pi_use, restrict)[0])
         null = np.array(null)
         p = float((np.sum(null >= r) + 1) / (N_TRIALS + 1))
-        res["fulcher_translation_null_b"][name] = {
-            "abs_r": float(r), "n_parcels": n, "null_abs_mean": float(null.mean()),
-            "p_spin": p, "survives": bool(p < 0.05)}
-        print(f"  {name:20s} |r| = {r:.3f}  null {null.mean():.3f}  p = {p:.4f}  "
+        print(f"  {tag:44s} |r| = {r:.3f}  null {null.mean():.3f}  p = {p:.4f}  "
               f"{'survives' if p < 0.05 else 'does NOT survive'}")
+        return {"abs_r": float(r), "n_parcels": n, "null_abs_mean": float(null.mean()),
+                "p_spin": p, "survives": bool(p < 0.05)}
 
-    res["_meta"] = {"n_trials": N_TRIALS,
+    print("\nFULCHER STRUCTURAL TRANSLATION, null B (spin the mouse input, route through the real pi)")
+    res["fulcher_translation_null_b"] = {}
+    res["fulcher_translation_coverage_control"] = {
+        "note": "canonical pi re-scored on exactly the human parcels the retired "
+                "coupling reached, isolating territory size from the coupling",
+        "retired_pi_file": prov_retired["pi_file"],
+        "retired_pi_sha256": prov_retired["pi_sha256"],
+        "n_parcels_retired_territory": int(retired_territory.sum()),
+        "n_parcels_canonical_territory": int(np.isfinite(route(maps["t1w_t2w"], pi)).sum()),
+    }
+    for name, v in maps.items():
+        res["fulcher_translation_null_b"][name] = spin_test(
+            v, pi, None, f"{name} [canonical, full territory]")
+        res["fulcher_translation_coverage_control"][name] = {
+            "canonical_on_retired_territory": spin_test(
+                v, pi, retired_territory, f"{name} [canonical, retired territory]"),
+            "retired_coupling": spin_test(
+                v, pi_retired, None, f"{name} [retired coupling]"),
+        }
+
+    res["_meta"] = {**prov, "n_trials": N_TRIALS,
                     "note": "null B is the null homer.eval.nulls designates for translation claims"}
+    res.update(prov)          # top-level pi_file / pi_sha256, as every log carries
     OUT.write_text(json.dumps(res, indent=2))
     print("\nwrote", OUT)
     if failures:

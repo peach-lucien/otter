@@ -39,7 +39,7 @@ from scipy.stats import pearsonr, spearmanr
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached
+from homer.data import load_cached, load_pi, pi_provenance
 
 
 def diffusion_components(fc: np.ndarray, *, top_pct: float = 10.0,
@@ -88,7 +88,8 @@ def principal_gradient(fc: np.ndarray, hierarchy_ref: np.ndarray, *,
     against a spatial-autocorrelation-preserving spin null is close to tautological,
     which manufactured a false negative ("the gradient does not translate",
     |r| = 0.41, p = 0.15). With the correct component the gradient DOES translate
-    (|r| = 0.54, spin p = 0.004).
+    (under the canonical coupling |r| = 0.537, spin p = 0.032; it was
+    |r| = 0.543, spin p = 0.004 under the retired coupling).
 
     So do not hard-code an index. Select the component that actually carries the
     hierarchy, using a reference that is external to the FC data.
@@ -151,9 +152,11 @@ def main():
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
     fc_mouse = M.uns["fc_mean"]
     fc_human = H.uns["fc_mean"]
-    pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")
+    pi = load_pi()
+    prov = pi_provenance()
     node_region = np.asarray(json.loads(
         (ROOT / "data_external/human_sc_meta.json").read_text())["node_region"], int)
+    print(f"  π: {prov['pi_file']}  sha256 {prov['pi_sha256']}")
     print(f"  π: {pi.shape}, total mass {pi.sum():.4f}")
 
     # ---- external hierarchy references, used to SELECT the right component ----
@@ -218,7 +221,7 @@ def main():
     print(f"  |r| = {abs(r_p):.3f}   spin p = {sp['p_spin']:.4f}")
 
     out = {
-        "pi_file": "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy",
+        **prov,
         "routing": "transport-weighted average (normalised)",
         "top_pct_threshold": 10.0,
         "component_selection": {"mouse": mouse_diag, "human": human_diag,

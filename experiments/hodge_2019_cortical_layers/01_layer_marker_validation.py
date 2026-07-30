@@ -45,7 +45,7 @@ from scipy.stats import pearsonr, spearmanr
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached
+from homer.data import load_cached, load_pi, pi_provenance
 
 # Hodge et al. 2019 canonical cortical-layer markers (gene symbol, layer).
 HODGE_MARKERS = [
@@ -80,8 +80,10 @@ def main():
     print("=" * 80)
 
     # ---- Load HOMER ----
-    pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")
+    pi = load_pi()                      # canonical coupling (pi_canonical.npy)
+    prov = pi_provenance()
     print(f"π shape: {pi.shape}, total mass: {pi.sum():.4f}")
+    print(f"π file: {prov['pi_file']}  sha256 {prov['pi_sha256']}")
 
     # Mouse gene matrix + names
     mouse_expr  = np.load(ROOT / "data_external/mouse_genes.npy")    # (1864, 61)
@@ -172,6 +174,7 @@ def main():
 
     # Save
     out = {
+        **prov,
         "n_markers":          len(results),
         "markers":            results,
         "mean_pearson_r":     float(np.mean(rs)),

@@ -29,7 +29,7 @@ from scipy.stats import pearsonr
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached                               # noqa: E402
+from homer.data import load_cached, load_pi, pi_provenance       # noqa: E402
 from homer.data.atlas_regions import (                           # noqa: E402
     ATLAS_PATHS, assign_atlas_labels, assign_atlas_labels_with_hemisphere)
 from homer.eval.nulls import translation_spin_null, _route_normalized  # noqa: E402
@@ -60,7 +60,9 @@ def main():
 
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
-    pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")
+    pi = load_pi()                      # canonical coupling (pi_canonical.npy)
+    prov = pi_provenance()
+    print(f"π file: {prov['pi_file']}  sha256 {prov['pi_sha256']}")
     mouse_coords = M.var[["x", "y", "z"]].to_numpy(float)
 
     me = np.load(ROOT / "data_external/mouse_genes.npy")
@@ -84,7 +86,7 @@ def main():
         "granular_L4_minus_infragranular":   (GRANULAR, DEEP),
         "supragranular_minus_granular":      (UPPER, GRANULAR),
     }
-    results = {}
+    results = dict(prov)
     for name, (pos, neg) in tests.items():
         m_vec = m_score(pos) - m_score(neg)
         h_vec = h_score(pos) - h_score(neg)

@@ -43,7 +43,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "autism_subtypes"))
 
-from homer.data import load_cached
+from homer.data import load_cached, load_pi, pi_provenance
 from homer.data.anchor_packs._dsurqe import mouse_parcels_in_dsurqe_region
 
 
@@ -74,8 +74,10 @@ def main():
 
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
-    pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")
+    pi = load_pi()
+    prov = pi_provenance()
     print(f"  π: {pi.shape}, total mass {pi.sum():.4f}")
+    print(f"  {prov['pi_file']}  sha256={prov['pi_sha256']}")
 
     # Identify Whitesell DMN mouse parcels via DSURQE
     print("\nResolving Whitesell 2021 DMN regions via DSURQE labels:")
@@ -170,6 +172,7 @@ def main():
 
     # Save
     out = {
+        **prov,
         "n_whitesell_dmn_parcels": int(n_dmn),
         "fraction_of_brain":      n_dmn / len(M.var),
         "per_region_counts":      per_region,

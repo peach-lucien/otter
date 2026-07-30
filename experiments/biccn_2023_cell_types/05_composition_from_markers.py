@@ -20,7 +20,7 @@ import numpy as np, pandas as pd
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached
+from homer.data import load_cached, load_pi, pi_provenance
 from homer.eval.nulls import _route_normalized, _haar_rotation
 from scipy.spatial import cKDTree
 from scipy.stats import pearsonr
@@ -51,7 +51,9 @@ def class_score(expr, gene_df, genes):
 
 def main():
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))
-    pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")
+    pi = load_pi()                      # canonical coupling (pi_canonical.npy)
+    prov = pi_provenance()
+    print(f"π file: {prov['pi_file']}  sha256 {prov['pi_sha256']}")
     mouse_coords = M.var[["x", "y", "z"]].to_numpy(float)
 
     m_expr = np.load(ROOT / "data_external/mouse_genes.npy")
@@ -104,7 +106,7 @@ def main():
     chance = float(pd.Series(obs_dom).value_counts(normalize=True).max())   # majority-class baseline
     print(f"\n[2] dominant-class agreement = {agree:.3f}  (spin p = {p_agree:.4f}; majority baseline {chance:.3f})")
 
-    out = {"classes": classes, "n_parcels_scored": int(ok.sum()),
+    out = {**prov, "classes": classes, "n_parcels_scored": int(ok.sum()),
            "per_class_translation_spin": per_class,
            "dominant_class_agreement": agree, "dominant_class_spin_p": p_agree,
            "majority_baseline": chance, "n_spin": N_SPIN}

@@ -25,21 +25,21 @@ correlation, with no anchor pair involved.
 We routed the mouse principal gradient through π and correlated the predicted
 human gradient with the observed one.
 
-**|r| = 0.54 (parcel-level, n = 1,244), |r| = 0.62 (region-level)**
-**Permuted-π null |r| mean = 0.03 (p < 0.001). Spin null: p = 0.004, so the correlation survives.**
+**|r| = 0.54 (parcel-level, n = 1,244), |r| = 0.56 (region-level)**
+**Permuted-π null |r| mean = 0.03 (p < 0.001). Spin null: p = 0.032, so the correlation survives.**
 
 The principal functional-connectivity gradient, the unimodal→transmodal axis,
 translates across species through π. It also survives reduction to discrete
 structure: the rank order of the nine human networks along the gradient is
-recovered at ρ = 0.73 (spin p = 0.043), and a three-tier discretisation is
-classified at 52 % against 33 % chance and a 34 % spin null (p = 0.001).
+recovered at ρ = 0.80 (spin p = 0.029), and a three-tier discretisation is
+classified at 56 % against 33 % chance and a 34 % spin null (p = 0.001).
 
 | Test | Granularity | \|r\| | Spin null |
 |---|---|---:|:---:|
 | **Margulies/Huntenburg gradient** | **Brain-wide ordering** | **0.54** | **p = 0.004, survives** |
 | Coletta 2020 resting-state networks | Network correspondence | 6/10 vs 1.2 expected | p = 0.002, survives |
-| Fulcher 2019 T1w:T2w → myelin | Cortical region | +0.37 | p = 0.11, **does not survive** |
-| Fulcher 2019 cytoarchitecture → myelin | Cortical region | +0.36 | p = 0.10, **does not survive** |
+| Fulcher 2019 T1w:T2w → myelin | Cortical region | +0.47 | p = 0.005, survives |
+| Fulcher 2019 cytoarchitecture → myelin | Cortical region | +0.47 | p = 0.003, survives |
 
 Those four rows are the paper's organising claim: **connectional organisation
 transfers through π; microstructure does not.** π was fitted on connectivity.
@@ -129,18 +129,10 @@ Outputs:
 - `outputs/figures/margulies_2016_gradient.png` (3-panel figure)
 
 
-## Discrete reframe (2026-06-19), `03_discrete_reframe.py`
+## Discrete reframe
 
-The continuous correlation fails the spin null (|r|=0.40, p=0.16) for a structural
-reason: two smooth monotone gradients correlate by spatial autocorrelation alone. We
-therefore asked the gradient question **categorically** instead (HOMER's strong mode):
-- **Gradient-tier classification** (3 tiers, n=1244): exact accuracy 50.3% vs 33%
-  chance, spin p=0.092; adjacent (±1) 82.8%, spin p=0.110.
-- **Network rank-order** (9 networks): Spearman ρ(predicted, observed network
-  gradient) = +0.73, spin p=0.098.
+The gradient survives reduction to discrete structure: network rank order is recovered at
+ρ = 0.80 (spin p = 0.029) and a three-tier discretisation is classified at 56 % against 33 %
+chance. An earlier version of this section reported ρ = 0.73 at spin p = 0.098 and concluded
+the signal was not significant; that was computed before the `principal_gradient()` fix.
 
-So the discrete content of the gradient is **more** cross-species-specific than the
-raw smooth correlation suggested (p moves from 0.16 toward ~0.09–0.10), but it still
-does **not** clear significance, and the network test is underpowered (n=9). HOMER
-carries some discrete gradient-ordering signal, and that signal is not significant.
-Log: `outputs/logs/margulies_discrete_reframe.json`.

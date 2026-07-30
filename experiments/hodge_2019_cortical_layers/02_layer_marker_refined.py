@@ -30,7 +30,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "autism_subtypes"))
 
-from homer.data import load_cached
+from homer.data import load_cached, load_pi, pi_provenance
 from homer.data.atlas_regions import (
     ATLAS_PATHS,
     assign_atlas_labels,
@@ -58,7 +58,9 @@ def main():
     print("Hodge 2019, refined (cortex-only, layer-group composites)")
     print("=" * 80)
 
-    pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")
+    pi = load_pi()                      # canonical coupling (pi_canonical.npy)
+    prov = pi_provenance()
+    print(f"π file: {prov['pi_file']}  sha256 {prov['pi_sha256']}")
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs" / "anndata"))
 
     mouse_expr = np.load(ROOT / "data_external/mouse_genes.npy")
@@ -256,6 +258,7 @@ def main():
         })
 
     out = {
+        **prov,
         "n_cortical_parcels": int(cortical_mask.sum()),
         "per_layer_group":    results,
         "upper_minus_deep_contrast": contrast_result,
