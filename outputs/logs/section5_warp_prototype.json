@@ -1,0 +1,258 @@
+{
+  "_finding": "anchor-driven warp vs naive per-species Euclidean spatial cost.",
+  "config": {
+    "base": "use_sc=True sc=0.3 fc=0.7 eps=5e-3 xyz_weight=0.5 lam_anchor=1.0 alpha=0.5",
+    "n_anchor_pairs": 42,
+    "warp_mean_anchor_residual": {
+      "affine": 19.726925626270667,
+      "tps": 0.0053464447788379435
+    },
+    "n_spin": 2000
+  },
+  "beauchamp": {
+    "production": {
+      "top1": 0.45728155339805826,
+      "top5": 0.5271844660194175,
+      "mean_mass_in_region": 0.45715088940275417,
+      "enrichment_top1": 50.61709006928414,
+      "n_pairs": 19.0
+    },
+    "euclid_baseline": {
+      "top1": 0.10388349514563107,
+      "top5": 0.1912621359223301,
+      "mean_mass_in_region": 0.10399685154884145,
+      "enrichment_top1": 11.498999230177077,
+      "n_pairs": 19.0
+    },
+    "warp_affine": {
+      "top1": 0.12330097087378641,
+      "top5": 0.3213592233009709,
+      "mean_mass_in_region": 0.12337476031041074,
+      "enrichment_top1": 13.648344880677465,
+      "n_pairs": 19.0
+    },
+    "warp_tps": {
+      "top1": 0.2563106796116505,
+      "top5": 0.49223300970873785,
+      "mean_mass_in_region": 0.25534048258997377,
+      "enrichment_top1": 28.371362586605123,
+      "n_pairs": 19.0
+    }
+  },
+  "beauchamp_per_pair_top1": {
+    "production": {
+      "Piriform area -> piriform cortex": 1.0,
+      "Subiculum -> subiculum": 1.0,
+      "Field CA1 -> CA1 field": 1.0,
+      "Field CA3 -> CA3 field": 1.0,
+      "Dentate gyrus -> dentate gyrus": 1.0,
+      "Anterior cingulate area -> cingulate gyrus": 0.043478260869565216,
+      "Primary auditory area -> Heschl's gyrus": 1.0,
+      "Primary motor area -> precentral gyrus": 1.0,
+      "Primary somatosensory area -> postcentral gyrus": 0.14935064935064934,
+      "Visual areas -> cuneus": 0.038461538461538464,
+      "Pallidum -> globus pallidus": 0.058823529411764705,
+      "Striatum ventral region -> nucleus accumbens": 0.07692307692307693,
+      "Caudoputamen -> caudate nucleus": 0.32167832167832167,
+      "Cortical subplate-other -> amygdala": 0.9655172413793104,
+      "Inferior colliculus -> inferior colliculus": 1.0,
+      "Superior colliculus, sensory related -> superior colliculus": 0.9636363636363636,
+      "Pons -> pons": 0.028985507246376812,
+      "Hypothalamus -> hypothalamus": 0.09615384615384616,
+      "Thalamus -> thalamus": 0.3300970873786408
+    },
+    "euclid_baseline": {
+      "Piriform area -> piriform cortex": 0.019230769230769232,
+      "Subiculum -> subiculum": 0.0,
+      "Field CA1 -> CA1 field": 0.0,
+      "Field CA3 -> CA3 field": 0.0,
+      "Dentate gyrus -> dentate gyrus": 0.0,
+      "Anterior cingulate area -> cingulate gyrus": 0.13043478260869565,
+      "Primary auditory area -> Heschl's gyrus": 0.2222222222222222,
+      "Primary motor area -> precentral gyrus": 0.0,
+      "Primary somatosensory area -> postcentral gyrus": 0.18831168831168832,
+      "Visual areas -> cuneus": 0.07692307692307693,
+      "Pallidum -> globus pallidus": 0.058823529411764705,
+      "Striatum ventral region -> nucleus accumbens": 0.11538461538461539,
+      "Caudoputamen -> caudate nucleus": 0.11888111888111888,
+      "Cortical subplate-other -> amygdala": 0.0,
+      "Inferior colliculus -> inferior colliculus": 0.0,
+      "Superior colliculus, sensory related -> superior colliculus": 0.0,
+      "Pons -> pons": 0.028985507246376812,
+      "Hypothalamus -> hypothalamus": 0.11538461538461539,
+      "Thalamus -> thalamus": 0.3592233009708738
+    },
+    "warp_affine": {
+      "Piriform area -> piriform cortex": 0.3076923076923077,
+      "Subiculum -> subiculum": 0.08571428571428572,
+      "Field CA1 -> CA1 field": 0.0,
+      "Field CA3 -> CA3 field": 0.08,
+      "Dentate gyrus -> dentate gyrus": 0.0,
+      "Anterior cingulate area -> cingulate gyrus": 0.08695652173913043,
+      "Primary auditory area -> Heschl's gyrus": 0.2222222222222222,
+      "Primary motor area -> precentral gyrus": 0.20754716981132076,
+      "Primary somatosensory area -> postcentral gyrus": 0.025974025974025976,
+      "Visual areas -> cuneus": 0.07692307692307693,
+      "Pallidum -> globus pallidus": 0.09803921568627451,
+      "Striatum ventral region -> nucleus accumbens": 0.0,
+      "Caudoputamen -> caudate nucleus": 0.16783216783216784,
+      "Cortical subplate-other -> amygdala": 0.0,
+      "Inferior colliculus -> inferior colliculus": 0.0,
+      "Superior colliculus, sensory related -> superior colliculus": 0.0,
+      "Pons -> pons": 0.17391304347826086,
+      "Hypothalamus -> hypothalamus": 0.15384615384615385,
+      "Thalamus -> thalamus": 0.3300970873786408
+    },
+    "warp_tps": {
+      "Piriform area -> piriform cortex": 0.3269230769230769,
+      "Subiculum -> subiculum": 0.0,
+      "Field CA1 -> CA1 field": 0.0,
+      "Field CA3 -> CA3 field": 0.0,
+      "Dentate gyrus -> dentate gyrus": 0.0,
+      "Anterior cingulate area -> cingulate gyrus": 0.5217391304347826,
+      "Primary auditory area -> Heschl's gyrus": 0.4444444444444444,
+      "Primary motor area -> precentral gyrus": 0.3584905660377358,
+      "Primary somatosensory area -> postcentral gyrus": 0.17532467532467533,
+      "Visual areas -> cuneus": 0.28846153846153844,
+      "Pallidum -> globus pallidus": 0.11764705882352941,
+      "Striatum ventral region -> nucleus accumbens": 0.07692307692307693,
+      "Caudoputamen -> caudate nucleus": 0.2867132867132867,
+      "Cortical subplate-other -> amygdala": 0.13793103448275862,
+      "Inferior colliculus -> inferior colliculus": 0.0,
+      "Superior colliculus, sensory related -> superior colliculus": 0.09090909090909091,
+      "Pons -> pons": 0.5217391304347826,
+      "Hypothalamus -> hypothalamus": 0.4423076923076923,
+      "Thalamus -> thalamus": 0.47572815533980584
+    }
+  },
+  "top_improvements_tps_vs_euclid": [
+    [
+      "Pons -> pons",
+      0.49275362318840576
+    ],
+    [
+      "Anterior cingulate area -> cingulate gyrus",
+      0.3913043478260869
+    ],
+    [
+      "Primary motor area -> precentral gyrus",
+      0.3584905660377358
+    ],
+    [
+      "Hypothalamus -> hypothalamus",
+      0.32692307692307687
+    ],
+    [
+      "Piriform area -> piriform cortex",
+      0.3076923076923077
+    ],
+    [
+      "Primary auditory area -> Heschl's gyrus",
+      0.2222222222222222
+    ],
+    [
+      "Visual areas -> cuneus",
+      0.2115384615384615
+    ],
+    [
+      "Caudoputamen -> caudate nucleus",
+      0.16783216783216784
+    ]
+  ],
+  "top_regressions_tps_vs_euclid": [
+    [
+      "Field CA3 -> CA3 field",
+      0.0
+    ],
+    [
+      "Dentate gyrus -> dentate gyrus",
+      0.0
+    ],
+    [
+      "Inferior colliculus -> inferior colliculus",
+      0.0
+    ],
+    [
+      "Primary somatosensory area -> postcentral gyrus",
+      -0.012987012987012991
+    ],
+    [
+      "Striatum ventral region -> nucleus accumbens",
+      -0.038461538461538464
+    ]
+  ],
+  "top_improvements_affine_vs_euclid": [
+    [
+      "Piriform area -> piriform cortex",
+      0.2884615384615385
+    ],
+    [
+      "Primary motor area -> precentral gyrus",
+      0.20754716981132076
+    ],
+    [
+      "Pons -> pons",
+      0.14492753623188406
+    ],
+    [
+      "Subiculum -> subiculum",
+      0.08571428571428572
+    ],
+    [
+      "Field CA3 -> CA3 field",
+      0.08
+    ],
+    [
+      "Caudoputamen -> caudate nucleus",
+      0.04895104895104896
+    ],
+    [
+      "Pallidum -> globus pallidus",
+      0.0392156862745098
+    ],
+    [
+      "Hypothalamus -> hypothalamus",
+      0.038461538461538464
+    ]
+  ],
+  "spatial": {
+    "production": {
+      "spearman_coverage_vs_spatial_isolation": -0.46803032759053925,
+      "spearman_p": 6.012288423350547e-100,
+      "n_cortical_parcels": 1824,
+      "contB_deficit_sd": -1.199553465011928,
+      "contB_spin_p": 0.0004997501249375312,
+      "contB_mean_coverage_sd": -1.123923723522689
+    },
+    "euclid_baseline": {
+      "spearman_coverage_vs_spatial_isolation": -0.7468927674905901,
+      "spearman_p": 0.0,
+      "n_cortical_parcels": 1824,
+      "contB_deficit_sd": -1.4576848028082796,
+      "contB_spin_p": 0.0004997501249375312,
+      "contB_mean_coverage_sd": -1.3657803333329768
+    },
+    "warp_affine": {
+      "spearman_coverage_vs_spatial_isolation": -0.9661644893719514,
+      "spearman_p": 0.0,
+      "n_cortical_parcels": 1824,
+      "contB_deficit_sd": -0.08643320064410084,
+      "contB_spin_p": 0.896551724137931,
+      "contB_mean_coverage_sd": -0.0809837389806845
+    },
+    "warp_tps": {
+      "spearman_coverage_vs_spatial_isolation": -0.9748228858516385,
+      "spearman_p": 0.0,
+      "n_cortical_parcels": 1824,
+      "contB_deficit_sd": -0.34535472192840044,
+      "contB_spin_p": 0.5577211394302849,
+      "contB_mean_coverage_sd": -0.3235807125962919
+    }
+  },
+  "reference": {
+    "production_beauchamp_top1": 0.457,
+    "production_rho_cov_iso": -0.62,
+    "production_contB_deficit_sd": -1.2,
+    "production_contB_spin_p": 0.0005
+  }
+}

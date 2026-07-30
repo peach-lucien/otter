@@ -1,0 +1,28 @@
+{
+  "n_visible_mouse_parcels": 857,
+  "overlap_acr": 52,
+  "network_means_z": {
+    "?": -0.03426496489711813,
+    "ContA": 0.6728583049950781,
+    "ContB": 0.7117225583197256,
+    "ContC": -0.929231802188793,
+    "DefaultA": -0.181795642541537,
+    "DefaultB": 0.6962230990047042,
+    "DefaultC": -0.5206538334688566,
+    "DorsAttnA": -0.9396898866010637,
+    "DorsAttnB": -0.05161905605905965,
+    "Limbic": 0.6502068952338819,
+    "SalVentAttnA": 0.5324802968844917,
+    "SalVentAttnB": 1.0229286678735896,
+    "SomMotA": 0.10968038291941605,
+    "SomMotB": 0.31064121954743873,
+    "TempPar": -0.139037730124036,
+    "VisCent": -1.2961179516191172,
+    "VisPeri": -1.1411437631365509
+  },
+  "top_human_regions": [],
+  "salience_enrichment_z": 0.8593947080109212,
+  "salience_perm_p": 0.000999000999000999,
+  "pi_file": "outputs/coupling/pi_canonical.npy",
+  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77"
+}

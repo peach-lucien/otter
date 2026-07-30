@@ -1,5 +1,6 @@
 {
-  "pi_file": "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy",
+  "pi_file": "outputs/coupling/pi_canonical.npy",
+  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
   "sub_test_A_labeled_correspondence": {
     "mouse_networks": [
       "auditory",
@@ -72,21 +73,21 @@
         "mouse_net": "sensorimotor",
         "human_net": "SomatoMotor",
         "rank": 1,
-        "row_norm_mass": 0.5148207586774828,
-        "expected_mass_null": 0.13246858362180486,
-        "ratio_over_null": 3.886361162789252,
+        "row_norm_mass": 0.5520044041129225,
+        "expected_mass_null": 0.11915782014582274,
+        "ratio_over_null": 4.632548694138509,
         "is_argmax_diagonal": true,
         "argmax_human_net": "SomatoMotor"
       },
       {
         "mouse_net": "visual",
         "human_net": "Visual",
-        "rank": 4,
-        "row_norm_mass": 0.14310948747618174,
-        "expected_mass_null": 0.08539834119210621,
-        "ratio_over_null": 1.6757876731381998,
-        "is_argmax_diagonal": false,
-        "argmax_human_net": "DorsAtten"
+        "rank": 1,
+        "row_norm_mass": 0.4718940973589451,
+        "expected_mass_null": 0.04399878660883509,
+        "ratio_over_null": 10.725161617620321,
+        "is_argmax_diagonal": true,
+        "argmax_human_net": "Visual"
       },
       {
         "mouse_net": "auditory",
@@ -102,29 +103,29 @@
         "mouse_net": "salience",
         "human_net": "Salience",
         "rank": 1,
-        "row_norm_mass": 0.3216098642098972,
-        "expected_mass_null": 0.07554864755607114,
-        "ratio_over_null": 4.256990358049796,
+        "row_norm_mass": 0.33034201870404284,
+        "expected_mass_null": 0.06412511292377941,
+        "ratio_over_null": 5.151523383618755,
         "is_argmax_diagonal": true,
         "argmax_human_net": "Salience"
       },
       {
         "mouse_net": "frontal_dmn",
         "human_net": "DMN",
-        "rank": 1,
-        "row_norm_mass": 0.35764593474922945,
-        "expected_mass_null": 0.17496428917740625,
-        "ratio_over_null": 2.044108180193227,
-        "is_argmax_diagonal": true,
-        "argmax_human_net": "DMN"
+        "rank": 4,
+        "row_norm_mass": 0.11291779552554287,
+        "expected_mass_null": 0.09843816142761781,
+        "ratio_over_null": 1.1470937072364158,
+        "is_argmax_diagonal": false,
+        "argmax_human_net": "Salience"
       },
       {
         "mouse_net": "temporal_dmn",
         "human_net": "DMN",
         "rank": 1,
-        "row_norm_mass": 0.4217389192803083,
-        "expected_mass_null": 0.17496428917740625,
-        "ratio_over_null": 2.4104285580966938,
+        "row_norm_mass": 0.49298798397943444,
+        "expected_mass_null": 0.09843816142761781,
+        "ratio_over_null": 5.008098250005731,
         "is_argmax_diagonal": true,
         "argmax_human_net": "DMN"
       },
@@ -132,19 +133,19 @@
         "mouse_net": "limbic",
         "human_net": "Limbic",
         "rank": 3,
-        "row_norm_mass": 0.09923138679376993,
-        "expected_mass_null": 0.07243460108258837,
-        "ratio_over_null": 1.3699445473666438,
+        "row_norm_mass": 0.1335245842510125,
+        "expected_mass_null": 0.07619810838134951,
+        "ratio_over_null": 1.7523346325444267,
         "is_argmax_diagonal": false,
         "argmax_human_net": "Subcortical"
       },
       {
         "mouse_net": "frontoparietal",
         "human_net": "DorsAtten",
-        "rank": 3,
-        "row_norm_mass": 0.21234404116641073,
-        "expected_mass_null": 0.07897450126018532,
-        "ratio_over_null": 2.6887671055602236,
+        "rank": 6,
+        "row_norm_mass": 0.11657658245314101,
+        "expected_mass_null": 0.045189849276604944,
+        "ratio_over_null": 2.579707264336759,
         "is_argmax_diagonal": false,
         "argmax_human_net": "DMN"
       },
@@ -152,9 +153,9 @@
         "mouse_net": "subcortical",
         "human_net": "Subcortical",
         "rank": 1,
-        "row_norm_mass": 0.6350707733636146,
-        "expected_mass_null": 0.3199999136373013,
-        "ratio_over_null": 1.9845967023710678,
+        "row_norm_mass": 0.8683864717522204,
+        "expected_mass_null": 0.5199823459164639,
+        "ratio_over_null": 1.670030681948822,
         "is_argmax_diagonal": true,
         "argmax_human_net": "Subcortical"
       },
@@ -162,9 +163,9 @@
         "mouse_net": "olfactory",
         "human_net": "Limbic",
         "rank": 1,
-        "row_norm_mass": 0.4740357480487779,
-        "expected_mass_null": 0.07243460108258837,
-        "ratio_over_null": 6.544327447987083,
+        "row_norm_mass": 0.4944652728376476,
+        "expected_mass_null": 0.07619810838134951,
+        "ratio_over_null": 6.48920666590556,
         "is_argmax_diagonal": true,
         "argmax_human_net": "Limbic"
       }
@@ -209,32 +210,32 @@
         "ic": 0,
         "mouse_label": "frontoparietal",
         "best_match_yeo7": "Limbic",
-        "second_match_yeo7": "DMN",
+        "second_match_yeo7": "Visual",
         "per_net_means": {
-          "Visual": -0.00016443712437691393,
-          "SomatoMotor": 0.0001231046393450041,
-          "DorsAtten": 0.00011426059439710432,
-          "Salience": 2.012961445397559e-05,
-          "Limbic": 0.0012796760704388403,
-          "Control": 2.1347931777202454e-05,
-          "DMN": 0.00012670356084046352,
-          "Subcortical": -0.0004909384423735395
+          "Visual": 0.00011945864346230744,
+          "SomatoMotor": 0.00010240392595886795,
+          "DorsAtten": 5.431423592285647e-05,
+          "Salience": 7.467493026840132e-05,
+          "Limbic": 0.0011545156208430621,
+          "Control": 6.862544157400471e-05,
+          "DMN": 6.180645170309452e-05,
+          "Subcortical": -0.0006228068692183268
         }
       },
       {
         "ic": 1,
         "mouse_label": "frontal_dmn",
-        "best_match_yeo7": "Control",
+        "best_match_yeo7": "Salience",
         "second_match_yeo7": "DorsAtten",
         "per_net_means": {
-          "Visual": -8.215601621553471e-05,
-          "SomatoMotor": 0.00013613601736114087,
-          "DorsAtten": 0.00013803235951006512,
-          "Salience": 4.980605351137644e-05,
-          "Limbic": -0.0009792329882804974,
-          "Control": 0.0001830527125003711,
-          "DMN": 8.27594372260743e-05,
-          "Subcortical": -0.0002651320836278577
+          "Visual": 2.5132029778985605e-05,
+          "SomatoMotor": 0.00013406986482746095,
+          "DorsAtten": 0.00013859373682919413,
+          "Salience": 0.00020934856805527433,
+          "Limbic": -0.0009143556610983104,
+          "Control": 0.00012178842890363138,
+          "DMN": 3.927163364447451e-05,
+          "Subcortical": -0.00037168725252230547
         }
       },
       {
@@ -243,30 +244,30 @@
         "best_match_yeo7": "Subcortical",
         "second_match_yeo7": "Visual",
         "per_net_means": {
-          "Visual": 0.00016072709583642747,
-          "SomatoMotor": -0.0003365849555697192,
-          "DorsAtten": -0.00011189607399271513,
-          "Salience": -2.7522672517720368e-05,
-          "Limbic": -0.0002685144804512248,
-          "Control": -4.283363863114441e-07,
-          "DMN": 6.219666449912364e-05,
-          "Subcortical": 0.00020551432295745444
+          "Visual": 0.00012421500011751706,
+          "SomatoMotor": -0.0003464443987549584,
+          "DorsAtten": -0.0001254395020417664,
+          "Salience": -2.2131405849369735e-05,
+          "Limbic": -0.0001513750514631389,
+          "Control": -4.100927168290352e-05,
+          "DMN": 4.585732314875669e-05,
+          "Subcortical": 0.00028185646273417106
         }
       },
       {
         "ic": 3,
         "mouse_label": "temporal_dmn",
-        "best_match_yeo7": "DMN",
+        "best_match_yeo7": "Visual",
         "second_match_yeo7": "Limbic",
         "per_net_means": {
-          "Visual": 6.575858463808895e-05,
-          "SomatoMotor": -0.00014791818559430506,
-          "DorsAtten": 9.847257673123037e-05,
-          "Salience": -2.2772082708850048e-05,
-          "Limbic": 0.00010789804427317768,
-          "Control": 0.00010595523514157822,
-          "DMN": 0.00019619490742834382,
-          "Subcortical": -0.00036455626050710925
+          "Visual": 0.0002353417469193627,
+          "SomatoMotor": -0.00010810495887537802,
+          "DorsAtten": -1.3276146113622542e-05,
+          "Salience": -2.124153473475975e-06,
+          "Limbic": 0.00020438604790899711,
+          "Control": 3.465735500471516e-05,
+          "DMN": 0.0001748850018752419,
+          "Subcortical": -0.0003906496789941616
         }
       },
       {
@@ -275,46 +276,46 @@
         "best_match_yeo7": "Salience",
         "second_match_yeo7": "Limbic",
         "per_net_means": {
-          "Visual": -0.00010979728826332923,
-          "SomatoMotor": -3.5305511550834734e-05,
-          "DorsAtten": -0.00014375419274736725,
-          "Salience": 0.0002963432401214723,
-          "Limbic": 6.586588908186399e-05,
-          "Control": 4.617918944282164e-05,
-          "DMN": -8.030866399594111e-05,
-          "Subcortical": 5.219320194647102e-05
+          "Visual": -4.362530461612268e-05,
+          "SomatoMotor": -0.00017405703516778413,
+          "DorsAtten": -7.515927041168392e-05,
+          "Salience": 0.00032049382533002604,
+          "Limbic": 0.0002339068691952447,
+          "Control": -9.635380588991454e-06,
+          "DMN": -2.477733728206232e-05,
+          "Subcortical": -2.04877779537738e-05
         }
       },
       {
         "ic": 5,
         "mouse_label": "limbic",
         "best_match_yeo7": "Limbic",
-        "second_match_yeo7": "DMN",
+        "second_match_yeo7": "Salience",
         "per_net_means": {
-          "Visual": -6.805482848317495e-05,
-          "SomatoMotor": -0.00033715358693265344,
-          "DorsAtten": -0.00023368155417728535,
-          "Salience": 8.556324145811036e-05,
-          "Limbic": 0.0007812854746104423,
-          "Control": 4.565897796703668e-05,
-          "DMN": 0.00025516817509485464,
-          "Subcortical": -0.00010209953799347276
+          "Visual": -0.00011267255526383103,
+          "SomatoMotor": -0.0002719386225158381,
+          "DorsAtten": -0.00010294595772488046,
+          "Salience": 0.00022545295501055142,
+          "Limbic": 0.0007497965228865347,
+          "Control": 2.3066233642314025e-05,
+          "DMN": 6.106683081149168e-05,
+          "Subcortical": -3.532060552428005e-05
         }
       },
       {
         "ic": 6,
         "mouse_label": "sensorimotor",
         "best_match_yeo7": "SomatoMotor",
-        "second_match_yeo7": "Control",
+        "second_match_yeo7": "DorsAtten",
         "per_net_means": {
-          "Visual": -6.610523932009432e-05,
-          "SomatoMotor": 0.0005517002427695641,
-          "DorsAtten": 4.347684109339623e-05,
-          "Salience": -2.205198719694275e-05,
-          "Limbic": -0.0007145374152855943,
-          "Control": 0.0001683771515544789,
-          "DMN": -3.325456746559585e-05,
-          "Subcortical": -0.0003556289452471388
+          "Visual": -2.403077074260888e-05,
+          "SomatoMotor": 0.0006295623710943134,
+          "DorsAtten": 0.00014435576610283233,
+          "Salience": 9.349716651043888e-05,
+          "Limbic": -0.000661958947347651,
+          "Control": 3.071532809737933e-05,
+          "DMN": -3.49098013333979e-05,
+          "Subcortical": -0.0005047660746231255
         }
       }
     ]
@@ -325,133 +326,133 @@
       {
         "network": "auditory",
         "n_mouse": 64,
-        "real_spread_mm": 52.90229418385843,
-        "null_mean_mm": 47.18159000261519,
+        "real_spread_mm": 43.383975483595336,
+        "null_mean_mm": 38.18420610757043,
         "null_ci95_mm": [
-          43.99191847019784,
-          52.08676284842442
+          34.00390548052819,
+          43.03387032067432
         ],
-        "ratio_real_over_null": 1.1212486518772715,
+        "ratio_real_over_null": 1.1361759194724752,
         "more_compact_than_null": false
       },
       {
         "network": "brainstem",
         "n_mouse": 262,
-        "real_spread_mm": 33.59276215302688,
-        "null_mean_mm": 47.668459917687976,
+        "real_spread_mm": 19.032853972200012,
+        "null_mean_mm": 38.607519235310555,
         "null_ci95_mm": [
-          45.788839590883136,
-          49.774914422218195
+          36.646651935856546,
+          40.302371569969424
         ],
-        "ratio_real_over_null": 0.7047167500488487,
+        "ratio_real_over_null": 0.49298308591639595,
         "more_compact_than_null": true
       },
       {
         "network": "frontal_dmn",
         "n_mouse": 103,
-        "real_spread_mm": 30.451047173269547,
-        "null_mean_mm": 47.49883644141284,
+        "real_spread_mm": 25.38121435378933,
+        "null_mean_mm": 38.585850089352256,
         "null_ci95_mm": [
-          44.53710250597656,
-          49.933526628165204
+          35.85203141112256,
+          41.796560050640586
         ],
-        "ratio_real_over_null": 0.6410903814629062,
+        "ratio_real_over_null": 0.6577855430167978,
         "more_compact_than_null": true
       },
       {
         "network": "frontoparietal",
         "n_mouse": 98,
-        "real_spread_mm": 35.01584916773532,
-        "null_mean_mm": 47.387683614299974,
+        "real_spread_mm": 37.39330927770744,
+        "null_mean_mm": 38.42894921747564,
         "null_ci95_mm": [
-          44.155985636548024,
-          50.71692502975427
+          35.72022436759878,
+          41.66402567587997
         ],
-        "ratio_real_over_null": 0.7389229963789312,
+        "ratio_real_over_null": 0.9730505267290201,
         "more_compact_than_null": true
       },
       {
         "network": "limbic",
         "n_mouse": 356,
-        "real_spread_mm": 42.37649791045859,
-        "null_mean_mm": 47.54346188393671,
+        "real_spread_mm": 29.0426078976624,
+        "null_mean_mm": 38.70375639531565,
         "null_ci95_mm": [
-          45.74731381549794,
-          48.92464859052334
+          37.02472350773144,
+          40.49751920813601
         ],
-        "ratio_real_over_null": 0.891321250730716,
+        "ratio_real_over_null": 0.7503821489837987,
         "more_compact_than_null": true
       },
       {
         "network": "olfactory",
         "n_mouse": 68,
-        "real_spread_mm": 31.272394951821397,
-        "null_mean_mm": 47.49926445097591,
+        "real_spread_mm": 27.154497391877964,
+        "null_mean_mm": 38.56411025014606,
         "null_ci95_mm": [
-          43.56069846461209,
-          51.34746611172309
+          34.38910036329323,
+          42.14937158636702
         ],
-        "ratio_real_over_null": 0.6583764046303855,
+        "ratio_real_over_null": 0.7041390872430441,
         "more_compact_than_null": true
       },
       {
         "network": "salience",
         "n_mouse": 127,
-        "real_spread_mm": 45.14611899512059,
-        "null_mean_mm": 47.495965611801985,
+        "real_spread_mm": 39.490749704859205,
+        "null_mean_mm": 38.49766498557725,
         "null_ci95_mm": [
-          44.233733036684185,
-          50.20840648460358
+          35.86611022266506,
+          41.43029146930512
         ],
-        "ratio_real_over_null": 0.9505253428072742,
-        "more_compact_than_null": true
+        "ratio_real_over_null": 1.0257959728117017,
+        "more_compact_than_null": false
       },
       {
         "network": "sensorimotor",
         "n_mouse": 233,
-        "real_spread_mm": 41.62711147225916,
-        "null_mean_mm": 47.62558347251664,
+        "real_spread_mm": 34.73055311860432,
+        "null_mean_mm": 38.689326239802156,
         "null_ci95_mm": [
-          45.28699414907954,
-          49.632168151738895
+          36.756527323030916,
+          40.709917654107386
         ],
-        "ratio_real_over_null": 0.8740493750859971,
+        "ratio_real_over_null": 0.8976778996702921,
         "more_compact_than_null": true
       },
       {
         "network": "subcortical",
         "n_mouse": 401,
-        "real_spread_mm": 35.160528931778025,
-        "null_mean_mm": 47.6708299805221,
+        "real_spread_mm": 22.96866086544181,
+        "null_mean_mm": 38.59777738113834,
         "null_ci95_mm": [
-          46.20175528683406,
-          49.05433280372779
+          37.06624885242878,
+          40.14659939243553
         ],
-        "ratio_real_over_null": 0.7375690531535599,
+        "ratio_real_over_null": 0.595077292628408,
         "more_compact_than_null": true
       },
       {
         "network": "temporal_dmn",
         "n_mouse": 65,
-        "real_spread_mm": 51.92969170025584,
-        "null_mean_mm": 47.51787702368789,
+        "real_spread_mm": 37.99743490845832,
+        "null_mean_mm": 38.37111088750692,
         "null_ci95_mm": [
-          43.55252400015804,
-          51.391627909003326
+          34.664282464552876,
+          42.17066720935321
         ],
-        "ratio_real_over_null": 1.09284536584765,
-        "more_compact_than_null": false
+        "ratio_real_over_null": 0.9902615282590042,
+        "more_compact_than_null": true
       },
       {
         "network": "visual",
         "n_mouse": 87,
-        "real_spread_mm": 46.15352698551211,
-        "null_mean_mm": 47.69706058758182,
+        "real_spread_mm": 34.20337065139572,
+        "null_mean_mm": 38.41226388000259,
         "null_ci95_mm": [
-          44.53595055371568,
-          50.77569889535765
+          35.51921048090867,
+          41.41595455061082
         ],
-        "ratio_real_over_null": 0.9676388107976706,
+        "ratio_real_over_null": 0.8904283995925057,
         "more_compact_than_null": true
       }
     ],

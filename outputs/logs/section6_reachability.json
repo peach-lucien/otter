@@ -1,0 +1,53 @@
+{
+  "_def": "reachability = thinning-burden-weighted mean reconstruction-coverage percentile; <50 = burden in mouse-un-reachable cortex. FC+SC recon on pi_canonical, 52 hemi-regions.",
+  "adhd": {
+    "reachability": 47.393162393162385,
+    "null_mean": 50.94804273504273,
+    "p_less_reachable": 0.22257774222577742,
+    "total_burden": 1.35,
+    "mean_d": -0.02230769230769231,
+    "n": 52
+  },
+  "asd": {
+    "reachability": 36.148648648648646,
+    "null_mean": 50.3701988045738,
+    "p_less_reachable": 0.004299570042995701,
+    "total_burden": 1.48,
+    "mean_d": 0.002,
+    "n": 50
+  },
+  "bipolar": {
+    "reachability": 49.71326409400284,
+    "null_mean": 50.939970403396686,
+    "p_less_reachable": 0.22697730226977303,
+    "total_burden": 9.583999999999998,
+    "mean_d": -0.18363461538461534,
+    "n": 52
+  },
+  "mdd": {
+    "reachability": 43.46105889123345,
+    "null_mean": 50.98894166826524,
+    "p_less_reachable": 0.0165983401659834,
+    "total_burden": 2.406,
+    "mean_d": -0.03855769230769231,
+    "n": 52
+  },
+  "ocd": {
+    "reachability": 49.970146283212266,
+    "null_mean": 50.939942345009456,
+    "p_less_reachable": 0.34656534346565343,
+    "total_burden": 3.092,
+    "mean_d": -0.05748076923076924,
+    "n": 52
+  },
+  "schizophrenia": {
+    "reachability": 48.16525294763727,
+    "null_mean": 50.964369726122264,
+    "p_less_reachable": 0.004199580041995801,
+    "total_burden": 17.438999999999997,
+    "mean_d": -0.33536538461538457,
+    "n": 52
+  },
+  "pi_file": "outputs/coupling/pi_canonical.npy",
+  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77"
+}

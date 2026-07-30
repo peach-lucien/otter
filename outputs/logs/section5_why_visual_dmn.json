@@ -1,0 +1,122 @@
+{
+  "per_network": {
+    "ContB": {
+      "cov_prod": -15.206675241753665,
+      "cov_xyz0": -4.157523720068547,
+      "delta": 11.049151521685118,
+      "spatial_isolation": 0.05888466164469719,
+      "xu_expansion": 25.77177031143852
+    },
+    "ContC": {
+      "cov_prod": -9.996632821027083,
+      "cov_xyz0": -4.612146669600555,
+      "delta": 5.384486151426528,
+      "spatial_isolation": 0.025295564904808998,
+      "xu_expansion": 27.257795731226604
+    },
+    "VisCent": {
+      "cov_prod": -9.638497080397299,
+      "cov_xyz0": -4.0247433623470235,
+      "delta": 5.613753718050275,
+      "spatial_isolation": 0.05406801775097847,
+      "xu_expansion": 7.916281541188558
+    },
+    "SalVentAttnB": {
+      "cov_prod": -9.175610937789472,
+      "cov_xyz0": -3.8351253354483097,
+      "delta": 5.340485602341162,
+      "spatial_isolation": 0.052591148763895035,
+      "xu_expansion": 13.75251195010017
+    },
+    "Limbic": {
+      "cov_prod": -8.38690899454782,
+      "cov_xyz0": -3.949238156165089,
+      "delta": 4.437670838382731,
+      "spatial_isolation": 0.042200859636068344,
+      "xu_expansion": 12.063455405988192
+    },
+    "ContA": {
+      "cov_prod": -8.344983161354255,
+      "cov_xyz0": -4.005871979593825,
+      "delta": 4.339111181760431,
+      "spatial_isolation": 0.036230143159627914,
+      "xu_expansion": 15.268453657627106
+    },
+    "DefaultA": {
+      "cov_prod": -8.316931651470862,
+      "cov_xyz0": -3.8175614106714324,
+      "delta": 4.499370240799429,
+      "spatial_isolation": 0.03676297888159752,
+      "xu_expansion": 26.95609900445649
+    },
+    "TempPar": {
+      "cov_prod": -8.078428870754667,
+      "cov_xyz0": -3.698724257663029,
+      "delta": 4.379704613091638,
+      "spatial_isolation": 0.03807239234447479,
+      "xu_expansion": 14.285288214683533
+    },
+    "DorsAttnB": {
+      "cov_prod": -7.962854240530805,
+      "cov_xyz0": -3.7058267313126003,
+      "delta": 4.257027509218204,
+      "spatial_isolation": 0.027753176167607307,
+      "xu_expansion": 13.166697692871093
+    },
+    "DefaultB": {
+      "cov_prod": -7.613278669387138,
+      "cov_xyz0": -4.006523878394882,
+      "delta": 3.606754790992256,
+      "spatial_isolation": 0.04989171773195267,
+      "xu_expansion": 21.318089321255684
+    },
+    "SomMotB": {
+      "cov_prod": -6.276145365162444,
+      "cov_xyz0": -4.109481281869986,
+      "delta": 2.166664083292458,
+      "spatial_isolation": 0.03571152687072754,
+      "xu_expansion": 10.393875291270595
+    },
+    "SomMotA": {
+      "cov_prod": -6.1246931205289,
+      "cov_xyz0": -3.654132367272005,
+      "delta": 2.4705607532568954,
+      "spatial_isolation": 0.026760781183838844,
+      "xu_expansion": 10.98405913302773
+    },
+    "DorsAttnA": {
+      "cov_prod": -5.461389844967643,
+      "cov_xyz0": -4.182577058072496,
+      "delta": 1.2788127868951467,
+      "spatial_isolation": 0.027606388553977013,
+      "xu_expansion": 12.444339575590911
+    },
+    "SalVentAttnA": {
+      "cov_prod": -5.440266197379962,
+      "cov_xyz0": -4.042118137296407,
+      "delta": 1.3981480600835559,
+      "spatial_isolation": 0.026622138917446136,
+      "xu_expansion": 14.135090351104736
+    },
+    "VisPeri": {
+      "cov_prod": -3.4670092556946512,
+      "cov_xyz0": -3.9606992986420333,
+      "delta": -0.49369004294738206,
+      "spatial_isolation": 0.025338372215628624,
+      "xu_expansion": 11.491241361783898
+    },
+    "DefaultC": {
+      "cov_prod": -3.2587396313405916,
+      "cov_xyz0": -4.788797932059302,
+      "delta": -1.5300583007187107,
+      "spatial_isolation": 0.026437457650899887,
+      "xu_expansion": 22.01755056014428
+    }
+  },
+  "corr": {
+    "cov_prod_vs_expansion": -0.2529411764705882,
+    "cov_xyz0_vs_expansion": -0.26176470588235295,
+    "cov_prod_vs_spatial_isolation": -0.6235294117647059,
+    "expansion_vs_spatial_isolation": -0.044117647058823525
+  }
+}

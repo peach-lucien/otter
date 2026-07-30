@@ -1,0 +1,69 @@
+{
+ "pi_file": "outputs/coupling/pi_canonical.npy",
+ "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+ "frac": 0.1,
+ "n_spins": 2000,
+ "contrast_C": 0.5850436384057899,
+ "spin_p": 0.0004997501249375312,
+ "bias_dysphoric": 0.3364966489657096,
+ "bias_anxiosomatic": -0.24854698944008027,
+ "dys_set": [
+  "PL",
+  "ACAd",
+  "ACAv",
+  "ORBm",
+  "FRP"
+ ],
+ "anx_set": [
+  "BLA",
+  "BMA",
+  "CEA",
+  "AId",
+  "AIv",
+  "AIp"
+ ],
+ "top_dysphoric": [
+  [
+   "PL",
+   0.1176
+  ],
+  [
+   "ACAd",
+   0.1081
+  ],
+  [
+   "FRP",
+   0.1016
+  ],
+  [
+   "MOs",
+   0.0861
+  ],
+  [
+   "AId",
+   0.0826
+  ]
+ ],
+ "top_anxiosomatic": [
+  [
+   "AUDv",
+   0.1448
+  ],
+  [
+   "TEa",
+   0.0934
+  ],
+  [
+   "BMA",
+   0.0922
+  ],
+  [
+   "VISC",
+   0.081
+  ],
+  [
+   "BLA",
+   0.0798
+  ]
+ ]
+}

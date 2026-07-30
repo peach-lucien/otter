@@ -1,0 +1,47 @@
+{
+  "_note": "partial Spearman of thinning d vs each axis, controlling the other; spin null on the predictor",
+  "adhd": {
+    "partial_cov": 0.2732860923759925,
+    "partial_cov_spin_p": 0.24387806096951525,
+    "partial_mye": -0.033381712626995644,
+    "partial_mye_spin_p": 0.8840579710144928,
+    "n": 52
+  },
+  "asd": {
+    "partial_cov": 0.4377911164465786,
+    "partial_cov_spin_p": 0.04447776111944028,
+    "partial_mye": -0.22378025381161804,
+    "partial_mye_spin_p": 0.3498250874562719,
+    "n": 50
+  },
+  "bipolar": {
+    "partial_cov": -0.15854179117220185,
+    "partial_cov_spin_p": 0.26186906546726635,
+    "partial_mye": 0.6264833945189107,
+    "partial_mye_spin_p": 0.0004997501249375312,
+    "n": 52
+  },
+  "mdd": {
+    "partial_cov": 0.30871681038162724,
+    "partial_cov_spin_p": 0.04847576211894053,
+    "partial_mye": 0.5641594809186374,
+    "partial_mye_spin_p": 0.0024987506246876563,
+    "n": 52
+  },
+  "ocd": {
+    "partial_cov": 0.0012806283616494493,
+    "partial_cov_spin_p": 0.9920039980009995,
+    "partial_mye": 0.4549645692819943,
+    "partial_mye_spin_p": 0.0014992503748125937,
+    "n": 52
+  },
+  "schizophrenia": {
+    "partial_cov": 0.22837872449415178,
+    "partial_cov_spin_p": 0.28335832083958024,
+    "partial_mye": 0.5591223426961496,
+    "partial_mye_spin_p": 0.0004997501249375312,
+    "n": 52
+  },
+  "pi_file": "outputs/coupling/pi_canonical.npy",
+  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77"
+}

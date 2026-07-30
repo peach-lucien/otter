@@ -1,0 +1,328 @@
+{
+ "pi_file": "outputs/coupling/pi_canonical.npy",
+ "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+ "n_functions_scored": 12,
+ "hit_top1": 3,
+ "hit_top3": 9,
+ "n_spin_sig": 12,
+ "n_spins": 1000,
+ "results": [
+  {
+   "function": "reward",
+   "term": "reward",
+   "ground_truth": [
+    "ACB"
+   ],
+   "best_gt_rank": 3,
+   "hit_top1": false,
+   "hit_top3": true,
+   "spin_p": 0.003996003996003996,
+   "top3_structures": [
+    [
+     "OT",
+     16.7257
+    ],
+    [
+     "SI",
+     15.9271
+    ],
+    [
+     "ACB",
+     11.0981
+    ]
+   ]
+  },
+  {
+   "function": "fear",
+   "term": "fear",
+   "ground_truth": [
+    "BLA",
+    "CEA",
+    "BMA",
+    "PAG"
+   ],
+   "best_gt_rank": 1,
+   "hit_top1": true,
+   "hit_top3": true,
+   "spin_p": 0.000999000999000999,
+   "top3_structures": [
+    [
+     "BMA",
+     10.5339
+    ],
+    [
+     "BLA",
+     9.9573
+    ],
+    [
+     "PIR",
+     8.3197
+    ]
+   ]
+  },
+  {
+   "function": "anxiety",
+   "term": "anxiety",
+   "ground_truth": [
+    "BLA",
+    "BST",
+    "CEA"
+   ],
+   "best_gt_rank": 2,
+   "hit_top1": false,
+   "hit_top3": true,
+   "spin_p": 0.000999000999000999,
+   "top3_structures": [
+    [
+     "BMA",
+     7.6033
+    ],
+    [
+     "BLA",
+     7.1282
+    ],
+    [
+     "COAp",
+     5.6898
+    ]
+   ]
+  },
+  {
+   "function": "feeding",
+   "term": "feeding",
+   "ground_truth": [
+    "LHA"
+   ],
+   "best_gt_rank": 5,
+   "hit_top1": false,
+   "hit_top3": false,
+   "spin_p": 0.003996003996003996,
+   "top3_structures": [
+    [
+     "SI",
+     2.2251
+    ],
+    [
+     "BLA",
+     2.1746
+    ],
+    [
+     "BMA",
+     2.1544
+    ]
+   ]
+  },
+  {
+   "function": "spatial_memory",
+   "term": "navigation",
+   "ground_truth": [
+    "CA1",
+    "CA3",
+    "DG",
+    "SUB"
+   ],
+   "best_gt_rank": 3,
+   "hit_top1": false,
+   "hit_top3": true,
+   "spin_p": 0.014985014985014986,
+   "top3_structures": [
+    [
+     "RSPd",
+     4.7194
+    ],
+    [
+     "PA",
+     4.1987
+    ],
+    [
+     "DG",
+     4.0653
+    ]
+   ]
+  },
+  {
+   "function": "motor",
+   "term": "motor",
+   "ground_truth": [
+    "MOp",
+    "MOs",
+    "CP"
+   ],
+   "best_gt_rank": 1,
+   "hit_top1": true,
+   "hit_top3": true,
+   "spin_p": 0.000999000999000999,
+   "top3_structures": [
+    [
+     "MOp",
+     13.2895
+    ],
+    [
+     "SSp-ul",
+     13.0883
+    ],
+    [
+     "RSPagl",
+     10.9433
+    ]
+   ]
+  },
+  {
+   "function": "addiction",
+   "term": "addiction",
+   "ground_truth": [
+    "ACB"
+   ],
+   "best_gt_rank": 6,
+   "hit_top1": false,
+   "hit_top3": false,
+   "spin_p": 0.03296703296703297,
+   "top3_structures": [
+    [
+     "OT",
+     3.5298
+    ],
+    [
+     "SI",
+     3.3514
+    ],
+    [
+     "LHA",
+     2.2668
+    ]
+   ]
+  },
+  {
+   "function": "pain",
+   "term": "pain",
+   "ground_truth": [
+    "PAG",
+    "VPM",
+    "VPL"
+   ],
+   "best_gt_rank": 10,
+   "hit_top1": false,
+   "hit_top3": false,
+   "spin_p": 0.000999000999000999,
+   "top3_structures": [
+    [
+     "SSp-n",
+     8.443
+    ],
+    [
+     "SSp-un",
+     8.205
+    ],
+    [
+     "ACAv",
+     7.1257
+    ]
+   ]
+  },
+  {
+   "function": "olfaction",
+   "term": "olfactory",
+   "ground_truth": [
+    "PIR",
+    "MOB",
+    "AON"
+   ],
+   "best_gt_rank": 2,
+   "hit_top1": false,
+   "hit_top3": true,
+   "spin_p": 0.000999000999000999,
+   "top3_structures": [
+    [
+     "BMA",
+     3.7211
+    ],
+    [
+     "PIR",
+     3.6599
+    ],
+    [
+     "BLA",
+     3.4849
+    ]
+   ]
+  },
+  {
+   "function": "vision",
+   "term": "visual",
+   "ground_truth": [
+    "VISp"
+   ],
+   "best_gt_rank": 1,
+   "hit_top1": true,
+   "hit_top3": true,
+   "spin_p": 0.000999000999000999,
+   "top3_structures": [
+    [
+     "VISp",
+     6.7058
+    ],
+    [
+     "VISpm",
+     5.4969
+    ],
+    [
+     "VISam",
+     3.6562
+    ]
+   ]
+  },
+  {
+   "function": "audition",
+   "term": "auditory",
+   "ground_truth": [
+    "AUDp"
+   ],
+   "best_gt_rank": 2,
+   "hit_top1": false,
+   "hit_top3": true,
+   "spin_p": 0.000999000999000999,
+   "top3_structures": [
+    [
+     "AUDd",
+     20.8459
+    ],
+    [
+     "AUDp",
+     16.7587
+    ],
+    [
+     "SSs",
+     9.9873
+    ]
+   ]
+  },
+  {
+   "function": "interoception",
+   "term": "interoception",
+   "ground_truth": [
+    "AId",
+    "AIv",
+    "AIp",
+    "PB"
+   ],
+   "best_gt_rank": 2,
+   "hit_top1": false,
+   "hit_top3": true,
+   "spin_p": 0.001998001998001998,
+   "top3_structures": [
+    [
+     "PRNr",
+     4.4173
+    ],
+    [
+     "PB",
+     4.1798
+    ],
+    [
+     "MRN",
+     3.4675
+    ]
+   ]
+  }
+ ]
+}

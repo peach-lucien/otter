@@ -1,0 +1,19 @@
+{
+ "_what": "Review-round analysis, 2026-07-28/29. Produced by the harness in _audit/HOMER_review_analyses.tar.gz, which reproduces pi_canonical.npy exactly before any experiment (argmax match 1.0000, entrywise r 1.00000). Committed here as a loose log so tools/check_manuscript_numbers.py can see it.",
+ "mean_disp": {
+  "both": 11.245985597724871,
+  "xyz_only": 11.389252306402081,
+  "conn_only": 24.20447249248809
+ },
+ "median_disp": {
+  "both": 10.2865951941902,
+  "xyz_only": 11.177336610112368,
+  "conn_only": 26.38579126080442
+ },
+ "mean_auroc": {
+  "both": 0.7106430397978648,
+  "xyz_only": 0.7046257229622018,
+  "conn_only": 0.5611601802601607
+ },
+ "chance_disp": 65.39205489380035
+}

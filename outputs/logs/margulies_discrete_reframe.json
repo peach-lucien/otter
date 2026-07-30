@@ -1,0 +1,49 @@
+{
+  "pi_file": "outputs/coupling/pi_canonical.npy",
+  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+  "continuous_reference": {
+    "abs_pearson_r": 0.5369570831520412,
+    "spin_p": 0.03196803196803197,
+    "source": "outputs/logs/margulies_2016_gradient.json"
+  },
+  "tier_classification": {
+    "n_tiers": 3,
+    "n_parcels": 2094,
+    "exact_accuracy": 0.5616045845272206,
+    "adjacent_accuracy": 0.8887297039159503,
+    "chance": 0.3333333333333333,
+    "spin_null_exact_mean": 0.333909264565425,
+    "spin_null_adjacent_mean": 0.7948094555873926,
+    "spin_p_exact": 0.000999000999000999,
+    "spin_p_adjacent": 0.022977022977022976,
+    "n_spin": 1000
+  },
+  "network_rank_order": {
+    "n_networks": 9,
+    "spearman_rho": 0.7999999999999999,
+    "spin_null_abs_rho_mean": 0.3312833333333334,
+    "spin_p": 0.028971028971028972,
+    "observed_order": [
+      "DMN",
+      "Limbic",
+      "Control",
+      "Subcortical",
+      "Salience",
+      "Visual",
+      "DorsAtten",
+      "Auditory",
+      "SomatoMotor"
+    ],
+    "predicted_order": [
+      "Limbic",
+      "Subcortical",
+      "DMN",
+      "Salience",
+      "Control",
+      "Auditory",
+      "Visual",
+      "SomatoMotor",
+      "DorsAtten"
+    ]
+  }
+}

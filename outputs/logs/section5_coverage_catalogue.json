@@ -1,0 +1,216 @@
+{
+  "metric": "mass-normalised mean coverage per Garin macro-region",
+  "n_regions": 21,
+  "regions": [
+    {
+      "pid": 8,
+      "region": "Middle Temporal, Inferior temporal, Temporal pole (MIPT)",
+      "n_parcels": 101,
+      "mean_coverage": 7.097301363642334e-05,
+      "log10_mean_coverage": -4.14890675348773,
+      "total_mass": 0.007168274377278758,
+      "frac_uncovered": 0.8415841584158416,
+      "coverage_score": 0.0
+    },
+    {
+      "pid": 16,
+      "region": "Claustrum",
+      "n_parcels": 93,
+      "mean_coverage": 0.00016689960951652528,
+      "log10_mean_coverage": -3.777544679408331,
+      "total_mass": 0.015521663685036852,
+      "frac_uncovered": 0.7204301075268817,
+      "coverage_score": 0.2287423214348478
+    },
+    {
+      "pid": 5,
+      "region": "Visual striate cortex",
+      "n_parcels": 78,
+      "mean_coverage": 0.00020573050815435727,
+      "log10_mean_coverage": -3.686701301204431,
+      "total_mass": 0.016046979636039866,
+      "frac_uncovered": 0.6410256410256411,
+      "coverage_score": 0.28469775325662605
+    },
+    {
+      "pid": 9,
+      "region": "Insula and others in lateral sulcus",
+      "n_parcels": 105,
+      "mean_coverage": 0.00024351634137501812,
+      "log10_mean_coverage": -3.613471889764059,
+      "total_mass": 0.0255692158443769,
+      "frac_uncovered": 0.6476190476190476,
+      "coverage_score": 0.32980377441321007
+    },
+    {
+      "pid": 7,
+      "region": "Auditory cortex (Superior temporal )",
+      "n_parcels": 158,
+      "mean_coverage": 0.0002683154687924262,
+      "log10_mean_coverage": -3.571354288872836,
+      "total_mass": 0.04239384406920334,
+      "frac_uncovered": 0.7088607594936709,
+      "coverage_score": 0.35574632071389933
+    },
+    {
+      "pid": 4,
+      "region": "Posterior parietal cortex",
+      "n_parcels": 296,
+      "mean_coverage": 0.00034675390784988646,
+      "log10_mean_coverage": -3.4599786358117695,
+      "total_mass": 0.1026391567235664,
+      "frac_uncovered": 0.4831081081081081,
+      "coverage_score": 0.4243487096241454
+    },
+    {
+      "pid": 6,
+      "region": "Visual pre and extra striate cortex",
+      "n_parcels": 160,
+      "mean_coverage": 0.0004126106180384762,
+      "log10_mean_coverage": -3.3844596001724057,
+      "total_mass": 0.06601769888615619,
+      "frac_uncovered": 0.5,
+      "coverage_score": 0.4708650362239794
+    },
+    {
+      "pid": 2,
+      "region": "Motor and premotor",
+      "n_parcels": 258,
+      "mean_coverage": 0.0004156951174179219,
+      "log10_mean_coverage": -3.381225076506311,
+      "total_mass": 0.10724934029382385,
+      "frac_uncovered": 0.4689922480620155,
+      "coverage_score": 0.4728573572060089
+    },
+    {
+      "pid": 13,
+      "region": "Striatum",
+      "n_parcels": 72,
+      "mean_coverage": 0.0004168012258351143,
+      "log10_mean_coverage": -3.38007101242292,
+      "total_mass": 0.030009688260128228,
+      "frac_uncovered": 0.7638888888888888,
+      "coverage_score": 0.47356820873325195
+    },
+    {
+      "pid": 1,
+      "region": "Medial prefrontal cortex (mPFC)",
+      "n_parcels": 208,
+      "mean_coverage": 0.00042165590536687864,
+      "log10_mean_coverage": -3.3750418129218667,
+      "total_mass": 0.08770442831631076,
+      "frac_uncovered": 0.5048076923076923,
+      "coverage_score": 0.47666596924550064
+    },
+    {
+      "pid": 15,
+      "region": "Pallidum",
+      "n_parcels": 11,
+      "mean_coverage": 0.000550144057087137,
+      "log10_mean_coverage": -3.259523574131002,
+      "total_mass": 0.006051584627958507,
+      "frac_uncovered": 0.0,
+      "coverage_score": 0.5478200044942317
+    },
+    {
+      "pid": 3,
+      "region": "Somatosensory cortex",
+      "n_parcels": 164,
+      "mean_coverage": 0.0005539093905381408,
+      "log10_mean_coverage": -3.256561272108549,
+      "total_mass": 0.09084114004825508,
+      "frac_uncovered": 0.5975609756097561,
+      "coverage_score": 0.5496446491973475
+    },
+    {
+      "pid": 12,
+      "region": "Periarchicortex",
+      "n_parcels": 38,
+      "mean_coverage": 0.0005559400715943053,
+      "log10_mean_coverage": -3.254972021329164,
+      "total_mass": 0.021125722720583603,
+      "frac_uncovered": 0.3684210526315789,
+      "coverage_score": 0.5506235561401736
+    },
+    {
+      "pid": 14,
+      "region": "Basal forebrain",
+      "n_parcels": 30,
+      "mean_coverage": 0.0006463475128012407,
+      "log10_mean_coverage": -3.1895339180538698,
+      "total_mass": 0.01939042538403722,
+      "frac_uncovered": 0.26666666666666666,
+      "coverage_score": 0.5909304821788401
+    },
+    {
+      "pid": 20,
+      "region": "Pons",
+      "n_parcels": 82,
+      "mean_coverage": 0.0006801330222494948,
+      "log10_mean_coverage": -3.167406138501013,
+      "total_mass": 0.05577090782445857,
+      "frac_uncovered": 0.47560975609756095,
+      "coverage_score": 0.6045601983410696
+    },
+    {
+      "pid": 21,
+      "region": "Tectum",
+      "n_parcels": 60,
+      "mean_coverage": 0.0010050005031485975,
+      "log10_mean_coverage": -2.997833720816025,
+      "total_mass": 0.06030003018891585,
+      "frac_uncovered": 0.15,
+      "coverage_score": 0.7090091746366152
+    },
+    {
+      "pid": 11,
+      "region": "Olfactory cortex",
+      "n_parcels": 78,
+      "mean_coverage": 0.0010514699996820064,
+      "log10_mean_coverage": -2.9782031139985143,
+      "total_mass": 0.0820146599751965,
+      "frac_uncovered": 0.48717948717948717,
+      "coverage_score": 0.7211007447996256
+    },
+    {
+      "pid": 10,
+      "region": "Septum",
+      "n_parcels": 18,
+      "mean_coverage": 0.0011795009959402437,
+      "log10_mean_coverage": -2.9283016880711625,
+      "total_mass": 0.021231017926924386,
+      "frac_uncovered": 0.2222222222222222,
+      "coverage_score": 0.7518377769476394
+    },
+    {
+      "pid": 18,
+      "region": "Hypothalamus",
+      "n_parcels": 10,
+      "mean_coverage": 0.0011817292338912673,
+      "log10_mean_coverage": -2.927482020660905,
+      "total_mass": 0.011817292338912672,
+      "frac_uncovered": 0.2,
+      "coverage_score": 0.7523426551764989
+    },
+    {
+      "pid": 19,
+      "region": "Thalamus",
+      "n_parcels": 50,
+      "mean_coverage": 0.0011911120352585403,
+      "log10_mean_coverage": -2.924047387126626,
+      "total_mass": 0.05955560176292701,
+      "frac_uncovered": 0.3,
+      "coverage_score": 0.7544582348297431
+    },
+    {
+      "pid": 17,
+      "region": "Amygdala",
+      "n_parcels": 24,
+      "mean_coverage": 0.002982555296246229,
+      "log10_mean_coverage": -2.5254114958111864,
+      "total_mass": 0.0715813271099095,
+      "frac_uncovered": 0.375,
+      "coverage_score": 1.0
+    }
+  ]
+}

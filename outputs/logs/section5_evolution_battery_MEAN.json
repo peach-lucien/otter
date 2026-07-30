@@ -1,0 +1,44 @@
+{
+  "Xu2020 mouse\u2192human expansion": {
+    "n": 391,
+    "spearman": -0.05210063958693845,
+    "pearson_spin_r": -0.035979262557855864,
+    "spin_p": 0.5644355644355644
+  },
+  "Xu2020 mouse\u2013human FC homology": {
+    "n": 391,
+    "spearman": 0.0741712069443162,
+    "pearson_spin_r": 0.1142044832759917,
+    "spin_p": 0.08891108891108891
+  },
+  "Hill2010 macaque\u2192human expansion": {
+    "n": 197,
+    "spearman": -0.18424481006061863,
+    "pearson_spin_r": -0.17483358509432514,
+    "spin_p": 0.04595404595404595
+  },
+  "Hill2010 developmental expansion": {
+    "n": 197,
+    "spearman": -0.13890798589855877,
+    "pearson_spin_r": -0.14980766515528546,
+    "spin_p": 0.08591408591408592
+  },
+  "Sydnor2021 S\u2013A axis": {
+    "n": 391,
+    "spearman": -0.14050636977198908,
+    "pearson_spin_r": -0.18437947573610539,
+    "spin_p": 0.012987012987012988
+  },
+  "Margulies2016 principal gradient": {
+    "n": 391,
+    "spearman": -0.11666178176956403,
+    "pearson_spin_r": -0.18031370646269224,
+    "spin_p": 0.008991008991008992
+  },
+  "HCP T1w/T2w hierarchy": {
+    "n": 391,
+    "spearman": 0.1143605937358221,
+    "pearson_spin_r": 0.1507061803657555,
+    "spin_p": 0.03696303696303696
+  }
+}

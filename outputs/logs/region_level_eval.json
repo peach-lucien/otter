@@ -2,102 +2,102 @@
   "per_pair": [
     {
       "pair": "Piriform area -> piriform cortex",
-      "n_mouse_parcels": 47,
+      "n_mouse_parcels": 52,
       "n_human_parcels": 13,
       "rank": 1,
-      "score_true": 0.00025208419342746027,
-      "fold_enrichment": 0.040604946233623214,
+      "score_true": 1.0000000000000002,
+      "fold_enrichment": 161.07692307692312,
       "top_k_hits": {
         "1": true,
         "3": true,
         "5": true
       },
       "qualified_top_k_hits": {
-        "1": false,
-        "3": false,
-        "5": false
+        "1": true,
+        "3": true,
+        "5": true
       },
-      "total_mass_in_candidates": 0.0002520841934954881,
+      "total_mass_in_candidates": 1.0000000000000002,
       "is_anchor_overlapping": true
     },
     {
       "pair": "Subiculum -> subiculum",
-      "n_mouse_parcels": 29,
+      "n_mouse_parcels": 35,
       "n_human_parcels": 8,
-      "rank": 2,
-      "score_true": 0.0,
-      "fold_enrichment": 0.0,
+      "rank": 1,
+      "score_true": 0.9904068553715821,
+      "fold_enrichment": 259.23899439351163,
       "top_k_hits": {
-        "1": false,
+        "1": true,
         "3": true,
         "5": true
       },
       "qualified_top_k_hits": {
-        "1": false,
-        "3": false,
-        "5": false
+        "1": true,
+        "3": true,
+        "5": true
       },
-      "total_mass_in_candidates": 0.034482758462903294,
+      "total_mass_in_candidates": 0.9999999999999998,
       "is_anchor_overlapping": false
     },
     {
       "pair": "Field CA1 -> CA1 field",
-      "n_mouse_parcels": 15,
+      "n_mouse_parcels": 18,
       "n_human_parcels": 6,
-      "rank": 3,
-      "score_true": 0.0,
-      "fold_enrichment": 0.0,
+      "rank": 1,
+      "score_true": 1.0,
+      "fold_enrichment": 349.0,
       "top_k_hits": {
-        "1": false,
+        "1": true,
         "3": true,
         "5": true
       },
       "qualified_top_k_hits": {
-        "1": false,
-        "3": false,
-        "5": false
+        "1": true,
+        "3": true,
+        "5": true
       },
-      "total_mass_in_candidates": 2.1151178301285345e-13,
+      "total_mass_in_candidates": 1.0,
       "is_anchor_overlapping": false
     },
     {
       "pair": "Field CA3 -> CA3 field",
-      "n_mouse_parcels": 26,
+      "n_mouse_parcels": 25,
       "n_human_parcels": 4,
-      "rank": 4,
-      "score_true": 7.105887143372729e-25,
-      "fold_enrichment": 3.7199319195556234e-22,
+      "rank": 1,
+      "score_true": 1.0,
+      "fold_enrichment": 523.5,
       "top_k_hits": {
-        "1": false,
-        "3": false,
-        "5": true
-      },
-      "qualified_top_k_hits": {
-        "1": false,
-        "3": false,
-        "5": false
-      },
-      "total_mass_in_candidates": 1.7875361399625186e-21,
-      "is_anchor_overlapping": false
-    },
-    {
-      "pair": "Dentate gyrus -> dentate gyrus",
-      "n_mouse_parcels": 22,
-      "n_human_parcels": 4,
-      "rank": 3,
-      "score_true": 0.0,
-      "fold_enrichment": 0.0,
-      "top_k_hits": {
-        "1": false,
+        "1": true,
         "3": true,
         "5": true
       },
       "qualified_top_k_hits": {
-        "1": false,
-        "3": false,
-        "5": false
+        "1": true,
+        "3": true,
+        "5": true
       },
-      "total_mass_in_candidates": 0.045454545244881656,
+      "total_mass_in_candidates": 1.0,
+      "is_anchor_overlapping": false
+    },
+    {
+      "pair": "Dentate gyrus -> dentate gyrus",
+      "n_mouse_parcels": 23,
+      "n_human_parcels": 4,
+      "rank": 1,
+      "score_true": 0.9992734473764474,
+      "fold_enrichment": 523.1196497015702,
+      "top_k_hits": {
+        "1": true,
+        "3": true,
+        "5": true
+      },
+      "qualified_top_k_hits": {
+        "1": true,
+        "3": true,
+        "5": true
+      },
+      "total_mass_in_candidates": 0.9999999999999999,
       "is_anchor_overlapping": false
     },
     {
@@ -105,8 +105,8 @@
       "n_mouse_parcels": 23,
       "n_human_parcels": 24,
       "rank": 1,
-      "score_true": 0.13043458464410318,
-      "fold_enrichment": 11.380417510198003,
+      "score_true": 0.05034198462781408,
+      "fold_enrichment": 4.392338158776778,
       "top_k_hits": {
         "1": true,
         "3": true,
@@ -117,7 +117,7 @@
         "3": true,
         "5": true
       },
-      "total_mass_in_candidates": 0.17391304239491284,
+      "total_mass_in_candidates": 0.05034198462781408,
       "is_anchor_overlapping": true
     },
     {
@@ -125,8 +125,8 @@
       "n_mouse_parcels": 9,
       "n_human_parcels": 18,
       "rank": 1,
-      "score_true": 0.22222222300554378,
-      "fold_enrichment": 25.85185194297826,
+      "score_true": 1.0,
+      "fold_enrichment": 116.33333333333333,
       "top_k_hits": {
         "1": true,
         "3": true,
@@ -137,7 +137,7 @@
         "3": true,
         "5": true
       },
-      "total_mass_in_candidates": 0.22222222300554378,
+      "total_mass_in_candidates": 1.0,
       "is_anchor_overlapping": true
     },
     {
@@ -145,48 +145,48 @@
       "n_mouse_parcels": 53,
       "n_human_parcels": 45,
       "rank": 1,
-      "score_true": 4.3876765902993256e-18,
-      "fold_enrichment": 2.0417321733526197e-16,
+      "score_true": 0.9999999999999999,
+      "fold_enrichment": 46.53333333333333,
       "top_k_hits": {
         "1": true,
         "3": true,
         "5": true
       },
       "qualified_top_k_hits": {
-        "1": false,
-        "3": false,
-        "5": false
+        "1": true,
+        "3": true,
+        "5": true
       },
-      "total_mass_in_candidates": 4.387676590299373e-18,
+      "total_mass_in_candidates": 0.9999999999999999,
       "is_anchor_overlapping": true
     },
     {
       "pair": "Primary somatosensory area -> postcentral gyrus",
-      "n_mouse_parcels": 155,
+      "n_mouse_parcels": 154,
       "n_human_parcels": 39,
-      "rank": 2,
-      "score_true": 0.19999624868093596,
-      "fold_enrichment": 10.7382601214841,
+      "rank": 1,
+      "score_true": 0.14935064943247792,
+      "fold_enrichment": 8.018981023374582,
       "top_k_hits": {
-        "1": false,
+        "1": true,
         "3": true,
         "5": true
       },
       "qualified_top_k_hits": {
-        "1": false,
+        "1": true,
         "3": true,
         "5": true
       },
-      "total_mass_in_candidates": 0.2783445970667096,
+      "total_mass_in_candidates": 0.14935083085452017,
       "is_anchor_overlapping": true
     },
     {
       "pair": "Visual areas -> cuneus",
-      "n_mouse_parcels": 54,
+      "n_mouse_parcels": 52,
       "n_human_parcels": 36,
       "rank": 1,
-      "score_true": 0.07407407415830543,
-      "fold_enrichment": 4.308641980208099,
+      "score_true": 0.038885081034158074,
+      "fold_enrichment": 2.261815546820195,
       "top_k_hits": {
         "1": true,
         "3": true,
@@ -197,56 +197,56 @@
         "3": true,
         "5": true
       },
-      "total_mass_in_candidates": 0.07407407522213322,
+      "total_mass_in_candidates": 0.038885081034158074,
       "is_anchor_overlapping": true
     },
     {
       "pair": "Pallidum -> globus pallidus",
-      "n_mouse_parcels": 44,
+      "n_mouse_parcels": 51,
       "n_human_parcels": 6,
-      "rank": 6,
-      "score_true": 0.04545454551052437,
-      "fold_enrichment": 15.863636383173006,
+      "rank": 2,
+      "score_true": 0.05882352941176817,
+      "fold_enrichment": 20.529411764707092,
       "top_k_hits": {
         "1": false,
-        "3": false,
-        "5": false
+        "3": true,
+        "5": true
       },
       "qualified_top_k_hits": {
         "1": false,
-        "3": false,
-        "5": false
+        "3": true,
+        "5": true
       },
-      "total_mass_in_candidates": 0.3638381942042836,
+      "total_mass_in_candidates": 0.1768761380988582,
       "is_anchor_overlapping": true
     },
     {
       "pair": "Striatum ventral region -> nucleus accumbens",
       "n_mouse_parcels": 26,
       "n_human_parcels": 2,
-      "rank": 2,
-      "score_true": 0.09492528392678191,
-      "fold_enrichment": 99.38677227134066,
+      "rank": 1,
+      "score_true": 0.07737365550784192,
+      "fold_enrichment": 81.0102173167105,
       "top_k_hits": {
-        "1": false,
+        "1": true,
         "3": true,
         "5": true
       },
       "qualified_top_k_hits": {
-        "1": false,
+        "1": true,
         "3": true,
         "5": true
       },
-      "total_mass_in_candidates": 0.6333853820625688,
+      "total_mass_in_candidates": 0.19275826758259043,
       "is_anchor_overlapping": true
     },
     {
       "pair": "Caudoputamen -> caudate nucleus",
-      "n_mouse_parcels": 149,
+      "n_mouse_parcels": 143,
       "n_human_parcels": 24,
       "rank": 1,
-      "score_true": 0.13376575682460942,
-      "fold_enrichment": 11.671062282947172,
+      "score_true": 0.32167950983300764,
+      "fold_enrichment": 28.066537232929917,
       "top_k_hits": {
         "1": true,
         "3": true,
@@ -257,27 +257,27 @@
         "3": true,
         "5": true
       },
-      "total_mass_in_candidates": 0.2689264377344551,
+      "total_mass_in_candidates": 0.422678625799859,
       "is_anchor_overlapping": true
     },
     {
       "pair": "Cortical subplate-other -> amygdala",
-      "n_mouse_parcels": 54,
+      "n_mouse_parcels": 58,
       "n_human_parcels": 6,
-      "rank": 6,
-      "score_true": 1.7233522453815667e-13,
-      "fold_enrichment": 6.014499336381668e-11,
+      "rank": 1,
+      "score_true": 0.9655172592017682,
+      "fold_enrichment": 336.96552346141715,
       "top_k_hits": {
-        "1": false,
-        "3": false,
-        "5": false
+        "1": true,
+        "3": true,
+        "5": true
       },
       "qualified_top_k_hits": {
-        "1": false,
-        "3": false,
-        "5": false
+        "1": true,
+        "3": true,
+        "5": true
       },
-      "total_mass_in_candidates": 0.037044315819733886,
+      "total_mass_in_candidates": 0.9655172592017681,
       "is_anchor_overlapping": true
     },
     {
@@ -285,39 +285,39 @@
       "n_mouse_parcels": 29,
       "n_human_parcels": 4,
       "rank": 1,
-      "score_true": 0.0,
-      "fold_enrichment": 0.0,
+      "score_true": 1.0,
+      "fold_enrichment": 523.5,
       "top_k_hits": {
         "1": true,
         "3": true,
         "5": true
       },
       "qualified_top_k_hits": {
-        "1": false,
-        "3": false,
-        "5": false
+        "1": true,
+        "3": true,
+        "5": true
       },
-      "total_mass_in_candidates": 0.0,
+      "total_mass_in_candidates": 1.0,
       "is_anchor_overlapping": true
     },
     {
       "pair": "Superior colliculus, sensory related -> superior colliculus",
-      "n_mouse_parcels": 53,
+      "n_mouse_parcels": 55,
       "n_human_parcels": 2,
-      "rank": 2,
-      "score_true": 0.0,
-      "fold_enrichment": 0.0,
+      "rank": 1,
+      "score_true": 0.9636578371756117,
+      "fold_enrichment": 1008.9497555228655,
       "top_k_hits": {
-        "1": false,
+        "1": true,
         "3": true,
         "5": true
       },
       "qualified_top_k_hits": {
-        "1": false,
-        "3": false,
-        "5": false
+        "1": true,
+        "3": true,
+        "5": true
       },
-      "total_mass_in_candidates": 0.037735849061546624,
+      "total_mass_in_candidates": 1.0,
       "is_anchor_overlapping": true
     },
     {
@@ -325,8 +325,8 @@
       "n_mouse_parcels": 69,
       "n_human_parcels": 6,
       "rank": 2,
-      "score_true": 0.02898550729145575,
-      "fold_enrichment": 10.115942044718057,
+      "score_true": 0.028985507246376812,
+      "fold_enrichment": 10.115942028985508,
       "top_k_hits": {
         "1": false,
         "3": true,
@@ -337,7 +337,7 @@
         "3": true,
         "5": true
       },
-      "total_mass_in_candidates": 0.2608695657713545,
+      "total_mass_in_candidates": 0.23188407223751473,
       "is_anchor_overlapping": true
     },
     {
@@ -345,8 +345,8 @@
       "n_mouse_parcels": 52,
       "n_human_parcels": 4,
       "rank": 2,
-      "score_true": 0.11538373872671671,
-      "fold_enrichment": 60.403387223436205,
+      "score_true": 0.09621547801842599,
+      "fold_enrichment": 50.368802742646004,
       "top_k_hits": {
         "1": false,
         "3": true,
@@ -357,16 +357,16 @@
         "3": true,
         "5": true
       },
-      "total_mass_in_candidates": 0.3704892162954059,
+      "total_mass_in_candidates": 0.37341629516331776,
       "is_anchor_overlapping": true
     },
     {
       "pair": "Thalamus -> thalamus",
-      "n_mouse_parcels": 110,
+      "n_mouse_parcels": 103,
       "n_human_parcels": 22,
       "rank": 1,
-      "score_true": 0.32760232890404345,
-      "fold_enrichment": 31.181785305684866,
+      "score_true": 0.3303080106768155,
+      "fold_enrichment": 31.43931701623871,
       "top_k_hits": {
         "1": true,
         "3": true,
@@ -377,26 +377,26 @@
         "3": true,
         "5": true
       },
-      "total_mass_in_candidates": 0.327602328904072,
+      "total_mass_in_candidates": 0.3303080106768485,
       "is_anchor_overlapping": true
     }
   ],
   "aggregate": {
     "top_k": {
-      "1": 0.465161923454367,
-      "3": 0.8783120706575074,
-      "5": 0.9038272816486752
+      "1": 0.8330097087378641,
+      "3": 1.0,
+      "5": 1.0
     },
     "qualified_top_k": {
-      "1": 0.338567222767419,
-      "3": 0.634936211972522,
-      "5": 0.634936211972522
+      "1": 0.8330097087378641,
+      "3": 1.0,
+      "5": 1.0
     },
-    "mean_rank": 2.0068694798822375,
-    "median_rank": 2.0,
-    "mean_fold_enrichment": 14.409655121552522,
-    "median_fold_enrichment": 4.308641980208099,
-    "mean_total_mass_in_candidates": 0.20118183391362734
+    "mean_rank": 1.166990291262136,
+    "median_rank": 1.0,
+    "mean_fold_enrichment": 153.1625140404033,
+    "median_fold_enrichment": 81.0102173167105,
+    "mean_total_mass_in_candidates": 0.5098007123958058
   },
   "n_candidates": 21,
   "n_pairs_evaluated": 19,
@@ -407,64 +407,65 @@
   ],
   "anchor_overlapping": {
     "n_pairs": 15,
-    "n_parcels": 927,
+    "n_parcels": 929,
     "top_k": {
-      "1": 0.511326860841424,
-      "3": 0.8942826321467098,
-      "5": 0.8942826321467098
-    },
-    "qualified_top_k": {
-      "1": 0.37216828478964403,
-      "3": 0.697950377562028,
-      "5": 0.697950377562028
-    },
-    "mean_rank": 1.9115426105717368,
-    "mean_fold_enrichment": 15.83973955648546
-  },
-  "novel": {
-    "n_pairs": 4,
-    "n_parcels": 92,
-    "top_k": {
-      "1": 0.0,
-      "3": 0.717391304347826,
+      "1": 0.8148546824542519,
+      "3": 1.0,
       "5": 1.0
     },
     "qualified_top_k": {
-      "1": 0.0,
-      "3": 0.0,
-      "5": 0.0
+      "1": 0.8148546824542519,
+      "3": 1.0,
+      "5": 1.0
     },
-    "mean_rank": 2.967391304347826,
-    "mean_fold_enrichment": 1.0512851077005022e-22
+    "mean_rank": 1.185145317545748,
+    "mean_fold_enrichment": 126.24625695877971
   },
+  "novel": {
+    "n_pairs": 4,
+    "n_parcels": 101,
+    "top_k": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "qualified_top_k": {
+      "1": 1.0,
+      "3": 1.0,
+      "5": 1.0
+    },
+    "mean_rank": 1.0,
+    "mean_fold_enrichment": 400.73877967236655
+  },
+  "candidate_set": "beauchamp22",
   "null_column_permuted": {
     "n_trials": 100,
     "null_topk_mean": {
-      "1": 0.08445534838076546,
-      "3": 0.24830225711481846,
-      "5": 0.3799018645731109
+      "1": 0.07829126213592233,
+      "3": 0.22144660194174753,
+      "5": 0.34203883495145637
     },
     "null_topk_std": {
-      "1": 0.09015861629658606,
-      "3": 0.13389045963255328,
-      "5": 0.12469482007691368
+      "1": 0.07939059055456213,
+      "3": 0.13420517934516946,
+      "5": 0.13008560302882768
     },
-    "null_fold_mean": 1.269630373404656,
-    "null_fold_std": 0.9004066594909067
+    "null_fold_mean": 1.3844977768735185,
+    "null_fold_std": 2.9024427327625477
   },
   "null_source_permuted": {
     "n_trials": 100,
     "null_topk_mean": {
-      "1": 0.11186457311089303,
-      "3": 0.520657507360157,
-      "5": 0.6661629048086359
+      "1": 0.07699029126213593,
+      "3": 0.17763106796116507,
+      "5": 0.2872330097087379
     },
     "null_topk_std": {
-      "1": 0.07971659724939076,
-      "3": 0.11225254811241875,
-      "5": 0.11099245892268424
+      "1": 0.09358895977839841,
+      "3": 0.1162894383897639,
+      "5": 0.13934608707200644
     },
-    "null_fold_mean": 1.9254260020213148,
-    "null_fold_std": 2.1270702115291247
+    "null_fold_mean": 14.258938277372767,
+    "null_fold_std": 16.37668074348311
   }
 }

@@ -1,0 +1,26 @@
+{
+  "n_benchmark_regions": 24,
+  "n_bn_regions": 127,
+  "homer": {
+    "top1": 0.25,
+    "top3": 0.4583333333333333,
+    "top5": 0.6666666666666666,
+    "auroc": 0.8293900503290746,
+    "mass": 0.2071082030087925,
+    "eff_n": 5.756791315297112
+  },
+  "transbrain": {
+    "top1": 0.25,
+    "top3": 0.5,
+    "top5": 0.5833333333333334,
+    "auroc": 0.8446329365079365,
+    "mass": 0.06919999392287783,
+    "eff_n": 60.116020308914266
+  },
+  "auroc_wins": {
+    "homer": 8,
+    "transbrain": 16
+  },
+  "auroc_paired_wilcoxon_p": 0.3632983472967518,
+  "_note": "AUROC/top-k/mass are means over the 24 benchmark regions, scored as distributions over the common Brainnetome set. The win split is by AUROC; the mass-in-region split differs and must not be quoted as the AUROC split."
+}

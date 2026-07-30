@@ -1,0 +1,99 @@
+{
+ "pi_file": "outputs/coupling/pi_canonical.npy",
+ "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+ "n_spins": 1000,
+ "networks": [
+  {
+   "network": "depression_tms",
+   "klass": "cortico-limbic",
+   "note": "convergent depression TMS circuit (Siddiqi 2021 NHB)",
+   "top3": [
+    [
+     "VISam",
+     1.8801
+    ],
+    [
+     "MOs",
+     1.7558
+    ],
+    [
+     "FRP",
+     1.6058
+    ]
+   ],
+   "concentration": 0.026,
+   "effN": 62.8,
+   "spin_p": 0.01998001998001998,
+   "verdict": "MOUSE HOMOLOG (routes specifically)"
+  },
+  {
+   "network": "tms_anxdys",
+   "klass": "cortico-limbic",
+   "note": "dysphoric/anxiosomatic TMS atlas (Siddiqi 2020 AJP)",
+   "top3": [
+    [
+     "BMA",
+     0.5094
+    ],
+    [
+     "AUDv",
+     0.5009
+    ],
+    [
+     "BLA",
+     0.4779
+    ]
+   ],
+   "concentration": 0.027,
+   "effN": 63.0,
+   "spin_p": 0.006993006993006993,
+   "verdict": "MOUSE HOMOLOG (routes specifically)"
+  },
+  {
+   "network": "ptsd_circuit",
+   "klass": "cortico-limbic",
+   "note": "PTSD circuit (Siddiqi 2024 Nat Neurosci)",
+   "top3": [
+    [
+     "MOs",
+     0.1162
+    ],
+    [
+     "VISp",
+     0.1154
+    ],
+    [
+     "FRP",
+     0.1021
+    ]
+   ],
+   "concentration": 0.028,
+   "effN": 59.0,
+   "spin_p": 0.000999000999000999,
+   "verdict": "MOUSE HOMOLOG (routes specifically)"
+  },
+  {
+   "network": "ms_depression",
+   "klass": "cortico-limbic",
+   "note": "MS-depression circuit (Siddiqi 2023 NMH)",
+   "top3": [
+    [
+     "SSp-ul",
+     0.1011
+    ],
+    [
+     "SSp-n",
+     0.0988
+    ],
+    [
+     "SSp-un",
+     0.0987
+    ]
+   ],
+   "concentration": 0.028,
+   "effN": 60.5,
+   "spin_p": 0.001998001998001998,
+   "verdict": "MOUSE HOMOLOG (routes specifically)"
+  }
+ ]
+}

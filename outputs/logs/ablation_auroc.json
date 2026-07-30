@@ -1,0 +1,23 @@
+{
+  "FC": 0.7831,
+  "FC_SC": 0.7884,
+  "FC_SC_gene": 0.7882,
+  "FC_gene": 0.7777,
+  "GW_only_(no_M)": 0.6735,
+  "SC": 0.7749,
+  "anchors_only": 0.7672,
+  "gene": 0.7749,
+  "grid_FC_anchors": 0.7148,
+  "grid_FC_none": 0.5133,
+  "grid_FC_xyz": 0.7559,
+  "grid_SC_anchors": 0.6685,
+  "grid_SC_none": 0.6668,
+  "grid_SC_xyz": 0.7964,
+  "grid_gene_anchors": 0.3396,
+  "grid_gene_none": 0.279,
+  "grid_gene_xyz": 0.5679,
+  "xyz_anch_M_gene": 0.7487,
+  "xyz_anch_netmask": 0.8072,
+  "xyz_anchors": 0.7884,
+  "xyz_only": 0.8197
+}

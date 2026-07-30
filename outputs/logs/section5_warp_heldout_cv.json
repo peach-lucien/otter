@@ -1,0 +1,44 @@
+{
+  "_config": "5-fold, held out of warp+supervision, near=10.0mm",
+  "fold_0": {
+    "n_test_anchors": 10,
+    "warp_mass10mm": 0.3985645562764912,
+    "eucl_mass10mm": 0.20000000045558694,
+    "warp_argmax_dist_mm": 16.636010027439,
+    "eucl_argmax_dist_mm": 26.781398910694776
+  },
+  "fold_1": {
+    "n_test_anchors": 8,
+    "warp_mass10mm": 0.250000001049359,
+    "eucl_mass10mm": 1.8310098125658493e-23,
+    "warp_argmax_dist_mm": 15.929896475150942,
+    "eucl_argmax_dist_mm": 40.689781285528866
+  },
+  "fold_2": {
+    "n_test_anchors": 8,
+    "warp_mass10mm": 0.25000346126562717,
+    "eucl_mass10mm": 9.877026229100588e-25,
+    "warp_argmax_dist_mm": 17.001565396743388,
+    "eucl_argmax_dist_mm": 25.151943687278397
+  },
+  "fold_3": {
+    "n_test_anchors": 8,
+    "warp_mass10mm": 0.37510530605610815,
+    "eucl_mass10mm": 0.12181274098163546,
+    "warp_argmax_dist_mm": 16.769434707856423,
+    "eucl_argmax_dist_mm": 31.032351866720216
+  },
+  "fold_4": {
+    "n_test_anchors": 8,
+    "warp_mass10mm": 0.12499999999999788,
+    "eucl_mass10mm": 2.867684223668177e-30,
+    "warp_argmax_dist_mm": 25.492550360267824,
+    "eucl_argmax_dist_mm": 40.0588335888224
+  },
+  "__aggregate__": {
+    "warp_mass10mm": 0.2797346649295166,
+    "eucl_mass10mm": 0.06436254828744448,
+    "warp_argmax_dist_mm": 18.365891393491516,
+    "eucl_argmax_dist_mm": 32.742861867808934
+  }
+}

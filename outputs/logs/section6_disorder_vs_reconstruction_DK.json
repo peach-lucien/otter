@@ -1,0 +1,57 @@
+{
+  "adhd": {
+    "n_regions": 30,
+    "spearman": 0.1999369035772841,
+    "spin_p": 0.3153423288355822,
+    "spearman_partial_hierarchy": 0.19377085650723025,
+    "fdr_q": 0.5967016491754122
+  },
+  "asd": {
+    "n_regions": 29,
+    "spearman": -0.042883557123352956,
+    "spin_p": 0.808095952023988,
+    "spearman_partial_hierarchy": -0.037438423645320185,
+    "fdr_q": 0.808095952023988
+  },
+  "bipolar": {
+    "n_regions": 30,
+    "spearman": 0.1621802002224694,
+    "spin_p": 0.4112943528235882,
+    "spearman_partial_hierarchy": 0.019799777530589546,
+    "fdr_q": 0.5967016491754122
+  },
+  "mdd": {
+    "n_regions": 30,
+    "spearman": 0.2689954405342618,
+    "spin_p": 0.14842578710644677,
+    "spearman_partial_hierarchy": 0.07942157953281423,
+    "fdr_q": 0.5967016491754122
+  },
+  "ocd": {
+    "n_regions": 30,
+    "spearman": 0.14838709677419354,
+    "spin_p": 0.44377811094452774,
+    "spearman_partial_hierarchy": 0.07897664071190211,
+    "fdr_q": 0.5967016491754122
+  },
+  "schizophrenia": {
+    "n_regions": 30,
+    "spearman": 0.13370411568409346,
+    "spin_p": 0.49725137431284355,
+    "spearman_partial_hierarchy": 0.0002224694104560623,
+    "fdr_q": 0.5967016491754122
+  },
+  "transdiagnostic": {
+    "n_regions": 29,
+    "spearman": 0.2475674362909444,
+    "spin_p": 0.1934032983508246,
+    "spearman_partial_hierarchy": 0.2009852216748768
+  },
+  "_meta": {
+    "coverage": "reconstruction-fidelity (mean per-parcel FC recon r) on pi_canonical",
+    "atlas": "Desikan-Killiany (abagen)",
+    "n_spin": 2000
+  },
+  "pi_file": "outputs/coupling/pi_canonical.npy",
+  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77"
+}

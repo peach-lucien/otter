@@ -1,0 +1,22 @@
+{
+  "pi_file": "outputs/coupling/pi_canonical.npy",
+  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+  "supragranular_minus_infragranular": {
+    "pearson_r": 0.008084976451264637,
+    "spin_p": 0.8781218781218781,
+    "spin_null_abs_mean": 0.037485218511153516,
+    "n_cortical": 1768
+  },
+  "granular_L4_minus_infragranular": {
+    "pearson_r": 0.18712178577391028,
+    "spin_p": 0.000999000999000999,
+    "spin_null_abs_mean": 0.03925024223702026,
+    "n_cortical": 1768
+  },
+  "supragranular_minus_granular": {
+    "pearson_r": 0.021039663620110366,
+    "spin_p": 0.6463536463536463,
+    "spin_null_abs_mean": 0.03837931632326823,
+    "n_cortical": 1768
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "pi_shape": [
+    1864,
+    2094
+  ],
+  "top_target_probability": {
+    "median": 0.314962887702142,
+    "mean": 0.35604795187246113,
+    "fraction_above_0.5": 0.20118025751072963
+  },
+  "spatial_fidelity": {
+    "pearson_r": 0.5340437498381436,
+    "n_parcels": 1864,
+    "permuted_null_mean": -0.0008574573469479013,
+    "permuted_null_sd": 0.007661069452499524
+  },
+  "evidence_tiers_percent": {
+    "anchored_and_validated": 31.0,
+    "validated_only": 21.5,
+    "anchored_only": 12.8,
+    "structural": 13.9,
+    "low_evidence": 20.9,
+    "_n": 1864
+  },
+  "per_tier_recovery": {
+    "anchored_and_validated": {
+      "n": 577,
+      "percent_of_brain": 31.0,
+      "top1": 0.685,
+      "auroc": 0.872
+    },
+    "anchored_only": {
+      "n": 238,
+      "percent_of_brain": 12.8,
+      "top1": 0.038,
+      "auroc": 0.34
+    },
+    "low_evidence": {
+      "n": 389,
+      "percent_of_brain": 20.9,
+      "top1": 0.038,
+      "auroc": 0.34
+    },
+    "structural": {
+      "n": 259,
+      "percent_of_brain": 13.9,
+      "top1": 0.038,
+      "auroc": 0.34
+    },
+    "validated_only": {
+      "n": 401,
+      "percent_of_brain": 21.5,
+      "top1": 0.184,
+      "auroc": 0.88
+    },
+    "_validated_tiers_percent_of_brain": 52.5
+  },
+  "pi_file": "outputs/coupling/pi_canonical.npy",
+  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77"
+}

@@ -1,4 +1,6 @@
 {
+  "pi_file": "outputs/coupling/pi_canonical.npy",
+  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
   "n_whitesell_dmn_parcels": 176,
   "fraction_of_brain": 0.0944206008583691,
   "per_region_counts": {
@@ -15,74 +17,74 @@
   "per_yeo7_network": [
     {
       "network": "Control",
-      "row_mass": 0.08881883066623532,
+      "row_mass": 0.04334115650006998,
       "n_human_parcels": 271,
       "expected_null": 0.1294173829990449,
-      "ratio_over_null": 0.686297532897036,
+      "ratio_over_null": 0.3348943974581053,
       "is_dmn": false
     },
     {
       "network": "DMN",
-      "row_mass": 0.4353089752870795,
+      "row_mass": 0.3804015180275834,
       "n_human_parcels": 439,
       "expected_null": 0.2096466093600764,
-      "ratio_over_null": 2.0763940643534045,
+      "ratio_over_null": 1.8144892454436439,
       "is_dmn": true
     },
     {
       "network": "DorsAtten",
-      "row_mass": 0.026912676082018597,
+      "row_mass": 0.01933323802030197,
       "n_human_parcels": 242,
       "expected_null": 0.11556829035339064,
-      "ratio_over_null": 0.23287249469316917,
+      "ratio_over_null": 0.16728843146492697,
       "is_dmn": false
     },
     {
       "network": "Limbic",
-      "row_mass": 0.09912910190784235,
+      "row_mass": 0.1182512125596317,
       "n_human_parcels": 60,
       "expected_null": 0.02865329512893983,
-      "ratio_over_null": 3.459605656583698,
+      "ratio_over_null": 4.126967318331146,
       "is_dmn": false
     },
     {
       "network": "Salience",
-      "row_mass": 0.10037232468908423,
+      "row_mass": 0.13240690190686785,
       "n_human_parcels": 248,
       "expected_null": 0.11843361986628462,
-      "ratio_over_null": 0.847498580237671,
+      "ratio_over_null": 1.1179840830362149,
       "is_dmn": false
     },
     {
       "network": "SomatoMotor",
-      "row_mass": 0.01136363636363637,
+      "row_mass": 0.008908051678890314,
       "n_human_parcels": 253,
       "expected_null": 0.12082139446036294,
-      "ratio_over_null": 0.09405318002155952,
+      "ratio_over_null": 0.07372909176125027,
       "is_dmn": false
     },
     {
       "network": "Visual",
-      "row_mass": 0.011624642707323376,
+      "row_mass": 0.10438436525550146,
       "n_human_parcels": 255,
       "expected_null": 0.12177650429799428,
-      "ratio_over_null": 0.09545883070249078,
+      "ratio_over_null": 0.857179846451059,
       "is_dmn": false
     },
     {
       "network": "Subcortical",
-      "row_mass": 0.2264698122967804,
+      "row_mass": 0.19297355605115335,
       "n_human_parcels": 326,
       "expected_null": 0.1556829035339064,
-      "ratio_over_null": 1.4546864630351477,
+      "ratio_over_null": 1.239529528745752,
       "is_dmn": false
     }
   ],
   "comparison": {
-    "pagani_DMN_to_DMN": 0.3824438156689921,
-    "coletta_frontal_dmn_to_DMN": 0.35764593474922945,
-    "coletta_temporal_dmn_to_DMN": 0.4217389192803083,
-    "whitesell_DMN_to_DMN": 0.4353089752870795
+    "pagani_DMN_to_DMN": 0.2599687612963938,
+    "coletta_frontal_dmn_to_DMN": 0.11291779552554287,
+    "coletta_temporal_dmn_to_DMN": 0.49298798397943444,
+    "whitesell_DMN_to_DMN": 0.3804015180275834
   },
-  "verdict": "Whitesell DMN (43.5%) BEATS Pagani's PAIRID-derived DMN (38.2%) \u2192 refining the mouse-DMN parcel set sharpens HOMER's DMN\u2192DMN correspondence"
+  "verdict": "Whitesell DMN (38.0%) BEATS Pagani's PAIRID-derived DMN (26.0%) \u2192 refining the mouse-DMN parcel set sharpens HOMER's DMN\u2192DMN correspondence"
 }

@@ -1,0 +1,210 @@
+{
+ "pi_file": "outputs/coupling/pi_canonical.npy",
+ "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+ "n_spins": 1000,
+ "n_anchored": 6,
+ "hit_top1": 0,
+ "hit_top3": 0,
+ "n_spin_sig": 4,
+ "results": [
+  {
+   "disease": "parkinson",
+   "group": "neurological",
+   "term": "parkinson",
+   "ground_truth": [
+    "SNr",
+    "CP"
+   ],
+   "best_gt_rank": 12,
+   "hit_top1": false,
+   "hit_top3": false,
+   "spin_p": 0.07292707292707293,
+   "top3": [
+    [
+     "VPL",
+     2.0651
+    ],
+    [
+     "VPM",
+     2.013
+    ],
+    [
+     "RT",
+     1.9649
+    ]
+   ]
+  },
+  {
+   "disease": "alzheimer",
+   "group": "neurological",
+   "term": "alzheimer",
+   "ground_truth": [
+    "ENTl",
+    "ENTm",
+    "CA1",
+    "SUB",
+    "DG",
+    "CA3"
+   ],
+   "best_gt_rank": 4,
+   "hit_top1": false,
+   "hit_top3": false,
+   "spin_p": 0.003996003996003996,
+   "top3": [
+    [
+     "BMA",
+     4.233
+    ],
+    [
+     "BLA",
+     3.9573
+    ],
+    [
+     "PA",
+     3.9397
+    ]
+   ]
+  },
+  {
+   "disease": "huntington",
+   "group": "neurological",
+   "status": "map_missing"
+  },
+  {
+   "disease": "epilepsy",
+   "group": "neurological",
+   "term": "epilepsy",
+   "ground_truth": [
+    "CA1",
+    "CA3",
+    "DG",
+    "ENTl",
+    "ENTm"
+   ],
+   "best_gt_rank": 5,
+   "hit_top1": false,
+   "hit_top3": false,
+   "spin_p": 0.005994005994005994,
+   "top3": [
+    [
+     "BMA",
+     2.9727
+    ],
+    [
+     "BLA",
+     2.7237
+    ],
+    [
+     "COAp",
+     2.5317
+    ]
+   ]
+  },
+  {
+   "disease": "addiction",
+   "group": "neurological",
+   "term": "addiction",
+   "ground_truth": [
+    "ACB"
+   ],
+   "best_gt_rank": 6,
+   "hit_top1": false,
+   "hit_top3": false,
+   "spin_p": 0.03296703296703297,
+   "top3": [
+    [
+     "OT",
+     3.5298
+    ],
+    [
+     "SI",
+     3.3514
+    ],
+    [
+     "LHA",
+     2.2668
+    ]
+   ]
+  },
+  {
+   "disease": "schizophrenia",
+   "group": "psychiatric",
+   "term": "schizophrenia",
+   "ground_truth": [
+    "CA1",
+    "SUB",
+    "PL",
+    "CP"
+   ],
+   "best_gt_rank": 45,
+   "hit_top1": false,
+   "hit_top3": false,
+   "spin_p": 0.8611388611388612,
+   "top3": [
+    [
+     "RSPd",
+     0.1645
+    ],
+    [
+     "ORBvl",
+     0.0503
+    ],
+    [
+     "ORBm",
+     0.0417
+    ]
+   ]
+  },
+  {
+   "disease": "ocd",
+   "group": "psychiatric",
+   "term": "obsessive",
+   "ground_truth": [
+    "CP",
+    "ACB"
+   ],
+   "best_gt_rank": 7,
+   "hit_top1": false,
+   "hit_top3": false,
+   "spin_p": 0.000999000999000999,
+   "top3": [
+    [
+     "TT",
+     1.2189
+    ],
+    [
+     "AIv",
+     1.189
+    ],
+    [
+     "AON",
+     1.1854
+    ]
+   ]
+  },
+  {
+   "disease": "autism",
+   "group": "psychiatric",
+   "term": "autism",
+   "ground_truth": [],
+   "best_gt_rank": null,
+   "hit_top1": false,
+   "hit_top3": false,
+   "spin_p": NaN,
+   "top3": [
+    [
+     "BMA",
+     2.5266
+    ],
+    [
+     "BLA",
+     2.435
+    ],
+    [
+     "AUDv",
+     2.069
+    ]
+   ]
+  }
+ ]
+}

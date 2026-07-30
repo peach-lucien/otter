@@ -1,0 +1,43 @@
+{
+  "anchor_distance": {
+    "coverage_vs_anchor_distance": -0.4117908787541713,
+    "bipolar": {
+      "raw": 0.6355951056729701,
+      "partialling_anchor_distance": 0.525250278086763
+    },
+    "schizophrenia": {
+      "raw": 0.5225806451612903,
+      "partialling_anchor_distance": 0.48565072302558404
+    }
+  },
+  "robustness": {
+    "bipolar": {
+      "rescue 2 mm": 0.5857142857142856,
+      "rescue 4 mm (main)": 0.6355951056729701,
+      "rescue 6 mm": 0.6240266963292548,
+      "\u22653 parcels": 0.6383064516129032,
+      "\u226520 parcels": 0.6182947487295314,
+      "leave_one_region_out_min": 0.6088669950738915,
+      "leave_one_region_out_max": 0.6995073891625614
+    },
+    "schizophrenia": {
+      "rescue 2 mm": 0.4285714285714285,
+      "rescue 4 mm (main)": 0.5225806451612903,
+      "rescue 6 mm": 0.52880978865406,
+      "\u22653 parcels": 0.4766129032258065,
+      "\u226520 parcels": 0.47374364765669114,
+      "leave_one_region_out_min": 0.48029556650246297,
+      "leave_one_region_out_max": 0.5822660098522167
+    }
+  },
+  "summed_coverage_control": {
+    "bipolar": {
+      "mass_normalised": 0.6355951056729701,
+      "summed": 0.046496106785317015
+    },
+    "schizophrenia": {
+      "mass_normalised": 0.5225806451612903,
+      "summed": 0.01935483870967742
+    }
+  }
+}

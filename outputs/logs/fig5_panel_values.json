@@ -1,0 +1,94 @@
+{
+ "5c_map_battery": {
+  "Evolutionary expansion, mouse\u2192human (Xu 2020)": {
+   "spearman_rho": -0.32065026679568154,
+   "spin_p": 0.000999000999000999
+  },
+  "Evolutionary expansion, macaque\u2192human (Hill 2010)": {
+   "spearman_rho": -0.4695745395527848,
+   "spin_p": 0.002997002997002997
+  },
+  "Postnatal developmental expansion (Hill 2010)": {
+   "spearman_rho": -0.24873567331870455,
+   "spin_p": 0.04995004995004995
+  },
+  "Mouse\u2013human FC homology (Xu 2020)": {
+   "spearman_rho": 0.40132554694118455,
+   "spin_p": 0.000999000999000999
+  },
+  "Sensorimotor\u2013association axis (Sydnor 2021)": {
+   "spearman_rho": -0.3340476658890982,
+   "spin_p": 0.016983016983016984
+  },
+  "Principal FC gradient (Margulies 2016)": {
+   "spearman_rho": -0.27694054210312896,
+   "spin_p": 0.016983016983016984
+  },
+  "Cortical hierarchy, T1w/T2w myelin (HCP)": {
+   "spearman_rho": 0.23792393211465193,
+   "spin_p": 0.10589410589410589
+  }
+ },
+ "5d_expansion_scatter": {
+  "spearman_rho": -0.32065026679568154,
+  "spin_p": 0.000999000999000999,
+  "pearson_r_log": -0.3900417810632441,
+  "n_regions": 391
+ },
+ "5a_fingerprint_examples": {
+  "high_parcel_r": 0.7749262778283508,
+  "high_parcel_network": "VisCent",
+  "low_parcel_r": 0.07061800037772918,
+  "low_parcel_network": "ContB"
+ },
+ "5f_network_deficit": {
+  "network_mean_sd": {
+   "ContB": -0.5750410243473826,
+   "ContA": -0.45604442985900273,
+   "SalVentAttnA": -0.4191879559075953,
+   "Limbic": -0.3330414439714143,
+   "SomMotA": -0.3148344256453626,
+   "SalVentAttnB": -0.2828685304768138,
+   "DorsAttnB": -0.26797950984563296,
+   "TempPar": -0.2489222355546367,
+   "DefaultB": -0.22400954580609275,
+   "DefaultC": -0.10743001999013571,
+   "DefaultA": -0.10173162023618891,
+   "ContC": 0.29900315206943845,
+   "DorsAttnA": 0.30899831087887564,
+   "SomMotB": 0.5276234461545057,
+   "VisPeri": 0.8605223522005612,
+   "VisCent": 1.1737454692670317
+  },
+  "n_networks": 16
+ },
+ "5f_tested_statistic": {
+  "contB_gap_sd": -0.6850359802219431,
+  "spin_p": 0.005997001499250375,
+  "n_parcels_tested": 1040,
+  "n_parcels_mapped": 1824,
+  "contB_sd_on_mapped_population": -0.5750410243473826
+ },
+ "5e_overlap": {
+  "association_floor": 0.07490068750338505,
+  "sensorimotor_floor": 0.22478914473939818,
+  "sensorimotor_median": 0.5148518756350895,
+  "frac_association_above_sensorimotor_median": 0.2076923076923077,
+  "n_per_tertile": 130
+ },
+ "5e_tertiles": {
+  "association_mean": 0.4023113158772629,
+  "sensorimotor_mean": 0.4990506739283684,
+  "delta": 0.0967393580511055,
+  "cohens_d": 0.8108634143645116,
+  "spin_p": 0.00999000999000999
+ },
+ "measure": {
+  "mean_recon_r": 0.44599135016165425,
+  "n_parcels_scored": 1824,
+  "min_r": -0.12632250781988882,
+  "max_r": 0.7749262778283508
+ },
+ "pi_file": "outputs/coupling/pi_canonical.npy",
+ "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77"
+}

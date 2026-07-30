@@ -1,0 +1,81 @@
+{
+ "_what": "Review-round analysis, 2026-07-28/29. Produced by the harness in _audit/HOMER_review_analyses.tar.gz, which reproduces pi_canonical.npy exactly before any experiment (argmax match 1.0000, entrywise r 1.00000). Committed here as a loose log so tools/check_manuscript_numbers.py can see it.",
+ "1_connectivity_only": {
+  "auroc": 0.69384860010984,
+  "top1": 0.0,
+  "mass_in_region": 0.013806620352594313,
+  "centroid_disp_mm": 29.071048066626453,
+  "cfg": {
+   "alpha": 0.5,
+   "xyzw": 0.0,
+   "garin": false,
+   "packs": false
+  },
+  "secs": 15
+ },
+ "2_+spatial": {
+  "auroc": 0.9744679168668517,
+  "top1": 0.2737864077669903,
+  "mass_in_region": 0.22839258769574416,
+  "centroid_disp_mm": 11.207050587303238,
+  "cfg": {
+   "alpha": 0.5,
+   "xyzw": 0.25,
+   "garin": false,
+   "packs": false
+  },
+  "secs": 14
+ },
+ "3_+anchors": {
+  "auroc": 0.9298778535674547,
+  "top1": 0.2611650485436893,
+  "mass_in_region": 0.22082276451495417,
+  "centroid_disp_mm": 11.118948929159886,
+  "cfg": {
+   "alpha": 0.5,
+   "xyzw": 0.25,
+   "garin": true,
+   "packs": false
+  },
+  "secs": 15
+ },
+ "4_+packs_CANONICAL": {
+  "auroc": 0.8987621871990727,
+  "top1": 0.566990291262136,
+  "mass_in_region": 0.5407463140555259,
+  "centroid_disp_mm": 8.83011401752322,
+  "cfg": {
+   "alpha": 0.5,
+   "xyzw": 0.25,
+   "garin": true,
+   "packs": true
+  },
+  "secs": 15
+ },
+ "5_NOCONN_spatial_only": {
+  "auroc": 0.9718886429043557,
+  "top1": 0.27475728155339807,
+  "mass_in_region": 0.2652294356828881,
+  "centroid_disp_mm": 11.490519874545155,
+  "cfg": {
+   "alpha": 0.0,
+   "xyzw": 0.25,
+   "garin": false,
+   "packs": false
+  },
+  "secs": 15
+ },
+ "6_NOCONN_spatial+anch+packs": {
+  "auroc": 0.8924267120755129,
+  "top1": 0.5737864077669903,
+  "mass_in_region": 0.561973131687085,
+  "centroid_disp_mm": 7.7544855734052565,
+  "cfg": {
+   "alpha": 0.0,
+   "xyzw": 0.25,
+   "garin": true,
+   "packs": true
+  },
+  "secs": 15
+ }
+}

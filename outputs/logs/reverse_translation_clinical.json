@@ -1,0 +1,142 @@
+{
+ "pi_file": "outputs/coupling/pi_canonical.npy",
+ "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+ "params": {
+  "K_NEAREST": 8,
+  "N_SPINS": 1000
+ },
+ "targets": [
+  {
+   "target": "NAcc DBS (OCD/depression)",
+   "klass": "conserved",
+   "source": "ventral striatum DBS",
+   "mni": [
+    -8,
+    10,
+    -8
+   ],
+   "expected": [
+    "ACB"
+   ],
+   "hit_top3": false,
+   "top3": [
+    [
+     "NDB",
+     0.4171
+    ],
+    [
+     "AHN",
+     0.3982
+    ],
+    [
+     "SI",
+     0.305
+    ]
+   ],
+   "peak_concentration": 0.111,
+   "effN_structures": 16.2,
+   "spin_p": 0.003996003996003996,
+   "evidence_tier_at_top": "validated_only",
+   "verdict": "NO ADEQUATE MOUSE TARGET"
+  },
+  {
+   "target": "STN DBS (Parkinson's)",
+   "klass": "conserved",
+   "source": "subthalamic DBS",
+   "mni": [
+    -12,
+    -14,
+    -7
+   ],
+   "expected": [
+    "STN"
+   ],
+   "hit_top3": true,
+   "top3": [
+    [
+     "ZI",
+     0.4694
+    ],
+    [
+     "VM",
+     0.4583
+    ],
+    [
+     "STN",
+     0.4532
+    ]
+   ],
+   "peak_concentration": 0.052,
+   "effN_structures": 32.2,
+   "spin_p": 0.000999000999000999,
+   "evidence_tier_at_top": "structural",
+   "verdict": "NO ADEQUATE MOUSE TARGET"
+  },
+  {
+   "target": "Subgenual Cg25 DBS (depr.)",
+   "klass": "contested",
+   "source": "Mayberg subgenual DBS",
+   "mni": [
+    -4,
+    22,
+    -8
+   ],
+   "expected": [
+    "ILA",
+    "PL",
+    "ACAv"
+   ],
+   "hit_top3": false,
+   "top3": [
+    [
+     "AON",
+     0.2045
+    ],
+    [
+     "TT",
+     0.183
+    ],
+    [
+     "OT",
+     0.1154
+    ]
+   ],
+   "peak_concentration": 0.28,
+   "effN_structures": 5.7,
+   "spin_p": 0.015984015984015984,
+   "evidence_tier_at_top": "anchored_only",
+   "verdict": "CONFIDENT PRESCRIPTION"
+  },
+  {
+   "target": "dlPFC TMS (depression)",
+   "klass": "elaborated",
+   "source": "Fox antidepressant TMS target",
+   "mni": [
+    -42,
+    44,
+    30
+   ],
+   "expected": null,
+   "hit_top3": null,
+   "top3": [
+    [
+     "ORBl",
+     0.0
+    ],
+    [
+     "AId",
+     0.0
+    ],
+    [
+     "ORBvl",
+     0.0
+    ]
+   ],
+   "peak_concentration": 0.205,
+   "effN_structures": 9.3,
+   "spin_p": 0.19480519480519481,
+   "evidence_tier_at_top": "anchored_only",
+   "verdict": "NO ADEQUATE MOUSE TARGET"
+  }
+ ]
+}

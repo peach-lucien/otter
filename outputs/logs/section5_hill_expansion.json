@@ -1,0 +1,27 @@
+{
+  "map": "hill2010 evoexp (fsLR164k, R hemi)",
+  "n_regions": 197,
+  "spearman": -0.18541574451654222,
+  "coverage_vs_expansion_continuous": {
+    "r_observed": -0.17408579916639913,
+    "p_spin": 0.04595404595404595,
+    "n_trials": 1000,
+    "null_mean": -0.001085648174746129,
+    "null_abs_mean": 0.07249819036674532,
+    "null_abs_p95": 0.16969542413678299,
+    "null_ci95": [
+      -0.17817404928490904,
+      0.15906241000720484
+    ]
+  },
+  "coverage_vs_expansion_tertile": {
+    "gap_observed": 3.6709758332726947,
+    "p_spin": 0.13686313686313686,
+    "null_abs_p95": 4.742481493327252
+  },
+  "caveats": [
+    "macaque->human vs mouse->human",
+    "right hemisphere only",
+    "Schaefer-400 resolution; nearest-vertex resample"
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "selectivity_battery": {
+    "Bipolar disorder": {
+      "spearman": 0.6355951056729701,
+      "spin_p": 0.0004997501249375312,
+      "fdr_q": 0.0037481259370314842,
+      "mean_abs_d": 0.17938333333333334,
+      "n_regions": 30
+    },
+    "Schizophrenia": {
+      "spearman": 0.5225806451612903,
+      "spin_p": 0.0004997501249375312,
+      "fdr_q": 0.0037481259370314842,
+      "mean_abs_d": 0.32185,
+      "n_regions": 30
+    },
+    "Anorexia nervosa (acute)": {
+      "spearman": 0.37664071190211346,
+      "spin_p": 0.0239880059970015,
+      "fdr_q": 0.1199400299850075,
+      "mean_abs_d": 0.5687451333333333,
+      "n_regions": 30
+    },
+    "Antisocial": {
+      "spearman": 0.35816716661777065,
+      "spin_p": 0.03798100949525238,
+      "fdr_q": 0.1424287856071964,
+      "mean_abs_d": 0.05066666666666667,
+      "n_regions": 30
+    },
+    "OCD (adult)": {
+      "spearman": 0.260511679644049,
+      "spin_p": 0.1359320339830085,
+      "fdr_q": 0.4077961019490255,
+      "mean_abs_d": 0.05550000000000001,
+      "n_regions": 30
+    },
+    "Psychosis (all cases)": {
+      "spearman": 0.23104440618917838,
+      "spin_p": 0.22038980509745126,
+      "fdr_q": 0.42145593869731807,
+      "mean_abs_d": 0.09883333333333331,
+      "n_regions": 30
+    },
+    "Clinical high risk, conv.": {
+      "spearman": 0.2223706521272964,
+      "spin_p": 0.23638180909545228,
+      "fdr_q": 0.42145593869731807,
+      "mean_abs_d": 0.14566666666666667,
+      "n_regions": 30
+    },
+    "Epilepsy (all)": {
+      "spearman": 0.20872274660044057,
+      "spin_p": 0.25287356321839083,
+      "fdr_q": 0.42145593869731807,
+      "mean_abs_d": 0.16325,
+      "n_regions": 30
+    },
+    "Normal ageing, 3\u201329 yr": {
+      "spearman": 0.18309232480533927,
+      "spin_p": 0.32083958020989506,
+      "fdr_q": 0.48125937031484256,
+      "mean_abs_d": 0.3889333333333333,
+      "n_regions": 30
+    },
+    "Temporal lobe epilepsy (L)": {
+      "spearman": 0.12658509454949946,
+      "spin_p": 0.49725137431284355,
+      "fdr_q": 0.6377580440548956,
+      "mean_abs_d": 0.23709999999999998,
+      "n_regions": 30
+    },
+    "Parkinson disease": {
+      "spearman": 0.10501724394720557,
+      "spin_p": 0.552223888055972,
+      "fdr_q": 0.6377580440548956,
+      "mean_abs_d": 0.10464999999999999,
+      "n_regions": 30
+    },
+    "22q11 deletion syndrome": {
+      "spearman": -0.10746467971716164,
+      "spin_p": 0.5527236381809095,
+      "fdr_q": 0.6377580440548956,
+      "mean_abs_d": 0.39416666666666667,
+      "n_regions": 30
+    },
+    "ADHD (all ages)": {
+      "spearman": -0.21896785184611856,
+      "spin_p": 0.2448775612193903,
+      "fdr_q": 0.42145593869731807,
+      "mean_abs_d": 0.02866666666666667,
+      "n_regions": 30
+    },
+    "ASD (mega-analysis)": {
+      "spearman": -0.03277881090463186,
+      "spin_p": 0.8670664667666167,
+      "fdr_q": 0.928999785821375,
+      "mean_abs_d": 0.06086206896551724,
+      "n_regions": 29
+    },
+    "Major depression (adult)": {
+      "spearman": 0.009567248918919153,
+      "spin_p": 0.9660169915042479,
+      "fdr_q": 0.9660169915042479,
+      "mean_abs_d": 0.054150000000000004,
+      "n_regions": 30
+    }
+  },
+  "hierarchy_head_to_head": {
+    "bipolar": {
+      "HOMER coverage": {
+        "spearman": 0.6355951056729701,
+        "spin_p": 0.0004997501249375312
+      },
+      "Sydnor S-A axis": {
+        "spearman": -0.5737486095661846,
+        "spin_p": 0.010494752623688156
+      },
+      "Margulies gradient": {
+        "spearman": -0.5154616240266964,
+        "spin_p": 0.010994502748625687
+      },
+      "HCP T1w/T2w": {
+        "spearman": 0.3975528364849833,
+        "spin_p": 0.08695652173913043
+      }
+    },
+    "schizophrenia": {
+      "HOMER coverage": {
+        "spearman": 0.5225806451612903,
+        "spin_p": 0.0004997501249375312
+      },
+      "Sydnor S-A axis": {
+        "spearman": -0.3828698553948832,
+        "spin_p": 0.16241879060469766
+      },
+      "Margulies gradient": {
+        "spearman": -0.30945494994438266,
+        "spin_p": 0.18990504747626186
+      },
+      "HCP T1w/T2w": {
+        "spearman": 0.3325917686318131,
+        "spin_p": 0.2538730634682659
+      }
+    }
+  },
+  "controls": {
+    "bipolar": {
+      "coverage_partialling_both_hierarchy_maps": 0.5959955506117909,
+      "summed_coverage_spearman": 0.046496106785317015
+    },
+    "schizophrenia": {
+      "coverage_partialling_both_hierarchy_maps": 0.4313681868743047,
+      "summed_coverage_spearman": 0.01935483870967742
+    }
+  },
+  "condition_topography_matrix": {
+    "Schizophrenia": {
+      "Schizophrenia": 1.0,
+      "Bipolar disorder": 0.7735261401557285,
+      "22q11 deletion syndrome": -0.09611747751100172,
+      "Anorexia nervosa (acute)": 0.11946607341490545,
+      "Normal ageing, 3\u201329 yr": 0.21023359288097884,
+      "Parkinson disease": 0.2311714331803953
+    },
+    "Bipolar disorder": {
+      "Schizophrenia": 0.7735261401557285,
+      "Bipolar disorder": 1.0,
+      "22q11 deletion syndrome": -0.2184892660088048,
+      "Anorexia nervosa (acute)": 0.19911012235817574,
+      "Normal ageing, 3\u201329 yr": 0.44471635150166855,
+      "Parkinson disease": 0.14662365203645863
+    },
+    "22q11 deletion syndrome": {
+      "Schizophrenia": -0.09611747751100172,
+      "Bipolar disorder": -0.21848926600880483,
+      "22q11 deletion syndrome": 1.0,
+      "Anorexia nervosa (acute)": -0.07008566068510542,
+      "Normal ageing, 3\u201329 yr": -0.3559906574481545,
+      "Parkinson disease": 0.24788607031597693
+    },
+    "Anorexia nervosa (acute)": {
+      "Schizophrenia": 0.11946607341490545,
+      "Bipolar disorder": 0.19911012235817574,
+      "22q11 deletion syndrome": -0.07008566068510542,
+      "Anorexia nervosa (acute)": 1.0,
+      "Normal ageing, 3\u201329 yr": 0.6151279199110122,
+      "Parkinson disease": 0.43186116631679244
+    },
+    "Normal ageing, 3\u201329 yr": {
+      "Schizophrenia": 0.21023359288097884,
+      "Bipolar disorder": 0.44471635150166855,
+      "22q11 deletion syndrome": -0.35599065744815445,
+      "Anorexia nervosa (acute)": 0.6151279199110122,
+      "Normal ageing, 3\u201329 yr": 1.0,
+      "Parkinson disease": 0.34175103115022837
+    },
+    "Parkinson disease": {
+      "Schizophrenia": 0.2311714331803953,
+      "Bipolar disorder": 0.14662365203645866,
+      "22q11 deletion syndrome": 0.24788607031597693,
+      "Anorexia nervosa (acute)": 0.43186116631679244,
+      "Normal ageing, 3\u201329 yr": 0.3417510311502283,
+      "Parkinson disease": 1.0
+    }
+  }
+}

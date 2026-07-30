@@ -1,0 +1,57 @@
+{
+  "bipolar": {
+    "n": 30,
+    "rho": 0.6298109010011124,
+    "spin_p": 0.0004997501249375312,
+    "mean_abs_d": 0.17938333333333334,
+    "rho_partial_hierarchy": 0.5256952169076751
+  },
+  "schizophrenia": {
+    "n": 30,
+    "rho": 0.507007786429366,
+    "spin_p": 0.0024987506246876563,
+    "mean_abs_d": 0.32185,
+    "rho_partial_hierarchy": 0.3917686318131257
+  },
+  "asd": {
+    "n": 29,
+    "rho": -0.03179298200524443,
+    "spin_p": 0.8700649675162418,
+    "mean_abs_d": 0.06086206896551724,
+    "rho_partial_hierarchy": 0.06995073891625614
+  },
+  "mdd": {
+    "n": 30,
+    "rho": -0.0037824007353866413,
+    "spin_p": 0.9870064967516242,
+    "mean_abs_d": 0.054150000000000004,
+    "rho_partial_hierarchy": -0.1599555061179088
+  },
+  "adhd": {
+    "n": 30,
+    "rho": -0.2140421946471261,
+    "spin_p": 0.25037481259370314,
+    "mean_abs_d": 0.02866666666666667,
+    "rho_partial_hierarchy": -0.28453837597330367
+  },
+  "ocd": {
+    "n": 30,
+    "rho": 0.2453837597330367,
+    "spin_p": 0.16991504247876063,
+    "mean_abs_d": 0.05550000000000001,
+    "rho_partial_hierarchy": 0.19777530589543937
+  },
+  "transdiagnostic": {
+    "n": 29,
+    "rho": 0.4135977368482544,
+    "spin_p": 0.01249375312343828,
+    "mean_abs_d": 0.09928160919540228,
+    "rho_partial_hierarchy": 0.3231527093596058
+  },
+  "_meta": {
+    "atlas": "abagen Desikan-Killiany volumetric MNI152 1mm",
+    "metric": "Spearman on mass-normalised mean log10 coverage",
+    "n_spin": 2000,
+    "coverage_vs_myelin_rho": 0.24271412680756396
+  }
+}

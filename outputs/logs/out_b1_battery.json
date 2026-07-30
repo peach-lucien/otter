@@ -1,0 +1,51 @@
+{
+ "_what": "Review-round analysis, 2026-07-28/29. Produced by the harness in _audit/HOMER_review_analyses.tar.gz, which reproduces pi_canonical.npy exactly before any experiment (argmax match 1.0000, entrywise r 1.00000). Committed here as a loose log so tools/check_manuscript_numbers.py can see it.",
+ "4_+packs_CANONICAL": {
+  "label": "canonical (alpha=0.5)",
+  "fulcher_t1t2": 0.5045941644709661,
+  "fulcher_cytoarch": 0.5338470183128415,
+  "transcriptomic_sim": 0.16413645132328455,
+  "roundtrip_AIopto": 0.8453192194579442,
+  "roundtrip_Magel2": 0.8836532397130535
+ },
+ "6_NOCONN_spatial+anch+packs": {
+  "label": "alpha=0 (NO connectivity)",
+  "fulcher_t1t2": 0.3960672734837843,
+  "fulcher_cytoarch": 0.42376781377405554,
+  "transcriptomic_sim": 0.16678812113867816,
+  "roundtrip_AIopto": 0.8744715832740448,
+  "roundtrip_Magel2": 0.8958715625446019
+ },
+ "2_+spatial": {
+  "label": "conn+spatial, no curation",
+  "fulcher_t1t2": 0.5032060053338533,
+  "fulcher_cytoarch": 0.4716795089330509,
+  "transcriptomic_sim": 0.1504068942201747,
+  "roundtrip_AIopto": 0.8646794372732559,
+  "roundtrip_Magel2": 0.9223186907402179
+ },
+ "5_NOCONN_spatial_only": {
+  "label": "alpha=0 spatial only",
+  "fulcher_t1t2": 0.4160339910962835,
+  "fulcher_cytoarch": 0.3963790038569448,
+  "transcriptomic_sim": 0.1574404130249255,
+  "roundtrip_AIopto": 0.9159711061016856,
+  "roundtrip_Magel2": 0.9361902403216747
+ },
+ "1_connectivity_only": {
+  "label": "connectivity only",
+  "fulcher_t1t2": 0.3757834969752956,
+  "fulcher_cytoarch": 0.35159091477810017,
+  "transcriptomic_sim": 0.004973003277615345,
+  "roundtrip_AIopto": 0.34251943123326395,
+  "roundtrip_Magel2": 0.12439083616789096
+ },
+ "_transcriptomic_contrast": {
+  "canonical_minus_alpha0_mean": -0.00265166981539361,
+  "boot_ci95": [
+   -0.0053423539757398225,
+   8.563840886601919e-05
+  ],
+  "frac_parcels_canonical_higher": 0.4715665236051502
+ }
+}

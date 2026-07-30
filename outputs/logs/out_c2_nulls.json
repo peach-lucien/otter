@@ -1,0 +1,48 @@
+{
+ "_what": "Review-round analysis, 2026-07-28/29. Produced by the harness in _audit/HOMER_review_analyses.tar.gz, which reproduces pi_canonical.npy exactly before any experiment (argmax match 1.0000, entrywise r 1.00000). Committed here as a loose log so tools/check_manuscript_numbers.py can see it.",
+ "Principal FC gradient": {
+  "abs_r": 0.5369570831520405,
+  "n_parcels_reported": 2094,
+  "n_distinct_mouse_values": 1589,
+  "translation_spin": {
+   "p": 0.0,
+   "null_mean": 0.15508771754194023,
+   "null_p95": 0.36554484224870876
+  },
+  "human_side_spin": {
+   "p": 0.042,
+   "null_mean": 0.23039553260799295,
+   "null_p95": 0.5110285261845899
+  }
+ },
+ "Fulcher T1w:T2w myelin": {
+  "abs_r": 0.5045941644988947,
+  "n_parcels_reported": 1789,
+  "n_distinct_mouse_values": 39,
+  "translation_spin": {
+   "p": 0.005,
+   "null_mean": 0.18935039302035597,
+   "null_p95": 0.3941437905005164
+  },
+  "human_side_spin": {
+   "p": 0.0,
+   "null_mean": 0.2194416852091867,
+   "null_p95": 0.40167631449941993
+  }
+ },
+ "Fulcher cytoarchitecture": {
+  "abs_r": 0.5338470183879769,
+  "n_parcels_reported": 1787,
+  "n_distinct_mouse_values": 5,
+  "translation_spin": {
+   "p": 0.0,
+   "null_mean": 0.1376008643485876,
+   "null_p95": 0.3147931745318007
+  },
+  "human_side_spin": {
+   "p": 0.0,
+   "null_mean": 0.24306073344161497,
+   "null_p95": 0.4147547974026749
+  }
+ }
+}

@@ -1,0 +1,189 @@
+{
+  "input": "data_external/transbrain_2025/ai_opto.csv",
+  "pi_file": "outputs/coupling/pi_canonical.npy",
+  "n_mouse_regions": 68,
+  "shared_support_parcels": 1635,
+  "n_salience_parcels": 230,
+  "n_rest_parcels": 1405,
+  "salience_enrichment_z": {
+    "homer": 0.866722035962699,
+    "transbrain": 0.2771415857452654,
+    "diff_homer_minus_tb": 0.5895804502174337
+  },
+  "salience_network_rank": {
+    "homer": {
+      "SalVentAttnB": 1,
+      "SalVentAttnA": 6
+    },
+    "transbrain": {
+      "SalVentAttnA": 2,
+      "SalVentAttnB": 8
+    },
+    "n_networks": 16
+  },
+  "yeo17_network_means_z": {
+    "homer": {
+      "SalVentAttnB": 1.0296171732624178,
+      "ContB": 0.6709688164846843,
+      "DefaultB": 0.6618121269127424,
+      "ContA": 0.6119747085326667,
+      "Limbic": 0.5653419468100804,
+      "SalVentAttnA": 0.5178324251546869,
+      "SomMotB": 0.28548769030528753,
+      "SomMotA": 0.11323741368676805,
+      "DorsAttnB": -0.058252600063328525,
+      "TempPar": -0.14308964097845542,
+      "DefaultA": -0.21903955409782294,
+      "DefaultC": -0.5075452386074655,
+      "DorsAttnA": -0.9332069725558736,
+      "ContC": -1.0458638171667032,
+      "VisPeri": -1.1226586085615682,
+      "VisCent": -1.2749204971801176
+    },
+    "transbrain": {
+      "SomMotB": 0.8090147096336,
+      "SalVentAttnA": 0.5202741067221083,
+      "DorsAttnB": 0.48108024667709826,
+      "Limbic": 0.3869402844590374,
+      "ContB": 0.25778144580841145,
+      "ContA": 0.12262794648747402,
+      "SomMotA": 0.10466002577212359,
+      "SalVentAttnB": -0.11587612652887376,
+      "ContC": -0.19189172844792926,
+      "DorsAttnA": -0.23424788219638507,
+      "DefaultB": -0.2510466147368963,
+      "VisCent": -0.351513906916544,
+      "DefaultC": -0.36090425360633055,
+      "DefaultA": -0.387428978036966,
+      "VisPeri": -0.4316239522176248,
+      "TempPar": -0.48525791968464277
+    }
+  },
+  "transbrain_insula_bn_ranks": [
+    {
+      "rank": 4,
+      "bn_region": "dIg",
+      "value": 0.42913675278221497
+    },
+    {
+      "rank": 5,
+      "bn_region": "vId/vIg",
+      "value": 0.4162773729662913
+    },
+    {
+      "rank": 7,
+      "bn_region": "vIa",
+      "value": 0.3302018177833507
+    },
+    {
+      "rank": 10,
+      "bn_region": "dId",
+      "value": 0.2578443470464095
+    },
+    {
+      "rank": 13,
+      "bn_region": "dIa",
+      "value": 0.1981640322860603
+    },
+    {
+      "rank": 21,
+      "bn_region": "A1/2/3tonIa",
+      "value": 0.15776806310895972
+    }
+  ],
+  "transbrain_top_bn_regions": [
+    {
+      "rank": 1,
+      "bn_region": "rTtha",
+      "value": 0.7325119443419604
+    },
+    {
+      "rank": 2,
+      "bn_region": "mPFtha",
+      "value": 0.5682603409587488
+    },
+    {
+      "rank": 3,
+      "bn_region": "PPtha",
+      "value": 0.46909294846624083
+    },
+    {
+      "rank": 4,
+      "bn_region": "dIg",
+      "value": 0.42913675278221497
+    },
+    {
+      "rank": 5,
+      "bn_region": "vId/vIg",
+      "value": 0.4162773729662913
+    },
+    {
+      "rank": 6,
+      "bn_region": "G",
+      "value": 0.3895774489645948
+    },
+    {
+      "rank": 7,
+      "bn_region": "vIa",
+      "value": 0.3302018177833507
+    },
+    {
+      "rank": 8,
+      "bn_region": "Otha",
+      "value": 0.2862573847427757
+    },
+    {
+      "rank": 9,
+      "bn_region": "posterovemtral putamen",
+      "value": 0.2835021340906276
+    },
+    {
+      "rank": 10,
+      "bn_region": "dId",
+      "value": 0.2578443470464095
+    },
+    {
+      "rank": 11,
+      "bn_region": "lPFtha",
+      "value": 0.2246415752712492
+    },
+    {
+      "rank": 12,
+      "bn_region": "A7ip",
+      "value": 0.20451230229176917
+    },
+    {
+      "rank": 13,
+      "bn_region": "dIa",
+      "value": 0.1981640322860603
+    },
+    {
+      "rank": 14,
+      "bn_region": "cTtha",
+      "value": 0.1962281253840298
+    },
+    {
+      "rank": 15,
+      "bn_region": "nucleus accumbens",
+      "value": 0.1944979509886255
+    }
+  ],
+  "specificity": {
+    "homer": {
+      "obs": 0.866722035962699,
+      "null_mean": 0.036550492936804374,
+      "null_std": 0.35326930751394325,
+      "p": 0.015984015984015984,
+      "n_perm": 1000
+    },
+    "transbrain": {
+      "obs": 0.2771415857452654,
+      "null_mean": 0.004460436799949666,
+      "null_std": 0.3248185161253376,
+      "p": 0.22777222777222778,
+      "n_perm": 1000
+    }
+  },
+  "verdict": "HOMER stronger",
+  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77"
+}

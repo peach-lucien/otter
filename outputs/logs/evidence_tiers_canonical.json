@@ -1,0 +1,27 @@
+{
+ "_source": "outputs/coupling/trust_multisource_canonical.npz",
+ "_note": "Canonical evidence-tier grading. Supersedes evidence_tiers_v2.json, which was built from the 8 July trust_multisource_all_packs_v2.npz.",
+ "n": 1864,
+ "tiers": {
+  "anchored_and_validated": 587,
+  "validated_only": 443,
+  "anchored_only": 228,
+  "structural": 204,
+  "low_evidence": 402
+ },
+ "tier_percent": {
+  "anchored_and_validated": 31.5,
+  "validated_only": 23.8,
+  "anchored_only": 12.2,
+  "structural": 10.9,
+  "low_evidence": 21.6
+ },
+ "beauchamp_top1_by_tier": {
+  "anchored_and_validated": 0.7,
+  "validated_only": 0.391,
+  "anchored_only": null,
+  "structural": null,
+  "low_evidence": null
+ },
+ "validated_tiers_percent": 55.3
+}

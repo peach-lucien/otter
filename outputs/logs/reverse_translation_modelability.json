@@ -1,0 +1,1172 @@
+{
+ "pi_file": "outputs/coupling/pi_canonical.npy",
+ "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+ "fracs": [
+  0.05,
+  0.1,
+  0.2
+ ],
+ "n_spins": 500,
+ "summary": {
+  "frac_primary": 0.1,
+  "functional_effN": {
+   "median": 18.3,
+   "vals": [
+    4.3,
+    5.6,
+    9.8,
+    13.9,
+    17.5,
+    18.0,
+    18.6,
+    20.9,
+    22.1,
+    27.7,
+    29.8,
+    31.5
+   ]
+  },
+  "clinical_effN": {
+   "median": 10.0,
+   "vals": [
+    8.1,
+    9.5,
+    10.0,
+    14.1,
+    14.7
+   ]
+  },
+  "median_gap": -8.3,
+  "perm_p_clinical_gt_functional": 0.9725027497250275,
+  "n_functional": 12,
+  "n_clinical": 5
+ },
+ "maps": [
+  {
+   "name": "reward",
+   "group": "functional",
+   "ground_truth": [
+    "ACB",
+    "VTA"
+   ],
+   "by_frac": {
+    "0.05": {
+     "effN": 12.7,
+     "concentration": 0.161,
+     "top3": [
+      [
+       "OT",
+       11.0283
+      ],
+      [
+       "SI",
+       10.0767
+      ],
+      [
+       "ACB",
+       5.3746
+      ]
+     ]
+    },
+    "0.1": {
+     "effN": 18.0,
+     "concentration": 0.12,
+     "top3": [
+      [
+       "OT",
+       13.1269
+      ],
+      [
+       "SI",
+       12.2627
+      ],
+      [
+       "ACB",
+       7.4377
+      ]
+     ],
+     "spin_p": 0.001996007984031936,
+     "gt_rank": 3,
+     "gt_hit_top3": true
+    },
+    "0.2": {
+     "effN": 28.2,
+     "concentration": 0.082,
+     "top3": [
+      [
+       "OT",
+       15.2977
+      ],
+      [
+       "SI",
+       14.4902
+      ],
+      [
+       "ACB",
+       9.6609
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "fear",
+   "group": "functional",
+   "ground_truth": [
+    "BLA",
+    "CEA",
+    "BMA",
+    "LA",
+    "PAG"
+   ],
+   "by_frac": {
+    "0.05": {
+     "effN": 15.4,
+     "concentration": 0.12,
+     "top3": [
+      [
+       "BMA",
+       7.6879
+      ],
+      [
+       "BLA",
+       7.1528
+      ],
+      [
+       "PIR",
+       5.8229
+      ]
+     ]
+    },
+    "0.1": {
+     "effN": 20.9,
+     "concentration": 0.098,
+     "top3": [
+      [
+       "BMA",
+       8.7856
+      ],
+      [
+       "BLA",
+       8.222
+      ],
+      [
+       "PIR",
+       6.7617
+      ]
+     ],
+     "spin_p": 0.001996007984031936,
+     "gt_rank": 1,
+     "gt_hit_top3": true
+    },
+    "0.2": {
+     "effN": 26.3,
+     "concentration": 0.082,
+     "top3": [
+      [
+       "BMA",
+       9.6282
+      ],
+      [
+       "BLA",
+       9.0556
+      ],
+      [
+       "PIR",
+       7.5107
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "anxiety",
+   "group": "functional",
+   "ground_truth": [
+    "BLA",
+    "BST",
+    "CEA"
+   ],
+   "by_frac": {
+    "0.05": {
+     "effN": 12.8,
+     "concentration": 0.14,
+     "top3": [
+      [
+       "BMA",
+       5.5462
+      ],
+      [
+       "BLA",
+       5.1128
+      ],
+      [
+       "COAp",
+       3.9866
+      ]
+     ]
+    },
+    "0.1": {
+     "effN": 17.5,
+     "concentration": 0.115,
+     "top3": [
+      [
+       "BMA",
+       6.2908
+      ],
+      [
+       "BLA",
+       5.8382
+      ],
+      [
+       "COAp",
+       4.5609
+      ]
+     ],
+     "spin_p": 0.001996007984031936,
+     "gt_rank": 2,
+     "gt_hit_top3": true
+    },
+    "0.2": {
+     "effN": 25.3,
+     "concentration": 0.089,
+     "top3": [
+      [
+       "BMA",
+       7.107
+      ],
+      [
+       "BLA",
+       6.6369
+      ],
+      [
+       "COAp",
+       5.2497
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "feeding",
+   "group": "functional",
+   "ground_truth": [
+    "LHA",
+    "ARH",
+    "VMH"
+   ],
+   "by_frac": {
+    "0.05": {
+     "effN": 26.0,
+     "concentration": 0.062,
+     "top3": [
+      [
+       "BMA",
+       0.5229
+      ],
+      [
+       "BLA",
+       0.5223
+      ],
+      [
+       "SI",
+       0.5196
+      ]
+     ]
+    },
+    "0.1": {
+     "effN": 29.8,
+     "concentration": 0.058,
+     "top3": [
+      [
+       "SI",
+       0.9038
+      ],
+      [
+       "BLA",
+       0.833
+      ],
+      [
+       "CEA",
+       0.8211
+      ]
+     ],
+     "spin_p": 0.003992015968063872,
+     "gt_rank": 6,
+     "gt_hit_top3": false
+    },
+    "0.2": {
+     "effN": 36.2,
+     "concentration": 0.048,
+     "top3": [
+      [
+       "SI",
+       1.4553
+      ],
+      [
+       "BLA",
+       1.4121
+      ],
+      [
+       "BMA",
+       1.3908
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "spatial_memory",
+   "group": "functional",
+   "ground_truth": [
+    "CA1",
+    "CA3",
+    "DG",
+    "SUB"
+   ],
+   "by_frac": {
+    "0.05": {
+     "effN": 9.8,
+     "concentration": 0.19,
+     "top3": [
+      [
+       "RSPd",
+       1.5291
+      ],
+      [
+       "RSPv",
+       1.0064
+      ],
+      [
+       "PA",
+       0.8646
+      ]
+     ]
+    },
+    "0.1": {
+     "effN": 13.9,
+     "concentration": 0.145,
+     "top3": [
+      [
+       "RSPd",
+       2.301
+      ],
+      [
+       "RSPv",
+       1.491
+      ],
+      [
+       "DG",
+       1.4103
+      ]
+     ],
+     "spin_p": 0.001996007984031936,
+     "gt_rank": 3,
+     "gt_hit_top3": true
+    },
+    "0.2": {
+     "effN": 20.9,
+     "concentration": 0.099,
+     "top3": [
+      [
+       "RSPd",
+       3.1127
+      ],
+      [
+       "DG",
+       2.3858
+      ],
+      [
+       "PA",
+       2.288
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "motor",
+   "group": "functional",
+   "ground_truth": [
+    "MOp",
+    "MOs",
+    "CP"
+   ],
+   "by_frac": {
+    "0.05": {
+     "effN": 6.8,
+     "concentration": 0.226,
+     "top3": [
+      [
+       "MOp",
+       4.371
+      ],
+      [
+       "SSp-ul",
+       3.6487
+      ],
+      [
+       "RSPagl",
+       3.6346
+      ]
+     ]
+    },
+    "0.1": {
+     "effN": 9.8,
+     "concentration": 0.178,
+     "top3": [
+      [
+       "MOp",
+       6.1248
+      ],
+      [
+       "SSp-ul",
+       5.3986
+      ],
+      [
+       "RSPagl",
+       5.0804
+      ]
+     ],
+     "spin_p": 0.001996007984031936,
+     "gt_rank": 1,
+     "gt_hit_top3": true
+    },
+    "0.2": {
+     "effN": 16.6,
+     "concentration": 0.119,
+     "top3": [
+      [
+       "MOp",
+       8.5388
+      ],
+      [
+       "SSp-ul",
+       7.9424
+      ],
+      [
+       "RSPagl",
+       7.096
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "addiction",
+   "group": "functional",
+   "ground_truth": [
+    "ACB",
+    "VTA"
+   ],
+   "by_frac": {
+    "0.05": {
+     "effN": 13.6,
+     "concentration": 0.158,
+     "top3": [
+      [
+       "OT",
+       2.3428
+      ],
+      [
+       "SI",
+       2.1692
+      ],
+      [
+       "LHA",
+       1.1204
+      ]
+     ]
+    },
+    "0.1": {
+     "effN": 18.6,
+     "concentration": 0.124,
+     "top3": [
+      [
+       "OT",
+       2.6947
+      ],
+      [
+       "SI",
+       2.5096
+      ],
+      [
+       "LHA",
+       1.4353
+      ]
+     ],
+     "spin_p": 0.001996007984031936,
+     "gt_rank": 6,
+     "gt_hit_top3": false
+    },
+    "0.2": {
+     "effN": 29.6,
+     "concentration": 0.085,
+     "top3": [
+      [
+       "OT",
+       3.1736
+      ],
+      [
+       "SI",
+       2.9831
+      ],
+      [
+       "LHA",
+       1.9026
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "pain",
+   "group": "functional",
+   "ground_truth": [
+    "PAG",
+    "VPM",
+    "VPL"
+   ],
+   "by_frac": {
+    "0.05": {
+     "effN": 16.7,
+     "concentration": 0.114,
+     "top3": [
+      [
+       "SSp-n",
+       2.4466
+      ],
+      [
+       "SSp-un",
+       2.3256
+      ],
+      [
+       "SSp-bfd",
+       1.8268
+      ]
+     ]
+    },
+    "0.1": {
+     "effN": 31.5,
+     "concentration": 0.063,
+     "top3": [
+      [
+       "SSp-n",
+       3.9921
+      ],
+      [
+       "SSp-un",
+       3.8052
+      ],
+      [
+       "SSp-m",
+       3.0566
+      ]
+     ],
+     "spin_p": 0.003992015968063872,
+     "gt_rank": 12,
+     "gt_hit_top3": false
+    },
+    "0.2": {
+     "effN": 40.1,
+     "concentration": 0.047,
+     "top3": [
+      [
+       "SSp-n",
+       5.6076
+      ],
+      [
+       "SSp-un",
+       5.386
+      ],
+      [
+       "SSp-m",
+       4.4057
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "olfaction",
+   "group": "functional",
+   "ground_truth": [
+    "PIR",
+    "MOB",
+    "AON"
+   ],
+   "by_frac": {
+    "0.05": {
+     "effN": 16.5,
+     "concentration": 0.105,
+     "top3": [
+      [
+       "PIR",
+       2.041
+      ],
+      [
+       "BMA",
+       1.918
+      ],
+      [
+       "BLA",
+       1.7372
+      ]
+     ]
+    },
+    "0.1": {
+     "effN": 22.1,
+     "concentration": 0.083,
+     "top3": [
+      [
+       "PIR",
+       2.6944
+      ],
+      [
+       "BMA",
+       2.6567
+      ],
+      [
+       "BLA",
+       2.4304
+      ]
+     ],
+     "spin_p": 0.001996007984031936,
+     "gt_rank": 1,
+     "gt_hit_top3": true
+    },
+    "0.2": {
+     "effN": 29.2,
+     "concentration": 0.067,
+     "top3": [
+      [
+       "BMA",
+       3.302
+      ],
+      [
+       "PIR",
+       3.2823
+      ],
+      [
+       "BLA",
+       3.0672
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "vision",
+   "group": "functional",
+   "ground_truth": [
+    "VISp",
+    "LGd"
+   ],
+   "by_frac": {
+    "0.05": {
+     "effN": 4.3,
+     "concentration": 0.346,
+     "top3": [
+      [
+       "VISp",
+       0.2535
+      ],
+      [
+       "VISpm",
+       0.1833
+      ],
+      [
+       "VISpor",
+       0.1475
+      ]
+     ]
+    },
+    "0.1": {
+     "effN": 4.3,
+     "concentration": 0.388,
+     "top3": [
+      [
+       "VISp",
+       1.138
+      ],
+      [
+       "VISpm",
+       0.6453
+      ],
+      [
+       "VISpor",
+       0.3934
+      ]
+     ],
+     "spin_p": 0.04790419161676647,
+     "gt_rank": 1,
+     "gt_hit_top3": true
+    },
+    "0.2": {
+     "effN": 6.2,
+     "concentration": 0.299,
+     "top3": [
+      [
+       "VISp",
+       3.6255
+      ],
+      [
+       "VISpm",
+       2.5139
+      ],
+      [
+       "VISam",
+       1.4141
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "audition",
+   "group": "functional",
+   "ground_truth": [
+    "AUDp",
+    "MG"
+   ],
+   "by_frac": {
+    "0.05": {
+     "effN": 4.6,
+     "concentration": 0.35,
+     "top3": [
+      [
+       "AUDd",
+       14.2917
+      ],
+      [
+       "AUDp",
+       10.6953
+      ],
+      [
+       "SSs",
+       5.3045
+      ]
+     ]
+    },
+    "0.1": {
+     "effN": 5.6,
+     "concentration": 0.303,
+     "top3": [
+      [
+       "AUDd",
+       18.3246
+      ],
+      [
+       "AUDp",
+       14.255
+      ],
+      [
+       "SSs",
+       7.8833
+      ]
+     ],
+     "spin_p": 0.001996007984031936,
+     "gt_rank": 2,
+     "gt_hit_top3": true
+    },
+    "0.2": {
+     "effN": 7.2,
+     "concentration": 0.259,
+     "top3": [
+      [
+       "AUDd",
+       20.1426
+      ],
+      [
+       "AUDp",
+       16.0591
+      ],
+      [
+       "SSs",
+       9.3397
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "interoception",
+   "group": "functional",
+   "ground_truth": [
+    "AId",
+    "AIv",
+    "AIp",
+    "PB"
+   ],
+   "by_frac": {
+    "0.05": {
+     "effN": 17.7,
+     "concentration": 0.135,
+     "top3": [
+      [
+       "PRNr",
+       1.6123
+      ],
+      [
+       "PB",
+       1.5209
+      ],
+      [
+       "MRN",
+       0.8078
+      ]
+     ]
+    },
+    "0.1": {
+     "effN": 27.7,
+     "concentration": 0.092,
+     "top3": [
+      [
+       "PRNr",
+       2.247
+      ],
+      [
+       "PB",
+       2.0862
+      ],
+      [
+       "MRN",
+       1.3447
+      ]
+     ],
+     "spin_p": 0.001996007984031936,
+     "gt_rank": 2,
+     "gt_hit_top3": true
+    },
+    "0.2": {
+     "effN": 36.8,
+     "concentration": 0.068,
+     "top3": [
+      [
+       "PRNr",
+       2.8189
+      ],
+      [
+       "PB",
+       2.606
+      ],
+      [
+       "MRN",
+       1.8873
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "depression_tms",
+   "group": "clinical",
+   "ground_truth": null,
+   "by_frac": {
+    "0.05": {
+     "effN": 6.0,
+     "concentration": 0.282,
+     "top3": [
+      [
+       "VISa",
+       0.2036
+      ],
+      [
+       "VISam",
+       0.1427
+      ],
+      [
+       "VISpm",
+       0.1299
+      ]
+     ]
+    },
+    "0.1": {
+     "effN": 8.1,
+     "concentration": 0.209,
+     "top3": [
+      [
+       "VISa",
+       0.4278
+      ],
+      [
+       "VISam",
+       0.354
+      ],
+      [
+       "VISpm",
+       0.2891
+      ]
+     ],
+     "spin_p": 0.001996007984031936
+    },
+    "0.2": {
+     "effN": 11.2,
+     "concentration": 0.151,
+     "top3": [
+      [
+       "VISa",
+       0.8204
+      ],
+      [
+       "VISam",
+       0.7712
+      ],
+      [
+       "MOs",
+       0.6541
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "ptsd_circuit",
+   "group": "clinical",
+   "ground_truth": null,
+   "by_frac": {
+    "0.05": {
+     "effN": 8.3,
+     "concentration": 0.18,
+     "top3": [
+      [
+       "MOs",
+       0.002
+      ],
+      [
+       "VISp",
+       0.0018
+      ],
+      [
+       "VISpm",
+       0.0018
+      ]
+     ]
+    },
+    "0.1": {
+     "effN": 9.5,
+     "concentration": 0.189,
+     "top3": [
+      [
+       "VISp",
+       0.0078
+      ],
+      [
+       "VISpm",
+       0.0058
+      ],
+      [
+       "MOs",
+       0.0052
+      ]
+     ],
+     "spin_p": 0.023952095808383235
+    },
+    "0.2": {
+     "effN": 11.3,
+     "concentration": 0.16,
+     "top3": [
+      [
+       "VISp",
+       0.0257
+      ],
+      [
+       "MOs",
+       0.0192
+      ],
+      [
+       "VISpm",
+       0.0177
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "ms_depression",
+   "group": "clinical",
+   "ground_truth": null,
+   "by_frac": {
+    "0.05": {
+     "effN": 6.6,
+     "concentration": 0.234,
+     "top3": [
+      [
+       "MOs",
+       0.0047
+      ],
+      [
+       "ACAd",
+       0.0038
+      ],
+      [
+       "SSp-ul",
+       0.0034
+      ]
+     ]
+    },
+    "0.1": {
+     "effN": 10.0,
+     "concentration": 0.171,
+     "top3": [
+      [
+       "SSp-ul",
+       0.0115
+      ],
+      [
+       "MOs",
+       0.0098
+      ],
+      [
+       "ACAd",
+       0.0077
+      ]
+     ],
+     "spin_p": 0.011976047904191617
+    },
+    "0.2": {
+     "effN": 13.5,
+     "concentration": 0.106,
+     "top3": [
+      [
+       "SSp-ul",
+       0.0368
+      ],
+      [
+       "SSp-n",
+       0.0324
+      ],
+      [
+       "SSp-un",
+       0.0323
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "anxiosomatic(+)",
+   "group": "clinical",
+   "ground_truth": null,
+   "by_frac": {
+    "0.05": {
+     "effN": 6.8,
+     "concentration": 0.264,
+     "top3": [
+      [
+       "AUDv",
+       0.0387
+      ],
+      [
+       "TEa",
+       0.0245
+      ],
+      [
+       "VISC",
+       0.0207
+      ]
+     ]
+    },
+    "0.1": {
+     "effN": 14.1,
+     "concentration": 0.145,
+     "top3": [
+      [
+       "AUDv",
+       0.101
+      ],
+      [
+       "TEa",
+       0.0651
+      ],
+      [
+       "BMA",
+       0.0643
+      ]
+     ],
+     "spin_p": 0.001996007984031936
+    },
+    "0.2": {
+     "effN": 22.7,
+     "concentration": 0.085,
+     "top3": [
+      [
+       "AUDv",
+       0.2329
+      ],
+      [
+       "BMA",
+       0.2226
+      ],
+      [
+       "BLA",
+       0.1989
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "dysphoric(-)",
+   "group": "clinical",
+   "ground_truth": null,
+   "by_frac": {
+    "0.05": {
+     "effN": 12.8,
+     "concentration": 0.15,
+     "top3": [
+      [
+       "PL",
+       0.0291
+      ],
+      [
+       "ACAd",
+       0.0213
+      ],
+      [
+       "FRP",
+       0.0209
+      ]
+     ]
+    },
+    "0.1": {
+     "effN": 14.7,
+     "concentration": 0.118,
+     "top3": [
+      [
+       "PL",
+       0.0567
+      ],
+      [
+       "ACAd",
+       0.0521
+      ],
+      [
+       "FRP",
+       0.049
+      ]
+     ],
+     "spin_p": 0.001996007984031936
+    },
+    "0.2": {
+     "effN": 20.5,
+     "concentration": 0.087,
+     "top3": [
+      [
+       "ACAd",
+       0.1153
+      ],
+      [
+       "PL",
+       0.1081
+      ],
+      [
+       "FRP",
+       0.1062
+      ]
+     ]
+    }
+   }
+  }
+ ]
+}

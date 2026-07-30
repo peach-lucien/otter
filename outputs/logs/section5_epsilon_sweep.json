@@ -1,0 +1,53 @@
+{
+  "_criterion": "pick eps by MAX coverage L/R reliability, then read expansion corr there.",
+  "eps_values": [
+    0.005,
+    0.02,
+    0.05,
+    0.1,
+    0.2
+  ],
+  "per_eps": {
+    "0.005": {
+      "sharpness_median_top1": 0.999999998459661,
+      "coverage_LR_reliability": 0.24100992008817854,
+      "expansion_spearman": 0.09598461458161861,
+      "expansion_spin_p": 0.16383616383616384,
+      "medial_lateral_rho": -0.34026688605160404
+    },
+    "0.020": {
+      "sharpness_median_top1": 0.9913987572083476,
+      "coverage_LR_reliability": 0.23265362358776526,
+      "expansion_spearman": 0.102660529094581,
+      "expansion_spin_p": 0.14085914085914086,
+      "medial_lateral_rho": -0.3487245479405048
+    },
+    "0.050": {
+      "sharpness_median_top1": 0.7811224308286642,
+      "coverage_LR_reliability": 0.25432109396527963,
+      "expansion_spearman": 0.11432104614421021,
+      "expansion_spin_p": 0.11888111888111888,
+      "medial_lateral_rho": -0.38040455242578647
+    },
+    "0.100": {
+      "sharpness_median_top1": 0.3888822115836259,
+      "coverage_LR_reliability": 0.29505717828602923,
+      "expansion_spearman": 0.1372034432502098,
+      "expansion_spin_p": 0.06993006993006994,
+      "medial_lateral_rho": -0.44650730712403885
+    },
+    "0.200": {
+      "sharpness_median_top1": 0.11747152421018389,
+      "coverage_LR_reliability": 0.38591898594654167,
+      "expansion_spearman": 0.1369784034014944,
+      "expansion_spin_p": 0.09090909090909091,
+      "medial_lateral_rho": -0.527050553260819
+    }
+  },
+  "chosen_eps_by_reliability": "0.200",
+  "expansion_at_chosen_eps": {
+    "spearman": 0.1369784034014944,
+    "spin_p": 0.09090909090909091,
+    "reliability": 0.38591898594654167
+  }
+}

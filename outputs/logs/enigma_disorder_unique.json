@@ -1,0 +1,63 @@
+{
+  "pi_file": "outputs/coupling/pi_canonical.npy",
+  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+  "n_full_overlap": {
+    "autism": 1713,
+    "bipolar_disorder": 109,
+    "schizophrenia": 530,
+    "psoriasis": 2,
+    "dementia": 0,
+    "adhd": 30
+  },
+  "full_disorders": [
+    "autism",
+    "bipolar_disorder",
+    "schizophrenia",
+    "adhd"
+  ],
+  "full_offdiag_mean": 0.9929022803336212,
+  "full_corr_matrix": [
+    [
+      1.0,
+      0.99333903890211,
+      0.9994669352926155,
+      0.9934315297225835
+    ],
+    [
+      0.99333903890211,
+      1.0,
+      0.9918763082300359,
+      0.9850679628798911
+    ],
+    [
+      0.9994669352926155,
+      0.9918763082300359,
+      1.0,
+      0.9942319069744909
+    ],
+    [
+      0.9934315297225835,
+      0.9850679628798911,
+      0.9942319069744909,
+      1.0
+    ]
+  ],
+  "note": "non-autism gene sets are nested in the autism set; pairwise relative-unique is the fair probe",
+  "pairwise_relative_unique": {
+    "bipolar_disorder|schizophrenia": {
+      "r": 0.9850667614901929,
+      "n_A_only": 26,
+      "n_B_only": 447
+    },
+    "bipolar_disorder|adhd": {
+      "r": 0.9865622826667083,
+      "n_A_only": 107,
+      "n_B_only": 28
+    },
+    "schizophrenia|adhd": {
+      "r": 0.987126695429285,
+      "n_A_only": 517,
+      "n_B_only": 17
+    }
+  }
+}

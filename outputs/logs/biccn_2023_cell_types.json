@@ -1,427 +1,429 @@
 {
+  "pi_file": "outputs/coupling/pi_canonical.npy",
+  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
   "n_markers": 23,
   "per_marker": [
     {
-      "marker": "Interneuron \u2014 Pvalb (parvalbumin)",
+      "marker": "Interneuron. Pvalb (parvalbumin)",
       "class": "interneuron",
       "genes": [
         "Pvalb"
       ],
-      "pearson_r": 0.19766862513402375,
-      "pearson_p_analytical": 6.83784558699936e-20,
-      "spearman_r": 0.22345955331862893,
-      "null_mean": 0.0026225729848054326,
+      "pearson_r": 0.23500884827755947,
+      "pearson_p_analytical": 1.1443109280642645e-27,
+      "spearman_r": 0.19653834431119377,
+      "null_mean": 0.003960234639096231,
       "null_ci95": [
-        -0.05681661013707674,
-        0.0494760885773803
+        -0.09029383157749019,
+        0.09590852755652596
       ],
       "empirical_p": 0.0
     },
     {
-      "marker": "Interneuron \u2014 Sst (somatostatin)",
+      "marker": "Interneuron. Sst (somatostatin)",
       "class": "interneuron",
       "genes": [
         "Sst"
       ],
-      "pearson_r": 0.0075232035794803205,
-      "pearson_p_analytical": 0.7307989503993134,
-      "spearman_r": 0.0611617343901752,
-      "null_mean": -0.0030104799154022787,
+      "pearson_r": 0.04813857806287227,
+      "pearson_p_analytical": 0.0276092115404163,
+      "spearman_r": 0.08610318480383251,
+      "null_mean": -0.00431533237022354,
       "null_ci95": [
-        -0.05914045169804784,
-        0.05590199014777742
+        -0.10428146209755486,
+        0.10061477790750437
       ],
-      "empirical_p": 0.34
+      "empirical_p": 0.145
     },
     {
-      "marker": "Interneuron \u2014 Vip (VIP+)",
+      "marker": "Interneuron. Vip (VIP+)",
       "class": "interneuron",
       "genes": [
         "Vip"
       ],
-      "pearson_r": 0.20056983293973546,
-      "pearson_p_analytical": 1.915191862375106e-20,
-      "spearman_r": 0.2362215571759546,
-      "null_mean": -0.002497432686929247,
+      "pearson_r": 0.37147373843839543,
+      "pearson_p_analytical": 1.63991014816103e-69,
+      "spearman_r": 0.2596434869995644,
+      "null_mean": -0.0018671728880182968,
       "null_ci95": [
-        -0.04925050724882533,
-        0.049246236834178454
+        -0.10077571758830335,
+        0.10150080946831941
       ],
       "empirical_p": 0.0
     },
     {
-      "marker": "Interneuron \u2014 Calb1 (calbindin)",
+      "marker": "Interneuron. Calb1 (calbindin)",
       "class": "interneuron",
       "genes": [
         "Calb1"
       ],
-      "pearson_r": 0.028360992287634886,
-      "pearson_p_analytical": 0.1945307503247799,
-      "spearman_r": -0.029660132220587804,
-      "null_mean": 0.0014970284005649348,
+      "pearson_r": 0.04134944734049808,
+      "pearson_p_analytical": 0.05851228880787148,
+      "spearman_r": -0.05598758039743218,
+      "null_mean": 0.0014672879136159631,
       "null_ci95": [
-        -0.05365357360763512,
-        0.054374794632102756
+        -0.08397520607555675,
+        0.06897913477143176
       ],
       "empirical_p": 0.17
     },
     {
-      "marker": "Interneuron \u2014 Calb2 (calretinin)",
+      "marker": "Interneuron. Calb2 (calretinin)",
       "class": "interneuron",
       "genes": [
         "Calb2"
       ],
-      "pearson_r": 0.19857597135978158,
-      "pearson_p_analytical": 4.6023364860336215e-20,
-      "spearman_r": 0.13483196757720742,
-      "null_mean": 0.0007183373060789624,
+      "pearson_r": 0.342127196012917,
+      "pearson_p_analytical": 1.4273063325937712e-58,
+      "spearman_r": 0.15347164921496975,
+      "null_mean": 0.006509290318636036,
       "null_ci95": [
-        -0.055569976085602255,
-        0.06549452262209637
+        -0.0920034062284276,
+        0.11665237393293752
       ],
       "empirical_p": 0.0
     },
     {
-      "marker": "Interneuron \u2014 Reln (reelin)",
+      "marker": "Interneuron. Reln (reelin)",
       "class": "interneuron",
       "genes": [
         "Reln"
       ],
-      "pearson_r": 0.06873769110372331,
-      "pearson_p_analytical": 0.001647867403235077,
-      "spearman_r": 0.05096157493429422,
-      "null_mean": 0.0014856370209123879,
+      "pearson_r": 0.136255776006339,
+      "pearson_p_analytical": 3.8351700379357443e-10,
+      "spearman_r": 0.03570467439008046,
+      "null_mean": 0.0016912179597362291,
       "null_ci95": [
-        -0.047293486995858426,
-        0.050679060130804136
+        -0.06335611710078742,
+        0.07410546458266182
       ],
-      "empirical_p": 0.01
+      "empirical_p": 0.0
     },
     {
-      "marker": "Interneuron \u2014 Lhx6 (MGE TF)",
+      "marker": "Interneuron. Lhx6 (MGE TF)",
       "class": "interneuron",
       "genes": [
         "Lhx6"
       ],
-      "pearson_r": 0.049446559239652514,
-      "pearson_p_analytical": 0.023652973991641024,
-      "spearman_r": 0.003355108201798384,
-      "null_mean": -0.0004966074316793178,
+      "pearson_r": 0.18397808591843928,
+      "pearson_p_analytical": 2.131516537519437e-17,
+      "spearman_r": 0.06585101658793041,
+      "null_mean": 0.0008642472498324344,
       "null_ci95": [
-        -0.05355225033194343,
-        0.05536587592573398
+        -0.09340475378791484,
+        0.1060626618369806
       ],
-      "empirical_p": 0.055
+      "empirical_p": 0.0
     },
     {
-      "marker": "GABA synthesis \u2014 Gad1+Gad2",
+      "marker": "GABA synthesis. Gad1+Gad2",
       "class": "gabaergic_synth",
       "genes": [
         "Gad1",
         "Gad2"
       ],
-      "pearson_r": 0.09249739403719982,
-      "pearson_p_analytical": 2.2425116228558295e-05,
-      "spearman_r": 0.038827459287765785,
-      "null_mean": 0.002828555331052281,
+      "pearson_r": 0.15944083343713517,
+      "pearson_p_analytical": 2.1569874308420055e-13,
+      "spearman_r": 0.02517954650289185,
+      "null_mean": -0.0011160288092539356,
       "null_ci95": [
-        -0.04806310714107252,
-        0.05284950135203824
+        -0.09333828402213068,
+        0.08217216788590234
       ],
       "empirical_p": 0.0
     },
     {
-      "marker": "Glutamatergic \u2014 Camk2a",
+      "marker": "Glutamatergic. Camk2a",
       "class": "glutamatergic",
       "genes": [
         "Camk2a"
       ],
-      "pearson_r": 0.18173256861175985,
-      "pearson_p_analytical": 5.2461078676444615e-17,
-      "spearman_r": 0.14628987349753514,
-      "null_mean": 0.0034710030233785103,
+      "pearson_r": 0.3828744135373107,
+      "pearson_p_analytical": 4.4344069045974295e-74,
+      "spearman_r": 0.24889556169050464,
+      "null_mean": 0.0060835731256928035,
       "null_ci95": [
-        -0.05087799772552348,
-        0.06120714045330482
+        -0.09743103214831611,
+        0.11389331232964853
       ],
       "empirical_p": 0.0
     },
     {
-      "marker": "Glutamatergic \u2014 Slc17a7 (Vglut1)",
+      "marker": "Glutamatergic. Slc17a7 (Vglut1)",
       "class": "glutamatergic",
       "genes": [
         "Slc17a7"
       ],
-      "pearson_r": 0.22132041851228945,
-      "pearson_p_analytical": 1.1959681317479737e-24,
-      "spearman_r": 0.2219112754120104,
-      "null_mean": -0.0004843408752215052,
+      "pearson_r": 0.36836134117640285,
+      "pearson_p_analytical": 2.693504968997164e-68,
+      "spearman_r": 0.25166039078909574,
+      "null_mean": -0.0013736509225518447,
       "null_ci95": [
-        -0.05881017760012783,
-        0.0585821315955676
+        -0.11230175341418765,
+        0.13324141929646613
       ],
       "empirical_p": 0.0
     },
     {
-      "marker": "Glutamatergic \u2014 Slc17a6 (Vglut2)",
+      "marker": "Glutamatergic. Slc17a6 (Vglut2)",
       "class": "glutamatergic",
       "genes": [
         "Slc17a6"
       ],
-      "pearson_r": 0.19618798134907348,
-      "pearson_p_analytical": 1.2993037453614933e-19,
-      "spearman_r": 0.09900642889177731,
-      "null_mean": 0.003681088494522049,
+      "pearson_r": 0.29294520524286877,
+      "pearson_p_analytical": 1.0312344761609632e-42,
+      "spearman_r": 0.04476492188172876,
+      "null_mean": -8.608949278185563e-05,
       "null_ci95": [
-        -0.049942712195840185,
-        0.05150376793722978
+        -0.09663515601237034,
+        0.09266682379846361
       ],
       "empirical_p": 0.0
     },
     {
-      "marker": "NMDA \u2014 Grin1+Grin2a+Grin2b",
+      "marker": "NMDA. Grin1+Grin2a+Grin2b",
       "class": "glutamatergic",
       "genes": [
         "Grin1",
         "Grin2a",
         "Grin2b"
       ],
-      "pearson_r": 0.1742860377207876,
-      "pearson_p_analytical": 9.577382180688665e-16,
-      "spearman_r": 0.19657735276166188,
-      "null_mean": -0.003270600350894463,
+      "pearson_r": 0.35330818143565745,
+      "pearson_p_analytical": 1.3256011703510682e-62,
+      "spearman_r": 0.22017527392909889,
+      "null_mean": -0.0002828023770520774,
       "null_ci95": [
-        -0.05470240805010178,
-        0.04444716061371204
+        -0.10068905259753713,
+        0.10438853561159384
       ],
       "empirical_p": 0.0
     },
     {
-      "marker": "Astrocyte \u2014 Gfap",
+      "marker": "Astrocyte. Gfap",
       "class": "astrocyte",
       "genes": [
         "Gfap"
       ],
-      "pearson_r": 0.05085094048492191,
-      "pearson_p_analytical": 0.019961668605477368,
-      "spearman_r": -0.017564745647260047,
-      "null_mean": -0.0038616149446189406,
+      "pearson_r": 0.11842806115261514,
+      "pearson_p_analytical": 5.4735643974146305e-08,
+      "spearman_r": 0.1196618356696192,
+      "null_mean": -0.0009292982057459223,
       "null_ci95": [
-        -0.04920990504646274,
-        0.04880333573381037
+        -0.07938046402507605,
+        0.08435755943635684
       ],
-      "empirical_p": 0.025
+      "empirical_p": 0.005
     },
     {
-      "marker": "Astrocyte \u2014 Aqp4",
+      "marker": "Astrocyte. Aqp4",
       "class": "astrocyte",
       "genes": [
         "Aqp4"
       ],
-      "pearson_r": 0.023248809682684984,
-      "pearson_p_analytical": 0.2876097970593077,
-      "spearman_r": -0.07369182630862023,
-      "null_mean": -0.0031679689474225525,
+      "pearson_r": 0.10454034596004544,
+      "pearson_p_analytical": 1.6342620422119297e-06,
+      "spearman_r": 0.07376034920011797,
+      "null_mean": -0.0058043784049426695,
       "null_ci95": [
-        -0.06285373692760936,
-        0.05660339316702581
+        -0.09802510769708335,
+        0.07905527848976393
       ],
-      "empirical_p": 0.21
+      "empirical_p": 0.005
     },
     {
-      "marker": "Oligodendrocyte \u2014 Mbp",
+      "marker": "Oligodendrocyte. Mbp",
       "class": "oligodendrocyte",
       "genes": [
         "Mbp"
       ],
-      "pearson_r": -0.039621163590706644,
-      "pearson_p_analytical": 0.06987759381070686,
-      "spearman_r": -0.005780971760507417,
-      "null_mean": -0.0027490827863210655,
+      "pearson_r": -0.10201578290721955,
+      "pearson_p_analytical": 2.9012781471900773e-06,
+      "spearman_r": -0.03197100686880357,
+      "null_mean": -0.003669692445101224,
       "null_ci95": [
-        -0.050559072956161945,
-        0.051213148102725876
+        -0.07395251613522508,
+        0.07534757156725051
       ],
-      "empirical_p": 0.93
+      "empirical_p": 0.995
     },
     {
-      "marker": "Oligodendrocyte \u2014 Plp1",
+      "marker": "Oligodendrocyte. Plp1",
       "class": "oligodendrocyte",
       "genes": [
         "Plp1"
       ],
-      "pearson_r": 0.06328341734332328,
-      "pearson_p_analytical": 0.0037670226963018977,
-      "spearman_r": 0.03208879499577834,
-      "null_mean": 0.0008176533799602069,
+      "pearson_r": 0.1460817588453257,
+      "pearson_p_analytical": 1.8575030218504866e-11,
+      "spearman_r": 0.08264644187179325,
+      "null_mean": -0.000932079207835692,
       "null_ci95": [
-        -0.053754511457037385,
-        0.0470659866346899
-      ],
-      "empirical_p": 0.01
-    },
-    {
-      "marker": "Oligodendrocyte TF \u2014 Olig2",
-      "class": "oligodendrocyte",
-      "genes": [
-        "Olig2"
-      ],
-      "pearson_r": -0.026686360904477156,
-      "pearson_p_analytical": 0.22221378806776193,
-      "spearman_r": -0.04700024283967002,
-      "null_mean": 0.0015196007279965906,
-      "null_ci95": [
-        -0.04712096436184353,
-        0.04302391895304504
-      ],
-      "empirical_p": 0.885
-    },
-    {
-      "marker": "Oligodendrocyte TF \u2014 Sox10",
-      "class": "oligodendrocyte",
-      "genes": [
-        "Sox10"
-      ],
-      "pearson_r": 0.029781199918709023,
-      "pearson_p_analytical": 0.17310846077620304,
-      "spearman_r": -0.01806071578567344,
-      "null_mean": 0.0029290926707572582,
-      "null_ci95": [
-        -0.0427050422868217,
-        0.046629283140209414
-      ],
-      "empirical_p": 0.14
-    },
-    {
-      "marker": "Microglia \u2014 Cx3cr1",
-      "class": "microglia",
-      "genes": [
-        "Cx3cr1"
-      ],
-      "pearson_r": 0.034493747483432244,
-      "pearson_p_analytical": 0.11457264364701329,
-      "spearman_r": -0.01899106057792712,
-      "null_mean": -0.004679782260917802,
-      "null_ci95": [
-        -0.056012149150685586,
-        0.03908233824548002
-      ],
-      "empirical_p": 0.06
-    },
-    {
-      "marker": "Dopaminergic \u2014 Th",
-      "class": "dopaminergic",
-      "genes": [
-        "Th"
-      ],
-      "pearson_r": -0.02229046160585566,
-      "pearson_p_analytical": 0.30794924270928786,
-      "spearman_r": -0.032774305858415405,
-      "null_mean": -0.0005042999912853979,
-      "null_ci95": [
-        -0.046351487253824146,
-        0.05045086505764242
-      ],
-      "empirical_p": 0.825
-    },
-    {
-      "marker": "Dopaminergic \u2014 Slc6a3 (DAT)",
-      "class": "dopaminergic",
-      "genes": [
-        "Slc6a3"
-      ],
-      "pearson_r": 0.016298983898126982,
-      "pearson_p_analytical": 0.4559999344497672,
-      "spearman_r": -0.038473028729351176,
-      "null_mean": 0.0005335848176097314,
-      "null_ci95": [
-        -0.043825796206264055,
-        0.047122397684485624
-      ],
-      "empirical_p": 0.265
-    },
-    {
-      "marker": "Dopaminergic \u2014 Drd1",
-      "class": "dopaminergic",
-      "genes": [
-        "Drd1"
-      ],
-      "pearson_r": 0.22727600404822504,
-      "pearson_p_analytical": 6.143746623627135e-26,
-      "spearman_r": 0.15983053144998519,
-      "null_mean": 0.0007576893187826727,
-      "null_ci95": [
-        -0.052915068231280955,
-        0.05973553246898212
+        -0.06998591406899805,
+        0.07030325628291598
       ],
       "empirical_p": 0.0
     },
     {
-      "marker": "Dopaminergic \u2014 Drd2",
+      "marker": "Oligodendrocyte TF. Olig2",
+      "class": "oligodendrocyte",
+      "genes": [
+        "Olig2"
+      ],
+      "pearson_r": 0.009357781933845068,
+      "pearson_p_analytical": 0.6686743663150787,
+      "spearman_r": 0.020602040074350198,
+      "null_mean": -0.00034072840738586516,
+      "null_ci95": [
+        -0.07492290110702964,
+        0.07071356998546481
+      ],
+      "empirical_p": 0.41
+    },
+    {
+      "marker": "Oligodendrocyte TF. Sox10",
+      "class": "oligodendrocyte",
+      "genes": [
+        "Sox10"
+      ],
+      "pearson_r": 0.10615931699177245,
+      "pearson_p_analytical": 1.1231263254837236e-06,
+      "spearman_r": 0.051687747462866696,
+      "null_mean": 0.0031127995286660513,
+      "null_ci95": [
+        -0.058724188222862655,
+        0.06391209550495175
+      ],
+      "empirical_p": 0.0
+    },
+    {
+      "marker": "Microglia. Cx3cr1",
+      "class": "microglia",
+      "genes": [
+        "Cx3cr1"
+      ],
+      "pearson_r": -0.027123264310825082,
+      "pearson_p_analytical": 0.2147334687738485,
+      "spearman_r": -0.045471182013343284,
+      "null_mean": -0.0037810104153111306,
+      "null_ci95": [
+        -0.07357738905682443,
+        0.07362310703847551
+      ],
+      "empirical_p": 0.685
+    },
+    {
+      "marker": "Dopaminergic. Th",
+      "class": "dopaminergic",
+      "genes": [
+        "Th"
+      ],
+      "pearson_r": 0.08449274726747821,
+      "pearson_p_analytical": 0.00010837926093760623,
+      "spearman_r": -0.08300034776764369,
+      "null_mean": -0.00040789599176832726,
+      "null_ci95": [
+        -0.06482092952897806,
+        0.08245034054418365
+      ],
+      "empirical_p": 0.015
+    },
+    {
+      "marker": "Dopaminergic. Slc6a3 (DAT)",
+      "class": "dopaminergic",
+      "genes": [
+        "Slc6a3"
+      ],
+      "pearson_r": 0.10522746856931849,
+      "pearson_p_analytical": 1.394688864201478e-06,
+      "spearman_r": -0.03888718831374312,
+      "null_mean": 8.506015062781827e-05,
+      "null_ci95": [
+        -0.07454027982546471,
+        0.06965654153669718
+      ],
+      "empirical_p": 0.005
+    },
+    {
+      "marker": "Dopaminergic. Drd1",
+      "class": "dopaminergic",
+      "genes": [
+        "Drd1"
+      ],
+      "pearson_r": 0.32986705095331814,
+      "pearson_p_analytical": 2.4511333480588793e-54,
+      "spearman_r": 0.18634431867860865,
+      "null_mean": 0.002154413257007027,
+      "null_ci95": [
+        -0.10836927642089475,
+        0.1072880628737445
+      ],
+      "empirical_p": 0.0
+    },
+    {
+      "marker": "Dopaminergic. Drd2",
       "class": "dopaminergic",
       "genes": [
         "Drd2"
       ],
-      "pearson_r": 0.07898125792121939,
-      "pearson_p_analytical": 0.00029723724451681587,
-      "spearman_r": 0.042882312078404414,
-      "null_mean": -0.00041962092070274473,
+      "pearson_r": 0.10042928738090205,
+      "pearson_p_analytical": 4.133191010252671e-06,
+      "spearman_r": 0.07132660109410263,
+      "null_mean": -0.004049524530210304,
       "null_ci95": [
-        -0.0516839771282486,
-        0.06419947914550027
+        -0.1154424604511003,
+        0.10102047188855456
       ],
-      "empirical_p": 0.01
+      "empirical_p": 0.03
     }
   ],
   "per_class": [
     {
       "class": "astrocyte",
       "n_markers": 2,
-      "n_significant": 1,
-      "mean_pearson_r": 0.037049875083803446
+      "n_significant": 2,
+      "mean_pearson_r": 0.11148420355633029
     },
     {
       "class": "dopaminergic",
       "n_markers": 4,
-      "n_significant": 2,
-      "mean_pearson_r": 0.07506644606542894
+      "n_significant": 4,
+      "mean_pearson_r": 0.15500413854275424
     },
     {
       "class": "gabaergic_synth",
       "n_markers": 1,
       "n_significant": 1,
-      "mean_pearson_r": 0.09249739403719982
+      "mean_pearson_r": 0.15944083343713517
     },
     {
       "class": "glutamatergic",
       "n_markers": 4,
       "n_significant": 4,
-      "mean_pearson_r": 0.1933817515484776
+      "mean_pearson_r": 0.34937228534806
     },
     {
       "class": "interneuron",
       "n_markers": 7,
-      "n_significant": 4,
-      "mean_pearson_r": 0.10726898223486168
+      "n_significant": 5,
+      "mean_pearson_r": 0.1940473814367172
     },
     {
       "class": "microglia",
       "n_markers": 1,
       "n_significant": 0,
-      "mean_pearson_r": 0.034493747483432244
+      "mean_pearson_r": -0.027123264310825082
     },
     {
       "class": "oligodendrocyte",
       "n_markers": 4,
-      "n_significant": 1,
-      "mean_pearson_r": 0.006689273191712126
+      "n_significant": 2,
+      "mean_pearson_r": 0.03989576871593092
     }
   ],
-  "verdict": "BICCN markers do NOT translate better than layer markers (-0.030). Suggests the cross-species resolution boundary is consistent across marker types.",
+  "verdict": "BICCN markers do NOT translate better than layer markers (-0.059). Suggests the cross-species resolution boundary is consistent across marker types.",
   "comparison": {
-    "biccn_mean_pearson_r": 0.08924015871977155,
-    "biccn_n_significant": 13,
-    "hodge_mean_pearson_r": 0.11907519319548895,
+    "biccn_mean_pearson_r": 0.16916114855317269,
+    "biccn_n_significant": 18,
+    "hodge_mean_pearson_r": 0.22818847172161785,
     "hodge_n_significant": 6
   }
 }

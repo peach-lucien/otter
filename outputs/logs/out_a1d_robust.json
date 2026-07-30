@@ -1,0 +1,87 @@
+{
+ "_what": "Review-round analysis, 2026-07-28/29. Produced by the harness in _audit/HOMER_review_analyses.tar.gz, which reproduces pi_canonical.npy exactly before any experiment (argmax match 1.0000, entrywise r 1.00000). Committed here as a loose log so tools/check_manuscript_numbers.py can see it.",
+ "epsilon_sweep": {
+  "0.02": {
+   "alpha0.5": {
+    "auroc": 0.886,
+    "top1": 0.562,
+    "mass_in_region": 0.557,
+    "centroid_disp_mm": 9.09
+   },
+   "alpha0": {
+    "auroc": 0.892,
+    "top1": 0.574,
+    "mass_in_region": 0.568,
+    "centroid_disp_mm": 7.766
+   }
+  },
+  "0.05": {
+   "alpha0.5": {
+    "auroc": 0.899,
+    "top1": 0.567,
+    "mass_in_region": 0.541,
+    "centroid_disp_mm": 8.83
+   },
+   "alpha0": {
+    "auroc": 0.892,
+    "top1": 0.574,
+    "mass_in_region": 0.562,
+    "centroid_disp_mm": 7.754
+   }
+  },
+  "0.1": {
+   "alpha0.5": {
+    "auroc": 0.905,
+    "top1": 0.569,
+    "mass_in_region": 0.506,
+    "centroid_disp_mm": 8.871
+   },
+   "alpha0": {
+    "auroc": 0.892,
+    "top1": 0.574,
+    "mass_in_region": 0.542,
+    "centroid_disp_mm": 7.775
+   }
+  },
+  "0.2": {
+   "alpha0.5": {
+    "auroc": 0.902,
+    "top1": 0.576,
+    "mass_in_region": 0.457,
+    "centroid_disp_mm": 9.694
+   },
+   "alpha0": {
+    "auroc": 0.891,
+    "top1": 0.574,
+    "mass_in_region": 0.5,
+    "centroid_disp_mm": 7.973
+   }
+  }
+ },
+ "modality": {
+  "FC+SC 0.7/0.3 (canonical)": {
+   "auroc": 0.899,
+   "top1": 0.567,
+   "mass_in_region": 0.541,
+   "centroid_disp_mm": 8.83,
+   "argmax_match_vs_canonical": 1.0,
+   "entry_r_vs_canonical": 1.0
+  },
+  "FC only": {
+   "auroc": 0.884,
+   "top1": 0.539,
+   "mass_in_region": 0.514,
+   "centroid_disp_mm": 8.087,
+   "argmax_match_vs_canonical": 0.631,
+   "entry_r_vs_canonical": 0.8981
+  },
+  "SC only": {
+   "auroc": 0.885,
+   "top1": 0.517,
+   "mass_in_region": 0.5,
+   "centroid_disp_mm": 15.052,
+   "argmax_match_vs_canonical": 0.406,
+   "entry_r_vs_canonical": 0.6592
+  }
+ }
+}

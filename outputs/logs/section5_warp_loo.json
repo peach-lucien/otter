@@ -1,0 +1,94 @@
+{
+  "Piriform area -> piriform cortex": {
+    "n_anchors_dropped": 2,
+    "euclid_top1": 0.019230769230769232,
+    "fullwarp_top1": 0.3269230769230769,
+    "loo_top1": 0.28846153846153844
+  },
+  "Anterior cingulate area -> cingulate gyrus": {
+    "n_anchors_dropped": 2,
+    "euclid_top1": 0.13043478260869565,
+    "fullwarp_top1": 0.5217391304347826,
+    "loo_top1": 0.08695652173913043
+  },
+  "Primary auditory area -> Heschl's gyrus": {
+    "n_anchors_dropped": 2,
+    "euclid_top1": 0.2222222222222222,
+    "fullwarp_top1": 0.4444444444444444,
+    "loo_top1": 0.4444444444444444
+  },
+  "Primary motor area -> precentral gyrus": {
+    "n_anchors_dropped": 0,
+    "euclid_top1": 0.0,
+    "fullwarp_top1": 0.3584905660377358,
+    "loo_top1": null,
+    "note": "no matching anchor or too few remain"
+  },
+  "Primary somatosensory area -> postcentral gyrus": {
+    "n_anchors_dropped": 2,
+    "euclid_top1": 0.18831168831168832,
+    "fullwarp_top1": 0.17532467532467533,
+    "loo_top1": 0.07142857142857142
+  },
+  "Visual areas -> cuneus": {
+    "n_anchors_dropped": 5,
+    "euclid_top1": 0.07692307692307693,
+    "fullwarp_top1": 0.28846153846153844,
+    "loo_top1": 0.07692307692307693
+  },
+  "Pallidum -> globus pallidus": {
+    "n_anchors_dropped": 4,
+    "euclid_top1": 0.058823529411764705,
+    "fullwarp_top1": 0.11764705882352941,
+    "loo_top1": 0.0784313725490196
+  },
+  "Striatum ventral region -> nucleus accumbens": {
+    "n_anchors_dropped": 0,
+    "euclid_top1": 0.11538461538461539,
+    "fullwarp_top1": 0.07692307692307693,
+    "loo_top1": null,
+    "note": "no matching anchor or too few remain"
+  },
+  "Caudoputamen -> caudate nucleus": {
+    "n_anchors_dropped": 6,
+    "euclid_top1": 0.11888111888111888,
+    "fullwarp_top1": 0.2867132867132867,
+    "loo_top1": 0.18181818181818182
+  },
+  "Cortical subplate-other -> amygdala": {
+    "n_anchors_dropped": 4,
+    "euclid_top1": 0.0,
+    "fullwarp_top1": 0.13793103448275862,
+    "loo_top1": 0.06896551724137931
+  },
+  "Inferior colliculus -> inferior colliculus": {
+    "n_anchors_dropped": 2,
+    "euclid_top1": 0.0,
+    "fullwarp_top1": 0.0,
+    "loo_top1": 0.0
+  },
+  "Superior colliculus, sensory related -> superior colliculus": {
+    "n_anchors_dropped": 2,
+    "euclid_top1": 0.0,
+    "fullwarp_top1": 0.09090909090909091,
+    "loo_top1": 0.0
+  },
+  "Pons -> pons": {
+    "n_anchors_dropped": 2,
+    "euclid_top1": 0.028985507246376812,
+    "fullwarp_top1": 0.5217391304347826,
+    "loo_top1": 0.028985507246376812
+  },
+  "Hypothalamus -> hypothalamus": {
+    "n_anchors_dropped": 2,
+    "euclid_top1": 0.11538461538461539,
+    "fullwarp_top1": 0.4423076923076923,
+    "loo_top1": 0.21153846153846154
+  },
+  "Thalamus -> thalamus": {
+    "n_anchors_dropped": 4,
+    "euclid_top1": 0.3592233009708738,
+    "fullwarp_top1": 0.47572815533980584,
+    "loo_top1": 0.1262135922330097
+  }
+}

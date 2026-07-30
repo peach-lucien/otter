@@ -1,0 +1,38 @@
+{
+  "pi_file": "outputs/coupling/pi_canonical.npy",
+  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+  "classes": [
+    "glutamatergic",
+    "GABAergic",
+    "astrocyte",
+    "oligodendrocyte",
+    "microglia"
+  ],
+  "n_parcels_scored": 2094,
+  "per_class_translation_spin": {
+    "glutamatergic": {
+      "r": 0.302229582215497,
+      "spin_p": 0.003996003996003996
+    },
+    "GABAergic": {
+      "r": 0.00308187413472899,
+      "spin_p": 0.955044955044955
+    },
+    "astrocyte": {
+      "r": 0.24672837920814938,
+      "spin_p": 0.003996003996003996
+    },
+    "oligodendrocyte": {
+      "r": 0.0699784607161994,
+      "spin_p": 0.08291708291708291
+    },
+    "microglia": {
+      "r": -0.032006131942705685,
+      "spin_p": 0.5864135864135864
+    }
+  },
+  "dominant_class_agreement": 0.2559694364851958,
+  "dominant_class_spin_p": 0.057942057942057944,
+  "majority_baseline": 0.5936007640878701,
+  "n_spin": 1000
+}

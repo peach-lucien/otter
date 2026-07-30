@@ -1,0 +1,108 @@
+{
+  "schizophrenia": {
+    "cortex": {
+      "n": 30,
+      "spearman": 0.5225806451612903,
+      "spin_p": 0.0004997501249375312,
+      "burden_low_coverage_tertile": 0.4060897933820103,
+      "burden_high_coverage_tertile": 0.25586453316762464
+    },
+    "subcortex": {
+      "n": 7,
+      "spearman": -0.792824967172092,
+      "coverage": {
+        "accumbensarea": -2.9315620102898263,
+        "amygdala": -2.551112688433412,
+        "caudate": -3.043799688292273,
+        "hippocampus": -2.7093976411483016,
+        "pallidum": -2.936864089037534,
+        "putamen": -3.0234188442345915,
+        "thalamusproper": -2.8759730420457776
+      },
+      "cohens_d": {
+        "accumbensarea": -0.22,
+        "amygdala": -0.28500000000000003,
+        "caudate": 0.02,
+        "hippocampus": -0.43,
+        "pallidum": 0.2,
+        "putamen": 0.07500000000000001,
+        "thalamusproper": -0.28500000000000003
+      }
+    },
+    "interaction": {
+      "fisher_z": 3.096312354982557,
+      "p": 0.00195943835185715
+    },
+    "controls": {
+      "hierarchy_T1wT2w": {
+        "spearman_with_d": 0.3481646273637375,
+        "coverage_partialling_hierarchy": 0.4002224694104561,
+        "williams_t": 0.870318279338048,
+        "williams_p": 0.3917987366732377,
+        "note": "coverage is NOT significantly better than T1w/T2w at this n"
+      },
+      "anchor_distance": {
+        "spearman_coverage_vs_anchor_distance": -0.4117908787541713,
+        "spearman_with_d": -0.1870967741935484,
+        "coverage_partialling_anchor_distance": 0.48565072302558404
+      }
+    }
+  },
+  "bipolar": {
+    "cortex": {
+      "n": 30,
+      "spearman": 0.6355951056729701,
+      "spin_p": 0.0004997501249375312,
+      "burden_low_coverage_tertile": 0.4314782123943139,
+      "burden_high_coverage_tertile": 0.21871225494750535
+    },
+    "subcortex": {
+      "n": 7,
+      "spearman": -0.6785714285714287,
+      "coverage": {
+        "accumbensarea": -2.9315620102898263,
+        "amygdala": -2.551112688433412,
+        "caudate": -3.043799688292273,
+        "hippocampus": -2.7093976411483016,
+        "pallidum": -2.936864089037534,
+        "putamen": -3.0234188442345915,
+        "thalamusproper": -2.8759730420457776
+      },
+      "cohens_d": {
+        "accumbensarea": -0.094,
+        "amygdala": -0.117,
+        "caudate": -0.098,
+        "hippocampus": -0.203,
+        "pallidum": -0.067,
+        "putamen": -0.033,
+        "thalamusproper": -0.144
+      }
+    },
+    "interaction": {
+      "fisher_z": 2.9438825108432267,
+      "p": 0.003241230174581772
+    },
+    "controls": {
+      "hierarchy_T1wT2w": {
+        "spearman_with_d": 0.4576195773081201,
+        "coverage_partialling_hierarchy": 0.5265850945494994,
+        "williams_t": 1.0017572436011288,
+        "williams_p": 0.3253547390059801,
+        "note": "coverage is NOT significantly better than T1w/T2w at this n"
+      },
+      "anchor_distance": {
+        "spearman_coverage_vs_anchor_distance": -0.4117908787541713,
+        "spearman_with_d": -0.4972191323692992,
+        "coverage_partialling_anchor_distance": 0.525250278086763
+      }
+    }
+  },
+  "_meta": {
+    "atlas": "Desikan-Killiany volumetric (abagen), 68 cortical + 7 subcortical",
+    "coverage": "log10 mass-normalised mean pi column-sum per region",
+    "cortical_metric": "ENIGMA cortical thickness Cohen's d",
+    "subcortical_metric": "ENIGMA subcortical volume Cohen's d (different metric; see text)",
+    "note": "positive rho = disorder effect larger where coverage is lower",
+    "n_spin": 2000
+  }
+}

@@ -1,4 +1,6 @@
 {
+  "pi_file": "outputs/coupling/pi_canonical.npy",
+  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
   "n_cortical_parcels": 1768,
   "per_layer_group": [
     {
@@ -9,15 +11,15 @@
         "Satb2"
       ],
       "n_cortical_parcels": 1768,
-      "pearson_r": 0.04655902035006074,
-      "pearson_p_analytical": 0.050303792724656266,
-      "spearman_r": 0.035874245880338676,
-      "null_mean": -0.0008012407986000247,
+      "pearson_r": 0.0885956243442931,
+      "pearson_p_analytical": 0.00019152960364368925,
+      "spearman_r": 0.12092051062144009,
+      "null_mean": 8.146381836648531e-05,
       "null_ci95": [
-        -0.05641062871258956,
-        0.057106192850234015
+        -0.09306714643065493,
+        0.0940463321983458
       ],
-      "empirical_p": 0.06
+      "empirical_p": 0.04
     },
     {
       "layer_group": "middle (L4)",
@@ -25,15 +27,15 @@
         "Rorb"
       ],
       "n_cortical_parcels": 1768,
-      "pearson_r": 0.05710712601711442,
-      "pearson_p_analytical": 0.01632895554955521,
-      "spearman_r": 0.15652089045927683,
-      "null_mean": -0.0009586695939411431,
+      "pearson_r": 0.057192218899815926,
+      "pearson_p_analytical": 0.01616967810050961,
+      "spearman_r": 0.24705768098369024,
+      "null_mean": -0.00268638097426548,
       "null_ci95": [
-        -0.050891863428833034,
-        0.048491931999933194
+        -0.06470899830803573,
+        0.06263409605266833
       ],
-      "empirical_p": 0.008
+      "empirical_p": 0.04
     },
     {
       "layer_group": "deep (L5/6)",
@@ -43,50 +45,50 @@
         "Foxp2"
       ],
       "n_cortical_parcels": 1768,
-      "pearson_r": 0.02032504746384844,
-      "pearson_p_analytical": 0.3930478638484107,
-      "spearman_r": -0.00013664636362264106,
-      "null_mean": -0.0019465610949444688,
+      "pearson_r": 0.018774372751174932,
+      "pearson_p_analytical": 0.43015386327738653,
+      "spearman_r": -0.037553511955294896,
+      "null_mean": 0.0018247088051437678,
       "null_ci95": [
-        -0.04626548877140045,
-        0.047424778931249516
+        -0.05145370494844564,
+        0.05916878559856508
       ],
-      "empirical_p": 0.176
+      "empirical_p": 0.272
     }
   ],
   "upper_minus_deep_contrast": {
     "test": "upper \u2212 deep contrast (cortex only)",
-    "pearson_r": 0.03081419424424771,
-    "pearson_p_analytical": 0.19530165754778644,
-    "spearman_r": -0.01562786863648381,
-    "null_mean": 0.0007570534361715918,
+    "pearson_r": 0.051552097792306,
+    "pearson_p_analytical": 0.030192953365170104,
+    "spearman_r": 0.014788335432925138,
+    "null_mean": 0.00044192795810017824,
     "null_ci95": [
-      -0.05427104755302086,
-      0.055011689969916934
+      -0.06838956274007381,
+      0.07373628400524106
     ],
-    "empirical_p": 0.136
+    "empirical_p": 0.08
   },
   "lobe_aggregated": [
     {
       "layer_group": "upper (L2/3)",
       "n_networks": 8,
-      "pearson_r": 0.08974566432093582,
-      "pearson_p_analytical": 0.8326282425373881,
-      "spearman_r": 0.38095238095238104
+      "pearson_r": 0.5065078137336327,
+      "pearson_p_analytical": 0.20022718164023195,
+      "spearman_r": 0.7142857142857144
     },
     {
       "layer_group": "middle (L4)",
       "n_networks": 8,
-      "pearson_r": 0.7936673052867996,
-      "pearson_p_analytical": 0.018702445725092498,
-      "spearman_r": 0.6666666666666669
+      "pearson_r": 0.7277321930121187,
+      "pearson_p_analytical": 0.040715391911160345,
+      "spearman_r": 0.6904761904761906
     },
     {
       "layer_group": "deep (L5/6)",
       "n_networks": 8,
-      "pearson_r": 0.5852313779714096,
-      "pearson_p_analytical": 0.12749665214667766,
-      "spearman_r": 0.880952380952381
+      "pearson_r": 0.7220174725666053,
+      "pearson_p_analytical": 0.04312850748188928,
+      "spearman_r": 0.6428571428571429
     }
   ]
 }

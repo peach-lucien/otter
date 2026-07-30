@@ -1,0 +1,31 @@
+{
+  "_q": "Coverage vs Xu2020 expansion as a concentrated (block) effect, not a global gradient.",
+  "n_regions": 391,
+  "coverage": "log10 mass-normalised region mean (sound)",
+  "expansion_tertile_contrast": {
+    "gap_sd": -0.22007712851009434,
+    "spin_p": 0.10394802598700649,
+    "hi_mean_cov_sd": -0.0901876794645684,
+    "lo_mean_cov_sd": 0.12988944904552593
+  },
+  "expansion_quintile_contrast": {
+    "gap_sd": -0.3384946018168321,
+    "spin_p": 0.05547226386806597,
+    "hi_mean_cov_sd": -0.21611922481637827,
+    "lo_mean_cov_sd": 0.12237537700045387
+  },
+  "most_expanded_decile_vs_rest": {
+    "gap_sd": -0.006300719130609254,
+    "spin_p": 0.9700149925037481,
+    "hi_mean_cov_sd": -0.005672258654666045,
+    "lo_mean_cov_sd": 0.000628460475943209
+  },
+  "quintile_bin_mean_coverage_sd": [
+    0.11599748960478294,
+    0.08197643649727752,
+    -0.0421803372244889,
+    0.05883848863618155,
+    -0.2161192248163782
+  ],
+  "monotone_trend_spearman": -0.8999999999999998
+}

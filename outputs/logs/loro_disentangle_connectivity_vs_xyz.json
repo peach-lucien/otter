@@ -1,0 +1,388 @@
+{
+ "_retired": {
+  "date": "2026-07-29",
+  "why": "Fitted at epsilon = 5e-3 and xyz_weight = 0.5, not the canonical epsilon = 0.05 / xyz_weight = 0.25. Its headline result (connectivity alone localises held-out regions better than connectivity plus space) does NOT replicate at canonical settings: canonical gives both 11.2 mm, xyz_only 11.4 mm, conn_only 24.2 mm over the same 19 regions.",
+  "use_instead": "the canonical three-config disentanglement reported in manuscript/HOMER_review_analyses_results.md (A1b) and drawn as ED-6",
+  "note": "Kept rather than deleted so the superseded values remain traceable. Nothing in the repository reads this file."
+ },
+ "Piriform area -> piriform cortex": {
+  "both": {
+   "cdist_mm": 9.811801397569909,
+   "mass": 0.004167147165110018,
+   "top1": 0.0,
+   "rand_mm": 71.17882422221855
+  },
+  "xyz_only": {
+   "cdist_mm": 8.456547027448671,
+   "mass": 0.03836216564798998,
+   "top1": 0.038461538461538464,
+   "rand_mm": 71.17882422221855
+  },
+  "conn_only": {
+   "cdist_mm": 56.46225661854754,
+   "mass": 1.5016952523573472e-07,
+   "top1": 0.0,
+   "rand_mm": 71.17882422221855
+  }
+ },
+ "Subiculum -> subiculum": {
+  "both": {
+   "cdist_mm": 44.937900070220806,
+   "mass": 4.6559794842237344e-51,
+   "top1": 0.0,
+   "rand_mm": 62.55506396487093
+  },
+  "xyz_only": {
+   "cdist_mm": 44.768373804924046,
+   "mass": 5.77245715117964e-99,
+   "top1": 0.0,
+   "rand_mm": 62.55506396487093
+  },
+  "conn_only": {
+   "cdist_mm": 5.7149551598961015,
+   "mass": 4.438854037111328e-05,
+   "top1": 0.0,
+   "rand_mm": 62.55506396487093
+  }
+ },
+ "Field CA1 -> CA1 field": {
+  "both": {
+   "cdist_mm": 54.8269804096537,
+   "mass": 4.93773839790613e-97,
+   "top1": 0.0,
+   "rand_mm": 61.97752272019766
+  },
+  "xyz_only": {
+   "cdist_mm": 55.036431396660625,
+   "mass": 2.343971924084845e-200,
+   "top1": 0.0,
+   "rand_mm": 61.97752272019766
+  },
+  "conn_only": {
+   "cdist_mm": 12.877296594389772,
+   "mass": 1.7225465425595125e-08,
+   "top1": 0.0,
+   "rand_mm": 61.97752272019766
+  }
+ },
+ "Field CA3 -> CA3 field": {
+  "both": {
+   "cdist_mm": 31.838126101574662,
+   "mass": 1.8717165564584972e-134,
+   "top1": 0.0,
+   "rand_mm": 61.94351957409321
+  },
+  "xyz_only": {
+   "cdist_mm": 32.72602806835657,
+   "mass": 1.6135789173968293e-284,
+   "top1": 0.0,
+   "rand_mm": 61.94351957409321
+  },
+  "conn_only": {
+   "cdist_mm": 11.59512692584919,
+   "mass": 1.0738949331854672e-168,
+   "top1": 0.0,
+   "rand_mm": 61.94351957409321
+  }
+ },
+ "Dentate gyrus -> dentate gyrus": {
+  "both": {
+   "cdist_mm": 45.66334759370405,
+   "mass": 3.948885238718859e-144,
+   "top1": 0.0,
+   "rand_mm": 62.126993238257036
+  },
+  "xyz_only": {
+   "cdist_mm": 45.8709077820142,
+   "mass": 3.563608962773749e-293,
+   "top1": 0.0,
+   "rand_mm": 62.126993238257036
+  },
+  "conn_only": {
+   "cdist_mm": 12.101988849168608,
+   "mass": 3.7253841645419446e-171,
+   "top1": 0.0,
+   "rand_mm": 62.126993238257036
+  }
+ },
+ "Anterior cingulate area -> cingulate gyrus": {
+  "both": {
+   "cdist_mm": 36.12706404251493,
+   "mass": 0.08695652184010262,
+   "top1": 0.08695652173913043,
+   "rand_mm": 70.07928154075984
+  },
+  "xyz_only": {
+   "cdist_mm": 36.554026866944625,
+   "mass": 0.08695652173913043,
+   "top1": 0.08695652173913043,
+   "rand_mm": 70.07928154075984
+  },
+  "conn_only": {
+   "cdist_mm": 68.5039863292187,
+   "mass": 0.0013010023728096587,
+   "top1": 0.0,
+   "rand_mm": 70.07928154075984
+  }
+ },
+ "Primary auditory area -> Heschl's gyrus": {
+  "both": {
+   "cdist_mm": 47.66894313065344,
+   "mass": 5.861360989747491e-131,
+   "top1": 0.0,
+   "rand_mm": 58.22312790069329
+  },
+  "xyz_only": {
+   "cdist_mm": 47.668943125957604,
+   "mass": 2.414087364280281e-246,
+   "top1": 0.0,
+   "rand_mm": 58.22312790069329
+  },
+  "conn_only": {
+   "cdist_mm": 56.154012100941614,
+   "mass": 0.013690680371783804,
+   "top1": 0.0,
+   "rand_mm": 58.22312790069329
+  }
+ },
+ "Primary motor area -> precentral gyrus": {
+  "both": {
+   "cdist_mm": 22.657435766247847,
+   "mass": 4.442070532681883e-27,
+   "top1": 0.0,
+   "rand_mm": 66.47145826313098
+  },
+  "xyz_only": {
+   "cdist_mm": 22.592036091113346,
+   "mass": 8.036800561283966e-56,
+   "top1": 0.0,
+   "rand_mm": 66.47145826313098
+  },
+  "conn_only": {
+   "cdist_mm": 6.02944546933358,
+   "mass": 0.0637945318992886,
+   "top1": 0.018867924528301886,
+   "rand_mm": 66.47145826313098
+  }
+ },
+ "Primary somatosensory area -> postcentral gyrus": {
+  "both": {
+   "cdist_mm": 15.14482132865572,
+   "mass": 0.1807035640438946,
+   "top1": 0.18181818181818182,
+   "rand_mm": 66.72519925720404
+  },
+  "xyz_only": {
+   "cdist_mm": 15.278710537177373,
+   "mass": 0.193986528874317,
+   "top1": 0.19480519480519481,
+   "rand_mm": 66.72519925720404
+  },
+  "conn_only": {
+   "cdist_mm": 10.253725304806721,
+   "mass": 0.003823737901327996,
+   "top1": 0.0,
+   "rand_mm": 66.72519925720404
+  }
+ },
+ "Visual areas -> cuneus": {
+  "both": {
+   "cdist_mm": 63.2857644165557,
+   "mass": 2.5567656312995257e-159,
+   "top1": 0.0,
+   "rand_mm": 82.07264562797882
+  },
+  "xyz_only": {
+   "cdist_mm": 64.02641638443988,
+   "mass": 1.5111950570945585e-281,
+   "top1": 0.0,
+   "rand_mm": 82.07264562797882
+  },
+  "conn_only": {
+   "cdist_mm": 46.79716705122101,
+   "mass": 0.008186818266715187,
+   "top1": 0.0,
+   "rand_mm": 82.07264562797882
+  }
+ },
+ "Pallidum -> globus pallidus": {
+  "both": {
+   "cdist_mm": 16.686331359760217,
+   "mass": 0.019607843137268603,
+   "top1": 0.0196078431372549,
+   "rand_mm": 61.11291443996236
+  },
+  "xyz_only": {
+   "cdist_mm": 16.550353495041517,
+   "mass": 0.019607843137254905,
+   "top1": 0.0196078431372549,
+   "rand_mm": 61.11291443996236
+  },
+  "conn_only": {
+   "cdist_mm": 14.791117500322875,
+   "mass": 0.009719627941112946,
+   "top1": 0.0,
+   "rand_mm": 61.11291443996236
+  }
+ },
+ "Striatum ventral region -> nucleus accumbens": {
+  "both": {
+   "cdist_mm": 5.6808611078842715,
+   "mass": 0.07737365550784189,
+   "top1": 0.07692307692307693,
+   "rand_mm": 67.39604087866168
+  },
+  "xyz_only": {
+   "cdist_mm": 6.120675765353191,
+   "mass": 0.15384615620541858,
+   "top1": 0.15384615384615385,
+   "rand_mm": 67.39604087866168
+  },
+  "conn_only": {
+   "cdist_mm": 20.739799489883314,
+   "mass": 0.00030925105998025576,
+   "top1": 0.0,
+   "rand_mm": 67.39604087866168
+  }
+ },
+ "Caudoputamen -> caudate nucleus": {
+  "both": {
+   "cdist_mm": 13.743320920194398,
+   "mass": 0.09790010533135549,
+   "top1": 0.0979020979020979,
+   "rand_mm": 63.06396941762074
+  },
+  "xyz_only": {
+   "cdist_mm": 13.804848753497645,
+   "mass": 0.10489510489572607,
+   "top1": 0.1048951048951049,
+   "rand_mm": 63.06396941762074
+  },
+  "conn_only": {
+   "cdist_mm": 34.18169791832888,
+   "mass": 0.015204469219542405,
+   "top1": 0.0,
+   "rand_mm": 63.06396941762074
+  }
+ },
+ "Cortical subplate-other -> amygdala": {
+  "both": {
+   "cdist_mm": 28.763168971744726,
+   "mass": 0.016605944499632687,
+   "top1": 0.017241379310344827,
+   "rand_mm": 68.54198575907107
+  },
+  "xyz_only": {
+   "cdist_mm": 26.82340460241569,
+   "mass": 5.114767100156656e-21,
+   "top1": 0.0,
+   "rand_mm": 68.54198575907107
+  },
+  "conn_only": {
+   "cdist_mm": 23.7476978551256,
+   "mass": 0.016980633552895478,
+   "top1": 0.017241379310344827,
+   "rand_mm": 68.54198575907107
+  }
+ },
+ "Inferior colliculus -> inferior colliculus": {
+  "both": {
+   "cdist_mm": 70.00517816667701,
+   "mass": 1.028210793653979e-109,
+   "top1": 0.0,
+   "rand_mm": 62.928951146067
+  },
+  "xyz_only": {
+   "cdist_mm": 70.00518235691044,
+   "mass": 2.677932017461124e-253,
+   "top1": 0.0,
+   "rand_mm": 62.928951146067
+  },
+  "conn_only": {
+   "cdist_mm": 10.572915603816815,
+   "mass": 6.740458515147825e-11,
+   "top1": 0.0,
+   "rand_mm": 62.928951146067
+  }
+ },
+ "Superior colliculus, sensory related -> superior colliculus": {
+  "both": {
+   "cdist_mm": 60.15168118693911,
+   "mass": 2.67244001492816e-105,
+   "top1": 0.0,
+   "rand_mm": 59.3495785978713
+  },
+  "xyz_only": {
+   "cdist_mm": 60.199354829750355,
+   "mass": 4.248249575965296e-240,
+   "top1": 0.0,
+   "rand_mm": 59.3495785978713
+  },
+  "conn_only": {
+   "cdist_mm": 16.48873392197358,
+   "mass": 0.02053264854524689,
+   "top1": 0.12727272727272726,
+   "rand_mm": 59.3495785978713
+  }
+ },
+ "Pons -> pons": {
+  "both": {
+   "cdist_mm": 48.57991359740559,
+   "mass": 1.332423002371233e-58,
+   "top1": 0.0,
+   "rand_mm": 73.35159445366183
+  },
+  "xyz_only": {
+   "cdist_mm": 49.76219868961487,
+   "mass": 3.0539902308184544e-106,
+   "top1": 0.0,
+   "rand_mm": 73.35159445366183
+  },
+  "conn_only": {
+   "cdist_mm": 37.12059421960041,
+   "mass": 0.003976601128893152,
+   "top1": 0.0,
+   "rand_mm": 73.35159445366183
+  }
+ },
+ "Hypothalamus -> hypothalamus": {
+  "both": {
+   "cdist_mm": 25.761252302002408,
+   "mass": 0.057752374026722196,
+   "top1": 0.057692307692307696,
+   "rand_mm": 65.35122611304884
+  },
+  "xyz_only": {
+   "cdist_mm": 25.810304003035036,
+   "mass": 0.07164008443086754,
+   "top1": 0.07692307692307693,
+   "rand_mm": 65.35122611304884
+  },
+  "conn_only": {
+   "cdist_mm": 30.319789499275466,
+   "mass": 0.00015887621554343205,
+   "top1": 0.0,
+   "rand_mm": 65.35122611304884
+  }
+ },
+ "Thalamus -> thalamus": {
+  "both": {
+   "cdist_mm": 11.38884032332925,
+   "mass": 0.3109217548634768,
+   "top1": 0.3106796116504854,
+   "rand_mm": 57.9991458668376
+  },
+  "xyz_only": {
+   "cdist_mm": 12.41519029313029,
+   "mass": 0.27184440876549903,
+   "top1": 0.27184466019417475,
+   "rand_mm": 57.9991458668376
+  },
+  "conn_only": {
+   "cdist_mm": 21.420788263244688,
+   "mass": 0.01583020590563643,
+   "top1": 0.0,
+   "rand_mm": 57.9991458668376
+  }
+ }
+}

@@ -1,0 +1,514 @@
+{
+ "pi_file": "outputs/coupling/pi_canonical.npy",
+ "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+ "n_spins": 1000,
+ "dopamine_maps": 8,
+ "dopamine_hit_top3": 8,
+ "dopamine_spin_sig": 8,
+ "results": [
+  {
+   "system": "dopamine",
+   "map": "jaworska2020/fallypride",
+   "anchored": true,
+   "ground_truth": [
+    "CP",
+    "ACB",
+    "SNr"
+   ],
+   "best_gt_rank": 1,
+   "hit_top3": true,
+   "spin_p": 0.000999000999000999,
+   "top3": [
+    [
+     "ACB",
+     8.5078
+    ],
+    [
+     "CP",
+     7.8731
+    ],
+    [
+     "SI",
+     7.0297
+    ]
+   ]
+  },
+  {
+   "system": "dopamine",
+   "map": "sandiego2015/flb457",
+   "anchored": true,
+   "ground_truth": [
+    "CP",
+    "ACB",
+    "SNr"
+   ],
+   "best_gt_rank": 1,
+   "hit_top3": true,
+   "spin_p": 0.000999000999000999,
+   "top3": [
+    [
+     "ACB",
+     5.214
+    ],
+    [
+     "CP",
+     4.9216
+    ],
+    [
+     "SI",
+     4.8216
+    ]
+   ]
+  },
+  {
+   "system": "dopamine",
+   "map": "sasaki2012/fepe2i",
+   "anchored": true,
+   "ground_truth": [
+    "CP",
+    "ACB",
+    "SNr"
+   ],
+   "best_gt_rank": 1,
+   "hit_top3": true,
+   "spin_p": 0.000999000999000999,
+   "top3": [
+    [
+     "CP",
+     1.6777
+    ],
+    [
+     "ACB",
+     1.5662
+    ],
+    [
+     "TT",
+     1.3256
+    ]
+   ]
+  },
+  {
+   "system": "dopamine",
+   "map": "smith2017/flb457",
+   "anchored": true,
+   "ground_truth": [
+    "CP",
+    "ACB",
+    "SNr"
+   ],
+   "best_gt_rank": 3,
+   "hit_top3": true,
+   "spin_p": 0.002997002997002997,
+   "top3": [
+    [
+     "OT",
+     4.2122
+    ],
+    [
+     "SI",
+     4.0017
+    ],
+    [
+     "ACB",
+     3.778
+    ]
+   ]
+  },
+  {
+   "system": "dopamine",
+   "map": "malen2022/raclopride",
+   "anchored": true,
+   "ground_truth": [
+    "CP",
+    "ACB",
+    "SNr"
+   ],
+   "best_gt_rank": 1,
+   "hit_top3": true,
+   "spin_p": 0.000999000999000999,
+   "top3": [
+    [
+     "CP",
+     1.4385
+    ],
+    [
+     "ACB",
+     1.2998
+    ],
+    [
+     "OT",
+     1.2378
+    ]
+   ]
+  },
+  {
+   "system": "dopamine",
+   "map": "alarkurtti2015/raclopride",
+   "anchored": true,
+   "ground_truth": [
+    "CP",
+    "ACB",
+    "SNr"
+   ],
+   "best_gt_rank": 1,
+   "hit_top3": true,
+   "spin_p": 0.000999000999000999,
+   "top3": [
+    [
+     "CP",
+     38.1041
+    ],
+    [
+     "AIv",
+     33.0488
+    ],
+    [
+     "OT",
+     32.0333
+    ]
+   ]
+  },
+  {
+   "system": "dopamine",
+   "map": "dukart2018/fpcit",
+   "anchored": true,
+   "ground_truth": [
+    "CP",
+    "ACB",
+    "SNr"
+   ],
+   "best_gt_rank": 3,
+   "hit_top3": true,
+   "spin_p": 0.004995004995004995,
+   "top3": [
+    [
+     "OT",
+     58.6292
+    ],
+    [
+     "SI",
+     57.9205
+    ],
+    [
+     "CP",
+     49.1481
+    ]
+   ]
+  },
+  {
+   "system": "dopamine",
+   "map": "kaller2017/sch23390",
+   "anchored": true,
+   "ground_truth": [
+    "CP",
+    "ACB",
+    "SNr"
+   ],
+   "best_gt_rank": 2,
+   "hit_top3": true,
+   "spin_p": 0.000999000999000999,
+   "top3": [
+    [
+     "OT",
+     32.9682
+    ],
+    [
+     "CP",
+     31.3384
+    ],
+    [
+     "SI",
+     28.7557
+    ]
+   ]
+  },
+  {
+   "system": "serotonin",
+   "map": "beliveau2017/az10419369",
+   "anchored": false,
+   "ground_truth": [
+    "CP",
+    "ACB"
+   ],
+   "best_gt_rank": 7,
+   "hit_top3": false,
+   "spin_p": 0.08791208791208792,
+   "top3": [
+    [
+     "OT",
+     13.1607
+    ],
+    [
+     "SI",
+     10.7151
+    ],
+    [
+     "RSPd",
+     9.8171
+    ]
+   ]
+  },
+  {
+   "system": "serotonin",
+   "map": "beliveau2017/cimbi36",
+   "anchored": false,
+   "ground_truth": [
+    "CP",
+    "ACB"
+   ],
+   "best_gt_rank": 58,
+   "hit_top3": false,
+   "spin_p": 1.0,
+   "top3": [
+    [
+     "AUDv",
+     26.177
+    ],
+    [
+     "AUDd",
+     24.0711
+    ],
+    [
+     "AUDp",
+     22.7668
+    ]
+   ]
+  },
+  {
+   "system": "serotonin",
+   "map": "beliveau2017/dasb",
+   "anchored": false,
+   "ground_truth": [
+    "CP",
+    "ACB"
+   ],
+   "best_gt_rank": 24,
+   "hit_top3": false,
+   "spin_p": 0.012987012987012988,
+   "top3": [
+    [
+     "SCm",
+     20.4996
+    ],
+    [
+     "SCs",
+     19.8567
+    ],
+    [
+     "POST",
+     14.4564
+    ]
+   ]
+  },
+  {
+   "system": "serotonin",
+   "map": "beliveau2017/sb207145",
+   "anchored": false,
+   "ground_truth": [
+    "CP",
+    "ACB"
+   ],
+   "best_gt_rank": 1,
+   "hit_top3": true,
+   "spin_p": 0.000999000999000999,
+   "top3": [
+    [
+     "CP",
+     2.9637
+    ],
+    [
+     "ACB",
+     2.6899
+    ],
+    [
+     "OT",
+     2.4167
+    ]
+   ]
+  },
+  {
+   "system": "serotonin",
+   "map": "gallezot2010/p943",
+   "anchored": false,
+   "ground_truth": [
+    "CP",
+    "ACB"
+   ],
+   "best_gt_rank": 41,
+   "hit_top3": false,
+   "spin_p": 0.8281718281718282,
+   "top3": [
+    [
+     "SI",
+     1.1461
+    ],
+    [
+     "OT",
+     1.1121
+    ],
+    [
+     "CEA",
+     0.9197
+    ]
+   ]
+  },
+  {
+   "system": "serotonin",
+   "map": "savli2012/altanserin",
+   "anchored": false,
+   "ground_truth": [
+    "CP",
+    "ACB"
+   ],
+   "best_gt_rank": 49,
+   "hit_top3": false,
+   "spin_p": 1.0,
+   "top3": [
+    [
+     "AUDd",
+     65.8654
+    ],
+    [
+     "SSs",
+     62.6843
+    ],
+    [
+     "AUDv",
+     61.6353
+    ]
+   ]
+  },
+  {
+   "system": "serotonin",
+   "map": "savli2012/dasb",
+   "anchored": false,
+   "ground_truth": [
+    "CP",
+    "ACB"
+   ],
+   "best_gt_rank": 26,
+   "hit_top3": false,
+   "spin_p": 0.058941058941058944,
+   "top3": [
+    [
+     "ZI",
+     46.0114
+    ],
+    [
+     "SI",
+     39.396
+    ],
+    [
+     "OT",
+     37.567
+    ]
+   ]
+  },
+  {
+   "system": "serotonin",
+   "map": "savli2012/p943",
+   "anchored": false,
+   "ground_truth": [
+    "CP",
+    "ACB"
+   ],
+   "best_gt_rank": 37,
+   "hit_top3": false,
+   "spin_p": 0.9330669330669331,
+   "top3": [
+    [
+     "AUDd",
+     37.1908
+    ],
+    [
+     "SSp-n",
+     36.3503
+    ],
+    [
+     "SSp-un",
+     36.296
+    ]
+   ]
+  },
+  {
+   "system": "serotonin",
+   "map": "savli2012/way100635",
+   "anchored": false,
+   "ground_truth": [
+    "CP",
+    "ACB"
+   ],
+   "best_gt_rank": 57,
+   "hit_top3": false,
+   "spin_p": 1.0,
+   "top3": [
+    [
+     "BMA",
+     61.9021
+    ],
+    [
+     "BLA",
+     57.2947
+    ],
+    [
+     "ECT",
+     55.1507
+    ]
+   ]
+  },
+  {
+   "system": "mu_opioid",
+   "map": "turtonen2020/carfentanil",
+   "anchored": false,
+   "ground_truth": [
+    "CP",
+    "ACB",
+    "PAG"
+   ],
+   "best_gt_rank": 7,
+   "hit_top3": false,
+   "spin_p": 0.04195804195804196,
+   "top3": [
+    [
+     "OT",
+     1.8792
+    ],
+    [
+     "SI",
+     1.7877
+    ],
+    [
+     "MD",
+     1.7679
+    ]
+   ]
+  },
+  {
+   "system": "mu_opioid",
+   "map": "kantonen2020/carfentanil",
+   "anchored": false,
+   "ground_truth": [
+    "CP",
+    "ACB",
+    "PAG"
+   ],
+   "best_gt_rank": 11,
+   "hit_top3": false,
+   "spin_p": 0.07592407592407592,
+   "top3": [
+    [
+     "OT",
+     46.6406
+    ],
+    [
+     "MD",
+     46.3632
+    ],
+    [
+     "PO",
+     44.9009
+    ]
+   ]
+  }
+ ]
+}

@@ -1,0 +1,59 @@
+{
+  "_def": "reachability with SPIN null (rotate reference map); 52 hemi-regions; two-sided p on |obs-50|",
+  "adhd": {
+    "recon_reach": 47.393162393162385,
+    "recon_spin_p": 0.6586706646676662,
+    "myelin_reach": 55.270655270655276,
+    "myelin_spin_p": 0.14392803598200898,
+    "burden": 1.35,
+    "mean_d": -0.02230769230769231,
+    "n": 52
+  },
+  "asd": {
+    "recon_reach": 36.75675675675676,
+    "recon_spin_p": 0.13043478260869565,
+    "myelin_reach": 47.621621621621614,
+    "myelin_spin_p": 0.777111444277861,
+    "burden": 1.48,
+    "mean_d": 0.002,
+    "n": 50
+  },
+  "bipolar": {
+    "recon_reach": 49.71326409400284,
+    "recon_spin_p": 0.9575212393803099,
+    "myelin_reach": 43.94042153589317,
+    "myelin_spin_p": 0.02798600699650175,
+    "burden": 9.583999999999998,
+    "mean_d": -0.18363461538461534,
+    "n": 52
+  },
+  "mdd": {
+    "recon_reach": 43.46105889123345,
+    "recon_spin_p": 0.21539230384807595,
+    "myelin_reach": 37.86607199948846,
+    "myelin_spin_p": 0.010994502748625687,
+    "burden": 2.406,
+    "mean_d": -0.03855769230769231,
+    "n": 52
+  },
+  "ocd": {
+    "recon_reach": 49.970146283212266,
+    "recon_spin_p": 0.9960019990004998,
+    "myelin_reach": 43.97701263807345,
+    "myelin_spin_p": 0.054972513743128434,
+    "burden": 3.092,
+    "mean_d": -0.05748076923076924,
+    "n": 52
+  },
+  "schizophrenia": {
+    "recon_reach": 48.16525294763727,
+    "recon_spin_p": 0.6821589205397302,
+    "myelin_reach": 46.99149121994469,
+    "myelin_spin_p": 0.22688655672163918,
+    "burden": 17.438999999999997,
+    "mean_d": -0.33536538461538457,
+    "n": 52
+  },
+  "pi_file": "outputs/coupling/pi_canonical.npy",
+  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77"
+}

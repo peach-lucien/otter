@@ -1,0 +1,1125 @@
+{
+  "meta": {
+    "base_config": {
+      "use_sc": true,
+      "sc_weight": 0.3,
+      "fc_weight": 0.7,
+      "xyz_weight": 0.5,
+      "lam_anchor": 1.0,
+      "alpha": 0.5
+    },
+    "eps_grid": [
+      0.005,
+      0.02,
+      0.05,
+      0.1,
+      0.2
+    ],
+    "xyzw_grid": [
+      0.0,
+      0.25,
+      0.5,
+      1.0
+    ],
+    "xyz_family_fixed_eps": 0.005,
+    "region_anchors": [],
+    "n_pairs": 19,
+    "production_agg_top1": 0.45728155339805826,
+    "note": "anchor-free couplings; production shown only as scorer sanity ref",
+    "runtime_s": 2.2516438961029053
+  },
+  "epsilon": {
+    "aggregate_top1_by_eps": {
+      "0.005": 0.10388349514563107,
+      "0.02": 0.10388349514563107,
+      "0.05": 0.10485436893203884,
+      "0.1": 0.10485436893203884,
+      "0.2": 0.10388349514563107
+    },
+    "aggregate_mean_mass_by_eps": {
+      "0.005": 0.10399685224230285,
+      "0.02": 0.10346305600043487,
+      "0.05": 0.10175128941987487,
+      "0.1": 0.09494347053846794,
+      "0.2": 0.07943870510848801
+    },
+    "global_best_eps": 0.05,
+    "per_pair": {
+      "Anterior cingulate area -> cingulate gyrus": {
+        "0.005": {
+          "top1": 0.13043478260869565,
+          "mean_mass": 0.13217108126567095
+        },
+        "0.02": {
+          "top1": 0.13043478260869565,
+          "mean_mass": 0.1457750676525488
+        },
+        "0.05": {
+          "top1": 0.13043478260869565,
+          "mean_mass": 0.1517648623600583
+        },
+        "0.1": {
+          "top1": 0.13043478260869565,
+          "mean_mass": 0.14794909117447966
+        },
+        "0.2": {
+          "top1": 0.13043478260869565,
+          "mean_mass": 0.13933120849822248
+        }
+      },
+      "Caudoputamen -> caudate nucleus": {
+        "0.005": {
+          "top1": 0.11888111888111888,
+          "mean_mass": 0.11887992557835833
+        },
+        "0.02": {
+          "top1": 0.11888111888111888,
+          "mean_mass": 0.11818419204485232
+        },
+        "0.05": {
+          "top1": 0.11888111888111888,
+          "mean_mass": 0.12139004986164681
+        },
+        "0.1": {
+          "top1": 0.11888111888111888,
+          "mean_mass": 0.12077675964038767
+        },
+        "0.2": {
+          "top1": 0.11888111888111888,
+          "mean_mass": 0.10063496097787729
+        }
+      },
+      "Cortical subplate-other -> amygdala": {
+        "0.005": {
+          "top1": 0.0,
+          "mean_mass": 4.553437326488911e-07
+        },
+        "0.02": {
+          "top1": 0.0,
+          "mean_mass": 0.0012113576390444124
+        },
+        "0.05": {
+          "top1": 0.0,
+          "mean_mass": 0.005954380664964524
+        },
+        "0.1": {
+          "top1": 0.0,
+          "mean_mass": 0.01171532528243446
+        },
+        "0.2": {
+          "top1": 0.0,
+          "mean_mass": 0.014197658311462124
+        }
+      },
+      "Dentate gyrus -> dentate gyrus": {
+        "0.005": {
+          "top1": 0.0,
+          "mean_mass": 2.7335167259989882e-77
+        },
+        "0.02": {
+          "top1": 0.0,
+          "mean_mass": 7.156592295459296e-21
+        },
+        "0.05": {
+          "top1": 0.0,
+          "mean_mass": 1.297565018183943e-09
+        },
+        "0.1": {
+          "top1": 0.0,
+          "mean_mass": 4.792704330007243e-06
+        },
+        "0.2": {
+          "top1": 0.0,
+          "mean_mass": 0.00018857982214337212
+        }
+      },
+      "Field CA1 -> CA1 field": {
+        "0.005": {
+          "top1": 0.0,
+          "mean_mass": 1.0219651162236929e-95
+        },
+        "0.02": {
+          "top1": 0.0,
+          "mean_mass": 2.7332122264469134e-25
+        },
+        "0.05": {
+          "top1": 0.0,
+          "mean_mass": 3.541753684673314e-11
+        },
+        "0.1": {
+          "top1": 0.0,
+          "mean_mass": 1.1374716984924575e-06
+        },
+        "0.2": {
+          "top1": 0.0,
+          "mean_mass": 0.00011989756477748337
+        }
+      },
+      "Field CA3 -> CA3 field": {
+        "0.005": {
+          "top1": 0.0,
+          "mean_mass": 1.4360052091691114e-28
+        },
+        "0.02": {
+          "top1": 0.0,
+          "mean_mass": 1.240462927141862e-08
+        },
+        "0.05": {
+          "top1": 0.0,
+          "mean_mass": 0.00010137254625954365
+        },
+        "0.1": {
+          "top1": 0.0,
+          "mean_mass": 0.001549175229431686
+        },
+        "0.2": {
+          "top1": 0.0,
+          "mean_mass": 0.004802362485081244
+        }
+      },
+      "Hypothalamus -> hypothalamus": {
+        "0.005": {
+          "top1": 0.11538461538461539,
+          "mean_mass": 0.11473472242558544
+        },
+        "0.02": {
+          "top1": 0.11538461538461539,
+          "mean_mass": 0.1087281199871595
+        },
+        "0.05": {
+          "top1": 0.11538461538461539,
+          "mean_mass": 0.10105609370722564
+        },
+        "0.1": {
+          "top1": 0.11538461538461539,
+          "mean_mass": 0.08428043808908894
+        },
+        "0.2": {
+          "top1": 0.11538461538461539,
+          "mean_mass": 0.0651753957775533
+        }
+      },
+      "Inferior colliculus -> inferior colliculus": {
+        "0.005": {
+          "top1": 0.0,
+          "mean_mass": 1.533343284865038e-169
+        },
+        "0.02": {
+          "top1": 0.0,
+          "mean_mass": 5.304277265891235e-44
+        },
+        "0.05": {
+          "top1": 0.0,
+          "mean_mass": 1.1779500374906106e-18
+        },
+        "0.1": {
+          "top1": 0.0,
+          "mean_mass": 2.587124712806495e-10
+        },
+        "0.2": {
+          "top1": 0.0,
+          "mean_mass": 2.0568138387987186e-06
+        }
+      },
+      "Pallidum -> globus pallidus": {
+        "0.005": {
+          "top1": 0.058823529411764705,
+          "mean_mass": 0.058823529411767564
+        },
+        "0.02": {
+          "top1": 0.058823529411764705,
+          "mean_mass": 0.05885971248771486
+        },
+        "0.05": {
+          "top1": 0.058823529411764705,
+          "mean_mass": 0.06221526004928033
+        },
+        "0.1": {
+          "top1": 0.058823529411764705,
+          "mean_mass": 0.06688966426330446
+        },
+        "0.2": {
+          "top1": 0.058823529411764705,
+          "mean_mass": 0.06295145009904214
+        }
+      },
+      "Piriform area -> piriform cortex": {
+        "0.005": {
+          "top1": 0.019230769230769232,
+          "mean_mass": 0.026243985361618854
+        },
+        "0.02": {
+          "top1": 0.019230769230769232,
+          "mean_mass": 0.02418797095086652
+        },
+        "0.05": {
+          "top1": 0.038461538461538464,
+          "mean_mass": 0.027884269052081682
+        },
+        "0.1": {
+          "top1": 0.038461538461538464,
+          "mean_mass": 0.04405963302905291
+        },
+        "0.2": {
+          "top1": 0.038461538461538464,
+          "mean_mass": 0.05094285795698231
+        }
+      },
+      "Pons -> pons": {
+        "0.005": {
+          "top1": 0.028985507246376812,
+          "mean_mass": 0.028985507246376812
+        },
+        "0.02": {
+          "top1": 0.028985507246376812,
+          "mean_mass": 0.02898550724637698
+        },
+        "0.05": {
+          "top1": 0.028985507246376812,
+          "mean_mass": 0.028985579740748266
+        },
+        "0.1": {
+          "top1": 0.028985507246376812,
+          "mean_mass": 0.029037726799689148
+        },
+        "0.2": {
+          "top1": 0.028985507246376812,
+          "mean_mass": 0.030172900594347702
+        }
+      },
+      "Primary auditory area -> Heschl's gyrus": {
+        "0.005": {
+          "top1": 0.2222222222222222,
+          "mean_mass": 0.2222222222222222
+        },
+        "0.02": {
+          "top1": 0.2222222222222222,
+          "mean_mass": 0.2222222222222222
+        },
+        "0.05": {
+          "top1": 0.2222222222222222,
+          "mean_mass": 0.22222222222222834
+        },
+        "0.1": {
+          "top1": 0.2222222222222222,
+          "mean_mass": 0.22222228662288324
+        },
+        "0.2": {
+          "top1": 0.2222222222222222,
+          "mean_mass": 0.22233280934018115
+        }
+      },
+      "Primary motor area -> precentral gyrus": {
+        "0.005": {
+          "top1": 0.0,
+          "mean_mass": 5.475185423328015e-24
+        },
+        "0.02": {
+          "top1": 0.0,
+          "mean_mass": 9.716069984277793e-08
+        },
+        "0.05": {
+          "top1": 0.0,
+          "mean_mass": 0.0002988990651906529
+        },
+        "0.1": {
+          "top1": 0.0,
+          "mean_mass": 0.0058115808201031904
+        },
+        "0.2": {
+          "top1": 0.0,
+          "mean_mass": 0.03129986652471713
+        }
+      },
+      "Primary somatosensory area -> postcentral gyrus": {
+        "0.005": {
+          "top1": 0.18831168831168832,
+          "mean_mass": 0.18831160670760447
+        },
+        "0.02": {
+          "top1": 0.18831168831168832,
+          "mean_mass": 0.18757081815608367
+        },
+        "0.05": {
+          "top1": 0.18831168831168832,
+          "mean_mass": 0.18353410183211918
+        },
+        "0.1": {
+          "top1": 0.18831168831168832,
+          "mean_mass": 0.17599228389892377
+        },
+        "0.2": {
+          "top1": 0.18831168831168832,
+          "mean_mass": 0.15180603899349066
+        }
+      },
+      "Striatum ventral region -> nucleus accumbens": {
+        "0.005": {
+          "top1": 0.11538461538461539,
+          "mean_mass": 0.10706865064762704
+        },
+        "0.02": {
+          "top1": 0.11538461538461539,
+          "mean_mass": 0.1029637732618356
+        },
+        "0.05": {
+          "top1": 0.11538461538461539,
+          "mean_mass": 0.0946379203832928
+        },
+        "0.1": {
+          "top1": 0.11538461538461539,
+          "mean_mass": 0.07978690957357323
+        },
+        "0.2": {
+          "top1": 0.07692307692307693,
+          "mean_mass": 0.046923614112432684
+        }
+      },
+      "Subiculum -> subiculum": {
+        "0.005": {
+          "top1": 0.0,
+          "mean_mass": 7.177741768989696e-46
+        },
+        "0.02": {
+          "top1": 0.0,
+          "mean_mass": 2.353396358330781e-13
+        },
+        "0.05": {
+          "top1": 0.0,
+          "mean_mass": 7.741899544122292e-07
+        },
+        "0.1": {
+          "top1": 0.0,
+          "mean_mass": 0.00011132754023177002
+        },
+        "0.2": {
+          "top1": 0.0,
+          "mean_mass": 0.00121250909708576
+        }
+      },
+      "Superior colliculus, sensory related -> superior colliculus": {
+        "0.005": {
+          "top1": 0.0,
+          "mean_mass": 2.3580738031526288e-102
+        },
+        "0.02": {
+          "top1": 0.0,
+          "mean_mass": 5.243815011695393e-27
+        },
+        "0.05": {
+          "top1": 0.0,
+          "mean_mass": 5.651582806819133e-12
+        },
+        "0.1": {
+          "top1": 0.0,
+          "mean_mass": 3.4286210529785665e-07
+        },
+        "0.2": {
+          "top1": 0.0,
+          "mean_mass": 5.232637275271168e-05
+        }
+      },
+      "Thalamus -> thalamus": {
+        "0.005": {
+          "top1": 0.3592233009708738,
+          "mean_mass": 0.35885730114636527
+        },
+        "0.02": {
+          "top1": 0.3592233009708738,
+          "mean_mass": 0.3569618572118868
+        },
+        "0.05": {
+          "top1": 0.3592233009708738,
+          "mean_mass": 0.3396891478410976
+        },
+        "0.1": {
+          "top1": 0.3592233009708738,
+          "mean_mass": 0.2798219319937249
+        },
+        "0.2": {
+          "top1": 0.3592233009708738,
+          "mean_mass": 0.19069166765470796
+        }
+      },
+      "Visual areas -> cuneus": {
+        "0.005": {
+          "top1": 0.07692307692307693,
+          "mean_mass": 0.07692307692307693
+        },
+        "0.02": {
+          "top1": 0.07692307692307693,
+          "mean_mass": 0.07692307692307693
+        },
+        "0.05": {
+          "top1": 0.07692307692307693,
+          "mean_mass": 0.07692307692307701
+        },
+        "0.1": {
+          "top1": 0.07692307692307693,
+          "mean_mass": 0.07692308065148232
+        },
+        "0.2": {
+          "top1": 0.07692307692307693,
+          "mean_mass": 0.07694572409990139
+        }
+      }
+    },
+    "per_pair_best_eps": {
+      "Anterior cingulate area -> cingulate gyrus": 0.05,
+      "Caudoputamen -> caudate nucleus": 0.05,
+      "Cortical subplate-other -> amygdala": 0.2,
+      "Dentate gyrus -> dentate gyrus": 0.2,
+      "Field CA1 -> CA1 field": 0.2,
+      "Field CA3 -> CA3 field": 0.2,
+      "Hypothalamus -> hypothalamus": 0.005,
+      "Inferior colliculus -> inferior colliculus": 0.2,
+      "Pallidum -> globus pallidus": 0.1,
+      "Piriform area -> piriform cortex": 0.2,
+      "Pons -> pons": 0.2,
+      "Primary auditory area -> Heschl's gyrus": 0.2,
+      "Primary motor area -> precentral gyrus": 0.2,
+      "Primary somatosensory area -> postcentral gyrus": 0.005,
+      "Striatum ventral region -> nucleus accumbens": 0.005,
+      "Subiculum -> subiculum": 0.2,
+      "Superior colliculus, sensory related -> superior colliculus": 0.2,
+      "Thalamus -> thalamus": 0.005,
+      "Visual areas -> cuneus": 0.2
+    },
+    "best_eps_counts": {
+      "0.05": 2,
+      "0.2": 12,
+      "0.005": 4,
+      "0.1": 1
+    },
+    "per_pair_gain": {
+      "Anterior cingulate area -> cingulate gyrus": {
+        "best": 0.13043478260869565,
+        "worst": 0.13043478260869565,
+        "gain": 0.0,
+        "best_eps": 0.05
+      },
+      "Caudoputamen -> caudate nucleus": {
+        "best": 0.11888111888111888,
+        "worst": 0.11888111888111888,
+        "gain": 0.0,
+        "best_eps": 0.05
+      },
+      "Cortical subplate-other -> amygdala": {
+        "best": 0.0,
+        "worst": 0.0,
+        "gain": 0.0,
+        "best_eps": 0.2
+      },
+      "Dentate gyrus -> dentate gyrus": {
+        "best": 0.0,
+        "worst": 0.0,
+        "gain": 0.0,
+        "best_eps": 0.2
+      },
+      "Field CA1 -> CA1 field": {
+        "best": 0.0,
+        "worst": 0.0,
+        "gain": 0.0,
+        "best_eps": 0.2
+      },
+      "Field CA3 -> CA3 field": {
+        "best": 0.0,
+        "worst": 0.0,
+        "gain": 0.0,
+        "best_eps": 0.2
+      },
+      "Hypothalamus -> hypothalamus": {
+        "best": 0.11538461538461539,
+        "worst": 0.11538461538461539,
+        "gain": 0.0,
+        "best_eps": 0.005
+      },
+      "Inferior colliculus -> inferior colliculus": {
+        "best": 0.0,
+        "worst": 0.0,
+        "gain": 0.0,
+        "best_eps": 0.2
+      },
+      "Pallidum -> globus pallidus": {
+        "best": 0.058823529411764705,
+        "worst": 0.058823529411764705,
+        "gain": 0.0,
+        "best_eps": 0.1
+      },
+      "Piriform area -> piriform cortex": {
+        "best": 0.038461538461538464,
+        "worst": 0.019230769230769232,
+        "gain": 0.019230769230769232,
+        "best_eps": 0.2
+      },
+      "Pons -> pons": {
+        "best": 0.028985507246376812,
+        "worst": 0.028985507246376812,
+        "gain": 0.0,
+        "best_eps": 0.2
+      },
+      "Primary auditory area -> Heschl's gyrus": {
+        "best": 0.2222222222222222,
+        "worst": 0.2222222222222222,
+        "gain": 0.0,
+        "best_eps": 0.2
+      },
+      "Primary motor area -> precentral gyrus": {
+        "best": 0.0,
+        "worst": 0.0,
+        "gain": 0.0,
+        "best_eps": 0.2
+      },
+      "Primary somatosensory area -> postcentral gyrus": {
+        "best": 0.18831168831168832,
+        "worst": 0.18831168831168832,
+        "gain": 0.0,
+        "best_eps": 0.005
+      },
+      "Striatum ventral region -> nucleus accumbens": {
+        "best": 0.11538461538461539,
+        "worst": 0.07692307692307693,
+        "gain": 0.038461538461538464,
+        "best_eps": 0.005
+      },
+      "Subiculum -> subiculum": {
+        "best": 0.0,
+        "worst": 0.0,
+        "gain": 0.0,
+        "best_eps": 0.2
+      },
+      "Superior colliculus, sensory related -> superior colliculus": {
+        "best": 0.0,
+        "worst": 0.0,
+        "gain": 0.0,
+        "best_eps": 0.2
+      },
+      "Thalamus -> thalamus": {
+        "best": 0.3592233009708738,
+        "worst": 0.3592233009708738,
+        "gain": 0.0,
+        "best_eps": 0.005
+      },
+      "Visual areas -> cuneus": {
+        "best": 0.07692307692307693,
+        "worst": 0.07692307692307693,
+        "gain": 0.0,
+        "best_eps": 0.2
+      }
+    }
+  },
+  "xyz_weight": {
+    "aggregate_top1_by_xyzw": {
+      "0.0": 0.036893203883495145,
+      "0.25": 0.10485436893203884,
+      "0.5": 0.10388349514563107,
+      "1.0": 0.1
+    },
+    "aggregate_mean_mass_by_xyzw": {
+      "0.0": 0.034174340066843445,
+      "0.25": 0.10506474279707594,
+      "0.5": 0.10399685224230285,
+      "1.0": 0.09978774125374805
+    },
+    "global_best_xyzw": 0.25,
+    "per_pair": {
+      "Anterior cingulate area -> cingulate gyrus": {
+        "0.0": {
+          "top1": 0.08695652173913043,
+          "mean_mass": 0.09155241098776132
+        },
+        "0.25": {
+          "top1": 0.13043478260869565,
+          "mean_mass": 0.13041997760864907
+        },
+        "0.5": {
+          "top1": 0.13043478260869565,
+          "mean_mass": 0.13217108126567095
+        },
+        "1.0": {
+          "top1": 0.17391304347826086,
+          "mean_mass": 0.1739130386370987
+        }
+      },
+      "Caudoputamen -> caudate nucleus": {
+        "0.0": {
+          "top1": 0.013986013986013986,
+          "mean_mass": 0.022034885745222034
+        },
+        "0.25": {
+          "top1": 0.11888111888111888,
+          "mean_mass": 0.11917241408939502
+        },
+        "0.5": {
+          "top1": 0.11888111888111888,
+          "mean_mass": 0.11887992557835833
+        },
+        "1.0": {
+          "top1": 0.11188811188811189,
+          "mean_mass": 0.11040049231783954
+        }
+      },
+      "Cortical subplate-other -> amygdala": {
+        "0.0": {
+          "top1": 0.0,
+          "mean_mass": 0.0032588573383817696
+        },
+        "0.25": {
+          "top1": 0.034482758620689655,
+          "mean_mass": 0.034016060079832974
+        },
+        "0.5": {
+          "top1": 0.0,
+          "mean_mass": 4.553437326488911e-07
+        },
+        "1.0": {
+          "top1": 0.0,
+          "mean_mass": 3.2314360506535314e-29
+        }
+      },
+      "Dentate gyrus -> dentate gyrus": {
+        "0.0": {
+          "top1": 0.0,
+          "mean_mass": 0.01095762902034169
+        },
+        "0.25": {
+          "top1": 0.0,
+          "mean_mass": 1.8213094084236882e-33
+        },
+        "0.5": {
+          "top1": 0.0,
+          "mean_mass": 2.7335167259989882e-77
+        },
+        "1.0": {
+          "top1": 0.0,
+          "mean_mass": 5.077481201934511e-169
+        }
+      },
+      "Field CA1 -> CA1 field": {
+        "0.0": {
+          "top1": 0.0,
+          "mean_mass": 0.008972006948544638
+        },
+        "0.25": {
+          "top1": 0.0,
+          "mean_mass": 1.9067070405540552e-43
+        },
+        "0.5": {
+          "top1": 0.0,
+          "mean_mass": 1.0219651162236929e-95
+        },
+        "1.0": {
+          "top1": 0.0,
+          "mean_mass": 1.4762066694902108e-195
+        }
+      },
+      "Field CA3 -> CA3 field": {
+        "0.0": {
+          "top1": 0.0,
+          "mean_mass": 0.012987136798598191
+        },
+        "0.25": {
+          "top1": 0.0,
+          "mean_mass": 2.3509745032707086e-11
+        },
+        "0.5": {
+          "top1": 0.0,
+          "mean_mass": 1.4360052091691114e-28
+        },
+        "1.0": {
+          "top1": 0.0,
+          "mean_mass": 2.5135608095837357e-66
+        }
+      },
+      "Hypothalamus -> hypothalamus": {
+        "0.0": {
+          "top1": 0.038461538461538464,
+          "mean_mass": 0.04427157500385845
+        },
+        "0.25": {
+          "top1": 0.11538461538461539,
+          "mean_mass": 0.11202629075856997
+        },
+        "0.5": {
+          "top1": 0.11538461538461539,
+          "mean_mass": 0.11473472242558544
+        },
+        "1.0": {
+          "top1": 0.11538461538461539,
+          "mean_mass": 0.11527860168861226
+        }
+      },
+      "Inferior colliculus -> inferior colliculus": {
+        "0.0": {
+          "top1": 0.0,
+          "mean_mass": 8.050123166767427e-06
+        },
+        "0.25": {
+          "top1": 0.0,
+          "mean_mass": 1.6665818988565398e-81
+        },
+        "0.5": {
+          "top1": 0.0,
+          "mean_mass": 1.533343284865038e-169
+        },
+        "1.0": {
+          "top1": 0.0,
+          "mean_mass": 0.0
+        }
+      },
+      "Pallidum -> globus pallidus": {
+        "0.0": {
+          "top1": 0.0784313725490196,
+          "mean_mass": 0.05172154326723395
+        },
+        "0.25": {
+          "top1": 0.058823529411764705,
+          "mean_mass": 0.05882362771693561
+        },
+        "0.5": {
+          "top1": 0.058823529411764705,
+          "mean_mass": 0.058823529411767564
+        },
+        "1.0": {
+          "top1": 0.058823529411764705,
+          "mean_mass": 0.058823529411764705
+        }
+      },
+      "Piriform area -> piriform cortex": {
+        "0.0": {
+          "top1": 0.0,
+          "mean_mass": 0.0008945289800030063
+        },
+        "0.25": {
+          "top1": 0.019230769230769232,
+          "mean_mass": 0.024034292972459688
+        },
+        "0.5": {
+          "top1": 0.019230769230769232,
+          "mean_mass": 0.026243985361618854
+        },
+        "1.0": {
+          "top1": 0.038461538461538464,
+          "mean_mass": 0.03412629972618529
+        }
+      },
+      "Pons -> pons": {
+        "0.0": {
+          "top1": 0.028985507246376812,
+          "mean_mass": 0.037042210038482966
+        },
+        "0.25": {
+          "top1": 0.028985507246376812,
+          "mean_mass": 0.028985507246376812
+        },
+        "0.5": {
+          "top1": 0.028985507246376812,
+          "mean_mass": 0.028985507246376812
+        },
+        "1.0": {
+          "top1": 0.028985507246376812,
+          "mean_mass": 0.028985507246376812
+        }
+      },
+      "Primary auditory area -> Heschl's gyrus": {
+        "0.0": {
+          "top1": 0.2222222222222222,
+          "mean_mass": 0.26757450480681416
+        },
+        "0.25": {
+          "top1": 0.2222222222222222,
+          "mean_mass": 0.2222222222222222
+        },
+        "0.5": {
+          "top1": 0.2222222222222222,
+          "mean_mass": 0.2222222222222222
+        },
+        "1.0": {
+          "top1": 0.2222222222222222,
+          "mean_mass": 0.2222222222222222
+        }
+      },
+      "Primary motor area -> precentral gyrus": {
+        "0.0": {
+          "top1": 0.11320754716981132,
+          "mean_mass": 0.039029538165119095
+        },
+        "0.25": {
+          "top1": 0.0,
+          "mean_mass": 1.4747364381860516e-13
+        },
+        "0.5": {
+          "top1": 0.0,
+          "mean_mass": 5.475185423328015e-24
+        },
+        "1.0": {
+          "top1": 0.0,
+          "mean_mass": 2.0790844067923585e-44
+        }
+      },
+      "Primary somatosensory area -> postcentral gyrus": {
+        "0.0": {
+          "top1": 0.012987012987012988,
+          "mean_mass": 0.03709792299721976
+        },
+        "0.25": {
+          "top1": 0.18181818181818182,
+          "mean_mass": 0.18662110218729186
+        },
+        "0.5": {
+          "top1": 0.18831168831168832,
+          "mean_mass": 0.18831160670760447
+        },
+        "1.0": {
+          "top1": 0.18831168831168832,
+          "mean_mass": 0.18831168831162826
+        }
+      },
+      "Striatum ventral region -> nucleus accumbens": {
+        "0.0": {
+          "top1": 0.0,
+          "mean_mass": 3.4039504209259655e-07
+        },
+        "0.25": {
+          "top1": 0.07692307692307693,
+          "mean_mass": 0.05882486989238378
+        },
+        "0.5": {
+          "top1": 0.11538461538461539,
+          "mean_mass": 0.10706865064762704
+        },
+        "1.0": {
+          "top1": 0.15384615384615385,
+          "mean_mass": 0.1538461533963875
+        }
+      },
+      "Subiculum -> subiculum": {
+        "0.0": {
+          "top1": 0.0,
+          "mean_mass": 0.011929635757285272
+        },
+        "0.25": {
+          "top1": 0.0,
+          "mean_mass": 4.565879925941808e-21
+        },
+        "0.5": {
+          "top1": 0.0,
+          "mean_mass": 7.177741768989696e-46
+        },
+        "1.0": {
+          "top1": 0.0,
+          "mean_mass": 4.660251596399023e-94
+        }
+      },
+      "Superior colliculus, sensory related -> superior colliculus": {
+        "0.0": {
+          "top1": 0.0,
+          "mean_mass": 0.013711646291294803
+        },
+        "0.25": {
+          "top1": 0.0,
+          "mean_mass": 5.352987254634668e-46
+        },
+        "0.5": {
+          "top1": 0.0,
+          "mean_mass": 2.3580738031526288e-102
+        },
+        "1.0": {
+          "top1": 0.0,
+          "mean_mass": 5.501535399427745e-218
+        }
+      },
+      "Thalamus -> thalamus": {
+        "0.0": {
+          "top1": 0.11650485436893204,
+          "mean_mass": 0.049405288811652355
+        },
+        "0.25": {
+          "top1": 0.36893203883495146,
+          "mean_mass": 0.3675552152850265
+        },
+        "0.5": {
+          "top1": 0.3592233009708738,
+          "mean_mass": 0.35885730114636527
+        },
+        "1.0": {
+          "top1": 0.30097087378640774,
+          "mean_mass": 0.30315580912029
+        }
+      },
+      "Visual areas -> cuneus": {
+        "0.0": {
+          "top1": 0.07692307692307693,
+          "mean_mass": 0.09659293756599745
+        },
+        "0.25": {
+          "top1": 0.07692307692307693,
+          "mean_mass": 0.07692307692307693
+        },
+        "0.5": {
+          "top1": 0.07692307692307693,
+          "mean_mass": 0.07692307692307693
+        },
+        "1.0": {
+          "top1": 0.07692307692307693,
+          "mean_mass": 0.07692307692307693
+        }
+      }
+    },
+    "per_pair_best_xyzw": {
+      "Anterior cingulate area -> cingulate gyrus": 1.0,
+      "Caudoputamen -> caudate nucleus": 0.25,
+      "Cortical subplate-other -> amygdala": 0.25,
+      "Dentate gyrus -> dentate gyrus": 0.0,
+      "Field CA1 -> CA1 field": 0.0,
+      "Field CA3 -> CA3 field": 0.0,
+      "Hypothalamus -> hypothalamus": 1.0,
+      "Inferior colliculus -> inferior colliculus": 0.0,
+      "Pallidum -> globus pallidus": 0.0,
+      "Piriform area -> piriform cortex": 1.0,
+      "Pons -> pons": 0.0,
+      "Primary auditory area -> Heschl's gyrus": 0.0,
+      "Primary motor area -> precentral gyrus": 0.0,
+      "Primary somatosensory area -> postcentral gyrus": 1.0,
+      "Striatum ventral region -> nucleus accumbens": 1.0,
+      "Subiculum -> subiculum": 0.0,
+      "Superior colliculus, sensory related -> superior colliculus": 0.0,
+      "Thalamus -> thalamus": 0.25,
+      "Visual areas -> cuneus": 0.0
+    },
+    "best_xyzw_counts": {
+      "1.0": 5,
+      "0.25": 3,
+      "0.0": 11
+    },
+    "per_pair_gain": {
+      "Anterior cingulate area -> cingulate gyrus": {
+        "best": 0.17391304347826086,
+        "worst": 0.08695652173913043,
+        "gain": 0.08695652173913043,
+        "best_xyzw": 1.0
+      },
+      "Caudoputamen -> caudate nucleus": {
+        "best": 0.11888111888111888,
+        "worst": 0.013986013986013986,
+        "gain": 0.1048951048951049,
+        "best_xyzw": 0.25
+      },
+      "Cortical subplate-other -> amygdala": {
+        "best": 0.034482758620689655,
+        "worst": 0.0,
+        "gain": 0.034482758620689655,
+        "best_xyzw": 0.25
+      },
+      "Dentate gyrus -> dentate gyrus": {
+        "best": 0.0,
+        "worst": 0.0,
+        "gain": 0.0,
+        "best_xyzw": 0.0
+      },
+      "Field CA1 -> CA1 field": {
+        "best": 0.0,
+        "worst": 0.0,
+        "gain": 0.0,
+        "best_xyzw": 0.0
+      },
+      "Field CA3 -> CA3 field": {
+        "best": 0.0,
+        "worst": 0.0,
+        "gain": 0.0,
+        "best_xyzw": 0.0
+      },
+      "Hypothalamus -> hypothalamus": {
+        "best": 0.11538461538461539,
+        "worst": 0.038461538461538464,
+        "gain": 0.07692307692307693,
+        "best_xyzw": 1.0
+      },
+      "Inferior colliculus -> inferior colliculus": {
+        "best": 0.0,
+        "worst": 0.0,
+        "gain": 0.0,
+        "best_xyzw": 0.0
+      },
+      "Pallidum -> globus pallidus": {
+        "best": 0.0784313725490196,
+        "worst": 0.058823529411764705,
+        "gain": 0.0196078431372549,
+        "best_xyzw": 0.0
+      },
+      "Piriform area -> piriform cortex": {
+        "best": 0.038461538461538464,
+        "worst": 0.0,
+        "gain": 0.038461538461538464,
+        "best_xyzw": 1.0
+      },
+      "Pons -> pons": {
+        "best": 0.028985507246376812,
+        "worst": 0.028985507246376812,
+        "gain": 0.0,
+        "best_xyzw": 0.0
+      },
+      "Primary auditory area -> Heschl's gyrus": {
+        "best": 0.2222222222222222,
+        "worst": 0.2222222222222222,
+        "gain": 0.0,
+        "best_xyzw": 0.0
+      },
+      "Primary motor area -> precentral gyrus": {
+        "best": 0.11320754716981132,
+        "worst": 0.0,
+        "gain": 0.11320754716981132,
+        "best_xyzw": 0.0
+      },
+      "Primary somatosensory area -> postcentral gyrus": {
+        "best": 0.18831168831168832,
+        "worst": 0.012987012987012988,
+        "gain": 0.17532467532467533,
+        "best_xyzw": 1.0
+      },
+      "Striatum ventral region -> nucleus accumbens": {
+        "best": 0.15384615384615385,
+        "worst": 0.0,
+        "gain": 0.15384615384615385,
+        "best_xyzw": 1.0
+      },
+      "Subiculum -> subiculum": {
+        "best": 0.0,
+        "worst": 0.0,
+        "gain": 0.0,
+        "best_xyzw": 0.0
+      },
+      "Superior colliculus, sensory related -> superior colliculus": {
+        "best": 0.0,
+        "worst": 0.0,
+        "gain": 0.0,
+        "best_xyzw": 0.0
+      },
+      "Thalamus -> thalamus": {
+        "best": 0.36893203883495146,
+        "worst": 0.11650485436893204,
+        "gain": 0.2524271844660194,
+        "best_xyzw": 0.25
+      },
+      "Visual areas -> cuneus": {
+        "best": 0.07692307692307693,
+        "worst": 0.07692307692307693,
+        "gain": 0.0,
+        "best_xyzw": 0.0
+      }
+    }
+  },
+  "oracle": {
+    "n_pairs_with_eps_top1_variation": 2,
+    "n_pairs_with_xyzw_top1_variation": 10,
+    "n_distinct_best_eps": 4,
+    "n_distinct_best_xyzw": 3,
+    "caveat": "per_pair_best_eps counts are tie-broken on mean_mass for the many pairs whose top1 is flat across eps; only the *_variation counts reflect pairs where top1 actually moves.",
+    "oracle_eps_top1": 0.10485436893203884,
+    "global_best_eps_top1": 0.10485436893203884,
+    "eps_oracle_uplift": 0.0,
+    "oracle_xyzw_top1": 0.11650485436893204,
+    "global_best_xyzw_top1": 0.10485436893203884,
+    "xyzw_oracle_uplift": 0.011650485436893204
+  }
+}

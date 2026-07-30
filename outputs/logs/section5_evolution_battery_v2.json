@@ -1,0 +1,61 @@
+{
+  "_why": "Reports a Spearman rho tested against a Spearman spin null. The previous battery attached a Pearson spin p to a Spearman rho. The two disagree because coverage's Pearson correlation is inflated by a handful of deep-underflow regions, which a rank statistic is immune to.",
+  "_source": "derives entirely from outputs/logs/section5_evolution_battery.json; the pi provenance below is that log's, re-stated here.",
+  "n_spin": 1000,
+  "pi_file": "outputs/coupling/pi_canonical.npy",
+  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+  "Xu2020 mouse\u2192human expansion": {
+    "spearman": -0.09137159880674679,
+    "spin_p": 0.3146853146853147,
+    "null_abs_p95": 0.1877429565970794,
+    "n": 391,
+    "spin_p_as_published_PEARSON": 0.8821178821178821
+  },
+  "Xu2020 mouse\u2013human FC homology": {
+    "spearman": 0.04035901986212546,
+    "spin_p": 0.6423576423576424,
+    "null_abs_p95": 0.17844386014977803,
+    "n": 391,
+    "spin_p_as_published_PEARSON": 0.7312687312687313
+  },
+  "Hill2010 macaque\u2192human expansion": {
+    "spearman": -0.13593513085898873,
+    "spin_p": 0.3866133866133866,
+    "null_abs_p95": 0.30132307039660944,
+    "n": 197,
+    "spin_p_as_published_PEARSON": 0.3886113886113886
+  },
+  "Hill2010 developmental expansion": {
+    "spearman": -0.13770722871520552,
+    "spin_p": 0.3246753246753247,
+    "null_abs_p95": 0.25527689949351473,
+    "n": 197,
+    "spin_p_as_published_PEARSON": 0.4245754245754246
+  },
+  "Sydnor2021 S\u2013A axis": {
+    "spearman": -0.13944862225826787,
+    "spin_p": 0.2137862137862138,
+    "null_abs_p95": 0.21075881995945117,
+    "n": 391,
+    "spin_p_as_published_PEARSON": 0.1088911088911089
+  },
+  "Margulies2016 principal gradient": {
+    "spearman": -0.1659635760658779,
+    "spin_p": 0.11888111888111888,
+    "null_abs_p95": 0.20621012659988935,
+    "n": 391,
+    "spin_p_as_published_PEARSON": 0.06493506493506493
+  },
+  "HCP T1w/T2w hierarchy": {
+    "spearman": 0.06383964957220348,
+    "spin_p": 0.5264735264735265,
+    "null_abs_p95": 0.20299283432185897,
+    "n": 391,
+    "spin_p_as_published_PEARSON": 0.2827172827172827
+  },
+  "_summary": {
+    "n_maps": 7,
+    "n_clearing_spin_null": 0,
+    "n_clearing_as_published": 0
+  }
+}

@@ -1,0 +1,74 @@
+{
+ "_what": "Review-round analysis, 2026-07-28/29. Produced by the harness in _audit/HOMER_review_analyses.tar.gz, which reproduces pi_canonical.npy exactly before any experiment (argmax match 1.0000, entrywise r 1.00000). Committed here as a loose log so tools/check_manuscript_numbers.py can see it.",
+ "families": {
+  "canonical": {
+   "hodge_individual_markers": {
+    "mean_r": 0.2040617702582557,
+    "mean_r_cortex_only": 0.0894970406846353,
+    "n": 7
+   },
+   "hodge_layer_contrasts": {
+    "per_contrast": {
+     "supragranular_minus_infragranular": 0.0034775308790317015,
+     "granular_L4_minus_infragranular": 0.18569204459142355,
+     "supragranular_minus_granular": 0.009610543233917437
+    },
+    "mean_r": 0.06626003956812423
+   },
+   "biccn_cell_type_markers": {
+    "mean_r": 0.1522514501028983,
+    "n_markers": 26
+   }
+  },
+  "alpha0": {
+   "hodge_individual_markers": {
+    "mean_r": 0.19072855185301132,
+    "mean_r_cortex_only": 0.09101199043924092,
+    "n": 7
+   },
+   "hodge_layer_contrasts": {
+    "per_contrast": {
+     "supragranular_minus_infragranular": -0.028659487554609238,
+     "granular_L4_minus_infragranular": 0.18152093984988746,
+     "supragranular_minus_granular": -0.0020538874670873813
+    },
+    "mean_r": 0.050269188276063616
+   },
+   "biccn_cell_type_markers": {
+    "mean_r": 0.14937069591218488,
+    "n_markers": 26
+   }
+  }
+ },
+ "contrasts": {
+  "hodge_individual_markers": {
+   "n": 7,
+   "mean_delta_abs_r": 0.012205891738167645,
+   "ci95": [
+    0.001328407518171876,
+    0.024605954244357797
+   ],
+   "frac_markers_canonical_higher": 0.5714285714285714
+  },
+  "biccn_cell_type_markers": {
+   "n": 26,
+   "mean_delta_abs_r": 0.0066457409580263724,
+   "ci95": [
+    -0.0018108176871132577,
+    0.015682966317550888
+   ],
+   "frac_markers_canonical_higher": 0.5769230769230769
+  }
+ },
+ "missing_genes": [
+  "Slc6a4",
+  "Tph2"
+ ],
+ "n_cortical_parcels": 1824,
+ "_reproduction_check": {
+  "hodge_repo_logged": 0.228,
+  "hodge_recomputed": 0.204,
+  "biccn_repo_logged": 0.169,
+  "biccn_recomputed": 0.152
+ }
+}

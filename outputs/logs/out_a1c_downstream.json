@@ -1,0 +1,88 @@
+{
+ "_what": "Review-round analysis, 2026-07-28/29. Produced by the harness in _audit/HOMER_review_analyses.tar.gz, which reproduces pi_canonical.npy exactly before any experiment (argmax match 1.0000, entrywise r 1.00000). Committed here as a loose log so tools/check_manuscript_numbers.py can see it.",
+ "4_+packs_CANONICAL": {
+  "label": "canonical (alpha=0.5)",
+  "FC": {
+   "mean_r": 0.4459913501438681,
+   "vs_iso": 0.04564037054168975,
+   "LR_rel": 0.3588092449710664,
+   "vs_exp": -0.32065026679568154,
+   "ContB_SD": -0.6137360024682244
+  },
+  "SC": {
+   "mean_r": 0.36894100964196447,
+   "vs_iso": 0.1091798536838796,
+   "LR_rel": 0.25565582805180487,
+   "vs_exp": -0.04881076176289915,
+   "ContB_SD": 0.19209933606503413
+  }
+ },
+ "6_NOCONN_spatial+anch+packs": {
+  "label": "alpha=0 (NO connectivity)",
+  "FC": {
+   "mean_r": 0.4158880870809211,
+   "vs_iso": 0.03999347155404334,
+   "LR_rel": 0.3886435657205841,
+   "vs_exp": -0.2960079014883546,
+   "ContB_SD": -0.5805184977552574
+  },
+  "SC": {
+   "mean_r": 0.29985806453368224,
+   "vs_iso": 0.07155456969255913,
+   "LR_rel": 0.2540817029484706,
+   "vs_exp": 0.009774277604018196,
+   "ContB_SD": 0.07155846207056364
+  }
+ },
+ "2_+spatial": {
+  "label": "conn+spatial, no curation",
+  "FC": {
+   "mean_r": 0.4811462675440909,
+   "vs_iso": -0.03629999301417085,
+   "LR_rel": 0.318867112152108,
+   "vs_exp": -0.25901524489394423,
+   "ContB_SD": -0.8303455301488558
+  },
+  "SC": {
+   "mean_r": 0.39222391873855356,
+   "vs_iso": 0.03168417386655386,
+   "LR_rel": 0.2984999311104987,
+   "vs_exp": 0.00406095548587328,
+   "ContB_SD": 0.003778886064987798
+  }
+ },
+ "5_NOCONN_spatial_only": {
+  "label": "alpha=0 spatial only",
+  "FC": {
+   "mean_r": 0.44980484234347345,
+   "vs_iso": -0.024386777502584746,
+   "LR_rel": 0.28192511711215207,
+   "vs_exp": -0.26523224674485185,
+   "ContB_SD": -0.7433312114886405
+  },
+  "SC": {
+   "mean_r": 0.325146377861274,
+   "vs_iso": 0.02184893979206002,
+   "LR_rel": 0.33421913750344445,
+   "vs_exp": 0.059911188555689845,
+   "ContB_SD": 0.05517316421125775
+  }
+ },
+ "1_connectivity_only": {
+  "label": "connectivity only",
+  "FC": {
+   "mean_r": 0.05644647731058474,
+   "vs_iso": -4.4153004754727545e-05,
+   "LR_rel": 0.6673945990631028,
+   "vs_exp": 0.17795793902845422,
+   "ContB_SD": 0.6958235256311127
+  },
+  "SC": {
+   "mean_r": 0.35554555550936623,
+   "vs_iso": -0.024983853555193027,
+   "LR_rel": 0.6485137090107467,
+   "vs_exp": 0.17876053431406008,
+   "ContB_SD": 0.5781458135103655
+  }
+ }
+}

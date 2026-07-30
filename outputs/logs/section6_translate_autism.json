@@ -1,0 +1,93 @@
+{
+  "_note": "mouse ASD occurrence -> pi_canonical -> DK vs ENIGMA thinning; L/R separate, whole-brain spin on ranks",
+  "enigma_asd_target": {
+    "n": 66,
+    "mean_d": 0.0027272727272727292,
+    "std_d": 0.0905797063121331,
+    "abs_max_d": 0.23
+  },
+  "maps": {
+    "hyper_occurrence": {
+      "label": "hyper_occurrence",
+      "n": 50,
+      "rho": 0.2150726348233073,
+      "spin_p": 0.24287856071964017,
+      "spin_null_abs_p95": 0.3637528688110517,
+      "pi_perm": {
+        "p_pi_perm": 0.1968031968031968,
+        "null_mean": 0.009553322523830812,
+        "null_abs_mean": 0.13249541973383414
+      },
+      "cross_disorder_rho": {
+        "adhd": 0.207,
+        "asd": 0.215,
+        "bipolar": 0.192,
+        "mdd": 0.283,
+        "ocd": 0.167,
+        "schizophrenia": 0.3
+      }
+    },
+    "hypo_occurrence": {
+      "label": "hypo_occurrence",
+      "n": 50,
+      "rho": 0.21608259129273696,
+      "spin_p": 0.255872063968016,
+      "spin_null_abs_p95": 0.351008813846567,
+      "pi_perm": {
+        "p_pi_perm": 0.1888111888111888,
+        "null_mean": 0.011404668918625809,
+        "null_abs_mean": 0.13183688002260077
+      },
+      "cross_disorder_rho": {
+        "adhd": -0.037,
+        "asd": 0.216,
+        "bipolar": 0.178,
+        "mdd": 0.01,
+        "ocd": 0.14,
+        "schizophrenia": 0.14
+      }
+    },
+    "total_dysconnectivity": {
+      "label": "total_dysconnectivity",
+      "n": 50,
+      "rho": 0.2620596572343921,
+      "spin_p": 0.1344327836081959,
+      "spin_null_abs_p95": 0.33950140216593405,
+      "pi_perm": {
+        "p_pi_perm": 0.12287712287712288,
+        "null_mean": 0.010849096674109071,
+        "null_abs_mean": 0.13157900447073972
+      },
+      "cross_disorder_rho": {
+        "adhd": 0.086,
+        "asd": 0.262,
+        "bipolar": 0.198,
+        "mdd": 0.111,
+        "ocd": 0.176,
+        "schizophrenia": 0.218
+      }
+    },
+    "signed_hyper_minus_hypo": {
+      "label": "signed_hyper_minus_hypo",
+      "n": 50,
+      "rho": -0.008031558590226367,
+      "spin_p": 0.9785107446276862,
+      "spin_null_abs_p95": 0.488913802141533,
+      "pi_perm": {
+        "p_pi_perm": 0.97002997002997,
+        "null_mean": -0.005886795794479454,
+        "null_abs_mean": 0.13599342801228637
+      },
+      "cross_disorder_rho": {
+        "adhd": 0.376,
+        "asd": -0.008,
+        "bipolar": 0.184,
+        "mdd": 0.379,
+        "ocd": 0.037,
+        "schizophrenia": 0.318
+      }
+    }
+  },
+  "pi_file": "outputs/coupling/pi_canonical.npy",
+  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77"
+}

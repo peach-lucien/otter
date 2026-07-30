@@ -1,0 +1,20 @@
+{
+  "n_cortical_parcels": 884,
+  "n_spin": 1000,
+  "connectivity_coverage_gap": {
+    "gap_sd": 0.4736579975916792,
+    "p_spin": 0.015984015984015984,
+    "null_abs_p95": 0.3743216061249814
+  },
+  "transcriptomic_similarity_gap": {
+    "gap_sd": -0.16306800788000655,
+    "p_spin": 0.45454545454545453,
+    "null_abs_p95": 0.40090937949711763
+  },
+  "dissociation_gap": {
+    "gap_sd": 0.6367260054716857,
+    "p_spin": 0.03796203796203796,
+    "null_abs_p95": 0.5940638118206968
+  },
+  "interpretation": "Coverage (connectional) collapses over association cortex; transcriptomic similarity (molecular) does not. The dissociation-gap spin p tests whether the connectional deficit specifically exceeds the molecular one."
+}

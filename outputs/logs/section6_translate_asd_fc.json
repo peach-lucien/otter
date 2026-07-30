@@ -1,0 +1,174 @@
+{
+  "_note": "mouse ASD occurrence -> pi_canonical -> 127 BN regions vs human ASD FC consensus (row-standardised, averaged across 233 ABIDE subjects). Spin over left-hemi region centroids; ranks.",
+  "human_target": {
+    "n_subjects": 233,
+    "n_regions": 127,
+    "col_zscored_so_group_mean_is_zero": true,
+    "naive_group_mean_absmax": 1.562889064708375e-16,
+    "consensus_G_std": 0.013916036041924013,
+    "consensus_G_abs_range": [
+      -0.032394121027702116,
+      0.04892263845226223
+    ]
+  },
+  "bridge": {
+    "assign_dist_mean": 2.4243553888193126,
+    "assign_dist_p95": 7.615773105863909,
+    "assign_dist_max": 24.61706725018234,
+    "n_regions_hit": 125
+  },
+  "sanity": {
+    "top_pos_consensus": {
+      "A38m": 0.049,
+      "A20r": 0.038,
+      "A21r": 0.023,
+      "A20iv": 0.023,
+      "TI": 0.022,
+      "vIa": 0.02,
+      "A45c": 0.02,
+      "posterovemtral putamen": 0.019
+    },
+    "top_neg_consensus": {
+      "OPC": -0.032,
+      "V5/MT+": -0.03,
+      "A40rv": -0.03,
+      "iOccG": -0.027,
+      "TE1.0 and TE1.2": -0.026,
+      "A10l": -0.026,
+      "G": -0.024,
+      "A1/2/3ulhf": -0.02
+    },
+    "dropped_regions": [
+      "A20cv",
+      "TI"
+    ]
+  },
+  "n_regions_tested": 125,
+  "main_maps": {
+    "total_dysconnectivity": {
+      "label": "total_dysconnectivity",
+      "n_regions": 125,
+      "rho": -0.1704454685099846,
+      "spin_p": 0.42478760619690153,
+      "spin_null_abs_p95": 0.3677314263260752,
+      "per_subject": {
+        "mean_rho": -0.0026780588464099487,
+        "median_rho": -0.008055299539170507,
+        "frac_pos": 0.47639484978540775,
+        "wilcoxon_p": 0.6685390754320785,
+        "n_subj": 233
+      },
+      "pi_perm": {
+        "p_pi_perm": 0.16283716283716285,
+        "null_abs_mean": 0.09847427342549922
+      },
+      "trans_spin": {
+        "p_trans_spin": 0.18281718281718282,
+        "null_abs_mean": 0.10325373886328723
+      }
+    },
+    "hyper_occurrence": {
+      "label": "hyper_occurrence",
+      "n_regions": 125,
+      "rho": -0.23477726574500765,
+      "spin_p": 0.3078460769615192,
+      "spin_null_abs_p95": 0.3819648233881556,
+      "per_subject": {
+        "mean_rho": -0.005050638502666746,
+        "median_rho": -0.0004546850998463901,
+        "frac_pos": 0.4978540772532189,
+        "wilcoxon_p": 0.5366023301868659,
+        "n_subj": 233
+      },
+      "pi_perm": {
+        "p_pi_perm": 0.052947052947052944,
+        "null_abs_mean": 0.09862094009216588
+      },
+      "trans_spin": {
+        "p_trans_spin": 0.08491508491508491,
+        "null_abs_mean": 0.10840159139784944
+      }
+    },
+    "hypo_occurrence": {
+      "label": "hypo_occurrence",
+      "n_regions": 125,
+      "rho": -0.09394777265745007,
+      "spin_p": 0.6381809095452274,
+      "spin_null_abs_p95": 0.3545146292356638,
+      "per_subject": {
+        "mean_rho": -0.0005560544029324315,
+        "median_rho": 0.002850998463901689,
+        "frac_pos": 0.5021459227467812,
+        "wilcoxon_p": 0.8647051917450287,
+        "n_subj": 233
+      },
+      "pi_perm": {
+        "p_pi_perm": 0.45554445554445555,
+        "null_abs_mean": 0.09836793855606757
+      },
+      "trans_spin": {
+        "p_trans_spin": 0.4645354645354645,
+        "null_abs_mean": 0.09803669431643625
+      }
+    },
+    "signed_hyper_minus_hypo": {
+      "label": "signed_hyper_minus_hypo",
+      "n_regions": 125,
+      "rho": -0.12924731182795698,
+      "spin_p": 0.4752623688155922,
+      "spin_null_abs_p95": 0.32197701798542216,
+      "per_subject": {
+        "mean_rho": -0.0035146193047342167,
+        "median_rho": -0.014500768049155142,
+        "frac_pos": 0.45064377682403434,
+        "wilcoxon_p": 0.5873249264093836,
+        "n_subj": 233
+      },
+      "pi_perm": {
+        "p_pi_perm": 0.3046953046953047,
+        "null_abs_mean": 0.0985931490015361
+      },
+      "trans_spin": {
+        "p_trans_spin": 0.31368631368631367,
+        "null_abs_mean": 0.10244261751152073
+      }
+    }
+  },
+  "specificity_maps": {
+    "shuffled_total": {
+      "label": "shuffled_total",
+      "n_regions": 125,
+      "rho": -0.1662734254992319,
+      "spin_p": 0.2913543228385807,
+      "spin_null_abs_p95": 0.2877352712774355
+    },
+    "smooth_random_s0": {
+      "label": "smooth_random_s0",
+      "n_regions": 125,
+      "rho": -0.11254685099846388,
+      "spin_p": 0.52023988005997,
+      "spin_null_abs_p95": 0.31570982507642
+    },
+    "smooth_random_s1": {
+      "label": "smooth_random_s1",
+      "n_regions": 125,
+      "rho": 0.0757910906298003,
+      "spin_p": 0.6066966516741629,
+      "spin_null_abs_p95": 0.2665634828177655
+    },
+    "smooth_random_s2": {
+      "label": "smooth_random_s2",
+      "n_regions": 125,
+      "rho": -0.05708755760368662,
+      "spin_p": 0.6996501749125438,
+      "spin_null_abs_p95": 0.27454948597976864
+    },
+    "mouse_AP_gradient": {
+      "label": "mouse_AP_gradient",
+      "n_regions": 125,
+      "rho": -0.10664208909370197,
+      "spin_p": 0.5377311344327836,
+      "spin_null_abs_p95": 0.2894295975095201
+    }
+  }
+}

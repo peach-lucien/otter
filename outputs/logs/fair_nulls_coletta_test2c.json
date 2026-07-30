@@ -1,12 +1,14 @@
 {
   "coletta": {
     "observed": 6,
-    "spin_null_mean": 1.232,
+    "spin_null_mean": 1.042,
     "spin_p": 0.001996007984031936
   },
   "test_2c": {
-    "observed_r": 0.5503600968699014,
-    "spin_null_abs_mean": 0.36792845782228645,
-    "spin_p": 0.18962075848303392
-  }
+    "observed_r": 0.4363404172624852,
+    "spin_null_abs_mean": 0.40951804654014323,
+    "spin_p": 0.5469061876247505
+  },
+  "pi_file": "outputs/coupling/pi_canonical.npy",
+  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77"
 }
