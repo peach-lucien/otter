@@ -22,7 +22,8 @@ The π matrix (1864 × 2094) is HOMER's core output. We ship several variants:
 | File | What | When to use |
 |---|---|---|
 | `pi_fc_plus_SC.npy` | **Production point-anchor π** (21 Garin anchors only, no packs) | Strictest validation baseline; what most internal CV uses |
-| `pi_fc_plus_SC_with_all_packs.npy` | **Recommended π** — production + 5 default anchor packs | **Use this for downstream queries** |
+| `pi_canonical.npy` | **Canonical π** — packs + anchor-warped spatial cost (ε = 0.05, xyz 0.25) | **Use this. `load_pi()` returns it.** |
+| `pi_fc_plus_SC_with_all_packs.npy` | pre-warp coupling, superseded 2026-07 | RETIRED — do not use for new work |
 | `pi_fc_plus_SC_with_atlas_regions.npy` | Production + 15 atlas-derived Garin region anchors | Ablation; superseded by per-pack |
 | `pi_fc_plus_SC_with_soft_atlas_regions.npy` | Same as above but with soft anchors (lam_outside=0.15) | Justification for the soft default |
 | `pi_fc_plus_SC_with_M1.npy` | Production + supplementary M1 point anchor | Historical (EXP-1, hippocampal supp) |
