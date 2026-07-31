@@ -28,7 +28,7 @@ Each subdirectory has its own `README.md` documenting its scripts, inputs, and o
 
 ## anchor_packs/, region-anchor experiments
 
-12 per-pack runners that fit production-with-pack π and report Beauchamp + region-level deltas. `compose_all.py` produces the recommended `pi_fc_plus_SC_with_all_packs.npy`. See [`anchor_packs/README.md`](anchor_packs/README.md) for the per-pack table and citations.
+12 per-pack runners that fit production-with-pack π and report Beauchamp + region-level deltas. `compose_all.py` produces the pre-warp `pi_fc_plus_SC_with_all_packs.npy`, retired 2026-07 and kept only to reproduce published comparisons; the canonical coupling adds the anchor-warped spatial cost and is what `load_pi()` returns. See [`anchor_packs/README.md`](anchor_packs/README.md) for the per-pack table and citations.
 
 ## ablations/, methodology ablations
 
@@ -36,7 +36,7 @@ Three ablations that justify production design choices (soft anchors, uniform ma
 
 ## Third-party validations
 
-Each `<paper>_*/` subdirectory takes a published cross-species paper and tests whether HOMER's π reproduces or refines its findings. Outputs are consumed by the per-figure notebooks in `notebooks/` and are the source of the numbers in `docs/03_results.md`.
+Each `<paper>_*/` subdirectory takes a published cross-species paper and tests whether HOMER's π reproduces or refines its findings. Outputs are consumed by the notebooks in `notebooks/` and are the source of the numbers in `docs/03_results.md`.
 
 ## archive/, older detours
 

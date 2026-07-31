@@ -4,7 +4,7 @@
 
 HOMER (**Hom**ology **E**stimation across species via **R**egional optimal transport) is a Python package that learns probabilistic correspondences between mouse and human brain parcels. The output is a coupling matrix **π** of shape (1864 mouse parcels × 2094 human parcels) where `π[i, j]` is interpretable as "probability that mouse parcel *i* corresponds to human parcel *j*".
 
-> **Note on sharpness and coverage.** The canonical coupling is fitted at ε = 0.05 and is deliberately soft: the median top-target probability is 0.31, above 0.5 for 20 % of parcels. Concentration is set by the regularisation rather than by anatomy, and re-fitting at ε = 0.005 gives a near-deterministic coupling with no gain in held-out recovery. Because the human marginal is free (semirelaxed FGW), the coupling can leave human parcels poorly reconstructed rather than forcing mass onto them. How much territory that amounts to depends entirely on the threshold chosen, which is why we report reconstruction-coverage (docs/03_results.md §5) instead of an uncovered-parcel percentage. Reverse (human→mouse) queries are correspondingly weak wherever reconstruction-coverage is low.
+> **Note on sharpness and reconstruction.** The canonical coupling is fitted at ε = 0.05 and is deliberately soft: the median top-target probability is 0.31, above 0.5 for 20 % of parcels. Concentration is set by the regularisation rather than by anatomy, and re-fitting at ε = 0.005 gives a near-deterministic coupling with no gain in held-out recovery. Because the human marginal is free (semirelaxed FGW), the coupling can leave human parcels poorly reconstructed rather than forcing mass onto them. We report reconstruction accuracy (docs/03_results.md §5) rather than an uncovered-parcel percentage, which would depend on the threshold chosen. Each column of π is normalised before the push-forward, so the score reflects whether some mouse tissue is wired like the human parcel rather than how much mass that parcel received.
 
 The method is **Fused Gromov-Wasserstein optimal transport** (POT's `entropic_semirelaxed_fused_gromov_wasserstein`), supervised by published mouse↔human anchor pairs.
 
@@ -32,8 +32,8 @@ top5 = pi[1234].argsort()[::-1][:5]
 For trust-tier filtering ("which mouse parcels can I rely on?"), load the multi-source trust map:
 
 ```python
-trust = np.load("outputs/coupling/trust_multisource_all_packs.npz", allow_pickle=True)
-reliable = trust["evidence_tier"] == "anchored_and_validated"     # 31% of parcels
+trust = np.load("outputs/coupling/trust_multisource_canonical.npz", allow_pickle=True)
+reliable = trust["evidence_tier"] == "anchored_and_validated"     # 31.5% of parcels
 ```
 
 See `03_results.md` for what each tier means and how to read the headline numbers.
@@ -53,7 +53,7 @@ For the **canonical π** (`pi_canonical.npy`, what `load_pi()` returns):
 |---|---:|
 | Beauchamp 2022 region-level AUROC | **0.90** parcel-weighted, 0.93 unweighted (19/19 regions significant, FDR q < 0.05) |
 | Beauchamp 2022 parcel-level top-1 | **57 %** |
-| Mean centroid displacement from the expected homologue | **7.7 mm** (chance 25 mm) |
+| Mean centroid displacement from the expected homologue | **8.8 mm** (chance 25 mm) |
 | Held-out recovery (41 units removed in turn, re-fit) | **AUROC 0.74** region-level; parcel-exact collapses to ~10 % |
 | Memorisation control (curation overlapping each benchmark region removed) | 0.90 → **0.73**, 5/19 below chance |
 | Median top-target probability | **0.31** (> 0.5 for 20 % of parcels) |

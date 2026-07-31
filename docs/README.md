@@ -21,7 +21,7 @@ Navigation hub. Read in order if new to the project; jump around once oriented.
 
 ## Interactive
 
-- **[index.html](index.html)**. HOMER Mapping Explorer. Static, self-contained 3D viewer for mouse↔human couplings: search a parcel, see top-K partners, toggle mouse-shell / human-surface overlays. No backend, no Python install needed. When published, this is what GitHub Pages serves at the repo URL.
+- **[index.html](index.html)**. HOMER Mapping Explorer. Static, self-contained 3D viewer for mouse↔human couplings. Search a parcel, see top-K partners, toggle mouse-shell or human-surface overlays. No backend, no Python install needed. When published, this is what GitHub Pages serves at the repo URL.
 
 ## Archive
 

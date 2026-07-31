@@ -2,7 +2,7 @@
 
 A **pack** is a small, self-contained Python module that builds one or more cross-species region anchors from published anatomical literature. Each entry pairs a set of mouse parcels with a set of human parcels and is applied to the FGW cost matrix as a *soft* constraint (default `lam_outside=0.15`, see [02_methods.md](02_methods.md)).
 
-Packs are modular: compose any subset, drop any subset. Default packs are layered together into the canonical coupling `outputs/coupling/pi_canonical.npy`, which also applies the anchor-warped spatial cost. The recipe below omits that warp and reproduces the retired pre-warp coupling; use `load_pi()` for the canonical one.
+Packs are modular. Compose any subset, drop any subset. Default packs are layered together into the canonical coupling `outputs/coupling/pi_canonical.npy`, which also applies the anchor-warped spatial cost. The recipe below omits that warp and reproduces the retired pre-warp coupling; use `load_pi()` for the canonical one.
 
 ## Philosophy
 
@@ -41,10 +41,10 @@ The **"In recommended π?"** column is authoritative against `src/homer/data/anc
 ### biccn_motor, pids 30, 31
 
 - **Source**: [Bakken et al. 2021, *Nature*](https://consensus.app/papers/details/82aefc336c0e5f2e88d65f51d91cfbfe/). BICCN Motor Cortex Consortium cell-type taxonomy (546 citations). DOI: 10.1038/s41586-021-03465-8.
-- **pid 30**: Mouse Primary motor area (53 parcels via DSURQE) ↔ Human BA4 at MNI(±37, –22, 55) r=10 mm (12 parcels)
-- **pid 31**: Mouse Secondary motor area (48 parcels) ↔ Human PMd / Area 6 at MNI(±28, –5, 62) r=12 mm (23 parcels)
+- **pid 30**: Mouse Primary motor area (53 parcels via DSURQE) ↔ Human BA4 at MNI(±37, −22, 55) r=10 mm (12 parcels)
+- **pid 31**: Mouse Secondary motor area (48 parcels) ↔ Human PMd / Area 6 at MNI(±28, −5, 62) r=12 mm (23 parcels)
 - **Lifts**: Beauchamp "Primary motor area → precentral gyrus" 0 → 100 %
-- **Off-target**: S1 top-5 –2 pp
+- **Off-target**: S1 top-5 −2 pp
 - **Held-out test**: Fitting with M2 anchor only leaves M1 at 0 % top-1, structure doesn't recover the held-out anchor.
 
 ### tectum, pids 32, 33
@@ -53,10 +53,10 @@ The **"In recommended π?"** column is authoritative against `src/homer/data/anc
   - [Isa et al. 2021, *Current Biology*](https://consensus.app/papers/details/b167c990210e55e7923df8ebdf731a32/), "The tectum/superior colliculus as the vertebrate solution for spatial sensory integration and action" (139 cit).
   - Winer & Schreiner 2005, "The inferior colliculus" (Springer book; the canonical IC reference).
   - Both establish conserved SC + IC cytoarchitecture across vertebrates.
-- **pid 32**: Mouse Superior Colliculus sensory (53 parcels) ↔ Human SC at MNI(±5, –30, –2) r=6 mm (2 parcels)
-- **pid 33**: Mouse Inferior Colliculus (29 parcels) ↔ Human IC at MNI(±5, –35, –8) r=8 mm (4 parcels)
+- **pid 32**: Mouse Superior Colliculus sensory (53 parcels) ↔ Human SC at MNI(±5, −30, −2) r=6 mm (2 parcels)
+- **pid 33**: Mouse Inferior Colliculus (29 parcels) ↔ Human IC at MNI(±5, −35, −8) r=8 mm (4 parcels)
 - **Lifts**: Beauchamp SC + IC 0 → 100 %
-- **Off-target**: Thalamus –4 pp
+- **Off-target**: Thalamus −4 pp
 - **Held-out**: SC anchor alone leaves IC at 0 %.
 
 ### olfactory, pids 34, 35
@@ -64,8 +64,8 @@ The **"In recommended π?"** column is authoritative against `src/homer/data/anc
 - **Sources**:
   - [Mori 2014](https://consensus.app/papers/details/0db38e2b1d39564799a5f173c4d942b1/), "The Olfactory System" (Springer book chapter; 260 cit).
   - [Carlén 2017, *Science*](https://consensus.app/papers/details/8f13a81410c4529c920311c591ff7833/), "What constitutes the prefrontal cortex?" (432 cit; includes olfactory PFC connectivity homologies).
-- **pid 34**: Mouse Piriform area (47 parcels) ↔ Human Piriform cortex at MNI(±25, 5, –20) r=10 mm (13 parcels)
-- **pid 35**: Mouse Anterior olfactory nucleus (9 parcels) ↔ Human AON at MNI(±15, 25, –15) r=10 mm (6 parcels)
+- **pid 34**: Mouse Piriform area (47 parcels) ↔ Human Piriform cortex at MNI(±25, 5, −20) r=10 mm (13 parcels)
+- **pid 35**: Mouse Anterior olfactory nucleus (9 parcels) ↔ Human AON at MNI(±15, 25, −15) r=10 mm (6 parcels)
 - **Lifts**: Beauchamp Piriform 0 → 100 %
 - **Off-target**: None, cleanest pack
 - **Composition caveat**: shares 2 human parcels (L/R Olfactory cortex) with the amygdala pack, see amygdala below.
@@ -77,7 +77,7 @@ The **"In recommended π?"** column is authoritative against `src/homer/data/anc
   - Vogt et al. 2013, *J Comp Neurol*, "Cingulate area 32 homologies in mouse, rat, macaque and human" (94 cit). Companion paper.
   - van Heukelum et al. 2020, *Trends in Neurosciences*, "Where is Cingulate Cortex? A Cross-Species View" (213 cit). Recent reframing.
 - **pid 36**: Mouse ACA ventral (15 parcels) ↔ Human subgenual ACC at MNI(±5, 10, 35) r=10 mm (6 parcels)
-- **pid 37**: Mouse Retrosplenial (27 parcels) ↔ Human RSC at MNI(±15, –55, 10) r=10 mm (8 parcels)
+- **pid 37**: Mouse Retrosplenial (27 parcels) ↔ Human RSC at MNI(±15, −55, 10) r=10 mm (8 parcels)
 - **Beauchamp ACG impact**: 13 % → **9 %** (anchor target = subgenual ACC, validation target = pregenual ACC). Documented hurt.
 - **Off-target**: None (besides ACG)
 - **Beauchamp trade-off**: the metric drop on ACG is real and reflects a real anatomical disagreement between anchor location and validation location. The pack stays in the recommended composition, it is anatomically defensible and the broad multi-benchmark evidence favours inclusion.
@@ -86,8 +86,8 @@ The **"In recommended π?"** column is authoritative against `src/homer/data/anc
 
 - **Sources**:
   - [Janak & Tye 2015, *Nature*](https://consensus.app/papers/details/51a6d86145eb5376a83388d1d98475eb/), "From circuits to behaviour in the amygdala" (1701 cit). DOI: 10.1038/nature14188.
-  - [Pessoa & Adolphs 2010, *Nature Reviews Neuroscience*](https://consensus.app/papers/details/e2ba7247dbca506a85f4d75eaf008c49/), "Emotion processing and the amygdala: from a 'low road' to 'many roads'" (1663 cit). DOI: 10.1038/nrn2920.
-- **pid 38**: Mouse Cortical subplate (54 parcels) ↔ Human amygdala at MNI(±25, –5, –20) r=8 mm (6 parcels)
+  - [Pessoa & Adolphs 2010, *Nature Reviews Neuroscience*](https://consensus.app/papers/details/e2ba7247dbca506a85f4d75eaf008c49/), "Emotion processing and the amygdala, from a 'low road' to 'many roads'" (1663 cit). DOI 10.1038/nrn2920.
+- **pid 38**: Mouse Cortical subplate (54 parcels) ↔ Human amygdala at MNI(±25, −5, −20) r=8 mm (6 parcels)
 - **Single-entry pack**. DSURQE doesn't distinguish basolateral/central/lateral sub-nuclei
 - **Lifts**: Beauchamp Cortical subplate → amygdala 0 → 100 %
 - **Off-target**: None
@@ -114,7 +114,7 @@ The **"In recommended π?"** column is authoritative against `src/homer/data/anc
   - [Carlén 2017, *Science*](https://consensus.app/papers/details/8f13a81410c4529c920311c591ff7833/), "What constitutes the prefrontal cortex?" (432 cit). DOI: 10.1126/science.aan8868. Argues functional PFC homology.
   - [Preuss 1995, *J Cognitive Neuroscience*](https://consensus.app/papers/details/2e000a3af07f508489ac7ba2f68c68dc/), "Do Rats Have Prefrontal Cortex? The Rose-Woolsey-Akert Program Reconsidered" (684 cit). DOI: 10.1162/jocn.1995.7.1.1. **Argues against rodent dlPFC homology.**
   - Laubach 2018, *eNeuro*, "What, If Anything, Is Rodent Prefrontal Cortex?" (351 cit). Modern continuation of debate.
-- **pid 45. OFC**: Mouse Orbital area lateral (21 parcels) ↔ Human OFC BA11/47 at MNI(±25, 35, –15) r=10 mm (8 parcels). High confidence.
+- **pid 45. OFC**: Mouse Orbital area lateral (21 parcels) ↔ Human OFC BA11/47 at MNI(±25, 35, −15) r=10 mm (8 parcels). High confidence.
 - **pid 46, dlPFC (contested, opt-in)**: Mouse Prelimbic (11 parcels) ↔ Human dlPFC BA9/46 at MNI(±40, 25, 35) r=10 mm (12 parcels). **Preuss 1995 argues rodents lack a true dlPFC; Carlén 2017 / Laubach 2018 argue functional homology.** This entry is **excluded from the recommended composition by default**, the homology is contested and HOMER's own Schaeffer et al. 2020 falsification test contradicts it (forcing the anchor routes 23 % of mouse-MFC mass to dlPFC by construction). Pass `build_lateral_pfc_region_anchors(..., include_dlpfc=True)` to add it for ablations.
 - **Lifts**: Neither OFC nor dlPFC has a Beauchamp validation pair, purely anatomical-credibility supervision.
 - **Off-target**: None measurable.
@@ -131,7 +131,7 @@ The **"In recommended π?"** column is authoritative against `src/homer/data/anc
 ### entorhinal, pid 49
 
 - **Source**: [Franjic et al. 2021, *Neuron*](https://consensus.app/papers/details/8133c8accfab51e6892690a7bed0c27e/), "Transcriptomic taxonomy and neurogenic trajectories of adult human, macaque, and pig hippocampal and entorhinal cells" (222 citations). DOI: 10.1016/j.neuron.2021.10.036. Direct cross-species cell-type homology.
-- **pid 49**: Mouse Entorhinal area (84 parcels) ↔ Human entorhinal cortex at MNI(±20, –10, –30) r=10 mm (6 parcels).
+- **pid 49**: Mouse Entorhinal area (84 parcels) ↔ Human entorhinal cortex at MNI(±20, −10, −30) r=10 mm (6 parcels).
 - **Lifts**: Beauchamp doesn't have an entorhinal validation pair, purely anatomical-credibility supervision. Hippocampal Subiculum top-1 unaffected (entorhinal sits separately).
 - **Off-target**: None detected.
 - **Single-entry pack**. DSURQE exposes "Entorhinal area" and "Entorhinal area, lateral part" but no "medial part" label, so we can't yet split into lateral-EC (object/contextual memory) vs medial-EC (spatial/grid-cell) per Ohara 2021. pid 50 reserved for a future split if DSURQE adds the medial-part label.
@@ -139,7 +139,7 @@ The **"In recommended π?"** column is authoritative against `src/homer/data/anc
 ### visual, pid 52
 
 - **Source**: [Wang & Burkhalter 2007, *J Comp Neurol*](https://consensus.app/papers/details/b4b515e8765d5045976cb27b170a865b/), "Area map of mouse visual cortex" (481 citations). DOI: 10.1002/cne.21286. Established the **mouse LM ↔ primate V2** homology via retinotopy + V1 input pattern + laminar architecture.
-- **pid 52**: Mouse Lateral visual area (LM, 9 parcels) ↔ Human V2 at MNI(±20, –85, 10) r=10 mm (12 parcels).
+- **pid 52**: Mouse Lateral visual area (LM, 9 parcels) ↔ Human V2 at MNI(±20, −85, 10) r=10 mm (12 parcels).
 - **Lifts**: Beauchamp "Visual areas → cuneus" stays at 7 % (Beauchamp's validation uses all 54 mouse Visual parcels, not the 9 LM subset, and cuneus ball at (±10, -85, 5) rather than our V2 at (±20, -85, 10), the difference doesn't surface in the Beauchamp metric).
 - **Off-target**: None detected.
 - **Value**: anatomical-credibility supervision; makes the specific LM↔V2 query trustworthy for downstream users studying visual hierarchy. AL↔V3 and AM↔V4 mappings are more contested and not included; pid 53 reserved for a future split.
@@ -149,7 +149,7 @@ The **"In recommended π?"** column is authoritative against `src/homer/data/anc
 - **Sources**:
   - [Ezra et al. 2015, *Human Brain Mapping*](https://consensus.app/papers/details/38ef392c65c5502d8004b70a100c0d55/), "Connectivity-based segmentation of the periaqueductal gray matter in human" (76 cit). DOI: 10.1002/hbm.22855. Identifies four PAG sub-columns in humans concordant with rodent model.
   - [Kingsbury et al. 2011, *PLOS ONE*](https://consensus.app/papers/details/a1924b15fe8f5245bdbe097e02235646/). Mammal-like PAG columnar organization in birds (93 cit). Pan-amniote conservation.
-- **pid 54**: Mouse Periaqueductal gray (16 parcels) ↔ Human PAG at MNI(±5, –30, –10) r=6 mm (4 parcels).
+- **pid 54**: Mouse Periaqueductal gray (16 parcels) ↔ Human PAG at MNI(±5, −30, −10) r=6 mm (4 parcels).
 - **Lifts**: No PAG validation pair in Beauchamp. Side effect: NAc rises +4 pp top-1 (8 % → 12 %), possibly via midbrain→forebrain mass redistribution.
 - **Off-target**: None negative.
 - **Caveat from Ezra 2015**: PAG *columnar structure* is conserved across species, but *cortical connectivity* differs. The gross PAG↔PAG anchor is defensible; sub-column splits (dorsolateral / lateral / ventrolateral) are NOT attempted because the human PAG sub-column atlas is research-grade and not standardised.
@@ -159,7 +159,7 @@ The **"In recommended π?"** column is authoritative against `src/homer/data/anc
 - **Sources**:
   - [Burwell et al. 1995, *Hippocampus*](https://consensus.app/papers/details/c76cb6a4230b5090b0c27d6b1685c7aa/), canonical rat-monkey perirhinal/postrhinal anatomy review (544 citations). DOI: 10.1002/hipo.450050503. Established the rodent perirhinal–postrhinal nomenclature and primate homology.
   - Kealy & Commins 2011, *Progress in Neurobiology*, rat perirhinal anatomy/physiology review (123 cit). DOI: 10.1016/j.pneurobio.2011.03.002.
-- **pid 55**: Mouse Perirhinal area (6 parcels) ↔ Human perirhinal cortex at MNI(±35, –10, –30) r=10 mm (6 parcels).
+- **pid 55**: Mouse Perirhinal area (6 parcels) ↔ Human perirhinal cortex at MNI(±35, −10, −30) r=10 mm (6 parcels).
 - **Lifts**: No perirhinal validation pair in Beauchamp. Completes HOMER's MTL coverage (hippocampal + entorhinal + perirhinal).
 - **Off-target**: None detected.
 - **Value**: anatomical-credibility supervision for memory researchers studying object-recognition / familiarity memory.
@@ -169,8 +169,8 @@ The **"In recommended π?"** column is authoritative against `src/homer/data/anc
 - **Sources**:
   - [Hackett et al. 2001, *J Comp Neurol*](https://consensus.app/papers/details/052fa94346785c9b8a06d58cbe6f651d/), "Architectonic identification of the core region in auditory cortex of macaques, chimpanzees, and humans" (464 citations). DOI: 10.1002/cne.1407.
   - [Kaas & Hackett 2000, *PNAS*](https://consensus.app/papers/details/275d7ce7c42857c7b78dc8f2a9fb3b16/), "Subdivisions of auditory cortex and processing streams in primates" (1025 citations). DOI: 10.1073/pnas.97.22.11793.
-- **pid 56. A1 core**: Mouse Primary auditory area (9 parcels) ↔ Human A1 core (BA41) at MNI(±48, –22, 6) r=6 mm (2 parcels).
-- **pid 57. Auditory belt**: Mouse Dorsal+Ventral auditory areas (11 parcels combined) ↔ Human auditory belt (BA42) at MNI(±55, –15, 0) r=8 mm (4 parcels).
+- **pid 56. A1 core**: Mouse Primary auditory area (9 parcels) ↔ Human A1 core (BA41) at MNI(±48, −22, 6) r=6 mm (2 parcels).
+- **pid 57. Auditory belt**: Mouse Dorsal+Ventral auditory areas (11 parcels combined) ↔ Human auditory belt (BA42) at MNI(±55, −15, 0) r=8 mm (4 parcels).
 - **Lifts**: Beauchamp **"Primary auditory area → Heschl's gyrus" 22 % → 100 %** top-1 (+78 pp). The largest single-pack lift on a previously-anchored region.
 - **Off-target**: None detected.
 - **Why this works**: A1 anchor's mouse-side set is identical to Beauchamp's validation set, and the A1-core human ball sits *inside* Beauchamp's Heschl's gyrus ball, so the soft constraint concentrates mass on the canonical target without competing with other regions.
@@ -182,10 +182,10 @@ The **"In recommended π?"** column is authoritative against `src/homer/data/anc
   - [Seelke et al. 2012, *PLOS ONE*](https://consensus.app/papers/details/668dd505c7205f73ae24bd50fdf577c0/), emergence of somatotopic body maps in rat S1 (77 cit). DOI: 10.1371/journal.pone.0032322.
   - [Gordon et al. 2023, *Nature*](https://consensus.app/papers/details/f24dace36aa05982a170fdc5de32b051/), somatosensory body map cross-species, including macaque/human homologues (345 cit). DOI: 10.1038/s41586-023-05964-2.
   - Freire et al. 2024, *Brain Behav Evol*, somatotopy in non-laboratory rodent confirming common mammalian plan.
-- **pid 58. Face S1**: Mouse Barrel field + Nose (88 parcels combined) ↔ Human Face S1 BA3b ventral at MNI(±55, –15, 25) r=8 mm (6 parcels).
-- **pid 59. Hand S1**: Mouse Upper limb (24 parcels) ↔ Human Hand S1 at MNI(±40, –25, 55) r=8 mm (4 parcels).
-- **pid 60. Leg S1**: Mouse Lower limb (14 parcels) ↔ Human Leg S1 / paracentral at MNI(±10, –40, 70) r=10 mm (12 parcels).
-- **Beauchamp impact**: "Primary somatosensory area → postcentral gyrus" **20 % → 15 %** (−5 pp). Same dynamic as cingulate pack: anchor target ≠ validation target. Beauchamp's r=15 ball is centred at hand S1 (-40, -25, 55); our face S1 ball at (-55, -15, 25) is ~35 mm away, outside the validation ball.
+- **pid 58. Face S1**: Mouse Barrel field + Nose (88 parcels combined) ↔ Human Face S1 BA3b ventral at MNI(±55, −15, 25) r=8 mm (6 parcels).
+- **pid 59. Hand S1**: Mouse Upper limb (24 parcels) ↔ Human Hand S1 at MNI(±40, −25, 55) r=8 mm (4 parcels).
+- **pid 60. Leg S1**: Mouse Lower limb (14 parcels) ↔ Human Leg S1 / paracentral at MNI(±10, −40, 70) r=10 mm (12 parcels).
+- **Beauchamp impact**: "Primary somatosensory area → postcentral gyrus" **20 % → 15 %** (−5 pp). Same dynamic as the cingulate pack, where the anchor target is not the validation target. Beauchamp's r=15 ball is centred at hand S1 (-40, -25, 55); our face S1 ball at (-55, -15, 25) is ~35 mm away, outside the validation ball.
 - **Off-target**: None outside S1.
 - **Beauchamp trade-off**: it lowers the Beauchamp S1 *parcel* metric, but adds body-map-specific S1 structure (Penfield-style face/hand/leg distinction). Anatomical credibility is unimpeachable; Beauchamp's broad-ball validation just measures something coarser. The pack stays in the recommended composition.
 
@@ -194,7 +194,7 @@ The **"In recommended π?"** column is authoritative against `src/homer/data/anc
 - **Sources**:
   - [Whitlock 2017, *Current Biology*](https://consensus.app/papers/details/27e90f12f5b95e2c8f6c8e0a25c33c5d/), "Posterior parietal cortex" cross-species review.
   - Lyamzin & Benucci 2019, *Neuroscience Research*, mouse PPC review.
-- **pid 61**: Mouse Posterior parietal association areas (10 parcels) ↔ Human PPC BA7 at MNI(±35, –55, 50) r=10 mm (14 parcels).
+- **pid 61**: Mouse Posterior parietal association areas (10 parcels) ↔ Human PPC BA7 at MNI(±35, −55, 50) r=10 mm (14 parcels).
 - **Lifts**: No PPC validation pair in Beauchamp (Garin pid 4 covers Posterior Parietal as a point anchor; this pack adds region coverage).
 - **Off-target**: None detected.
 
@@ -240,7 +240,7 @@ Each region anchor uses `lam_outside=0.15` (soft) by default. To override:
 model.fit(..., region_anchors=entries, region_lam_outside=1.0)  # hard 0/1 wall
 ```
 
-The soft default gives essentially identical argmax to hard but better-calibrated probability tails, see [archive/iteration_log.md §5.6.0a](archive/iteration_log.md).
+The soft default gives the same argmax as hard, with better-calibrated probability tails, see [archive/iteration_log.md §5.6.0a](archive/iteration_log.md).
 
 ## Working around the DSURQE granularity limit
 
@@ -250,16 +250,16 @@ The soft default gives essentially identical argmax to hard but better-calibrate
 
 **What it does and doesn't deliver**:
 
-- **Mechanically works** for medium-sized structures (claustrum, SN region) at r ≈ 0.5–1.0 mm.
+- **Mechanically works** for medium-sized structures (claustrum, SN region) at r ≈ 0.5−1.0 mm.
 - **Anatomical specificity is lost**, the captured parcels are in the right spatial neighbourhood but not labelled as the target structure. We're trusting coordinates rather than verified labels.
-- **Very small structures** (habenula ~0.5 mm³, LC ~0.1 mm³) at our 200μm parcel resolution: even tight balls (r=0.3-0.5) capture neighbouring thalamic/midbrain parcels rather than the structure proper.
+- **Very small structures** (habenula ~0.5 mm³, LC ~0.1 mm³) at our 200μm parcel resolution. Even tight balls (r=0.3-0.5) capture neighbouring thalamic/midbrain parcels rather than the structure proper.
 - **No Beauchamp validation pair** for any of these structures, so empirical assessment isn't possible.
 
 **Conclusion**: the workaround is real infrastructure but **not yet a recipe we trust enough to ship as default packs**. Building a Habenula or LC pack would require external verification (e.g. comparing captured parcels' gene expression against habenular/LC-specific markers from Allen ISH data, or against Yao 2023 cell-type composition). That's a larger curation effort, left as a deliberate future-work item.
 
 ## Roadmap, remaining candidate packs
 
-The recommended composition is all 15 packs / 26 region-anchor entries (pids 30–61). Remaining candidates with strong literature support but not yet implemented:
+The recommended composition is all 15 packs / 26 region-anchor entries (pids 30−61). Remaining candidates with strong literature support but not yet implemented:
 
 | Candidate | Strong reference | Feasibility | Reserved pids |
 |---|---|---|---|

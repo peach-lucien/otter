@@ -12,7 +12,7 @@ Output: a coupling matrix **π** of shape (1864 mouse parcels × 2094 human parc
 
 **→ [Open the HOMER Mapping Explorer](https://peach-lucien.github.io/homer/)**
 
-A self-contained 3D viewer for the production coupling. Search a mouse region or parcel, see its top-K human partners ranked by coupling mass, toggle the cortical surface or mouse atlas shell, and inspect the trust evidence behind every prediction. No Python, no install, no backend. It is a single HTML file with the recommended model baked in. Use this if you want to *look at* HOMER. The rest of the README is for using it programmatically or reproducing it.
+A self-contained 3D viewer for the canonical coupling. Search a mouse region or parcel, see its top-K human partners ranked by coupling mass, toggle the cortical surface or mouse atlas shell, and inspect the trust evidence behind every prediction. No Python, no install, no backend. It is a single HTML file with the canonical coupling baked in. Use this if you want to *look at* HOMER. The rest of the README is for using it programmatically or reproducing it.
 
 ---
 

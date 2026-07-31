@@ -143,19 +143,17 @@ combination so weighting parameters are interpretable as relative shares.
 ## Why semirelaxed (not balanced)
 
 With balanced FGW, the human marginal is fixed at uniform `1/n_h`, forcing the
-solver to assign positive mass to every human node, including the ~20% of
-human parcels that don't have a clear mouse counterpart. This produces a
+solver to assign positive mass to every human node, including human parcels
+that have no clear mouse counterpart. This produces a
 "smeared" π with no clean per-mouse-row interpretation.
 
 Semirelaxed lets the human marginal float, so the coupling can leave human parcels poorly
-reconstructed rather than forcing mass onto them. How much territory that amounts to depends on
-the threshold chosen, so we report reconstruction-coverage (docs/03_results.md §5) rather than an
-uncovered-parcel percentage.
-
-coupling report that a human parcel has NO mouse counterpart, and §5 of
-`03_results.md` builds its central measurement on that report. The benefit:
-every mouse row has an interpretable distribution over human nodes, and we
-don't force fake correspondences.
+reconstructed rather than forcing mass onto them. We report reconstruction accuracy
+(docs/03_results.md §5) rather than an uncovered-parcel percentage, which would depend on the
+threshold chosen. Each column of π is normalised before the push-forward, so the score reflects
+whether some mouse tissue is wired like the human parcel rather than how much mass that parcel
+received, and §5 of `03_results.md` builds its central measurement on it. Every mouse row keeps
+an interpretable distribution over human nodes, and no correspondence is forced.
 
 ## Validation pipeline
 
@@ -185,5 +183,7 @@ Plus null distributions (random π, permuted anchors) for z-score reporting.
 - Flamary et al. 2021, *POT: Python Optimal Transport*, the solver library.
 - Garin et al. 2021, *MICCAI*, the 21 cross-species anchor pairs.
 - Cutuli, Schaefer, Domhof 2024. Domhof human structural connectivity dataset.
-- Knox et al. 2019, *Network Neuroscience*. Allen mouse SC voxel model
-  (planned for future M5 work; currently we use Allen *summary structure* SC).
+- Knox et al. 2019, *Network Neuroscience*. Allen mouse SC voxel model. The eleven cortical
+  Garin anchor classes take leaf-level connectivity from this model, which resolves cortical
+  areas the summary atlas does not separate; subcortical and brainstem parcels keep Allen
+  *summary structure* SC.

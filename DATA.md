@@ -1,8 +1,7 @@
-# Data
+# Data and artifacts
 
-> The published v1.2.0 archive predates `pi_canonical.npy` and does not contain it.
-> `scripts/build_archives.sh` now includes it; the bundle needs re-cutting as v1.3.0.
-> See the `_canonical_coupling_note` in `data_manifest.json`. and artifacts
+The published archive is v1.3.0 and contains `pi_canonical.npy`. See the
+`_canonical_coupling_note` in `data_manifest.json`.
 
 The HOMER code lives in this Git repository. The data and generated artifacts do
 **not**. They are too large for Git, and most of the inputs are third-party data
@@ -43,7 +42,7 @@ You do **not** need Tier 2 to use HOMER, only to regenerate `π` from scratch.
 
 ---
 
-## Zenodo record, exactly what to upload
+## Zenodo record, what to upload
 
 Create **one Zenodo record** with **two archive files**. Build both from the repo
 root so the paths inside the tarball are repo-relative (the fetch script unpacks
@@ -65,7 +64,8 @@ array).
 | `outputs/coupling/pi_fc_plus_SC_with_all_packs.npy` | 30 MB | pre-warp coupling, retired 2026-07 |
 | `outputs/coupling/pi_fc_plus_SC.npy` | 15 MB | pre-warp point-anchor coupling, retired 2026-07 |
 | `outputs/coupling/pi_fc_plus_SC_with_*.npy` (×15) + `pi_fc_plus_SC_xyz_zero.npy` | ~430 MB | ablation-variant couplings the advanced notebooks load (per-anchor-pack, xyz-zeroed, etc.) |
-| `outputs/coupling/trust_multisource_all_packs.npz`, `trust_score_fc_plus_SC*.npz` | ~0.5 MB | per-parcel trust tiers + scores |
+| `outputs/coupling/trust_multisource_canonical.npz` | ~0.1 MB | per-parcel evidence tiers on the canonical π, what the docs gate queries on |
+| `outputs/coupling/trust_multisource_all_packs.npz`, `trust_score_fc_plus_SC*.npz` | ~0.5 MB | per-parcel trust tiers + scores on the retired couplings |
 | `outputs/coupling/bootstrap_aggregate_fc_plus_SC.npz` | | bootstrap stability aggregate |
 | `outputs/coupling/per_disorder_predictions.npz` | 0.07 MB | ENIGMA per-disorder predicted maps |
 | `outputs/anndata/mouse.h5ad` | 42 MB | processed mouse parcel table + features |

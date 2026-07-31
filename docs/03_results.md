@@ -13,9 +13,10 @@ on this page, the notebook is right and this page is a bug.
 that axis.
 
 π is fitted on functional and structural connectivity, but what travels through it is not limited
-to connectivity. Microstructure comes across at r = 0.47. What does not come across is anything
-varying through the cortical depth. The boundary is areal against laminar, rather than
-connectional against everything else.
+to connectivity. Microstructure comes across, at |r| = 0.50 and 0.53 over parcels and r = 0.47
+against the human myelin map over regions. What does not come across is anything varying
+through the cortical depth. The boundary is areal against laminar, rather than connectional
+against everything else.
 
 ## Synthesis
 
@@ -35,8 +36,8 @@ connectional against everything else.
 
 ## The coupling files
 
-`load_pi()` returns `pi_canonical.npy`, the coupling used throughout the paper: region packs plus
-an anchor-warped spatial cost, ε = 0.05 and xyz weight 0.25, both selected by nested
+`load_pi()` returns `pi_canonical.npy`, the coupling used throughout the paper. It combines region
+packs with an anchor-warped spatial cost at ε = 0.05 and xyz weight 0.25, both selected by nested
 cross-validation on held-out Beauchamp homologies.
 
 | file | what it is | use |
@@ -50,7 +51,7 @@ Verify by hash rather than by filename. `pi_provenance()` returns the file and i
 
 ## 1 · The coupling is calibrated
 
-Mass concentrates on the homology diagonal: mean self-mass across the 21 Garin classes is 0.40,
+Mass concentrates on the homology diagonal. Mean self-mass across the 21 Garin classes is 0.40,
 against 0.048 under a size-matched uniform mapping. Routing preserves topography, with the
 distance between two mouse parcels predicting the distance between their routed human centroids at
 r = 0.53 against a permuted-coupling null of ≈ 0.
@@ -74,8 +75,8 @@ confidence: membership in a curated anchor, and independent reproduction of a pu
 | `low_evidence` | 21.6 % |
 
 The two validated tiers cover 55 % of the brain. The tier grades the resolution at which a
-prediction can be trusted rather than whether a homologue exists: parcel-exact recovery separates
-the two validated tiers (top-1 0.70 against 0.39).
+prediction can be trusted rather than whether a homologue exists. Parcel-exact recovery separates
+the two validated tiers, at top-1 0.70 against 0.39.
 
 Trust cannot be read from the solver. Across parcels without anchor supervision, the coupling's own
 concentration predicts top-1 accuracy at r = 0.06 and bootstrap stability at r = −0.04, neither
@@ -140,14 +141,24 @@ networks map to a more compact human territory than the null.
 Routing the mouse principal functional-connectivity gradient predicts the observed human gradient
 at |r| = 0.54 across all 2,094 parcels and |r| = 0.56 at region level, exceeding both a permuted-π
 null (|r| = 0.07, p < 0.001) and a spin null (p = 0.032). The correspondence survives reduction to
-discrete structure: the rank order of the nine human networks along the gradient is recovered at
+discrete structure. The rank order of the nine human networks along the gradient is recovered at
 ρ = 0.80 (spin p = 0.029), and a three-tier discretisation is classified at 56 % against 33 %
 chance (p = 0.001).
 
 ### Microstructure
 
-Two independent mouse measurements routed through π both predict the human HCP myelin map: the
-T1w:T2w proxy at r = 0.47 and cytoarchitectural type at r = 0.47, over 388 of 400 Schaefer regions.
+Two independent mouse measurements routed through π both predict the human HCP myelin map, the
+T1w:T2w proxy and cytoarchitectural type. At parcel level each clears a translation null, which
+rotates the mouse input and routes it through π unchanged, at |r| = 0.50 over 1,789 parcels
+(p = 0.005) and |r| = 0.53 over 1,787 parcels (p = 0.003). Aggregated to the 388 of 400 Schaefer
+regions the coupling reaches, each correlates with the human myelin map at r = 0.47.
+
+One number stood for two measurements because the region-level values round together, 0.470 for
+the myelin proxy and 0.473 for cytoarchitecture. The parcel-level values separate them.
+
+Both mouse inputs are coarse. The myelin proxy takes 39 distinct values across the mouse cortex
+and cytoarchitectural type takes five, so the nulls account for their resolution but the parcel
+count is not a degrees-of-freedom count.
 
 > Reversed in July 2026. An earlier draft reported r = 0.37 / 0.36 failing a spin null at
 > p = 0.11 / 0.10 and concluded that microstructure does not translate. Those values came from the
@@ -161,11 +172,22 @@ Grouping fourteen properties by their relation to the areal hierarchy, all nine 
 "hierarchy maps" and "varies along the hierarchy" groups clear their spin nulls, and none of the
 five orthogonal to it does.
 
-The controlling comparison sits within one dataset. Individual cortical-layer marker genes, which
-retain areal variation, translate at mean r = 0.23 with 6 of 7 significant. Layer contrasts built
-from the same genes, which remove the shared areal component, do not (mean r = 0.07). Granular
-L4 − infragranular is the expected exception at r = 0.19, since cortical granularity is itself the
-areal hierarchy.
+The comparison is internally controlled. Eight of the fourteen measures are cell-class maps scored
+on the same 2,094 parcels against the same null, and they span the full range, from −0.03 for
+microglial density to +0.35 for the neuronal-glial contrast. What separates them is their relation
+to the areal hierarchy rather than how they were measured. Granular L4 − infragranular is the
+expected exception among the laminar contrasts at r = 0.19, since cortical granularity is itself
+areal.
+
+> Withdrawn July 2026. An earlier version of this page offered individual cortical-layer marker
+> genes as the control, at mean r = 0.23 with 6 of 7 significant against layer contrasts at 0.07.
+> The two arms were not comparable. The markers were scored over the whole brain against a null
+> that shuffled the coupling, and the contrasts over the 1,768 cortical parcels of Schaefer-400
+> against a null that rotates the mouse input. Re-scored like for like the markers give 0.072 with
+> 3 of 7 significant, which sits inside the range of the contrasts they were supposed to exceed,
+> and the dissociation does not survive. The manuscript deleted the claim and removed Fig. 3e.
+> The as-published arm reproduces `hodge_2019_layer_markers.json` at 0.22819, which is what
+> verifies the re-scoring. Log: `outputs/logs/hodge_markers_like_for_like.json`.
 
 ## 4 · HOMER versus TransBrain
 
@@ -186,13 +208,13 @@ Across the seven capability axes compared, HOMER leads on six and is level on th
 probably better read as complementary instruments, region-level phenotype transfer against
 calibrated whole-brain correspondence, than as competitors.
 
-## 5 · Where π has no support
+## 5 · Where the mouse cannot reconstruct human connectivity
 
-Reconstruction-coverage asks how well each human parcel's connectivity fingerprint is rebuilt by
-routing mouse connectivity through π:
+Reconstruction accuracy asks how well each human parcel's connectivity fingerprint is rebuilt by
+routing mouse connectivity through π.
 
 ```
-pihat = pi / pi.sum(0);  pred = pihat.T @ Mfc @ pihat;  coverage[j] = pearson(pred[j], Hfc[j])
+pihat = pi / pi.sum(0);  pred = pihat.T @ Mfc @ pihat;  accuracy[j] = pearson(pred[j], Hfc[j])
 ```
 
 > This replaced a measure that did not work. The earlier metric was the total mouse mass a parcel
@@ -202,9 +224,11 @@ pihat = pi / pi.sum(0);  pred = pihat.T @ Mfc @ pihat;  coverage[j] = pearson(pr
 > sensorimotor–association gap (0.68 at spin p = 0.286 on the canonical coupling) and the
 > uncovered-parcel percentages, which were threshold-dependent.
 
-Coverage runs high over sensorimotor, auditory and visual territory and low over prefrontal and
-lateral temporal cortex. One central visual parcel is rebuilt at r = 0.77; one dorsolateral
-prefrontal parcel at r = 0.07.
+Reconstruction accuracy runs high over sensorimotor, auditory and visual territory and low over
+prefrontal and lateral temporal cortex. One central visual parcel is rebuilt at r = 0.77, one
+dorsolateral prefrontal parcel at r = 0.07. Across 1,824 cortical parcels the mean is r = 0.45, and
+the measure agrees between homotopic regions across hemispheres at ρ = 0.36, so single-parcel
+values are illustrative and the analyses below are conducted at tertile or network level.
 
 ### It tracks cortical expansion
 
@@ -218,7 +242,7 @@ Six of seven published maps clear a spin null:
 | principal FC gradient (Margulies 2016) | −0.28 | 0.017 |
 | postnatal developmental expansion (Hill 2010) | −0.25 | 0.050 |
 | mouse–human FC homology (Xu 2020) | +0.40 | 0.001 |
-| T1w:T2w myelin (HCP) | +0.24 | n.s. |
+| T1w:T2w myelin (HCP) | +0.24 | 0.106 |
 
 Splitting cortex by the sensorimotor–association axis, the association tertile sits at 0.40 against
 0.50 for sensorimotor (Δ = 0.10, Cohen's d = 0.81, spin p = 0.010). The distributions overlap; what
@@ -229,8 +253,9 @@ cortex.
 
 Control B, covering dorsolateral and rostrolateral prefrontal cortex, is the only network
 significantly below the cortical mean (−0.69 SD, spin p = 0.006), while transcriptomic similarity
-to mouse over the same parcels is flat (−0.18 SD, p = 0.39). The mouse appears to have the parts
-without the wiring.
+to mouse over the same parcels is flat (−0.18 SD, p = 0.39). Human dorsolateral prefrontal cortex
+remains molecularly mammalian while having lost its connectional counterpart, so the species
+difference is a reorganisation of connections rather than a replacement of tissue.
 
 ### A falsification control
 
@@ -254,18 +279,18 @@ Cortical atrophy patterns from five mouse autism models route to different netwo
 differing in severity, with salience enrichment from +0.15 (Dvl1) to −0.39 (Slc6a4). No null is
 attached to the between-model comparison, and none should be read into the ordering.
 
-### Coverage does not resolve disorders
+### Reconstruction accuracy does not resolve disorders
 
 Because §5 localises territory the mouse cannot reconstruct, it is natural to ask whether that map
 predicts where a human disorder falls beyond the mouse's reach. It does not. Correlating
-reconstruction-coverage with case-control cortical-thickness effect sizes across the
+reconstruction accuracy with case-control cortical-thickness effect sizes across the
 Desikan-Killiany atlas is null for all seven ENIGMA maps tested (minimum spin p = 0.15), and
 weighting each disorder's thinning burden by reachability is null for all six disorders under the
 same null (minimum p = 0.13, in autism).
 
-The test can detect a hierarchy-aligned effect when one is present: run identically, the myelin
+The test detects a hierarchy-aligned effect when one is present. Run identically, the myelin
 hierarchy map flags bipolar disorder (p = 0.028) and major depression (p = 0.011) in these same
-data. Reconstruction-coverage carries no disorder-specific information at this resolution.
+data. Reconstruction accuracy carries no disorder-specific information at this resolution.
 
 > An earlier draft reported the opposite, correlating mass-coverage with ENIGMA thinning and
 > finding bipolar disorder (ρ = +0.64) and schizophrenia (ρ = +0.52) surviving FDR. That analysis
@@ -295,8 +320,8 @@ data. Reconstruction-coverage carries no disorder-specific information at this r
    region-level; `low_evidence` is a hypothesis.
 2. Ask whether your phenotype varies across the areal hierarchy. If it does, π will likely carry
    it. If it varies through cortical depth, it will not. §3 is the evidence.
-3. Check reconstruction-coverage before translating into association cortex. Where coverage is
-   low, the absence of a good counterpart is the finding rather than a failed query.
+3. Check reconstruction accuracy before translating into association cortex. Where it is low, the
+   absence of a good counterpart is the finding rather than a failed query.
 4. Spin-test every spatial correlation (`homer.eval.nulls.spin_null`) before reading it as
    significant. A permuted-π null is too lenient for a smooth map, and that is how two of the
    errors corrected on this page happened.

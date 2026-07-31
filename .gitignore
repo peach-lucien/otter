@@ -84,3 +84,6 @@ _review_scratch/
 
 # ABIDE phenotypic data: per-subject clinical detail, not ours to redistribute
 outputs/logs/abide_per_subject_scores.csv
+
+# resume state for experiments/section2_supervision/05_heldout_three_config.py
+outputs/logs/.05_heldout_progress.json

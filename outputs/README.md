@@ -21,7 +21,7 @@ The π matrix (1864 × 2094) is HOMER's core output. We ship several variants:
 
 | File | What | When to use |
 |---|---|---|
-| `pi_fc_plus_SC.npy` | **Production point-anchor π** (21 Garin anchors only, no packs) | Strictest validation baseline; what most internal CV uses |
+| `pi_fc_plus_SC.npy` | Point-anchor π (21 Garin anchors only, no packs), pre-warp | RETIRED 2026-07 — kept so published comparisons reproduce |
 | `pi_canonical.npy` | **Canonical π** — packs + anchor-warped spatial cost (ε = 0.05, xyz 0.25) | **Use this. `load_pi()` returns it.** |
 | `pi_fc_plus_SC_with_all_packs.npy` | pre-warp coupling, superseded 2026-07 | RETIRED — do not use for new work |
 | `pi_fc_plus_SC_with_atlas_regions.npy` | Production + 15 atlas-derived Garin region anchors | Ablation; superseded by per-pack |
@@ -49,7 +49,7 @@ The π matrix (1864 × 2094) is HOMER's core output. We ship several variants:
 |---|---|
 | `trust_score_fc_plus_SC.npz` | 3-signal internal trust (bootstrap + concentration + FC similarity) on production π |
 | `trust_score_fc_plus_SC_with_M1_hippo.npz` | Same on the supplementary-anchor π |
-| `trust_multisource_all_packs.npz` | **5-tier multi-source trust** on production-with-packs π — the recommended map |
+| `trust_multisource_canonical.npz` | **5-tier multi-source trust** on the canonical π — use this one |
 
 ## Logs (`logs/`)
 

@@ -62,13 +62,14 @@ PYTHONPATH=src python pipeline/04_solve_production.py --multistart       # 5-ini
 ```
 
 Saves:
-- `outputs/coupling/pi_fc_plus_SC.npy`, production coupling (1864 × 2094)
+- `outputs/coupling/pi_fc_plus_SC.npy`, point-anchor coupling (1864 × 2094), retired 2026-07.
+  `pi_canonical.npy` is the coupling the paper uses; `load_pi()` returns it
 - `outputs/coupling/pi_fc_plus_SC.json`, config + fit info sidecar
 
 ## 5. Evaluate
 
 ```bash
-PYTHONPATH=src python pipeline/05_evaluate.py            # orchestrator (runs all 3 substeps)
+PYTHONPATH=src python pipeline/05_evaluate.py            # orchestrator (runs the substeps below)
 ```
 
 Or individually:
@@ -116,7 +117,7 @@ PYTHONPATH=src python pipeline/08a_multisource_trust.py     # five-tier per-parc
 PYTHONPATH=src python pipeline/08_build_gui.py --publish    # region-first explorer
 ```
 
-`08a` writes `outputs/coupling/trust_multisource_all_packs.npz` (the evidence
+`08a` writes `outputs/coupling/trust_multisource_canonical.npz` (the evidence
 map the GUI and `notebooks/fig1_coupling.ipynb` read); `08_build_gui.py` builds
 `outputs/gui/index.html` and, with `--publish`, copies it to `docs/index.html`
 for GitHub Pages.

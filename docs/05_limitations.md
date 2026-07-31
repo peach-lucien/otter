@@ -18,7 +18,7 @@ Every default anchor pack gives 100 % top-1 for its target Beauchamp pair, but t
 
 ## 3. Per-parcel correspondence is a region-level claim
 
-Mean argmax distance is 25-45 mm even in well-anchored regions. Mouse parcels are ~12-2837 voxels each.
+Mean centroid displacement from the expected homologue is 8.83 mm parcel-weighted for the production model, quoted as 8.8 mm in the manuscript, against a derived chance displacement of 25 mm. Individual regions range more widely, and reconstruction accuracy agrees between homotopic regions across hemispheres at only ρ = 0.36. Mouse parcels are 12 to 2,837 voxels each.
 
 **Implication**: don't make "mouse parcel 1234 = human parcel 5678" statements at the millimeter level. Aggregate over regions (`pi[mouse_region_indices, :].sum(axis=0)`) and report top-K *human regions*.
 
@@ -47,9 +47,10 @@ Most validation in this codebase uses Beauchamp 2022's 22 published mouse-human 
 - Bootstrap stability (98.2 % argmax stability across 40 subject resamples)
 - Network coherence (Coletta-style, see [archive/iteration_log.md §5.21](archive/iteration_log.md))
 
-Other independent sources we identified but did not integrate:
+BICCN cell-type composition at parcel level is now integrated. Eight BICCN cell-class maps are scored over all 2,094 parcels against the translation spin null and reported in section 3, spanning −0.03 for microglial density to +0.35 for the neuronal-glial contrast. They constrain what transfers rather than which regions correspond, so they do not replace a homology benchmark.
+
+One independent source remains unintegrated:
 - **Mars 2018 white-matter homologies** (supplementary table requires manual extraction)
-- **BICCN cell-type composition at parcel level** (requires alignment with Yao 2023 / Siletti 2023; heavy lift)
 
 **Implication**: Beauchamp validation passes are necessary but not sufficient. A region anchored against Beauchamp may still disagree with Mars 2018 / BICCN cell types.
 
@@ -65,7 +66,7 @@ When a pack subdivides a Beauchamp-validated region into multiple human sub-targ
 
 The anatomy is right in all three cases. Vogt 2012, Voorn 2004, and Penfield's homunculus are uncontested. Beauchamp's broad-ball validation just measures something coarser than the sub-region anchor targets. When the pack's sub-targets happen to land at Beauchamp's ball centre (striatum), the metric improves. When they spread away from it (cingulate, somatosensory), the metric worsens, even though the predictions are anatomically more correct.
 
-**Implication for pack design**: if you're building a subdivision pack and want it to *also* lift the Beauchamp metric, place at least one sub-target inside Beauchamp's broad ball centre. If anatomy puts your sub-targets outside that ball, the pack remains anatomically defensible but lowers the Beauchamp *parcel* metric for that region (cingulate, somatosensory, visual). These packs are kept in the recommended composition: the multi-benchmark evidence, notably TransBrain's region-level homology benchmark, favours inclusion. The trade-off is documented per pack in [`04_anchor_packs.md`](04_anchor_packs.md).
+**Implication for pack design**: if you're building a subdivision pack and want it to *also* lift the Beauchamp metric, place at least one sub-target inside Beauchamp's broad ball centre. If anatomy puts your sub-targets outside that ball, the pack remains anatomically defensible but lowers the Beauchamp *parcel* metric for that region (cingulate, somatosensory, visual). These packs are kept in the recommended composition. The multi-benchmark evidence favours inclusion, in particular TransBrain's region-level homology benchmark. The trade-off is documented per pack in [`04_anchor_packs.md`](04_anchor_packs.md).
 
 **Methodological note**: this pattern is the cleanest evidence that Beauchamp's 22-pair validation, while useful, isn't fine-grained enough to distinguish among cytoarchitecturally-defined sub-regions of the same gross anatomical area. A model that is "right" by one sub-division can look "wrong" under another. Future validation work using sub-region-aware metrics (e.g. Mars 2018 transitive, BICCN cell-type composition) would resolve these false negatives.
 
@@ -88,6 +89,6 @@ We've curated 15 anchor packs covering ~22 named brain regions beyond the Garin 
 
 Use the multi-source trust map (`outputs/coupling/trust_multisource_canonical.npz`) to gate queries. For parcels in the `anchored_and_validated` tier (31.5 % of the brain), top-K queries are reliable at *parcel* granularity. For `validated_only` (23.8 %), parcel-exact recovery is much weaker (top-1 0.391 against 0.700), so query these at *region* granularity. For `anchored_only` (12.2 %) and `structural` (10.9 %), treat the prediction as a research starting point. For `low_evidence` (21.6 %), assume no signal. The two validated tiers cover 55.3 % of the brain.
 
-> Corrected 2026-07-29. The previous figures (31/22/13/14 %, top-1 0.18 against 0.69) came from the superseded 8 July grading. Region-level AUROC by tier is no longer quoted here: the canonical trust map carries `beauchamp_top1` but no `region_auroc`, so the old "AUROC 0.88 against 0.87" has no canonical source and has been removed rather than carried over.
+> Corrected 2026-07-29. The previous figures (31/22/13/14 %, top-1 0.18 against 0.69) came from the superseded 8 July grading. Region-level AUROC by tier is no longer quoted here. The canonical trust map carries `beauchamp_top1` but no `region_auroc`, so the old "AUROC 0.88 against 0.87" has no canonical source and has been removed rather than carried over.
 
-For region-level queries on any anchored region, the predictions are essentially correct by construction. That covers the ~22 sub-regions supplied by packs plus the 21 Garin regions, well over 40 well-defined cross-species region predictions, which is more than any prior method we are aware of.
+For region-level queries on any anchored region, the predictions are correct by construction. That covers the ~22 sub-regions supplied by packs plus the 21 Garin regions, well over 40 well-defined cross-species region predictions, which is more than any prior method we are aware of.
