@@ -1,4 +1,4 @@
-"""Phase 2. Compare HOMER per-disorder predictions to ENIGMA observed maps.
+"""Phase 2. Compare OTTER per-disorder predictions to ENIGMA observed maps.
 
 REQUIRES external data: ENIGMA per-region Cohen's d cortical-thickness effect
 sizes per disorder. Easiest source is the ENIGMA Toolbox repository:
@@ -9,7 +9,7 @@ sizes per disorder. Easiest source is the ENIGMA Toolbox repository:
 Each disorder ships a CSV like `cortical_thickness_<disorder>.csv` with
 Cohen's d per Desikan-Killiany region. Place the CSVs in:
 
-    homer/data_external/enigma/
+    otter/data_external/enigma/
         cortical_thickness_22q11.csv
         cortical_thickness_adhd.csv
         cortical_thickness_asd.csv
@@ -19,13 +19,13 @@ Cohen's d per Desikan-Killiany region. Place the CSVs in:
         cortical_thickness_schizophrenia.csv
 
 This script then:
-  1. Maps Desikan-Killiany regions to HOMER's 2,094-parcel atlas via
+  1. Maps Desikan-Killiany regions to OTTER's 2,094-parcel atlas via
      nearest-MNI-centroid (Desikan-Killiany centroids in MNI mm are
      well-tabulated).
-  2. Aggregates HOMER's per-disorder predicted patterns (from Phase 1) to
+  2. Aggregates OTTER's per-disorder predicted patterns (from Phase 1) to
      Desikan-Killiany region-level scores.
-  3. Correlates HOMER-predicted region scores vs ENIGMA observed Cohen's d.
-  4. Cross-disorder specificity check: does HOMER's autism prediction
+  3. Correlates OTTER-predicted region scores vs ENIGMA observed Cohen's d.
+  4. Cross-disorder specificity check: does OTTER's autism prediction
      correlate more with ENIGMA-autism than with ENIGMA-schizophrenia?
 """
 from __future__ import annotations
@@ -41,11 +41,11 @@ from scipy.stats import pearsonr
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached
+from otter.data import load_cached
 
 
 # Desikan-Killiany MNI centroids (approximate, from Freesurfer template + DK
-# atlas labels). Used to map DK regions to HOMER's 2,094 parcels via
+# atlas labels). Used to map DK regions to OTTER's 2,094 parcels via
 # nearest-centroid matching. These are L/R hemisphere centroids in MNI mm.
 # Source: aggregated from various Freesurfer-based atlases.
 DK_REGIONS_MNI = {
@@ -87,15 +87,15 @@ DK_REGIONS_MNI = {
 }
 
 
-def dk_to_homer_parcels(H_var, dk_regions):
-    """Map each DK region to its nearest-MNI-centroid HOMER parcel set.
-    Returns dict {dk_region: list of HOMER parcel indices}."""
+def dk_to_otter_parcels(H_var, dk_regions):
+    """Map each DK region to its nearest-MNI-centroid OTTER parcel set.
+    Returns dict {dk_region: list of OTTER parcel indices}."""
     H_xyz = H_var[["x", "y", "z"]].to_numpy()
     out = {}
     for name, (x_l, y_l, z_l) in dk_regions.items():
         # Left + right hemisphere centroids
         centroids = np.array([[x_l, y_l, z_l], [-x_l, y_l, z_l]])
-        # Find nearest HOMER parcels (one per hemisphere)
+        # Find nearest OTTER parcels (one per hemisphere)
         d_l = np.linalg.norm(H_xyz - centroids[0], axis=1)
         d_r = np.linalg.norm(H_xyz - centroids[1], axis=1)
         # Take all parcels within 20mm of either centroid
@@ -106,7 +106,7 @@ def dk_to_homer_parcels(H_var, dk_regions):
 
 
 def aggregate_per_disorder_to_dk(predicted, dk_to_parcels):
-    """Aggregate per-parcel HOMER prediction to per-DK-region scores."""
+    """Aggregate per-parcel OTTER prediction to per-DK-region scores."""
     out = {}
     for region, parcel_idxs in dk_to_parcels.items():
         if not parcel_idxs:
@@ -118,7 +118,7 @@ def aggregate_per_disorder_to_dk(predicted, dk_to_parcels):
 
 def main():
     print("=" * 80)
-    print("HOMER × ENIGMA cross-disorder comparison (Phase 2)")
+    print("OTTER × ENIGMA cross-disorder comparison (Phase 2)")
     print("=" * 80)
 
     # ---- Check ENIGMA data is present ----
@@ -133,21 +133,21 @@ def main():
         print(f"  4. Re-run this script.")
         sys.exit(1)
 
-    # ---- Load HOMER per-disorder predictions (from Phase 1) ----
+    # ---- Load OTTER per-disorder predictions (from Phase 1) ----
     preds = np.load(ROOT / "outputs/coupling/per_disorder_predictions.npz")
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
-    print(f"\nHOMER per-disorder predictions: {list(preds.keys())}")
+    print(f"\nOTTER per-disorder predictions: {list(preds.keys())}")
 
-    # ---- Build DK → HOMER parcel mapping ----
-    print(f"\nMapping {len(DK_REGIONS_MNI)} Desikan-Killiany regions to HOMER parcels...")
-    dk_to_parcels = dk_to_homer_parcels(H.var, DK_REGIONS_MNI)
-    print(f"  median HOMER parcels per DK region: "
+    # ---- Build DK → OTTER parcel mapping ----
+    print(f"\nMapping {len(DK_REGIONS_MNI)} Desikan-Killiany regions to OTTER parcels...")
+    dk_to_parcels = dk_to_otter_parcels(H.var, DK_REGIONS_MNI)
+    print(f"  median OTTER parcels per DK region: "
           f"{int(np.median([len(v) for v in dk_to_parcels.values()]))}")
 
-    # ---- Aggregate HOMER predictions per DK region ----
-    homer_per_dk = {}
+    # ---- Aggregate OTTER predictions per DK region ----
+    otter_per_dk = {}
     for disorder in preds.keys():
-        homer_per_dk[disorder] = aggregate_per_disorder_to_dk(preds[disorder], dk_to_parcels)
+        otter_per_dk[disorder] = aggregate_per_disorder_to_dk(preds[disorder], dk_to_parcels)
 
     # ---- Load ENIGMA CSVs and align region labels ----
     print(f"\nLoading ENIGMA cortical-thickness Cohen's d per disorder...")
@@ -172,22 +172,22 @@ def main():
         enigma_data[disorder] = d_dict
         print(f"  {disorder}: {len(d_dict)} regions loaded")
 
-    # ---- Cross-disorder correlation: HOMER-predicted vs ENIGMA-observed ----
+    # ---- Cross-disorder correlation: OTTER-predicted vs ENIGMA-observed ----
     print(f"\n{'='*80}")
-    print(f"Cross-disorder correlation (HOMER-predicted vs ENIGMA-observed)")
+    print(f"Cross-disorder correlation (OTTER-predicted vs ENIGMA-observed)")
     print(f"{'='*80}")
-    homer_disorders = list(preds.keys())
+    otter_disorders = list(preds.keys())
     enigma_disorders = list(enigma_data.keys())
 
-    corr_matrix = np.zeros((len(homer_disorders), len(enigma_disorders)))
-    for i, h_d in enumerate(homer_disorders):
+    corr_matrix = np.zeros((len(otter_disorders), len(enigma_disorders)))
+    for i, h_d in enumerate(otter_disorders):
         for j, e_d in enumerate(enigma_disorders):
             # Align regions: which DK regions are in both?
-            common = set(homer_per_dk[h_d].keys()) & set(enigma_data[e_d].keys())
+            common = set(otter_per_dk[h_d].keys()) & set(enigma_data[e_d].keys())
             if len(common) < 10:
                 corr_matrix[i, j] = np.nan
                 continue
-            hv = np.array([homer_per_dk[h_d][r] for r in sorted(common)])
+            hv = np.array([otter_per_dk[h_d][r] for r in sorted(common)])
             ev = np.array([enigma_data[e_d][r]  for r in sorted(common)])
             valid = np.isfinite(hv) & np.isfinite(ev)
             if valid.sum() < 10:
@@ -197,35 +197,35 @@ def main():
             corr_matrix[i, j] = r
 
     print(f"\n{'':<22s}" + "".join(f"{d[:10]:>12s}" for d in enigma_disorders))
-    for i, h_d in enumerate(homer_disorders):
+    for i, h_d in enumerate(otter_disorders):
         row = "".join(f"{corr_matrix[i,j]:>+12.3f}" if not np.isnan(corr_matrix[i,j])
                        else f"{'N/A':>12s}" for j in range(len(enigma_disorders)))
         print(f"  {h_d:<20s}{row}")
 
     # Specificity: diagonal vs off-diagonal
-    diag_pairs = [(i, j) for i, h in enumerate(homer_disorders)
+    diag_pairs = [(i, j) for i, h in enumerate(otter_disorders)
                   for j, e in enumerate(enigma_disorders)
                   if h.lower().replace("_", "") in e.lower().replace("_", "")
                   or e.lower().replace("_", "") in h.lower().replace("_", "")]
     diag_vals = [corr_matrix[i, j] for i, j in diag_pairs if not np.isnan(corr_matrix[i, j])]
-    off_diag_vals = [corr_matrix[i, j] for i in range(len(homer_disorders))
+    off_diag_vals = [corr_matrix[i, j] for i in range(len(otter_disorders))
                      for j in range(len(enigma_disorders))
                      if (i, j) not in diag_pairs and not np.isnan(corr_matrix[i, j])]
-    print(f"\nDiagonal pairs (HOMER-X vs ENIGMA-X): mean r = {np.mean(diag_vals):+.3f}")
-    print(f"Off-diagonal pairs (HOMER-X vs ENIGMA-Y): mean r = {np.mean(off_diag_vals):+.3f}")
-    print(f"  → If HOMER's predictions are disorder-specific, diagonal should beat off-diagonal.")
-    print(f"  → Given Phase 1 showed all HOMER predictions are essentially identical (r>0.97),")
+    print(f"\nDiagonal pairs (OTTER-X vs ENIGMA-X): mean r = {np.mean(diag_vals):+.3f}")
+    print(f"Off-diagonal pairs (OTTER-X vs ENIGMA-Y): mean r = {np.mean(off_diag_vals):+.3f}")
+    print(f"  → If OTTER's predictions are disorder-specific, diagonal should beat off-diagonal.")
+    print(f"  → Given Phase 1 showed all OTTER predictions are essentially identical (r>0.97),")
     print(f"     we EXPECT diagonal ≈ off-diagonal here.")
 
     out = {
-        "homer_disorders":   homer_disorders,
+        "otter_disorders":   otter_disorders,
         "enigma_disorders":  enigma_disorders,
         "correlation_matrix": corr_matrix.tolist(),
         "diagonal_mean":     float(np.mean(diag_vals)) if diag_vals else None,
         "off_diagonal_mean": float(np.mean(off_diag_vals)) if off_diag_vals else None,
-        "dk_homer_aggregation": {d: {r: float(v) for r, v in homer_per_dk[d].items()
+        "dk_otter_aggregation": {d: {r: float(v) for r, v in otter_per_dk[d].items()
                                        if not np.isnan(v)}
-                                  for d in homer_disorders},
+                                  for d in otter_disorders},
     }
     out_path = ROOT / "outputs" / "logs" / "enigma_phase2_comparison.json"
     out_path.write_text(json.dumps(out, indent=2))

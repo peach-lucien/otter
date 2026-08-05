@@ -3,7 +3,7 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "homer"
+name = "otter"
 version = "0.1.0"
 description = "Cross-species brain region mapping via Fused Gromov–Wasserstein"
 readme = "README.md"
@@ -43,9 +43,9 @@ Results       = "./docs/results.md"
 [project.scripts]
 # CLI shortcuts for the most-run pipeline steps. After `pip install -e .`
 # you can call them directly without `python pipeline/...`.
-homer-solve     = "homer.cli:solve_production"
-homer-evaluate  = "homer.cli:evaluate"
-homer-artefacts = "homer.cli:build_artefacts"
+otter-solve     = "otter.cli:solve_production"
+otter-evaluate  = "otter.cli:evaluate"
+otter-artefacts = "otter.cli:build_artefacts"
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -65,5 +65,5 @@ markers = [
 filterwarnings = [
     # Old-API shim modules emit DeprecationWarnings — they're expected and
     # documented; surfacing them in test output is noise.
-    "ignore::DeprecationWarning:homer\\..*",
+    "ignore::DeprecationWarning:otter\\..*",
 ]

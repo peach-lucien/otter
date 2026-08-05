@@ -1,10 +1,10 @@
-"""Cross-disease specificity test for HOMER's gene-spatial cross-species signal.
+"""Cross-disease specificity test for OTTER's gene-spatial cross-species signal.
 
 Test 3 showed that translating Pagani's 1,713 autism-implicated genes through
-HOMER's π reliably (bootstrap r=+0.428, 95% CI +0.349–+0.497) predicts Pagani's
+OTTER's π reliably (bootstrap r=+0.428, 95% CI +0.349–+0.497) predicts Pagani's
 observed human ASD subtype Δ pattern.
 
-Is this signal autism-specific, or does HOMER produce the same correlation for
+Is this signal autism-specific, or does OTTER produce the same correlation for
 ANY brain-disorder gene set? Pagani's MOESM5 supplementary lists 4,822 genes
 implicated in five comparison conditions:
   - bipolar_disorder
@@ -15,7 +15,7 @@ implicated in five comparison conditions:
 
 For each condition we:
   1. Take its gene list.
-  2. Intersect with HOMER's 1,713-gene Allen ISH matrix.
+  2. Intersect with OTTER's 1,713-gene Allen ISH matrix.
   3. Compute mean z-scored expression per mouse parcel.
   4. Translate via π to predicted per-human-parcel score.
   5. Aggregate to 8 Pagani networks.
@@ -51,7 +51,7 @@ from importlib import import_module
 nc = import_module("01_network_crossvalidation")
 st = import_module("04_subtype_translation")
 
-from homer.data import load_cached
+from otter.data import load_cached
 
 
 MOESM5_PATH = ROOT / "data_external" / "pagani_2026" / "41593_2026_2287_MOESM5_ESM.xlsx"
@@ -94,12 +94,12 @@ def main():
     print("Cross-disease specificity test")
     print("=" * 80)
 
-    # Load HOMER expanded matrix + metadata
+    # Load OTTER expanded matrix + metadata
     expr = np.load(ROOT / "experiments/autism_subtypes/allen_expansion/pagani_mouse_expr.npy")
     meta = pd.read_csv(ROOT / "experiments/autism_subtypes/allen_expansion/pagani_gene_list_resolved.csv")
     pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs" / "anndata"))
-    print(f"\nHOMER expanded matrix: {expr.shape}")
+    print(f"\nOTTER expanded matrix: {expr.shape}")
 
     # NaN-fill + z-score
     expr = expr.copy()
@@ -108,7 +108,7 @@ def main():
     expr[nz] = np.take(cmean, nz[1])
     z = (expr - expr.mean(0, keepdims=True)) / (expr.std(0, keepdims=True) + 1e-9)
 
-    # HOMER gene index by lowercased symbol
+    # OTTER gene index by lowercased symbol
     gene_to_idx = {g.lower(): i for i, g in enumerate(meta["mouse_symbol"])}
 
     # Disease gene sets

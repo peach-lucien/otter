@@ -1,4 +1,4 @@
-# sha256 of HOMER-generated artifacts in the Zenodo reproduce bundle.
+# sha256 of OTTER-generated artifacts in the Zenodo reproduce bundle.
 # Verify a downloaded/rebuilt file with: shasum -a 256 -c scripts/artifact_checksums.sha256
 ab51f5037e24e8806f7b823aac6ed6444044a4c8b1f829299f8686798b5bc857  outputs/coupling/pi_fc_plus_SC_with_all_packs.npy
 0db79736b82647b285d643fbb51a80f5dd576ca849c1963560bf6589ba0601ae  outputs/coupling/trust_multisource_all_packs.npz

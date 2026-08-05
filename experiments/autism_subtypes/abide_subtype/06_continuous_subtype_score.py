@@ -1,15 +1,15 @@
-"""Continuous HOMER cross-species subtype score for every ABIDE individual.
+"""Continuous OTTER cross-species subtype score for every ABIDE individual.
 
 Pagani assign a *binary* subtype (hypo / hyper / unsubtyped) by a hard ±1 s.d.
 threshold, which leaves ~75–78 % of individuals unclassified, yet they note
 autism connectivity "exists along a subtle continuum". The mask-definition method
-isn't the bottleneck (HOMER vs name-matched masks subtype the same ~22 %, 93 %
+isn't the bottleneck (OTTER vs name-matched masks subtype the same ~22 %, 93 %
 agreement, see 05); the *hard threshold* is.
 
-This script instead gives EVERY individual a continuous position on a HOMER-defined
+This script instead gives EVERY individual a continuous position on a OTTER-defined
 hyper↔hypo axis, so the whole sample is placed on the continuum:
 
-  • From π (04_homer_human_masks.py) we have human hypo and hyper coupling maps.
+  • From π (04_otter_human_masks.py) we have human hypo and hyper coupling maps.
     Their contrast (hyper − hypo) defines a per-region weight emphasising where the
     two subtypes diverge (the maps are distinct: coupling r=0.41, mask Jaccard 0.28).
   • For each individual, axis = Σ_region contrast_weight · (z-scored regional global
@@ -23,7 +23,7 @@ Then we test the new question Pagani's binary scheme can't:
 
 Needs the ABIDE download (run like 05). Prereqs: 04 (masks JSON) + ideally 05
 (hard labels, for the sanity check).
-    HOMER_ALLOW_INSECURE_SSL=1 PYTHONPATH=src python \
+    OTTER_ALLOW_INSECURE_SSL=1 PYTHONPATH=src python \
         experiments/autism_subtypes/abide_subtype/06_continuous_subtype_score.py \
         --abide-data-dir /tmp/abide_cache
 """
@@ -43,7 +43,7 @@ try:
     os.environ.setdefault("REQUESTS_CA_BUNDLE", certifi.where())
 except ImportError:
     pass
-if os.environ.get("HOMER_ALLOW_INSECURE_SSL", "").lower() in {"1", "true", "yes"}:
+if os.environ.get("OTTER_ALLOW_INSECURE_SSL", "").lower() in {"1", "true", "yes"}:
     import ssl, requests, urllib3
     ssl._create_default_https_context = ssl._create_unverified_context
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -55,7 +55,7 @@ from scipy.stats import mannwhitneyu, spearmanr  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached  # noqa: E402
+from otter.data import load_cached  # noqa: E402
 
 LOG = ROOT / "outputs" / "logs"
 ADOS_FIELDS = ["ADOS_TOTAL", "ADOS_GOTHAM_TOTAL", "ADOS_GOTHAM_SEVERITY",
@@ -77,7 +77,7 @@ def main():
     ap.add_argument("--pipeline", default="cpac")
     args = ap.parse_args()
 
-    masks = json.loads((LOG / "pagani_homer_human_masks.json").read_text())
+    masks = json.loads((LOG / "pagani_otter_human_masks.json").read_text())
     hypo_c = np.array(masks["masks"]["hypo"]["coupling_vector"], float)
     hyper_c = np.array(masks["masks"]["hyper"]["coupling_vector"], float)
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
@@ -97,7 +97,7 @@ def main():
     cents = np.array([(aaff @ np.r_[np.array(np.where(aarr == lab)).mean(1), 1])[:3] for lab in idxs])
     n_aal = len(idxs)
 
-    # map HOMER per-parcel coupling -> per-AAL region (nearest HOMER parcel)
+    # map OTTER per-parcel coupling -> per-AAL region (nearest OTTER parcel)
     d2 = (cents ** 2).sum(1, keepdims=True) + (H_xyz ** 2).sum(1)[None, :] - 2 * cents @ H_xyz.T
     nearest = d2.argmin(1)
     contrast_w = (hyper_c - hypo_c)[nearest]                 # per-AAL contrast weight
@@ -121,9 +121,9 @@ def main():
 
     # (1) recover hard labels?
     sanity = {}
-    hl = LOG / "abide_homer_subtyping.json"
+    hl = LOG / "abide_otter_subtyping.json"
     # (re)compute hard labels here if 05's per-subject labels not stored
-    # quick HOMER-mask hard labels for the sanity check:
+    # quick OTTER-mask hard labels for the sanity check:
     hypo_aal = np.isin(nearest, np.where(hypo_c >= masks["masks"]["hypo"]["coupling_threshold_pct80"])[0])
     hyper_aal = np.isin(nearest, np.where(hyper_c >= masks["masks"]["hyper"]["coupling_threshold_pct80"])[0])
     hard = np.full(len(Gz), "uns", object)

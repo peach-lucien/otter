@@ -11,7 +11,7 @@ Refinement:
   - For each layer group (upper L2/3, middle L4, deep L5-L6), combine markers
     into a single z-scored composite score before testing.
 
-Hypothesis: if HOMER's π preserves cortical layer-marker geometry at the area
+Hypothesis: if OTTER's π preserves cortical layer-marker geometry at the area
 level (not the layer level, π has no layer awareness), then the area-level
 spatial pattern of "where is upper-layer expression highest" should agree
 between species after π translation.
@@ -30,8 +30,8 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "autism_subtypes"))
 
-from homer.data import load_cached, load_pi, pi_provenance
-from homer.data.atlas_regions import (
+from otter.data import load_cached, load_pi, pi_provenance
+from otter.data.atlas_regions import (
     ATLAS_PATHS,
     assign_atlas_labels,
     assign_atlas_labels_with_hemisphere,
@@ -212,7 +212,7 @@ def main():
 
     # ---- Lobe-aggregated test ----
     # Aggregate predicted and observed scores to anatomical lobes (rough Yeo7
-    # network categories) to see if HOMER preserves the *broad* gradient even
+    # network categories) to see if OTTER preserves the *broad* gradient even
     # if per-parcel comparison is noisy.
     print(f"\n{'='*80}")
     print("Lobe-aggregated test (mean score per Yeo7 network, cortex only)")

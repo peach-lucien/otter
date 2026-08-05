@@ -16,8 +16,8 @@ from scipy.stats import rankdata, spearmanr, false_discovery_control
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance  # noqa: E402
-from homer.eval.nulls import spin_null                  # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance  # noqa: E402
+from otter.eval.nulls import spin_null                  # noqa: E402
 ENIGMA = ROOT / "data_external/enigma"
 N_SPIN = 1000
 

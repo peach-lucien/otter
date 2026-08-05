@@ -5,7 +5,7 @@
 
 # Fulcher 2019 multimodal-gradient validation
 
-We asked whether HOMER's π carries the **mouse multimodal cortical hierarchy**,
+We asked whether OTTER's π carries the **mouse multimodal cortical hierarchy**,
 the sensorimotor → prefrontal axis that Fulcher et al. showed is shared across
 cytoarchitecture, gene expression, cell density and connectivity, across to
 the human cortex.
@@ -20,9 +20,9 @@ proxy reported for 40 mouse isocortical areas; they also use Goulas et al.'s
 **cytoarchitectural type** (eulamination 1–4) for 38 areas.
 
 This is a Beauchamp-independent, anchor-orthogonal test on two counts: both
-mouse maps are *structural* (HOMER's π is built from FC + SC), and the human
+mouse maps are *structural* (OTTER's π is built from FC + SC), and the human
 reference, the [HCP S1200 T1w/T2w myelin map](https://github.com/netneurolab/neuromaps),
-is independent published data rather than an anchor pair. If HOMER's π is
+is independent published data rather than an anchor pair. If OTTER's π is
 anatomically faithful, translating the mouse myelin hierarchy through π should
 reproduce the human myelin map: heavily myelinated sensory cortex, lightly
 myelinated association cortex.
@@ -70,9 +70,9 @@ here. This is the negative half of the paper's organising claim (`docs/03_result
 
 ## Method
 
-1. Assign every HOMER mouse parcel its Allen-acronym value from Fulcher's
+1. Assign every OTTER mouse parcel its Allen-acronym value from Fulcher's
    tables (T1w:T2w → 417 parcels / 36 areas; cytoarchitecture → 414 / 35).
-   PTLp has no acronym in HOMER's parcellation (split into VISa/VISrl in the
+   PTLp has no acronym in OTTER's parcellation (split into VISa/VISrl in the
    newer Allen CCF); VISal/PERI/AUDpo carry no parcels.
 2. Translate each mouse map through π as a transport-weighted average:
    `predicted_h[j] = Σ_i m[i]·π[i,j] / Σ_i π[i,j]` over the assigned parcels.
@@ -83,7 +83,7 @@ here. This is the negative half of the paper's organising claim (`docs/03_result
    territory.
 
 The human myelin map is the HCP S1200 T1w/T2w annotation (neuromaps), parcellated
-onto Domhof's Schaefer-400 17Networks parcellation, in HOMER's human
+onto Domhof's Schaefer-400 17Networks parcellation, in OTTER's human
 parcellation order. See `data_external/fulcher_2019_gradients/SOURCES.md`.
 
 ## Files

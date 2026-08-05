@@ -10,7 +10,7 @@ and test
       actually dominates there? scored vs a fair translation-spin null (rotate the
       mouse profiles on the mouse sphere, route through the real π, recompute).
 
-Run: cd homer && PYTHONPATH=src python experiments/biccn_2023_cell_types/05_composition_from_markers.py
+Run: cd otter && PYTHONPATH=src python experiments/biccn_2023_cell_types/05_composition_from_markers.py
 Writes outputs/logs/biccn_composition_from_markers.json
 """
 from __future__ import annotations
@@ -20,8 +20,8 @@ import numpy as np, pandas as pd
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance
-from homer.eval.nulls import _route_normalized, _haar_rotation
+from otter.data import load_cached, load_pi, pi_provenance
+from otter.eval.nulls import _route_normalized, _haar_rotation
 from scipy.spatial import cKDTree
 from scipy.stats import pearsonr
 

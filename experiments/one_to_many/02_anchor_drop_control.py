@@ -16,7 +16,7 @@ other packs are kept), then asks whether CP still splits into caudate + putamen.
 Note the Garin point anchor for CP is retained (it only says CP <-> striatum, not
 the sub-split), so this isolates the effect of the striatum SUBDIVISION supervision.
 
-Run: cd homer && PYTHONPATH=src python experiments/one_to_many/02_anchor_drop_control.py
+Run: cd otter && PYTHONPATH=src python experiments/one_to_many/02_anchor_drop_control.py
 Writes /var/tmp/pi_canonical_nostriatum.npy (scratch) and prints PASS/FAIL. Does not
 touch outputs/coupling.
 """
@@ -28,10 +28,10 @@ from scipy.interpolate import RBFInterpolator
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached                                    # noqa: E402
-from homer.data.anchors import get_anchor_index                      # noqa: E402
-from homer.models.multimodal import MultimodalFGW                    # noqa: E402
-from homer.data.anchor_packs.registry import PACKS                   # noqa: E402
+from otter.data import load_cached                                    # noqa: E402
+from otter.data.anchors import get_anchor_index                      # noqa: E402
+from otter.models.multimodal import MultimodalFGW                    # noqa: E402
+from otter.data.anchor_packs.registry import PACKS                   # noqa: E402
 
 # reuse the exact metric helpers from the diagnostic
 _spec = importlib.util.spec_from_file_location("o2m", ROOT / "experiments/one_to_many/01_diagnostic.py")

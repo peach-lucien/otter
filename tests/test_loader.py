@@ -28,28 +28,28 @@ V2_MAT   = V2_DIR / "corrs_mouse_v2.mat"
 
 
 # ---------------------------------------------------------------------------
-# Load homer.data.io directly without going through the package __init__
+# Load otter.data.io directly without going through the package __init__
 # (which imports `ot`, not always available in test envs).
 # ---------------------------------------------------------------------------
 
 def _load_io_module():
     import importlib.machinery
-    # Provide stubs so io.py's `from homer.data import DATA_DIR` style still
-    # works without invoking the full homer package init.
-    pkg_homer = importlib.util.module_from_spec(
-        importlib.machinery.ModuleSpec("homer", None)
+    # Provide stubs so io.py's `from otter.data import DATA_DIR` style still
+    # works without invoking the full otter package init.
+    pkg_otter = importlib.util.module_from_spec(
+        importlib.machinery.ModuleSpec("otter", None)
     )
-    pkg_homer_data = importlib.util.module_from_spec(
-        importlib.machinery.ModuleSpec("homer.data", None)
+    pkg_otter_data = importlib.util.module_from_spec(
+        importlib.machinery.ModuleSpec("otter.data", None)
     )
-    sys.modules.setdefault("homer", pkg_homer)
-    sys.modules.setdefault("homer.data", pkg_homer_data)
+    sys.modules.setdefault("otter", pkg_otter)
+    sys.modules.setdefault("otter.data", pkg_otter_data)
 
     io_spec = importlib.util.spec_from_file_location(
-        "homer.data.io", REPO / "src/homer/data/io.py"
+        "otter.data.io", REPO / "src/otter/data/io.py"
     )
     io_mod = importlib.util.module_from_spec(io_spec)
-    sys.modules["homer.data.io"] = io_mod
+    sys.modules["otter.data.io"] = io_mod
     io_spec.loader.exec_module(io_mod)
     return io_mod
 
@@ -423,11 +423,11 @@ def test_v2_rr_unchanged_sampled():
     """m.rr should be bit-identical between v1 and v2. Paul did NOT recompute FC.
 
     Marked slow because reads two 1.3 GB files. Skip in fast runs with
-    ``pytest -m 'not slow'`` or env var HOMER_TEST_FAST=1.
+    ``pytest -m 'not slow'`` or env var OTTER_TEST_FAST=1.
     """
     import os
-    if os.environ.get("HOMER_TEST_FAST") == "1":
-        pytest.skip("HOMER_TEST_FAST=1: skipping 1.3GB file comparison")
+    if os.environ.get("OTTER_TEST_FAST") == "1":
+        pytest.skip("OTTER_TEST_FAST=1: skipping 1.3GB file comparison")
     v1_path = DATA_DIR / "corrs_mouse.mat"
     if not v1_path.exists():
         pytest.skip("v1 file not present for comparison")
@@ -440,9 +440,9 @@ def test_v2_rr_unchanged_sampled():
         # Sample subjects at first / middle / last positions. The 1.3 GB
         # files are slow to read; 3 samples is sufficient to catch any
         # systematic difference. If you want exhaustive verification,
-        # run with HOMER_TEST_EXHAUSTIVE=1 set.
+        # run with OTTER_TEST_EXHAUSTIVE=1 set.
         import os
-        if os.environ.get("HOMER_TEST_EXHAUSTIVE") == "1":
+        if os.environ.get("OTTER_TEST_EXHAUSTIVE") == "1":
             sample = np.linspace(0, rr1.shape[0] - 1, 10, dtype=int)
         else:
             sample = np.array([0, rr1.shape[0] // 2, rr1.shape[0] - 1])

@@ -13,7 +13,7 @@ If a step fails in your NiMARE version, the fix is almost always a single name i
 FUNCTION_TERMS or MAP_KEYS below.
 
 Run once (downloads the Neurosynth v7 database, ~a few hundred MB, then builds 12 maps):
-    cd homer && python experiments/reverse_translation/00_fetch_maps.py
+    cd otter && python experiments/reverse_translation/00_fetch_maps.py
 Re-runnable; skips functions whose map already exists.
 """
 from __future__ import annotations

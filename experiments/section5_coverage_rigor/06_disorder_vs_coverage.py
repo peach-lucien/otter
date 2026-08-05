@@ -1,4 +1,4 @@
-"""Do human cortical disorders concentrate in the cortex HOMER leaves UNCOVERED?
+"""Do human cortical disorders concentrate in the cortex OTTER leaves UNCOVERED?
 
 Definitive version. Supersedes two earlier attempts, both of which were wrong:
 
@@ -12,7 +12,7 @@ Definitive version. Supersedes two earlier attempts, both of which were wrong:
                       between 12 mm and 20 mm. Not trustworthy.
 
 This version uses the REAL volumetric Desikan-Killiany atlas (abagen, MNI152 1 mm,
-68 cortical regions) and assigns every HOMER human parcel to the DK label at its MNI
+68 cortical regions) and assigns every OTTER human parcel to the DK label at its MNI
 coordinate; parcels landing outside the labelled ribbon are rescued to the nearest
 cortical voxel within 4 mm. Coverage per DK region is the MASS-NORMALISED MEAN of the
 pi column-sums (log10). Statistics are rank-based (Spearman), because log-coverage is
@@ -23,7 +23,7 @@ ENIGMA d is negative for cortical thinning, so if disorders preferentially thin 
 LOW-coverage cortex we expect a POSITIVE coverage-vs-d correlation.
 
 Requires: pip install abagen
-Run: cd homer && PYTHONPATH=src python experiments/section5_coverage_rigor/06_disorder_vs_coverage.py
+Run: cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/06_disorder_vs_coverage.py
 Writes outputs/logs/section6_disorder_vs_coverage_DK.json
 """
 from __future__ import annotations
@@ -38,18 +38,18 @@ from scipy.stats import rankdata, spearmanr, false_discovery_control
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi          # noqa: E402
-from homer.eval.nulls import spin_null               # noqa: E402
+from otter.data import load_cached, load_pi          # noqa: E402
+from otter.eval.nulls import spin_null               # noqa: E402
 
 N_SPIN = 2000
 RESCUE_MM = 4.0        # parcels off the labelled ribbon snap to nearest cortical voxel
-MIN_PARCELS = 10       # DK regions with fewer HOMER parcels are dropped
+MIN_PARCELS = 10       # DK regions with fewer OTTER parcels are dropped
 ENIGMA = ROOT / "data_external/enigma"
 OUT = ROOT / "outputs/logs/section6_disorder_vs_coverage_DK.json"
 
 
 def dk_parcel_labels(xyz):
-    """Assign each HOMER human parcel to a volumetric Desikan-Killiany cortical region."""
+    """Assign each OTTER human parcel to a volumetric Desikan-Killiany cortical region."""
     import abagen
     atlas = abagen.fetch_desikan_killiany()
     img = nib.load(atlas["image"])
@@ -161,7 +161,7 @@ def main():
 
     res["_meta"] = {
         "atlas": "Desikan-Killiany volumetric (abagen, MNI152 1mm, 68 cortical regions)",
-        "coverage": "log10 of mass-normalised MEAN pi column-sum over each region's HOMER parcels",
+        "coverage": "log10 of mass-normalised MEAN pi column-sum over each region's OTTER parcels",
         "statistic": "Spearman; spin null over DK centroids",
         "n_spin": N_SPIN, "rescue_mm": RESCUE_MM, "min_parcels": MIN_PARCELS,
         "coverage_vs_myelin_spearman": float(spearmanr(

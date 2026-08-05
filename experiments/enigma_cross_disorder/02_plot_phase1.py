@@ -1,4 +1,4 @@
-"""Phase 1 visualisation: cross-disorder correlation matrix + HOMER predicted spatial pattern."""
+"""Phase 1 visualisation: cross-disorder correlation matrix + OTTER predicted spatial pattern."""
 from __future__ import annotations
 import json
 from pathlib import Path
@@ -27,7 +27,7 @@ def main():
                     color="white" if corr_mat[ii,jj] < 0.97 else "black", fontsize=9)
     plt.colorbar(im, ax=ax, label="Pearson r")
     mean_off = float(np.array(j['correlation_matrix'])[np.triu_indices(len(disorders), k=1)].mean())
-    ax.set_title(f"HOMER per-disorder predicted human patterns (2,094 parcels)\n"
+    ax.set_title(f"OTTER per-disorder predicted human patterns (2,094 parcels)\n"
                  f"Mean off-diagonal r = {mean_off:+.3f}\n"
                  f"→ predictions are nearly identical across disorders")
 
@@ -36,14 +36,14 @@ def main():
     colors = ["#264653", "#2a9d8f", "#e9c46a", "#e76f51"]
     for i, d in enumerate(disorders):
         ax.hist(preds[d], bins=60, alpha=0.5, label=d, color=colors[i % len(colors)])
-    ax.set_xlabel("HOMER-predicted per-parcel score")
+    ax.set_xlabel("OTTER-predicted per-parcel score")
     ax.set_ylabel("Count")
-    ax.set_title(f"Distribution of HOMER predictions per disorder\n"
+    ax.set_title(f"Distribution of OTTER predictions per disorder\n"
                  f"(distributions overlap heavily, confirms predictions are similar)")
     ax.legend(fontsize=8)
 
     plt.suptitle(
-        "Phase 1. HOMER per-disorder spatial predictions\n"
+        "Phase 1. OTTER per-disorder spatial predictions\n"
         "(autism / bipolar / schizophrenia / ADHD genes from MOESM4 + MOESM5)",
         fontsize=12, y=1.02,
     )

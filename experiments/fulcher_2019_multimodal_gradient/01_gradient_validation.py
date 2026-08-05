@@ -1,4 +1,4 @@
-"""HOMER × Fulcher 2019 multimodal-gradient validation.
+"""OTTER × Fulcher 2019 multimodal-gradient validation.
 
 [Fulcher, Murray, Zerbi & Wang 2019, PNAS](https://doi.org/10.1073/pnas.1814144116)
 "Multimodal gradients across mouse cortex" showed that cytoarchitecture, gene
@@ -11,7 +11,7 @@ Two of their modality maps are used here:
   * **Cytoarchitectural type**. Goulas et al.'s ordinal eulamination scale
     1 (agranular) → 4 (eulaminate), for 38 areas (`CytoarchitectureTypes.txt`).
 
-The test is orthogonal to HOMER's inputs: both mouse modalities are
+The test is orthogonal to OTTER's inputs: both mouse modalities are
 structural (π is built from FC + SC), and the human reference is the
 independent HCP S1200 T1w/T2w myelin map.
 
@@ -45,7 +45,7 @@ from scipy.stats import pearsonr, spearmanr
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 DATA = ROOT / "data_external" / "fulcher_2019_gradients"
-# The canonical coupling is whatever homer.data.load_pi() defaults to
+# The canonical coupling is whatever otter.data.load_pi() defaults to
 # (pi_canonical.npy). Do NOT hard-code a path here: this script previously
 # pinned pi_fc_plus_SC_with_all_packs.npy and so kept using the RETIRED
 # coupling after the 2026-07-17 switch, silently, through several re-runs.
@@ -83,7 +83,7 @@ def load_mouse_cytoarch() -> dict[str, float]:
 
 
 def load_mouse_parcel_acronyms() -> list[str]:
-    """Allen structure acronym for each of HOMER's 1,864 mouse parcels."""
+    """Allen structure acronym for each of OTTER's 1,864 mouse parcels."""
     meta = json.loads((ROOT / "data_external" / "mouse_sc_meta.json").read_text())
     acr = meta["structure_acronyms"]
     return [acr[i] for i in meta["node_struct_idx"]]
@@ -98,9 +98,9 @@ def load_human_node_region() -> np.ndarray:
 def load_human_myelin() -> np.ndarray:
     """HCP T1w/T2w myelin per Schaefer region, indexed [1..400]."""
     vals = np.full(401, np.nan)
-    with open(DATA / "human_myelinmap_schaefer400_HOMERorder.csv") as f:
+    with open(DATA / "human_myelinmap_schaefer400_OTTERorder.csv") as f:
         for row in csv.DictReader(f):
-            vals[int(row["homer_region_id"])] = float(row["t1t2_myelin"])
+            vals[int(row["otter_region_id"])] = float(row["t1t2_myelin"])
     return vals
 
 
@@ -156,10 +156,10 @@ def _corr(a: np.ndarray, b: np.ndarray) -> tuple[float, float, float, int]:
 
 def main():
     print("=" * 80)
-    print("HOMER × Fulcher 2019, multimodal cortical-gradient validation")
+    print("OTTER × Fulcher 2019, multimodal cortical-gradient validation")
     print("=" * 80)
 
-    from homer.data import load_pi, pi_provenance
+    from otter.data import load_pi, pi_provenance
     pi = load_pi()
     prov = pi_provenance()
     print(f"  π: {prov['pi_file']}  sha256 {prov['pi_sha256']}")
@@ -219,7 +219,7 @@ def main():
     # one. Any gain in panels 1/3 could therefore be territory size rather than
     # a better coupling. Re-score the canonical prediction on exactly the region
     # set the retired coupling reached, so the two are compared on equal ground.
-    from homer.data import load_pi as _load_pi, pi_provenance as _prov
+    from otter.data import load_pi as _load_pi, pi_provenance as _prov
     pi_retired = _load_pi(RETIRED_PI_FILE)
     prov_retired = _prov(RETIRED_PI_FILE)
     ret_t1t2 = aggregate_to_regions(

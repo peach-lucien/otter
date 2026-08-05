@@ -1,4 +1,4 @@
-"""Visualise the ABIDE per-subject HOMER-template result."""
+"""Visualise the ABIDE per-subject OTTER-template result."""
 from __future__ import annotations
 
 import json
@@ -17,8 +17,8 @@ def main():
     j = json.loads((ROOT / "outputs/logs/autism_subtypes_abide.json").read_text())
     df = pd.read_csv(ROOT / "outputs/logs/abide_per_subject_scores.csv")
     df = df[df["valid"] == True]
-    asd = df[df["DX_GROUP"] == 1]["homer_score"].dropna().values
-    ctrl = df[df["DX_GROUP"] == 2]["homer_score"].dropna().values
+    asd = df[df["DX_GROUP"] == 1]["otter_score"].dropna().values
+    ctrl = df[df["DX_GROUP"] == 2]["otter_score"].dropna().values
 
     fig, axes = plt.subplots(1, 3, figsize=(15, 4.5))
 
@@ -34,7 +34,7 @@ def main():
                s=4, alpha=0.3, color="#2a9d8f")
     ax.scatter(2 + rng.normal(0, 0.04, len(asd)),  asd,
                s=4, alpha=0.3, color="#e76f51")
-    ax.set_ylabel("HOMER cross-species template score\n(subject perturbation · template Δ)")
+    ax.set_ylabel("OTTER cross-species template score\n(subject perturbation · template Δ)")
     ax.set_title(f"ASD vs Control\nMann-Whitney p = {j['mann_whitney_p']:.3f}, "
                  f"Cliff's δ = {j['cliffs_delta']:+.3f}")
     ax.axhline(0, color="black", linewidth=0.5, linestyle="--")
@@ -45,7 +45,7 @@ def main():
     xs = np.linspace(min(asd.min(), ctrl.min()), max(asd.max(), ctrl.max()), 300)
     ax.fill_between(xs, kde_c(xs), color="#2a9d8f", alpha=0.4, label=f"Control (n={len(ctrl)})")
     ax.fill_between(xs, kde_a(xs), color="#e76f51", alpha=0.4, label=f"ASD (n={len(asd)})")
-    ax.set_xlabel("HOMER template score")
+    ax.set_xlabel("OTTER template score")
     ax.set_yticks([])
     ax.set_title("Density: distributions almost identical")
     ax.legend()
@@ -60,11 +60,11 @@ def main():
     ax.set_title(f"ASD only, bimodality check\n"
                  f"Δ BIC (2-comp − 1-comp) = {gmm['delta_bic_2_minus_1']:+.1f} "
                  f"({'2-comp' if gmm['two_comp_preferred_bic'] else '1-comp'} preferred)")
-    ax.set_xlabel("HOMER template score (ASD subjects)")
+    ax.set_xlabel("OTTER template score (ASD subjects)")
     ax.set_yticks([])
 
     plt.suptitle(
-        f"PAGANI-B. HOMER cross-species template does NOT classify ASD at individual level\n"
+        f"PAGANI-B. OTTER cross-species template does NOT classify ASD at individual level\n"
         f"(n={j['n_valid']} valid subjects across 24 sites, AAL-116 parcellation)",
         fontsize=12, y=1.02,
     )

@@ -8,13 +8,13 @@ DMN, DorsAtten, Limbic, Salience, SomatoMotor, Visual, Subcortical; Fig 4e). The
 cross-species correspondence is **by name**. Somatomotor in mouse ↔ Somatomotor in
 human, etc.
 
-HOMER provides a quantitative π (1864 mouse × 2094 human) that can be aggregated to a
+OTTER provides a quantitative π (1864 mouse × 2094 human) that can be aggregated to a
 network-network mapping matrix. This script asks: **does π preferentially route mass
 between like-named networks?**
 
-If yes, HOMER's structural+anchor evidence corroborates the name-based correspondence
+If yes, OTTER's structural+anchor evidence corroborates the name-based correspondence
 the paper relies on, providing a quantitative bridge for the paper's workflow.
-If no, the name-based shortcut is over-confident in places HOMER thinks the structural
+If no, the name-based shortcut is over-confident in places OTTER thinks the structural
 evidence disagrees.
 
 Method:
@@ -44,20 +44,20 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from homer.data import load_cached, load_pi, pi_provenance
-from homer.data.anchors import get_anchor_index
-from homer.data.atlas_regions import (
+from otter.data import load_cached, load_pi, pi_provenance
+from otter.data.anchors import get_anchor_index
+from otter.data.atlas_regions import (
     ATLAS_PATHS,
     assign_atlas_labels,
     assign_atlas_labels_with_hemisphere,
 )
-from homer.data.networks import PAIRID_TO_NETWORK, NETWORKS, assign_networks
+from otter.data.networks import PAIRID_TO_NETWORK, NETWORKS, assign_networks
 
 
-# Mapping: HOMER's 11-network mouse scheme → Pagani paper's network names
+# Mapping: OTTER's 11-network mouse scheme → Pagani paper's network names
 # (matches paper's ED Fig 1 nine-network scheme + collapses some mouse-specific
 # distinctions that don't have a clean human counterpart).
-HOMER_NET_TO_PAPER_MOUSE: dict[str, str] = {
+OTTER_NET_TO_PAPER_MOUSE: dict[str, str] = {
     "auditory":      "Auditory",
     "sensorimotor":  "SomatoMotor",
     "visual":        "Visual",
@@ -166,13 +166,13 @@ def assign_mouse_paper_networks(M_var: pd.DataFrame, *, separate_aud: bool = Tru
                                  ) -> tuple[np.ndarray, list[str]]:
     """Assign each of 1864 mouse parcels to a paper-aligned network name.
 
-    Uses HOMER's PAIRID_TO_NETWORK (Garin 21 anchor inheritance), then maps the
-    HOMER name to the paper's naming via HOMER_NET_TO_PAPER_MOUSE.
+    Uses OTTER's PAIRID_TO_NETWORK (Garin 21 anchor inheritance), then maps the
+    OTTER name to the paper's naming via OTTER_NET_TO_PAPER_MOUSE.
     """
     idx_m = get_anchor_index(M_var)
-    homer_net_ids = assign_networks(M_var, idx_m)  # int into NETWORKS
-    homer_net_names = [NETWORKS[i] for i in homer_net_ids]
-    paper_names = [HOMER_NET_TO_PAPER_MOUSE[n] for n in homer_net_names]
+    otter_net_ids = assign_networks(M_var, idx_m)  # int into NETWORKS
+    otter_net_names = [NETWORKS[i] for i in otter_net_ids]
+    paper_names = [OTTER_NET_TO_PAPER_MOUSE[n] for n in otter_net_names]
 
     # Same paper-aligned name set as human (extended with mouse-only Brainstem,
     # Frontoparietal which the paper does not include).

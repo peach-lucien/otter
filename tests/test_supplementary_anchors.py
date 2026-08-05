@@ -1,17 +1,17 @@
-"""Tests for homer.data.supplementary_anchors."""
+"""Tests for otter.data.supplementary_anchors."""
 from __future__ import annotations
 
 import numpy as np
 import pandas as pd
 import pytest
 
-from homer.data.supplementary_anchors import (
+from otter.data.supplementary_anchors import (
     SuppAnchorEntry,
     parse_supplementary_anchors_config,
     apply_supplementary_anchors,
     summarize_supplementary_anchors,
 )
-from homer.data.anchors import get_anchor_index
+from otter.data.anchors import get_anchor_index
 
 
 def _make_fake_var(n: int, n_anchors: int = 4, anchor_xyz=None) -> pd.DataFrame:

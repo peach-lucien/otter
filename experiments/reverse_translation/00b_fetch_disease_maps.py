@@ -4,7 +4,7 @@ disease_maps/<disease>.nii.gz. Reuses the exact machinery of 00_fetch_maps.py (s
 Neurosynth v7 database, same association-test map), just with disease terms.
 
 Run (after 00_fetch_maps.py has downloaded the Neurosynth db once):
-    cd homer && python experiments/reverse_translation/00b_fetch_disease_maps.py
+    cd otter && python experiments/reverse_translation/00b_fetch_disease_maps.py
 Re-runnable; skips diseases whose map already exists.
 """
 from __future__ import annotations

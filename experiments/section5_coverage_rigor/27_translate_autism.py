@@ -30,8 +30,8 @@ from scipy.stats import rankdata, spearmanr
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import DATA_DIR, load_cached, load_pi, pi_provenance
-from homer.eval.nulls import _route_normalized, spin_null
+from otter.data import DATA_DIR, load_cached, load_pi, pi_provenance
+from otter.eval.nulls import _route_normalized, spin_null
 
 ENIGMA = ROOT / "data_external/enigma"
 PAGANI = Path(DATA_DIR) / "pagani"

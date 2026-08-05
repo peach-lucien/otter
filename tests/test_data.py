@@ -16,7 +16,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from homer.data import DATA_DIR, build_anndata, parse_t_table, load_cached, load_struct
+from otter.data import DATA_DIR, build_anndata, parse_t_table, load_cached, load_struct
 
 
 # Fixtures ---------------------------------------------------------------------
@@ -147,7 +147,7 @@ def test_voxel_indices_present_and_nonempty():
     """Voxel index lists are stripped before .h5ad write (anndata can't serialise
     ragged object arrays). Test against a fresh build instead.
     """
-    from homer.data import load_metadata, parse_t_table
+    from otter.data import load_metadata, parse_t_table
     for sp in ("mouse",):  # mouse is small/fast; sufficient as a smoke test
         try:
             meta = load_metadata(sp)

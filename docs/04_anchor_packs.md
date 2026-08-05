@@ -8,13 +8,13 @@ Packs are modular. Compose any subset, drop any subset. Default packs are layere
 
 Each pack reflects a **single published cross-species correspondence**. The mouse-side set comes from the DSURQE atlas overlay; the human-side set comes from canonical MNI cytoarchitectural centroids (Mai/Paxinos, Glasser HCP-MMP360, or atlas-specific references).
 
-This is *not* a generative method, packs encode what's already known about anatomy, not what HOMER discovered. The FGW solver then propagates the constraints through FC + SC structure to fill in the unanchored ~80 % of parcels.
+This is *not* a generative method, packs encode what's already known about anatomy, not what OTTER discovered. The FGW solver then propagates the constraints through FC + SC structure to fill in the unanchored ~80 % of parcels.
 
 ## Pid registry
 
 All citations have been verified against the literature (Consensus search, May 2026). Citation count + journal links provided per pack data sheet below.
 
-The **"In recommended π?"** column is authoritative against `src/homer/data/anchor_packs/registry.py`, the single source of truth for which packs are composed into the canonical coupling. **All 15 packs are in the recommended composition** (26 region-anchor entries): a multi-benchmark comparison showed the full set wins the TransBrain region-level homology benchmark decisively and ties for best on Beauchamp. A few packs carry a Beauchamp-metric trade-off (flagged in their data sheets below); they are kept because the broader evidence favours inclusion.
+The **"In recommended π?"** column is authoritative against `src/otter/data/anchor_packs/registry.py`, the single source of truth for which packs are composed into the canonical coupling. **All 15 packs are in the recommended composition** (26 region-anchor entries): a multi-benchmark comparison showed the full set wins the TransBrain region-level homology benchmark decisively and ties for best on Beauchamp. A few packs carry a Beauchamp-metric trade-off (flagged in their data sheets below); they are kept because the broader evidence favours inclusion.
 
 | pid range | Pack | In recommended π? | Primary reference |
 |---|---|---|---|
@@ -115,7 +115,7 @@ The **"In recommended π?"** column is authoritative against `src/homer/data/anc
   - [Preuss 1995, *J Cognitive Neuroscience*](https://consensus.app/papers/details/2e000a3af07f508489ac7ba2f68c68dc/), "Do Rats Have Prefrontal Cortex? The Rose-Woolsey-Akert Program Reconsidered" (684 cit). DOI: 10.1162/jocn.1995.7.1.1. **Argues against rodent dlPFC homology.**
   - Laubach 2018, *eNeuro*, "What, If Anything, Is Rodent Prefrontal Cortex?" (351 cit). Modern continuation of debate.
 - **pid 45. OFC**: Mouse Orbital area lateral (21 parcels) ↔ Human OFC BA11/47 at MNI(±25, 35, −15) r=10 mm (8 parcels). High confidence.
-- **pid 46, dlPFC (contested, opt-in)**: Mouse Prelimbic (11 parcels) ↔ Human dlPFC BA9/46 at MNI(±40, 25, 35) r=10 mm (12 parcels). **Preuss 1995 argues rodents lack a true dlPFC; Carlén 2017 / Laubach 2018 argue functional homology.** This entry is **excluded from the recommended composition by default**, the homology is contested and HOMER's own Schaeffer et al. 2020 falsification test contradicts it (forcing the anchor routes 23 % of mouse-MFC mass to dlPFC by construction). Pass `build_lateral_pfc_region_anchors(..., include_dlpfc=True)` to add it for ablations.
+- **pid 46, dlPFC (contested, opt-in)**: Mouse Prelimbic (11 parcels) ↔ Human dlPFC BA9/46 at MNI(±40, 25, 35) r=10 mm (12 parcels). **Preuss 1995 argues rodents lack a true dlPFC; Carlén 2017 / Laubach 2018 argue functional homology.** This entry is **excluded from the recommended composition by default**, the homology is contested and OTTER's own Schaeffer et al. 2020 falsification test contradicts it (forcing the anchor routes 23 % of mouse-MFC mass to dlPFC by construction). Pass `build_lateral_pfc_region_anchors(..., include_dlpfc=True)` to add it for ablations.
 - **Lifts**: Neither OFC nor dlPFC has a Beauchamp validation pair, purely anatomical-credibility supervision.
 - **Off-target**: None measurable.
 
@@ -160,7 +160,7 @@ The **"In recommended π?"** column is authoritative against `src/homer/data/anc
   - [Burwell et al. 1995, *Hippocampus*](https://consensus.app/papers/details/c76cb6a4230b5090b0c27d6b1685c7aa/), canonical rat-monkey perirhinal/postrhinal anatomy review (544 citations). DOI: 10.1002/hipo.450050503. Established the rodent perirhinal–postrhinal nomenclature and primate homology.
   - Kealy & Commins 2011, *Progress in Neurobiology*, rat perirhinal anatomy/physiology review (123 cit). DOI: 10.1016/j.pneurobio.2011.03.002.
 - **pid 55**: Mouse Perirhinal area (6 parcels) ↔ Human perirhinal cortex at MNI(±35, −10, −30) r=10 mm (6 parcels).
-- **Lifts**: No perirhinal validation pair in Beauchamp. Completes HOMER's MTL coverage (hippocampal + entorhinal + perirhinal).
+- **Lifts**: No perirhinal validation pair in Beauchamp. Completes OTTER's MTL coverage (hippocampal + entorhinal + perirhinal).
 - **Off-target**: None detected.
 - **Value**: anatomical-credibility supervision for memory researchers studying object-recognition / familiarity memory.
 
@@ -201,15 +201,15 @@ The **"In recommended π?"** column is authoritative against `src/homer/data/anc
 ## Composition recipe
 
 The recommended π is composed from the `default=True` packs in the registry
-(`src/homer/data/anchor_packs/registry.py`), currently all 15 packs
+(`src/otter/data/anchor_packs/registry.py`), currently all 15 packs
 (26 region-anchor entries). Use `build_default_pack_entries` rather than
 re-listing the builders by hand:
 
 ```python
 import numpy as np
-from homer.data import load_cached
-from homer.data.anchor_packs import build_default_pack_entries
-from homer.models import MultimodalFGW
+from otter.data import load_cached
+from otter.data.anchor_packs import build_default_pack_entries
+from otter.models import MultimodalFGW
 
 M, _ = load_cached("mouse", cache_dir="outputs/anndata")
 H, _ = load_cached("human", cache_dir="outputs/anndata")
@@ -246,7 +246,7 @@ The soft default gives the same argmax as hard, with better-calibrated probabili
 
 **The problem**: DSURQE doesn't expose some well-conserved cross-species structures as labels (habenula, locus coeruleus, substantia nigra, VTA, claustrum, raphe nuclei). For each, we know the cross-species homology is real and published (Aizawa 2011 habenula; Manger 2021 LC; Krashia 2017 SN/VTA; Smith 2018 claustrum), but we can't get a mouse-side parcel set via DSURQE label lookup.
 
-**The workaround**: ``homer.data.anchor_packs._dsurqe.mouse_parcels_in_mouse_sphere``, symmetric to the human-side helper. Pass a centroid in M_var coords + radius; get back the mouse parcels in that vicinity. Lets you build packs without going through DSURQE labels.
+**The workaround**: ``otter.data.anchor_packs._dsurqe.mouse_parcels_in_mouse_sphere``, symmetric to the human-side helper. Pass a centroid in M_var coords + radius; get back the mouse parcels in that vicinity. Lets you build packs without going through DSURQE labels.
 
 **What it does and doesn't deliver**:
 
@@ -275,4 +275,4 @@ For brainstem/midbrain nuclei (LC, habenula, SN, VTA, claustrum), the verificati
 
 ## Adding a new pack
 
-See [06_extending.md](06_extending.md) for the recipe. Pattern: pick a pid range ≥ 47 (so it doesn't clash with existing packs), drop a new module into `src/homer/data/anchor_packs/`, expose `build_<name>_region_anchors(M_var, H_var)`, add an integration test.
+See [06_extending.md](06_extending.md) for the recipe. Pattern: pick a pid range ≥ 47 (so it doesn't clash with existing packs), drop a new module into `src/otter/data/anchor_packs/`, expose `build_<name>_region_anchors(M_var, H_var)`, add an integration test.

@@ -30,7 +30,7 @@ whole-brain values alongside, so the size of the change is visible rather than s
 modify either existing script or their logs.
 
 Usage:
-    cd homer && PYTHONPATH=src python experiments/hodge_2019_cortical_layers/04_marker_like_for_like.py
+    cd otter && PYTHONPATH=src python experiments/hodge_2019_cortical_layers/04_marker_like_for_like.py
 
 Writes: outputs/logs/hodge_markers_like_for_like.json
 """
@@ -46,10 +46,10 @@ from scipy.stats import pearsonr
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance                    # noqa: E402
-from homer.data.atlas_regions import (                                        # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance                    # noqa: E402
+from otter.data.atlas_regions import (                                        # noqa: E402
     ATLAS_PATHS, assign_atlas_labels, assign_atlas_labels_with_hemisphere)
-from homer.eval.nulls import translation_spin_null, _route_normalized         # noqa: E402
+from otter.eval.nulls import translation_spin_null, _route_normalized         # noqa: E402
 
 # Same seven markers, same layer assignment, as 01_layer_marker_validation.py
 MARKERS = [("Cux1", "L2/3 upper"), ("Cux2", "L2/3 upper"), ("Satb2", "L2/3 upper"),

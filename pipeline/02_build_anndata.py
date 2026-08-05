@@ -1,6 +1,6 @@
 """Build & cache AnnData for both species.
 
-Run from homer/ root:
+Run from otter/ root:
     PYTHONPATH=src python scripts/build_anndata.py [--species human|mouse|both]
 
 Outputs:
@@ -22,7 +22,7 @@ THIS = Path(__file__).resolve()
 ROOT = THIS.parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import build_anndata  # noqa: E402
+from otter.data import build_anndata  # noqa: E402
 
 CACHE = ROOT / "outputs" / "anndata"
 LOGS = ROOT / "outputs" / "logs"

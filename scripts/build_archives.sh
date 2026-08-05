@@ -31,7 +31,7 @@ REPRODUCE=(
   outputs/coupling/pi_canonical.npy
   outputs/coupling/pi_canonical_sharp.npy
   outputs/coupling/trust_multisource_canonical.npz
-  # HOMER-generated (we own these), all coupling files the notebooks +
+  # OTTER-generated (we own these), all coupling files the notebooks +
   # experiments load (recommended pi, strict pi, ablation variants, trust maps).
   outputs/coupling/pi_fc_plus_SC_with_all_packs.npy
   outputs/coupling/pi_fc_plus_SC.npy

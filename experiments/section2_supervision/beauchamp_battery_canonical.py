@@ -21,8 +21,8 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 BBspec = importlib.util.spec_from_file_location("bb", Path(__file__).resolve().parent / "beauchamp_battery.py")
 BB = importlib.util.module_from_spec(BBspec); BBspec.loader.exec_module(BB)
-from homer.data import load_cached, load_pi
-from homer.data.anchors import get_anchor_index
+from otter.data import load_cached, load_pi
+from otter.data.anchors import get_anchor_index
 EPS = 0.05
 XYZW = 0.25
 
@@ -55,8 +55,8 @@ def main():
         return
 
     import time
-    from homer.data.anchor_packs import build_default_pack_entries
-    from homer.models import MultimodalFGW
+    from otter.data.anchor_packs import build_default_pack_entries
+    from otter.models import MultimodalFGW
     CACHE = ROOT / "outputs/logs/beauchamp_metric_battery_loro_canonical.json"
     GUARD = 34.0; t0 = time.time()
     costs = np.load(ROOT / "outputs/anndata/full_costs.npz")

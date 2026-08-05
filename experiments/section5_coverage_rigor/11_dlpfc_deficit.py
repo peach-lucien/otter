@@ -4,7 +4,7 @@
 The retired §5 claimed a smooth sensorimotor->association coverage GRADIENT. It is not a
 gradient. Coverage is roughly flat across cortex (every myelin decile within +-0.25 SD) with
 one exception: Yeo-17 network Control B = dorsolateral / rostrolateral prefrontal cortex, which
-is under-covered by ~1.2 SD. See homer-section5-dlpfc memory and 08_anchorfree_control.py for
+is under-covered by ~1.2 SD. See otter-section5-dlpfc memory and 08_anchorfree_control.py for
 why the gradient framing failed (log-column-mass is an eps-amplified transport cost, coverage
 L/R reliability is only 0.22, and the tertile contrast was carried by a single anomalous
 myelin decile that turns out to be this same dlPFC territory).
@@ -40,7 +40,7 @@ membership / myelin (symmetric). That configuration is calibrated (5.5% FPR). Do
 average coverage before spinning: that makes both maps symmetric and the whole-brain spin null
 then over-rejects (37% FPR). See the memory.
 
-Run:  cd homer && PYTHONPATH=src python experiments/section5_coverage_rigor/11_dlpfc_deficit.py
+Run:  cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/11_dlpfc_deficit.py
 Writes: outputs/logs/section5_dlpfc_deficit.json
 """
 from __future__ import annotations
@@ -57,9 +57,9 @@ from scipy.stats import spearmanr
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached, load_pi, pi_provenance        # noqa: E402
-from homer.data.anchors import get_anchor_index                   # noqa: E402
-from homer.eval.nulls import _haar_rotation                       # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance        # noqa: E402
+from otter.data.anchors import get_anchor_index                   # noqa: E402
+from otter.eval.nulls import _haar_rotation                       # noqa: E402
 
 N_SPIN = 2000
 SEED = 0

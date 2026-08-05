@@ -11,7 +11,7 @@ some human cortex integrates several mouse regions. We test whether this converg
 is organised along the sensorimotor->association (myelin) axis with the repo's spin
 null, and whether convergence tracks (low) coverage.
 
-Run: cd homer && PYTHONPATH=src python experiments/section5_coverage_rigor/04_convergence_asymmetry_spin.py
+Run: cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/04_convergence_asymmetry_spin.py
 Writes outputs/logs/section5_convergence_asymmetry.json
 """
 from __future__ import annotations
@@ -21,8 +21,8 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance
-from homer.eval.nulls import spin_null, _haar_rotation
+from otter.data import load_cached, load_pi, pi_provenance
+from otter.eval.nulls import spin_null, _haar_rotation
 from scipy.spatial import cKDTree
 from scipy.stats import spearmanr
 
@@ -63,9 +63,9 @@ def main():
     print(f"reverse eff sources: mean {eff_sources.mean():.2f} median {np.median(eff_sources):.2f}")
 
     myelin_reg = {}
-    with open(DATA / "fulcher_2019_gradients/human_myelinmap_schaefer400_HOMERorder.csv") as f:
+    with open(DATA / "fulcher_2019_gradients/human_myelinmap_schaefer400_OTTERorder.csv") as f:
         for row in csv.DictReader(f):
-            myelin_reg[int(row["homer_region_id"])] = float(row["t1t2_myelin"])
+            myelin_reg[int(row["otter_region_id"])] = float(row["t1t2_myelin"])
     myelin = np.array([myelin_reg.get(r, np.nan) for r in node_region])
 
     m = np.isfinite(myelin)

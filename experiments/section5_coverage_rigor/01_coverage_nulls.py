@@ -3,7 +3,7 @@
 The manuscript's Fig 5b reports the sensorimotor->association coverage gap under a
 *permuted-axis* null (shuffle the myelin labels), which does NOT preserve spatial
 autocorrelation and therefore over-states significance (p = 3.4e-7). Here we re-test
-the SAME statistic with `homer.eval.nulls.spin_null` (Alexander-Bloch / Vazquez-
+the SAME statistic with `otter.eval.nulls.spin_null` (Alexander-Bloch / Vazquez-
 Rodriguez), which rotates parcel centroids on a sphere and so keeps spatial
 smoothness in the null. Two statistics are reported:
 
@@ -19,7 +19,7 @@ On the RETIRED pre-warp coupling (pi_fc_plus_SC_with_all_packs.npy) the tertile 
 contrast" note in this file described. It does not survive the canonical coupling. Do
 not reinstate the tertile contrast as a positive result without re-deriving it here.
 
-Run: cd homer && PYTHONPATH=src python experiments/section5_coverage_rigor/01_coverage_nulls.py
+Run: cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/01_coverage_nulls.py
 Writes outputs/logs/section5_coverage_nulls.json
 """
 from __future__ import annotations
@@ -29,8 +29,8 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance
-from homer.eval.nulls import spin_null, _haar_rotation
+from otter.data import load_cached, load_pi, pi_provenance
+from otter.eval.nulls import spin_null, _haar_rotation
 
 DATA = ROOT / "data_external"
 N_SPIN = 1000
@@ -39,7 +39,7 @@ SEED = 0
 
 def tertile_gap_spin(cov, axis, xyz, n_trials=N_SPIN, seed=SEED):
     """Spin p for the (high-axis tertile - low-axis tertile) coverage gap, using
-    the same Haar-rotation scheme as homer.eval.nulls.spin_null. Tertiles are fixed
+    the same Haar-rotation scheme as otter.eval.nulls.spin_null. Tertiles are fixed
     by `axis`; only `cov` is spun, so the null preserves spatial autocorrelation."""
     from scipy.spatial import cKDTree
     o = np.argsort(axis); t = len(o) // 3
@@ -69,9 +69,9 @@ def main():
 
     # sensorimotor->association axis: HCP T1w/T2w myelin per Schaefer region
     myelin_reg = {}
-    with open(DATA / "fulcher_2019_gradients/human_myelinmap_schaefer400_HOMERorder.csv") as f:
+    with open(DATA / "fulcher_2019_gradients/human_myelinmap_schaefer400_OTTERorder.csv") as f:
         for row in csv.DictReader(f):
-            myelin_reg[int(row["homer_region_id"])] = float(row["t1t2_myelin"])
+            myelin_reg[int(row["otter_region_id"])] = float(row["t1t2_myelin"])
     myelin = np.array([myelin_reg.get(r, np.nan) for r in node_region])
 
     ctx = np.isfinite(myelin)

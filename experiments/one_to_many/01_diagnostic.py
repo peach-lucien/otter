@@ -5,7 +5,7 @@ QUESTION
 --------
 Which mouse structures correspond to >=2 GENUINELY DISTINCT human structures
 (one-to-many)? The textbook case is mouse caudoputamen (CP) -> human caudate AND
-putamen. If HOMER recovers that and surfaces further, non-obvious, connectionally
+putamen. If OTTER recovers that and surfaces further, non-obvious, connectionally
 coherent splits that a single-assignment method cannot represent, it is the
 demonstrated payoff of the probabilistic parcel-level coupling.
 
@@ -48,7 +48,7 @@ CONVERGENCE (reverse view, reported not gated)
     name this mouse structure as their dominant mouse origin (column-normalised pi).
 
 Run (needs transbrain for the Brainnetome atlas, as in the Fig. 4 dumps):
-    cd homer && PYTHONPATH=src python experiments/one_to_many/01_diagnostic.py
+    cd otter && PYTHONPATH=src python experiments/one_to_many/01_diagnostic.py
 Read-only; writes outputs/logs/one_to_many_diagnostic.json (pi-provenance stamped).
 """
 from __future__ import annotations
@@ -58,7 +58,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance  # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance  # noqa: E402
 
 MIN_PARCELS = 10
 D_ONE2MANY = 1.8       # effective number of connectionally-distinct targets
@@ -81,10 +81,10 @@ def _mouse_acr():
 def _anchored():
     try:
         M, _ = load_cached("mouse", cache_dir=ROOT / "outputs/anndata")
-        from homer.data.anchors import get_anchor_index
+        from otter.data.anchors import get_anchor_index
         acr = _mouse_acr(); out = {acr[int(p)] for p in get_anchor_index(M.var).pos}
         try:
-            from homer.data.region_anchors import build_default_pack_entries
+            from otter.data.region_anchors import build_default_pack_entries
             for e in build_default_pack_entries(M.var, None, atlas_root=ROOT):
                 for i in getattr(e, "mouse_parcels", []) or []:
                     out.add(acr[int(i)])

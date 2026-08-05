@@ -1,11 +1,11 @@
-"""HOMER coverage vs a battery of published hierarchy / evolution maps.
+"""OTTER coverage vs a battery of published hierarchy / evolution maps.
 
 Each map is fetched from neuromaps, resampled to fsLR-32k by nearest-neighbour on the
-sphere (workbench-free), parcellated into Schaefer-400, and correlated against HOMER
+sphere (workbench-free), parcellated into Schaefer-400, and correlated against OTTER
 coverage with the repo's spin null over parcel centroids.
 
 Coverage per Schaefer region is the MASS-NORMALISED MEAN of the pi column-sums, not the
-sum: summed coverage scales with the number of HOMER parcels inside a region (rho = 0.35
+sum: summed coverage scales with the number of OTTER parcels inside a region (rho = 0.35
 with parcel count), which is a size confound rather than a biological signal. Every
 conclusion in the battery is unchanged under mass-normalisation, but the rho values move
 slightly, so this is the version the figures must be built from.
@@ -25,7 +25,7 @@ implementation 37_fig5_gallery.py) against these maps, computed live; it reads o
 MASS-coverage battery, kept for the record and now on the canonical coupling.
 
 Requires: neuromaps, netneurotools (only when re-fetching the maps).
-Run: cd homer && PYTHONPATH=src python experiments/section5_coverage_rigor/07_evolution_battery.py
+Run: cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/07_evolution_battery.py
      add --refetch-maps to re-download the published annotations instead of reusing them.
 Writes outputs/logs/section5_evolution_battery.json
 """
@@ -40,8 +40,8 @@ from scipy.stats import spearmanr
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance   # noqa: E402
-from homer.eval.nulls import spin_null               # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance   # noqa: E402
+from otter.eval.nulls import spin_null               # noqa: E402
 
 N_SPIN = 1000
 OUT = ROOT / "outputs/logs/section5_evolution_battery.json"

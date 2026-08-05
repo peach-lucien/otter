@@ -1,4 +1,4 @@
-"""HOMER × Balsters 2020, rodent medial frontal cortex divergence (falsification test).
+"""OTTER × Balsters 2020, rodent medial frontal cortex divergence (falsification test).
 
 [Balsters, Zerbi, Sallet, Wenderoth & Mars 2020, PNAS](https://doi.org/10.1073/pnas.2003181117),
 "Divergence of rodent and primate medial frontal cortex functional
@@ -18,7 +18,7 @@ NOT send mouse MFC:
           cortex, and **avoids** dorsolateral PFC (BA9/46).
   FAIL, mouse MFC routes confidently onto human dlPFC.
 
-HOMER already encodes a falsifiable design choice here: the Garin point
+OTTER already encodes a falsifiable design choice here: the Garin point
 anchor for mPFC pairs mouse mPFC with human *medial* frontal cortex, and
 the contested mouse-Prelimbic ↔ human-dlPFC homology (Carlén 2017 vs
 Preuss 1995) is shipped as the **opt-in** `lateral_pfc` pack, not in the
@@ -33,9 +33,9 @@ choice. We test three couplings:
   * `pi_fc_plus_SC_with_lateral_pfc`, adds the contested Prelimbic→dlPFC anchor
     (pre-warp variant, so compare it against the pre-warp row)
 
-Note on species: Balsters used rat + marmoset + human; HOMER is mouse +
+Note on species: Balsters used rat + marmoset + human; OTTER is mouse +
 human. Rodent MFC (anterior cingulate + prelimbic + infralimbic) is the
-comparable structure. The test compares HOMER's π against Balsters'
+comparable structure. The test compares OTTER's π against Balsters'
 *published directional conclusion*, not their FC matrices, the rat/mouse
 and marmoset/human mismatches make re-routing their data unjustified.
 """
@@ -50,7 +50,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached, load_pi, pi_provenance
+from otter.data import load_cached, load_pi, pi_provenance
 
 ANN = ROOT / "outputs" / "anndata"
 COUP = ROOT / "outputs" / "coupling"
@@ -96,7 +96,7 @@ def mass_fractions(pi: np.ndarray, rows: np.ndarray,
 
 def main():
     print("=" * 80)
-    print("HOMER × Balsters 2020, rodent MFC divergence (falsification test)")
+    print("OTTER × Balsters 2020, rodent MFC divergence (falsification test)")
     print("=" * 80)
 
     # ---- human ROIs ---------------------------------------------------------

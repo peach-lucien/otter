@@ -35,7 +35,7 @@
     "transversetemporal",
     "insula"
   ],
-  "homer_generic_dk": [
+  "otter_generic_dk": [
     1.4669452590566427e-05,
     -3.1650810423509866e-05,
     -4.540482387355264e-05,
@@ -143,5 +143,5 @@
       "in_gene_sets": false
     }
   },
-  "note": "HOMER generic = mean of per-disorder routed maps; transdiagnostic avg = mean ENIGMA Cohen's d across ASD/SCZ/BD/ADHD. Spin null over DK centroids."
+  "note": "OTTER generic = mean of per-disorder routed maps; transdiagnostic avg = mean ENIGMA Cohen's d across ASD/SCZ/BD/ADHD. Spin null over DK centroids."
 }

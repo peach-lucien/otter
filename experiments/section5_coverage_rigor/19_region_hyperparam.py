@@ -36,8 +36,8 @@ BASE = dict(use_sc=True, sc_weight=0.3, fc_weight=0.7, xyz_weight=0.5,
 
 def refit(epsilon, xyz_weight, out_path):
     """Fit an anchor-free MultimodalFGW coupling and cache it."""
-    from homer.data import load_cached
-    from homer.models import MultimodalFGW
+    from otter.data import load_cached
+    from otter.models import MultimodalFGW
     M, _ = load_cached('mouse', cache_dir='outputs/anndata')
     H, _ = load_cached('human', cache_dir='outputs/anndata')
     costs = np.load('outputs/anndata/full_costs.npz')
@@ -78,7 +78,7 @@ def main():
     t0 = time.time()
     sc = BeauchampScorer()
 
-    from homer.data import load_pi
+    from otter.data import load_pi
     prod = sc.score(load_pi())
     prod_agg_top1 = prod['__aggregate__']['top1']
 

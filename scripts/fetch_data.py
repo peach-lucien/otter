@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Fetch HOMER's data + artifacts from the Zenodo archive (CLI).
+"""Fetch OTTER's data + artifacts from the Zenodo archive (CLI).
 
     python scripts/fetch_data.py                 # reproduce bundle (default)
     python scripts/fetch_data.py --tier raw      # full raw inputs (for a rebuild)
     python scripts/fetch_data.py --tier all      # both
     python scripts/fetch_data.py --check         # report what's present
 
-This is a thin wrapper around ``homer.data.fetch``; the same logic also runs
+This is a thin wrapper around ``otter.data.fetch``; the same logic also runs
 automatically (with a prompt) when a library call needs data that isn't present.
 See DATA.md for what each tier contains.
 """
@@ -18,7 +18,7 @@ _SRC = Path(__file__).resolve().parents[1] / "src"
 if _SRC.exists() and str(_SRC) not in sys.path:
     sys.path.insert(0, str(_SRC))
 
-from homer.data.fetch import main  # noqa: E402
+from otter.data.fetch import main  # noqa: E402
 
 # The coupling load_pi() returns. Checked after fetching so that an incomplete or stale archive
 # reports itself here, rather than surfacing as a bare FileNotFoundError in the first cell of a

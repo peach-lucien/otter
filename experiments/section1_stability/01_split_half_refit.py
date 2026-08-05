@@ -13,7 +13,7 @@ Requires outputs/splithalf/*.npz from pipeline/02b_build_splithalf_fc.py.
 Writes outputs/logs/out_a2_splithalf.json.
 
     conda activate retune
-    cd homer && python3 experiments/section1_stability/01_split_half_refit.py
+    cd otter && python3 experiments/section1_stability/01_split_half_refit.py
 """
 from __future__ import annotations
 
@@ -24,12 +24,12 @@ from pathlib import Path
 
 import numpy as np
 
-ROOT = Path(__file__).resolve().parents[2]                       # .../homer
+ROOT = Path(__file__).resolve().parents[2]                       # .../otter
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.costs.normalisation import normalise_cost                          # noqa: E402
-from homer.costs.relational import correlation_distance                       # noqa: E402
-from homer.repro import (anchor_warped_xyz, beauchamp_scorer, fit_coupling,   # noqa: E402
+from otter.costs.normalisation import normalise_cost                          # noqa: E402
+from otter.costs.relational import correlation_distance                       # noqa: E402
+from otter.repro import (anchor_warped_xyz, beauchamp_scorer, fit_coupling,   # noqa: E402
                          load_canonical, load_inputs, refit_provenance, stamp)
 
 SPLITHALF = ROOT / "outputs" / "splithalf"

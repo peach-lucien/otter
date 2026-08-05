@@ -24,11 +24,11 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached                                      # noqa: E402
-from homer.data.anchors import get_anchor_index                         # noqa: E402
-from homer.data.networks import NETWORKS, PAIRID_TO_NETWORK             # noqa: E402
-from homer.eval.full_space_metrics import full_space_metrics            # noqa: E402
-from homer.models import MultimodalFGW                                  # noqa: E402
+from otter.data import load_cached                                      # noqa: E402
+from otter.data.anchors import get_anchor_index                         # noqa: E402
+from otter.data.networks import NETWORKS, PAIRID_TO_NETWORK             # noqa: E402
+from otter.eval.full_space_metrics import full_space_metrics            # noqa: E402
+from otter.models import MultimodalFGW                                  # noqa: E402
 
 ANN  = ROOT / "outputs" / "anndata"
 LOG  = ROOT / "outputs" / "logs"; LOG.mkdir(parents=True, exist_ok=True)

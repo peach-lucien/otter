@@ -1,4 +1,4 @@
-"""Per-mouse-model subtype translation through HOMER's π.
+"""Per-mouse-model subtype translation through OTTER's π.
 
 The per-model hyper/hypo subtype labels come from the Gozzi lab's clean data
 (`data_crossspecies/pagani/`); see `DATA_VALIDATION_2026-06-10.md`.
@@ -40,7 +40,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "autism_subtypes"))
 
-from homer.data import DATA_DIR, load_cached  # noqa: E402
+from otter.data import DATA_DIR, load_cached  # noqa: E402
 
 st = import_module("04_subtype_translation")
 ncv = import_module("01_network_crossvalidation")
@@ -61,7 +61,7 @@ _SOURCE_DATA_MSG = (
     "This experiment depends on raw Gozzi-lab Pagani 2026 inputs under\n"
     "  data_crossspecies/pagani/\n"
     "which are third-party source data and are NOT part of the public data\n"
-    "release (the Zenodo bundles ship HOMER's processed artifacts, not this raw\n"
+    "release (the Zenodo bundles ship OTTER's processed artifacts, not this raw\n"
     "source). It is a maintainer / source-data-only experiment, contact the\n"
     "authors for access. See experiments/pagani_2026_per_model/README.md.\n"
 )

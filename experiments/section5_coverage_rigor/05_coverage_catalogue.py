@@ -10,7 +10,7 @@ uncovered_by_region) by MASS-NORMALISED coverage = mean mouse π-mass per parcel
 which is not parcel-count-biased. Both metrics are reported side by side so the
 V1-type artefact is visible.
 
-Run: cd homer && PYTHONPATH=src python experiments/section5_coverage_rigor/05_coverage_catalogue.py
+Run: cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/05_coverage_catalogue.py
 Writes outputs/logs/section5_coverage_catalogue.json
 """
 from __future__ import annotations
@@ -20,8 +20,8 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi
-from homer.data.anchors import get_anchor_index
+from otter.data import load_cached, load_pi
+from otter.data.anchors import get_anchor_index
 
 
 def nearest_garin_pid(var):

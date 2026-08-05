@@ -36,8 +36,8 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached                                      # noqa: E402
-from homer.eval.trust_score import (                                    # noqa: E402
+from otter.data import load_cached                                      # noqa: E402
+from otter.eval.trust_score import (                                    # noqa: E402
     compute_trust_score,
     regional_empirical_accuracy,
     assign_regional_trust,

@@ -1,16 +1,16 @@
-"""ABIDE per-subject HOMER-template subtype scoring.
+"""ABIDE per-subject OTTER-template subtype scoring.
 
-Tests whether HOMER's mouse → human translation of Pagani's per-subtype
+Tests whether OTTER's mouse → human translation of Pagani's per-subtype
 network maps can distinguish ASD subjects from controls at the individual
 level, and whether ASD subjects split into hyper/hypo subtypes by their
-projection onto the HOMER templates.
+projection onto the OTTER templates.
 
 This does NOT re-implement Pagani's clustering pipeline. We just:
-  1. Build two HOMER-translated human templates (one per Pagani subtype) by
+  1. Build two OTTER-translated human templates (one per Pagani subtype) by
      routing the mouse 9×9 network perturbation matrices through π.
   2. For each ABIDE subject, compute a per-parcel FC strength profile,
      subtract site-matched control mean to get a perturbation pattern.
-  3. Score subject against (hyper - hypo) HOMER template.
+  3. Score subject against (hyper - hypo) OTTER template.
   4. Test: ASD vs control on that score; within-ASD bimodality.
 
 Disk / time:
@@ -49,7 +49,7 @@ except ImportError:
 # explicitly set it, never on by default. Must monkey-patch BOTH stdlib ssl
 # (used by urllib) AND requests.Session (used by nilearn), since they have
 # independent SSL configurations.
-if os.environ.get("HOMER_ALLOW_INSECURE_SSL", "").lower() in {"1", "true", "yes"}:
+if os.environ.get("OTTER_ALLOW_INSECURE_SSL", "").lower() in {"1", "true", "yes"}:
     import ssl
     ssl._create_default_https_context = ssl._create_unverified_context
     # Patch requests.Session BEFORE nilearn imports, set verify=False as
@@ -68,7 +68,7 @@ if os.environ.get("HOMER_ALLOW_INSECURE_SSL", "").lower() in {"1", "true", "yes"
         kw.setdefault("verify", False)
         return _orig_send(self, request, **kw)
     requests.Session.send = _patched_send
-    warnings.warn("HOMER_ALLOW_INSECURE_SSL is set. SSL verification "
+    warnings.warn("OTTER_ALLOW_INSECURE_SSL is set. SSL verification "
                   "is DISABLED for this run. Re-enable for production use.")
 
 import numpy as np
@@ -79,7 +79,7 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "autism_subtypes"))
 
-from homer.data import load_cached
+from otter.data import load_cached
 
 ABIDE_DERIVATIVE = "rois_aal"   # was rois_cc400; CC400 atlas host (NITRC) has
                                  # an SSL/hostname problem as of 2026. AAL-116
@@ -87,9 +87,9 @@ ABIDE_DERIVATIVE = "rois_aal"   # was rois_cc400; CC400 atlas host (NITRC) has
                                  # works against a different (GIN/CNRS) host.
 
 
-def build_homer_templates(mouse_M_hypo, mouse_M_hyper, mouse_pagani_net,
+def build_otter_templates(mouse_M_hypo, mouse_M_hyper, mouse_pagani_net,
                           n_mouse_nets, pi, kept_mask):
-    """Per-human-parcel HOMER templates for each subtype."""
+    """Per-human-parcel OTTER templates for each subtype."""
     def _intensity(M):
         Ma = np.abs(M)
         return Ma.sum(axis=0) + Ma.sum(axis=1) - np.diag(Ma)
@@ -103,8 +103,8 @@ def build_homer_templates(mouse_M_hypo, mouse_M_hyper, mouse_pagani_net,
     return _to_parcel(hypo_int) @ pi, _to_parcel(hyper_int) @ pi
 
 
-def map_cc400_to_homer_parcels(H_var, cc400_centroids):
-    """Nearest-HOMER-parcel index per CC400 parcel."""
+def map_cc400_to_otter_parcels(H_var, cc400_centroids):
+    """Nearest-OTTER-parcel index per CC400 parcel."""
     H_xyz = H_var[["x", "y", "z"]].to_numpy()
     sq_a = (H_xyz ** 2).sum(1, keepdims=True)
     sq_b = (cc400_centroids ** 2).sum(1, keepdims=True)
@@ -135,11 +135,11 @@ def main():
     out_dir = Path(args.out_dir); out_dir.mkdir(parents=True, exist_ok=True)
 
     print("=" * 80)
-    print("ABIDE per-subject HOMER-template subtype scoring")
+    print("ABIDE per-subject OTTER-template subtype scoring")
     print("=" * 80)
 
-    # ---- Step 1: HOMER templates ----
-    print("\nStep 1: building HOMER-translated templates from Pagani mouse matrices...")
+    # ---- Step 1: OTTER templates ----
+    print("\nStep 1: building OTTER-translated templates from Pagani mouse matrices...")
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs" / "anndata"))
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs" / "anndata"))
     pi = np.load(str(ROOT / "outputs" / "coupling" / "pi_fc_plus_SC_with_all_packs.npy"))
@@ -155,7 +155,7 @@ def main():
 
     M_hypo  = 0.5 * (data["mouse_hypo"]  + data["mouse_hypo"].T)
     M_hyper = 0.5 * (data["mouse_hyper"] + data["mouse_hyper"].T)
-    template_hypo, template_hyper = build_homer_templates(
+    template_hypo, template_hyper = build_otter_templates(
         M_hypo, M_hyper, mouse_pagani_net, len(mouse_pagani_names), pi, keep)
     template_delta = template_hyper - template_hypo
     template_z = (template_delta - template_delta.mean()) / (template_delta.std() + 1e-9)
@@ -183,11 +183,11 @@ def main():
             pheno = pheno[: args.n_subjects]
         print(f"  (limiting to first {args.n_subjects} for smoke test)")
 
-    # ---- Step 3: AAL atlas → HOMER mapping ----
+    # ---- Step 3: AAL atlas → OTTER mapping ----
     # (Switched from CC400 because cluster_roi.projects.nitrc.org has an SSL
     #  cert mismatch as of 2026 and nilearn's Craddock fetcher fails. AAL is
     #  hosted at www.gin.cnrs.fr which works reliably.)
-    print(f"\nStep 3: aligning AAL atlas → HOMER parcels...")
+    print(f"\nStep 3: aligning AAL atlas → OTTER parcels...")
     import nibabel as nib
     aal = ndatasets.fetch_atlas_aal(data_dir=args.abide_data_dir)
     aal_path = aal["maps"] if "maps" in aal else aal.maps
@@ -208,12 +208,12 @@ def main():
         valid_indices.append(lab)
     aal_centroids = np.array(centroids)
     print(f"  AAL parcels resolved: {len(aal_centroids)} (expected ~116)")
-    cc_to_homer = map_cc400_to_homer_parcels(H.var, aal_centroids)
+    cc_to_otter = map_cc400_to_otter_parcels(H.var, aal_centroids)
     cc_centroids = aal_centroids   # variable reused below
     n_h = pi.shape[1]
 
     # ---- Step 4: per-subject FC + template scoring ----
-    print("\nStep 4: per-subject scoring against HOMER templates...")
+    print("\nStep 4: per-subject scoring against OTTER templates...")
     site = _phenotypic_field(pheno, "SITE_ID").astype(str)
     dx = _phenotypic_field(pheno, "DX_GROUP").astype(int)
     subj_id = _phenotypic_field(pheno, "SUB_ID") if "SUB_ID" in (
@@ -266,7 +266,7 @@ def main():
     if modal_cols < len(cc_centroids):
         print(f"  trimming centroids to first {modal_cols} (ABIDE dropped some ROIs)")
         cc_centroids = cc_centroids[:modal_cols]
-        cc_to_homer = cc_to_homer[:modal_cols]
+        cc_to_otter = cc_to_otter[:modal_cols]
     elif modal_cols > len(cc_centroids):
         print(f"  WARN: timeseries has more columns ({modal_cols}) than atlas "
               f"centroids ({len(cc_centroids)}); this is unexpected.")
@@ -293,15 +293,15 @@ def main():
             np.fill_diagonal(fc, np.nan)
             per_cc_abs    = np.nanmean(np.abs(fc), axis=1)
             per_cc_signed = np.nanmean(fc, axis=1)
-        per_homer_abs    = np.zeros(n_h); per_homer_signed = np.zeros(n_h); cnt = np.zeros(n_h)
-        for i, hp in enumerate(cc_to_homer):
+        per_otter_abs    = np.zeros(n_h); per_otter_signed = np.zeros(n_h); cnt = np.zeros(n_h)
+        for i, hp in enumerate(cc_to_otter):
             if i >= len(per_cc_abs): break
-            per_homer_abs[hp]    += per_cc_abs[i]
-            per_homer_signed[hp] += per_cc_signed[i]
+            per_otter_abs[hp]    += per_cc_abs[i]
+            per_otter_signed[hp] += per_cc_signed[i]
             cnt[hp] += 1
         denom = np.maximum(cnt, 1)
-        subject_pat_abs[s]    = per_homer_abs / denom
-        subject_pat_signed[s] = per_homer_signed / denom
+        subject_pat_abs[s]    = per_otter_abs / denom
+        subject_pat_signed[s] = per_otter_signed / denom
         if (s + 1) % 100 == 0:
             print(f"    {s+1}/{len(rois)} processed (skipped: {skipped})")
     print(f"  total skipped: {skipped}/{len(rois)}")
@@ -402,7 +402,7 @@ def main():
         "n_valid":       int(valid.sum()),
         "n_asd":         int(asd.sum()),
         "n_control":     int(ctrl.sum()),
-        "homer_template_dim": int(n_h),
+        "otter_template_dim": int(n_h),
         "cc400_parcels": int(len(cc_centroids)),
         "by_feature": {k: {kk: vv for kk, vv in v.items()
                             if kk in {"asd_mean","asd_sd","ctrl_mean","ctrl_sd",
@@ -427,7 +427,7 @@ def main():
         df_out = pheno.copy()
     else:
         df_out = pd.DataFrame({k: pheno[k] for k in pheno.dtype.names})
-    df_out["homer_score"] = score
+    df_out["otter_score"] = score
     df_out["valid"] = valid
     df_out.to_csv(out_dir / "abide_per_subject_scores.csv", index=False)
     print(f"Wrote {out_dir/'abide_per_subject_scores.csv'}")

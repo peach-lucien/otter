@@ -3,7 +3,7 @@
 The per-marker test correlates each gene's smooth z-scored expression map
 mouse→human (mean r=+0.089, weak). Two problems make that the wrong question:
 single-gene maps are noisy, and any two smooth cortical maps share spatial
-autocorrelation. Here we ask sharper, HOMER-strong-mode questions:
+autocorrelation. Here we ask sharper, OTTER-strong-mode questions:
 
   1. CLASS CONTRASTS (magnitude-cancelling, like the Pagani contrast). Build a
      per-parcel class score (mean z over a class's markers) for both species and
@@ -31,8 +31,8 @@ from scipy.stats import pearsonr, hypergeom
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance      # noqa: E402
-from homer.eval.nulls import translation_spin_null, _route_normalized  # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance      # noqa: E402
+from otter.eval.nulls import translation_spin_null, _route_normalized  # noqa: E402
 
 CLASS_MARKERS = {
     "glutamatergic": ["Camk2a", "Slc17a7", "Slc17a6", "Grin1", "Grin2a", "Grin2b"],

@@ -25,7 +25,7 @@ Groups:
 Outputs a per-map table, a group contrast (median effN + label-permutation p), and the
 anxiosomatic-vs-dysphoric dissociation.
 
-Run: cd homer && PYTHONPATH=src python experiments/reverse_translation/04_modelability.py
+Run: cd otter && PYTHONPATH=src python experiments/reverse_translation/04_modelability.py
 Read-only; writes outputs/logs/reverse_translation_modelability.json
 """
 from __future__ import annotations
@@ -35,7 +35,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance      # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance      # noqa: E402
 
 _s = importlib.util.spec_from_file_location("rt01", ROOT / "experiments/reverse_translation/01_validate.py")
 rt01 = importlib.util.module_from_spec(_s); _s.loader.exec_module(rt01)

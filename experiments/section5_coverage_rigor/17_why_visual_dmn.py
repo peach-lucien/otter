@@ -21,7 +21,7 @@ from collections import defaultdict
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi                 # noqa: E402
+from otter.data import load_cached, load_pi                 # noqa: E402
 np.seterr(divide="ignore", invalid="ignore")
 
 

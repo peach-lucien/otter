@@ -4,7 +4,7 @@ The analyses added during the review rounds, ported from the scratch harness the
 in. Each writes a log under `outputs/logs/` that the manuscript cites, and each stamps that log with
 the coupling or the recipe that produced it.
 
-All of them import the fitting recipe from `homer.repro` rather than restating it, so an arm fitted
+All of them import the fitting recipe from `otter.repro` rather than restating it, so an arm fitted
 here is the same arm the figure scripts use.
 
 ## Order
@@ -56,7 +56,7 @@ the manuscript to agree with the re-run.
 A script that loads a coupling stamps the file it opened:
 
 ```python
-from homer.repro import provenance, stamp
+from otter.repro import provenance, stamp
 OUT.write_text(json.dumps(stamp(out, **provenance()), indent=2))
 ```
 
@@ -64,7 +64,7 @@ A script that fits its own coupling records the recipe and its measured distance
 because borrowing the released sha would claim an input the run never used:
 
 ```python
-from homer.repro import refit_provenance, stamp
+from otter.repro import refit_provenance, stamp
 OUT.write_text(json.dumps(stamp(out, **refit_provenance(pi, recipe=config)), indent=2))
 ```
 

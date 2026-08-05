@@ -1,15 +1,15 @@
 # TransBrain 2025, sibling-method benchmark
 
 A **methods-landscape** comparison rather than a validation "pass". It
-positions HOMER against the current state-of-the-art mouse↔human translator.
+positions OTTER against the current state-of-the-art mouse↔human translator.
 
 ## Why this experiment
 
 [Huang et al. 2025, Nature Methods](https://doi.org/10.1038/s41592-025-02961-3),
 [TransBrain](https://github.com/ibpshangzheng/transbrain), is a published
-mouse↔human phenotype-translation framework, a direct sibling of HOMER. It
+mouse↔human phenotype-translation framework, a direct sibling of OTTER. It
 works at **region level** (68-region mouse atlas; Brainnetome / DK / AAL human
-atlases) via graph embeddings + dual regression, where HOMER produces a soft
+atlases) via graph embeddings + dual regression, where OTTER produces a soft
 parcel-level coupling π via Fused Gromov-Wasserstein optimal transport. Two
 methods, different principles, this experiment asks how they compare.
 
@@ -19,13 +19,13 @@ methods, different principles, this experiment asks how they compare.
 
 **Part A. Homology benchmark.** TransBrain ships a literature-curated set of
 classic mouse↔human homologous region pairs (`homo_cortex.csv`,
-`homo_subcortex.csv`), a benchmark HOMER has never seen, independent of the
-Garin anchors and the Beauchamp set. Routing HOMER's π for the 17 scorable
+`homo_subcortex.csv`), a benchmark OTTER has never seen, independent of the
+Garin anchors and the Beauchamp set. Routing OTTER's π for the 17 scorable
 cortical mouse regions: the literature-homolog Brainnetome region lands in
-HOMER's **top-3 41 %** of the time (permuted-π null 4 %, p < 0.001) and top-5
+OTTER's **top-3 41 %** of the time (permuted-π null 4 %, p < 0.001) and top-5
 47 %, modest on a fine 127-region atlas. The resolution-fair metric is
-clearer: HOMER's predicted human centroid sits **25.3 mm** from the literature
-homolog vs **39.8 mm** for the null (p < 0.001). HOMER places mouse regions in
+clearer: OTTER's predicted human centroid sits **25.3 mm** from the literature
+homolog vs **39.8 mm** for the null (p < 0.001). OTTER places mouse regions in
 the right neighbourhood, and 25.3 mm is squarely within its own stated
 ~25–45 mm resolution, but does not pinpoint the exact Brainnetome parcel. The
 7-region subcortical benchmark comes out at chance.
@@ -33,7 +33,7 @@ the right neighbourhood, and 25.3 mm is squarely within its own stated
 **Part B. Head-to-head.** The same mouse phenotype translated by both methods,
 compared at Brainnetome-region level:
 
-| Phenotype | HOMER vs human | TransBrain vs human | HOMER ↔ TransBrain |
+| Phenotype | OTTER vs human | TransBrain vs human | OTTER ↔ TransBrain |
 |---|---:|---:|---:|
 | resting-fMRI gradient | \|r\| = 0.393 | \|r\| = 0.463 | \|r\| = 0.23 |
 | Magel2 autism pattern | | | r = 0.10 (maps); 0.05 (risk scores) |
@@ -45,9 +45,9 @@ diverge. The per-individual ASD risk-score workflow (TransBrain's own case 3,
 reproduced) gives near-zero concordance: the autism phenotype is noisy for
 both methods.
 
-**Assessment.** HOMER and TransBrain are different tools that agree
+**Assessment.** OTTER and TransBrain are different tools that agree
 only moderately (\|r\| ≈ 0.2–0.3). TransBrain is stronger for region-level
-phenotype translation, its home turf. HOMER's complementary contribution is a
+phenotype translation, its home turf. OTTER's complementary contribution is a
 *soft, parcel-level* coupling with per-parcel trust tiers and explicit anchor
 supervision. This experiment is best read as positioning rather than as a contest.
 
@@ -58,32 +58,32 @@ dig past the average.
 
 **Bidirectional cycle-consistency.** Round-tripping a phenotype
 mouse→human→mouse, an even-handed, ground-truth-free metric with no home-turf
-advantage. HOMER recovers the original at **0.98 / 0.95 / 0.97** (gradient, optogenetic
+advantage. OTTER recovers the original at **0.98 / 0.95 / 0.97** (gradient, optogenetic
 circuit, Magel2 autism pattern) versus **0.89 / 0.82 / 0.83** for TransBrain, both
 scored over the same 52 mouse regions in which the phenotype is measured.
 
 > ⚠️ **Corrected July 2026.** This previously read "0.81–0.91 for TransBrain". Those
-> numbers scored HOMER on the 52 regions its parcellation covers but TransBrain on all
+> numbers scored OTTER on the 52 regions its parcellation covers but TransBrain on all
 > 68 of `Config.MOUSE_REGIONS`, 16 of them **mean-filled** for the gradient. The two
 > were not comparable, and the error did not bias consistently: it inflated
 > TransBrain on the optogenetic map (0.82 → 0.91) and deflated it on the gradient
-> (0.89 → 0.87). Both are now scored on the identical region set. HOMER still leads all
+> (0.89 → 0.87). Both are now scored on the identical region set. OTTER still leads all
 > three; the margin is narrowest on the smooth gradient (+0.09) and widest on the two
-> focal maps (+0.13 each). HOMER's soft optimal-transport coupling is more internally
+> focal maps (+0.13 each). OTTER's soft optimal-transport coupling is more internally
 > coherent in both directions, which is a real strength of the method.
 
 **Optogenetic circuit → human cognition.** Reproducing TransBrain's Case 2: a
 mouse anterior-insula optogenetic circuit routed through π and decoded against
-114 Neurosynth cognitive-term maps. HOMER's top terms emphasise language /
+114 Neurosynth cognitive-term maps. OTTER's top terms emphasise language /
 cognitive-control; TransBrain's emphasise interoception / reward, both genuine
 insula functions, overlapping 2/10.
 
-**Trust-stratified agreement, a negative result.** HOMER↔TransBrain agreement
-does *not* track HOMER's trust tiers (r ≈ 0, flat across all five). HOMER's
+**Trust-stratified agreement, a negative result.** OTTER↔TransBrain agreement
+does *not* track OTTER's trust tiers (r ≈ 0, flat across all five). OTTER's
 trust map reflects its own anchor/validation evidence, not inter-method
-consensus, so the methods' disagreement is not explained by HOMER's confidence.
+consensus, so the methods' disagreement is not explained by OTTER's confidence.
 
-**Consensus / disagreement map.** Mouse regions ranked by HOMER↔TransBrain
+**Consensus / disagreement map.** Mouse regions ranked by OTTER↔TransBrain
 top-region distance flag which homologies the two methods concur on versus
 contest.
 
@@ -98,8 +98,8 @@ NIfTI files not bundled in the TransBrain repo.
 
 ## Method
 
-1. Build a HOMER-parcel → Brainnetome-region map by sampling TransBrain's BN
-   atlas at each HOMER human parcel's MNI centroid (3×3×3 fallback).
+1. Build a OTTER-parcel → Brainnetome-region map by sampling TransBrain's BN
+   atlas at each OTTER human parcel's MNI centroid (3×3×3 fallback).
 2. Part A, for each benchmarked mouse region, route π and rank BN regions by
    received mass; also measure the predicted-centroid distance to the
    literature homolog. Permuted-π null (200 trials).

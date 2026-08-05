@@ -1,7 +1,7 @@
 {
   "n_benchmark_regions": 24,
   "n_bn_regions": 127,
-  "homer": {
+  "otter": {
     "top1": 0.25,
     "top3": 0.4583333333333333,
     "top5": 0.6666666666666666,
@@ -18,7 +18,7 @@
     "eff_n": 60.116020308914266
   },
   "auroc_wins": {
-    "homer": 8,
+    "otter": 8,
     "transbrain": 16
   },
   "auroc_paired_wilcoxon_p": 0.3632983472967518,

@@ -29,7 +29,7 @@ nc = import_module("01_network_crossvalidation")
 st = import_module("04_subtype_translation")
 fm = import_module("07_full_matrix_translation")
 
-from homer.data import load_cached
+from otter.data import load_cached
 
 
 PAGANI_PATHWAYS_PATH = ROOT / "data_external" / "pagani_2026" / "41593_2026_2287_MOESM3_ESM.xlsx"
@@ -160,13 +160,13 @@ def main():
     # ---- DIAGNOSTIC 3: pathway-by-pathway --------------------------------
     print("\n--- Diagnostic 3: per-pathway test (each Pagani pathway separately) ---")
     pathways = load_pathway_genes()
-    homer_genes = meta["mouse_symbol"].tolist()
-    homer_lower = {g.lower(): i for i, g in enumerate(homer_genes)}
+    otter_genes = meta["mouse_symbol"].tolist()
+    otter_lower = {g.lower(): i for i, g in enumerate(otter_genes)}
     results = []
     for pname, pgenes in pathways.items():
-        # which HOMER-resolved genes belong to this pathway?
+        # which OTTER-resolved genes belong to this pathway?
         pgenes_lower = {g.lower() for g in pgenes}
-        gene_indices = [homer_lower[g] for g in homer_lower if g in pgenes_lower]
+        gene_indices = [otter_lower[g] for g in otter_lower if g in pgenes_lower]
         if len(gene_indices) < 5:
             continue
         # Pathway-spatial map: mean expression of pathway genes per parcel
@@ -180,7 +180,7 @@ def main():
         r_to_delta, _ = pearsonr(pmap_human_8, obs_delta)
         results.append({
             "pathway": pname,
-            "n_genes_in_homer": len(gene_indices),
+            "n_genes_in_otter": len(gene_indices),
             "r_to_obs_hypo":  float(r_to_hypo),
             "r_to_obs_hyper": float(r_to_hyper),
             "r_to_obs_delta": float(r_to_delta),

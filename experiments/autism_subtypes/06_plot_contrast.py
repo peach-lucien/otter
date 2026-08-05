@@ -23,7 +23,7 @@ def main():
     obs_z = (obs - obs.mean()) / obs.std()
     pred_z = (pred - pred.mean()) / pred.std()
     ax1.bar(x - width/2, obs_z, width, label="observed (Pagani Fig 4e Δ)", color="#264653")
-    ax1.bar(x + width/2, pred_z, width, label="predicted via HOMER π", color="#e76f51")
+    ax1.bar(x + width/2, pred_z, width, label="predicted via OTTER π", color="#e76f51")
     ax1.set_xticks(x); ax1.set_xticklabels(nets, rotation=30, ha="right")
     ax1.set_ylabel("z-scored subtype contrast (hyper − hypo)")
     ax1.axhline(0, color="black", linewidth=0.5)

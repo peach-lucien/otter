@@ -37,7 +37,7 @@ tests. Findings below supersede the first-round note.
 ### 3. Fig 1d occurrence maps ✅
 - `cluster1_…_pos` = hyperconnectivity, `cluster2_…_neg` = hypoconnectivity.
 - Integer occurrence counts 0–5. **Allen CCFv3** grid (456×320×528), same family
-  as HOMER's `annotation_25_fixed.nii.gz`. Route through π directly.
+  as OTTER's `annotation_25_fixed.nii.gz`. Route through π directly.
 - These are **group/cluster-level**, not per-model.
 
 ### 4. `Region_masks/` ✅
@@ -85,7 +85,7 @@ the reverse. That prior must be replaced with this row-order assignment.
 - **Per-model voxelwise translation: still needs one specific thing, but it is
   NOT a "1,491 lookup."** The right object is the **20 per-model
   weighted-degree-centrality maps as NIfTIs in functional (or Allen) space**
-  the full-resolution Fig 1a/b maps. Those register to HOMER's mouse atlas and
+  the full-resolution Fig 1a/b maps. Those register to OTTER's mouse atlas and
   route through π directly. The lab's pipeline produces these natively, so it's a
   clean ask. Trying to reconstruct them from the 1,491-feature CSV is the wrong
   path (lossy, unrecoverable ordering).

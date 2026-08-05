@@ -4,7 +4,7 @@ Schaefer-400 cannot separate layers within an area, so the per-marker test
 (mean r=+0.119) can only ever measure the *area-level* distribution of layer
 genes, not lamination, the README says as much. Rather than present it as a
 (impossible) laminar test, we recast it as the question it CAN answer and that
-HOMER is good at: does π preserve cortical AREAL TYPE, the supragranular↔
+OTTER is good at: does π preserve cortical AREAL TYPE, the supragranular↔
 infragranular (eulaminate↔agranular) axis that distinguishes sensory/granular
 from limbic/agranular cortex? This is the same cytoarchitectural hierarchy that
 Fulcher's T1w:T2w + Goulas type test captured and that DID survive a spin null.
@@ -29,10 +29,10 @@ from scipy.stats import pearsonr
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance       # noqa: E402
-from homer.data.atlas_regions import (                           # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance       # noqa: E402
+from otter.data.atlas_regions import (                           # noqa: E402
     ATLAS_PATHS, assign_atlas_labels, assign_atlas_labels_with_hemisphere)
-from homer.eval.nulls import translation_spin_null, _route_normalized  # noqa: E402
+from otter.eval.nulls import translation_spin_null, _route_normalized  # noqa: E402
 
 UPPER = ["Cux1", "Cux2", "Satb2"]      # supragranular L2/3
 GRANULAR = ["Rorb"]                     # L4

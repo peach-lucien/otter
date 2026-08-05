@@ -1,6 +1,6 @@
 """OLFACTORY-1: Add Piriform + AON sub-region anchors.
 
-Olfactory cortex is a documented HOMER failure region. Beauchamp gives
+Olfactory cortex is a documented OTTER failure region. Beauchamp gives
 0 % top-1 for "Piriform area → piriform cortex" under the production
 point-anchor π (mean rank 657 / 2094). The Garin pair_id 11 (Olfactory
 cortex) is a single point anchor in the Piriform parcel.
@@ -39,9 +39,9 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached                                    # noqa: E402
-from homer.data.anchor_packs import build_olfactory_region_anchors   # noqa: E402
-from homer.models import MultimodalFGW                                # noqa: E402
+from otter.data import load_cached                                    # noqa: E402
+from otter.data.anchor_packs import build_olfactory_region_anchors   # noqa: E402
+from otter.models import MultimodalFGW                                # noqa: E402
 
 ANN  = ROOT / "outputs" / "anndata"
 COUP = ROOT / "outputs" / "coupling"

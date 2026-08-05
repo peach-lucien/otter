@@ -1,10 +1,10 @@
 """Cross-check: live DSURQE atlas lookup vs. the precomputed region votes.
 
-HOMER's anchor packs resolve "which mouse parcels are in DSURQE region R?"
+OTTER's anchor packs resolve "which mouse parcels are in DSURQE region R?"
 with a **live atlas lookup** (production default): each parcel's centroid is
 placed into the Beauchamp DSURQE label volume and the majority label in a
 ~1 mm neighbourhood is read off (see
-``src/homer/data/anchor_packs/_dsurqe.py::assign_dsurqe_labels``).
+``src/otter/data/anchor_packs/_dsurqe.py::assign_dsurqe_labels``).
 
 The mouse parcel table also ships a **precomputed vote** per parcel
 (``region_vote_ss_dsq``, the majority DSURQE label over the parcel's full
@@ -46,7 +46,7 @@ ATLAS = ROOT / "data_external/MouseHumanTranscriptomicSimilarity/AMBA/data"
 TREE_PATH = ATLAS / "DSURQE_tree.json"
 VOL_PATH = ATLAS / "imaging/DSURQE_CCFv3_labels_200um.mnc"
 CSV_PATH = ATLAS / "imaging/DSURQE_40micron_R_mapping_long.csv"
-PACKS_DIR = ROOT / "src/homer/data/anchor_packs"
+PACKS_DIR = ROOT / "src/otter/data/anchor_packs"
 
 # Mouse-coord -> DSURQE-volume offset, mirrored from _dsurqe.DSURQE_OFFSET_MM
 # (kept inline so this diagnostic has no heavy imports; _dsurqe.py is the
@@ -55,7 +55,7 @@ DSURQE_OFFSET_MM = np.array([-0.027, -2.334, 1.018])
 
 
 def _norm(s: str) -> str:
-    """Comma/case/whitespace-tolerant key, matching homer.data.labels."""
+    """Comma/case/whitespace-tolerant key, matching otter.data.labels."""
     return re.sub(r"\s+", " ", s.lower().replace(",", " ")).strip()
 
 

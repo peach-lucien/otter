@@ -1,6 +1,6 @@
 # Ablations
 
-Three ablation experiments that motivated production design choices in HOMER. All three converged to the same direction: **the production configuration (soft anchors, uniform mouse marginal, area-level xyz weighting) outperforms variants**. Documented here for provenance; see `docs/archive/iteration_log.md` for the full discussion of each.
+Three ablation experiments that motivated production design choices in OTTER. All three converged to the same direction: **the production configuration (soft anchors, uniform mouse marginal, area-level xyz weighting) outperforms variants**. Documented here for provenance; see `docs/archive/iteration_log.md` for the full discussion of each.
 
 ## Files
 

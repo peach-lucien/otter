@@ -4,19 +4,19 @@ Pagani 2026 claim 4: the gene/pathway signature of each FC subtype recurs
 cross-species. They report this as parallel observations (mouse-subtype gene set
 is enriched for synaptic pathways; human-subtype gene set is enriched for the
 same pathways), without explicitly linking the *spatial* expression patterns
-through a cross-species mapping. HOMER's π lets us do that explicit linking:
+through a cross-species mapping. OTTER's π lets us do that explicit linking:
 translate the mouse spatial expression map of the hypo/hyper gene sets through
 π and check whether the predicted human map aligns with the observed human
 subtype perturbation map.
 
-Limitation: HOMER's curated mouse expression matrix contains only 51 genes;
+Limitation: OTTER's curated mouse expression matrix contains only 51 genes;
 only 36 of these (10 hypo + 26 hyper) overlap with Pagani's gene lists. So
 this is a **proof-of-concept**, not a full pathway-spatial test. A full version
 would need parcel-level expression for all 1,952 + 4,463 genes from the Allen
-Brain Atlas (~3-4 hours of API queries beyond what HOMER ships).
+Brain Atlas (~3-4 hours of API queries beyond what OTTER ships).
 
 Procedure:
-  1. Identify HOMER genes that overlap with Pagani's hypo-only / hyper-only sets.
+  1. Identify OTTER genes that overlap with Pagani's hypo-only / hyper-only sets.
   2. Compute per-parcel mouse expression score = mean of those gene columns.
   3. Translate via π: pred_human[h] = Σ_m π[m, h] · score[m].
   4. Aggregate to 8 human networks (Pagani's scheme).
@@ -44,7 +44,7 @@ assign_mouse_pagani_networks = fm.assign_mouse_pagani_networks
 load_pagani_subtype_matrices = st.load_pagani_subtype_matrices
 network_intensity = st.network_intensity
 
-from homer.data import load_cached
+from otter.data import load_cached
 
 
 PAGANI_GENES_PATH = (
@@ -76,23 +76,23 @@ def main():
     pi = np.load("outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")
     # mouse_genes.npy is the unfiltered (1864, 61) matrix matching mouse_gene_list.csv
     mouse_expr = np.load("data_external/mouse_genes.npy")
-    homer_genes = pd.read_csv("data_external/mouse_gene_list.csv")["gene_symbol"].tolist()
-    homer_lower = [g.lower() for g in homer_genes]
+    otter_genes = pd.read_csv("data_external/mouse_gene_list.csv")["gene_symbol"].tolist()
+    otter_lower = [g.lower() for g in otter_genes]
     # Replace NaNs with column means
     col_mean = np.nanmean(mouse_expr, axis=0)
     inds = np.where(np.isnan(mouse_expr))
     mouse_expr = mouse_expr.copy()
     mouse_expr[inds] = np.take(col_mean, inds[1])
-    print(f"\nHOMER gene matrix: {mouse_expr.shape}  ({len(homer_genes)} genes)")
+    print(f"\nOTTER gene matrix: {mouse_expr.shape}  ({len(otter_genes)} genes)")
 
     hypo_set, hyper_set = load_pagani_gene_sets()
     print(f"Pagani hypo-only: {len(hypo_set)}, hyper-only: {len(hyper_set)}")
 
-    hypo_idx = [i for i, g in enumerate(homer_lower) if g in hypo_set]
-    hyper_idx = [i for i, g in enumerate(homer_lower) if g in hyper_set]
+    hypo_idx = [i for i, g in enumerate(otter_lower) if g in hypo_set]
+    hyper_idx = [i for i, g in enumerate(otter_lower) if g in hyper_set]
     print(f"\nGene overlap:")
-    print(f"  hypo:  {len(hypo_idx)} HOMER genes - {[homer_genes[i] for i in hypo_idx]}")
-    print(f"  hyper: {len(hyper_idx)} HOMER genes - {[homer_genes[i] for i in hyper_idx]}")
+    print(f"  hypo:  {len(hypo_idx)} OTTER genes - {[otter_genes[i] for i in hypo_idx]}")
+    print(f"  hyper: {len(hyper_idx)} OTTER genes - {[otter_genes[i] for i in hyper_idx]}")
 
     if not hypo_idx or not hyper_idx:
         print("Insufficient overlap, aborting.")
@@ -185,11 +185,11 @@ def main():
           f"empirical p={emp_p_s:.3f}")
 
     out = {
-        "n_homer_genes": len(homer_genes),
+        "n_otter_genes": len(otter_genes),
         "n_overlap_hypo_genes":  len(hypo_idx),
         "n_overlap_hyper_genes": len(hyper_idx),
-        "homer_hypo_genes":  [homer_genes[i] for i in hypo_idx],
-        "homer_hyper_genes": [homer_genes[i] for i in hyper_idx],
+        "otter_hypo_genes":  [otter_genes[i] for i in hypo_idx],
+        "otter_hyper_genes": [otter_genes[i] for i in hyper_idx],
         "pagani_human_networks": pagani_human_names,
         "observed_delta":  obs_delta.tolist(),
         "predicted_delta": pred_delta.tolist(),
@@ -205,7 +205,7 @@ def main():
             "pearson_empirical_p":  emp_p_p,
             "spearman_empirical_p": emp_p_s,
         },
-        "caveat": ("HOMER's curated gene set is 51 genes; only 36 overlap with Pagani's "
+        "caveat": ("OTTER's curated gene set is 51 genes; only 36 overlap with Pagani's "
                    "1,952+4,463 implicated genes. This is a proof-of-concept; a full "
                    "pathway-spatial test would need parcel-level Allen Brain Atlas "
                    "expression for the full gene lists."),

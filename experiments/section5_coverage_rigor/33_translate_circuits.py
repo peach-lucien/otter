@@ -1,4 +1,4 @@
-"""HOMER-as-translator, expanded: route mouse causal/disease circuits to human networks.
+"""OTTER-as-translator, expanded: route mouse causal/disease circuits to human networks.
 AI-opto (canonical + sharp pi, full + cortical-only input) and the 5 autism-mutation circuits.
 Report Yeo-17 network landing, salience/default enrichment, and a permuted-pi null for each.
 Save the AI-opto human percentile map for a figure.
@@ -14,7 +14,7 @@ from scipy.stats import rankdata
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance  # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance  # noqa: E402
 DATA = ROOT / "data_external/transbrain_2025"
 
 

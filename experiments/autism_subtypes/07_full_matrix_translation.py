@@ -16,9 +16,9 @@ Procedure:
   6. Permuted-π null: shuffle π rows, repeat 200 trials.
 
 Critically, we map mouse parcels to Pagani's *9* mouse networks (separating
-Caudate Putamen from Thalamus, which HOMER's PAIRID_TO_NETWORK lumps as
+Caudate Putamen from Thalamus, which OTTER's PAIRID_TO_NETWORK lumps as
 "subcortical"). We do this via per-parcel nearest-Garin-anchor assignment using
-the same xyz logic in homer.data.networks.assign_networks, but exposing the
+the same xyz logic in otter.data.networks.assign_networks, but exposing the
 *anchor pair_id* rather than the network name.
 """
 from __future__ import annotations
@@ -38,8 +38,8 @@ st = import_module("04_subtype_translation")
 assign_human_paper_networks = nc.assign_human_paper_networks
 load_pagani_subtype_matrices = st.load_pagani_subtype_matrices
 
-from homer.data import load_cached
-from homer.data.anchors import get_anchor_index
+from otter.data import load_cached
+from otter.data.anchors import get_anchor_index
 
 
 # Map Garin pair_id → Pagani 9-net name
@@ -78,7 +78,7 @@ def assign_mouse_pagani_networks(M_var: pd.DataFrame) -> tuple[np.ndarray, list[
     (plus a -1 sentinel for parcels that don't map cleanly. Pons/Tectum).
 
     Uses the same nearest-anchor-by-normalised-xyz logic as
-    homer.data.networks.assign_networks, but maps to Pagani names via
+    otter.data.networks.assign_networks, but maps to Pagani names via
     GARIN_PID_TO_PAGANI_MOUSE so we can split Caudate Putamen vs Thalamus.
     """
     idx_m = get_anchor_index(M_var)

@@ -26,8 +26,8 @@ once this script has been run and reproduces.
 57 fits. Resumable: each region is written as it completes, and re-running skips what is done.
 
     conda activate retune
-    cd homer && python3 experiments/section2_supervision/05_heldout_three_config.py --check
-    cd homer && python3 experiments/section2_supervision/05_heldout_three_config.py
+    cd otter && python3 experiments/section2_supervision/05_heldout_three_config.py --check
+    cd otter && python3 experiments/section2_supervision/05_heldout_three_config.py
 """
 from __future__ import annotations
 
@@ -41,10 +41,10 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import roc_auc_score
 
-ROOT = Path(__file__).resolve().parents[2]                       # .../homer
+ROOT = Path(__file__).resolve().parents[2]                       # .../otter
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.repro import (ALPHA, EPSILON, FC_WEIGHT, SC_WEIGHT, XYZ_WEIGHT,   # noqa: E402
+from otter.repro import (ALPHA, EPSILON, FC_WEIGHT, SC_WEIGHT, XYZ_WEIGHT,   # noqa: E402
                          anchor_warped_xyz, beauchamp_scorer, fit_coupling,
                          load_inputs, refit_provenance, stamp)
 
@@ -59,7 +59,7 @@ CONSUMERS = ("manuscript/figures/fig2/make_fig2c_heldout_delta.py (Fig. 2c); "
              "Extended Data Fig. 4 panels b and c")
 
 # The production recipe with one term switched off at a time. Everything not named here comes
-# from homer.repro, so a change to the recipe reaches this script rather than being restated.
+# from otter.repro, so a change to the recipe reaches this script rather than being restated.
 CONFIGS: dict[str, dict] = {
     "both":      dict(alpha=ALPHA, xyz_weight=XYZ_WEIGHT),
     "xyz_only":  dict(alpha=0.0,   xyz_weight=XYZ_WEIGHT),

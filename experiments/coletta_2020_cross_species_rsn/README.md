@@ -1,6 +1,6 @@
 # Coletta 2020 cross-species RSN correspondence validation
 
-We asked whether HOMER's π preserves the cross-species network correspondence under multiple operationalisations of "network": (A) HOMER's PAIRID-derived mouse networks vs canonical Yeo-7 human networks, (B) data-driven ICA-derived mouse RSNs, (C) spatial coherence of network images in human space.
+We asked whether OTTER's π preserves the cross-species network correspondence under multiple operationalisations of "network": (A) OTTER's PAIRID-derived mouse networks vs canonical Yeo-7 human networks, (B) data-driven ICA-derived mouse RSNs, (C) spatial coherence of network images in human space.
 
 ## Why this experiment
 
@@ -16,7 +16,7 @@ This is a stricter version of Pagani's Test 1, with three improvements: (i) uses
 
 > **Fair-null confirmation.** This discrete result **survives a spatially-fair mouse-parcel spin null**: rotating the mouse networks on a sphere and re-aggregating π drops the diagonal-argmax count to **mean 1.23/10** (95th pct 2); the observed 6/10 beats it at **p=0.002**. The mouse↔human RSN correspondence is therefore specific rather than a product of spatial autocorrelation. (Run `experiments/spatial_null_check/fair_nulls_coletta_test2c.py`.)
 
-| Pair | HOMER mass | Null | Ratio | Argmax? |
+| Pair | OTTER mass | Null | Ratio | Argmax? |
 |---|---:|---:|---:|:---:|
 | olfactory → Limbic | 36.0% | 4.8% | 7.5× | ★ |
 | salience → Salience | 37.8% | 8.8% | 4.3× | ★ |
@@ -33,15 +33,15 @@ Same Schaefer-definition misses as Pagani's Test 1. Schaefer-17's "Visual" is V1
 
 ### Sub-test B. Data-driven ICA
 
-2/7 ICA components map cleanly to their expected Yeo-7 network (Salience, sensorimotor). The others are noisier because ICA decomposition mixes anatomical regions: each component is a *mode of FC variation* rather than a clean network. This is an inherent property of ICA rather than a HOMER failure.
+2/7 ICA components map cleanly to their expected Yeo-7 network (Salience, sensorimotor). The others are noisier because ICA decomposition mixes anatomical regions: each component is a *mode of FC variation* rather than a clean network. This is an inherent property of ICA rather than a OTTER failure.
 
 ### Sub-test C. Network coherence
 
-**9/11 networks have HOMER-mapped images MORE compact than permuted-π null.** Best compression: frontoparietal (0.58× null), frontal_dmn (0.63×), brainstem (0.68×), subcortical (0.70×). The two networks that don't beat null (auditory, temporal_dmn) are the smallest in HOMER's PAIRID scheme (62 + 66 parcels) and the most spatially distributed.
+**9/11 networks have OTTER-mapped images MORE compact than permuted-π null.** Best compression: frontoparietal (0.58× null), frontal_dmn (0.63×), brainstem (0.68×), subcortical (0.70×). The two networks that don't beat null (auditory, temporal_dmn) are the smallest in OTTER's PAIRID scheme (62 + 66 parcels) and the most spatially distributed.
 
 ## What this tells us
 
-HOMER's π preserves the cross-species network structure under both labeled-correspondence (A) and spatial-coherence (C) tests. The data-driven ICA test (B) is noisier because of an inherent ambiguity in ICA decomposition rather than a HOMER failure. Together, A + C provide robust evidence that HOMER captures the cross-species RSN topology.
+OTTER's π preserves the cross-species network structure under both labeled-correspondence (A) and spatial-coherence (C) tests. The data-driven ICA test (B) is noisier because of an inherent ambiguity in ICA decomposition rather than a OTTER failure. Together, A + C provide robust evidence that OTTER captures the cross-species RSN topology.
 
 ## Files
 

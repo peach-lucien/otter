@@ -20,10 +20,10 @@ phenomenon. This script establishes the continuum and its spatial organisation:
    couplings. The per-coupling arms below are what establishes that; canonical is the arm to
    report.
 
-Spin note (see homer-section5-dlpfc memory): spin the SIGNAL (coverage, asymmetric) against the
+Spin note (see otter-section5-dlpfc memory): spin the SIGNAL (coverage, asymmetric) against the
 symmetric axis map. Do NOT bilaterally average coverage first (walks into the 37% FPR regime).
 
-Run:  cd homer && PYTHONPATH=src python experiments/section5_coverage_rigor/12_coverage_continuum.py
+Run:  cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/12_coverage_continuum.py
 Writes: outputs/logs/section5_coverage_continuum.json
 """
 from __future__ import annotations
@@ -39,9 +39,9 @@ from scipy.stats import spearmanr, rankdata
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached, load_pi, pi_provenance        # noqa: E402
-from homer.data.anchors import get_anchor_index                   # noqa: E402
-from homer.eval.nulls import _haar_rotation                       # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance        # noqa: E402
+from otter.data.anchors import get_anchor_index                   # noqa: E402
+from otter.eval.nulls import _haar_rotation                       # noqa: E402
 
 N_SPIN = 2000
 SEED = 0

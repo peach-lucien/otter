@@ -51,7 +51,7 @@ from scipy.spatial.transform import Rotation
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi
+from otter.data import load_cached, load_pi
 spec = importlib.util.spec_from_file_location("b05f", ROOT / "pipeline/05f_beauchamp_validation.py")
 b = importlib.util.module_from_spec(spec); spec.loader.exec_module(b)
 rng = np.random.default_rng(0)
@@ -164,8 +164,8 @@ def main():
 
     # ---- LORO mode (resumable) ----
     import time
-    from homer.data.anchor_packs import build_default_pack_entries
-    from homer.models import MultimodalFGW
+    from otter.data.anchor_packs import build_default_pack_entries
+    from otter.models import MultimodalFGW
     CACHE = ROOT / "outputs/logs/beauchamp_metric_battery_loro.json"
     GUARD = 34.0; t0 = time.time()
     entries = build_default_pack_entries(M.var, H.var, atlas_root=str(ROOT))

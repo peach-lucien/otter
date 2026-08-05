@@ -1,4 +1,4 @@
-"""Visualise the HOMER × Buckner & Krienen tethering test (3 panels)."""
+"""Visualise the OTTER × Buckner & Krienen tethering test (3 panels)."""
 from __future__ import annotations
 
 import json
@@ -27,8 +27,8 @@ def main():
     ax.bar(range(1, 11), dec, color=colors)
     ax.set_xticks(range(1, 11))
     ax.set_xlabel("myelin decile   D1 = association  →  D10 = sensorimotor")
-    ax.set_ylabel("HOMER coverage  (mean log₁₀ π column mass)")
-    ax.set_title("1 · HOMER coverage collapses toward association cortex\n"
+    ax.set_ylabel("OTTER coverage  (mean log₁₀ π column mass)")
+    ax.set_title("1 · OTTER coverage collapses toward association cortex\n"
                  f"sensorimotor−association gap = "
                  f"{j['coverage_gap_log_units']:.1f} log units", fontsize=9.5)
 
@@ -44,7 +44,7 @@ def main():
     ax.plot([mo[-t], mo[-1]], [s, s], color="#264653", lw=3,
             label=f"sensorimotor tertile  ({s:.0f})")
     ax.set_xlabel("Human T1w/T2w myelin  (sensorimotor → association ←)")
-    ax.set_ylabel("HOMER coverage  (log₁₀ π column mass)")
+    ax.set_ylabel("OTTER coverage  (log₁₀ π column mass)")
     ax.set_title(f"2 · Coverage vs the sensorimotor–association axis\n"
                  f"Spearman ρ = {j['spearman_coverage_vs_myelin']:+.3f}   "
                  f"Mann–Whitney p = {j['mannwhitney_p']:.0e}", fontsize=9.5)
@@ -62,7 +62,7 @@ def main():
                  f"it is the *amount* of coverage, not its diffuseness,\n"
                  f"that carries the tethering signal", fontsize=9.5)
 
-    plt.suptitle("HOMER × Buckner & Krienen 2013, π is sparsest over human "
+    plt.suptitle("OTTER × Buckner & Krienen 2013, π is sparsest over human "
                  "association cortex, as the tethering hypothesis predicts",
                  fontsize=12, y=1.04)
     plt.tight_layout()

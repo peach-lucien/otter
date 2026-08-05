@@ -20,9 +20,9 @@ What it looks for:
 
 Usage::
 
-    cd homer && python3 tools/check_prose_style.py                 # notebooks and docs
-    cd homer && python3 tools/check_prose_style.py notebooks/fig1_coupling.ipynb
-    cd homer && python3 tools/check_prose_style.py --quiet         # exit code only
+    cd otter && python3 tools/check_prose_style.py                 # notebooks and docs
+    cd otter && python3 tools/check_prose_style.py notebooks/fig1_coupling.ipynb
+    cd otter && python3 tools/check_prose_style.py --quiet         # exit code only
 
 Exit code is 1 if anything was flagged, so it can gate a commit. A flag is not automatically a
 defect. "significantly" is correct when it means a p-value.
@@ -35,9 +35,9 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]                       # .../homer
+ROOT = Path(__file__).resolve().parents[1]                       # .../otter
 
-DEFAULT_TARGETS = ["notebooks", "docs", "README.md", "src/homer/repro.py", "DATA.md"]
+DEFAULT_TARGETS = ["notebooks", "docs", "README.md", "src/otter/repro.py", "DATA.md"]
 
 INTENSIFIERS = ("exactly", "precisely", "crucially", "remarkably", "importantly",
                 "notably", "simply", "essentially", "fundamentally")

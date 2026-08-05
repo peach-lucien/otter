@@ -17,10 +17,10 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 BBP = ROOT.parent / "manuscript/figures/fig_2_ED/beauchamp_battery.py"
 spec = importlib.util.spec_from_file_location("bb", BBP); BB = importlib.util.module_from_spec(spec); spec.loader.exec_module(BB)
-from homer.data import load_cached                          # noqa: E402
-from homer.data.anchors import get_anchor_index             # noqa: E402
-from homer.data.anchor_packs import build_default_pack_entries   # noqa: E402
-from homer.models import MultimodalFGW                      # noqa: E402
+from otter.data import load_cached                          # noqa: E402
+from otter.data.anchors import get_anchor_index             # noqa: E402
+from otter.data.anchor_packs import build_default_pack_entries   # noqa: E402
+from otter.models import MultimodalFGW                      # noqa: E402
 
 OUT = ROOT / "outputs/logs/ablation_ladder_battery_canonical.json"
 STAGES = ["connectivity", "+spatial", "+anchors", "+packs"]

@@ -1,8 +1,8 @@
-"""Tests for homer.models, the four FGW model classes."""
+"""Tests for otter.models, the four FGW model classes."""
 import numpy as np
 import pytest
 
-from homer.models import (
+from otter.models import (
     FGWModel,
     HierarchicalFGW,
     MultimodalFGW,

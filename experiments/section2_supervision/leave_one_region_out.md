@@ -12,7 +12,7 @@ is re-scored. This is the honest "would we recover this region if we had **not**
 curated it" test for the production model (Garin + all 15 packs).
 
 Script: `leave_one_region_out.py`. Raw data:
-`homer/outputs/logs/beauchamp_leave_one_region_out.json`.
+`otter/outputs/logs/beauchamp_leave_one_region_out.json`.
 Harness reproduces the logged full-model per-pair top-1 exactly.
 
 ## Results (full → leave-one-out)

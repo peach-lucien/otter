@@ -1,7 +1,7 @@
 """COMPOSE-ALL: fit MultimodalFGW with all default anchor packs at once.
 
 The set of default packs is defined once in
-:mod:`homer.data.anchor_packs.registry` (``DEFAULT_PACK_NAMES``) and built
+:mod:`otter.data.anchor_packs.registry` (``DEFAULT_PACK_NAMES``) and built
 here via :func:`build_default_pack_entries`, this script no longer keeps
 its own copy of the list. Currently the default packs are:
 
@@ -36,12 +36,12 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached                                  # noqa: E402
-from homer.data.anchor_packs import (                                # noqa: E402
+from otter.data import load_cached                                  # noqa: E402
+from otter.data.anchor_packs import (                                # noqa: E402
     DEFAULT_PACK_NAMES,
     build_default_pack_entries,
 )
-from homer.models import MultimodalFGW                              # noqa: E402
+from otter.models import MultimodalFGW                              # noqa: E402
 
 ANN  = ROOT / "outputs" / "anndata"
 COUP = ROOT / "outputs" / "coupling"

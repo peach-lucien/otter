@@ -1,4 +1,4 @@
-"""Visualise the HOMER × Margulies/Huntenburg principal-gradient result."""
+"""Visualise the OTTER × Margulies/Huntenburg principal-gradient result."""
 from __future__ import annotations
 
 import json
@@ -34,8 +34,8 @@ def main():
     xs = np.linspace(human_grad[m].min(), human_grad[m].max(), 50)
     ax.plot(xs, z[0] * xs + z[1], "k--", linewidth=0.8)
     ax.set_xlabel("Observed human gradient (per-parcel)")
-    ax.set_ylabel("Predicted via HOMER π\n(transport-weighted routing)")
-    ax.set_title(f"HOMER preserves the principal axis\n"
+    ax.set_ylabel("Predicted via OTTER π\n(transport-weighted routing)")
+    ax.set_title(f"OTTER preserves the principal axis\n"
                  f"parcel |r| = {pl['abs_pearson_r']:.3f}  "
                  f"|ρ| = {pl['abs_spearman_r']:.3f}  (n = {pl['n']})\n"
                  f"region-level |r| = {rl['abs_pearson_r']:.3f}")
@@ -57,7 +57,7 @@ def main():
                  f"empirical p = {j['null']['empirical_p']:.3f}")
     ax.legend(loc="upper right", fontsize=8)
 
-    plt.suptitle("HOMER × Margulies/Huntenburg, π preserves the cross-species "
+    plt.suptitle("OTTER × Margulies/Huntenburg, π preserves the cross-species "
                  "principal connectivity gradient", fontsize=12, y=1.02)
     plt.tight_layout()
     out = ROOT / "outputs" / "figures" / "margulies_2016_gradient.png"

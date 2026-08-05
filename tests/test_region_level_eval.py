@@ -1,10 +1,10 @@
-"""Tests for homer.eval.region_level."""
+"""Tests for otter.eval.region_level."""
 from __future__ import annotations
 
 import numpy as np
 import pytest
 
-from homer.eval.region_level import (
+from otter.eval.region_level import (
     aggregate_pi_over_mouse_region,
     score_candidate_human_regions,
     fold_enrichment_candidate_regions,

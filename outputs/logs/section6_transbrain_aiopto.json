@@ -6,12 +6,12 @@
   "n_salience_parcels": 230,
   "n_rest_parcels": 1405,
   "salience_enrichment_z": {
-    "homer": 0.866722035962699,
+    "otter": 0.866722035962699,
     "transbrain": 0.2771415857452654,
-    "diff_homer_minus_tb": 0.5895804502174337
+    "diff_otter_minus_tb": 0.5895804502174337
   },
   "salience_network_rank": {
-    "homer": {
+    "otter": {
       "SalVentAttnB": 1,
       "SalVentAttnA": 6
     },
@@ -22,7 +22,7 @@
     "n_networks": 16
   },
   "yeo17_network_means_z": {
-    "homer": {
+    "otter": {
       "SalVentAttnB": 1.0296171732624178,
       "ContB": 0.6709688164846843,
       "DefaultB": 0.6618121269127424,
@@ -169,7 +169,7 @@
     }
   ],
   "specificity": {
-    "homer": {
+    "otter": {
       "obs": 0.866722035962699,
       "null_mean": 0.036550492936804374,
       "null_std": 0.35326930751394325,
@@ -184,6 +184,6 @@
       "n_perm": 1000
     }
   },
-  "verdict": "HOMER stronger",
+  "verdict": "OTTER stronger",
   "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77"
 }

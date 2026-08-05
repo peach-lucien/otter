@@ -22,7 +22,7 @@ route it through the real pi), so that all of section 3's claims are judged by o
 standard.
 
 Requires: neuromaps.
-Run: cd homer && PYTHONPATH=src python experiments/validation/00_validate_published_maps.py
+Run: cd otter && PYTHONPATH=src python experiments/validation/00_validate_published_maps.py
 Writes outputs/logs/published_map_validation.json
 """
 from __future__ import annotations
@@ -39,8 +39,8 @@ from scipy.stats import spearmanr, pearsonr
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance   # noqa: E402
-from homer.eval.nulls import _haar_rotation              # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance   # noqa: E402
+from otter.eval.nulls import _haar_rotation              # noqa: E402
 
 OUT = ROOT / "outputs/logs/published_map_validation.json"
 N_TRIALS = 1000
@@ -226,7 +226,7 @@ def main():
         }
 
     res["_meta"] = {**prov, "n_trials": N_TRIALS,
-                    "note": "null B is the null homer.eval.nulls designates for translation claims"}
+                    "note": "null B is the null otter.eval.nulls designates for translation claims"}
     res.update(prov)          # top-level pi_file / pi_sha256, as every log carries
     OUT.write_text(json.dumps(res, indent=2))
     print("\nwrote", OUT)

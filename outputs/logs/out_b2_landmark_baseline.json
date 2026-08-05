@@ -1,0 +1,357 @@
+{
+  "_what": "Landmark-only baseline for section 2. The 42 bilateral Garin anchors define a thin-plate-spline warp; mouse parcel centroids are pushed through it and assigned to the nearest human parcel. No connectivity, no region packs, no transport. Top-1, mass_in_region and centroid_disp_mm come from the hard assignment. AUROC comes from the negated warped distance, because a one-hot row would be penalised by a ranking metric for its shape rather than its accuracy. Produced by experiments/section2_supervision/07_landmark_baseline.py.",
+  "_recipe": {
+    "warp": "thin_plate_spline RBFInterpolator, smoothing 1e-3",
+    "landmarks": "bilateral Garin anchor pairs matched across species",
+    "n_mouse_landmark_parcels": 42,
+    "assignment": "nearest human parcel to the warped mouse centroid",
+    "coupling_used": null,
+    "transport_solved": false
+  },
+  "full": {
+    "per_region": {
+      "Piriform area -> piriform cortex": {
+        "auroc": 0.9940856836580046,
+        "rand_mm": 71.17882422221855,
+        "centroid_disp_mm": 2.746688186098181,
+        "mass_in_region": 0.2692307692307692,
+        "top1": 0.2692307692307692
+      },
+      "Subiculum -> subiculum": {
+        "auroc": 0.9654841802492808,
+        "rand_mm": 62.55506396487093,
+        "centroid_disp_mm": 8.770319452148719,
+        "mass_in_region": 0.0,
+        "top1": 0.0
+      },
+      "Field CA1 -> CA1 field": {
+        "auroc": 0.8761973180076629,
+        "rand_mm": 61.97752272019766,
+        "centroid_disp_mm": 24.642443060703215,
+        "mass_in_region": 0.0,
+        "top1": 0.0
+      },
+      "Field CA3 -> CA3 field": {
+        "auroc": 0.9529904306220096,
+        "rand_mm": 61.94351957409321,
+        "centroid_disp_mm": 11.655608092244695,
+        "mass_in_region": 0.0,
+        "top1": 0.0
+      },
+      "Dentate gyrus -> dentate gyrus": {
+        "auroc": 0.9210526315789473,
+        "rand_mm": 62.126993238257036,
+        "centroid_disp_mm": 21.51297634944248,
+        "mass_in_region": 0.0,
+        "top1": 0.0
+      },
+      "Anterior cingulate area -> cingulate gyrus": {
+        "auroc": 0.9895732689210951,
+        "rand_mm": 70.07928154075984,
+        "centroid_disp_mm": 15.57556935376975,
+        "mass_in_region": 0.5217391304347826,
+        "top1": 0.5217391304347826
+      },
+      "Primary auditory area -> Heschl's gyrus": {
+        "auroc": 0.9176300578034682,
+        "rand_mm": 58.22312790069329,
+        "centroid_disp_mm": 8.041125993056538,
+        "mass_in_region": 0.3333333333333333,
+        "top1": 0.3333333333333333
+      },
+      "Primary motor area -> precentral gyrus": {
+        "auroc": 0.8953961281926143,
+        "rand_mm": 66.47145826313098,
+        "centroid_disp_mm": 15.695582845943694,
+        "mass_in_region": 0.41509433962264153,
+        "top1": 0.41509433962264153
+      },
+      "Primary somatosensory area -> postcentral gyrus": {
+        "auroc": 0.838031068688003,
+        "rand_mm": 66.72519925720404,
+        "centroid_disp_mm": 21.332592344469827,
+        "mass_in_region": 0.17532467532467533,
+        "top1": 0.17532467532467533
+      },
+      "Visual areas -> cuneus": {
+        "auroc": 0.9815759637188209,
+        "rand_mm": 82.07264562797882,
+        "centroid_disp_mm": 18.24801510141132,
+        "mass_in_region": 0.3076923076923077,
+        "top1": 0.3076923076923077
+      },
+      "Pallidum -> globus pallidus": {
+        "auroc": 0.9875478927203064,
+        "rand_mm": 61.11291443996236,
+        "centroid_disp_mm": 8.074027353258051,
+        "mass_in_region": 0.09803921568627451,
+        "top1": 0.09803921568627451
+      },
+      "Striatum ventral region -> nucleus accumbens": {
+        "auroc": 0.9983269598470363,
+        "rand_mm": 67.39604087866168,
+        "centroid_disp_mm": 6.537493400713785,
+        "mass_in_region": 0.11538461538461539,
+        "top1": 0.11538461538461539
+      },
+      "Caudoputamen -> caudate nucleus": {
+        "auroc": 0.985768921095008,
+        "rand_mm": 63.06396941762074,
+        "centroid_disp_mm": 11.466134263162248,
+        "mass_in_region": 0.2867132867132867,
+        "top1": 0.2867132867132867
+      },
+      "Cortical subplate-other -> amygdala": {
+        "auroc": 0.9843550446998723,
+        "rand_mm": 68.54198575907107,
+        "centroid_disp_mm": 3.691056946722322,
+        "mass_in_region": 0.1724137931034483,
+        "top1": 0.1724137931034483
+      },
+      "Inferior colliculus -> inferior colliculus": {
+        "auroc": 0.9947368421052633,
+        "rand_mm": 62.928951146067,
+        "centroid_disp_mm": 15.659652384185552,
+        "mass_in_region": 0.06896551724137931,
+        "top1": 0.06896551724137931
+      },
+      "Superior colliculus, sensory related -> superior colliculus": {
+        "auroc": 0.9925908221797323,
+        "rand_mm": 59.3495785978713,
+        "centroid_disp_mm": 15.19967397724924,
+        "mass_in_region": 0.10909090909090909,
+        "top1": 0.10909090909090909
+      },
+      "Pons -> pons": {
+        "auroc": 1.0,
+        "rand_mm": 73.35159445366183,
+        "centroid_disp_mm": 2.9568724613853163,
+        "mass_in_region": 0.5797101449275363,
+        "top1": 0.5797101449275363
+      },
+      "Hypothalamus -> hypothalamus": {
+        "auroc": 1.0,
+        "rand_mm": 65.35122611304884,
+        "centroid_disp_mm": 1.7892273096938909,
+        "mass_in_region": 0.6730769230769231,
+        "top1": 0.6730769230769231
+      },
+      "Thalamus -> thalamus": {
+        "auroc": 0.9936600561600561,
+        "rand_mm": 57.9991458668376,
+        "centroid_disp_mm": 6.963629258061919,
+        "mass_in_region": 0.4563106796116505,
+        "top1": 0.4563106796116505
+      }
+    },
+    "aggregate": {
+      "auroc": 0.9572857779468565,
+      "top1": 0.27475728155339807,
+      "mass_in_region": 0.27475728155339807,
+      "centroid_disp_mm": 11.5689808481128
+    }
+  },
+  "heldout": {
+    "per_region": {
+      "Piriform area -> piriform cortex": {
+        "auroc": 0.9940856836580046,
+        "rand_mm": 71.17882422221855,
+        "centroid_disp_mm": 2.746688186098181,
+        "mass_in_region": 0.2692307692307692,
+        "top1": 0.2692307692307692,
+        "dropped_pair_ids": []
+      },
+      "Subiculum -> subiculum": {
+        "auroc": 0.9727948226270374,
+        "rand_mm": 62.55506396487093,
+        "centroid_disp_mm": 6.5772800035347405,
+        "mass_in_region": 0.02857142857142857,
+        "top1": 0.02857142857142857,
+        "dropped_pair_ids": [
+          12
+        ]
+      },
+      "Field CA1 -> CA1 field": {
+        "auroc": 0.8761973180076629,
+        "rand_mm": 61.97752272019766,
+        "centroid_disp_mm": 24.642443060703215,
+        "mass_in_region": 0.0,
+        "top1": 0.0,
+        "dropped_pair_ids": []
+      },
+      "Field CA3 -> CA3 field": {
+        "auroc": 0.9529904306220096,
+        "rand_mm": 61.94351957409321,
+        "centroid_disp_mm": 11.655608092244695,
+        "mass_in_region": 0.0,
+        "top1": 0.0,
+        "dropped_pair_ids": []
+      },
+      "Dentate gyrus -> dentate gyrus": {
+        "auroc": 0.9686602870813398,
+        "rand_mm": 62.126993238257036,
+        "centroid_disp_mm": 12.21220685295175,
+        "mass_in_region": 0.08695652173913043,
+        "top1": 0.08695652173913043,
+        "dropped_pair_ids": [
+          12
+        ]
+      },
+      "Anterior cingulate area -> cingulate gyrus": {
+        "auroc": 0.8926127214170693,
+        "rand_mm": 70.07928154075984,
+        "centroid_disp_mm": 34.041077734353856,
+        "mass_in_region": 0.0,
+        "top1": 0.0,
+        "dropped_pair_ids": [
+          1
+        ]
+      },
+      "Primary auditory area -> Heschl's gyrus": {
+        "auroc": 0.8496574609291372,
+        "rand_mm": 58.22312790069329,
+        "centroid_disp_mm": 12.610091668396576,
+        "mass_in_region": 0.2222222222222222,
+        "top1": 0.2222222222222222,
+        "dropped_pair_ids": [
+          7
+        ]
+      },
+      "Primary motor area -> precentral gyrus": {
+        "auroc": 0.8953961281926143,
+        "rand_mm": 66.47145826313098,
+        "centroid_disp_mm": 15.695582845943694,
+        "mass_in_region": 0.41509433962264153,
+        "top1": 0.41509433962264153,
+        "dropped_pair_ids": []
+      },
+      "Primary somatosensory area -> postcentral gyrus": {
+        "auroc": 0.7535966061513506,
+        "rand_mm": 66.72519925720404,
+        "centroid_disp_mm": 28.220289397602617,
+        "mass_in_region": 0.045454545454545456,
+        "top1": 0.045454545454545456,
+        "dropped_pair_ids": [
+          3
+        ]
+      },
+      "Visual areas -> cuneus": {
+        "auroc": 0.5233236151603498,
+        "rand_mm": 82.07264562797882,
+        "centroid_disp_mm": 52.345845577464395,
+        "mass_in_region": 0.0,
+        "top1": 0.0,
+        "dropped_pair_ids": [
+          4,
+          5,
+          6
+        ]
+      },
+      "Pallidum -> globus pallidus": {
+        "auroc": 0.9884259259259259,
+        "rand_mm": 61.11291443996236,
+        "centroid_disp_mm": 6.26035384314357,
+        "mass_in_region": 0.09803921568627451,
+        "top1": 0.09803921568627451,
+        "dropped_pair_ids": [
+          14,
+          15
+        ]
+      },
+      "Striatum ventral region -> nucleus accumbens": {
+        "auroc": 0.9983269598470363,
+        "rand_mm": 67.39604087866168,
+        "centroid_disp_mm": 6.537493400713785,
+        "mass_in_region": 0.11538461538461539,
+        "top1": 0.11538461538461539,
+        "dropped_pair_ids": []
+      },
+      "Caudoputamen -> caudate nucleus": {
+        "auroc": 0.9830314009661836,
+        "rand_mm": 63.06396941762074,
+        "centroid_disp_mm": 11.741979111431107,
+        "mass_in_region": 0.18181818181818182,
+        "top1": 0.18181818181818182,
+        "dropped_pair_ids": [
+          11,
+          13,
+          16
+        ]
+      },
+      "Cortical subplate-other -> amygdala": {
+        "auroc": 0.9865900383141762,
+        "rand_mm": 68.54198575907107,
+        "centroid_disp_mm": 7.826428486455853,
+        "mass_in_region": 0.06896551724137931,
+        "top1": 0.06896551724137931,
+        "dropped_pair_ids": [
+          17
+        ]
+      },
+      "Inferior colliculus -> inferior colliculus": {
+        "auroc": 0.9947368421052633,
+        "rand_mm": 62.928951146067,
+        "centroid_disp_mm": 15.659652384185552,
+        "mass_in_region": 0.06896551724137931,
+        "top1": 0.06896551724137931,
+        "dropped_pair_ids": []
+      },
+      "Superior colliculus, sensory related -> superior colliculus": {
+        "auroc": 0.8950764818355641,
+        "rand_mm": 59.3495785978713,
+        "centroid_disp_mm": 36.43840495098408,
+        "mass_in_region": 0.0,
+        "top1": 0.0,
+        "dropped_pair_ids": [
+          21
+        ]
+      },
+      "Pons -> pons": {
+        "auroc": 0.9261653895274585,
+        "rand_mm": 73.35159445366183,
+        "centroid_disp_mm": 33.64305380320905,
+        "mass_in_region": 0.0,
+        "top1": 0.0,
+        "dropped_pair_ids": [
+          20
+        ]
+      },
+      "Hypothalamus -> hypothalamus": {
+        "auroc": 0.9978468899521532,
+        "rand_mm": 65.35122611304884,
+        "centroid_disp_mm": 7.762994688808021,
+        "mass_in_region": 0.2692307692307692,
+        "top1": 0.2692307692307692,
+        "dropped_pair_ids": [
+          18
+        ]
+      },
+      "Thalamus -> thalamus": {
+        "auroc": 0.9720296595296595,
+        "rand_mm": 57.9991458668376,
+        "centroid_disp_mm": 17.534147571211445,
+        "mass_in_region": 0.05825242718446602,
+        "top1": 0.05825242718446602,
+        "dropped_pair_ids": [
+          19
+        ]
+      }
+    },
+    "aggregate": {
+      "auroc": 0.9074432029637214,
+      "top1": 0.10485436893203884,
+      "mass_in_region": 0.10485436893203884,
+      "centroid_disp_mm": 19.22007002806297
+    }
+  },
+  "_compared_against": {
+    "ladder": {
+      "log": "outputs/logs/out_a1_ladder.json",
+      "sha256": "4534a94aa4271b1588953f4036f0befae833042314debe34378d90c2eb583683"
+    },
+    "heldout_three_config": {
+      "log": "outputs/logs/out_a1b_loro.json",
+      "sha256": "503835f5babaa7746354f29f5cca09af28c97e542d180bcbeb67978807aa6553"
+    }
+  }
+}

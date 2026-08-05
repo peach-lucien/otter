@@ -4,7 +4,7 @@
 WHY THIS EXISTS
 ---------------
 On 2026-07-17 the canonical coupling was switched to pi_canonical.npy by changing the
-default of homer.data.load_pi(). That only reaches callers that USE load_pi(). Scripts
+default of otter.data.load_pi(). That only reaches callers that USE load_pi(). Scripts
 doing their own np.load("<hardcoded path>") silently kept the retired coupling. Several
 were re-executed, reproduced their old numbers, and the unchanged output was read as
 "nothing flipped" -- a false all-clear. A day later the same quantities, computed live
@@ -39,7 +39,7 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]          # .../homer
+ROOT = Path(__file__).resolve().parents[1]          # .../otter
 REPO = ROOT.parent                                   # repo root (has manuscript/)
 COUP = ROOT / "outputs" / "coupling"
 LOGS = ROOT / "outputs" / "logs"
@@ -64,11 +64,11 @@ PI_RE = re.compile(r"pi_[A-Za-z0-9_\-\+]*\.npy")
 # consuming the retired one. Record the reason next to every entry.
 BY_DESIGN = {
     # --- loaders / registries / fetchers: expose the retired pi as a named option ---
-    "src/homer/data/io.py",                        # load_pi() docstring lists it
-    "src/homer/data/fetch.py",                     # bundle sentinel; must still download it
-    "src/homer/data/anchor_packs/__init__.py",     # doc reference to the pack composition
-    "src/homer/data/anchor_packs/registry.py",     # doc reference to the pack composition
-    "src/homer/viz/viewer.py",                     # docstring example of a pi_source label
+    "src/otter/data/io.py",                        # load_pi() docstring lists it
+    "src/otter/data/fetch.py",                     # bundle sentinel; must still download it
+    "src/otter/data/anchor_packs/__init__.py",     # doc reference to the pack composition
+    "src/otter/data/anchor_packs/registry.py",     # doc reference to the pack composition
+    "src/otter/viz/viewer.py",                     # docstring example of a pi_source label
 
     # --- deliberate labelled COMPARISON ARMS (verified 2026-07-18) ---
     # headline via load_pi(); retired coupling appears only as a named contrast row.
@@ -135,7 +135,7 @@ SUPERSEDED_LOGS = {
     # twice over: by the canonical coupling AND by experiments/pagani_2026_per_model/,
     # which corrected the subtype labels these runs had inverted. Re-running them on the
     # canonical coupling would produce numbers that are still wrong for the label reason,
-    # so they are quarantined instead. Only homer/notebooks/archive/ reads them.
+    # so they are quarantined instead. Only otter/notebooks/archive/ reads them.
     "autism_subtypes_contrast.json",
     "autism_subtypes_full_matrix.json",
     "autism_subtypes_translation.json",

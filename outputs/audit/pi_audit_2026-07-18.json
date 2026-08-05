@@ -298,7 +298,7 @@
    "uses_load_pi": false
   },
   {
-   "file": "src/homer/viz/viewer.py",
+   "file": "src/otter/viz/viewer.py",
    "class": "LIVE",
    "role": "ambiguous",
    "stale_refs": [
@@ -662,7 +662,7 @@
    "uses_load_pi": false
   },
   {
-   "file": "experiments/pagani_2026_per_model/04_homer_human_masks.py",
+   "file": "experiments/pagani_2026_per_model/04_otter_human_masks.py",
    "class": "RETIRED",
    "role": "ambiguous",
    "stale_refs": [
@@ -705,7 +705,7 @@
    "uses_load_pi": false
   },
   {
-   "file": "src/homer/data/anchor_packs/__init__.py",
+   "file": "src/otter/data/anchor_packs/__init__.py",
    "class": "BY-DESIGN",
    "role": "ambiguous",
    "stale_refs": [
@@ -715,7 +715,7 @@
    "uses_load_pi": false
   },
   {
-   "file": "src/homer/data/anchor_packs/registry.py",
+   "file": "src/otter/data/anchor_packs/registry.py",
    "class": "BY-DESIGN",
    "role": "ambiguous",
    "stale_refs": [
@@ -725,7 +725,7 @@
    "uses_load_pi": false
   },
   {
-   "file": "src/homer/data/fetch.py",
+   "file": "src/otter/data/fetch.py",
    "class": "BY-DESIGN",
    "role": "ambiguous",
    "stale_refs": [
@@ -736,7 +736,7 @@
    "uses_load_pi": false
   },
   {
-   "file": "src/homer/data/io.py",
+   "file": "src/otter/data/io.py",
    "class": "BY-DESIGN",
    "role": "ambiguous",
    "stale_refs": [
@@ -906,7 +906,7 @@
  ],
  "unstamped_logs": [
   "abide_continuous_subtype.json",
-  "abide_homer_subtyping.json",
+  "abide_otter_subtyping.json",
   "ablation_auroc.json",
   "ablation_factorial_results.json",
   "ablation_grid_results.json",
@@ -999,7 +999,7 @@
   "network_holdout_cv.json",
   "network_mask_cv_summary.json",
   "null_distributions.json",
-  "pagani_homer_human_masks.json",
+  "pagani_otter_human_masks.json",
   "pagani_per_model_translation.json",
   "pagani_spatial_subtype_routing.json",
   "pagani_subtype_translation_corrected.json",

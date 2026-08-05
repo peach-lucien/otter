@@ -85,7 +85,7 @@ def main():
                  f"BICCN overall mean r = {biccn_mean:+.3f}")
 
     plt.suptitle(
-        "HOMER × BICCN cell-type marker validation. HOMER preserves regionally-concentrated\n"
+        "OTTER × BICCN cell-type marker validation. OTTER preserves regionally-concentrated\n"
         "cell-type signals (glia, dopamine) but not broadly-distributed cortical class markers (interneurons)",
         fontsize=12, y=1.02,
     )

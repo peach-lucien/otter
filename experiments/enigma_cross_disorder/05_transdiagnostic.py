@@ -1,18 +1,18 @@
 """Transdiagnostic test, turn the 'no disorder-specificity' negative into a positive.
 
-Phase 1 + the disorder-unique test (04) showed HOMER's per-disorder predictions are
-near-identical (even disjoint gene sets give r≈0.98): HOMER carries a single SHARED
+Phase 1 + the disorder-unique test (04) showed OTTER's per-disorder predictions are
+near-identical (even disjoint gene sets give r≈0.98): OTTER carries a single SHARED
 psychiatric spatial geometry, not disorder-specific biology. That is a real claim if
-HOMER's generic map matches the actual transdiagnostic cortical signature, the
+OTTER's generic map matches the actual transdiagnostic cortical signature, the
 "p-factor" pattern of shared cortical vulnerability across disorders.
 
 We test exactly that against ENIGMA observed cortical-thickness Cohen's d maps:
   • Build the ENIGMA TRANSDIAGNOSTIC AVERAGE = mean case-control Cohen's d across the
     four disorders we have gene sets for (ASD, SCZ, BD, ADHD), per DK region.
-  • HOMER's GENERIC prediction = mean of its per-disorder routed maps (they're
+  • OTTER's GENERIC prediction = mean of its per-disorder routed maps (they're
     near-identical anyway), aggregated to the same DK regions.
-  • Correlate HOMER-generic vs the ENIGMA transdiagnostic average, vs each disorder,
-    and vs two held-out disorders not in HOMER's gene sets (MDD, OCD), and test
+  • Correlate OTTER-generic vs the ENIGMA transdiagnostic average, vs each disorder,
+    and vs two held-out disorders not in OTTER's gene sets (MDD, OCD), and test
     significance with a spin null over the 34 DK region centroids.
 
 ENIGMA CSVs expected in data_external/enigma/cortical_thickness_<disorder>.csv
@@ -37,13 +37,13 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "enigma_cross_disorder"))
 
-from homer.data import load_cached                     # noqa: E402
-from homer.eval.nulls import _haar_rotation            # noqa: E402
+from otter.data import load_cached                     # noqa: E402
+from otter.eval.nulls import _haar_rotation            # noqa: E402
 cmp_mod = import_module("03_enigma_comparison")
 
 ENIGMA_DIR = ROOT / "data_external" / "enigma"
-GENE_DISORDERS = ["asd", "schizophrenia", "bipolar", "adhd"]   # in HOMER gene sets
-HELDOUT = ["mdd", "ocd"]                                       # NOT in HOMER gene sets
+GENE_DISORDERS = ["asd", "schizophrenia", "bipolar", "adhd"]   # in OTTER gene sets
+HELDOUT = ["mdd", "ocd"]                                       # NOT in OTTER gene sets
 
 
 def enigma_region_d(path):
@@ -63,19 +63,19 @@ def enigma_region_d(path):
 
 def main():
     print("=" * 78)
-    print("ENIGMA. TRANSDIAGNOSTIC test (HOMER generic map vs shared cortical signature)")
+    print("ENIGMA. TRANSDIAGNOSTIC test (OTTER generic map vs shared cortical signature)")
     print("=" * 78)
 
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
     preds = dict(np.load(ROOT / "outputs/coupling/per_disorder_predictions.npz"))
     dk_centroids = cmp_mod.DK_REGIONS_MNI
-    dk_to_parcels = cmp_mod.dk_to_homer_parcels(H.var, dk_centroids)
+    dk_to_parcels = cmp_mod.dk_to_otter_parcels(H.var, dk_centroids)
     dk_regions = list(dk_centroids.keys())
 
-    # HOMER generic prediction = mean across disorders (they're ~identical)
+    # OTTER generic prediction = mean across disorders (they're ~identical)
     generic = np.mean([preds[d] for d in preds], axis=0)
-    homer_dk = cmp_mod.aggregate_per_disorder_to_dk(generic, dk_to_parcels)
-    homer_vec = np.array([homer_dk.get(r, np.nan) for r in dk_regions])
+    otter_dk = cmp_mod.aggregate_per_disorder_to_dk(generic, dk_to_parcels)
+    otter_vec = np.array([otter_dk.get(r, np.nan) for r in dk_regions])
 
     # ENIGMA per-disorder + transdiagnostic average over the gene-set disorders
     fname = {"asd": "asd", "schizophrenia": "schizophrenia", "bipolar": "bipolar",
@@ -106,28 +106,28 @@ def main():
         p = (np.sum(np.abs(null) >= abs(r_obs)) + 1) / (n + 1)
         return float(r_obs), float(p)
 
-    print(f"\nHOMER generic predicted map vs ENIGMA observed (34 DK regions):")
+    print(f"\nOTTER generic predicted map vs ENIGMA observed (34 DK regions):")
     results = {}
-    r_trans, p_trans = spin_p(homer_vec, trans_avg)
+    r_trans, p_trans = spin_p(otter_vec, trans_avg)
     print(f"  TRANSDIAGNOSTIC AVERAGE (ASD+SCZ+BD+ADHD): r = {r_trans:+.3f}  "
           f"spin p = {p_trans:.4f}  {'SURVIVES' if p_trans < 0.05 else 'n.s.'}")
     results["transdiagnostic_average"] = {"pearson_r": r_trans, "spin_p": p_trans}
 
-    print(f"\n  per-disorder (HOMER generic vs each ENIGMA disorder):")
+    print(f"\n  per-disorder (OTTER generic vs each ENIGMA disorder):")
     for k in GENE_DISORDERS + HELDOUT:
         if k not in enigma:
             continue
-        r, p = spin_p(homer_vec, enigma[k])
+        r, p = spin_p(otter_vec, enigma[k])
         tag = "(held-out, not in gene sets)" if k in HELDOUT else ""
         print(f"    {k:<15} r = {r:+.3f}  spin p = {p:.4f}  {tag}")
         results[k] = {"pearson_r": r, "spin_p": p, "in_gene_sets": k not in HELDOUT}
 
     out = {
         "dk_regions": dk_regions,
-        "homer_generic_dk": homer_vec.tolist(),
+        "otter_generic_dk": otter_vec.tolist(),
         "enigma_transdiagnostic_dk": [float(x) for x in trans_avg],
         "results": results,
-        "note": "HOMER generic = mean of per-disorder routed maps; transdiagnostic avg = "
+        "note": "OTTER generic = mean of per-disorder routed maps; transdiagnostic avg = "
                 "mean ENIGMA Cohen's d across ASD/SCZ/BD/ADHD. Spin null over DK centroids.",
     }
     out_path = ROOT / "outputs" / "logs" / "enigma_transdiagnostic.json"

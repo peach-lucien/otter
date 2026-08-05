@@ -1,6 +1,6 @@
 """Generate all data Figure 6 needs: full Yeo-17 network z-profiles for the AI-opto circuit and the
 5 autism-mutation circuits (canonical pi), the AI-opto salience-enrichment permuted-pi null
-distribution, and the HOMER-vs-TransBrain head-to-head numbers.
+distribution, and the OTTER-vs-TransBrain head-to-head numbers.
 
 Writes outputs/logs/fig6_data.json
 """
@@ -11,7 +11,7 @@ import numpy as np, pandas as pd
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance  # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance  # noqa: E402
 DATA = ROOT / "data_external/transbrain_2025"
 
 

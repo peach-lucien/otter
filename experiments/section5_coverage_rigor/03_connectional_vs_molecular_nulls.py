@@ -1,6 +1,6 @@
 """§5: the homology boundary is CONNECTIONAL, not MOLECULAR — with proper spin nulls.
 
-`make_boundary_connectional.py` shows the descriptive picture: HOMER coverage (a
+`make_boundary_connectional.py` shows the descriptive picture: OTTER coverage (a
 connectivity + anchor quantity) has a large association-cortex deficit, while an
 independent transcriptomic similarity (51-gene homolog panel, best mouse match per
 human parcel) has essentially none. This script attaches significance via the repo's
@@ -14,7 +14,7 @@ z-scored across cortical parcels so they are on the same scale:
       is the connectional deficit specifically greater than the molecular one over
       association cortex, beyond spatial autocorrelation?
 
-Run: cd homer && PYTHONPATH=src python experiments/section5_coverage_rigor/03_connectional_vs_molecular_nulls.py
+Run: cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/03_connectional_vs_molecular_nulls.py
 Writes outputs/logs/section5_connectional_vs_molecular.json
 """
 from __future__ import annotations
@@ -24,8 +24,8 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached
-from homer.eval.nulls import _haar_rotation
+from otter.data import load_cached
+from otter.eval.nulls import _haar_rotation
 from scipy.spatial import cKDTree
 
 DATA = ROOT / "data_external"

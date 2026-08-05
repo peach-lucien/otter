@@ -12,7 +12,7 @@ Two things are wrong with that.
     so rotations fold it back onto itself and the null inflates (its 95th percentile is 0.21,
     against 0.13-0.14 for the whole-brain maps).
 
-2.  HOMER's human atlas is left/right symmetric, so the map can be mirrored and re-tested.
+2.  OTTER's human atlas is left/right symmetric, so the map can be mirrored and re-tested.
     The correlation does not replicate. It reverses:
 
         RIGHT hemisphere (Hill's native side) : rho = -0.184  (n = 197)
@@ -34,7 +34,7 @@ the coupling to be bilaterally symmetric, and entropic amplification lets small 
 send mass preferentially to one side. Coverage is therefore noisy per parcel, which is a further
 reason to report it as a tertile contrast rather than a per-parcel map.
 
-Run:  cd homer && PYTHONPATH=src python experiments/section5_coverage_rigor/10_hemisphere_replication.py
+Run:  cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/10_hemisphere_replication.py
 Writes: outputs/logs/section5_hemisphere_replication.json
 """
 from __future__ import annotations
@@ -50,8 +50,8 @@ from scipy.stats import spearmanr
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached, load_pi, pi_provenance  # noqa: E402
-from homer.eval.nulls import _haar_rotation              # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance  # noqa: E402
+from otter.eval.nulls import _haar_rotation              # noqa: E402
 
 N_SPIN = 1000
 

@@ -13,7 +13,7 @@ spin null that rotates the human map, re-splits by sign, re-routes and re-comput
 null preserves each circuit's spatial smoothness and the sign split.
 
 Needs clinical_maps/tms_anxdys.nii.gz. Run:
-  cd homer && PYTHONPATH=src python experiments/reverse_translation/07_symptom_dissociation.py
+  cd otter && PYTHONPATH=src python experiments/reverse_translation/07_symptom_dissociation.py
 Read-only; writes outputs/logs/reverse_translation_symptom_dissociation.json
 """
 from __future__ import annotations
@@ -23,7 +23,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance      # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance      # noqa: E402
 
 _s = importlib.util.spec_from_file_location("rt01", ROOT / "experiments/reverse_translation/01_validate.py")
 rt01 = importlib.util.module_from_spec(_s); _s.loader.exec_module(rt01)

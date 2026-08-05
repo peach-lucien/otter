@@ -1,10 +1,10 @@
 # Hodge 2019 cortical-layer-marker validation
 
-We asked whether HOMER's π preserves cortical-layer-marker spatial patterns across mouse and human, using the canonical layer-defining transcription factors from [Hodge et al. 2019, *Nature*](https://www.nature.com/articles/s41586-019-1506-7).
+We asked whether OTTER's π preserves cortical-layer-marker spatial patterns across mouse and human, using the canonical layer-defining transcription factors from [Hodge et al. 2019, *Nature*](https://www.nature.com/articles/s41586-019-1506-7).
 
 ## Why this experiment
 
-[Hodge 2019](https://www.nature.com/articles/s41586-019-1506-7) ("Conserved cell types with divergent features in human versus mouse cortex") showed that canonical layer-defining transcription factors maintain their layer-specific spatial expression across mouse and human cortex. We use these markers as an independent quantitative test of HOMER's anatomical fidelity:
+[Hodge 2019](https://www.nature.com/articles/s41586-019-1506-7) ("Conserved cell types with divergent features in human versus mouse cortex") showed that canonical layer-defining transcription factors maintain their layer-specific spatial expression across mouse and human cortex. We use these markers as an independent quantitative test of OTTER's anatomical fidelity:
 
 - **CUX1, CUX2, SATB2** → upper layers (L2/3)
 - **RORB** → granular L4
@@ -19,7 +19,7 @@ We routed each mouse layer-marker expression map through π and correlated the p
 
 ## What this means
 
-The Schaefer-400 parcellation does not separate layers within an area, and each mouse parcel mixes the cortical layers. This test therefore measures the area-level spatial distribution of the layer-marker genes rather than within-area lamination. At that level six of seven markers carry cross-species signal that π routes, at a strength (mean +0.119) comparable to the BICCN cell-type markers and below the region-level tests (~0.4). It does not show that HOMER resolves laminar geometry; the parcellation has no information at that scale.
+The Schaefer-400 parcellation does not separate layers within an area, and each mouse parcel mixes the cortical layers. This test therefore measures the area-level spatial distribution of the layer-marker genes rather than within-area lamination. At that level six of seven markers carry cross-species signal that π routes, at a strength (mean +0.119) comparable to the BICCN cell-type markers and below the region-level tests (~0.4). It does not show that OTTER resolves laminar geometry; the parcellation has no information at that scale.
 
 ## Files
 

@@ -26,10 +26,10 @@ import ot
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached                                              # noqa: E402
-from homer.data.anchors  import get_anchor_index                                  # noqa: E402
-from homer.data.networks import assign_networks, network_mismatch_mask            # noqa: E402
-from homer.eval.translation import (                                             # noqa: E402
+from otter.data import load_cached                                              # noqa: E402
+from otter.data.anchors  import get_anchor_index                                  # noqa: E402
+from otter.data.networks import assign_networks, network_mismatch_mask            # noqa: E402
+from otter.eval.translation import (                                             # noqa: E402
     fc_translation_quality, random_pi_baseline, uniform_pi_baseline,
 )
 

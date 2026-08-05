@@ -20,7 +20,7 @@ reverse operator is row-normalised pi (human -> mouse), aggregated to mouse stru
 Coordinates below are REPRESENTATIVE published targets; confirm against your preferred source
 before publication. The method contrast is robust to a few mm.
 
-Run: cd homer && PYTHONPATH=src python experiments/reverse_translation/02_clinical_targets.py
+Run: cd otter && PYTHONPATH=src python experiments/reverse_translation/02_clinical_targets.py
 Read-only; writes outputs/logs/reverse_translation_clinical.json
 """
 from __future__ import annotations
@@ -30,7 +30,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance      # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance      # noqa: E402
 
 K_NEAREST = 8          # human parcels forming the target ROI
 MIN_PARCELS = 2        # allow small nuclei (STN) — parcel counts are printed
@@ -63,7 +63,7 @@ def evidence_tier_by_parcel():
 
 def spin_indices(xyz, n, seed=0):
     from scipy.spatial import cKDTree
-    from homer.eval.nulls import _haar_rotation
+    from otter.eval.nulls import _haar_rotation
     c = xyz - xyz.mean(0); s = c / np.linalg.norm(c, axis=1, keepdims=True)
     t = cKDTree(s); rng = np.random.default_rng(seed)
     return [t.query(s @ _haar_rotation(rng).T)[1] for _ in range(n)]

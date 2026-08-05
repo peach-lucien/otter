@@ -19,9 +19,9 @@ from scipy.interpolate import RBFInterpolator
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src")); sys.path.insert(0, str(ROOT / "experiments/section5_coverage_rigor"))
-from homer.data import load_cached                       # noqa: E402
-from homer.data.anchors import get_anchor_index          # noqa: E402
-from homer.models import MultimodalFGW                   # noqa: E402
+from otter.data import load_cached                       # noqa: E402
+from otter.data.anchors import get_anchor_index          # noqa: E402
+from otter.models import MultimodalFGW                   # noqa: E402
 from beauchamp_scorer import BeauchampScorer             # noqa: E402
 
 LOG = ROOT / "outputs/logs/section5_warp_loo.json"

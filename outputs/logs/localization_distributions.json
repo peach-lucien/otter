@@ -5,7 +5,7 @@
    38.983748610906375,
    -15.463490234051655
   ],
-  "homer_top": [
+  "otter_top": [
    [
     -27.0,
     36.0,
@@ -2350,7 +2350,7 @@
    -19.14557744285606,
    58.937050934952865
   ],
-  "homer_top": [
+  "otter_top": [
    [
     36.0,
     -18.0,
@@ -4695,7 +4695,7 @@
    -13.935779816513762,
    16.137614678899084
   ],
-  "homer_top": [
+  "otter_top": [
    [
     54.0,
     -18.0,
@@ -7040,7 +7040,7 @@
    -79.45509674561065,
    -1.7427324247491773
   ],
-  "homer_top": [
+  "otter_top": [
    [
     -10.91851851851852,
     -80.96296296296296,
@@ -9385,7 +9385,7 @@
    -24.0,
    -11.571428571428571
   ],
-  "homer_top": [
+  "otter_top": [
    [
     -27.0,
     -18.0,
@@ -11729,6 +11729,6 @@
   "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
   "n_bn_labels": 124,
   "n_human_parcels": 2094,
-  "note": "tb_parcel is TransBrain's BN-region weight painted onto HOMER's human parcels, constant within a region. Region centroids are not stored: the bundled BN atlas is hemisphere-merged, so every centroid sits at x=0."
+  "note": "tb_parcel is TransBrain's BN-region weight painted onto OTTER's human parcels, constant within a region. Region centroids are not stored: the bundled BN atlas is hemisphere-merged, so every centroid sits at x=0."
  }
 }

@@ -6,7 +6,7 @@ reconstruction-fidelity coverage (mean per-parcel FC reconstruction r) on the CA
 mass-normalised column-sum. Low recon-coverage = connectivity has no mouse basis. ENIGMA d is
 negative for thinning, so if thinning concentrates in low-recon cortex we expect POSITIVE rho.
 
-Run: cd homer && PYTHONPATH=src python experiments/section5_coverage_rigor/24_disease_reconstruction.py
+Run: cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/24_disease_reconstruction.py
 Writes outputs/logs/section6_disorder_vs_reconstruction_DK.json
 """
 from __future__ import annotations
@@ -20,8 +20,8 @@ from scipy.stats import rankdata, spearmanr, false_discovery_control
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance  # noqa: E402
-from homer.eval.nulls import spin_null                  # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance  # noqa: E402
+from otter.eval.nulls import spin_null                  # noqa: E402
 
 N_SPIN = 2000
 RESCUE_MM = 4.0

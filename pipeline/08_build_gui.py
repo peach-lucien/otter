@@ -1,4 +1,4 @@
-"""Pipeline step 08 - build the region-first HOMER GUI.
+"""Pipeline step 08 - build the region-first OTTER GUI.
 
 This creates a static app in ``outputs/gui/``:
 
@@ -23,8 +23,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached                                      # noqa: E402
-from homer.viz.gui import build_gui_payload, write_gui                  # noqa: E402
+from otter.data import load_cached                                      # noqa: E402
+from otter.viz.gui import build_gui_payload, write_gui                  # noqa: E402
 
 ANN = ROOT / "outputs" / "anndata"
 COUP = ROOT / "outputs" / "coupling"
@@ -36,11 +36,11 @@ DOCS = ROOT / "docs"
 def _default_anchor_entries(M, H):
     """Anchor entries matching the current recommended all-packs pi.
 
-    Uses the pack registry (``homer.data.anchor_packs.registry``) so the GUI's
+    Uses the pack registry (``otter.data.anchor_packs.registry``) so the GUI's
     anchor-pack groups stay in lockstep with what ``compose_all.py`` fits.
     """
     try:
-        from homer.data.anchor_packs import build_default_pack_entries     # noqa: E402
+        from otter.data.anchor_packs import build_default_pack_entries     # noqa: E402
         return build_default_pack_entries(M.var, H.var, atlas_root=ROOT)
     except Exception as exc:  # pragma: no cover - depends on external atlas files
         print(f"  warning: could not build anchor-pack groups: {exc}")

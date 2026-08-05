@@ -26,7 +26,7 @@ reverse-translated human map ranks one of the listed mouse structures in the top
   anxiety, not only fear. BLA belongs in the anxiety set on the review's authority.
 - **interoception → parabrachial nucleus (PB added).** Palmiter 2018 establishes the PBN as
   the mouse relay of interoceptive (visceral/taste/temperature/pain) signals to the forebrain.
-  PB belongs in the interoception set on the review's authority. HOMER independently routing
+  PB belongs in the interoception set on the review's authority. OTTER independently routing
   interoception to PB is corroboration, not the reason for the edit.
 
 ## Notes

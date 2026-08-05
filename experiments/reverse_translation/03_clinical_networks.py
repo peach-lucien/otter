@@ -20,7 +20,7 @@ These are directly downloadable from NeuroVault collection 13075 -- see
 clinical_maps/DATA_SOURCES.md for the exact per-file URLs and a curl block.
 Any MNI152 volume works; the script resamples it, so you can add DBS voxel maps too.
 
-Run: cd homer && PYTHONPATH=src python experiments/reverse_translation/03_clinical_networks.py
+Run: cd otter && PYTHONPATH=src python experiments/reverse_translation/03_clinical_networks.py
 Read-only; writes outputs/logs/reverse_translation_clinical_networks.json
 """
 from __future__ import annotations
@@ -30,7 +30,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance      # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance      # noqa: E402
 
 # reuse the validated helpers from script 01 (resampling, mouse acronyms, spin null)
 _s = importlib.util.spec_from_file_location("rt01", ROOT / "experiments/reverse_translation/01_validate.py")

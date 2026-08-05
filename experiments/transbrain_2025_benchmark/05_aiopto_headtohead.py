@@ -1,22 +1,22 @@
-"""HOMER x TransBrain, head-to-head on the mouse anterior-insula optogenetic circuit.
+"""OTTER x TransBrain, head-to-head on the mouse anterior-insula optogenetic circuit.
 
 Both methods translate the SAME mouse phenotype (data_external/transbrain_2025/ai_opto.csv,
 TransBrain's own AI-opto case study; Allen acronym -> effect size) into human space, and
 we score each translated human map with the IDENTICAL salience-vs-rest enrichment metric
 used by experiments/section5_coverage_rigor/32_translate_aiopto.py.
 
-Apples-to-apples: both methods produce a value per HOMER human parcel.
-  * HOMER: transport-weighted average of the mouse map through pi_canonical.
+Apples-to-apples: both methods produce a value per OTTER human parcel.
+  * OTTER: transport-weighted average of the mouse map through pi_canonical.
   * TransBrain: SpeciesTrans(bn).mouse_to_human(...) -> human Brainnetome region values,
-    broadcast onto each HOMER human parcel via that parcel's BN label.
+    broadcast onto each OTTER human parcel via that parcel's BN label.
 Then, on the SHARED support (parcels with a BN label AND a Yeo-17 network AND a finite
 value from each method), we z-score the map across parcels and compute
     salience_enrichment = mean(z[SalVentAttn parcels]) - mean(z[rest]).
-Salience = Yeo-17 SalVentAttnA/B, the same mask HOMER uses.
+Salience = Yeo-17 SalVentAttnA/B, the same mask OTTER uses.
 
 Specificity null: for each method we permute which mouse region carries which value
 (shuffling the mouse->value assignment) and recompute the enrichment. This is the
-analogue of HOMER's permuted-coupling null for a fixed-mapping method like TransBrain.
+analogue of OTTER's permuted-coupling null for a fixed-mapping method like TransBrain.
 
 Writes outputs/logs/section6_transbrain_aiopto.json
 """
@@ -27,7 +27,7 @@ import numpy as np, pandas as pd
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance  # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance  # noqa: E402
 import nibabel as nib                                              # noqa: E402
 from transbrain.config import Config                               # noqa: E402
 from transbrain.trans import SpeciesTrans                          # noqa: E402
@@ -37,7 +37,7 @@ SEED = 0
 
 
 # ---------------------------------------------------------------------------
-# BN label per HOMER human parcel (same routine as 01_transbrain_benchmark.py)
+# BN label per OTTER human parcel (same routine as 01_transbrain_benchmark.py)
 # ---------------------------------------------------------------------------
 def load_bn_atlas(H_var):
     nii = nib.load(Config.bnatlas_path)
@@ -65,7 +65,7 @@ def load_bn_atlas(H_var):
 
 
 def route_norm(value_by_acr, parcel_acr, pi):
-    """HOMER: transport-weighted average of a mouse acronym->value map through pi."""
+    """OTTER: transport-weighted average of a mouse acronym->value map through pi."""
     mvec = np.array([value_by_acr.get(a, np.nan) for a in parcel_acr])
     mask = np.isfinite(mvec)
     num = mvec[mask] @ pi[mask, :]
@@ -83,7 +83,7 @@ def transbrain_map(value_by_acr, st_all):
 
 
 def tb_to_parcels(tb_dict, bn_id, id2name):
-    """Broadcast a {BN name: value} dict onto HOMER human parcels via their BN label."""
+    """Broadcast a {BN name: value} dict onto OTTER human parcels via their BN label."""
     out = np.full(len(bn_id), np.nan)
     for i, rid in enumerate(bn_id):
         if rid and rid in id2name:
@@ -114,7 +114,7 @@ def main():
     bn_id, id2name = load_bn_atlas(H.var)
     st_all = SpeciesTrans(atlas_type="bn")
 
-    # ---- Yeo-17 network per HOMER human parcel (same source as exp 32) ----
+    # ---- Yeo-17 network per OTTER human parcel (same source as exp 32) ----
     nr = np.asarray(json.loads((ROOT / "data_external/human_sc_meta.json").read_text())["node_region"], int)
     rows = [l.split("\t") for l in (ROOT / "outputs/anndata/_schaefer_order.txt").read_text().splitlines() if l.strip()]
     sch2net = {int(p[0]): p[1].split("_", 2)[2].split("_")[0] for p in rows}
@@ -124,19 +124,19 @@ def main():
     has_bn = bn_id > 0
 
     # ---- translate with both methods ------------------------------------
-    homer_vals = route_norm(value_by_acr, parcel_acr, pi)
+    otter_vals = route_norm(value_by_acr, parcel_acr, pi)
     tb_dict = transbrain_map(value_by_acr, st_all)
     tb_vals = tb_to_parcels(tb_dict, bn_id, id2name)
 
     # SHARED support: parcel needs a Yeo net, a BN label, and a finite value from BOTH
-    support = has_net & has_bn & np.isfinite(homer_vals) & np.isfinite(tb_vals)
+    support = has_net & has_bn & np.isfinite(otter_vals) & np.isfinite(tb_vals)
     print(f"shared support parcels: {int(support.sum())} "
           f"(salience {int((support & sal).sum())}, rest {int((support & ~sal).sum())})")
 
-    h_enr, ns, nr_ = enrichment(homer_vals, sal, support)
+    h_enr, ns, nr_ = enrichment(otter_vals, sal, support)
     t_enr, _, _ = enrichment(tb_vals, sal, support)
     print(f"\nSalience-vs-rest enrichment on shared support:")
-    print(f"  HOMER      {h_enr:+.3f} SD")
+    print(f"  OTTER      {h_enr:+.3f} SD")
     print(f"  TransBrain {t_enr:+.3f} SD")
 
     # ---- per-method Yeo-17 network ranking (z over shared support) -------
@@ -151,23 +151,23 @@ def main():
                 d[u] = float(np.nanmean(zf[sel]))
         return dict(sorted(d.items(), key=lambda kv: -kv[1]))
 
-    homer_nets = net_rank(homer_vals)
+    otter_nets = net_rank(otter_vals)
     tb_nets = net_rank(tb_vals)
     print("\nYeo-17 network ranking (z, shared support):")
-    print(f"{'network':16s} {'HOMER':>8s} {'TransBrain':>11s}")
-    for u in sorted(set(homer_nets) | set(tb_nets),
+    print(f"{'network':16s} {'OTTER':>8s} {'TransBrain':>11s}")
+    for u in sorted(set(otter_nets) | set(tb_nets),
                     key=lambda k: -(tb_nets.get(k, -9))):
         tag = " <-SAL" if u.startswith("SalVentAttn") else ""
-        print(f"  {u:14s} {homer_nets.get(u, float('nan')):+8.2f} {tb_nets.get(u, float('nan')):+11.2f}{tag}")
+        print(f"  {u:14s} {otter_nets.get(u, float('nan')):+8.2f} {tb_nets.get(u, float('nan')):+11.2f}{tag}")
 
     # rank of the salience networks within each method (1 = highest-z network)
     def sal_ranks(nets):
         order = list(nets.keys())
         return {u: order.index(u) + 1 for u in order if u.startswith("SalVentAttn")}, len(order)
-    h_sr, h_nn = sal_ranks(homer_nets)
+    h_sr, h_nn = sal_ranks(otter_nets)
     t_sr, t_nn = sal_ranks(tb_nets)
     print(f"\nSalience-network rank (of {t_nn} networks): "
-          f"HOMER {h_sr}  |  TransBrain {t_sr}")
+          f"OTTER {h_sr}  |  TransBrain {t_sr}")
 
     # ---- TransBrain: where do the human insula BN regions rank? ----------
     tb_sorted = sorted(tb_dict.items(), key=lambda kv: -kv[1])
@@ -183,7 +183,7 @@ def main():
     acrs = list(value_by_acr.keys())
     vals_arr = np.array([value_by_acr[a] for a in acrs])
 
-    # HOMER null (permute mouse assignment; cheap)
+    # OTTER null (permute mouse assignment; cheap)
     h_null = []
     for _ in range(N_PERM):
         perm = {a: v for a, v in zip(acrs, rng.permutation(vals_arr))}
@@ -194,7 +194,7 @@ def main():
     h_p = float((np.sum(h_null >= h_enr) + 1) / (len(h_null) + 1))
 
     # TransBrain null (permute mouse assignment; re-translate).
-    # MATCHED to HOMER's N_PERM as of 2026-07-20. This used to be 120 because re-translating
+    # MATCHED to OTTER's N_PERM as of 2026-07-20. This used to be 120 because re-translating
     # through SpeciesTrain is slow, but an unequal number of permutations makes the two
     # p-values non-comparable — the head-to-head is the whole point of this script, so the
     # nulls must be estimated at the same resolution.
@@ -236,7 +236,7 @@ def main():
     t_null = np.array(t_null)
     t_p = float((np.sum(t_null >= t_enr) + 1) / (len(t_null) + 1))
     print(f"\nSpecificity (shuffled mouse->value null):")
-    print(f"  HOMER      obs {h_enr:+.3f} vs null {h_null.mean():+.3f}+/-{h_null.std():.3f}  p={h_p:.3f}  (n={N_PERM})")
+    print(f"  OTTER      obs {h_enr:+.3f} vs null {h_null.mean():+.3f}+/-{h_null.std():.3f}  p={h_p:.3f}  (n={N_PERM})")
     print(f"  TransBrain obs {t_enr:+.3f} vs null {t_null.mean():+.3f}+/-{t_null.std():.3f}  p={t_p:.3f}  (n={N_TB})")
 
     # ---- verdict ---------------------------------------------------------
@@ -244,10 +244,10 @@ def main():
     if abs(diff) < 0.15:
         verdict = "comparable"
     elif diff > 0:
-        verdict = "HOMER stronger"
+        verdict = "OTTER stronger"
     else:
         verdict = "TransBrain stronger"
-    print(f"\nVERDICT: {verdict} (HOMER {h_enr:+.3f} vs TransBrain {t_enr:+.3f} SD, diff {diff:+.3f})")
+    print(f"\nVERDICT: {verdict} (OTTER {h_enr:+.3f} vs TransBrain {t_enr:+.3f} SD, diff {diff:+.3f})")
 
     out = {
         "input": "data_external/transbrain_2025/ai_opto.csv",
@@ -256,16 +256,16 @@ def main():
         "shared_support_parcels": int(support.sum()),
         "n_salience_parcels": ns,
         "n_rest_parcels": nr_,
-        "salience_enrichment_z": {"homer": h_enr, "transbrain": t_enr, "diff_homer_minus_tb": diff},
-        "salience_network_rank": {"homer": h_sr, "transbrain": t_sr, "n_networks": t_nn},
-        "yeo17_network_means_z": {"homer": homer_nets, "transbrain": tb_nets},
+        "salience_enrichment_z": {"otter": h_enr, "transbrain": t_enr, "diff_otter_minus_tb": diff},
+        "salience_network_rank": {"otter": h_sr, "transbrain": t_sr, "n_networks": t_nn},
+        "yeo17_network_means_z": {"otter": otter_nets, "transbrain": tb_nets},
         "transbrain_insula_bn_ranks": [
             {"rank": r, "bn_region": n, "value": v} for r, n, v in tb_ins],
         "transbrain_top_bn_regions": [
             {"rank": i + 1, "bn_region": n, "value": v}
             for i, (n, v) in enumerate(tb_sorted[:15])],
         "specificity": {
-            "homer": {"obs": h_enr, "null_mean": float(h_null.mean()),
+            "otter": {"obs": h_enr, "null_mean": float(h_null.mean()),
                       "null_std": float(h_null.std()), "p": h_p, "n_perm": N_PERM},
             "transbrain": {"obs": t_enr, "null_mean": float(t_null.mean()),
                            "null_std": float(t_null.std()), "p": t_p, "n_perm": N_TB},

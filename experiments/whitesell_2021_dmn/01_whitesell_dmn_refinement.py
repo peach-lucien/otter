@@ -1,4 +1,4 @@
-"""HOMER × Whitesell 2021 DMN refinement.
+"""OTTER × Whitesell 2021 DMN refinement.
 
 [Whitesell et al. 2021, Neuron](https://www.cell.com/neuron/fulltext/S0896-6273(21)00006-X)
 characterised the mouse default mode network at high resolution using Allen
@@ -6,9 +6,9 @@ Mouse Brain Connectivity (MBC) tract-tracing + rsfMRI, providing the most
 careful published mouse-DMN boundary. Their cross-species comparison maps the
 mouse DMN onto human Yeo-7 DMN regions.
 
-This experiment tests whether HOMER's DMN-DMN correspondence (currently 41 %
+This experiment tests whether OTTER's DMN-DMN correspondence (currently 41 %
 row-mass per Pagani Test 1) sharpens when we use Whitesell's more careful
-mouse-DMN parcel definition rather than HOMER's PAIRID-derived 'frontal_dmn'
+mouse-DMN parcel definition rather than OTTER's PAIRID-derived 'frontal_dmn'
 + 'temporal_dmn' networks.
 
 Mouse-DMN regions per Whitesell 2021 (DSURQE labels):
@@ -20,12 +20,12 @@ Mouse-DMN regions per Whitesell 2021 (DSURQE labels):
   - Entorhinal cortex, medial part
 
 Test:
-  1. Identify HOMER mouse parcels with DSURQE labels in these regions.
+  1. Identify OTTER mouse parcels with DSURQE labels in these regions.
   2. Aggregate π for these parcels → human-side mass distribution (2,094-vec).
   3. Aggregate to Yeo-7 networks → row-mass per human network.
   4. Compare DMN row-mass against the baseline (Pagani Test 1, 41 %).
 
-If Whitesell-DMN produces a higher DMN row-mass than HOMER's PAIRID-derived
+If Whitesell-DMN produces a higher DMN row-mass than OTTER's PAIRID-derived
 DMN, that's evidence the current PAIRID scheme underspecifies the mouse DMN
 (missing PPC, RSC, dorsal hippocampus), and an opportunity for a
 whitesell_dmn anchor pack.
@@ -43,8 +43,8 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "autism_subtypes"))
 
-from homer.data import load_cached, load_pi, pi_provenance
-from homer.data.anchor_packs._dsurqe import mouse_parcels_in_dsurqe_region
+from otter.data import load_cached, load_pi, pi_provenance
+from otter.data.anchor_packs._dsurqe import mouse_parcels_in_dsurqe_region
 
 
 # Whitesell 2021 mouse DMN: union of these DSURQE regions
@@ -69,7 +69,7 @@ WHITESELL_DMN_REGIONS = [
 
 def main():
     print("=" * 80)
-    print("HOMER × Whitesell 2021 DMN refinement")
+    print("OTTER × Whitesell 2021 DMN refinement")
     print("=" * 80)
 
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))
@@ -153,7 +153,7 @@ def main():
                            if p.get("mouse_net") == "frontal_dmn" and p.get("human_net") == "DMN"), None)
     coletta_temporal = next((p["row_norm_mass"] for p in coletta_result["sub_test_A_labeled_correspondence"]["per_pair_scores"]
                             if p.get("mouse_net") == "temporal_dmn" and p.get("human_net") == "DMN"), None)
-    print(f"  Pagani Test 1 (HOMER 'DMN' net → human DMN):       "
+    print(f"  Pagani Test 1 (OTTER 'DMN' net → human DMN):       "
           f"{pagani_dmn*100:.1f}%" if pagani_dmn else "  Pagani Test 1: N/A")
     print(f"  Coletta sub-test A (frontal_dmn → DMN):            "
           f"{coletta_frontal*100:.1f}%" if coletta_frontal else "  Coletta: N/A")
@@ -164,10 +164,10 @@ def main():
 
     if dmn_result['row_mass'] > (pagani_dmn or 0.41):
         verdict = (f"Whitesell DMN ({dmn_result['row_mass']*100:.1f}%) BEATS Pagani's PAIRID-derived "
-                   f"DMN ({(pagani_dmn or 0)*100:.1f}%) → refining the mouse-DMN parcel set sharpens HOMER's DMN→DMN correspondence")
+                   f"DMN ({(pagani_dmn or 0)*100:.1f}%) → refining the mouse-DMN parcel set sharpens OTTER's DMN→DMN correspondence")
     else:
         verdict = (f"Whitesell DMN ({dmn_result['row_mass']*100:.1f}%) is in the same range as Pagani's PAIRID-derived DMN "
-                   f"→ HOMER's existing DMN definition is consistent with Whitesell's careful definition")
+                   f"→ OTTER's existing DMN definition is consistent with Whitesell's careful definition")
     print(f"\nVerdict: {verdict}")
 
     # Save

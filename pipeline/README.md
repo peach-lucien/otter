@@ -6,7 +6,7 @@ End-to-end reproduction recipe. Run these in order to recreate every artefact in
 
 ```bash
 # Set up env
-conda env create -f env.yml && conda activate homer
+conda env create -f env.yml && conda activate otter
 pip install -e ".[dev]"
 
 # Run the full pipeline (in order)

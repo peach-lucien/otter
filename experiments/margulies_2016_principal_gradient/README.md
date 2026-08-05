@@ -1,6 +1,6 @@
 # Margulies 2016 + Huntenburg 2021 principal-gradient validation
 
-We asked whether HOMER's π preserves the cross-species principal connectivity
+We asked whether OTTER's π preserves the cross-species principal connectivity
 gradient, a single brain-wide ordering that is orthogonal to the specific-pair
 anchor benchmarks.
 
@@ -16,7 +16,7 @@ dominant organisational axis of cortex.
 extended the same procedure to mouse rsfMRI and showed an analogous gradient
 exists in mouse, broadly conserved across species.
 
-If HOMER's π is anatomically faithful, routing the mouse principal gradient
+If OTTER's π is anatomically faithful, routing the mouse principal gradient
 through π should reproduce the human principal gradient. That is a single global
 correlation, with no anchor pair involved.
 
@@ -46,7 +46,7 @@ transfers through π; microstructure does not.** π was fitted on connectivity.
 See `docs/03_results.md` §3.
 
 This is a *brain-wide* organisational test that no anchor pair drives, so it
-establishes that HOMER's cross-species fidelity extends beyond the Beauchamp
+establishes that OTTER's cross-species fidelity extends beyond the Beauchamp
 anchor pairs and the network-aggregated level.
 
 ---

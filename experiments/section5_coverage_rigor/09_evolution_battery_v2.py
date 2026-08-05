@@ -17,7 +17,7 @@ null" is not supportable as published.
 This script spin-tests the statistic it reports: a Spearman correlation against a
 Spearman-based spin null, on rank-transformed coverage (scale-free, so immune to epsilon).
 
-Run:  cd homer && PYTHONPATH=src python experiments/section5_coverage_rigor/09_evolution_battery_v2.py
+Run:  cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/09_evolution_battery_v2.py
 Writes: outputs/logs/section5_evolution_battery_v2.json
 """
 from __future__ import annotations
@@ -33,8 +33,8 @@ from scipy.stats import rankdata, spearmanr
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached, load_pi, pi_provenance   # noqa: E402
-from homer.eval.nulls import _haar_rotation          # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance   # noqa: E402
+from otter.eval.nulls import _haar_rotation          # noqa: E402
 
 N_SPIN = 1000
 SEED = 0

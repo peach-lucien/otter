@@ -1,14 +1,14 @@
-"""HOMER × Coletta 2020 cross-species RSN correspondence validation.
+"""OTTER × Coletta 2020 cross-species RSN correspondence validation.
 
 [Coletta et al. 2020, Sci Adv](https://www.science.org/doi/10.1126/sciadv.abb7187)
 characterised mouse resting-state networks via group-ICA on mouse rsfMRI and
 showed that a small set of mouse RSNs broadly correspond to canonical human
 Yeo networks (Somatomotor, Visual, DMN, Salience, Limbic, etc.).
 
-This is a stricter version of Pagani's Test 1 ("does HOMER's name-bridge hold")
+This is a stricter version of Pagani's Test 1 ("does OTTER's name-bridge hold")
 in three ways:
 
-  (A) **Labeled correspondence**, aggregate π over (HOMER mouse network ×
+  (A) **Labeled correspondence**, aggregate π over (OTTER mouse network ×
       Schaefer-Yeo7 human network), score diagonal-argmax, ratio over null.
       Re-runs the test with the canonical Yeo-7 partition (rather than
       Pagani's bespoke 8-net scheme) to check robustness of the bridge.
@@ -18,14 +18,14 @@ in three ways:
       through π, and ask which Yeo-7 network the predicted human spatial
       pattern best matches. Tests whether the cross-species correspondence
       survives when mouse networks are defined data-driven rather than from
-      HOMER's anchor-derived PAIRID_TO_NETWORK.
+      OTTER's anchor-derived PAIRID_TO_NETWORK.
 
   (C) **Network coherence (compactness)**, for each mouse network, how
       spatially compact is its predicted human-side image? A coherent mapping
       yields tight clusters; an incoherent one scatters mass across human
       space. Compared against permuted-π null.
 
-Together these test whether HOMER's π preserves the cross-species network
+Together these test whether OTTER's π preserves the cross-species network
 structure under multiple operationalisations of what a "network" is.
 """
 from __future__ import annotations
@@ -43,13 +43,13 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "autism_subtypes"))
 
-from homer.data import load_cached, load_pi, pi_provenance
-from homer.data.networks import PAIRID_TO_NETWORK, NETWORKS, assign_networks
-from homer.data.anchors import get_anchor_index
+from otter.data import load_cached, load_pi, pi_provenance
+from otter.data.networks import PAIRID_TO_NETWORK, NETWORKS, assign_networks
+from otter.data.anchors import get_anchor_index
 
 
 # ============================================================================
-# Sub-test A: labeled correspondence (HOMER mouse-nets × Schaefer-Yeo7 human-nets)
+# Sub-test A: labeled correspondence (OTTER mouse-nets × Schaefer-Yeo7 human-nets)
 # ============================================================================
 
 
@@ -182,10 +182,10 @@ def network_coherence(pi, mouse_net, n_mouse_nets, H_var):
 
 def main():
     print("=" * 80)
-    print("HOMER × Coletta 2020, cross-species RSN correspondence validation")
+    print("OTTER × Coletta 2020, cross-species RSN correspondence validation")
     print("=" * 80)
 
-    # ---- Load HOMER + atlas labels ----
+    # ---- Load OTTER + atlas labels ----
     pi = load_pi()
     prov = pi_provenance()
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))
@@ -193,9 +193,9 @@ def main():
     print(f"  π: {prov['pi_file']}  sha256 {prov['pi_sha256']}")
     print(f"  π: {pi.shape}, total mass {pi.sum():.4f}")
 
-    # Mouse network assignment via HOMER's PAIRID_TO_NETWORK (anchor-derived)
+    # Mouse network assignment via OTTER's PAIRID_TO_NETWORK (anchor-derived)
     idx_m = get_anchor_index(M.var)
-    mouse_net_homer = assign_networks(M.var, idx_m)
+    mouse_net_otter = assign_networks(M.var, idx_m)
     print(f"  Mouse PAIRID_TO_NETWORK assigns 1864 parcels to {len(NETWORKS)} networks")
 
     # Human network via Schaefer-Yeo7 (audit-corrected version)
@@ -213,10 +213,10 @@ def main():
     # Sub-test A: Labeled correspondence
     # ========================================================================
     print("\n" + "=" * 80)
-    print("SUB-TEST A. Labeled correspondence (HOMER mouse-nets × Yeo-7 human-nets)")
+    print("SUB-TEST A. Labeled correspondence (OTTER mouse-nets × Yeo-7 human-nets)")
     print("=" * 80)
 
-    # HOMER → Yeo-7 canonical pairings (best mapping each direction can be matched)
+    # OTTER → Yeo-7 canonical pairings (best mapping each direction can be matched)
     target_pairs = [
         ("sensorimotor", "SomatoMotor"),
         ("visual",       "Visual"),
@@ -230,7 +230,7 @@ def main():
         ("olfactory",    "Limbic"),
     ]
     N, N_norm, score_a = labeled_correspondence(
-        pi, mouse_net_homer, NETWORKS, human_net, human_paper_names,
+        pi, mouse_net_otter, NETWORKS, human_net, human_paper_names,
         target_pairs=target_pairs,
     )
     print(f"\n{'Pair':<35s} | {'mass on target':>16s} | {'null':>7s} | {'ratio':>7s} | argmax?")
@@ -262,7 +262,7 @@ def main():
     print(f"  components shape: {mouse_components.shape}")
 
     ica_labels = label_mouse_ica_by_anatomy(
-        mouse_components, mouse_net_homer, NETWORKS)
+        mouse_components, mouse_net_otter, NETWORKS)
     print(f"\nLabeling each ICA component by dominant anatomical network:")
     for k, lbl in ica_labels:
         peak_n = np.sum(mouse_components[k] >= np.percentile(mouse_components[k], 95))
@@ -300,7 +300,7 @@ def main():
     print("SUB-TEST C. Network coherence (spatial compactness in human space)")
     print("=" * 80)
 
-    real_coh = network_coherence(pi, mouse_net_homer, len(NETWORKS), H.var)
+    real_coh = network_coherence(pi, mouse_net_otter, len(NETWORKS), H.var)
     # Permuted-π null
     rng = np.random.default_rng(seed=42)
     n_trials = 100
@@ -308,7 +308,7 @@ def main():
     for _ in range(n_trials):
         perm = rng.permutation(pi.shape[0])
         pi_n = pi[perm]
-        coh_n = network_coherence(pi_n, mouse_net_homer, len(NETWORKS), H.var)
+        coh_n = network_coherence(pi_n, mouse_net_otter, len(NETWORKS), H.var)
         for mi in real_coh:
             if mi in coh_n:
                 null_spread[mi].append(coh_n[mi]["centroid_spread_mm"])
@@ -324,7 +324,7 @@ def main():
         null_mean = nulls.mean()
         ci = (np.percentile(nulls, 2.5), np.percentile(nulls, 97.5))
         ratio = real / null_mean if null_mean > 0 else float("nan")
-        # ratio < 1 means HOMER more compact than null (good)
+        # ratio < 1 means OTTER more compact than null (good)
         print(f"  {net_name:<16s} | {n_m:>8d} | {real:>20.1f} | "
               f"{null_mean:>10.1f} ({ci[0]:.0f}, {ci[1]:.0f})       | {ratio:>5.2f}")
         coh_results.append({
@@ -336,7 +336,7 @@ def main():
         })
 
     n_more_compact = sum(1 for r in coh_results if r["more_compact_than_null"])
-    print(f"\n  → HOMER's mouse-network images are MORE compact than null in "
+    print(f"\n  → OTTER's mouse-network images are MORE compact than null in "
           f"{n_more_compact}/{len(coh_results)} networks")
 
     # Save

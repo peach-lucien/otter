@@ -1,4 +1,4 @@
-"""Tests for homer.data.io, parse_t_table is the unit testable bit.
+"""Tests for otter.data.io, parse_t_table is the unit testable bit.
 
 Streaming + raw mat73 loading is integration-tested via the real h5ad cache;
 those tests would need ~100 MB external data, so are skipped here.
@@ -6,7 +6,7 @@ those tests would need ~100 MB external data, so are skipped here.
 import numpy as np
 import pandas as pd
 
-from homer.data.io import parse_t_table
+from otter.data.io import parse_t_table
 
 
 def _build_t_ht():

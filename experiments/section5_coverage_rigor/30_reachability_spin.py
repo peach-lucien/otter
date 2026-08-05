@@ -4,7 +4,7 @@ The first reachability test used a plain permutation of burden across regions, w
 autocorrelation and inflates significance (both coverage and disease maps are smooth). Redo with a
 spin null (rotate the coverage map on the sphere, preserving autocorrelation). Also test whether the
 disease burden aligns with reconstruction-coverage MORE than with a generic myelin/hierarchy map -
-if myelin does just as well, the signal is 'disorders hit association cortex', not HOMER-specific.
+if myelin does just as well, the signal is 'disorders hit association cortex', not OTTER-specific.
 
 reachability(disorder) = burden-weighted mean of a reference-map PERCENTILE across 52 hemi-regions,
 burden = max(0,-d). <50 = burden on low-reference cortex. Spin p (two-sided on |obs-50|).
@@ -22,8 +22,8 @@ import abagen
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance  # noqa: E402
-from homer.eval.nulls import _haar_rotation             # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance  # noqa: E402
+from otter.eval.nulls import _haar_rotation             # noqa: E402
 
 
 def recon(pi, Mc, Hc):

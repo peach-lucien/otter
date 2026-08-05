@@ -179,18 +179,18 @@
   },
   "head_to_head_gradient": {
     "n_bn_regions": 101,
-    "homer_vs_reference": 0.5619029715720308,
+    "otter_vs_reference": 0.5619029715720308,
     "transbrain_vs_reference": 0.5170626018163381,
-    "homer_vs_transbrain": 0.8257601262895222
+    "otter_vs_transbrain": 0.8257601262895222
   },
   "head_to_head_autism": {
     "n_bn_regions": 122,
     "n_individuals": 233,
     "map_agreement": 0.5841373709695624,
     "risk_score_concordance": 0.6055391495381729,
-    "mean_risk_homer": 0.001928423939404795,
+    "mean_risk_otter": 0.001928423939404795,
     "mean_risk_transbrain": -0.0009099356803783078,
-    "risk_homer": [
+    "risk_otter": [
       -0.01916692591973561,
       -0.11441246914877655,
       0.14381592614083108,

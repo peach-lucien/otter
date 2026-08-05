@@ -1,6 +1,6 @@
 # Experiments
 
-Reproducible one-off experiments. The `src/homer/` library is the production code; every file here is a research script that produced a specific result documented in `docs/`.
+Reproducible one-off experiments. The `src/otter/` library is the production code; every file here is a research script that produced a specific result documented in `docs/`.
 
 ## Layout
 
@@ -36,7 +36,7 @@ Three ablations that justify production design choices (soft anchors, uniform ma
 
 ## Third-party validations
 
-Each `<paper>_*/` subdirectory takes a published cross-species paper and tests whether HOMER's π reproduces or refines its findings. Outputs are consumed by the notebooks in `notebooks/` and are the source of the numbers in `docs/03_results.md`.
+Each `<paper>_*/` subdirectory takes a published cross-species paper and tests whether OTTER's π reproduces or refines its findings. Outputs are consumed by the notebooks in `notebooks/` and are the source of the numbers in `docs/03_results.md`.
 
 ## archive/, older detours
 

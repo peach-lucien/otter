@@ -42,7 +42,7 @@ def main():
     ax.set_xlim(0, 0.6)
     ax.axvline(0, color="black", linewidth=0.5)
     ax.set_title(
-        "HOMER cross-species translation produces equal correlation\n"
+        "OTTER cross-species translation produces equal correlation\n"
         "with the human ASD pattern for ALL brain-disorder gene sets, "
         "signal is NOT autism-specific",
         fontsize=11,
@@ -56,7 +56,7 @@ def main():
     # Note about excluded conditions
     skipped = [c for c, v in results.items() if v.get("skipped")]
     if skipped:
-        note = (f"Skipped (too few HOMER-overlap genes): " + ", ".join(skipped) +
+        note = (f"Skipped (too few OTTER-overlap genes): " + ", ".join(skipped) +
                 "\n(Psoriasis = non-brain control; expected near-zero r had it been testable.)")
         plt.figtext(0.5, -0.05, note, ha="center", fontsize=8, style="italic")
 

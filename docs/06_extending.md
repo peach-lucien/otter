@@ -10,7 +10,7 @@ Suppose you want to add a within-species cost matrix from a new modality
 
 ### 1. A within-species cost function
 
-Add to `homer.costs.relational`:
+Add to `otter.costs.relational`:
 
 ```python
 def tractography_correlation_distance(tract: np.ndarray) -> np.ndarray:
@@ -77,7 +77,7 @@ is species-agnostic, the work is in the data layer.
 
 ### 1. Update the I/O constants
 
-`homer.data.io._MAT_TOPKEY` currently maps `"mouse" → "m"` and `"human" → "h"`.
+`otter.data.io._MAT_TOPKEY` currently maps `"mouse" → "m"` and `"human" → "h"`.
 Extend it for your new species and the corresponding `corrs_<species>.mat`
 file under `data_external/`.
 
@@ -86,7 +86,7 @@ file under `data_external/`.
 The 42 Garin anchors are mouse-human-specific. For a new species pair, you
 need new putative homologue pairs. Two options:
 
-- Hand-curate them and update `homer.data.networks.PAIRID_TO_NETWORK` with
+- Hand-curate them and update `otter.data.networks.PAIRID_TO_NETWORK` with
   your new species' pair labels.
 - Use a published atlas (e.g. for macaque-human, the Markov 2014 hierarchy
   has ~30 well-defined cortical homologues).
@@ -97,8 +97,8 @@ Once the data layer accepts your new species, the model classes work
 unchanged:
 
 ```python
-from homer.data import load_cached
-from homer.models import MultimodalFGW
+from otter.data import load_cached
+from otter.models import MultimodalFGW
 M, _ = load_cached("macaque", cache_dir=...)
 H, _ = load_cached("human", cache_dir=...)
 model = MultimodalFGW(use_sc=True).fit(M, H)
@@ -130,7 +130,7 @@ YAML form (see `config/region_anchors_motor.yaml` for an example):
 Then in code:
 
 ```python
-from homer.data.region_anchors import parse_region_anchors_config, apply_region_supervision
+from otter.data.region_anchors import parse_region_anchors_config, apply_region_supervision
 
 entries = parse_region_anchors_config("config/my_region.yaml", M.var, H.var)
 # Soft constraint (default 0.15), gives room for FC/SC structure to push back
@@ -147,11 +147,11 @@ for the soft-vs-hard tradeoff.
 
 ## Add a new model class
 
-The base class contract is in `homer.models.base.FGWModel`. To add a new
+The base class contract is in `otter.models.base.FGWModel`. To add a new
 solver:
 
 ```python
-from homer.models.base import FGWModel, FitInfo
+from otter.models.base import FGWModel, FitInfo
 
 
 class MyNewSolverFGW(FGWModel):
@@ -168,10 +168,10 @@ class MyNewSolverFGW(FGWModel):
         return pi, FitInfo(loss=loss, n_iter=n_iter, converged=True)
 ```
 
-Then export it from `homer.models.__init__`:
+Then export it from `otter.models.__init__`:
 
 ```python
-from homer.models.my_new_solver import MyNewSolverFGW
+from otter.models.my_new_solver import MyNewSolverFGW
 __all__.append("MyNewSolverFGW")
 ```
 
@@ -180,7 +180,7 @@ Test it the same way the other models are tested in `tests/test_models.py`
 
 ## Use a custom evaluation metric
 
-Add a new function to `homer.eval` and re-export from `homer.eval.__init__`.
+Add a new function to `otter.eval` and re-export from `otter.eval.__init__`.
 Then add it to `pipeline/07_build_artefacts.py` if you want it to appear in
 the headline comparison table.
 

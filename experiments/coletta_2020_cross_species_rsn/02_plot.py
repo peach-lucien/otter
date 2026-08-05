@@ -26,7 +26,7 @@ def main():
     ax.barh(y, ratios, color=colors)
     ax.axvline(1.0, color="black", linewidth=0.5, linestyle="--", label="null (1×)")
     ax.set_yticks(y); ax.set_yticklabels(names, fontsize=8)
-    ax.set_xlabel("HOMER mass / null expectation")
+    ax.set_xlabel("OTTER mass / null expectation")
     n_diag = A["n_diagonal_argmax"]; n_pairs = A["n_pairs_scored"]
     ax.set_title(f"Sub-test A: Labeled correspondence\n"
                  f"{n_diag}/{n_pairs} pairs are diagonal-argmax")
@@ -72,7 +72,7 @@ def main():
     y = np.arange(len(nets))
     ax.barh(y - 0.2, real, 0.4,
             color=["#2a9d8f" if c else "#e76f51" for c in more_compact],
-            label="HOMER (real)")
+            label="OTTER (real)")
     ax.barh(y + 0.2, nulls, 0.4, color="#aaaaaa", label="permuted-π null mean")
     ax.set_yticks(y); ax.set_yticklabels(nets, fontsize=9)
     ax.set_xlabel("Centroid spread (mm), smaller = more compact")
@@ -82,7 +82,7 @@ def main():
     ax.legend(loc="lower right", fontsize=8)
 
     plt.suptitle(
-        "HOMER × Coletta 2020, cross-species RSN correspondence + coherence",
+        "OTTER × Coletta 2020, cross-species RSN correspondence + coherence",
         fontsize=12, y=1.02,
     )
     plt.tight_layout()

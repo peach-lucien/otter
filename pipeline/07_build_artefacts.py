@@ -35,12 +35,12 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached                                      # noqa: E402
-from homer.viz.reports import (                                          # noqa: E402
+from otter.data import load_cached                                      # noqa: E402
+from otter.viz.reports import (                                          # noqa: E402
     build_comparison_table, render_summary_md,
     make_comparison_bars_figure, make_per_network_heatmap_figure,
 )
-from homer.viz.viewer import write_viewer                                # noqa: E402
+from otter.viz.viewer import write_viewer                                # noqa: E402
 
 ANN  = ROOT / "outputs" / "anndata"
 COUP = ROOT / "outputs" / "coupling"

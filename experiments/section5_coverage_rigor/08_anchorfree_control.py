@@ -45,7 +45,7 @@ leaving them free to go anywhere. Its sidecar JSON still reports n_visible_ancho
 correct way to drop anchors is to clear M.var["garin_anchor"], which is what we do below (and
 what ablation_ladder.py does).
 
-Run:  cd homer && PYTHONPATH=src python experiments/section5_coverage_rigor/08_anchorfree_control.py
+Run:  cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/08_anchorfree_control.py
 Writes: outputs/coupling/pi_anchorfree_control.npy
         outputs/logs/section5_anchorfree_control.json
 """
@@ -62,9 +62,9 @@ from scipy.stats import rankdata, spearmanr
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached, load_pi, pi_provenance  # noqa: E402
-from homer.data.anchors import get_anchor_index                 # noqa: E402
-from homer.eval.nulls import _haar_rotation                     # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance  # noqa: E402
+from otter.data.anchors import get_anchor_index                 # noqa: E402
+from otter.eval.nulls import _haar_rotation                     # noqa: E402
 
 N_SPIN = 1000
 SEED = 0
@@ -73,7 +73,7 @@ PI_AF = ROOT / "outputs/coupling/pi_anchorfree_control.npy"
 
 def fit_anchor_free():
     """GW(FC+SC) + xyz, with garin_anchor CLEARED and no region packs."""
-    from homer.models import MultimodalFGW
+    from otter.models import MultimodalFGW
 
     M, _ = load_cached("mouse", cache_dir=ROOT / "outputs/anndata")
     H, _ = load_cached("human", cache_dir=ROOT / "outputs/anndata")

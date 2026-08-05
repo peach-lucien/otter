@@ -27,8 +27,8 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "autism_subtypes"))
 
-from homer.data import load_cached                                  # noqa: E402
-from homer.eval.nulls import translation_spin_null, _haar_rotation  # noqa: E402
+from otter.data import load_cached                                  # noqa: E402
+from otter.eval.nulls import translation_spin_null, _haar_rotation  # noqa: E402
 
 ncv = import_module("01_network_crossvalidation")
 

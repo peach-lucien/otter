@@ -7,11 +7,11 @@
 > maintainer/source-data-only script; the per-parcel result it produces
 > (`pagani_mouse_expr.npy`) is already committed so downstream steps don't need it.
 
-Standalone pipeline to expand HOMER's mouse Allen ISH atlas from 61 curated genes to **all 6,415 genes implicated by Pagani et al. 2026** (1,952 hypo-only + 4,463 hyper-only from MOESM4). Required to power Test 3 (gene-spatial translation) properly.
+Standalone pipeline to expand OTTER's mouse Allen ISH atlas from 61 curated genes to **all 6,415 genes implicated by Pagani et al. 2026** (1,952 hypo-only + 4,463 hyper-only from MOESM4). Required to power Test 3 (gene-spatial translation) properly.
 
 ## Why this exists
 
-The in-conversation proof-of-concept used HOMER's 51-gene panel, of which only 36 overlap with Pagani's lists. Spearman ρ = +0.619 (empirical p = 0.045) is suggestive but underpowered. With the full 6,415-gene panel, or however much of it Allen has usable ISH data for (expected 30–50%). Test 3 becomes a properly-powered cross-species spatial replication of Pagani's pathway claim.
+The in-conversation proof-of-concept used OTTER's 51-gene panel, of which only 36 overlap with Pagani's lists. Spearman ρ = +0.619 (empirical p = 0.045) is suggestive but underpowered. With the full 6,415-gene panel, or however much of it Allen has usable ISH data for (expected 30–50%). Test 3 becomes a properly-powered cross-species spatial replication of Pagani's pathway claim.
 
 ## Why this isn't run in-conversation
 
@@ -35,20 +35,20 @@ So this directory contains a portable script you run on your own machine.
 ### One-time setup
 
 ```bash
-# From HOMER repo root
+# From OTTER repo root
 pip install requests nibabel numpy pandas scipy openpyxl
 ```
 
-The script imports HOMER's existing transform helpers (`_mouse_transform.py`) and requires:
+The script imports OTTER's existing transform helpers (`_mouse_transform.py`) and requires:
 - `data_external/_diagnostics/mouse_to_ccf_transform.json` (exists)
-- `data_crossspecies/_mouse_mask/rsmask.nii` (HOMER's mouse mask, exists)
+- `data_crossspecies/_mouse_mask/rsmask.nii` (OTTER's mouse mask, exists)
 
 ### Step 1, small test (optional but recommended)
 
 Validate the pipeline on 30 Pagani genes first to confirm the API + parsing chain works on your machine:
 
 ```bash
-cd <homer-repo-root>
+cd <otter-repo-root>
 python experiments/autism_subtypes/allen_expansion/download_pagani_ish.py \
     --max-genes 30 --workers 2
 ```
@@ -83,7 +83,7 @@ Writes `outputs/logs/autism_subtypes_gene_spatial_expanded.json`. With ~2,000+ g
 
 ## Expected outcome
 
-If Pagani's claim 4 is correct AND HOMER's π carries cross-species spatial signal:
+If Pagani's claim 4 is correct AND OTTER's π carries cross-species spatial signal:
 - Pearson r should be substantially above the underpowered +0.44 we got with 36 genes
 - Empirical p should drop well below 0.045 (Spearman) / 0.13 (Pearson)
 - Same-sign agreement should rise from 4/8 toward 6-8/8
@@ -100,4 +100,4 @@ If the result *doesn't* improve, that would suggest the cross-species pathway si
 
 ## After Pagani's gene list is downloaded once
 
-The cache is reusable across HOMER experiments. Future studies that need parcel-level mouse expression for any subset of these genes can read from `pagani_mouse_expr.npy` directly without re-querying Allen.
+The cache is reusable across OTTER experiments. Future studies that need parcel-level mouse expression for any subset of these genes can read from `pagani_mouse_expr.npy` directly without re-querying Allen.

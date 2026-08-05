@@ -6,7 +6,7 @@ precomputed DSURQE vote labels:
 
   - The mouse parcel table ships ``region_vote_ss_dsq``, precomputed
     DSURQE vote labels per parcel.
-  - HOMER's anchor packs query ``mouse_parcels_in_dsurqe_region(M, NAME)``
+  - OTTER's anchor packs query ``mouse_parcels_in_dsurqe_region(M, NAME)``
     with names like "Caudoputamen", "Periaqueductal gray", "Lateral
     visual area".
   - The vote vocabulary uses DIFFERENT NAMES, coarser-grained and with
@@ -43,19 +43,19 @@ needs_v2 = pytest.mark.skipif(
 
 
 def _load_io():
-    pkg_homer = importlib.util.module_from_spec(
-        importlib.machinery.ModuleSpec("homer", None)
+    pkg_otter = importlib.util.module_from_spec(
+        importlib.machinery.ModuleSpec("otter", None)
     )
     pkg_data = importlib.util.module_from_spec(
-        importlib.machinery.ModuleSpec("homer.data", None)
+        importlib.machinery.ModuleSpec("otter.data", None)
     )
-    sys.modules.setdefault("homer", pkg_homer)
-    sys.modules.setdefault("homer.data", pkg_data)
+    sys.modules.setdefault("otter", pkg_otter)
+    sys.modules.setdefault("otter.data", pkg_data)
     spec = importlib.util.spec_from_file_location(
-        "homer.data.io", REPO / "src/homer/data/io.py"
+        "otter.data.io", REPO / "src/otter/data/io.py"
     )
     mod = importlib.util.module_from_spec(spec)
-    sys.modules["homer.data.io"] = mod
+    sys.modules["otter.data.io"] = mod
     spec.loader.exec_module(mod)
     return mod
 
@@ -105,8 +105,8 @@ def test_dsurqe_offset_constant_still_present():
     because the live atlas lookup is still the production code path.
     """
     spec = importlib.util.spec_from_file_location(
-        "homer.data.anchor_packs._dsurqe",
-        REPO / "src/homer/data/anchor_packs/_dsurqe.py",
+        "otter.data.anchor_packs._dsurqe",
+        REPO / "src/otter/data/anchor_packs/_dsurqe.py",
     )
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)

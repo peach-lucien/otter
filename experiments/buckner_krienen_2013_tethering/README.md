@@ -1,6 +1,6 @@
 # Buckner & Krienen 2013, tethering hypothesis (negative control)
 
-A negative-control / falsification test. We asked whether HOMER's π is
+A negative-control / falsification test. We asked whether OTTER's π is
 *appropriately unconfident* over the part of human cortex the field says has
 no clear mouse homologue.
 
@@ -15,9 +15,9 @@ no well-defined mouse homologue of the expanded human association cortex, so a
 faithful coupling should be confident over sensorimotor cortex and **sparse /
 unconfident over association cortex**.
 
-The falsification logic follows from that. If HOMER's π were *uniformly* confident
+The falsification logic follows from that. If OTTER's π were *uniformly* confident
 everywhere, including over association cortex that has no clear mouse
-homologue, that would signal over-fitting. HOMER should know what it can't
+homologue, that would signal over-fitting. OTTER should know what it can't
 map.
 
 ## Result
@@ -56,7 +56,7 @@ map.
 
 Three panels (`outputs/figures/buckner_krienen_2013_tethering.png`).
 
-For every human cortical parcel we measure HOMER's **coverage**, the π mass it
+For every human cortical parcel we measure OTTER's **coverage**, the π mass it
 receives from the mouse brain (the per-column mass of the coupling), and place it on
 the sensorimotor → association axis (the HCP T1w/T2w myelin map; high myelin =
 sensorimotor).
@@ -73,7 +73,7 @@ sensorimotor).
 > are a **0.68 log-unit** gap at **spin p = 0.286**, with the continuous correlation
 > r = 0.14 at spin p = 0.169. Both are null.
 
-HOMER's coverage **collapses toward association cortex**. The sensorimotor
+OTTER's coverage **collapses toward association cortex**. The sensorimotor
 tertile receives a mean log₁₀ coverage of −8.5; the association tertile −18.8,
 a gap of **10.3 log units** [SUPERSEDED: summed, and on the retired coupling. The
 mass-normalised gap on the canonical coupling is **0.68 log units, spin p = 0.286**, i.e.
@@ -91,7 +91,7 @@ shows a monotone-ish collapse from sensorimotor to association cortex; Spearman
 | coverage gap (mass-normalised mean, **retired** π, WITHDRAWN) | ~~6.7 log units, spin p = 0.002~~ |
 | **coverage gap (mass-normalised mean, canonical π)** | **0.68 log units, spin p = 0.286 (null)** |
 
-~~**HOMER is not confident everywhere**, it is dramatically sparser over human
+~~**OTTER is not confident everywhere**, it is dramatically sparser over human
 association cortex, just as the tethering hypothesis predicts. The coupling
 "knows" it has no good mouse homologue for the expanded human association
 networks.~~
@@ -104,7 +104,7 @@ expansion and hierarchy maps under a spin null (see `docs/03_results.md` §5).
 
 **Notes.** (1) π's per-parcel *entropy*, the diffuseness of a parcel's
 mouse origin, is flat along the axis (ρ = +0.088). The *amount* of
-coverage carries the tethering signal, and its diffuseness does not. (2) HOMER's
+coverage carries the tethering signal, and its diffuseness does not. (2) OTTER's
 Garin anchors are weighted toward sensorimotor cortex, which contributes to the
 sensorimotor–association coverage gap alongside the underlying evolutionary
 untethering. The two are not fully separable, but both push the same way: a
@@ -115,7 +115,7 @@ territory that never reaches the transmodal extreme.
 
 ## Method
 
-1. Per human cortical parcel, HOMER coverage = log₁₀ of the π column mass
+1. Per human cortical parcel, OTTER coverage = log₁₀ of the π column mass
    (Σ_i π[i,j]).
 2. Sensorimotor→association axis = HCP T1w/T2w myelin per Schaefer region
    (reused from the Fulcher experiment).

@@ -9,7 +9,7 @@ What it does:
   2. For each gene, queries Allen Brain Atlas RMA API for a coronal
      SectionDataSet (no allensdk dependency; uses requests directly).
   3. Downloads the 3D ISH energy grid (.mhd + .raw) as a zip.
-  4. Reads the volume, samples per-parcel CCFv3 voxels using HOMER's existing
+  4. Reads the volume, samples per-parcel CCFv3 voxels using OTTER's existing
      mouse → CCFv3 transform.
   5. Saves a (1864, n_genes_kept) expression matrix + a gene list.
 
@@ -52,11 +52,11 @@ import pandas as pd
 import requests
 from xml.etree import ElementTree as ET
 
-ROOT = Path(__file__).resolve().parents[3]   # homer/
+ROOT = Path(__file__).resolve().parents[3]   # otter/
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "pipeline" / "00_external"))
 
-from homer.data import DATA_DIR, load_metadata, parse_t_table       # noqa: E402
+from otter.data import DATA_DIR, load_metadata, parse_t_table       # noqa: E402
 from _mouse_transform import load_transform, colleague_voxel_to_ccf_world  # noqa: E402
 
 ALLEN_BASE = "http://api.brain-map.org"

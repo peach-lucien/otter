@@ -31,7 +31,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import DATA_DIR, load_metadata, parse_t_table   # noqa: E402
+from otter.data import DATA_DIR, load_metadata, parse_t_table   # noqa: E402
 
 OUT = ROOT / "data_external" / "_diagnostics"
 OUT.mkdir(parents=True, exist_ok=True)

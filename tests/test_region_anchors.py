@@ -1,11 +1,11 @@
-"""Tests for homer.data.region_anchors."""
+"""Tests for otter.data.region_anchors."""
 from __future__ import annotations
 
 import numpy as np
 import pandas as pd
 import pytest
 
-from homer.data.region_anchors import (
+from otter.data.region_anchors import (
     RegionAnchorEntry,
     parse_region_anchors_config,
     apply_region_supervision,
@@ -222,8 +222,8 @@ def _skip_if_no_atlas():
 def test_build_biccn_motor_region_anchors_integration():
     """Integration: BICCN motor pack builds 2 valid entries."""
     repo, ann = _skip_if_no_atlas()
-    from homer.data import load_cached
-    from homer.data.anchor_packs import build_biccn_motor_region_anchors
+    from otter.data import load_cached
+    from otter.data.anchor_packs import build_biccn_motor_region_anchors
 
     M, _ = load_cached("mouse", cache_dir=ann)
     H, _ = load_cached("human", cache_dir=ann)
@@ -242,8 +242,8 @@ def test_build_biccn_motor_region_anchors_integration():
 def test_build_tectum_region_anchors_integration():
     """Integration: Tectum pack builds 2 valid entries with disjoint pids 32/33."""
     repo, ann = _skip_if_no_atlas()
-    from homer.data import load_cached
-    from homer.data.anchor_packs import build_tectum_region_anchors
+    from otter.data import load_cached
+    from otter.data.anchor_packs import build_tectum_region_anchors
 
     M, _ = load_cached("mouse", cache_dir=ann)
     H, _ = load_cached("human", cache_dir=ann)
@@ -263,8 +263,8 @@ def test_build_tectum_region_anchors_integration():
 def test_build_olfactory_region_anchors_integration():
     """Integration: Olfactory pack builds 2 valid entries with pids 34/35."""
     repo, ann = _skip_if_no_atlas()
-    from homer.data import load_cached
-    from homer.data.anchor_packs import build_olfactory_region_anchors
+    from otter.data import load_cached
+    from otter.data.anchor_packs import build_olfactory_region_anchors
 
     M, _ = load_cached("mouse", cache_dir=ann)
     H, _ = load_cached("human", cache_dir=ann)
@@ -285,8 +285,8 @@ def test_build_olfactory_region_anchors_integration():
 def test_build_cingulate_region_anchors_integration():
     """Integration: Cingulate pack builds 2 valid entries with pids 36/37."""
     repo, ann = _skip_if_no_atlas()
-    from homer.data import load_cached
-    from homer.data.anchor_packs import build_cingulate_region_anchors
+    from otter.data import load_cached
+    from otter.data.anchor_packs import build_cingulate_region_anchors
 
     M, _ = load_cached("mouse", cache_dir=ann)
     H, _ = load_cached("human", cache_dir=ann)
@@ -304,8 +304,8 @@ def test_build_cingulate_region_anchors_integration():
 def test_build_amygdala_region_anchors_integration():
     """Integration: Amygdala pack builds 1 valid entry with pid 38."""
     repo, ann = _skip_if_no_atlas()
-    from homer.data import load_cached
-    from homer.data.anchor_packs import build_amygdala_region_anchors
+    from otter.data import load_cached
+    from otter.data.anchor_packs import build_amygdala_region_anchors
 
     M, _ = load_cached("mouse", cache_dir=ann)
     H, _ = load_cached("human", cache_dir=ann)
@@ -322,8 +322,8 @@ def test_build_amygdala_region_anchors_integration():
 def test_build_hippocampal_region_anchors_integration():
     """Integration: Hippocampal pack builds 4 valid entries with pids 39-42."""
     repo, ann = _skip_if_no_atlas()
-    from homer.data import load_cached
-    from homer.data.anchor_packs import build_hippocampal_region_anchors
+    from otter.data import load_cached
+    from otter.data.anchor_packs import build_hippocampal_region_anchors
 
     M, _ = load_cached("mouse", cache_dir=ann)
     H, _ = load_cached("human", cache_dir=ann)
@@ -349,8 +349,8 @@ def test_build_hippocampal_region_anchors_integration():
 def test_build_striatum_region_anchors_integration():
     """Integration: Striatum pack builds 2 entries at pids 47, 48."""
     repo, ann = _skip_if_no_atlas()
-    from homer.data import load_cached
-    from homer.data.anchor_packs import build_striatum_region_anchors
+    from otter.data import load_cached
+    from otter.data.anchor_packs import build_striatum_region_anchors
 
     M, _ = load_cached("mouse", cache_dir=ann)
     H, _ = load_cached("human", cache_dir=ann)
@@ -370,8 +370,8 @@ def test_build_striatum_region_anchors_integration():
 def test_build_entorhinal_region_anchors_integration():
     """Integration: Entorhinal pack builds 1 entry at pid 49."""
     repo, ann = _skip_if_no_atlas()
-    from homer.data import load_cached
-    from homer.data.anchor_packs import build_entorhinal_region_anchors
+    from otter.data import load_cached
+    from otter.data.anchor_packs import build_entorhinal_region_anchors
 
     M, _ = load_cached("mouse", cache_dir=ann)
     H, _ = load_cached("human", cache_dir=ann)
@@ -387,8 +387,8 @@ def test_build_entorhinal_region_anchors_integration():
 def test_build_visual_region_anchors_integration():
     """Integration: Visual pack builds 1 entry at pid 52."""
     repo, ann = _skip_if_no_atlas()
-    from homer.data import load_cached
-    from homer.data.anchor_packs import build_visual_region_anchors
+    from otter.data import load_cached
+    from otter.data.anchor_packs import build_visual_region_anchors
 
     M, _ = load_cached("mouse", cache_dir=ann)
     H, _ = load_cached("human", cache_dir=ann)
@@ -404,8 +404,8 @@ def test_build_visual_region_anchors_integration():
 def test_build_pag_region_anchors_integration():
     """Integration: PAG pack builds 1 entry at pid 54."""
     repo, ann = _skip_if_no_atlas()
-    from homer.data import load_cached
-    from homer.data.anchor_packs import build_pag_region_anchors
+    from otter.data import load_cached
+    from otter.data.anchor_packs import build_pag_region_anchors
 
     M, _ = load_cached("mouse", cache_dir=ann)
     H, _ = load_cached("human", cache_dir=ann)
@@ -421,8 +421,8 @@ def test_build_pag_region_anchors_integration():
 def test_mouse_parcels_in_mouse_sphere_smoke():
     """Spatial selection helper finds at least the expected count of nearby parcels."""
     repo, ann = _skip_if_no_atlas()
-    from homer.data import load_cached
-    from homer.data.anchor_packs._dsurqe import mouse_parcels_in_mouse_sphere
+    from otter.data import load_cached
+    from otter.data.anchor_packs._dsurqe import mouse_parcels_in_mouse_sphere
     M, _ = load_cached("mouse", cache_dir=ann)
     # PAG centroid in M_var ≈ (0.03, -1.81, +1.20); ball r=0.5 should capture parcels
     near_pag = mouse_parcels_in_mouse_sphere(M.var, (0.0, -1.81, 1.20), 0.5)
@@ -435,8 +435,8 @@ def test_mouse_parcels_in_mouse_sphere_smoke():
 def test_build_perirhinal_region_anchors_integration():
     """Integration: Perirhinal pack builds 1 entry at pid 55."""
     repo, ann = _skip_if_no_atlas()
-    from homer.data import load_cached
-    from homer.data.anchor_packs import build_perirhinal_region_anchors
+    from otter.data import load_cached
+    from otter.data.anchor_packs import build_perirhinal_region_anchors
     M, _ = load_cached("mouse", cache_dir=ann)
     H, _ = load_cached("human", cache_dir=ann)
     entries = build_perirhinal_region_anchors(M.var, H.var, atlas_root=repo)
@@ -451,8 +451,8 @@ def test_build_perirhinal_region_anchors_integration():
 def test_build_auditory_region_anchors_integration():
     """Integration: Auditory pack builds 2 entries at pids 56, 57."""
     repo, ann = _skip_if_no_atlas()
-    from homer.data import load_cached
-    from homer.data.anchor_packs import build_auditory_region_anchors
+    from otter.data import load_cached
+    from otter.data.anchor_packs import build_auditory_region_anchors
     M, _ = load_cached("mouse", cache_dir=ann)
     H, _ = load_cached("human", cache_dir=ann)
     entries = build_auditory_region_anchors(M.var, H.var, atlas_root=repo)
@@ -469,8 +469,8 @@ def test_build_auditory_region_anchors_integration():
 def test_build_somatosensory_region_anchors_integration():
     """Integration: Somatosensory pack builds 3 entries at pids 58, 59, 60."""
     repo, ann = _skip_if_no_atlas()
-    from homer.data import load_cached
-    from homer.data.anchor_packs import build_somatosensory_region_anchors
+    from otter.data import load_cached
+    from otter.data.anchor_packs import build_somatosensory_region_anchors
     M, _ = load_cached("mouse", cache_dir=ann)
     H, _ = load_cached("human", cache_dir=ann)
     entries = build_somatosensory_region_anchors(M.var, H.var, atlas_root=repo)
@@ -491,8 +491,8 @@ def test_build_somatosensory_region_anchors_integration():
 def test_build_ppc_region_anchors_integration():
     """Integration: PPC pack builds 1 entry at pid 61."""
     repo, ann = _skip_if_no_atlas()
-    from homer.data import load_cached
-    from homer.data.anchor_packs import build_ppc_region_anchors
+    from otter.data import load_cached
+    from otter.data.anchor_packs import build_ppc_region_anchors
     M, _ = load_cached("mouse", cache_dir=ann)
     H, _ = load_cached("human", cache_dir=ann)
     entries = build_ppc_region_anchors(M.var, H.var, atlas_root=repo)
@@ -507,8 +507,8 @@ def test_build_ppc_region_anchors_integration():
 def test_compose_packs_disjoint_pids():
     """Combining all 14 packs yields 25 entries with unique pids."""
     repo, ann = _skip_if_no_atlas()
-    from homer.data import load_cached
-    from homer.data.anchor_packs import (
+    from otter.data import load_cached
+    from otter.data.anchor_packs import (
         build_biccn_motor_region_anchors,
         build_tectum_region_anchors,
         build_olfactory_region_anchors,

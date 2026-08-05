@@ -2,15 +2,15 @@
 
 ⚠️ SUPERSEDED (2026-06-11). This script tests a *continuous-map correlation*
 (route the occurrence maps → predict the human subtype Δ-matrix), which is
-HOMER's WEAK mode, it does not survive a fair spatial null (F-007/F-027), and it
+OTTER's WEAK mode, it does not survive a fair spatial null (F-007/F-027), and it
 does NOT replicate what Pagani actually do. Two problems we found re-reading the
 paper: (1) it aggregates over all 13 conserved regions uniformly, but Pagani use
 only the 5 hypo-prominent / 3 hyper-prominent regions (Methods, Supp Fig 2b); and
 (2) Pagani's human step is a discrete *classification* (score each individual's
 regional global connectivity, threshold ±1 s.d.), not a Δ-matrix correlation.
 → The corrected, Pagani-faithful analysis lives in:
-   `04_homer_human_masks.py`            (π-derived human hypo/hyper masks)
-   `../autism_subtypes/abide_subtype/05_abide_homer_subtyping.py`  (re-subtype ABIDE)
+   `04_otter_human_masks.py`            (π-derived human hypo/hyper masks)
+   `../autism_subtypes/abide_subtype/05_abide_otter_subtyping.py`  (re-subtype ABIDE)
 This script is kept for provenance / the continuous-routing negative result.
 
 The earlier subtype translation (Test 2c / 01_per_model_clustering.py) drives the
@@ -22,7 +22,7 @@ Bridge (verified, no fragile voxel transform):
   • The occurrence maps and the 13 conserved-region masks are co-registered
     (identical affine), so we read the mean occurrence within each region mask
     directly, in their own space.
-  • HOMER's 1,864 mouse parcels carry Allen region-vote names, which map to the
+  • OTTER's 1,864 mouse parcels carry Allen region-vote names, which map to the
     13 conserved regions by keyword (verified anatomically: thalamus→thalamic
     nuclei, caudoputamen→Caudoputamen/Striatum, etc.).
 
@@ -48,7 +48,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "autism_subtypes"))
 
-from homer.data import DATA_DIR, load_cached  # noqa: E402
+from otter.data import DATA_DIR, load_cached  # noqa: E402
 
 ncv = import_module("01_network_crossvalidation")
 st = import_module("04_subtype_translation")

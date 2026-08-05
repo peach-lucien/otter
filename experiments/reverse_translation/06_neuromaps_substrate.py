@@ -12,7 +12,7 @@ dopamine system (CP, ACB, SNc, SNr, VTA)?  Serotonin and mu-opioid maps are carr
 reference systems for specificity.
 
 Requires neuromaps:  pip install neuromaps
-Run: cd homer && PYTHONPATH=src python experiments/reverse_translation/06_neuromaps_substrate.py
+Run: cd otter && PYTHONPATH=src python experiments/reverse_translation/06_neuromaps_substrate.py
 Read-only w.r.t. the coupling; caches maps in neuromaps_cache/, writes
 outputs/logs/reverse_translation_neuromaps.json
 """
@@ -23,7 +23,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance      # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance      # noqa: E402
 
 _s = importlib.util.spec_from_file_location("rt01", ROOT / "experiments/reverse_translation/01_validate.py")
 rt01 = importlib.util.module_from_spec(_s); _s.loader.exec_module(rt01)

@@ -8,8 +8,8 @@ section 5 as coverage, which the paper retired, and does not mention section 6 a
 Each edit asserts its target appears exactly once, so a changed README fails loudly rather than
 being partially patched. Numbers are taken from the manuscript sections named in the comments.
 
-    cd homer && python3 tools/patch_readme.py            # apply
-    cd homer && python3 tools/patch_readme.py --check    # report without writing
+    cd otter && python3 tools/patch_readme.py            # apply
+    cd otter && python3 tools/patch_readme.py --check    # report without writing
 """
 from __future__ import annotations
 
@@ -48,13 +48,13 @@ EDITS: list[tuple[str, str, str]] = [
     # ---- section 4. Every figure below is from the manuscript's benchmark table. ----
     ("TransBrain bullet",
      "On region identity TransBrain leads on its own benchmark (AUROC 0.84 vs 0.79), and the "
-     "difference is not significant (paired Wilcoxon p = 0.17). HOMER leads where the modality is "
+     "difference is not significant (paired Wilcoxon p = 0.17). OTTER leads where the modality is "
      "connectional: the gradient (0.55 vs 0.42), round-trip fidelity (0.98/0.95/0.97 vs "
      "0.89/0.82/0.83), sharpness (≈ 3 vs ≈ 60 effective target regions) and absence "
      "detection.",
 
      "On region identity the two are level on TransBrain's own benchmark, AUROC 0.83 against 0.84, "
-     "a paired per-region difference that is not significant (Wilcoxon p = 0.36). HOMER leads "
+     "a paired per-region difference that is not significant (Wilcoxon p = 0.36). OTTER leads "
      "where the modality is connectional. It tracks the human gradient at r = 0.56 against 0.52, "
      "recovers a phenotype routed mouse to human and back at 0.97, 0.86 and 0.91 against 0.89, "
      "0.82 and 0.83, concentrates its predictions on an effective 6 target regions against 60, and "
@@ -115,8 +115,8 @@ EDITS: list[tuple[str, str, str]] = [
      "and transposing π turns a human map into a\nranking over mouse structures.\n\nForward, an "
      "optogenetic mouse anterior-insula activation map routes onto human anterior insula\nand "
      "ventral-attention cortex. Salience cortex is enriched by +0.86 SD against a permuted-π "
-     "null\n(p = 0.001). Scored head to head on the 1,635 parcels both methods cover, HOMER "
-     "reaches +0.87 SD and\na transcriptomic translator +0.28 SD. HOMER exceeds a shuffled-input "
+     "null\n(p = 0.001). Scored head to head on the 1,635 parcels both methods cover, OTTER "
+     "reaches +0.87 SD and\na transcriptomic translator +0.28 SD. OTTER exceeds a shuffled-input "
      "null (p = 0.016) and the\ntranscriptomic translator does not (p = 0.228).\n\n"
      "Reverse, twelve human functional systems route to their "
      "established mouse substrate, with the\nground-truth structure in the top three for nine of "

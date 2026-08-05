@@ -1,4 +1,4 @@
-# HOMER notebooks
+# OTTER notebooks
 
 Eight notebooks: two that introduce the coupling, and one per figure of the paper. Each figure
 notebook recomputes that figure's results from the data and compares them against the numbers

@@ -1,7 +1,7 @@
-"""Tests for homer.costs (relational + cross-species + normalisation)."""
+"""Tests for otter.costs (relational + cross-species + normalisation)."""
 import numpy as np
 
-from homer.costs import (
+from otter.costs import (
     correlation_distance,
     cross_species_anchor_M,
     cross_species_gene_cost,

@@ -23,8 +23,8 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached                          # noqa: E402
-from homer.models import MultimodalFGW, SupervisedFGW       # noqa: E402
+from otter.data import load_cached                          # noqa: E402
+from otter.models import MultimodalFGW, SupervisedFGW       # noqa: E402
 
 ANN  = ROOT / "outputs" / "anndata"
 COUP = ROOT / "outputs" / "coupling"; COUP.mkdir(parents=True, exist_ok=True)

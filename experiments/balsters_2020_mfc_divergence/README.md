@@ -6,7 +6,7 @@
 
 A **falsification** test: it states, with a direction, where a faithful
 mouse↔human mapping should *not* send mouse medial frontal cortex, and
-checks whether HOMER's π obeys.
+checks whether OTTER's π obeys.
 
 ## Why this experiment
 
@@ -19,30 +19,30 @@ proposal that rat MFC is the analogue of primate lateral PFC); its
 connectivity instead most resembles **premotor** cortex.
 
 That is a specific, directional, published "where it should *not* go"
-prediction. Most HOMER validations test for a *positive* signal; this one
-tests whether HOMER avoids a *wrong* answer:
+prediction. Most OTTER validations test for a *positive* signal; this one
+tests whether OTTER avoids a *wrong* answer:
 
 - **PASS**, mouse MFC routes to human medial-frontal / cingulate / premotor cortex and avoids dlPFC.
 - **FAIL**, mouse MFC routes confidently onto human dlPFC (BA9/46).
 
-HOMER already makes a falsifiable design choice here. Its Garin point anchor
+OTTER already makes a falsifiable design choice here. Its Garin point anchor
 pairs mouse mPFC with human *medial* frontal cortex, and the contested
 mouse-Prelimbic ↔ human-dlPFC homology (Carlén 2017 vs Preuss 1995) ships as
 the **opt-in** `lateral_pfc` pack, not in the production coupling. Schaeffer et al. 2020
 is independent FC evidence adjudicating that choice.
 
-*Species note:* Schaeffer et al. used rat + marmoset + human; HOMER is mouse + human.
+*Species note:* Schaeffer et al. used rat + marmoset + human; OTTER is mouse + human.
 Rodent MFC (anterior cingulate + prelimbic + infralimbic) is the comparable
-structure. The test compares HOMER's π against Schaeffer et al.'s published
+structure. The test compares OTTER's π against Schaeffer et al.'s published
 *directional conclusion*, not their FC matrices, the rat/mouse and
 marmoset/human mismatches make re-routing their data unjustified.
 
 ## Result
 
-**HOMER passes, and its π is Schaeffer-consistent.** Three panels
+**OTTER passes, and its π is Schaeffer-consistent.** Three panels
 (`outputs/figures/balsters_2020_mfc_divergence.png`):
 
-**1. Where π routes mouse MFC.** Of the coupling mass leaving HOMER's 39
+**1. Where π routes mouse MFC.** Of the coupling mass leaving OTTER's 39
 mouse rodent-MFC parcels (ACAd/ACAv/PL/ILA), **0.0 %** reaches human dlPFC,
 an enrichment of **×0.0** against the permuted-π null (empirical p = 0.99,
 i.e. observed mass is at the *bottom* of the null distribution). The
@@ -57,11 +57,11 @@ production coupling. It only appears, jumping to **23.1 %** (and 18.2 % for
 Prelimbic specifically), when the opt-in `lateral_pfc` pack's contested
 Prelimbic→dlPFC anchor is forced in. Schaeffer et al. 2020 is the independent FC
 evidence that this anchor encodes a homology the data argues against, and
-supports HOMER's decision to keep it opt-in.
+supports OTTER's decision to keep it opt-in.
 
 **3. dlPFC is a low-homology territory.** Human dlPFC receives only 0.6 %
 of *all* mouse→human coupling mass while occupying 1.1 % of human parcels, so it
-is under-represented relative to chance. HOMER finds no confident rodent
+is under-represented relative to chance. OTTER finds no confident rodent
 homologue of dorsolateral PFC from anywhere in the mouse brain, consistent
 with the evolutionary expansion of human lateral PFC.
 

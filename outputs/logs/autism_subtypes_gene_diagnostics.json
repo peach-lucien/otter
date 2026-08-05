@@ -19,98 +19,98 @@
   "per_pathway": [
     {
       "pathway": "protein-protein_interaction_at_synapses",
-      "n_genes_in_homer": 15,
+      "n_genes_in_otter": 15,
       "r_to_obs_hypo": -0.5472329326957053,
       "r_to_obs_hyper": 0.4990618737604777,
       "r_to_obs_delta": 0.5026906706114522
     },
     {
       "pathway": "trasmission_across_chemical_synapses",
-      "n_genes_in_homer": 72,
+      "n_genes_in_otter": 72,
       "r_to_obs_hypo": -0.5369685472378345,
       "r_to_obs_hyper": 0.507242201586598,
       "r_to_obs_delta": 0.5103300142026136
     },
     {
       "pathway": "SynGO",
-      "n_genes_in_homer": 268,
+      "n_genes_in_otter": 268,
       "r_to_obs_hypo": -0.5317653329801175,
       "r_to_obs_hyper": 0.4883787176036756,
       "r_to_obs_delta": 0.49181266337136287
     },
     {
       "pathway": "mapk_family_signaling_cascades",
-      "n_genes_in_homer": 35,
+      "n_genes_in_otter": 35,
       "r_to_obs_hypo": -0.5209261460253738,
       "r_to_obs_hyper": 0.4932637409924151,
       "r_to_obs_delta": 0.4962276012543353
     },
     {
       "pathway": "signaling_by_WNT",
-      "n_genes_in_homer": 29,
+      "n_genes_in_otter": 29,
       "r_to_obs_hypo": -0.5619150767763632,
       "r_to_obs_hyper": 0.5370369958678809,
       "r_to_obs_delta": 0.5401003172943732
     },
     {
       "pathway": "membrane_trafficking",
-      "n_genes_in_homer": 45,
+      "n_genes_in_otter": 45,
       "r_to_obs_hypo": -0.5319517858967191,
       "r_to_obs_hyper": 0.5123303970882108,
       "r_to_obs_delta": 0.515124413718708
     },
     {
       "pathway": "nervous_system_development",
-      "n_genes_in_homer": 58,
+      "n_genes_in_otter": 58,
       "r_to_obs_hypo": -0.5451742130571099,
       "r_to_obs_hyper": 0.5135315413439754,
       "r_to_obs_delta": 0.5167059582745172
     },
     {
       "pathway": "gene_expression_transcription",
-      "n_genes_in_homer": 55,
+      "n_genes_in_otter": 55,
       "r_to_obs_hypo": -0.5363774441147661,
       "r_to_obs_hyper": 0.5140799911713207,
       "r_to_obs_delta": 0.5169650000464399
     },
     {
       "pathway": "chromatin_organization",
-      "n_genes_in_homer": 8,
+      "n_genes_in_otter": 8,
       "r_to_obs_hypo": -0.5636090672320095,
       "r_to_obs_hyper": 0.5350650342103603,
       "r_to_obs_delta": 0.5382344045323736
     },
     {
       "pathway": "mTOR_signaling",
-      "n_genes_in_homer": 5,
+      "n_genes_in_otter": 5,
       "r_to_obs_hypo": -0.647240626733781,
       "r_to_obs_hyper": 0.6390760646260758,
       "r_to_obs_delta": 0.6420520910186518
     },
     {
       "pathway": "signaling_by_GPCR",
-      "n_genes_in_homer": 101,
+      "n_genes_in_otter": 101,
       "r_to_obs_hypo": -0.49204363803283235,
       "r_to_obs_hyper": 0.48362226847167195,
       "r_to_obs_delta": 0.4859444005639655
     },
     {
       "pathway": "adaptive_immune_system",
-      "n_genes_in_homer": 49,
+      "n_genes_in_otter": 49,
       "r_to_obs_hypo": -0.5003677371592348,
       "r_to_obs_hyper": 0.4580170624102212,
       "r_to_obs_delta": 0.461289389896895
     },
     {
       "pathway": "immune_system",
-      "n_genes_in_homer": 140,
+      "n_genes_in_otter": 140,
       "r_to_obs_hypo": -0.517006795681412,
       "r_to_obs_hyper": 0.49102224108795933,
       "r_to_obs_delta": 0.4939241772965395
     },
     {
       "pathway": "cytokine_signaling_in_immune_system",
-      "n_genes_in_homer": 40,
+      "n_genes_in_otter": 40,
       "r_to_obs_hypo": -0.5255252460342169,
       "r_to_obs_hyper": 0.5053428941050296,
       "r_to_obs_delta": 0.5081246708381107

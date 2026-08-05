@@ -1,21 +1,21 @@
-"""§5 external validation: HOMER coverage vs Hill 2010 evolutionary cortical expansion,
-tested with the repo's spin null. Asks whether the human cortex HOMER leaves
+"""§5 external validation: OTTER coverage vs Hill 2010 evolutionary cortical expansion,
+tested with the repo's spin null. Asks whether the human cortex OTTER leaves
 uncovered by the mouse is the cortex that expanded most in evolution.
 
 Data: neuromaps `source='hill2010', desc='evoexp'` (fsLR 164k, RIGHT hemisphere only).
-The map is resampled to Schaefer-400 and compared to HOMER's per-Schaefer coverage,
-with `homer.eval.nulls.spin_null` (continuous) + a tertile-gap spin (most- vs least-
-expanded third). Centroids = mean HOMER parcel MNI coord per Schaefer region, so the
+The map is resampled to Schaefer-400 and compared to OTTER's per-Schaefer coverage,
+with `otter.eval.nulls.spin_null` (continuous) + a tertile-gap spin (most- vs least-
+expanded third). Centroids = mean OTTER parcel MNI coord per Schaefer region, so the
 spin runs in the repo's own coordinate frame.
 
-CAVEATS (state in the paper): (i) Hill is macaque->human expansion, HOMER is mouse->
+CAVEATS (state in the paper): (i) Hill is macaque->human expansion, OTTER is mouse->
 human, so primary areas (e.g. V1) may deviate; (ii) right hemisphere only; (iii) an
 in-sandbox check gave continuous rho=-0.21 (spin p~0.10) and tertile gap 3.66 log units
 (spin p~0.15) -> directionally consistent but NOT spin-significant at Schaefer-400. Run
 this to confirm at full rigor and, if desired, at parcel resolution.
 
 Requires: pip install neuromaps netneurotools ; Connectome Workbench (wb_command) on PATH.
-Run: cd homer && PYTHONPATH=src python experiments/section5_coverage_rigor/02_hill_expansion_spin.py
+Run: cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/02_hill_expansion_spin.py
 Writes outputs/logs/section5_hill_expansion.json
 """
 from __future__ import annotations
@@ -25,8 +25,8 @@ import numpy as np, nibabel as nib
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance
-from homer.eval.nulls import spin_null, _haar_rotation
+from otter.data import load_cached, load_pi, pi_provenance
+from otter.eval.nulls import spin_null, _haar_rotation
 from scipy.spatial import cKDTree
 from scipy.stats import spearmanr
 
@@ -81,7 +81,7 @@ def main():
     ids = sorted(hill)
     exp = np.array([hill[k] for k in ids])
     # MASS-NORMALISED MEAN, not sum: summing makes coverage scale with the number of
-    # HOMER parcels in a Schaefer region (rho = 0.35 with parcel count), which is a
+    # OTTER parcels in a Schaefer region (rho = 0.35 with parcel count), which is a
     # size confound, not a biological signal.
     cov = np.array([np.log10(col_mass[node_region == k].mean()) if (node_region == k).any() else np.nan for k in ids])
     cen = np.array([xyz[node_region == k].mean(0) if (node_region == k).any() else [np.nan] * 3 for k in ids])

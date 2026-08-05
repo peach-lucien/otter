@@ -6,7 +6,7 @@ idempotent and saves to `outputs/`.
 ## 0. Environment
 
 ```bash
-conda env create -f env.yml && conda activate homer
+conda env create -f env.yml && conda activate otter
 pip install -e ".[dev]"
 pytest -q                      # 176 tests, ~10 s
 ```

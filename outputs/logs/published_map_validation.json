@@ -70,7 +70,7 @@
     "pi_file": "outputs/coupling/pi_canonical.npy",
     "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
     "n_trials": 1000,
-    "note": "null B is the null homer.eval.nulls designates for translation claims"
+    "note": "null B is the null otter.eval.nulls designates for translation claims"
   },
   "pi_file": "outputs/coupling/pi_canonical.npy",
   "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77"

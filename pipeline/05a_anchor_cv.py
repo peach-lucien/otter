@@ -26,14 +26,14 @@ import ot
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached                                # noqa: E402
-from homer.data.anchors import (                                   # noqa: E402
+from otter.data import load_cached                                # noqa: E402
+from otter.data.anchors import (                                   # noqa: E402
     get_anchor_index, held_out_metrics_graded,
 )
-from homer.data.networks import (                                  # noqa: E402
+from otter.data.networks import (                                  # noqa: E402
     PAIRID_TO_NETWORK, NETWORKS, assign_networks, network_mismatch_mask,
 )
-from homer.models import entropic_semirelaxed_fgw_multistart        # noqa: E402
+from otter.models import entropic_semirelaxed_fgw_multistart        # noqa: E402
 
 ANN = ROOT / "outputs" / "anndata"
 LOG = ROOT / "outputs" / "logs"; LOG.mkdir(parents=True, exist_ok=True)

@@ -29,7 +29,7 @@ _spec.loader.exec_module(b05f)
 
 class BeauchampScorer:
     def __init__(self):
-        from homer.data import load_cached
+        from otter.data import load_cached
         self.M, _ = load_cached("mouse", cache_dir=ROOT / "outputs/anndata")
         self.H, _ = load_cached("human", cache_dir=ROOT / "outputs/anndata")
         self.h_xyz = self.H.var[["x", "y", "z"]].to_numpy()
@@ -99,7 +99,7 @@ if __name__ == "__main__":
     sc = BeauchampScorer()
     print(f"masks built: {len(sc.pairs)} scorable pairs")
     # verify on production + score the eps family
-    from homer.data import load_pi
+    from otter.data import load_pi
     prod = load_pi()
     for name, pi in [("production", prod)]:
         a = sc.score(pi)["__aggregate__"]

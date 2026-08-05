@@ -24,7 +24,7 @@ def main():
     fig = plt.figure(figsize=(14, 9))
     gs = fig.add_gridspec(2, 2, hspace=0.45, wspace=0.30)
     axes = [fig.add_subplot(gs[i // 2, i % 2]) for i in range(4)]
-    fig.suptitle("HOMER × Pagani 2026, independent cross-species validation",
+    fig.suptitle("OTTER × Pagani 2026, independent cross-species validation",
                  fontsize=14, y=0.98)
 
     # Panel 1. Test 1: bridge assumption diagonal-argmax
@@ -37,7 +37,7 @@ def main():
     ax.bar(x, ratios, color=colors)
     ax.axhline(1.0, color="black", linestyle="--", linewidth=0.7)
     ax.set_xticks(x); ax.set_xticklabels(labels, rotation=35, ha="right", fontsize=8)
-    ax.set_ylabel("HOMER mass / null expectation")
+    ax.set_ylabel("OTTER mass / null expectation")
     ax.set_title(f"Test 1, name-based bridge check\n"
                  f"4/8 pairs diagonal-argmax; mean 1.92× over null", fontsize=10)
     ax.legend(handles=[
@@ -58,7 +58,7 @@ def main():
     ax.plot(xs, z[0]*xs + z[1], color="black", linewidth=0.8, linestyle="--")
     ax.axhline(0, color="black", linewidth=0.5); ax.axvline(0, color="black", linewidth=0.5)
     ax.set_xlabel("Observed Δ (Pagani Fig 4e, hyper − hypo)", fontsize=9)
-    ax.set_ylabel("Predicted Δ via HOMER π", fontsize=9)
+    ax.set_ylabel("Predicted Δ via OTTER π", fontsize=9)
     ax.set_title(f"Test 2c, full 36-element matrix translation\n"
                  f"r={j2c['pearson_r']:+.3f}, analytical p={j2c['pearson_p_analytical']:.4f}, "
                  f"emp. p={j2c['null']['pearson_empirical_p']:.3f}", fontsize=10)
@@ -116,11 +116,11 @@ def main():
             "$\\bf{Test\\ 3}$. Gene-set spatial proof-of-concept (claim 4):",
             f"  Pearson r = {j3['pearson_r']:+.3f} (p = {j3['pearson_p']:.3f}),  Spearman ρ = {j3['spearman_r']:+.3f}",
             f"  Empirical p = {j3['null']['spearman_empirical_p']:.3f} (Spearman, marginal)",
-            "  → Underpowered (36 / 6,415 Pagani genes in HOMER atlas);",
+            "  → Underpowered (36 / 6,415 Pagani genes in OTTER atlas);",
             "     suggestive but needs full Allen gene coverage",
         ]
     lines = [
-        "$\\bf{Summary}$ (HOMER fit independently of Pagani 2026)",
+        "$\\bf{Summary}$ (OTTER fit independently of Pagani 2026)",
         "",
         "$\\bf{Test\\ 1}$. Name-based bridge check (paper's scaffolding):",
         "  4/8 canonical mouse↔human network pairs diagonal-argmax",
@@ -131,7 +131,7 @@ def main():
         "$\\bf{Test\\ 2c}$. Subtype-contrast spatial pattern (claim 3):",
         f"  Pearson r = {j2c['pearson_r']:+.3f}, p = {j2c['pearson_p_analytical']:.4f} (n=36)",
         f"  Empirical p < {max(1/200, j2c['null']['pearson_empirical_p']):.3f} vs permuted-π null",
-        "  → HOMER π reproduces joint network-pair Δ structure",
+        "  → OTTER π reproduces joint network-pair Δ structure",
         "     across species without using name-bridge",
         "",
         *gene_summary,

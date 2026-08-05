@@ -1,4 +1,4 @@
-"""Visualise the HOMER × Balsters 2020 MFC-divergence falsification test."""
+"""Visualise the OTTER × Balsters 2020 MFC-divergence falsification test."""
 from __future__ import annotations
 
 import json
@@ -11,7 +11,7 @@ from matplotlib.patches import Circle
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached
+from otter.data import load_cached
 
 COL = {"dlPFC": "#e76f51", "premotor": "#2a9d8f", "medial_PFC": "#264653",
        "mid_cingulate": "#8ab17d", "other": "#cccccc"}
@@ -84,7 +84,7 @@ def main():
     ax.legend(fontsize=7.5, loc="lower center")
     ax.set_aspect("equal")
 
-    plt.suptitle("HOMER × Balsters 2020, π routes mouse medial frontal cortex "
+    plt.suptitle("OTTER × Balsters 2020, π routes mouse medial frontal cortex "
                  "away from human dlPFC, as the connectivity evidence predicts",
                  fontsize=12, y=1.04)
     plt.tight_layout()

@@ -1,5 +1,5 @@
 {
-  "homer_disorders": [
+  "otter_disorders": [
     "autism",
     "bipolar_disorder",
     "schizophrenia",
@@ -49,7 +49,7 @@
   ],
   "diagonal_mean": null,
   "off_diagonal_mean": null,
-  "dk_homer_aggregation": {
+  "dk_otter_aggregation": {
     "autism": {
       "bankssts": 1.6665221146777906e-05,
       "caudalanteriorcingulate": -4.161007474548755e-05,

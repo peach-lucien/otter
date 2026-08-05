@@ -29,7 +29,7 @@ network_intensity = st.network_intensity
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached
+from otter.data import load_cached
 
 
 def main():

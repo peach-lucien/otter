@@ -22,7 +22,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import DATA_DIR, load_cached                       # noqa: E402
+from otter.data import DATA_DIR, load_cached                       # noqa: E402
 
 OUT = ROOT / "data_external" / "_diagnostics"
 OUT.mkdir(parents=True, exist_ok=True)
@@ -102,7 +102,7 @@ def check_voxel_indices(species: str, mask_data: np.ndarray) -> dict:
     A, _ = load_cached(species, cache_dir=ROOT / "outputs" / "anndata")
     if "voxel_indices" not in A.uns:
         # voxel_indices were stripped before cache; re-extract from raw t-table
-        from homer.data import load_metadata, parse_t_table
+        from otter.data import load_metadata, parse_t_table
         meta = load_metadata(species)
         df = parse_t_table(meta["t"], meta["ht"])
         all_indices = np.concatenate([np.asarray(v) for v in df["voxel_indices"]])

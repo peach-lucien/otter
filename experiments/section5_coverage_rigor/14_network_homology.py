@@ -4,7 +4,7 @@
 Coverage is noisy per parcel (L/R reliability 0.22), so per-region correlations against smooth
 maps are attenuated. Averaging within Yeo-17 networks cancels that noise. The relationship that
 emerges is with mouse-human FC HOMOLOGY (Xu2020): regions whose functional connectivity is more
-homologous between mouse and human receive more mouse mass. This is the same modality HOMER encodes.
+homologous between mouse and human receive more mouse mass. This is the same modality OTTER encodes.
 
 Significance: spin the parcel-level coverage on the sphere (asymmetric signal vs symmetric network
 structure = the calibrated 5.5% FPR config), re-average within networks, recompute the network-level
@@ -21,8 +21,8 @@ from scipy.stats import spearmanr
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi                 # noqa: E402
-from homer.eval.nulls import _haar_rotation                 # noqa: E402
+from otter.data import load_cached, load_pi                 # noqa: E402
+from otter.eval.nulls import _haar_rotation                 # noqa: E402
 np.seterr(divide="ignore", invalid="ignore")
 N_SPIN = 2000
 

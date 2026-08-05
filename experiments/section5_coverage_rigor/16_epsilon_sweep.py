@@ -24,9 +24,9 @@ from scipy.stats import spearmanr
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached                       # noqa: E402
-from homer.models import MultimodalFGW                   # noqa: E402
-from homer.eval.nulls import _haar_rotation              # noqa: E402
+from otter.data import load_cached                       # noqa: E402
+from otter.models import MultimodalFGW                   # noqa: E402
+from otter.eval.nulls import _haar_rotation              # noqa: E402
 np.seterr(divide="ignore", invalid="ignore")
 
 EPS = [0.005, 0.02, 0.05, 0.1, 0.2]

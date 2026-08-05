@@ -1,13 +1,13 @@
-"""Tests for homer.data.anchors and homer.data.networks."""
+"""Tests for otter.data.anchors and otter.data.networks."""
 import numpy as np
 import pytest
 
-from homer.data.anchors import (
+from otter.data.anchors import (
     AnchorIndex, get_anchor_index, held_out_metrics_graded,
     metrics_summary, true_assignment, kfold_pair_ids,
     assign_parcels_to_nearest_anchor_region, build_xyz_weight_array,
 )
-from homer.data.networks import (
+from otter.data.networks import (
     NETWORKS, PAIRID_TO_NETWORK, assign_networks, network_mismatch_mask,
 )
 

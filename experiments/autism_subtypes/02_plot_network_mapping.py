@@ -32,8 +32,8 @@ def main():
     ax.set_yticks(range(len(mouse_names_k)))
     ax.set_yticklabels(mouse_names_k)
     ax.set_xlabel("Human network (Schaefer-400 → Yeo-7 + Subcortical)")
-    ax.set_ylabel("Mouse network (HOMER PAIRID_TO_NETWORK → paper-aligned)")
-    ax.set_title("HOMER π mass aggregated by network\n"
+    ax.set_ylabel("Mouse network (OTTER PAIRID_TO_NETWORK → paper-aligned)")
+    ax.set_title("OTTER π mass aggregated by network\n"
                  "(each row = mouse network; sums to 100%)", fontsize=11)
 
     # Annotate cells
@@ -82,8 +82,8 @@ def main():
     ax.bar(x, ratios, color=colors)
     ax.axhline(1.0, color="black", linestyle="--", linewidth=0.7, label="null (uniform π)")
     ax.set_xticks(x); ax.set_xticklabels(labels, rotation=30, ha="right")
-    ax.set_ylabel("HOMER mass on target / null expectation")
-    ax.set_title("Pagani 2026 canonical pairs: how much HOMER mass concentrates on the name-matched human network")
+    ax.set_ylabel("OTTER mass on target / null expectation")
+    ax.set_title("Pagani 2026 canonical pairs: how much OTTER mass concentrates on the name-matched human network")
     legend = [
         mpatches.Patch(facecolor="#2a9d8f", label="argmax human-net = target"),
         mpatches.Patch(facecolor="#e76f51", label="argmax human-net ≠ target"),

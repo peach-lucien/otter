@@ -11,7 +11,7 @@
 # validation that consumes it. The production π is gene-free (use_gene_gw=False),
 # so π and all FC/SC validations are UNAFFECTED and are not re-run here.
 #
-# Prereqs: the homer env (numpy/scipy/pandas/anndata/nibabel/allensdk), the v2
+# Prereqs: the otter env (numpy/scipy/pandas/anndata/nibabel/allensdk), the v2
 # mouse .mat present, and the Allen ISH energy zips cached under
 # experiments/autism_subtypes/allen_expansion/pagani_ish_cache/ (already present).
 #

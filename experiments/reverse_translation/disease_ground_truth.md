@@ -26,7 +26,7 @@ mouse-model substrate rather than the normal-function substrate.
 | Autism | autism | — (distributed) | deliberately expected NO clean mouse home — the primate-elaborated / poor-model case |
 
 ## Why this is a fair, preregistered test
-- The mouse substrates are set from the *model* literature, not from HOMER's output, and the
+- The mouse substrates are set from the *model* literature, not from OTTER's output, and the
   neurological pairings (nigrostriatal, entorhinal–hippocampal, striatal, mesolimbic) are
   textbook-uncontroversial.
 - Autism is the built-in expected-negative (as addiction was in the function table): a

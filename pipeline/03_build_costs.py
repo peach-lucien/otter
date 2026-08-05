@@ -39,9 +39,9 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached                                       # noqa: E402
-from homer.data.anchors import get_anchor_index                          # noqa: E402
-from homer.costs import (                                                # noqa: E402
+from otter.data import load_cached                                       # noqa: E402
+from otter.data.anchors import get_anchor_index                          # noqa: E402
+from otter.costs import (                                                # noqa: E402
     correlation_distance, normalise_cost,
     sc_correlation_distance, gene_correlation_distance,
     cross_species_gene_cost, cross_species_anchor_M,

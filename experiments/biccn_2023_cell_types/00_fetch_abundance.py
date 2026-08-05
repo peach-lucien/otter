@@ -3,7 +3,7 @@
 
 Output CSVs (one row per region):
     region, x, y, z, <subclass_1>, <subclass_2>, ...
-x,y,z = region centroids IN HOMER'S COORDINATE FRAME (mouse: Allen CCF, matching
+x,y,z = region centroids IN OTTER'S COORDINATE FRAME (mouse: Allen CCF, matching
 M.var; human: MNI mm, matching H.var). Subclass columns = FRACTION of cells of each
 subclass in the region (rows ~sum to 1). Only subclasses whose column names match
 across species are used by 04, so keep the label level comparable.

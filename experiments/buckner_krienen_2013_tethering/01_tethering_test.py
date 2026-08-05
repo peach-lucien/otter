@@ -1,4 +1,4 @@
-"""HOMER × Buckner & Krienen 2013, the tethering hypothesis (negative control).
+"""OTTER × Buckner & Krienen 2013, the tethering hypothesis (negative control).
 
 [Buckner & Krienen 2013, Trends Cogn Sci](https://doi.org/10.1016/j.tics.2013.09.017),
 "The evolution of distributed association networks in the human brain", argue
@@ -9,11 +9,11 @@ well-defined mouse homologue of the expanded human association cortex, so a
 faithful coupling should be **confident over sensorimotor cortex and sparse /
 unconfident over association cortex**.
 
-This is a negative-control / falsification test: if HOMER's π were uniformly
+This is a negative-control / falsification test: if OTTER's π were uniformly
 confident everywhere, including over association cortex that the field says
 has no clear mouse homologue, that would signal over-fitting.
 
-Test: for every human cortical parcel, measure HOMER's **coverage**, the total
+Test: for every human cortical parcel, measure OTTER's **coverage**, the total
 π mass it receives from the mouse brain (the per-column mass of the coupling)
 and ask whether it collapses toward association cortex along the sensorimotor →
 association axis (the HCP T1w/T2w myelin map; high myelin = sensorimotor).
@@ -35,7 +35,7 @@ from scipy.stats import entropy, mannwhitneyu, spearmanr
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_pi, pi_provenance                    # noqa: E402
+from otter.data import load_pi, pi_provenance                    # noqa: E402
 
 DATA = ROOT / "data_external"
 PI_NAME = "pi_canonical.npy"                       # canonical coupling
@@ -46,7 +46,7 @@ SEED = 42
 
 def main():
     print("=" * 80)
-    print("HOMER × Buckner & Krienen 2013, tethering-hypothesis negative control")
+    print("OTTER × Buckner & Krienen 2013, tethering-hypothesis negative control")
     print("=" * 80)
 
     pi = load_pi(PI_NAME)
@@ -57,12 +57,12 @@ def main():
 
     # sensorimotor → association axis: HCP T1w/T2w myelin per Schaefer region
     myelin_reg = {}
-    with open(DATA / "fulcher_2019_gradients/human_myelinmap_schaefer400_HOMERorder.csv") as f:
+    with open(DATA / "fulcher_2019_gradients/human_myelinmap_schaefer400_OTTERorder.csv") as f:
         for row in csv.DictReader(f):
-            myelin_reg[int(row["homer_region_id"])] = float(row["t1t2_myelin"])
+            myelin_reg[int(row["otter_region_id"])] = float(row["t1t2_myelin"])
     myelin = np.array([myelin_reg.get(r, np.nan) for r in node_region])
 
-    # ---- per-human-parcel HOMER coverage + entropy ------------------------
+    # ---- per-human-parcel OTTER coverage + entropy ------------------------
     col_mass = pi.sum(axis=0)
     coverage = np.log10(np.maximum(col_mass, 1e-300))      # log π mass per parcel
     col_norm = pi / np.maximum(col_mass, 1e-300)
@@ -110,7 +110,7 @@ def main():
           f"{np.percentile(np.abs(null), 95):.2f}  →  empirical p = {emp_p:.3f}")
 
     passed = mw.pvalue < 1e-3 and obs_diff > 1.0
-    verdict = ("PASS. HOMER is sparsest over association cortex, "
+    verdict = ("PASS. OTTER is sparsest over association cortex, "
                "consistent with tethering") if passed else "INCONCLUSIVE"
     print(f"\nVERDICT: {verdict}")
 

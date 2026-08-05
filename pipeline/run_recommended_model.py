@@ -1,4 +1,4 @@
-"""Reproducible end-to-end pipeline for the recommended HOMER model.
+"""Reproducible end-to-end pipeline for the recommended OTTER model.
 
 The "recommended model" is the production FC+SC coupling supervised with the
 default region-anchor packs (``pi_fc_plus_SC_with_all_packs.npy``). It is

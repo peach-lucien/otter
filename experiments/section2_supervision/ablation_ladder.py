@@ -9,7 +9,7 @@ Four stages, each a fresh fit, scored with AUROC / displacement / mass / top-k
   + packs      : + region-anchor packs   (= production)
 
 Resumable per stage. -> outputs/logs/ablation_ladder_battery.json
-Run: cd homer && PYTHONPATH=src python ../manuscript/figures/fig_2_ED/ablation_ladder.py
+Run: cd otter && PYTHONPATH=src python ../manuscript/figures/fig_2_ED/ablation_ladder.py
 """
 import sys, json, time, importlib.util
 from pathlib import Path
@@ -19,9 +19,9 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 bb = importlib.util.spec_from_file_location("bb", Path(__file__).resolve().parent / "beauchamp_battery.py")
 BB = importlib.util.module_from_spec(bb); bb.loader.exec_module(BB)
-from homer.data import load_cached
-from homer.data.anchor_packs import build_default_pack_entries
-from homer.models import MultimodalFGW
+from otter.data import load_cached
+from otter.data.anchor_packs import build_default_pack_entries
+from otter.models import MultimodalFGW
 
 CACHE = ROOT / "outputs/logs/ablation_ladder_battery.json"
 STAGES = ["connectivity", "+spatial", "+anchors", "+packs"]

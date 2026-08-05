@@ -1,6 +1,6 @@
 # Draft email to Silvia, request for per-model connectivity maps
 
-Subject: HOMER follow-up, per-model degree-centrality maps?
+Subject: OTTER follow-up, per-model degree-centrality maps?
 
 Dear Silvia,
 

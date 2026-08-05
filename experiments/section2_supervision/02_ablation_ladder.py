@@ -15,7 +15,7 @@ must use the identical couplings rather than refitting them.
 Writes outputs/logs/out_a1_ladder.json.
 
     conda activate retune
-    cd homer && python3 experiments/section2_supervision/02_ablation_ladder.py
+    cd otter && python3 experiments/section2_supervision/02_ablation_ladder.py
 
 Six fits. Expect this to take a while; --arms restricts it to a subset for a partial rerun.
 """
@@ -29,10 +29,10 @@ from pathlib import Path
 
 import numpy as np
 
-ROOT = Path(__file__).resolve().parents[2]                       # .../homer
+ROOT = Path(__file__).resolve().parents[2]                       # .../otter
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.repro import (anchor_warped_xyz, beauchamp_scorer, fit_coupling,   # noqa: E402
+from otter.repro import (anchor_warped_xyz, beauchamp_scorer, fit_coupling,   # noqa: E402
                          load_inputs, refit_provenance, stamp)
 
 OUT = ROOT / "outputs" / "logs" / "out_a1_ladder.json"

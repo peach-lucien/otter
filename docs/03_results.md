@@ -28,7 +28,7 @@ against everything else.
    cytoarchitecture and hierarchy-aligned cell densities all clear spin nulls; laminar contrasts
    and spatially uniform cell classes do not.
 4. Against a state-of-the-art transcriptomic translator the two are level on region-level
-   accuracy, on that method's own benchmark, and HOMER leads on the other six capability axes.
+   accuracy, on that method's own benchmark, and OTTER leads on the other six capability axes.
 5. Where the mouse cannot rebuild human connectivity is a network-shaped territory tracking
    cortical expansion, with dorsolateral prefrontal cortex the clearest case.
 6. The coupling turns a mouse experiment into a falsifiable human prediction. It does not resolve
@@ -128,7 +128,7 @@ therefore not memorised curation, though the bound on parcel-exact recovery is r
 
 ## 3 · What transfers through π
 
-Each test uses data HOMER never saw and a spin null preserving spatial autocorrelation.
+Each test uses data OTTER never saw and a spin null preserving spatial autocorrelation.
 
 ### Networks
 
@@ -189,12 +189,12 @@ areal.
 > The as-published arm reproduces `hodge_2019_layer_markers.json` at 0.22819, which is what
 > verifies the re-scoring. Log: `outputs/logs/hodge_markers_like_for_like.json`.
 
-## 4 · HOMER versus TransBrain
+## 4 · OTTER versus TransBrain
 
 Both methods scored as distributions over the same 127-region Brainnetome atlas, on the same 24
 literature homologue pairs, using TransBrain's own atlas and curation.
 
-| | HOMER | TransBrain |
+| | OTTER | TransBrain |
 |---|---:|---:|
 | region-level AUROC | 0.83 | 0.84 |
 | mass on the correct region | 0.21 | 0.07 |
@@ -204,7 +204,7 @@ literature homologue pairs, using TransBrain's own atlas and curation.
 | spatial resolution | 2,094 parcels | ~127 regions |
 
 The accuracy difference is not significant (paired Wilcoxon p = 0.36), so the two are level there.
-Across the seven capability axes compared, HOMER leads on six and is level on the seventh. They are
+Across the seven capability axes compared, OTTER leads on six and is level on the seventh. They are
 probably better read as complementary instruments, region-level phenotype transfer against
 calibrated whole-brain correspondence, than as competitors.
 
@@ -271,8 +271,8 @@ over anterior insula and ventral-attention cortex and is lowest in visual cortex
 network, SalVentAttnB ranks first (+1.02 SD) and VisCent last (−1.30 SD). Salience enrichment
 relative to the rest of cortex is +0.86 SD, against a permuted-π null at p = 0.001.
 
-Against TransBrain on the same 1,635 parcels with matched permutation counts, HOMER reaches
-+0.87 SD (p = 0.016) and TransBrain +0.28 SD (p = 0.228). HOMER ranks SalVentAttnB first of 16
+Against TransBrain on the same 1,635 parcels with matched permutation counts, OTTER reaches
++0.87 SD (p = 0.016) and TransBrain +0.28 SD (p = 0.228). OTTER ranks SalVentAttnB first of 16
 networks; TransBrain ranks it eighth.
 
 Cortical atrophy patterns from five mouse autism models route to different networks rather than
@@ -304,7 +304,7 @@ data. Reconstruction accuracy carries no disorder-specific information at this r
 2. Parcel-level claims need the right tier. Trust parcel granularity in `anchored_and_validated`;
    use region granularity across the validated tiers.
 3. The spatial scaffold is doing real work, and is itself fitted to the Garin pairs. No arm of the
-   ablation is supervision-free, so HOMER is not unsupervised homology discovery.
+   ablation is supervision-free, so OTTER is not unsupervised homology discovery.
 4. Laminar structure does not translate. See §3, and do not read it out of π.
 5. Reconstruction of association cortex is poor. The coupling reports the shortfall rather than
    hiding it, but a mouse model still cannot address phenotypes living there.
@@ -322,6 +322,6 @@ data. Reconstruction accuracy carries no disorder-specific information at this r
    it. If it varies through cortical depth, it will not. §3 is the evidence.
 3. Check reconstruction accuracy before translating into association cortex. Where it is low, the
    absence of a good counterpart is the finding rather than a failed query.
-4. Spin-test every spatial correlation (`homer.eval.nulls.spin_null`) before reading it as
+4. Spin-test every spatial correlation (`otter.eval.nulls.spin_null`) before reading it as
    significant. A permuted-π null is too lenient for a smooth map, and that is how two of the
    errors corrected on this page happened.

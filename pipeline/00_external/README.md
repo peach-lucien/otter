@@ -3,9 +3,9 @@
 Scripts that download and project public neuroscience datasets onto the
 colleague's specific 1864 (mouse) / 2094 (human) parcellation. Run these on a
 machine with internet access and the colleague's `rsmask.nii` /
-`rsmask_human.nii` files at the locations expected by `homer.data.DATA_DIR`.
+`rsmask_human.nii` files at the locations expected by `otter.data.DATA_DIR`.
 
-All outputs land in `homer/data_external/`:
+All outputs land in `otter/data_external/`:
 
 ```
 data_external/
@@ -81,7 +81,7 @@ pip install -r scripts/external/requirements.txt
 On the **mouse** side, no mask registration is needed, voxel indices are
 pre-warped into CCFv3 (NS) and DSURQE (SS) space inside the mouse `.mat` file.
 If `01_mouse_sc.py` / `02_mouse_genes.py` warn that the parcel table is missing
-the pre-warped voxel-index columns, point `homer.data.DATA_DIR` at the mouse
+the pre-warped voxel-index columns, point `otter.data.DATA_DIR` at the mouse
 package that ships them.
 
 On the **human** side, the most likely failure mode is `00_inspect_masks.py`

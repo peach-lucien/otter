@@ -15,7 +15,7 @@ function", Siddiqi lab): https://neurovault.org/collections/13075/
 ## One-shot download (run from this folder)
 
 ```bash
-cd homer/experiments/reverse_translation/clinical_maps
+cd otter/experiments/reverse_translation/clinical_maps
 curl -L -o depression_tms.nii.gz  https://neurovault.org/media/images/13075/DepressionCircuit_t.nii.gz
 curl -L -o tms_anxdys.nii.gz      https://neurovault.org/media/images/13075/TargetAtlas_AnxDys.nii.gz
 curl -L -o ptsd_circuit.nii.gz    https://neurovault.org/media/images/13075/PTSDmap.nii.gz

@@ -3,7 +3,7 @@
 Test 2 (script 04) had a confound: per-subtype absolute intensity per network is
 dominated by network-size (large human networks like Subcortical collect most of
 the predicted mass under almost any translation). The permuted-π null was non-zero
-which means our test had no power to distinguish HOMER-specific signal from generic
+which means our test had no power to distinguish OTTER-specific signal from generic
 column-sum effects.
 
 The cleaner test: use the **subtype contrast** Δ = hyper − hypo. Network-size
@@ -21,7 +21,7 @@ Procedure:
   5. Permuted-π null: shuffle π rows, repeat.
 
 If pred_human_delta correlates with human_delta_obs significantly above null,
-HOMER's π replicates the per-subtype spatial *contrast*, a real Pagani finding.
+OTTER's π replicates the per-subtype spatial *contrast*, a real Pagani finding.
 """
 from __future__ import annotations
 
@@ -43,7 +43,7 @@ network_intensity = st.network_intensity
 mouse_intensity_to_parcel_values = st.mouse_intensity_to_parcel_values
 aggregate_human_parcels_to_networks = st.aggregate_human_parcels_to_networks
 
-from homer.data import load_cached
+from otter.data import load_cached
 
 
 def main():

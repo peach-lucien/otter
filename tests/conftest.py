@@ -13,7 +13,7 @@ import sys
 import warnings
 from pathlib import Path
 
-# Make `src/homer/` importable from a fresh checkout without requiring
+# Make `src/otter/` importable from a fresh checkout without requiring
 # `pip install -e .` or `PYTHONPATH=src`. This conftest is loaded by pytest
 # before any test module, so the sys.path injection happens early enough.
 _SRC = Path(__file__).resolve().parents[1] / "src"
@@ -27,7 +27,7 @@ import pytest
 
 # Suppress the deprecation warnings from the shim modules during tests so
 # pytest output stays readable. Tests themselves can re-enable if needed.
-warnings.filterwarnings("ignore", category=DeprecationWarning, module="homer\\..*")
+warnings.filterwarnings("ignore", category=DeprecationWarning, module="otter\\..*")
 
 
 N_MOUSE  = 20
@@ -39,9 +39,9 @@ def _build_var(n_nodes: int, n_anchors: int, *, seed: int) -> pd.DataFrame:
     """Build a synthetic adata.var with n_anchors anchors split across 5 networks.
 
     Anchors get pair_ids 1..N_PAIRS (×2 hemispheres). The first 5 networks of
-    `homer.data.networks.NETWORKS` are used (one per pair_id).
+    `otter.data.networks.NETWORKS` are used (one per pair_id).
     """
-    from homer.data.networks import NETWORKS, PAIRID_TO_NETWORK
+    from otter.data.networks import NETWORKS, PAIRID_TO_NETWORK
     rng = np.random.default_rng(seed)
     types = np.zeros(n_nodes, dtype=np.int8)
     pairids = np.zeros(n_nodes, dtype=np.int32)
@@ -126,7 +126,7 @@ def human_ad():
 @pytest.fixture(scope="session")
 def synthetic_costs(mouse_ad, human_ad):
     """Pre-built FC + SC cost matrices for the synthetic data."""
-    from homer.costs import correlation_distance, normalise_cost
+    from otter.costs import correlation_distance, normalise_cost
     fc_m = mouse_ad.uns["fc_mean"].astype(np.float64)
     fc_h = human_ad.uns["fc_mean"].astype(np.float64)
     Cm_FC = normalise_cost(correlation_distance(fc_m), scheme="max")

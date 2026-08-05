@@ -5,7 +5,7 @@ parcels sit in DSURQE region R?"*:
 
 - **Live atlas lookup** (production default), place each parcel's centroid
   into the Beauchamp DSURQE label volume and read the majority label in a
-  ~1 mm neighbourhood (`src/homer/data/anchor_packs/_dsurqe.py`).
+  ~1 mm neighbourhood (`src/otter/data/anchor_packs/_dsurqe.py`).
 - **Precomputed votes**, the per-parcel `region_vote_ss_dsq` label that ships
   in the mouse table (majority over the parcel's full voxel set), resolved to
   tree names via the Beauchamp CSV + the hand-authored `_paul_vote_bridge`.

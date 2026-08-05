@@ -1,4 +1,4 @@
-"""Visualise the HOMER × Fulcher 2019 multimodal-gradient result (3 panels)."""
+"""Visualise the OTTER × Fulcher 2019 multimodal-gradient result (3 panels)."""
 from __future__ import annotations
 
 import json
@@ -39,7 +39,7 @@ def main():
     _scatter(
         axes[0], myelin, pred_t1t2, "#2a9d8f",
         "Observed human T1w/T2w myelin (Schaefer-400 region)",
-        "Predicted via HOMER π\n(mouse T1w:T2w translated)",
+        "Predicted via OTTER π\n(mouse T1w:T2w translated)",
         f"1 · Mouse myelin hierarchy → human myelin\n"
         f"Pearson r = {p1['pearson_r']:+.3f}   ρ = {p1['spearman_r']:+.3f}   "
         f"p = {p1['pearson_p_analytical']:.1e}\n"
@@ -74,7 +74,7 @@ def main():
     _scatter(
         axes[2], myelin, pred_cyto, "#264653",
         "Observed human T1w/T2w myelin (Schaefer-400 region)",
-        "Predicted via HOMER π\n(mouse cytoarchitecture translated)",
+        "Predicted via OTTER π\n(mouse cytoarchitecture translated)",
         f"3 · Independent modality, cytoarchitecture → human myelin\n"
         f"Pearson r = {p3['pearson_r']:+.3f}   ρ = {p3['spearman_r']:+.3f}   "
         f"p = {p3['pearson_p_analytical']:.1e}\n"
@@ -83,7 +83,7 @@ def main():
     )
 
     plt.suptitle(
-        "HOMER × Fulcher 2019, π translates the mouse multimodal cortical "
+        "OTTER × Fulcher 2019, π translates the mouse multimodal cortical "
         "hierarchy onto the human cortex",
         fontsize=12, y=1.04,
     )

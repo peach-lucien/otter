@@ -1,4 +1,4 @@
-"""Tests for homer.viz, viewer + notebook plotters + reports."""
+"""Tests for otter.viz, viewer + notebook plotters + reports."""
 import json
 
 import numpy as np
@@ -10,7 +10,7 @@ import pytest
 # Viewer (HTML + payload generation)
 # ---------------------------------------------------------------------------
 def test_topk_per_row_shape_and_sort():
-    from homer.viz.viewer import topk_per_row
+    from otter.viz.viewer import topk_per_row
     rng = np.random.default_rng(0)
     pi = rng.uniform(0, 1, size=(8, 12))
     out = topk_per_row(pi, k=4)
@@ -23,7 +23,7 @@ def test_topk_per_row_shape_and_sort():
 
 
 def test_topk_per_col_normalises_by_col_sum():
-    from homer.viz.viewer import topk_per_col
+    from otter.viz.viewer import topk_per_col
     pi = np.array([[1.0, 2.0], [3.0, 4.0]])     # col sums = 4, 6
     out = topk_per_col(pi, k=1)
     # Top entry of col 0 is row 1 (val 3) → normalised 3/4 = 0.75
@@ -32,21 +32,21 @@ def test_topk_per_col_normalises_by_col_sum():
 
 
 def test_row_entropy_one_hot_is_zero():
-    from homer.viz.viewer import row_entropy
+    from otter.viz.viewer import row_entropy
     pi = np.array([[1.0, 0.0, 0.0], [0.0, 1.0, 0.0]])
     e = row_entropy(pi)
     np.testing.assert_allclose(e, [0.0, 0.0], atol=1e-9)
 
 
 def test_row_entropy_uniform_is_log_n():
-    from homer.viz.viewer import row_entropy
+    from otter.viz.viewer import row_entropy
     pi = np.array([[1.0, 1.0, 1.0, 1.0]])
     e = row_entropy(pi)
     np.testing.assert_allclose(e, [np.log(4)], atol=1e-9)
 
 
 def test_build_viewer_data_shape(mouse_ad, human_ad):
-    from homer.viz.viewer import build_viewer_data
+    from otter.viz.viewer import build_viewer_data
     rng = np.random.default_rng(0)
     pi = rng.uniform(0, 1, size=(20, 25))
     pi /= pi.sum(axis=1, keepdims=True) * 20      # normalise to mouse uniform marginal
@@ -70,7 +70,7 @@ def test_build_viewer_data_shape(mouse_ad, human_ad):
 
 
 def test_build_viewer_html_contains_data(mouse_ad, human_ad):
-    from homer.viz.viewer import build_viewer_data, build_viewer_html
+    from otter.viz.viewer import build_viewer_data, build_viewer_html
     rng = np.random.default_rng(0)
     pi = rng.uniform(0, 1, size=(20, 25))
     payload = build_viewer_data(pi, mouse_ad, human_ad, top_k=5, pi_label="test_label")
@@ -84,7 +84,7 @@ def test_build_viewer_html_contains_data(mouse_ad, human_ad):
 
 
 def test_write_viewer_creates_files(mouse_ad, human_ad, tmp_path):
-    from homer.viz.viewer import write_viewer
+    from otter.viz.viewer import write_viewer
     rng = np.random.default_rng(0)
     pi = rng.uniform(0, 1, size=(20, 25))
     json_path, html_path = write_viewer(
@@ -99,7 +99,7 @@ def test_write_viewer_creates_files(mouse_ad, human_ad, tmp_path):
 
 
 def test_build_viewer_data_rejects_1d_pi(mouse_ad, human_ad):
-    from homer.viz.viewer import build_viewer_data
+    from otter.viz.viewer import build_viewer_data
     with pytest.raises(ValueError, match="must be 2-D"):
         build_viewer_data(np.zeros(20), mouse_ad, human_ad)
 
@@ -108,7 +108,7 @@ def test_build_viewer_data_rejects_1d_pi(mouse_ad, human_ad):
 # Region-first GUI
 # ---------------------------------------------------------------------------
 def test_build_gui_payload_smoke(mouse_ad, human_ad):
-    from homer.viz.gui import build_gui_payload
+    from otter.viz.gui import build_gui_payload
     rng = np.random.default_rng(0)
     pi = rng.uniform(0, 1, size=(20, 25))
     payload = build_gui_payload(
@@ -126,7 +126,7 @@ def test_build_gui_payload_smoke(mouse_ad, human_ad):
 
 
 def test_build_gui_html_contains_app(mouse_ad, human_ad):
-    from homer.viz.gui import build_gui_html, build_gui_payload
+    from otter.viz.gui import build_gui_html, build_gui_payload
     pi = np.eye(20, 25)
     payload = build_gui_payload(
         [{"id": "identity", "label": "Identity-ish", "pi": pi}],
@@ -136,13 +136,13 @@ def test_build_gui_html_contains_app(mouse_ad, human_ad):
     )
     html = build_gui_html(payload)
     assert "<!DOCTYPE html>" in html
-    assert "HOMER Mapping Explorer" in html
+    assert "OTTER Mapping Explorer" in html
     assert "plotMouse" in html and "plotHuman" in html
     assert "Identity-ish" in html
 
 
 def test_write_gui_creates_files(mouse_ad, human_ad, tmp_path):
-    from homer.viz.gui import build_gui_payload, write_gui
+    from otter.viz.gui import build_gui_payload, write_gui
     pi = np.eye(20, 25)
     payload = build_gui_payload(
         [{"id": "identity", "label": "Identity-ish", "pi": pi}],
@@ -169,7 +169,7 @@ def go():
 
 
 def test_plot_brain_3d_default(mouse_ad, go):
-    from homer.viz.notebook import plot_brain_3d
+    from otter.viz.notebook import plot_brain_3d
     fig = plot_brain_3d(mouse_ad)
     assert isinstance(fig, go.Figure)
     assert len(fig.data) == 1
@@ -178,14 +178,14 @@ def test_plot_brain_3d_default(mouse_ad, go):
 
 
 def test_plot_brain_3d_color_modes(mouse_ad, go):
-    from homer.viz.notebook import plot_brain_3d
+    from otter.viz.notebook import plot_brain_3d
     for mode in ("network", "hemisphere", "is_anchor"):
         fig = plot_brain_3d(mouse_ad, color_by=mode)
         assert isinstance(fig, go.Figure)
 
 
 def test_plot_brain_3d_highlight(human_ad, go):
-    from homer.viz.notebook import plot_brain_3d
+    from otter.viz.notebook import plot_brain_3d
     fig = plot_brain_3d(human_ad, color_by="highlight",
                           highlight_idx=[0, 5, 10],
                           highlight_values=[1.0, 0.5, 0.1])
@@ -193,28 +193,28 @@ def test_plot_brain_3d_highlight(human_ad, go):
 
 
 def test_plot_brain_3d_unknown_mode_raises(mouse_ad, go):
-    from homer.viz.notebook import plot_brain_3d
+    from otter.viz.notebook import plot_brain_3d
     with pytest.raises(ValueError, match="unknown color_by"):
         plot_brain_3d(mouse_ad, color_by="bogus")
 
 
 def test_plot_pi_partners_with_fitted_model(mouse_ad, human_ad, go):
-    from homer.models import SupervisedFGW
-    from homer.viz.notebook import plot_pi_partners
+    from otter.models import SupervisedFGW
+    from otter.viz.notebook import plot_pi_partners
     m = SupervisedFGW(epsilon=1e-2).fit(mouse_ad, human_ad)
     fig = plot_pi_partners(m, source_idx=0, source="mouse", top_k=5)
     assert isinstance(fig, go.Figure)
 
 
 def test_plot_pi_partners_unfit_raises(go):
-    from homer.models import SupervisedFGW
-    from homer.viz.notebook import plot_pi_partners
+    from otter.models import SupervisedFGW
+    from otter.viz.notebook import plot_pi_partners
     with pytest.raises(RuntimeError, match="must be fitted"):
         plot_pi_partners(SupervisedFGW(), source_idx=0)
 
 
 def test_plot_pi_heatmap_small(go):
-    from homer.viz.notebook import plot_pi_heatmap
+    from otter.viz.notebook import plot_pi_heatmap
     pi = np.eye(10)
     fig = plot_pi_heatmap(pi)
     assert isinstance(fig, go.Figure)
@@ -223,7 +223,7 @@ def test_plot_pi_heatmap_small(go):
 
 
 def test_plot_pi_heatmap_large_downsamples(go):
-    from homer.viz.notebook import plot_pi_heatmap
+    from otter.viz.notebook import plot_pi_heatmap
     pi = np.random.rand(900, 1000)
     fig = plot_pi_heatmap(pi, max_size=100)
     assert isinstance(fig, go.Figure)
@@ -232,7 +232,7 @@ def test_plot_pi_heatmap_large_downsamples(go):
 
 
 def test_plot_per_network_heatmap_shape(go):
-    from homer.viz.notebook import plot_per_network_heatmap
+    from otter.viz.notebook import plot_per_network_heatmap
     df = pd.DataFrame([
         {"config": "a", "label": "A", "network": "visual",   "top1": 0.5},
         {"config": "a", "label": "A", "network": "auditory", "top1": 1.0},
@@ -244,7 +244,7 @@ def test_plot_per_network_heatmap_shape(go):
 
 
 def test_plot_comparison_bars_shape(go):
-    from homer.viz.notebook import plot_comparison_bars
+    from otter.viz.notebook import plot_comparison_bars
     df = pd.DataFrame([
         {"config": "a", "label": "Config A", "notes": "",
          "anchor_top1": 0.79, "anchor_top5": 1.0,
@@ -261,7 +261,7 @@ def test_plot_comparison_bars_shape(go):
 # Reports
 # ---------------------------------------------------------------------------
 def test_aggregate_anchor_cv_weighted_mean():
-    from homer.viz.reports import aggregate_anchor_cv
+    from otter.viz.reports import aggregate_anchor_cv
     per_net = {
         "visual":   {"n_anchors_held": 4,  "top1": 0.5,  "top5": 1.0},
         "auditory": {"n_anchors_held": 2,  "top1": 1.0,  "top5": 1.0},
@@ -275,20 +275,20 @@ def test_aggregate_anchor_cv_weighted_mean():
 
 
 def test_aggregate_anchor_cv_empty():
-    from homer.viz.reports import aggregate_anchor_cv
+    from otter.viz.reports import aggregate_anchor_cv
     assert aggregate_anchor_cv({}) == {}
     # Missing n_anchors_held → also empty
     assert aggregate_anchor_cv({"visual": {"top1": 0.5}}) == {}
 
 
 def test_aggregate_null_zero_when_no_trials():
-    from homer.viz.reports import aggregate_null
+    from otter.viz.reports import aggregate_null
     out = aggregate_null({}, weights_per_net={})
     assert out == {}
 
 
 def test_aggregate_null_basic():
-    from homer.viz.reports import aggregate_null
+    from otter.viz.reports import aggregate_null
     null_per_net = {
         "visual":   [{"top1": 0.0}, {"top1": 0.5}],
         "auditory": [{"top1": 1.0}, {"top1": 0.5}],

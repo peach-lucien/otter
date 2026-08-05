@@ -1,4 +1,4 @@
-"""HOMER × BICCN cell-type marker cross-species validation.
+"""OTTER × BICCN cell-type marker cross-species validation.
 
 BICCN's atlases ([Yao et al. 2023, Nature](https://www.nature.com/articles/s41586-023-06812-z)
 for mouse; [Siletti et al. 2023, Science](https://www.science.org/doi/10.1126/science.add7046)
@@ -8,7 +8,7 @@ interneurons, Sst for somatostatin interneurons, Camk2a for excitatory
 neurons, Gfap for astrocytes, etc.) maintaining their spatial distributions
 across species.
 
-This tests whether HOMER's π preserves cell-type marker spatial patterns
+This tests whether OTTER's π preserves cell-type marker spatial patterns
 across species. It's parallel to the Hodge 2019 layer-marker test
 (experiments/hodge_2019_cortical_layers) but tests cell-type-defining markers
 instead of cortical-layer markers.
@@ -16,14 +16,14 @@ instead of cortical-layer markers.
 Hypothesis: cell-type markers (especially interneuron class markers) should
 translate cross-species *better* than layer markers, because:
   - Cell-type spatial distributions are largely AREA-SPECIFIC (Pvalb high in
-    sensorimotor, Vip preferring associative cortex), so HOMER's area-level
+    sensorimotor, Vip preferring associative cortex), so OTTER's area-level
     anchors should capture them.
-  - Layer markers are WITHIN-AREA structure (laminar), which HOMER's anchors
+  - Layer markers are WITHIN-AREA structure (laminar), which OTTER's anchors
     don't supervise.
 
 Procedure (same as Hodge 2019 validation):
   1. For each cell-type marker, look up mouse and human per-parcel expression
-     from HOMER's Allen ISH (mouse) and AHBA microarray (human) matrices.
+     from OTTER's Allen ISH (mouse) and AHBA microarray (human) matrices.
   2. Translate mouse z-scored expression through π → predicted human pattern.
   3. Correlate predicted vs observed human expression (Pearson r over 2,094
      parcels, 200 permuted-π null trials).
@@ -44,11 +44,11 @@ from scipy.stats import pearsonr, spearmanr
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached, load_pi, pi_provenance
+from otter.data import load_cached, load_pi, pi_provenance
 
 
 # BICCN-aligned cell-type markers, grouped by class.
-# All markers present in HOMER's 61-gene curated panel + AHBA microarray.
+# All markers present in OTTER's 61-gene curated panel + AHBA microarray.
 CELL_TYPE_MARKERS = {
     "Interneuron. Pvalb (parvalbumin)":   {"genes": ["Pvalb"],         "class": "interneuron"},
     "Interneuron. Sst (somatostatin)":    {"genes": ["Sst"],           "class": "interneuron"},
@@ -85,7 +85,7 @@ def _z(v):
 
 def main():
     print("=" * 80)
-    print("HOMER × BICCN cell-type marker cross-species validation")
+    print("OTTER × BICCN cell-type marker cross-species validation")
     print("=" * 80)
 
     pi = load_pi()                      # canonical coupling (pi_canonical.npy)

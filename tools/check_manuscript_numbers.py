@@ -27,9 +27,9 @@ declares no source is reported separately rather than silently passed.
 
 Usage
 -----
-    cd homer && python3 tools/check_manuscript_numbers.py
-    cd homer && python3 tools/check_manuscript_numbers.py --section 2
-    cd homer && python3 tools/check_manuscript_numbers.py --verbose
+    cd otter && python3 tools/check_manuscript_numbers.py
+    cd otter && python3 tools/check_manuscript_numbers.py --section 2
+    cd otter && python3 tools/check_manuscript_numbers.py --verbose
 """
 from __future__ import annotations
 
@@ -40,19 +40,21 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]                 # .../homer
+ROOT = Path(__file__).resolve().parents[1]                 # .../otter
 LOGS = ROOT / "outputs" / "logs"
+# The manuscript keeps its original filename until the renamed copy replaces it. Point this
+# at OTTER_first_draft.v2.docx once that swap is made.
 MANUSCRIPT = ROOT.parent / "manuscript" / "HOMER_first_draft.v2.docx"
 
 # Heading text -> section key. Matched case-insensitively against whole paragraphs.
 SECTION_HEADINGS = {
     "abstract": "0",
-    "homer learns a calibrated probabilistic mouse-human coupling": "1",
+    "otter learns a calibrated probabilistic mouse-human coupling": "1",
     "connectivity, spatial structure and curation cover each other's failures": "2",
     "π transfers areal organisation along the cortical hierarchy, but not laminar structure": "3",
-    "homer complements a state-of-the-art phenotype translator": "4",
-    "homer measures the connectional reorganisation of human association cortex": "5",
-    "homer translates mouse experiments into human predictions and clinical targets into mouse circuits": "6",
+    "otter complements a state-of-the-art phenotype translator": "4",
+    "otter measures the connectional reorganisation of human association cortex": "5",
+    "otter translates mouse experiments into human predictions and clinical targets into mouse circuits": "6",
     "discussion": "END",
 }
 
@@ -98,7 +100,7 @@ ALLOWLIST: dict[str, str] = {
     "1864": "parcel count, structural constant of the mouse atlas",
     "1824": "cortical parcel count, structural constant",
     "1768": "Schaefer-400 cortical parcel count",
-    "1635": "common-parcel count for the HOMER/TransBrain comparison",
+    "1635": "common-parcel count for the OTTER/TransBrain comparison",
     "127": "Brainnetome region count", "120": "Brainnetome region count (approx, prose)",
     "400": "Schaefer-400 parcellation", "388": "Schaefer regions the coupling reaches",
     "42": "number of curated Garin anchors", "41": "combined supervision units",
@@ -106,7 +108,7 @@ ALLOWLIST: dict[str, str] = {
     "24": "benchmark region count", "19": "Beauchamp homology pairs",
     "16": "Yeo-17 networks tested", "17": "Yeo-17 networks",
     "34": "Desikan-Killiany regions per hemisphere", "68": "DK structures (34 x 2)",
-    "30": "DK cortical regions HOMER resolves", "15": "scorable Garin classes / ENIGMA count",
+    "30": "DK cortical regions OTTER resolves", "15": "scorable Garin classes / ENIGMA count",
     "14": "published mouse measurements in the battery", "12": "functional systems, reverse test",
     "8": "dopamine PET maps / prose count", "7": "prose count", "9": "prose count",
     "10": "prose count", "11": "prose count", "13": "prose count",

@@ -32,7 +32,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached  # noqa: E402
+from otter.data import load_cached  # noqa: E402
 
 EXT = ROOT / "data_external"
 
@@ -120,7 +120,7 @@ def main():
 
     # Build the new SC matrix as a copy of the old, then OVERWRITE the
     # cortical-anchor block with knox_dist (in *correlation-distance* form,
-    # which matches what homer.costs.sc_correlation_distance produces from
+    # which matches what otter.costs.sc_correlation_distance produces from
     # an SC matrix).
     # The existing data_external/mouse_sc.npy is the RAW SC matrix (streamline
     # density), not the cost matrix. We need to produce a NEW raw SC matrix
@@ -162,7 +162,7 @@ def main():
     # Without this, Cm_SC_knox lives in [0, ~1.32] while every other cost
     # matrix in the cache lives in [0, 1], that scale mismatch silently
     # over-weights SC by ~30% in any FGW solve that uses Cm_SC_knox.
-    from homer.costs.normalisation import normalise_cost
+    from otter.costs.normalisation import normalise_cost
 
     eps = 1e-6
     x = np.log1p(np.maximum(fp, 0))                # log-transform (positive only)

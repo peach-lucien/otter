@@ -1,4 +1,4 @@
-"""HOMER × Margulies 2016 + Huntenburg 2021 principal-gradient validation.
+"""OTTER × Margulies 2016 + Huntenburg 2021 principal-gradient validation.
 
 [Margulies et al. 2016, PNAS](https://www.pnas.org/doi/10.1073/pnas.1608282113)
 introduced the principal connectivity gradient, derived by diffusion-map
@@ -10,7 +10,7 @@ spans from primary sensorimotor cortex (unimodal end) to default-mode network
 extended the same procedure to mouse rsfMRI and showed that a broadly
 analogous principal gradient exists in mouse.
 
-This experiment tests whether HOMER's π preserves the cross-species principal
+This experiment tests whether OTTER's π preserves the cross-species principal
 gradient. Procedure:
 
   1. Compute the principal gradient on each species' FC matrix (Fisher-z →
@@ -39,7 +39,7 @@ from scipy.stats import pearsonr, spearmanr
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached, load_pi, pi_provenance
+from otter.data import load_cached, load_pi, pi_provenance
 
 
 def diffusion_components(fc: np.ndarray, *, top_pct: float = 10.0,
@@ -114,7 +114,7 @@ def route_normalized(mouse_vec: np.ndarray, pi: np.ndarray) -> np.ndarray:
     """Transport-weighted average, translate a mouse map to human space.
 
     predicted[j] = Σ_i mouse_vec[i]·π[i,j] / Σ_i π[i,j].  Human parcels that
-    receive negligible π mass (HOMER's coupling is concentrated) are NaN.
+    receive negligible π mass (OTTER's coupling is concentrated) are NaN.
     """
     num = mouse_vec @ pi
     den = pi.sum(axis=0)
@@ -145,7 +145,7 @@ def aggregate_to_regions(node_vals: np.ndarray, node_region: np.ndarray) -> np.n
 
 def main():
     print("=" * 80)
-    print("HOMER × Margulies/Huntenburg principal-gradient validation")
+    print("OTTER × Margulies/Huntenburg principal-gradient validation")
     print("=" * 80)
 
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))
@@ -212,8 +212,8 @@ def main():
           f"{abs(r_p) / max(null_abs.mean(), 1e-6):.0f}× null mean)")
 
     # ---- spatial-autocorrelation-preserving null (the permuted-π null above is
-    #      too lenient; see homer.eval.nulls docstring) --------------------------
-    from homer.eval.nulls import spin_null
+    #      too lenient; see otter.eval.nulls docstring) --------------------------
+    from otter.eval.nulls import spin_null
     hx = H.var[["x", "y", "z"]].to_numpy(float)
     fin = np.isfinite(pred) & np.isfinite(human_grad)
     sp = spin_null(pred[fin], human_grad[fin], hx[fin], n_trials=1000, seed=0)

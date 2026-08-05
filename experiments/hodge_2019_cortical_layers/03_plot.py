@@ -28,7 +28,7 @@ def main():
     x = np.arange(len(names))
     ax.bar(x - 0.2, rs, 0.4,
            color=["#2a9d8f" if s else "#e76f51" for s in sig],
-           label="HOMER predicted vs observed (cortex+subcortex)")
+           label="OTTER predicted vs observed (cortex+subcortex)")
     ax.bar(x + 0.2, nulls, 0.4, color="#aaaaaa",
            label="permuted-π null mean")
     # Add CI bars on null
@@ -54,7 +54,7 @@ def main():
     x = np.arange(len(g_names))
     ax.bar(x - 0.2, g_rs, 0.4,
            color=["#2a9d8f" if s else "#e76f51" for s in g_sig],
-           label="HOMER predicted vs observed (cortex only)")
+           label="OTTER predicted vs observed (cortex only)")
     ax.bar(x + 0.2, g_nulls, 0.4, color="#aaaaaa",
            label="permuted-π null mean")
     for i, (lo, hi) in enumerate(zip(g_ci_lo, g_ci_hi)):
@@ -74,10 +74,10 @@ def main():
     ax.axhline(0, color="black", linewidth=0.5)
     ax.set_ylabel("Pearson r")
     ax.set_title(f"Layer-group composites (cortical parcels only, n=1,768)\n"
-                 f"L4 (RORB) is the only group where HOMER signal beats null")
+                 f"L4 (RORB) is the only group where OTTER signal beats null")
     ax.legend(loc="upper left", fontsize=8)
 
-    plt.suptitle("Hodge 2019 layer-marker cross-species test. HOMER works at area level, not at layer level",
+    plt.suptitle("Hodge 2019 layer-marker cross-species test. OTTER works at area level, not at layer level",
                  fontsize=12, y=1.02)
     plt.tight_layout()
     out = ROOT / "outputs" / "figures" / "hodge_2019_layer_markers.png"

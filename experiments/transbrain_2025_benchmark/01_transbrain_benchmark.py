@@ -1,9 +1,9 @@
-"""HOMER × TransBrain 2025, benchmark against a sibling method.
+"""OTTER × TransBrain 2025, benchmark against a sibling method.
 
 [Huang et al. 2025, Nature Methods](https://doi.org/10.1038/s41592-025-02961-3),
 "TransBrain: a computational framework for translating brain-wide
 phenotypes between humans and mice", is a published mouse↔human phenotype-
-translation framework, a direct sibling/competitor to HOMER. It works at
+translation framework, a direct sibling/competitor to OTTER. It works at
 region level (68-region mouse atlas; Brainnetome / DK / AAL human atlases)
 via graph embeddings + dual regression.
 
@@ -11,11 +11,11 @@ This is a **methods-landscape** comparison, not a validation "pass".
 
 **Part A. Homology benchmark.** TransBrain validated its mapping against a
 literature-curated set of classic mouse↔human homologous region pairs
-(`homo_cortex.csv`, `homo_subcortex.csv`), a set HOMER has never seen
+(`homo_cortex.csv`, `homo_subcortex.csv`), a set OTTER has never seen
 (independent of the Garin anchors and the Beauchamp benchmark). For each
-benchmarked mouse region we route HOMER's π and measure (1) whether the
+benchmarked mouse region we route OTTER's π and measure (1) whether the
 literature-homolog human Brainnetome region is in the top-K, and (2) how
-far HOMER's predicted human centroid is from the homolog (mm), the
+far OTTER's predicted human centroid is from the homolog (mm), the
 resolution-fair metric.
 
 **Part B. Head-to-head.** We translate the same mouse phenotype with BOTH
@@ -40,7 +40,7 @@ from scipy.stats import pearsonr, spearmanr
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached
+from otter.data import load_cached
 
 try:
     import nibabel as nib
@@ -63,7 +63,7 @@ SEED = 42
 # Brainnetome atlas
 # ---------------------------------------------------------------------------
 def load_bn_atlas(H_var):
-    """Return (bn_id per HOMER human parcel, id→name, name→MNI centroid)."""
+    """Return (bn_id per OTTER human parcel, id→name, name→MNI centroid)."""
     nii = nib.load(Config.bnatlas_path)
     vol = np.asarray(nii.dataobj).astype(int)
     aff = nii.affine
@@ -207,11 +207,11 @@ def homology_benchmark(pi, parcel_acr, H_var, bn_id, id2name, centroid,
 def head_to_head_gradient(pi, parcel_acr, bn_id, id2name):
     """Smooth phenotype: the resting-fMRI principal gradient."""
     mg = json.loads((ROOT / "outputs/logs/margulies_2016_gradient.json").read_text())
-    mouse_grad = np.array(mg["mouse_gradient"])          # per HOMER mouse parcel
-    human_grad = np.array(mg["human_gradient"])          # per HOMER human parcel
+    mouse_grad = np.array(mg["mouse_gradient"])          # per OTTER mouse parcel
+    human_grad = np.array(mg["human_gradient"])          # per OTTER human parcel
 
     # common mouse input: gradient averaged into the 39 mouse cortical acronyms.
-    # 4 acronyms absent from HOMER's parcellation (PTLp/VISal/PERI/AUDpo) are
+    # 4 acronyms absent from OTTER's parcellation (PTLp/VISal/PERI/AUDpo) are
     # filled with the neutral mean so TransBrain receives its full region set.
     by_acr: dict[str, list] = {}
     for a, v in zip(parcel_acr, mouse_grad):
@@ -221,12 +221,12 @@ def head_to_head_gradient(pi, parcel_acr, bn_id, id2name):
     fill = float(np.mean(list(avail.values())))
     mouse_in = {a: avail.get(a, fill) for a in Config.MOUSE_CORTICAL}
 
-    homer = aggregate_bn(route_norm(mouse_in, parcel_acr, pi), bn_id, id2name)
+    otter = aggregate_bn(route_norm(mouse_in, parcel_acr, pi), bn_id, id2name)
     tb = transbrain_translate(mouse_in, "cortex", col="gradient")
     ref = aggregate_bn(human_grad, bn_id, id2name)
 
-    shared = sorted(set(homer) & set(tb) & set(ref) & set(Config.BN_CORTICAL))
-    h = np.array([homer[r] for r in shared])
+    shared = sorted(set(otter) & set(tb) & set(ref) & set(Config.BN_CORTICAL))
+    h = np.array([otter[r] for r in shared])
     t = np.array([tb[r] for r in shared])
     rf = np.array([ref[r] for r in shared])
     # gradients are sign-ambiguous, report |r|
@@ -235,11 +235,11 @@ def head_to_head_gradient(pi, parcel_acr, bn_id, id2name):
     r_ht = abs(pearsonr(h, t)[0])
     print(f"\n[Part B-1] Head-to-head, resting-fMRI gradient "
           f"({len(shared)} BN cortical regions)")
-    print(f"  HOMER vs observed human gradient:      |r| = {r_h:.3f}")
+    print(f"  OTTER vs observed human gradient:      |r| = {r_h:.3f}")
     print(f"  TransBrain vs observed human gradient: |r| = {r_t:.3f}")
-    print(f"  HOMER vs TransBrain (method agreement):|r| = {r_ht:.3f}")
-    return {"n_bn_regions": len(shared), "homer_vs_reference": r_h,
-            "transbrain_vs_reference": r_t, "homer_vs_transbrain": r_ht}
+    print(f"  OTTER vs TransBrain (method agreement):|r| = {r_ht:.3f}")
+    return {"n_bn_regions": len(shared), "otter_vs_reference": r_h,
+            "transbrain_vs_reference": r_t, "otter_vs_transbrain": r_ht}
 
 
 def head_to_head_autism(pi, parcel_acr, bn_id, id2name):
@@ -247,12 +247,12 @@ def head_to_head_autism(pi, parcel_acr, bn_id, id2name):
     magel2 = pd.read_csv(DATA / "magel2_mutation_pattern.csv", index_col=0)
     mouse_in = magel2["Magel2"].to_dict()
 
-    homer = aggregate_bn(route_norm(mouse_in, parcel_acr, pi), bn_id, id2name)
+    otter = aggregate_bn(route_norm(mouse_in, parcel_acr, pi), bn_id, id2name)
     tb = transbrain_translate(mouse_in, "all", col="Magel2")
 
     z = pd.read_csv(DATA / "z_autism_regress.csv", index_col=0)
-    shared = [r for r in z.columns if r in homer and r in tb]
-    h = np.array([homer[r] for r in shared])
+    shared = [r for r in z.columns if r in otter and r in tb]
+    h = np.array([otter[r] for r in shared])
     t = np.array([tb[r] for r in shared])
     zmat = z[shared].to_numpy()
 
@@ -262,29 +262,29 @@ def head_to_head_autism(pi, parcel_acr, bn_id, id2name):
     concord = pearsonr(risk_h, risk_t)[0]
     print(f"\n[Part B-2] Head-to-head. Magel2 autism mutation pattern "
           f"({len(shared)} BN regions, {len(zmat)} ASD individuals)")
-    print(f"  HOMER vs TransBrain translated maps:   r = {map_agree:+.3f}")
+    print(f"  OTTER vs TransBrain translated maps:   r = {map_agree:+.3f}")
     print(f"  per-individual ASD risk-score concord: r = {concord:+.3f}")
     return {"n_bn_regions": len(shared), "n_individuals": int(len(zmat)),
             "map_agreement": float(map_agree),
             "risk_score_concordance": float(concord),
-            "mean_risk_homer": float(risk_h.mean()),
+            "mean_risk_otter": float(risk_h.mean()),
             "mean_risk_transbrain": float(risk_t.mean()),
-            "risk_homer": risk_h.tolist(),
+            "risk_otter": risk_h.tolist(),
             "risk_transbrain": risk_t.tolist()}
 
 
 def main():
     print("=" * 80)
-    print("HOMER × TransBrain 2025, sibling-method benchmark")
+    print("OTTER × TransBrain 2025, sibling-method benchmark")
     print("=" * 80)
 
-    from homer.data import load_pi, pi_provenance
+    from otter.data import load_pi, pi_provenance
     pi = load_pi()
     mm = json.loads((ROOT / "data_external" / "mouse_sc_meta.json").read_text())
     parcel_acr = [mm["structure_acronyms"][i] for i in mm["node_struct_idx"]]
     H, _ = load_cached("human", cache_dir=ANN)
     bn_id, id2name, centroid = load_bn_atlas(H.var)
-    print(f"  π: {pi.shape}   HOMER human parcels with a BN label: "
+    print(f"  π: {pi.shape}   OTTER human parcels with a BN label: "
           f"{int((bn_id > 0).sum())} / {len(bn_id)}")
 
     out = {

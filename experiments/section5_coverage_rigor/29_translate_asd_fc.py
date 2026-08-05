@@ -14,7 +14,7 @@ HUMAN TARGET  data_external/transbrain_2025/z_autism_regress.csv
   subject-level statistic; we report both.
 
 ATLAS BRIDGE  transbrain's bn_atlas_2mm_symmetry.nii.gz (127 bilateral labels,
-  MNI 2mm). Each HOMER human parcel (H.var xyz, MNI mm) is assigned to its nearest
+  MNI 2mm). Each OTTER human parcel (H.var xyz, MNI mm) is assigned to its nearest
   labelled atlas voxel; the routed mouse per-parcel map is averaged within each of
   the 127 BN regions. Region names are matched by NAME (the CSV column order and
   the atlas index order differ at the thalamic tail). Spin geometry uses the
@@ -45,8 +45,8 @@ from scipy.stats import spearmanr, rankdata, wilcoxon
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import DATA_DIR, load_cached, load_pi, pi_provenance
-from homer.eval.nulls import _route_normalized, spin_null
+from otter.data import DATA_DIR, load_cached, load_pi, pi_provenance
+from otter.eval.nulls import _route_normalized, spin_null
 
 PAGANI = Path(DATA_DIR) / "pagani"
 TB = ROOT / "data_external/transbrain_2025/z_autism_regress.csv"
@@ -158,7 +158,7 @@ def pi_perm_null(mvec, pi, regions, order, G, rho_obs, n=N_PIPERM, seed=1):
 
 def trans_spin_null(mvec, mcoords, pi, regions, order, G, rho_obs, n=N_TRANSSPIN, seed=2):
     """Null B: spin the MOUSE input, route through the REAL pi, aggregate, corr."""
-    from homer.eval.nulls import _haar_rotation
+    from otter.eval.nulls import _haar_rotation
     c = mcoords - mcoords.mean(0)
     sph = c / np.linalg.norm(c, axis=1, keepdims=True).clip(min=1e-12)
     rng = np.random.default_rng(seed)

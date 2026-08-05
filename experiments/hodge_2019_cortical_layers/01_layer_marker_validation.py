@@ -10,7 +10,7 @@ layer-specific spatial expression across mouse and human cortex:
   - FEZF2            → infragranular L5
   - TBR1, FOXP2      → deep layers (L6)
 
-HOMER's claim: the coupling π maps mouse parcels to human parcels such that
+OTTER's claim: the coupling π maps mouse parcels to human parcels such that
 their connectivity neighborhoods + spatial position match. If π is sensible,
 then **mouse parcels with high CUX2 expression should map to human parcels
 with high CUX2 expression**, and the same should hold for the other markers.
@@ -21,7 +21,7 @@ Mouse-Human Transcriptomic Similarity dataset. So agreement here is
 independent evidence about π's anatomical fidelity.
 
 Procedure:
-  1. For each Hodge marker, pull mouse per-parcel expression from HOMER's
+  1. For each Hodge marker, pull mouse per-parcel expression from OTTER's
      `mouse_genes.npy` (Allen ISH, 1864 parcels × 61 genes).
   2. Translate through π:  pred_human[h] = Σ_m π[m, h] · mouse_expr[m].
   3. Compare predicted human spatial pattern to observed AHBA per-parcel
@@ -30,7 +30,7 @@ Procedure:
   5. Compare against permuted-π null (200 trials, within-row permutation).
 
 Headline statistic: mean cross-species Pearson r over the 7 markers, vs null
-mean. If HOMER preserves layer geometry, we expect r ≈ +0.3 to +0.6 per marker.
+mean. If OTTER preserves layer geometry, we expect r ≈ +0.3 to +0.6 per marker.
 """
 from __future__ import annotations
 
@@ -45,7 +45,7 @@ from scipy.stats import pearsonr, spearmanr
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached, load_pi, pi_provenance
+from otter.data import load_cached, load_pi, pi_provenance
 
 # Hodge et al. 2019 canonical cortical-layer markers (gene symbol, layer).
 HODGE_MARKERS = [
@@ -79,7 +79,7 @@ def main():
     print("Hodge 2019 cortical-layer marker cross-species validation")
     print("=" * 80)
 
-    # ---- Load HOMER ----
+    # ---- Load OTTER ----
     pi = load_pi()                      # canonical coupling (pi_canonical.npy)
     prov = pi_provenance()
     print(f"π shape: {pi.shape}, total mass: {pi.sum():.4f}")

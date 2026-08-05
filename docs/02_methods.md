@@ -71,7 +71,7 @@ purely through the FC + xyz + SC signal.
 
 ### Region anchors (optional, soft by default)
 
-A region anchor (`homer.data.region_anchors`) generalises a point anchor to a
+A region anchor (`otter.data.region_anchors`) generalises a point anchor to a
 *set* of mouse parcels mapping to a *set* of human parcels. Encoding in M for
 each region anchor with mouse-set `Mset` and human-set `Hset`:
 
@@ -89,7 +89,7 @@ for the sweep. Pass `region_lam_outside=1.0` to recover the hard wall.
 ## Modality combinations
 
 Each modality contributes either to the relational cost (within-species) or to
-M (cross-species). The four model levels in `homer.models`:
+M (cross-species). The four model levels in `otter.models`:
 
 | Class                   | Relational                | M                           | Headline top-1 |
 |-------------------------|---------------------------|-----------------------------|----------------|

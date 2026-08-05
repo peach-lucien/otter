@@ -17,7 +17,7 @@ outputs/
 
 ## π files (`coupling/`)
 
-The π matrix (1864 × 2094) is HOMER's core output. We ship several variants:
+The π matrix (1864 × 2094) is OTTER's core output. We ship several variants:
 
 | File | What | When to use |
 |---|---|---|

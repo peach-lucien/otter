@@ -25,11 +25,11 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 BBspec = importlib.util.spec_from_file_location("bb", Path(__file__).resolve().parent / "beauchamp_battery.py")
 BB = importlib.util.module_from_spec(BBspec); BBspec.loader.exec_module(BB)
-from homer.data import load_cached
-from homer.data.anchors import get_anchor_index
-from homer.data.anchor_packs import build_default_pack_entries
-from homer.data.atlas_regions import build_garin_region_anchors_from_atlases
-from homer.models import MultimodalFGW
+from otter.data import load_cached
+from otter.data.anchors import get_anchor_index
+from otter.data.anchor_packs import build_default_pack_entries
+from otter.data.atlas_regions import build_garin_region_anchors_from_atlases
+from otter.models import MultimodalFGW
 
 CACHE = ROOT / "outputs/logs/anchor_recovery_loo_combined_canonical.json"
 GUARD = 34.0

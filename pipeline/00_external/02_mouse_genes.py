@@ -49,15 +49,15 @@ PAGANI_CACHE = ROOT / "experiments/autism_subtypes/allen_expansion/pagani_ish_ca
 ALLENSDK_CACHE = Path.home() / ".allensdk_cache" / "ish_energy"
 
 
-# Bypass the homer package __init__ (which requires `ot`), load io.py directly.
+# Bypass the otter package __init__ (which requires `ot`), load io.py directly.
 def _load_io():
-    pkg_homer = importlib.util.module_from_spec(importlib.machinery.ModuleSpec("homer", None))
-    pkg_data  = importlib.util.module_from_spec(importlib.machinery.ModuleSpec("homer.data", None))
-    sys.modules.setdefault("homer", pkg_homer)
-    sys.modules.setdefault("homer.data", pkg_data)
-    spec = importlib.util.spec_from_file_location("homer.data.io", ROOT / "src/homer/data/io.py")
+    pkg_otter = importlib.util.module_from_spec(importlib.machinery.ModuleSpec("otter", None))
+    pkg_data  = importlib.util.module_from_spec(importlib.machinery.ModuleSpec("otter.data", None))
+    sys.modules.setdefault("otter", pkg_otter)
+    sys.modules.setdefault("otter.data", pkg_data)
+    spec = importlib.util.spec_from_file_location("otter.data.io", ROOT / "src/otter/data/io.py")
     mod = importlib.util.module_from_spec(spec)
-    sys.modules["homer.data.io"] = mod
+    sys.modules["otter.data.io"] = mod
     spec.loader.exec_module(mod)
     return mod
 

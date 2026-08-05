@@ -15,16 +15,16 @@ import sys, json, time, importlib.util
 from pathlib import Path
 import numpy as np
 
-ROOT = Path("/sessions/modest-tender-carson/mnt/brain_crossspecies_translation/homer")
+ROOT = Path("/sessions/modest-tender-carson/mnt/brain_crossspecies_translation/otter")
 OUT = Path("/sessions/modest-tender-carson/mnt/outputs")
 CACHE = OUT / ".disentangle_v1.json"
 TIME_GUARD = 33.0
 t_start = time.time()
 
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached
-from homer.data.anchor_packs import build_default_pack_entries
-from homer.models import MultimodalFGW
+from otter.data import load_cached
+from otter.data.anchor_packs import build_default_pack_entries
+from otter.models import MultimodalFGW
 
 spec = importlib.util.spec_from_file_location("b05f", ROOT / "pipeline/05f_beauchamp_validation.py")
 b = importlib.util.module_from_spec(spec); spec.loader.exec_module(b)

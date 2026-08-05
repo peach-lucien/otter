@@ -22,7 +22,7 @@ from scipy.stats import rankdata
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance  # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance  # noqa: E402
 import abagen                                            # noqa: E402
 
 

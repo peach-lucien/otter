@@ -4,7 +4,7 @@ gradient validations.
 The experiments report significance against a *permuted-π* null, which destroys
 spatial autocorrelation and so over-states significance when the target is a
 smooth map (a gradient). This script recomputes the significance with the spin
-null in `homer.eval.nulls.spin_null` (rotate parcel centroids on a sphere) and
+null in `otter.eval.nulls.spin_null` (rotate parcel centroids on a sphere) and
 prints both p-values side by side.
 
 Usage:
@@ -21,8 +21,8 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached          # noqa: E402
-from homer.eval.nulls import spin_null      # noqa: E402
+from otter.data import load_cached          # noqa: E402
+from otter.eval.nulls import spin_null      # noqa: E402
 
 LOG = ROOT / "outputs" / "logs"
 

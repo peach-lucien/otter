@@ -1,17 +1,17 @@
-"""Section 6: does HOMER's coverage map separate the REACHABLE part of a human
+"""Section 6: does OTTER's coverage map separate the REACHABLE part of a human
 psychiatric disorder from the unreachable part?
 
 The cortical result (from section5_coverage_rigor/06): case-control cortical THINNING in
-bipolar disorder and schizophrenia concentrates where HOMER's coverage is LOWEST
+bipolar disorder and schizophrenia concentrates where OTTER's coverage is LOWEST
 (Spearman +0.63 and +0.51, spin p < 0.005). Positive rho = more thinning (more negative
 Cohen's d) where coverage is lower.
 
-The control this script adds: the SUBCORTICAL signature of the same two disorders. HOMER
+The control this script adds: the SUBCORTICAL signature of the same two disorders. OTTER
 covers subcortex well (S5 catalogue), so if coverage really indexes what a mouse model can
 reach -- rather than simply tracking "wherever disease is severe" -- the subcortical
 correlation should NOT show the same deficit. It does not: it reverses. The three
 structures with the largest schizophrenia effects (hippocampus, amygdala, thalamus) are
-HOMER's three best-covered structures, giving rho = -0.79 (SCZ) and -0.68 (BD).
+OTTER's three best-covered structures, giving rho = -0.79 (SCZ) and -0.68 (BD).
 
 The finding is the INTERACTION, tested with a Fisher z on the two independent correlations
 (the subcortical arm alone is only n = 7 and is not independently spin-testable).
@@ -26,7 +26,7 @@ and is read from enigmatoolbox/datasets/summary_statistics/ (override with ENIGM
 Atlas: volumetric Desikan-Killiany via `pip install abagen` (also supplies the 7 subcortical
 structures, which are exactly ENIGMA's).
 
-Run: cd homer && PYTHONPATH=src python experiments/section6_disorder_reachability/01_double_dissociation.py
+Run: cd otter && PYTHONPATH=src python experiments/section6_disorder_reachability/01_double_dissociation.py
 Writes outputs/logs/section6_double_dissociation.json
 """
 from __future__ import annotations
@@ -41,9 +41,9 @@ from scipy.stats import spearmanr, rankdata, norm, t as tdist
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi          # noqa: E402
-from homer.data.anchors import get_anchor_index      # noqa: E402
-from homer.eval.nulls import spin_null               # noqa: E402
+from otter.data import load_cached, load_pi          # noqa: E402
+from otter.data.anchors import get_anchor_index      # noqa: E402
+from otter.eval.nulls import spin_null               # noqa: E402
 
 N_SPIN = 2000
 RESCUE_MM = 4.0
@@ -65,7 +65,7 @@ def sumstats_dir():
 
 
 def parcel_labels(xyz):
-    """Assign each HOMER human parcel to a DK region (cortical or subcortical)."""
+    """Assign each OTTER human parcel to a DK region (cortical or subcortical)."""
     import abagen
     atlas = abagen.fetch_desikan_killiany()
     img = nib.load(atlas["image"])

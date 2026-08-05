@@ -37,11 +37,11 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached                                   # noqa: E402
-from homer.data.atlas_regions import (                                # noqa: E402
+from otter.data import load_cached                                   # noqa: E402
+from otter.data.atlas_regions import (                                # noqa: E402
     assign_atlas_labels, ATLAS_PATHS,
 )
-from homer.eval.region_level import (                                 # noqa: E402
+from otter.eval.region_level import (                                 # noqa: E402
     evaluate_region_level,
     column_permuted_null,
     source_permuted_null,

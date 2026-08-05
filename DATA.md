@@ -3,7 +3,7 @@
 The published archive is v1.3.0 and contains `pi_canonical.npy`. See the
 `_canonical_coupling_note` in `data_manifest.json`.
 
-The HOMER code lives in this Git repository. The data and generated artifacts do
+The OTTER code lives in this Git repository. The data and generated artifacts do
 **not**. They are too large for Git, and most of the inputs are third-party data
 we are not the right party to redistribute. They are hosted as a versioned archive
 with a citable DOI, and fetched with `scripts/fetch_data.py`.
@@ -38,7 +38,7 @@ need the archive below.
 | 1, reproduce bundle | Zenodo `homer-reproduce-v1.3.0.tar.gz` (~735 MB download) | re-run every experiment/notebook against the precomputed couplings |
 | 2, raw inputs | Zenodo `homer-raw-inputs-v1.0.0.tar.gz` (606 MB download) | rebuild the coupling bitwise from raw data via `pipeline/` |
 
-You do **not** need Tier 2 to use HOMER, only to regenerate `π` from scratch.
+You do **not** need Tier 2 to use OTTER, only to regenerate `π` from scratch.
 
 ---
 
@@ -55,7 +55,7 @@ Everything needed to re-run the experiments **and all the notebooks** on the shi
 couplings. The exact file list is in `scripts/build_archives.sh` (the `REPRODUCE`
 array).
 
-**HOMER-generated (we own these, safe to redistribute):**
+**OTTER-generated (we own these, safe to redistribute):**
 
 | Path | Size | What |
 |---|---:|---|
@@ -110,7 +110,7 @@ The files under `data_external/` are **derived from third-party datasets**, each
 with its own terms. Before making the archives public, confirm you may
 redistribute them; where you can't, drop those entries from Archive 1/2 and let
 users re-download via the scripts in `pipeline/00_external/`, which fetch from the
-original sources. The HOMER-generated artifacts (the coupling, trust map,
+original sources. The OTTER-generated artifacts (the coupling, trust map,
 per-disorder predictions, and the processed AnnData caches) are ours to share
 freely. Sources and any redistribution restrictions are recorded per dataset in
 `pipeline/00_external/README.md` and in the `SOURCES.md` files under

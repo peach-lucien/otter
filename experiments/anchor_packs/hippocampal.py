@@ -1,7 +1,7 @@
 """HIPPOCAMPAL-1: Add Subiculum + CA1 + CA3 + Dentate gyrus region anchors.
 
 All five hippocampal subfields show 0 % Beauchamp top-1 under production
-point-anchor π. HOMER's cleanest documented failure region. Earlier
+point-anchor π. OTTER's cleanest documented failure region. Earlier
 EXP-1 / SPLIT-1 added four hippocampal *point* anchors and moved 3 of 4
 from 0 → 7-9 % top-1. This experiment is the region-anchor analogue:
 each subfield's full DSURQE parcel set is forced into the matching human
@@ -34,9 +34,9 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached                                       # noqa: E402
-from homer.data.anchor_packs import build_hippocampal_region_anchors    # noqa: E402
-from homer.models import MultimodalFGW                                   # noqa: E402
+from otter.data import load_cached                                       # noqa: E402
+from otter.data.anchor_packs import build_hippocampal_region_anchors    # noqa: E402
+from otter.models import MultimodalFGW                                   # noqa: E402
 
 ANN  = ROOT / "outputs" / "anndata"
 COUP = ROOT / "outputs" / "coupling"

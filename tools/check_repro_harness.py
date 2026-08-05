@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Smoke-test homer.repro before the notebooks are built on top of it.
+"""Smoke-test otter.repro before the notebooks are built on top of it.
 
 Run this in the `retune` environment. It does no fitting and takes a couple of minutes. It checks
 that the harness imports, that the released coupling is present and hashes to the value the logs
@@ -7,7 +7,7 @@ claim, and that every log the manuscript cites exists and records which coupling
 failure here would otherwise surface later as a broken notebook.
 
     conda activate retune
-    cd homer && python3 tools/check_repro_harness.py
+    cd otter && python3 tools/check_repro_harness.py
 """
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]                       # .../homer
+ROOT = Path(__file__).resolve().parents[1]                       # .../otter
 sys.path.insert(0, str(ROOT / "src"))
 
 # The logs the manuscript is allowed to draw on, per tools/check_manuscript_numbers.py.
@@ -37,17 +37,19 @@ reverse_translation_validation reverse_translation_neuromaps reverse_translation
 reverse_translation_symptom_dissociation fig7h_homologue_transfer""".split()
 
 # Inputs that live outside outputs/ and that an analysis would break without.
+# Paths are relative to the repository root, not to its parent, so the check does not depend on
+# what the checkout directory happens to be called.
 EXTERNAL_INPUTS = [
-    ("split-half FC (section 1)",   "homer/outputs/splithalf/human_splithalf.npz"),
-    ("split-half FC (section 1)",   "homer/outputs/splithalf/mouse_splithalf.npz"),
-    ("split-half producer",         "homer/pipeline/02b_build_splithalf_fc.py"),
-    ("ABIDE scores, de-identified", "homer/outputs/logs/abide_homer_scores_deidentified.csv"),
+    ("split-half FC (section 1)",   "outputs/splithalf/human_splithalf.npz"),
+    ("split-half FC (section 1)",   "outputs/splithalf/mouse_splithalf.npz"),
+    ("split-half producer",         "pipeline/02b_build_splithalf_fc.py"),
+    ("ABIDE scores, de-identified", "outputs/logs/abide_otter_scores_deidentified.csv"),
 ]
 
 # The split-half caches are gitignored because they are large and rebuildable, so a fresh clone
 # reports them missing until pipeline/02b_build_splithalf_fc.py has been run once.
-REBUILDABLE = {"homer/outputs/splithalf/human_splithalf.npz",
-               "homer/outputs/splithalf/mouse_splithalf.npz"}
+REBUILDABLE = {"outputs/splithalf/human_splithalf.npz",
+               "outputs/splithalf/mouse_splithalf.npz"}
 
 ok = True
 
@@ -75,16 +77,16 @@ def report(label: str, passed: bool, detail: str = "") -> None:
 
 print("\n1. harness imports")
 try:
-    import homer.repro as R
-    report("import homer.repro", True, f"canonical recipe {R.CANONICAL}")
+    import otter.repro as R
+    report("import otter.repro", True, f"canonical recipe {R.CANONICAL}")
 except Exception as exc:                                          # noqa: BLE001
-    report("import homer.repro", False, f"{type(exc).__name__}: {exc}")
+    report("import otter.repro", False, f"{type(exc).__name__}: {exc}")
     print("\nNothing downstream can run until this imports.")
     raise SystemExit(1)
 
 for name in R.__all__:
     if not hasattr(R, name):
-        report(f"homer.repro.{name} exists", False)
+        report(f"otter.repro.{name} exists", False)
 
 print("\n2. released coupling and its provenance")
 try:
@@ -138,7 +140,7 @@ if shas:
 
 print("\n4. external inputs an analysis would break without")
 for label, rel in EXTERNAL_INPUTS:
-    path = ROOT.parent / rel
+    path = ROOT / rel
     if not path.exists() and rel in REBUILDABLE:
         print(f"  [ -- ] {label}: {rel}  not built yet, "
               f"run pipeline/02b_build_splithalf_fc.py")

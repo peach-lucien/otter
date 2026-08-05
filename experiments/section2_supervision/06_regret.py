@@ -27,8 +27,8 @@ touched. It records the path and sha256 of the log it read instead. Note that th
 carries no coupling stamp of its own, so the chain terminates there rather than at a coupling;
 stamping it is outstanding work, tracked as A3b.
 
-    cd homer && python3 experiments/section2_supervision/06_regret.py --check   # compare only
-    cd homer && python3 experiments/section2_supervision/06_regret.py           # write the log
+    cd otter && python3 experiments/section2_supervision/06_regret.py --check   # compare only
+    cd otter && python3 experiments/section2_supervision/06_regret.py           # write the log
 """
 from __future__ import annotations
 

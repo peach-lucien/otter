@@ -25,9 +25,9 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached                                       # noqa: E402
-from homer.data.atlas_regions import build_garin_region_anchors_from_atlases  # noqa: E402
-from homer.models import MultimodalFGW                                   # noqa: E402
+from otter.data import load_cached                                       # noqa: E402
+from otter.data.atlas_regions import build_garin_region_anchors_from_atlases  # noqa: E402
+from otter.models import MultimodalFGW                                   # noqa: E402
 
 ANN  = ROOT / "outputs" / "anndata"
 COUP = ROOT / "outputs" / "coupling"

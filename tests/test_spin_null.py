@@ -2,7 +2,7 @@
 import numpy as np
 from scipy.spatial import cKDTree
 
-from homer.eval.nulls import spin_null
+from otter.eval.nulls import spin_null
 
 
 def _sphere_coords(n=300, seed=0):
@@ -36,7 +36,7 @@ def test_spin_null_two_independent_smooth_maps_not_significant():
 
 
 def test_translation_spin_null_runs_and_is_sane():
-    from homer.eval.nulls import translation_spin_null
+    from otter.eval.nulls import translation_spin_null
     rng = np.random.default_rng(0)
     n_m, n_h = 120, 150
     coords = rng.standard_normal((n_m, 3))

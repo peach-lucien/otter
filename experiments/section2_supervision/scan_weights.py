@@ -7,8 +7,8 @@
            (circularity-free: the 19 regions are scored with their own anchors gone).
 Aggregates parcel-weighted over the 19 Beauchamp pairs.
 
-Run (from the repo's homer/ dir, with the HOMER scientific env active):
-    cd homer
+Run (from the repo's otter/ dir, with the OTTER scientific env active):
+    cd otter
     PYTHONPATH=src python ../manuscript/figures/fig_2_ED/scan_weights.py
 
 Resumable: caches to outputs/logs/scan_weights.json; re-run to continue / finish.
@@ -19,12 +19,12 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-ROOT = Path(__file__).resolve().parents[2]   # repo/homer
+ROOT = Path(__file__).resolve().parents[2]   # repo/otter
 CACHE = ROOT / "outputs" / "logs" / "scan_weights.json"
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached
-from homer.data.anchor_packs import build_default_pack_entries
-from homer.models import MultimodalFGW
+from otter.data import load_cached
+from otter.data.anchor_packs import build_default_pack_entries
+from otter.models import MultimodalFGW
 spec = importlib.util.spec_from_file_location("b05f", ROOT / "pipeline/05f_beauchamp_validation.py")
 b = importlib.util.module_from_spec(spec); spec.loader.exec_module(b)
 

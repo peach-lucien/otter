@@ -5,7 +5,7 @@ vs human gradient) is |r|=0.54 and clears a spatial spin null at p=0.032 -- but
 only just, and it weakened relative to the retired coupling (p=0.004). Two
 smooth monotone maps can correlate by spatial autocorrelation alone (see
 01_gradient_validation.py and experiments/spatial_null_check/), so the
-continuous number should not carry the claim on its own. HOMER's *strong* mode
+continuous number should not carry the claim on its own. OTTER's *strong* mode
 is discrete correspondence (the network bridge and Coletta RSNs survive spin),
 so here we ask the gradient question categorically, does π preserve the
 discrete content of the gradient? and test it against the fair spin null.
@@ -44,8 +44,8 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "autism_subtypes"))
 
-from homer.data import load_cached, load_pi, pi_provenance   # noqa: E402
-from homer.eval.nulls import _haar_rotation, _route_normalized  # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance   # noqa: E402
+from otter.eval.nulls import _haar_rotation, _route_normalized  # noqa: E402
 
 grad_mod = import_module("01_gradient_validation")
 nc = import_module("01_network_crossvalidation")

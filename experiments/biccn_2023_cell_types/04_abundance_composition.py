@@ -16,7 +16,7 @@ regions of matching cell-type *composition*.
 Pipeline (once the two abundance tables are present):
   1. Build composition vectors C_mouse[region, type] and C_human[region, type] over a
      shared class/subclass label set.
-  2. Map each abundance table's regions to HOMER's parcels (CCFv3 centroids for mouse;
+  2. Map each abundance table's regions to OTTER's parcels (CCFv3 centroids for mouse;
      MNI/dissection centroids for human) → per-parcel composition.
   3. For each cell type t: route the mouse abundance map of t through π and correlate
      with the human abundance map of t, but TEST THE CONTRAST/COMPOSITION, not the
@@ -52,8 +52,8 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance      # noqa: E402
-from homer.eval.nulls import translation_spin_null, _route_normalized  # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance      # noqa: E402
+from otter.eval.nulls import translation_spin_null, _route_normalized  # noqa: E402
 from scipy.spatial import cKDTree                               # noqa: E402
 from scipy.stats import pearsonr                                # noqa: E402
 
@@ -67,7 +67,7 @@ def _need(path, what):
 
 
 def parcel_composition(abund_df, parcel_xyz):
-    """Assign each HOMER parcel the composition of its nearest abundance-table region."""
+    """Assign each OTTER parcel the composition of its nearest abundance-table region."""
     cents = abund_df[["x", "y", "z"]].to_numpy(float)
     type_cols = [c for c in abund_df.columns if c not in ("region", "x", "y", "z")]
     frac = abund_df[type_cols].to_numpy(float)

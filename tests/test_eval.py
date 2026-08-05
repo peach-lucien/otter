@@ -1,8 +1,8 @@
-"""Tests for homer.eval, translation, anchor CV, nulls."""
+"""Tests for otter.eval, translation, anchor CV, nulls."""
 import numpy as np
 import pytest
 
-from homer.eval.translation import (
+from otter.eval.translation import (
     fc_translation_quality,
     predict_human_fc,
     uniform_pi_baseline,
@@ -58,8 +58,8 @@ def test_uniform_pi_baseline_gives_constant_prediction():
 
 def test_anchor_loo_cv_smoke(mouse_ad, human_ad):
     """The CV harness runs end-to-end on one network."""
-    from homer.eval.anchor_cv import anchor_loo_cv
-    from homer.models import SupervisedFGW
+    from otter.eval.anchor_cv import anchor_loo_cv
+    from otter.models import SupervisedFGW
     # Use only 1 network for speed; pick 'frontal_dmn' (pair_id 1)
     res = anchor_loo_cv(
         model_factory=lambda: SupervisedFGW(epsilon=1e-2),
@@ -73,7 +73,7 @@ def test_anchor_loo_cv_smoke(mouse_ad, human_ad):
 
 
 def test_random_pi_null_smoke(mouse_ad, human_ad):
-    from homer.eval.nulls import random_pi_null
+    from otter.eval.nulls import random_pi_null
     res = random_pi_null(mouse_ad, human_ad,
                           held_out_pair_ids=[1], n_trials=3, seed=0)
     assert "top1_mean" in res
@@ -87,7 +87,7 @@ def test_random_pi_null_smoke(mouse_ad, human_ad):
 
 def test_compute_multisource_trust_returns_evidence_tiers(mouse_ad, human_ad):
     """With no external evidence, tiers fall back to structural / low_evidence."""
-    from homer.eval.trust_score import compute_multisource_trust
+    from otter.eval.trust_score import compute_multisource_trust
     n_m = mouse_ad.uns["n_nodes"]
     n_h = human_ad.uns["n_nodes"]
     pi = np.full((n_m, n_h), 1.0 / n_h)
@@ -105,8 +105,8 @@ def test_compute_multisource_trust_returns_evidence_tiers(mouse_ad, human_ad):
 
 def test_compute_multisource_trust_with_pack_anchored(mouse_ad, human_ad):
     """Passing region_anchor entries flags those parcels as pack_anchored."""
-    from homer.eval.trust_score import compute_multisource_trust
-    from homer.data.region_anchors import RegionAnchorEntry
+    from otter.eval.trust_score import compute_multisource_trust
+    from otter.data.region_anchors import RegionAnchorEntry
     n_m = mouse_ad.uns["n_nodes"]
     n_h = human_ad.uns["n_nodes"]
     pi = np.full((n_m, n_h), 1.0 / n_h)
@@ -129,7 +129,7 @@ def test_compute_multisource_trust_with_pack_anchored(mouse_ad, human_ad):
 
 def test_network_compactness_smoke(mouse_ad, human_ad):
     """network_compactness returns per-network compactness metrics."""
-    from homer.eval.network_coherence import network_compactness
+    from otter.eval.network_coherence import network_compactness
     n_m = mouse_ad.uns["n_nodes"]
     n_h = human_ad.uns["n_nodes"]
     rng = np.random.default_rng(7)
@@ -145,7 +145,7 @@ def test_network_compactness_smoke(mouse_ad, human_ad):
 
 def test_compare_network_compactness_delta_zero(mouse_ad, human_ad):
     """Comparing pi vs pi yields zero delta everywhere."""
-    from homer.eval.network_coherence import compare_network_compactness
+    from otter.eval.network_coherence import compare_network_compactness
     n_m = mouse_ad.uns["n_nodes"]
     n_h = human_ad.uns["n_nodes"]
     rng = np.random.default_rng(11)

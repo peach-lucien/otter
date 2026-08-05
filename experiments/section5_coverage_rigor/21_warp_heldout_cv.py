@@ -24,9 +24,9 @@ from scipy.interpolate import RBFInterpolator
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached                       # noqa: E402
-from homer.data.anchors import get_anchor_index          # noqa: E402
-from homer.models import MultimodalFGW                   # noqa: E402
+from otter.data import load_cached                       # noqa: E402
+from otter.data.anchors import get_anchor_index          # noqa: E402
+from otter.models import MultimodalFGW                   # noqa: E402
 
 LOG = ROOT / "outputs/logs/section5_warp_heldout_cv.json"
 K = 5
@@ -41,7 +41,7 @@ def warped_M(src, dst, mxyz, hxyz):
 
 
 def eucl_M(mouse_var, human_var):
-    from homer.models.supervised import _build_xyz_M
+    from otter.models.supervised import _build_xyz_M
     M = _build_xyz_M(mouse_var, human_var)
     return M.astype(np.float64)
 

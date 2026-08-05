@@ -13,7 +13,7 @@ stays NaN.
 Writes outputs/splithalf/{species}_splithalf.npz with A, B, idxA, idxB and n_subj.
 
     conda activate retune
-    cd homer && python3 pipeline/02b_build_splithalf_fc.py
+    cd otter && python3 pipeline/02b_build_splithalf_fc.py
 """
 from __future__ import annotations
 
@@ -23,7 +23,7 @@ from pathlib import Path
 
 import numpy as np
 
-ROOT = Path(__file__).resolve().parents[1]                       # .../homer
+ROOT = Path(__file__).resolve().parents[1]                       # .../otter
 sys.path.insert(0, str(ROOT / "src"))
 
 DATA = ROOT.parent / "data_crossspecies"

@@ -1,4 +1,4 @@
-"""HOMER as a translator: route a MOUSE anterior-insula optogenetic circuit map into human space and
+"""OTTER as a translator: route a MOUSE anterior-insula optogenetic circuit map into human space and
 check it lands on the human salience network (anterior insula / cingulate) - a causal-circuit
 translation only a cross-species coupling can do.
 
@@ -17,7 +17,7 @@ from scipy.stats import rankdata
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance  # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance  # noqa: E402
 
 
 def route_norm(value_by_acr, parcel_acr, pi):
@@ -37,7 +37,7 @@ def main():
     value_by_acr = ai.iloc[:, 0].to_dict()
     n_mouse_regions = len(value_by_acr)
     overlap = len(set(value_by_acr) & set(parcel_acr))
-    print(f"AI-opto: {n_mouse_regions} mouse regions; {overlap} overlap HOMER parcel acronyms")
+    print(f"AI-opto: {n_mouse_regions} mouse regions; {overlap} overlap OTTER parcel acronyms")
     print("strongest mouse input regions:", ", ".join(
         f"{k}={v:.2f}" for k, v in sorted(value_by_acr.items(), key=lambda kv: -kv[1])[:6]))
 

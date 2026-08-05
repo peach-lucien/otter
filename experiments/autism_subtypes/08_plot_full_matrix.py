@@ -32,7 +32,7 @@ def main():
     ax1.axhline(0, color="black", linewidth=0.5)
     ax1.axvline(0, color="black", linewidth=0.5)
     ax1.set_xlabel("Observed Δ (Pagani Fig 4e, hyper − hypo)")
-    ax1.set_ylabel("Predicted Δ via HOMER π")
+    ax1.set_ylabel("Predicted Δ via OTTER π")
     ax1.set_title(f"Full network-pair Δ-matrix translation\n"
                   f"Pearson r = {j['pearson_r']:+.3f}  (n=36, analytical p={j['pearson_p_analytical']:.4f}, "
                   f"empirical p={j['null']['pearson_empirical_p']:.3f})")

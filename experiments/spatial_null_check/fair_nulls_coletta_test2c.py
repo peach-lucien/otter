@@ -23,10 +23,10 @@ sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "autism_subtypes"))
 sys.path.insert(0, str(ROOT / "experiments" / "coletta_2020_cross_species_rsn"))
 
-from homer.data import load_cached, load_pi, pi_provenance                          # noqa: E402
-from homer.data.anchors import get_anchor_index             # noqa: E402
-from homer.data.networks import assign_networks, NETWORKS   # noqa: E402
-from homer.eval.nulls import _haar_rotation                 # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance                          # noqa: E402
+from otter.data.anchors import get_anchor_index             # noqa: E402
+from otter.data.networks import assign_networks, NETWORKS   # noqa: E402
+from otter.eval.nulls import _haar_rotation                 # noqa: E402
 
 cm = import_module("01_correspondence_validation")
 nc = import_module("01_network_crossvalidation")

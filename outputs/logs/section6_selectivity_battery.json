@@ -108,7 +108,7 @@
   },
   "hierarchy_head_to_head": {
     "bipolar": {
-      "HOMER coverage": {
+      "OTTER coverage": {
         "spearman": 0.6355951056729701,
         "spin_p": 0.0004997501249375312
       },
@@ -126,7 +126,7 @@
       }
     },
     "schizophrenia": {
-      "HOMER coverage": {
+      "OTTER coverage": {
         "spearman": 0.5225806451612903,
         "spin_p": 0.0004997501249375312
       },

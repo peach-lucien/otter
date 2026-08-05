@@ -31,7 +31,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "enigma_cross_disorder"))
 
-from homer.data import load_pi, pi_provenance  # noqa: E402
+from otter.data import load_pi, pi_provenance  # noqa: E402
 
 pd_mod = import_module("01_per_disorder_prediction")
 

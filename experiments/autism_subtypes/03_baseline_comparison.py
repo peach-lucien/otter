@@ -15,7 +15,7 @@ from typing import Callable
 
 import numpy as np
 
-from homer.data import load_cached
+from otter.data import load_cached
 import sys
 
 sys.path.insert(0, str(Path(__file__).parent))

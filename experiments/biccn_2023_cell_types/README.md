@@ -1,12 +1,12 @@
 # BICCN cell-type marker cross-species validation
 
-We asked whether HOMER's π preserves cell-type-defining marker spatial patterns across mouse and human, using markers aligned to BICCN's cross-species cell-type atlases ([Yao 2023, Nature](https://www.nature.com/articles/s41586-023-06812-z); [Siletti 2023, Science](https://www.science.org/doi/10.1126/science.add7046)).
+We asked whether OTTER's π preserves cell-type-defining marker spatial patterns across mouse and human, using markers aligned to BICCN's cross-species cell-type atlases ([Yao 2023, Nature](https://www.nature.com/articles/s41586-023-06812-z); [Siletti 2023, Science](https://www.science.org/doi/10.1126/science.add7046)).
 
 ## Why this experiment
 
 BICCN's atlases establish cross-species conservation of cell types with their defining markers (Pvalb interneurons, Sst interneurons, Vip interneurons, Camk2a glutamatergic neurons, Gfap astrocytes, Th dopaminergic neurons, etc.). This is a parallel test to Hodge 2019 layer-marker validation, but tests *cell-type-defining* markers (mostly area-level distributions) rather than *cortical-layer* markers (within-area structure).
 
-**Hypothesis**: HOMER should preserve cell-type markers that have area-specific spatial distributions (interneuron class preferences across cortex, glia density variation, subcortical neuromodulator localisation).
+**Hypothesis**: OTTER should preserve cell-type markers that have area-specific spatial distributions (interneuron class preferences across cortex, glia density variation, subcortical neuromodulator localisation).
 
 ## Result
 
@@ -65,10 +65,10 @@ Outputs:
 
 ## Future work, full BICCN atlas data
 
-This test uses HOMER's curated 61-gene panel + AHBA microarray as proxies for cell types. A full integration would:
+This test uses OTTER's curated 61-gene panel + AHBA microarray as proxies for cell types. A full integration would:
 1. Pull Yao 2023's per-CCFv3-region cell-type abundance tables (~5,000 cell types × ~700 regions, tens of GB)
 2. Pull Siletti 2023's per-dissection-region cell-type abundance tables (~3,000 cell types × ~100 regions)
-3. Map both to HOMER's parcellations via centroid alignment
+3. Map both to OTTER's parcellations via centroid alignment
 4. Test cross-species correlations for actual transcriptomically-defined cell types, not gene-marker proxies
 
 This would extend from ~25 cell-type-marker proxies to thousands of actual cell types, closer to BICCN's intended use case. Tractable but a multi-day data engineering project.
@@ -84,7 +84,7 @@ like the Pagani contrast), against the fair translation-spin null:
   (marginal); full-map spin n.s.
 
 **The E/I axis is a specific cross-species result** that the per-marker test
-missed. HOMER preserves where excitatory versus inhibitory neurons dominate, beyond
+missed. OTTER preserves where excitatory versus inhibitory neurons dominate, beyond
 spatial smoothness. Log: `outputs/logs/biccn_contrast_reframe.json`.
 
 A higher-resolution upgrade (real per-region cell-type *abundance* from Yao 2023 +

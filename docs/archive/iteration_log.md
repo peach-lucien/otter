@@ -132,7 +132,7 @@ Added 8 supplementary anchor parcels (4 pair_ids × L+R) for CA1, CA3, Dentate, 
 
 ### 5.3 S4: Region-anchor supervision
 
-The supplementary anchors above (SPLIT-1, EXP-1) are still **point-to-point**: one mouse parcel ↔ one human parcel. Garin's anchors and Beauchamp's region pairs are natively *region* objects (sets of parcels), so we built a region-anchor mechanism (`homer.data.region_anchors`): each mouse parcel in a declared region is allowed to map to *any* human parcel in the matching declared region, forbidden elsewhere.
+The supplementary anchors above (SPLIT-1, EXP-1) are still **point-to-point**: one mouse parcel ↔ one human parcel. Garin's anchors and Beauchamp's region pairs are natively *region* objects (sets of parcels), so we built a region-anchor mechanism (`otter.data.region_anchors`): each mouse parcel in a declared region is allowed to map to *any* human parcel in the matching declared region, forbidden elsewhere.
 
 **Proof of concept**: declare ALL 53 mouse-Motor parcels (DSURQE "Primary motor area") ↔ ALL 44 human-precentral parcels (within 15mm of canonical M1) as one region anchor (pid=30). Re-solve and re-validate.
 
@@ -157,11 +157,11 @@ YAML configs in `config/region_anchors_*.yaml`. 7 unit tests in `tests/test_regi
 
 ### 5.4 Infrastructure
 
-`homer.data.supplementary_anchors` (point) and `homer.data.region_anchors` (region) both let you promote existing non-anchor parcels to anchors with new pair_ids, without modifying the underlying FC matrix or atlas. The point form goes via `MultimodalFGW.fit(M_aug, H_aug, ...)` after augmenting the var; the region form goes via `MultimodalFGW.fit(..., region_anchors=[entry, ...])` directly. Tests in `tests/test_supplementary_anchors.py` (6) + `tests/test_region_anchors.py` (7).
+`otter.data.supplementary_anchors` (point) and `otter.data.region_anchors` (region) both let you promote existing non-anchor parcels to anchors with new pair_ids, without modifying the underlying FC matrix or atlas. The point form goes via `MultimodalFGW.fit(M_aug, H_aug, ...)` after augmenting the var; the region form goes via `MultimodalFGW.fit(..., region_anchors=[entry, ...])` directly. Tests in `tests/test_supplementary_anchors.py` (6) + `tests/test_region_anchors.py` (7).
 
 ### 5.5 S7 — Region anchors via real atlas labels (no fabricated centroids)
 
-`homer.data.atlas_regions.build_garin_region_anchors_from_atlases(M.var, H.var)` builds region anchors using **only published atlases**:
+`otter.data.atlas_regions.build_garin_region_anchors_from_atlases(M.var, H.var)` builds region anchors using **only published atlases**:
 - **Mouse**: DSURQE labels (Beauchamp 2022 repo) — already used by the validation pipeline.
 - **Human**: Schaefer-400 (cortical) + JuBrain-184 (where Schaefer is missing). Both are in the Domhof bundle we already use as the human-FC source.
 
@@ -290,7 +290,7 @@ Parcel-level top-K (§4-§5.7) asks "is the right human *parcel* in the model's 
 
 > Given a mouse region (set of parcels), which *human region*, out of a candidate set of named regions, does the model predict?
 
-**Implementation** (`homer.eval.region_level`, `pipeline/05j_region_level_eval.py`). For mouse region M with parcel indices `M_idx`:
+**Implementation** (`otter.eval.region_level`, `pipeline/05j_region_level_eval.py`). For mouse region M with parcel indices `M_idx`:
 
   `pi_M = π[M_idx, :].sum(axis=0); pi_M /= pi_M.sum()` → distribution over 2094 human parcels.
 
@@ -424,15 +424,15 @@ xyz overall is **net positive** — it helps thalamus, S1, caudate, hypothalamus
 
 **The per-region intervention does not reproduce the global effect on the targeted regions.** Motor / Tectum / Piriform stay at 0 % top-1 even though zeroing xyz *globally* lifts them by 4 / 6 / 13 pp. The most plausible explanation: the FGW solver finds a joint coupling π that depends on the *full* M, not just on each row independently. Zeroing xyz for some rows changes their local cost but leaves the human marginal pulled in the same direction by the other 1556 parcels' xyz contributions, so the targeted parcels end up in the same equilibrium.
 
-**Conclusion.** Per-row xyz weighting *is not the right mechanism* for fixing topology-inverted regions in HOMER. The infrastructure (`xyz_weight_per_mouse_parcel` kwarg, `homer.data.build_xyz_weight_array` helper) is kept in the API as a general tool — and the unit tests confirm it works as intended at the cost-matrix level — but this specific application is a convergent negative. To actually fix Motor / Tectum / Piriform you would need to change the cost in a way that affects the global equilibrium (e.g. learned per-region xyz affine transforms, or removing xyz uniformly and accepting the cost of −28 pp on Thalamus). Both are research-grade interventions, not an evening's work.
+**Conclusion.** Per-row xyz weighting *is not the right mechanism* for fixing topology-inverted regions in OTTER. The infrastructure (`xyz_weight_per_mouse_parcel` kwarg, `otter.data.build_xyz_weight_array` helper) is kept in the API as a general tool — and the unit tests confirm it works as intended at the cost-matrix level — but this specific application is a convergent negative. To actually fix Motor / Tectum / Piriform you would need to change the cost in a way that affects the global equilibrium (e.g. learned per-region xyz affine transforms, or removing xyz uniformly and accepting the cost of −28 pp on Thalamus). Both are research-grade interventions, not an evening's work.
 
 The most-likely-to-help next direction is therefore *not* per-region xyz weighting but the one we already established works empirically: **more anchors in the failure regions** — specifically Motor (pair_id 2), Tectum (21), Olfactory (11), via hand-curated anatomical homologue pairs from the cytoarchitecture literature.
 
 ### 5.12 BICCN-MOTOR-1 — Motor sub-region anchors from Bakken 2021
 
-Bakken et al. 2021 (*Nature*; the BICCN Motor Cortex Consortium) identified two conserved mouse↔human motor sub-region homologies via cross-species single-cell transcriptomics: **mouse Primary motor area (M1) ↔ human Area 4 (BA4)** and **mouse Secondary motor area (M2) ↔ human Area 6 dorsal premotor (PMd)**. We translated these into HOMER region anchors at pair_ids 30 (M1↔BA4, 53 mouse × 12 human parcels) and 31 (M2↔PMd, 48 mouse × 23 human parcels). Mouse-side sets come from the DSURQE atlas overlay (same source as the Beauchamp validation); human-side sets come from MNI spheres around the canonical cytoarchitectural centroids (Mayka 2006, Glasser HCP-MMP360).
+Bakken et al. 2021 (*Nature*; the BICCN Motor Cortex Consortium) identified two conserved mouse↔human motor sub-region homologies via cross-species single-cell transcriptomics: **mouse Primary motor area (M1) ↔ human Area 4 (BA4)** and **mouse Secondary motor area (M2) ↔ human Area 6 dorsal premotor (PMd)**. We translated these into OTTER region anchors at pair_ids 30 (M1↔BA4, 53 mouse × 12 human parcels) and 31 (M2↔PMd, 48 mouse × 23 human parcels). Mouse-side sets come from the DSURQE atlas overlay (same source as the Beauchamp validation); human-side sets come from MNI spheres around the canonical cytoarchitectural centroids (Mayka 2006, Glasser HCP-MMP360).
 
-Helper: ``homer.data.atlas_regions.build_biccn_motor_region_anchors(M.var, H.var)``.
+Helper: ``otter.data.atlas_regions.build_biccn_motor_region_anchors(M.var, H.var)``.
 
 Experiment: ``experiments/biccn_motor/01_add_motor_subregion_anchors.py``.
 
@@ -463,17 +463,17 @@ The mouse-side set for the BICCN M1 anchor is the **same 53-parcel DSURQE "Prima
 
 #### 5.12.3 What this is and isn't
 
-**This is** a real practical improvement. Downstream users querying HOMER for "where does mouse M1 map to?" now get a defensible BA4-centred answer rather than a near-uniform misdirected distribution. The mechanism is clean (region anchors via the existing `region_anchors` API), the citation is solid (Bakken 2021 BICCN consortium published cell-type-conserved correspondences), and the off-target cost is small (-2 pp on S1 top-5, otherwise stable).
+**This is** a real practical improvement. Downstream users querying OTTER for "where does mouse M1 map to?" now get a defensible BA4-centred answer rather than a near-uniform misdirected distribution. The mechanism is clean (region anchors via the existing `region_anchors` API), the citation is solid (Bakken 2021 BICCN consortium published cell-type-conserved correspondences), and the off-target cost is small (-2 pp on S1 top-5, otherwise stable).
 
-**This isn't** evidence that HOMER's FC + SC structure encodes motor cross-species biology. The held-out test cleanly shows the opposite: motor is unrecoverable without the explicit anchor. So the path forward for unanchored motor sub-regions (or any region without published correspondences) remains: more curated anchors. Mouse M1 ↔ human BA4 is now a published, anatomically-grounded, parcellation-aligned anchor — usable as a building block for any user who wants trustworthy motor-region queries.
+**This isn't** evidence that OTTER's FC + SC structure encodes motor cross-species biology. The held-out test cleanly shows the opposite: motor is unrecoverable without the explicit anchor. So the path forward for unanchored motor sub-regions (or any region without published correspondences) remains: more curated anchors. Mouse M1 ↔ human BA4 is now a published, anatomically-grounded, parcellation-aligned anchor — usable as a building block for any user who wants trustworthy motor-region queries.
 
-**Implications for further work**: the same mechanism applies to Tectum (Stein 2009 cross-species optic tectum/SC), Olfactory (Mori 2014 piriform layers), Cingulate sub-areas (Vogt 2019). Each one needs a published correspondence + an MNI centroid + ~30 minutes of curation. We deliberately did not anchor every Garin region this way; the goal is to make HOMER queryable in a few key regions, not to exhaustively over-supervise.
+**Implications for further work**: the same mechanism applies to Tectum (Stein 2009 cross-species optic tectum/SC), Olfactory (Mori 2014 piriform layers), Cingulate sub-areas (Vogt 2019). Each one needs a published correspondence + an MNI centroid + ~30 minutes of curation. We deliberately did not anchor every Garin region this way; the goal is to make OTTER queryable in a few key regions, not to exhaustively over-supervise.
 
 ### 5.13 TECTUM-1 — Superior + Inferior Colliculus anchors
 
-The tectum is one of HOMER's most-documented failure regions — both Superior Colliculus (SC) and Inferior Colliculus (IC) sit at 0 % Beauchamp top-1 under the production point-anchor π, with mean ranks of 1872 / 2094 (SC) and 1431 / 2094 (IC). ``docs/diagnostics.md`` attributes this to spatial inversion (mouse SC is dorsal, human SC is ventral in MNI space) and lack of finer sub-region supervision than the single Garin Tectum anchor at pair_id 21.
+The tectum is one of OTTER's most-documented failure regions — both Superior Colliculus (SC) and Inferior Colliculus (IC) sit at 0 % Beauchamp top-1 under the production point-anchor π, with mean ranks of 1872 / 2094 (SC) and 1431 / 2094 (IC). ``docs/diagnostics.md`` attributes this to spatial inversion (mouse SC is dorsal, human SC is ventral in MNI space) and lack of finer sub-region supervision than the single Garin Tectum anchor at pair_id 21.
 
-We added a tectum anchor pack with two entries (``homer.data.anchor_packs.tectum``):
+We added a tectum anchor pack with two entries (``otter.data.anchor_packs.tectum``):
 
   - pid 32: Mouse Superior Colliculus sensory (53 parcels) ↔ Human SC at MNI(±5, -30, -2) r=6 mm (2 parcels)
   - pid 33: Mouse Inferior Colliculus (29 parcels) ↔ Human IC at MNI(±5, -35, -8) r=8 mm (4 parcels)
@@ -498,7 +498,7 @@ Combined with §5.12, the picture across two anchor packs is consistent:
 - **Region anchors do what they say**: anchored regions become trustworthy for downstream queries (100 % top-1 by construction).
 - **Off-target cost is small**: thalamus -4 pp here, S1 -2 pp top-5 for BICCN motor. Everything else stable.
 - **Held-out generalization is null**: dropping one of the two anchors in either pack gives 0 % top-1 for the held-out region. Structure does not bridge across un-anchored sub-regions.
-- **Implication for future packs**: every region we want HOMER to handle reliably needs its own pack. The cost is ~30 minutes per region (find canonical MNI centroid, validate the parcel set is non-empty, add the helper). The benefit is bounded but real — a trustworthy answer for that specific region.
+- **Implication for future packs**: every region we want OTTER to handle reliably needs its own pack. The cost is ~30 minutes per region (find canonical MNI centroid, validate the parcel set is non-empty, add the helper). The benefit is bounded but real — a trustworthy answer for that specific region.
 
 The pid registry is now:
 
@@ -509,11 +509,11 @@ The pid registry is now:
 | 32, 33 | Tectum (SC, IC) |
 | 34, 35 | Olfactory (Piriform, AON) |
 
-Future packs reserve ≥ 36. See ``homer.data.anchor_packs/__init__.py`` for the registry and the "adding a new pack" recipe.
+Future packs reserve ≥ 36. See ``otter.data.anchor_packs/__init__.py`` for the registry and the "adding a new pack" recipe.
 
 ### 5.14 OLFACTORY-1 — Piriform + Anterior Olfactory Nucleus
 
-Piriform cortex (primary olfactory cortex) is HOMER's third documented failure region — 0 % Beauchamp top-1 under production point-anchor π, mean rank 657 / 2094. Cross-species olfactory homology is among the most conserved in mammalian neuroanatomy (Mori 2014 *The Olfactory System*; Carlén 2017 *Science*). The olfactory anchor pack (``homer.data.anchor_packs.olfactory``) adds:
+Piriform cortex (primary olfactory cortex) is OTTER's third documented failure region — 0 % Beauchamp top-1 under production point-anchor π, mean rank 657 / 2094. Cross-species olfactory homology is among the most conserved in mammalian neuroanatomy (Mori 2014 *The Olfactory System*; Carlén 2017 *Science*). The olfactory anchor pack (``otter.data.anchor_packs.olfactory``) adds:
 
   - pid 34: Mouse Piriform area (47 parcels via DSURQE) ↔ Human Piriform cortex at MNI(±25, 5, -20) r=10 mm (13 parcels)
   - pid 35: Mouse Anterior olfactory nucleus (9 parcels) ↔ Human AON at MNI(±15, 25, -15) r=10 mm (6 parcels)
@@ -543,7 +543,7 @@ All three confirm the same lesson: **region anchors deliver trustworthy queries 
 
 ### 5.15 HIPPOCAMPAL-1 — Subiculum + CA1 + CA3 + Dentate gyrus
 
-Hippocampal subfields are HOMER's cleanest documented failure region: all four (Subiculum, CA1, CA3, Dentate) sit at 0 % Beauchamp top-1 under production point-anchor π. Earlier work (EXP-1 / SPLIT-1, §5.2) added four hippocampal *point* anchors and moved 3 of 4 from 0 → 7–9 % top-1. The hippocampal pack (``homer.data.anchor_packs.hippocampal``) is the region-anchor analogue, forcing each subfield's full mouse parcel set into the matching human subfield MNI ball:
+Hippocampal subfields are OTTER's cleanest documented failure region: all four (Subiculum, CA1, CA3, Dentate) sit at 0 % Beauchamp top-1 under production point-anchor π. Earlier work (EXP-1 / SPLIT-1, §5.2) added four hippocampal *point* anchors and moved 3 of 4 from 0 → 7–9 % top-1. The hippocampal pack (``otter.data.anchor_packs.hippocampal``) is the region-anchor analogue, forcing each subfield's full mouse parcel set into the matching human subfield MNI ball:
 
   - pid 39: Subiculum (29 mouse / 8 human)
   - pid 40: CA1 (15 / 6)
@@ -568,7 +568,7 @@ This is the largest single pack (4 entries vs 2 in the others) and lifts the mos
 
 ### 5.16 CINGULATE-1 — Subgenual ACC + Retrosplenial (Vogt 2019)
 
-The cingulate pack (``homer.data.anchor_packs.cingulate``) anchors two best-conserved cingulate sub-domains identified by Vogt (2019):
+The cingulate pack (``otter.data.anchor_packs.cingulate``) anchors two best-conserved cingulate sub-domains identified by Vogt (2019):
 
   - pid 36: Mouse ACA ventral (15 parcels) ↔ Human subgenual ACC at (±5, 10, 35) r=10 mm (6 parcels)
   - pid 37: Mouse Retrosplenial (27 parcels) ↔ Human RSC at (±15, –55, 10) r=10 mm (8 parcels)
@@ -598,7 +598,7 @@ We've taken position (2): the cingulate pack is part of the codebase but is *not
 
 ### 5.17 AMYGDALA-1 — Cortical subplate / amygdala (closing pack)
 
-Beauchamp pair "Cortical subplate-other → amygdala" was the last 0 % top-1 failure region without dedicated sub-region supervision. Cross-species amygdala homology is uncontroversial (Janak & Tye 2015 *Nature*; Pessoa & Adolphs 2010 *Nature Reviews Neuroscience*). The amygdala pack (``homer.data.anchor_packs.amygdala``) is a single-entry pack — DSURQE doesn't distinguish basolateral / central / lateral amygdaloid nuclei, so we use the broader "Cortical subplate" set that Beauchamp itself uses:
+Beauchamp pair "Cortical subplate-other → amygdala" was the last 0 % top-1 failure region without dedicated sub-region supervision. Cross-species amygdala homology is uncontroversial (Janak & Tye 2015 *Nature*; Pessoa & Adolphs 2010 *Nature Reviews Neuroscience*). The amygdala pack (``otter.data.anchor_packs.amygdala``) is a single-entry pack — DSURQE doesn't distinguish basolateral / central / lateral amygdaloid nuclei, so we use the broader "Cortical subplate" set that Beauchamp itself uses:
 
   - pid 38: Mouse Cortical subplate (54 parcels) ↔ Human amygdala at MNI(±25, –5, –20) r=8 mm (6 parcels)
 
@@ -639,7 +639,7 @@ Cleanest result so far — zero off-target cost, same tautological 100 % by cons
 
 **Coverage**: with all default packs composed (everything except opt-in cingulate), every 0 % Beauchamp failure pair is now anchored at sub-region level. The aggregate effect on Beauchamp top-1 for anchor-overlapping pairs goes from 12 % (production point-anchor) to a substantial improvement, weighted by the parcel counts of the newly-anchored regions.
 
-**Generalised conclusion across 14 entries / 6 packs**: anchored regions become trustworthy by construction; structure does NOT propagate across un-anchored sub-regions; each region we want HOMER to handle reliably needs its own pack entry. The cingulate finding (where anchor and validation target different things) adds nuance: the Beauchamp metric is a noisier validation target than its 22-pair design suggests, and disagreements between anchor and validation can produce informative metric drops rather than indictments of the anchor.
+**Generalised conclusion across 14 entries / 6 packs**: anchored regions become trustworthy by construction; structure does NOT propagate across un-anchored sub-regions; each region we want OTTER to handle reliably needs its own pack entry. The cingulate finding (where anchor and validation target different things) adds nuance: the Beauchamp metric is a noisier validation target than its 22-pair design suggests, and disagreements between anchor and validation can produce informative metric drops rather than indictments of the anchor.
 
 ### 5.19 COMPOSE-ALL — full default-pack π
 
@@ -700,7 +700,7 @@ The FGW solver handles these (soft constraints, not hard walls). Mass on shared 
 
 **Is**: a deployable mouse↔human coupling that returns trustworthy human partners for 9 previously-zero-recovery Beauchamp regions plus the 6 regions already at non-zero top-1. Mean rank 85 / 2094 means the right human partner is in the top 4 % of candidates on average. For downstream users querying π for any of the 11 anchored sub-regions, this is the recommended π.
 
-**Isn't**: an unsupervised demonstration that HOMER's FC + SC structure recovers cross-species homology. Every per-region 100 % is by-construction, and per-region held-out tests (e.g. §5.13 Tectum's IC) confirm that structure does not propagate across un-anchored sub-regions. The validation gain is real because the *anchor sources* are credible (published cross-species correspondences); it's not a methodological claim about the FGW solver's recovery power.
+**Isn't**: an unsupervised demonstration that OTTER's FC + SC structure recovers cross-species homology. Every per-region 100 % is by-construction, and per-region held-out tests (e.g. §5.13 Tectum's IC) confirm that structure does not propagate across un-anchored sub-regions. The validation gain is real because the *anchor sources* are credible (published cross-species correspondences); it's not a methodological claim about the FGW solver's recovery power.
 
 This is the right π for the "best mouse↔human mapping we can deliver with current evidence" use case. Multi-source validation against Mars 2018 / Coletta 2020 / BICCN cell-types is the next step beyond this.
 
@@ -719,7 +719,7 @@ Impact: zero off-target effect on any Beauchamp pair (the lateral PFC regions do
 
 The Beauchamp top-1 metric is one validation source. The "best mouse↔human mapping" framing requires combining multiple signals to estimate, per-parcel and per-network, where the mapping is trustworthy and where it isn't.
 
-#### 5.21.1 Multi-source trust map (v1, ``homer.eval.compute_multisource_trust``)
+#### 5.21.1 Multi-source trust map (v1, ``otter.eval.compute_multisource_trust``)
 
 Augments the internal-signal trust score (``compute_trust_score``: bootstrap stability + argmax concentration + FC similarity to nearest anchor) with two external signals:
 
@@ -738,7 +738,7 @@ Combined into 5 evidence tiers. Distribution on the all-packs π over 1864 mouse
 
 This is the right trust map to ship: it tells users *why* to trust each parcel rather than collapsing everything into a single composite score. The 19 % anchored_and_validated parcels are the strictest "we have multi-source evidence" set; the 35.7 % validated_only is the next tier; low_evidence parcels (~30 %) should be flagged as out-of-distribution.
 
-#### 5.21.2 Network coherence (v2, ``homer.eval.network_compactness``)
+#### 5.21.2 Network coherence (v2, ``otter.eval.network_compactness``)
 
 Coletta 2020 (*Sci Adv*) identified ~7 mouse functional networks. A good mouse↔human mapping should preserve these — within-network mouse parcels should map to a *compact* region in human space. We measure compactness as median pairwise distance and mean centroid spread.
 
@@ -791,7 +791,7 @@ Neither is required to claim "best mapping" — multi-source trust + network coh
 
 ## 6. Comparative methods (kept as additions, neither moves the headline)
 
-### 6.1 FUGW (`homer.models.FUGWModel`)
+### 6.1 FUGW (`otter.models.FUGWModel`)
 
 Drop-in alternative using the [Thual et al. 2022 NeurIPS](https://proceedings.neurips.cc/paper_files/paper/2022/hash/8906cac4ca58dcaf17e97a0486ad57ca-Abstract-Conference.html) unbalanced FGW solver via the `fugw` PyPI package. `pip install fugw torch` to use it.
 

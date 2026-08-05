@@ -1,4 +1,4 @@
-"""Test 2. Subtype spatial-pattern translation through HOMER's π.
+"""Test 2. Subtype spatial-pattern translation through OTTER's π.
 
 Pagani et al. 2026 report per-subtype network connectivity matrices in both
 species (ED Fig 1 for mouse, Fig 4e for human). Each subtype (hyper, hypo) has
@@ -9,7 +9,7 @@ Their claim: "the FC subtypes recur cross-species in matching anatomical
 locations" (their claim 3, supported by **name-based** matching of mouse
 Somatomotor to human Somatomotor, etc.).
 
-This test replaces the name-based bridge with HOMER's quantitative π:
+This test replaces the name-based bridge with OTTER's quantitative π:
   1. Read the mouse 9-network per-subtype intensity vector from ED Fig 1.
   2. Distribute the per-network intensity to 1864 mouse parcels (via
      PAIRID_TO_NETWORK → paper-mouse-network labels).
@@ -44,7 +44,7 @@ mod = import_module("01_network_crossvalidation")
 assign_mouse_paper_networks = mod.assign_mouse_paper_networks
 assign_human_paper_networks = mod.assign_human_paper_networks
 
-from homer.data import load_cached
+from otter.data import load_cached
 
 
 import os
@@ -77,12 +77,12 @@ PAGANI_HUMAN_NETS = [
     "Salience", "SomatoMotor", "Visual", "Subcortical",
 ]
 
-# How to map HOMER's mouse-side networks (PAIRID_TO_NETWORK + assign_mouse_paper_networks
+# How to map OTTER's mouse-side networks (PAIRID_TO_NETWORK + assign_mouse_paper_networks
 # names) onto Pagani's 9 mouse network names.
 # Note our mouse_paper_networks gives 13 labels:
 #   Visual, Auditory, SomatoMotor, DorsAtten, Salience, Limbic, Control, DMN,
 #   Subcortical, HC_Limbic, BF_Olfactory, Frontoparietal, Brainstem
-HOMER_MOUSENET_TO_PAGANI_MOUSE: dict[str, str] = {
+OTTER_MOUSENET_TO_PAGANI_MOUSE: dict[str, str] = {
     "Auditory":      "Auditory",
     "SomatoMotor":   "Somatomotor",
     "Visual":        "Visual",
@@ -90,7 +90,7 @@ HOMER_MOUSENET_TO_PAGANI_MOUSE: dict[str, str] = {
     "DMN":           "DMN",
     "HC_Limbic":     "HC",
     "BF_Olfactory":  "BF",
-    "Subcortical":   "Thalamus",          # HOMER subcortical (pids 13/14/15/18/19) → split below
+    "Subcortical":   "Thalamus",          # OTTER subcortical (pids 13/14/15/18/19) → split below
     "Frontoparietal": None,               # not in Pagani 9-net, drop
     "Brainstem":     None,                # not in Pagani 9-net, drop
     "Limbic":        None,                # never populated in our scheme (legacy slot)
@@ -171,7 +171,7 @@ def mouse_intensity_to_parcel_values(mouse_paper_net: np.ndarray,
     n = len(mouse_paper_net)
     out = np.zeros(n, dtype=float)
     for net_idx, name in enumerate(mouse_net_names):
-        pagani_name = HOMER_MOUSENET_TO_PAGANI_MOUSE.get(name)
+        pagani_name = OTTER_MOUSENET_TO_PAGANI_MOUSE.get(name)
         if pagani_name is None:
             continue
         val = mouse_net_intensity.get(pagani_name, 0.0)

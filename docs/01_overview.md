@@ -1,8 +1,8 @@
 # Overview
 
-## What HOMER is
+## What OTTER is
 
-HOMER (**Hom**ology **E**stimation across species via **R**egional optimal transport) is a Python package that learns probabilistic correspondences between mouse and human brain parcels. The output is a coupling matrix **π** of shape (1864 mouse parcels × 2094 human parcels) where `π[i, j]` is interpretable as "probability that mouse parcel *i* corresponds to human parcel *j*".
+OTTER (**O**ptimal **T**ransport for **T**ranslation across **E**volutionary **R**elatives) is a Python package that learns probabilistic correspondences between mouse and human brain parcels. The output is a coupling matrix **π** of shape (1864 mouse parcels × 2094 human parcels) where `π[i, j]` is interpretable as "probability that mouse parcel *i* corresponds to human parcel *j*".
 
 > **Note on sharpness and reconstruction.** The canonical coupling is fitted at ε = 0.05 and is deliberately soft: the median top-target probability is 0.31, above 0.5 for 20 % of parcels. Concentration is set by the regularisation rather than by anatomy, and re-fitting at ε = 0.005 gives a near-deterministic coupling with no gain in held-out recovery. Because the human marginal is free (semirelaxed FGW), the coupling can leave human parcels poorly reconstructed rather than forcing mass onto them. We report reconstruction accuracy (docs/03_results.md §5) rather than an uncovered-parcel percentage, which would depend on the threshold chosen. Each column of π is normalised before the push-forward, so the score reflects whether some mouse tissue is wired like the human parcel rather than how much mass that parcel received.
 
@@ -16,13 +16,13 @@ The method is **Fused Gromov-Wasserstein optimal transport** (POT's `entropic_se
 
 ## What you query
 
-For any mouse parcel, HOMER returns a probability distribution over 2094 human parcels. Typical workflows:
+For any mouse parcel, OTTER returns a probability distribution over 2094 human parcels. Typical workflows:
 
 ```python
 import numpy as np
-from homer.data import load_cached
+from otter.data import load_cached
 
-from homer.data import load_pi
+from otter.data import load_pi
 pi = load_pi()                                   # pi_canonical.npy, 1864 × 2094
 
 # Top-5 human partners for mouse parcel 1234
@@ -38,7 +38,7 @@ reliable = trust["evidence_tier"] == "anchored_and_validated"     # 31.5% of par
 
 See `03_results.md` for what each tier means and how to read the headline numbers.
 
-## What HOMER *is not*
+## What OTTER *is not*
 
 - Not an unsupervised method. It requires anchor pairs (we ship 21 Garin point anchors + 26 region-anchor entries from 15 anchor packs).
 - Not a voxel-level mapping. π is parcel-to-parcel. Mouse parcels span ~12-2837 voxels each.
@@ -64,8 +64,8 @@ See `03_results.md` for the full six-section results, the third-party validation
 ## Project structure at a glance
 
 ```
-homer/
-├── src/homer/          # The library (data, models, eval, viz, costs)
+otter/
+├── src/otter/          # The library (data, models, eval, viz, costs)
 ├── pipeline/           # Reproduction scripts (02 → 07)
 ├── experiments/        # Anchor-pack runners + ablations
 ├── notebooks/          # 9 walkthroughs: quickstart, methodology, one per figure

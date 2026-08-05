@@ -1,7 +1,7 @@
-"""HOMER per-disorder spatial pattern prediction (Phase 1 of ENIGMA validation).
+"""OTTER per-disorder spatial pattern prediction (Phase 1 of ENIGMA validation).
 
 Generate per-parcel predicted human spatial patterns for each of 5 psychiatric
-disorders + autism, using HOMER's π applied to each disorder's gene set:
+disorders + autism, using OTTER's π applied to each disorder's gene set:
 
   - Autism (Pagani MOESM4 'subtypes', hypo + hyper combined)
   - Bipolar disorder (MOESM5)
@@ -10,13 +10,13 @@ disorders + autism, using HOMER's π applied to each disorder's gene set:
   - Dementia (MOESM5)
   - Psoriasis (MOESM5, non-brain control)
 
-For each disorder, intersect its gene list with HOMER's 1,713-gene Allen ISH
+For each disorder, intersect its gene list with OTTER's 1,713-gene Allen ISH
 panel, compute the mouse-parcel mean expression score, route through π →
 predicted human-parcel score (2094-vec). Save these as `predicted_pattern.npy`
 for Phase 2 comparison against ENIGMA observed disease spatial maps.
 
 Also: compute pairwise cross-disorder correlation matrix at parcel level
-this tells us how disorder-specific HOMER's predictions are even before we
+this tells us how disorder-specific OTTER's predictions are even before we
 get to ENIGMA. If all disorders predict highly similar patterns, that confirms
 the shared-geometry result we found in the per-network specificity test
 (cross_disease_specificity.py).
@@ -35,7 +35,7 @@ from scipy.stats import pearsonr, spearmanr
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached, load_pi, pi_provenance
+from otter.data import load_cached, load_pi, pi_provenance
 
 MOESM4 = ROOT / "data_external" / "pagani_2026" / "41593_2026_2287_MOESM4_ESM.xlsx"
 MOESM5 = ROOT / "data_external" / "pagani_2026" / "41593_2026_2287_MOESM5_ESM.xlsx"
@@ -71,16 +71,16 @@ def load_disorder_gene_sets() -> dict[str, set[str]]:
 
 def main():
     print("=" * 80)
-    print("HOMER per-disorder spatial pattern prediction (Phase 1)")
+    print("OTTER per-disorder spatial pattern prediction (Phase 1)")
     print("=" * 80)
 
-    # ---- Load HOMER expanded gene matrix ----
+    # ---- Load OTTER expanded gene matrix ----
     expr = np.load(ROOT / "experiments/autism_subtypes/allen_expansion/pagani_mouse_expr.npy")
     meta = pd.read_csv(ROOT / "experiments/autism_subtypes/allen_expansion/pagani_gene_list_resolved.csv")
     pi = load_pi()
     prov = pi_provenance()
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
-    print(f"HOMER expanded matrix: {expr.shape}")
+    print(f"OTTER expanded matrix: {expr.shape}")
     print(f"π: {pi.shape}  {prov['pi_file']}  sha256={prov['pi_sha256']}")
 
     # NaN-fill + z-score
@@ -97,7 +97,7 @@ def main():
     disorders = load_disorder_gene_sets()
     for d, gs in disorders.items():
         n_overlap = len({g.lower() for g in gs} & set(gene_to_idx.keys()))
-        print(f"  {d:<22s}: {len(gs):>5d} genes, {n_overlap} overlap with HOMER 1,713-gene panel")
+        print(f"  {d:<22s}: {len(gs):>5d} genes, {n_overlap} overlap with OTTER 1,713-gene panel")
 
     # ---- For each disorder, route through π → predicted human pattern ----
     print(f"\n{'='*80}")
@@ -141,8 +141,8 @@ def main():
     off_diag = corr_mat[iu]
     print(f"\nOff-diagonal correlation: mean = {off_diag.mean():+.3f}, "
           f"min = {off_diag.min():+.3f}, max = {off_diag.max():+.3f}")
-    print(f"  If HOMER predictions are disorder-specific: low off-diagonal (close to 0).")
-    print(f"  If HOMER predictions reflect shared geometry: high off-diagonal (close to 1).")
+    print(f"  If OTTER predictions are disorder-specific: low off-diagonal (close to 0).")
+    print(f"  If OTTER predictions reflect shared geometry: high off-diagonal (close to 1).")
 
     # ---- Save ----
     np.savez(ROOT / "outputs/coupling/per_disorder_predictions.npz",

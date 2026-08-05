@@ -1,8 +1,8 @@
 {
-  "n_homer_genes": 61,
+  "n_otter_genes": 61,
   "n_overlap_hypo_genes": 10,
   "n_overlap_hyper_genes": 26,
-  "homer_hypo_genes": [
+  "otter_hypo_genes": [
     "Bdnf",
     "Calb1",
     "Calb2",
@@ -14,7 +14,7 @@
     "Slc17a7",
     "Snap25"
   ],
-  "homer_hyper_genes": [
+  "otter_hyper_genes": [
     "Aqp4",
     "Camk2a",
     "Cux2",
@@ -92,5 +92,5 @@
     "pearson_empirical_p": 0.005,
     "spearman_empirical_p": 0.055
   },
-  "caveat": "HOMER's curated gene set is 51 genes; only 36 overlap with Pagani's 1,952+4,463 implicated genes. This is a proof-of-concept; a full pathway-spatial test would need parcel-level Allen Brain Atlas expression for the full gene lists."
+  "caveat": "OTTER's curated gene set is 51 genes; only 36 overlap with Pagani's 1,952+4,463 implicated genes. This is a proof-of-concept; a full pathway-spatial test would need parcel-level Allen Brain Atlas expression for the full gene lists."
 }

@@ -8,7 +8,7 @@ This step is the missing link between the trust machinery and the GUI.
     not the file the GUI reads.
   * ``08_build_gui.py`` reads ``trust_multisource_all_packs.npz``, the
     *multi-source evidence map* (five evidence tiers) produced by
-    :func:`homer.eval.trust_score.compute_multisource_trust`.
+    :func:`otter.eval.trust_score.compute_multisource_trust`.
 
 Until now nothing wrote that file inside the documented pipeline:
 ``compute_multisource_trust`` had no caller, and the GUI silently fell back
@@ -60,16 +60,16 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached                                       # noqa: E402
-from homer.data.anchor_packs import (                                    # noqa: E402
+from otter.data import load_cached                                       # noqa: E402
+from otter.data.anchor_packs import (                                    # noqa: E402
     DEFAULT_PACK_NAMES,
     build_default_pack_entries,
 )
-from homer.data.anchor_packs._dsurqe import (                            # noqa: E402
+from otter.data.anchor_packs._dsurqe import (                            # noqa: E402
     assign_dsurqe_labels,
     parse_dsurqe_tree,
 )
-from homer.eval.trust_score import compute_multisource_trust             # noqa: E402
+from otter.eval.trust_score import compute_multisource_trust             # noqa: E402
 
 ANN  = ROOT / "outputs" / "anndata"
 COUP = ROOT / "outputs" / "coupling"
@@ -162,7 +162,7 @@ def main(args):
     n_validated = int(np.nansum(out["beauchamp_top1"] > 0))
     print(f"  Beauchamp top-1 > 0 : {n_validated:>4d} parcels")
 
-    # ---- Save (keys consumed by homer.viz.gui._node_records)
+    # ---- Save (keys consumed by otter.viz.gui._node_records)
     out_path = COUP / args.output
     np.savez(
         out_path,

@@ -15,7 +15,7 @@ STALE: they predate the 2026-07-08 regrade and disagree with evidence_tiers_v2.j
 This script recomputes section 1's coupling claims directly from the canonical pi and
 writes them to a JSON so every number can be verified.
 
-Run: cd homer && PYTHONPATH=src python experiments/coupling_summary/01_dump_coupling_stats.py
+Run: cd otter && PYTHONPATH=src python experiments/coupling_summary/01_dump_coupling_stats.py
 Writes outputs/logs/coupling_summary.json
 """
 from __future__ import annotations
@@ -30,8 +30,8 @@ from scipy.stats import pearsonr
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance  # noqa: E402
-from homer.data.anchors import get_anchor_index              # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance  # noqa: E402
+from otter.data.anchors import get_anchor_index              # noqa: E402
 
 OUT = ROOT / "outputs/logs/coupling_summary.json"
 SEED = 0

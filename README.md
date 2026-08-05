@@ -1,6 +1,10 @@
-# HOMER
+<p align="center">
+  <img src="otter_logo.png" alt="OTTER" width="420">
+</p>
 
-**Hom**ology **E**stimation across species via **R**egional optimal transport.
+# OTTER
+
+**O**ptimal **T**ransport for **T**ranslation across **E**volutionary **R**elatives.
 
 A Python package that learns probabilistic cross-species correspondences between mouse and human brain parcels using **Fused Gromov–Wasserstein optimal transport**, anchored on published homologue pairs.
 
@@ -10,9 +14,9 @@ Output: a coupling matrix **π** of shape (1864 mouse parcels × 2094 human parc
 
 ## Try it in your browser (no install)
 
-**→ [Open the HOMER Mapping Explorer](https://peach-lucien.github.io/homer/)**
+**→ [Open the OTTER Mapping Explorer](https://peach-lucien.github.io/otter/)**
 
-A self-contained 3D viewer for the canonical coupling. Search a mouse region or parcel, see its top-K human partners ranked by coupling mass, toggle the cortical surface or mouse atlas shell, and inspect the trust evidence behind every prediction. No Python, no install, no backend. It is a single HTML file with the canonical coupling baked in. Use this if you want to *look at* HOMER. The rest of the README is for using it programmatically or reproducing it.
+A self-contained 3D viewer for the canonical coupling. Search a mouse region or parcel, see its top-K human partners ranked by coupling mass, toggle the cortical surface or mouse atlas shell, and inspect the trust evidence behind every prediction. No Python, no install, no backend. It is a single HTML file with the canonical coupling baked in. Use this if you want to *look at* OTTER. The rest of the README is for using it programmatically or reproducing it.
 
 ---
 
@@ -64,12 +68,12 @@ recovery at held-out AUROC 0.74 while parcel-exact recovery collapses to roughly
 The spatial scaffold is itself fitted to the Garin landmark pairs, so the
 ladder separates kinds of supervision rather than supervision from none. Connectivity alone is
 unidentifiable rather than uninformative: Gromov–Wasserstein aligns two connectomes only up to
-relabelling, so with nothing fixing the global orientation the coupling cannot be placed. HOMER
+relabelling, so with nothing fixing the global orientation the coupling cannot be placed. OTTER
 is therefore neither a connectivity-only method nor a landmark look-up.
 
 ### What transfers through π
 
-Each test below uses data HOMER never saw and a spatial-autocorrelation-preserving spin null, a
+Each test below uses data OTTER never saw and a spatial-autocorrelation-preserving spin null, a
 bar most cross-species analyses do not set.
 
 | test | modality | result |
@@ -142,8 +146,8 @@ ranking over mouse structures.
 
 Forward, an optogenetic mouse anterior-insula activation map routes onto human anterior insula
 and ventral-attention cortex. Salience cortex is enriched by +0.86 SD against a permuted-π null
-(p = 0.001). Scored head to head on the 1,635 parcels both methods cover, HOMER reaches +0.87 SD and
-a transcriptomic translator +0.28 SD. HOMER exceeds a shuffled-input null (p = 0.016) and the
+(p = 0.001). Scored head to head on the 1,635 parcels both methods cover, OTTER reaches +0.87 SD and
+a transcriptomic translator +0.28 SD. OTTER exceeds a shuffled-input null (p = 0.016) and the
 transcriptomic translator does not (p = 0.228).
 
 Reverse, twelve human functional systems route to their established mouse substrate, with the
@@ -159,11 +163,11 @@ derive every number above.
 
 ## Install + quickstart (for programmatic use)
 
-Skip this section if you only want to look at the couplings. Use the [explorer](https://peach-lucien.github.io/homer/) above. Install only if you need to query π in code, re-train the model, or extend it.
+Skip this section if you only want to look at the couplings. Use the [explorer](https://peach-lucien.github.io/otter/) above. Install only if you need to query π in code, re-train the model, or extend it.
 
 ```bash
-git clone <this-repo> homer && cd homer
-conda env create -f env.yml && conda activate homer
+git clone <this-repo> otter && cd otter
+conda env create -f env.yml && conda activate otter
 pip install -e ".[dev]"
 pytest -q                            # ~10s, runs on a bare checkout (synthetic fixtures)
 python scripts/fetch_data.py         # pull the couplings + caches from Zenodo (~735 MB)
@@ -173,13 +177,13 @@ The repository ships code only. The coupling, the processed AnnData caches, and
 the validation inputs live in a versioned Zenodo archive and are pulled by
 `scripts/fetch_data.py`; the committed result logs in `outputs/logs/` already let
 you read every headline number without downloading anything. See
-[`DATA.md`](DATA.md) for the tiers and what each contains. Data DOI: [10.5281/zenodo.21458106](https://doi.org/10.5281/zenodo.21458106). If you call into the library before fetching, it prompts you to download then; set `HOMER_AUTO_FETCH=1` to fetch automatically whenever data is needed.
+[`DATA.md`](DATA.md) for the tiers and what each contains. Data DOI: [10.5281/zenodo.21458106](https://doi.org/10.5281/zenodo.21458106). If you call into the library before fetching, it prompts you to download then; set `OTTER_AUTO_FETCH=1` to fetch automatically whenever data is needed.
 
 Query a region after installation (requires the fetched data):
 
 ```python
 import numpy as np
-from homer.data import load_cached, load_pi
+from otter.data import load_cached, load_pi
 
 M, _ = load_cached("mouse", cache_dir="outputs/anndata")
 H, _ = load_cached("human", cache_dir="outputs/anndata")
@@ -197,7 +201,7 @@ reliable = trust["evidence_tier"] == "anchored_and_validated"     # 31% of parce
 
 `load_pi()` defaults to `pi_canonical.npy`, the canonical coupling used throughout the paper. Always call `load_pi()` rather than loading a filename. The earlier couplings (`pi_fc_plus_SC*.npy`) are retired, give different answers, and are kept only so that published comparisons remain reproducible. `pi_provenance()` returns the file and its sha256.
 
-For interactive exploration, see `notebooks/01_quickstart.ipynb` (Python) or the browser-only [HOMER Mapping Explorer](https://peach-lucien.github.io/homer/) (no install).
+For interactive exploration, see `notebooks/01_quickstart.ipynb` (Python) or the browser-only [OTTER Mapping Explorer](https://peach-lucien.github.io/otter/) (no install).
 
 ## Mouse data preprocessing
 
@@ -213,15 +217,15 @@ Entry points:
   parcel's CCFv3 centre voxel.
 - `pipeline/00_external/02_mouse_genes.py`, builds `mouse_genes.npy`: Allen ISH
   expression sampled over each parcel's CCFv3 voxel set.
-- `src/homer/data/io.py`, exposes the per-parcel voxel-index fields for
+- `src/otter/data/io.py`, exposes the per-parcel voxel-index fields for
   downstream code.
 
 ## What's in this repo
 
 ```
-homer/
+otter/
 ├── docs/                # 7-doc reading path + the published GUI (docs/index.html)
-├── src/homer/           # The library (data, models, eval, viz, costs)
+├── src/otter/           # The library (data, models, eval, viz, costs)
 ├── pipeline/            # End-to-end reproduction scripts (02 → 08)
 ├── experiments/         # Analyses, grouped by the manuscript section they support
 ├── tools/               # Provenance, number and prose checks
@@ -237,19 +241,19 @@ Documentation navigation hub: [`docs/README.md`](docs/README.md). To rebuild the
 
 We solve a **Fused Gromov-Wasserstein optimal transport** problem (POT's `entropic_semirelaxed_fused_gromov_wasserstein`) that finds a soft coupling π minimising (within-mouse FC + SC distance ↔ within-human FC + SC distance) + (cross-species xyz + anchor cost). The mouse row marginal is fixed uniform; the human column marginal is free (semirelaxed), so the coupling can report that a human parcel has **no** mouse counterpart. The result is supervised by **21 Garin point anchors** (single-parcel) plus **15 region-anchor packs** (26 multi-parcel sub-region homology entries curated from the published literature, see [`docs/04_anchor_packs.md`](docs/04_anchor_packs.md)). Anchors are *soft* by default. The FGW solver can violate the constraint if structural cost strongly disagrees. See [`docs/02_methods.md`](docs/02_methods.md).
 
-## What HOMER does not do
+## What OTTER does not do
 
 - **It does not translate properties orthogonal to the areal hierarchy.** What travels through π is areal position, so a mouse measurement transfers if it varies along the sensory-to-association axis and does not if it varies through the cortical depth. Myelin and cytoarchitecture do transfer, each clearing a translation null that rotates the mouse input and routes it through the real π (|r| = 0.50, p = 0.005 and |r| = 0.53, p = 0.003), and reaching r = 0.47 against the human myelin map. Cell-class composition transfers when it tracks that axis (neuronal minus glial 0.35, excitatory minus inhibitory 0.34). Laminar contrasts do not (supragranular minus infragranular 0.01, supragranular minus granular 0.02), and neither do spatially uniform cell classes (GABAergic 0.00, oligodendrocyte 0.07, microglial −0.03). Earlier versions of this README reported myelin as failing its null. That used a null which shuffled the coupling rather than rotating the input, and it was replaced.
 - **It reconstructs association cortex poorly.** Reconstruction accuracy runs low over prefrontal and lateral temporal cortex, with dorsolateral prefrontal cortex the clearest case (Control B, −0.69 SD below the cortical mean). The coupling reports the shortfall rather than hiding it, and we read it as a measurement, but a mouse model still cannot address phenotypes living in that territory. Note that uncovered-parcel percentages quoted in earlier drafts were threshold-dependent and have been dropped.
 - **It is not a parcel-level oracle without supervision.** Curation buys parcel precision. Withhold it and region-level correspondence largely survives (held-out mean AUROC 0.74) while parcel-exact recovery collapses to roughly 10 % top-1. Trust the tier: parcel-level for `anchored_and_validated`, region-level across the validated tiers.
-- **It does not localise better than a transcriptomic translator.** We once claimed it did; that was a reduction artefact. TransBrain's output is region-level, so scoring at parcel resolution flatters HOMER by construction. On region identity the two are level on TransBrain's own benchmark, AUROC 0.83 against 0.84, a paired per-region difference that is not significant (Wilcoxon p = 0.36). HOMER leads where the modality is connectional. It tracks the human gradient at r = 0.56 against 0.52, recovers a phenotype routed mouse to human and back at 0.97, 0.86 and 0.91 against 0.89, 0.82 and 0.83, concentrates its predictions on an effective 6 target regions against 60, and places three times as much mass on the correct region, 0.21 against 0.07. They are complementary instruments rather than competitors.
+- **It does not localise better than a transcriptomic translator.** We once claimed it did; that was a reduction artefact. TransBrain's output is region-level, so scoring at parcel resolution flatters OTTER by construction. On region identity the two are level on TransBrain's own benchmark, AUROC 0.83 against 0.84, a paired per-region difference that is not significant (Wilcoxon p = 0.36). OTTER leads where the modality is connectional. It tracks the human gradient at r = 0.56 against 0.52, recovers a phenotype routed mouse to human and back at 0.97, 0.86 and 0.91 against 0.89, 0.82 and 0.83, concentrates its predictions on an effective 6 target regions against 60, and places three times as much mass on the correct region, 0.21 against 0.07. They are complementary instruments rather than competitors.
 - **Cerebellum and medulla** are excluded from the parcellation. **dlPFC homology** is contested and opt-in only.
 
 See [`docs/05_limitations.md`](docs/05_limitations.md) for the full list.
 
 ## The four model levels
 
-`homer.models` exposes four sklearn-style classes:
+`otter.models` exposes four sklearn-style classes:
 
 | Class | Use when |
 |---|---|
@@ -270,7 +274,7 @@ Manuscript in preparation. The repo bundles 21 Garin homologue anchors (Garin 20
 
 ## Acknowledgements
 
-HOMER was built by the **S01 project** of the reTune CRC, a collaborative research centre between Würzburg and Berlin. The project is led by PIs **Robert Peach**, **Phillip Boehm-Sturm**, and **Martin Reich**, with postdoctoral researcher **Stefan Koch** and PhD student **Mario Perales**.
+OTTER was built by the **S01 project** of the reTune CRC, a collaborative research centre between Würzburg and Berlin. The project is led by PIs **Robert Peach**, **Phillip Boehm-Sturm**, and **Martin Reich**, with postdoctoral researcher **Stefan Koch** and PhD student **Mario Perales**.
 
 ## License
 

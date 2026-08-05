@@ -4,9 +4,9 @@ mouse circuit?  (go/no-go for a reverse-translation / experiment-design section)
 
 IDEA
 ----
-HOMER's coupling is bidirectional. Column-normalised it carries mouse -> human
+OTTER's coupling is bidirectional. Column-normalised it carries mouse -> human
 (Section 6). ROW-normalised it carries human -> mouse: a human map v_h (over the
-2,094 human parcels) becomes a mouse prediction v_m = rownorm(pi) @ v_h. If HOMER is
+2,094 human parcels) becomes a mouse prediction v_m = rownorm(pi) @ v_h. If OTTER is
 a faithful reverse translator, a human meta-analytic activation map for a function
 (e.g. "reward") should land on the mouse structure the field uses to study it
 (nucleus accumbens / VTA). This is the direction reverse-translational neuroscience
@@ -18,7 +18,7 @@ For each of a curated set of human functions with an established mouse substrate
 routes the human map to mouse, ranks mouse STRUCTURES by the translated value, and asks:
   * does a ground-truth mouse structure land in the top-k?                (accuracy)
   * is its enrichment significant against a spatial spin null?            (rigour)
-  * how confident is HOMER at that target, and does ANY mouse structure
+  * how confident is OTTER at that target, and does ANY mouse structure
     clear the null -- or is the human target "primate-unique" with no
     adequate mouse home? (the actionable output: when NOT to use a mouse)  (confidence)
 
@@ -34,7 +34,7 @@ source is neuromaps / Neurosynth association maps, e.g.:
 The script resamples each volume onto the 2,094-node parcellation itself, so any
 MNI152 volume works. Nothing else about the pipeline depends on how the maps are made.
 
-Run: cd homer && PYTHONPATH=src python experiments/reverse_translation/01_validate.py
+Run: cd otter && PYTHONPATH=src python experiments/reverse_translation/01_validate.py
 Read-only w.r.t. the coupling; writes outputs/logs/reverse_translation_validation.json
 """
 from __future__ import annotations
@@ -44,7 +44,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-from homer.data import load_cached, load_pi, pi_provenance      # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance      # noqa: E402
 
 MAPDIR = ROOT / "experiments/reverse_translation/human_maps"
 PARC = ROOT / "data_external/_diagnostics/parcellation_2094.nii.gz"
@@ -114,7 +114,7 @@ def structure_scores(v_mouse, acr):
 
 def spin_indices(xyz, n, seed=0):
     from scipy.spatial import cKDTree
-    from homer.eval.nulls import _haar_rotation
+    from otter.eval.nulls import _haar_rotation
     c = xyz - xyz.mean(0); s = c / np.linalg.norm(c, axis=1, keepdims=True)
     t = cKDTree(s); rng = np.random.default_rng(seed)
     return [t.query(s @ _haar_rotation(rng).T)[1] for _ in range(n)]

@@ -49,7 +49,7 @@ def main():
     pw = sorted(pw, key=lambda x: x["r_to_obs_delta"])
     names = [p["pathway"].replace("_", "\n", 1) for p in pw]
     rs = [p["r_to_obs_delta"] for p in pw]
-    ns = [p["n_genes_in_homer"] for p in pw]
+    ns = [p["n_genes_in_otter"] for p in pw]
     ax.barh(np.arange(len(pw)), rs, color="#264653")
     ax.axvline(0, color="black", linewidth=0.5)
     ax.set_yticks(np.arange(len(pw)))
@@ -74,7 +74,7 @@ def main():
         f"    Spearman ρ = {r_gf_s:+.3f}",
         "",
         "Interpretation:",
-        "  Modest agreement, not strong. The two HOMER translation routes",
+        "  Modest agreement, not strong. The two OTTER translation routes",
         "  (gene-spatial vs FC-perturbation, both routed through π) capture",
         "  COMPLEMENTARY rather than redundant signals:",
         "    • gene-spatial = 'which regions express Pagani-implicated genes'",
@@ -99,7 +99,7 @@ def main():
         f"  100% of 1,000 bootstrap resamples produce positive r.",
         f"  Spearman ρ = {j_exp['spearman_r']:+.3f},  empirical p (n=8) = {j_exp['spearman_empirical_p']:.3f}",
         "",
-        "$\\bf{Headline}$: HOMER-translated gene-spatial maps reproducibly",
+        "$\\bf{Headline}$: OTTER-translated gene-spatial maps reproducibly",
         "match Pagani's observed human ASD subtype pattern.",
         "",
         "$\\bf{Caveat}$: the test cannot distinguish synaptic-vs-immune",

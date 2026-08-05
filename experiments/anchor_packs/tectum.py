@@ -1,6 +1,6 @@
 """TECTUM-1: Add Superior + Inferior Colliculus sub-region anchors.
 
-The tectum (midbrain colliculi) is one of HOMER's documented failure
+The tectum (midbrain colliculi) is one of OTTER's documented failure
 regions, both SC and IC have 0 % Beauchamp top-1 under the production
 point-anchor π. ``docs/archive/diagnostics.md`` calls out tectum's spatial
 inversion as the failure mechanism: mouse SC is dorsal whereas human SC
@@ -41,9 +41,9 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from homer.data import load_cached                                    # noqa: E402
-from homer.data.anchor_packs import build_tectum_region_anchors       # noqa: E402
-from homer.models import MultimodalFGW                                # noqa: E402
+from otter.data import load_cached                                    # noqa: E402
+from otter.data.anchor_packs import build_tectum_region_anchors       # noqa: E402
+from otter.models import MultimodalFGW                                # noqa: E402
 
 ANN  = ROOT / "outputs" / "anndata"
 COUP = ROOT / "outputs" / "coupling"
