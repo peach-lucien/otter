@@ -23,7 +23,7 @@ curl -L -o ms_depression.nii.gz   https://neurovault.org/media/images/13075/DepM
 ```
 
 The script `03_clinical_networks.py` reads whatever of these are present and skips the rest.
-NeuroVault persistent citation IDs (put in the manuscript if you use a map), e.g. the
+NeuroVault persistent citation IDs (cite these if you use a map), e.g. the
 anxdys atlas: `https://identifiers.org/neurovault.image:787858`.
 
 ## Subcortical DBS optimal targets (OCD / PD) — extra conversion needed

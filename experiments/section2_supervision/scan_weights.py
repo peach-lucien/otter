@@ -9,7 +9,7 @@ Aggregates parcel-weighted over the 19 Beauchamp pairs.
 
 Run (from the repo's otter/ dir, with the OTTER scientific env active):
     cd otter
-    PYTHONPATH=src python ../manuscript/figures/fig_2_ED/scan_weights.py
+    PYTHONPATH=src python experiments/section2_supervision/scan_weights.py
 
 Resumable: caches to outputs/logs/scan_weights.json; re-run to continue / finish.
 Prints a summary table (best generalisation, best Beauchamp) at the end.

@@ -4,7 +4,7 @@ We asked whether OTTER's π preserves cortical-layer-marker spatial patterns acr
 
 ## Why this experiment
 
-[Hodge 2019](https://www.nature.com/articles/s41586-019-1506-7) ("Conserved cell types with divergent features in human versus mouse cortex") showed that canonical layer-defining transcription factors maintain their layer-specific spatial expression across mouse and human cortex. We use these markers as an independent quantitative test of OTTER's anatomical fidelity:
+[Hodge 2019](https://www.nature.com/articles/s41586-019-1506-7) ("Conserved cell types with divergent features in human versus mouse cortex") showed that canonical layer-defining transcription factors maintain their layer-specific spatial expression across mouse and human cortex. These markers give an independent quantitative test of the anatomical accuracy of OTTER.
 
 - **CUX1, CUX2, SATB2** → upper layers (L2/3)
 - **RORB** → granular L4

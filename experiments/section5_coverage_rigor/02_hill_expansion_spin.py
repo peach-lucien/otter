@@ -1,4 +1,4 @@
-"""§5 external validation: OTTER coverage vs Hill 2010 evolutionary cortical expansion,
+"""External validation: OTTER coverage vs Hill 2010 evolutionary cortical expansion,
 tested with the repo's spin null. Asks whether the human cortex OTTER leaves
 uncovered by the mouse is the cortex that expanded most in evolution.
 
@@ -8,7 +8,7 @@ with `otter.eval.nulls.spin_null` (continuous) + a tertile-gap spin (most- vs le
 expanded third). Centroids = mean OTTER parcel MNI coord per Schaefer region, so the
 spin runs in the repo's own coordinate frame.
 
-CAVEATS (state in the paper): (i) Hill is macaque->human expansion, OTTER is mouse->
+CAVEATS: (i) Hill is macaque->human expansion, OTTER is mouse->
 human, so primary areas (e.g. V1) may deviate; (ii) right hemisphere only; (iii) an
 in-sandbox check gave continuous rho=-0.21 (spin p~0.10) and tertile gap 3.66 log units
 (spin p~0.15) -> directionally consistent but NOT spin-significant at Schaefer-400. Run

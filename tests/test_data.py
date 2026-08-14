@@ -1,4 +1,4 @@
-"""Tests for the data layer (PLAN.md §3.4 + a few extras).
+"""Tests for the data layer.
 
 These tests must pass before any modeling work proceeds. They check:
     - shape & cardinality of each species' data
@@ -44,7 +44,7 @@ def adatas() -> dict[str, ad.AnnData]:
     return out
 
 
-# Core PLAN.md §3.4 tests ------------------------------------------------------
+# Core tests ------------------------------------------------------
 def test_shapes(adatas):
     H, M = adatas["human"], adatas["mouse"]
     assert H.uns["fc_mean"].shape == (2094, 2094)

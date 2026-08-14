@@ -1,115 +1,99 @@
-# ABIDE per-subject OTTER-template subtype scoring (PAGANI-B)
+# ABIDE per-subject subtype scoring
 
-## Corrected, Pagani-faithful subtyping (05/06), read this first
+Four scripts that score individual ABIDE subjects against human templates
+obtained by translating the mouse hyper- and hypo-connectivity subtype maps of
+Pagani 2026 through OTTER's coupling π.
 
-The original script below (`abide_subtype_prediction.py`) scores subjects against a
-continuous Δ = hyper − hypo template. OTTER's *weak* (continuous-map) mode. Two
-newer scripts implement Pagani's *actual* discrete classification and a continuous
-extension, and supersede the framing of the older one:
+The ABIDE data are distributed by the 1000 Functional Connectomes Project and
+are available after registration. The outputs of these scripts are not
+distributed with this repository. Reproducing them requires downloading the data
+and running the scripts.
 
-- **`05_abide_otter_subtyping.py`** reproduces Pagani's exact ±1 s.d. classification
-  on ABIDE, comparing OTTER-derived masks against name-matched masks head to head.
-  **Result (ran 2026):** OTTER masks subtype **21.3%** of ASD, name-matched **22.3%**
-  (Pagani report ~25%), with **93% label agreement**. So OTTER does *not* subtype more
-  individuals, it ≈equals the name-matched bridge and thereby **validates** it
-  (discrete homology survives; this is OTTER's strong mode). The ~78% unsubtyped is a
-  *hard-threshold* bottleneck, not a mapping failure. (NB: our pipeline uses AAL-116,
-  not Pagani's Schaefer-400+14, so absolute % isn't directly comparable; the
-  OTTER-vs-name comparison is internally consistent.)
+## Data
 
-- **`06_continuous_subtype_score.py`** removes the hard threshold: every individual
-  gets a continuous position on the OTTER hyper↔hypo axis (projection of z-scored
-  regional global connectivity onto the hyper−hypo coupling contrast). This tests the
-  dose-response Pagani's binary scheme structurally can't. **Result (ran 2026-06-19):
-  NULL.** The axis *is* a valid construct (it orders the hard labels correctly:
-  hard-hyper mean +0.110 > hard-hypo +0.025), but it carries **no diagnostic signal**
-  (ASD vs control Mann-Whitney p=0.97) and **no severity dose-response** (axis vs ADOS:
-  every subscale |ρ|≤0.11, all n.s.; closest ADOS_SOCIAL ρ=−0.11, p=0.078). This is
-  consistent with OTTER's established dichotomy, discrete correspondence survives,
-  continuous/graded translation does not, and with Pagani themselves never having
-  shown a continuous ADOS dose-response. **Caveat (F-015):** the axis inherits π's
-  uneven human coverage (masks lean Subcortical/Salience/DMN), so the claim is
-  "no detectable continuous severity signal under the current coupling," not "the
-  continuum is flat." Output: `outputs/logs/abide_continuous_subtype.json`.
+`nilearn.datasets.fetch_abide_pcp` supplies the preprocessed derivatives. The
+scripts use the CPAC pipeline and the `rois_aal` derivative, which gives AAL-116
+regional timeseries. The download is 3 to 8 GB and nilearn caches it, so it
+happens once. `nilearn.datasets.fetch_atlas_aal` supplies the parcel definitions
+used to align those timeseries to OTTER's 2,094 human parcels by nearest MNI
+centroid.
 
-**Bottom line for the manuscript:** the per-individual continuous subtype readout is a
-clean negative; the discrete OTTER↔name-match equivalence (05) is the positive result
-worth reporting. See `../../pagani_2026_per_model/README.md` for the mouse-side story.
+## Scripts
 
-## What this tests
+### `abide_subtype_prediction.py`
 
-Pagani 2026's claim 1 is that ASD subjects cluster into hyper- and hypo-connected functional-connectivity subtypes. They derive those subtypes by an in-house clustering pipeline on FC perturbation features.
+Routes the mouse 9×9 network perturbation matrices (Pagani 2026, ED Fig 1)
+through π to give one human template per mouse subtype, and takes their
+difference (hyper − hypo) as a subtype-contrast template. For each subject the
+script computes a per-parcel mean absolute connectivity profile, subtracts the
+site-matched control mean, and projects the residual onto the contrast template.
+The score is tested for a case-control difference (Mann-Whitney U, Cliff's δ)
+and for bimodality within the case group (one- versus two-component Gaussian
+mixture, AIC and BIC).
 
-We don't re-implement their clustering. Instead we ask a sharper question that uses OTTER's contribution directly: **does OTTER's translation of mouse subtype patterns produce a feature that distinguishes ASD from controls at the individual level?** And: **does that feature reveal hyper-vs-hypo bimodality within ASD?**
-
-If yes. OTTER's quantitative cross-species translation can serve as an automatic, biologically-grounded subtype classifier for human ASD, replacing the name-based bridge Pagani uses with a structural one.
-
-## Pipeline
-
-1. **Build OTTER human templates.** Translate Pagani's mouse 9×9 hypo and hyper perturbation matrices (ED Fig 1) through π → 2,094-parcel human templates. Take Δ = hyper − hypo as the *subtype-contrast* template.
-
-2. **Fetch ABIDE preprocessed FC.** Via `nilearn.datasets.fetch_abide_pcp`, uses CPAC pipeline, CC400 parcellation, ~1,000 ASD + ~1,100 control subjects across ~24 sites.
-
-3. **Map CC400 → OTTER's 2,094 parcels.** Nearest-MNI-centroid (Craddock 2012 atlas, 400-cluster level).
-
-4. **Per-subject perturbation profile.** For each subject: compute per-parcel mean-abs-FC strength, subtract site-matched control mean. This is a coarse but defensible approximation of Pagani's subject-level FC perturbation map.
-
-5. **Score each subject.** dot-product of subject perturbation with the OTTER Δ template (z-scored, mean-normalized).
-
-6. **Tests.**
-   - ASD vs control on score → Mann-Whitney U + Cliff's δ.
-   - Within-ASD bimodality → 1-vs-2 component Gaussian mixture (AIC + BIC).
-
-## Disk + time
-
-- ABIDE preprocessed CC400 timeseries: **~3–8 GB**, one-time download via nilearn.
-- Craddock atlas: ~10 MB.
-- Wall-clock for first run: **~1–2 hours after download finishes**.
-- Subsequent runs: ~10–30 minutes (nilearn caches everything).
-
-## How to run
-
-### Smoke test (50 subjects, ~5–10 min wall-clock after the first 1–2 GB of ABIDE downloads)
+Writes `outputs/logs/autism_subtypes_abide.json` with the summary statistics and
+`outputs/logs/abide_per_subject_scores.csv` with the per-subject scores.
 
 ```bash
-cd <otter-repo-root>
-PYTHONPATH=src python experiments/autism_subtypes/abide_subtype/abide_subtype_prediction.py \
-    --n-subjects 50
-```
-
-### Full run
-
-```bash
+# subset run
+PYTHONPATH=src python experiments/autism_subtypes/abide_subtype/abide_subtype_prediction.py --n-subjects 50
+# full run
 PYTHONPATH=src python experiments/autism_subtypes/abide_subtype/abide_subtype_prediction.py
+# alternative cache location
+PYTHONPATH=src python experiments/autism_subtypes/abide_subtype/abide_subtype_prediction.py --abide-data-dir /path/to/abide_cache
 ```
 
-### Custom cache dir (if home directory is small)
+The first run takes one to two hours once the download has finished. Later runs
+take tens of minutes.
+
+### `05_abide_otter_subtyping.py`
+
+Applies the discrete classification rule of Pagani 2026, under which a subject
+is hypo if regional global connectivity falls below −1 s.d. within the hypo mask
+and hyper if it exceeds +1 s.d. within the hyper mask, under two definitions of
+the human masks. One is the set of human regions π routes the prominent mouse
+regions to, the other is the set of human regions carrying the same names as
+those mouse regions. The script reports both subtypings and their agreement.
+
+Requires `experiments/pagani_2026_per_model/04_otter_human_masks.py` to have run
+first, which writes `outputs/logs/pagani_otter_human_masks.json`. Writes
+`outputs/logs/abide_otter_subtyping.json`.
 
 ```bash
-PYTHONPATH=src python ... --abide-data-dir /path/to/big/disk/abide_cache
+PYTHONPATH=src python experiments/autism_subtypes/abide_subtype/05_abide_otter_subtyping.py --abide-data-dir /path/to/abide_cache
 ```
 
-## Outputs
+### `06_continuous_subtype_score.py`
 
-- `outputs/logs/autism_subtypes_abide.json`, summary stats (Mann-Whitney p, Cliff's δ, GMM bimodality verdict, n_asd/n_ctrl)
-- `outputs/logs/abide_per_subject_scores.csv`, every subject's OTTER score + phenotype (for downstream plotting / replication)
+Replaces the ±1 s.d. threshold with a continuous coordinate. The contrast
+between the human hyper and hypo coupling maps gives a per-region weight, and a
+subject's position on the axis is the weighted sum of their z-scored regional
+global connectivity. The script compares the axis against the discrete labels
+from `05`, compares cases with controls, and correlates the axis with symptom
+severity.
 
-## Expected outcome (priors)
+Same prerequisites as `05`. Writes `outputs/logs/abide_continuous_subtype.json`.
 
-If OTTER's translation is biologically meaningful:
-- ASD score mean should differ from control (Mann-Whitney p < 0.05; Cliff's δ ≠ 0).
-- Within-ASD GMM should marginally prefer 2-component fit (BIC verdict).
+```bash
+PYTHONPATH=src python experiments/autism_subtypes/abide_subtype/06_continuous_subtype_score.py --abide-data-dir /path/to/abide_cache
+```
 
-If neither: OTTER's translation captures cross-species pattern at the network-aggregate level (Test 2c) but not at the subject-resolution noise level, useful information either way for the manuscript.
+### `plot_abide.py`
 
-## Caveats
+Reads the two outputs of `abide_subtype_prediction.py` and writes
+`outputs/figures/autism_subtypes_abide.png`.
 
-- **Coarse FC perturbation metric.** We use mean-abs-FC-per-parcel as the subject perturbation feature; Pagani uses a more sophisticated per-cell vs-control contrast. Our coarser version may underestimate true effects.
-- **Parcellation translation.** CC400 → OTTER nearest-centroid mapping introduces error. A volume-weighted mapping would be more rigorous (~1 day to implement properly).
-- **Site / age regression.** We site-match controls but don't formally regress out age, sex, motion. Standard ABIDE analyses do; this is a screening test.
+## Options
 
-If results look promising (Cliff's δ > 0.1, p < 0.05) the natural next iteration is to harden these three caveats.
+`--abide-data-dir` sets the nilearn cache directory and defaults to
+`~/abide_cache`. `--pipeline` selects the preprocessing pipeline and defaults to
+`cpac`. `--n-subjects`, in `abide_subtype_prediction.py`, caps the number of
+subjects loaded.
 
-## What OTTER contributes
+## Limitations
 
-The OTTER score is **the only feature in this pipeline derived from mouse data**. Every other feature is human-only (ABIDE FC, Craddock parcellation). If OTTER's translation of mouse subtype patterns generates a feature that classifies human ASD vs controls, that's a direct demonstration that the cross-species mouse model literature carries clinically-relevant signal, operationalized through OTTER's π rather than through the name-based bridge Pagani uses.
+The per-subject perturbation feature is a mean absolute connectivity per parcel,
+coarser than the per-cell contrast against controls used by Pagani. The AAL to
+OTTER alignment is by nearest centroid, where a volume-weighted assignment would
+be more accurate. Controls are matched by site, and age, sex and head motion are
+not regressed out.

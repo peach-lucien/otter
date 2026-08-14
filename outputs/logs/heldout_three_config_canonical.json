@@ -453,5 +453,5 @@
     "argmax_match": 0.9973175965665236,
     "entrywise_r": 0.99815017951787
   },
-  "_consumers": "manuscript/figures/fig2/make_fig2c_heldout_delta.py (Fig. 2c); Extended Data Fig. 4 panels b and c"
+  "_consumers": "notebooks/; experiments/section2_supervision/06_regret.py"
 }

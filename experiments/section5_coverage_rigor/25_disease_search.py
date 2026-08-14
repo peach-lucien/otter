@@ -1,8 +1,9 @@
 """Search for a robust disease link on the PRINCIPLED (reconstruction) coverage.
 
-Tests reconstruction-fidelity coverage (FC, and FC+SC combined) on the canonical (soft) and
+Tests reconstruction-accuracy coverage (FC, and FC+SC combined) on the canonical (soft) and
 canonical_sharp couplings, against all 6 ENIGMA disorders + transdiagnostic, DK region level,
-Spearman + spin null + FDR. If nothing robust clears, §6 has no defensible home on the new metric.
+Spearman + spin null + FDR. If nothing robust clears, the disorder-reachability claim has no
+defensible home on the new metric.
 
 Run under: PYTHONPATH=/var/tmp/pylib:...:src ABAGEN_DATA=/var/tmp/abagen HOME=/var/tmp
 Writes outputs/logs/section6_disease_search.json

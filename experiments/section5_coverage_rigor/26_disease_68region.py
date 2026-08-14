@@ -1,4 +1,4 @@
-"""Section 6 redone at correct resolution + valid spin geometry.
+"""Disorder reachability redone at correct resolution + valid spin geometry.
 
 BUG in the DK analysis: abagen DK labels are identical L/R (e.g. 'bankssts' = id 1 AND id 35), so
 grouping by label pools BOTH hemispheres into 34 bilateral regions, and each region's centroid

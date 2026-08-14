@@ -20,7 +20,6 @@ experiments/
 ├── enigma_cross_disorder/          # ENIGMA cross-disorder spatial validation
 ├── whitesell_2021_dmn/             # Whitesell 2021 DMN refinement note
 ├── pagani_2026_per_model/          # Per-mouse-model exploratory translation
-├── archive/                        # Older detours superseded by the current pipeline
 └── outputs/                        # Cached intermediate results from these runs
 ```
 
@@ -38,6 +37,3 @@ Three ablations that justify production design choices (soft anchors, uniform ma
 
 Each `<paper>_*/` subdirectory takes a published cross-species paper and tests whether OTTER's π reproduces or refines its findings. Outputs are consumed by the notebooks in `notebooks/` and are the source of the numbers in `docs/03_results.md`.
 
-## archive/, older detours
-
-Stepping-stone experiments from earlier iterations. Kept for reproducibility but not part of the current narrative. See `docs/archive/iteration_log.md` for context.

@@ -33,7 +33,7 @@ piriform → human piriform directly. The AON entry is included because the
 anatomy is clean and both species have a well-defined AON region in our
 atlases, it's a small but cheap supplementary constraint.
 
-Same caveat as the other packs (see docs/archive/iteration_log.md §5.12.2 and §5.13):
+Same caveat as the other packs:
 the mouse Piriform set used here is identical to Beauchamp's validation
 set, so any improvement on the Beauchamp Piriform pair is partly
 tautological. The pack's value is *practical* (OTTER queries for olfactory

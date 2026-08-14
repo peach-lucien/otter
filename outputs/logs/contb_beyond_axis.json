@@ -1,0 +1,76 @@
+{
+ "pi_file": "outputs/coupling/pi_canonical.npy",
+ "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+ "n_parcels": 1824,
+ "n_spin": 2000,
+ "network_ordering_vs_axis_rho": -0.591,
+ "contb_gap_raw_sd": -0.614,
+ "contb_gap_axis_removed_sd": -0.197,
+ "contb_gap_axis_removed_spin_p": 0.2619,
+ "network_means": {
+  "ContA": {
+   "accuracy": 0.3814,
+   "axis": 0.525
+  },
+  "ContB": {
+   "accuracy": 0.3646,
+   "axis": 1.229
+  },
+  "ContC": {
+   "accuracy": 0.4883,
+   "axis": -0.374
+  },
+  "DefaultA": {
+   "accuracy": 0.4316,
+   "axis": 1.088
+  },
+  "DefaultB": {
+   "accuracy": 0.4143,
+   "axis": 1.208
+  },
+  "DefaultC": {
+   "accuracy": 0.4308,
+   "axis": -0.101
+  },
+  "DorsAttnA": {
+   "accuracy": 0.4897,
+   "axis": -0.415
+  },
+  "DorsAttnB": {
+   "accuracy": 0.4081,
+   "axis": -0.277
+  },
+  "Limbic": {
+   "accuracy": 0.3988,
+   "axis": 0.598
+  },
+  "SalVentAttnA": {
+   "accuracy": 0.3867,
+   "axis": 0.098
+  },
+  "SalVentAttnB": {
+   "accuracy": 0.406,
+   "axis": 1.016
+  },
+  "SomMotA": {
+   "accuracy": 0.4014,
+   "axis": -1.266
+  },
+  "SomMotB": {
+   "accuracy": 0.5207,
+   "axis": -0.669
+  },
+  "TempPar": {
+   "accuracy": 0.4108,
+   "axis": 0.411
+  },
+  "VisCent": {
+   "accuracy": 0.6121,
+   "axis": -1.09
+  },
+  "VisPeri": {
+   "accuracy": 0.5678,
+   "axis": -1.316
+  }
+ }
+}

@@ -1,4 +1,4 @@
-"""§5: comprehensive, MASS-NORMALISED catalogue of unmapped human territory.
+"""MASS-NORMALISED catalogue of unmapped human territory.
 
 The `uncovered_by_region.json` table ranks regions by the FRACTION of their parcels
 below a coverage threshold. That metric is confounded by parcel count / relative size:

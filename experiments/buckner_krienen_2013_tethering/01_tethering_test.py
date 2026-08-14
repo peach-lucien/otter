@@ -57,7 +57,7 @@ def main():
 
     # sensorimotor → association axis: HCP T1w/T2w myelin per Schaefer region
     myelin_reg = {}
-    with open(DATA / "fulcher_2019_gradients/human_myelinmap_schaefer400_OTTERorder.csv") as f:
+    with open(DATA / "fulcher_2019_gradients/human_myelinmap_schaefer400_HOMERorder.csv") as f:
         for row in csv.DictReader(f):
             myelin_reg[int(row["otter_region_id"])] = float(row["t1t2_myelin"])
     myelin = np.array([myelin_reg.get(r, np.nan) for r in node_region])

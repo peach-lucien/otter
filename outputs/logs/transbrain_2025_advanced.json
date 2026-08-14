@@ -89,7 +89,7 @@
  },
  "_removed_2026_07_20": {
   "what": "cycle_consistency",
-  "why": "scored TransBrain on a different region set than OTTER; the manuscript and Fig 4b use transbrain_roundtrip_maps.json, which scores both methods on the same 52 mouse regions. The two disagreed on AI_opto (0.908 here vs 0.821 matched), and this block was the wrong one.",
+  "why": "scored TransBrain on a different region set than OTTER; the reported comparison uses transbrain_roundtrip_maps.json, which scores both methods on the same 52 mouse regions. The two disagreed on AI_opto (0.908 here vs 0.821 matched), and this block was the wrong one.",
   "use_instead": "outputs/logs/transbrain_roundtrip_maps.json",
   "removed_values": {
    "gradient": {

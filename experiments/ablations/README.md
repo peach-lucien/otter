@@ -1,6 +1,6 @@
 # Ablations
 
-Three ablation experiments that motivated production design choices in OTTER. All three converged to the same direction: **the production configuration (soft anchors, uniform mouse marginal, area-level xyz weighting) outperforms variants**. Documented here for provenance; see `docs/archive/iteration_log.md` for the full discussion of each.
+Three ablation experiments that motivated production design choices in OTTER. All three converged to the same direction: **the production configuration (soft anchors, uniform mouse marginal, area-level xyz weighting) outperforms variants**. Documented here for provenance.
 
 ## Files
 
@@ -18,4 +18,4 @@ PYTHONPATH=src python experiments/ablations/marginal_weighting.py
 PYTHONPATH=src python experiments/ablations/per_region_xyz.py
 ```
 
-Results are written to `outputs/logs/`. See `docs/archive/iteration_log.md` §5.6 (SOFT-1), §5.7 (WEIGHT-1), §5.11 (TOPO-1) for context.
+Results are written to `outputs/logs/`.

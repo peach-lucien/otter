@@ -5,8 +5,7 @@ Fits the model six times, adding one source of information at a time, and scores
 the 19 held-out Beauchamp region correspondences. The relational term on the two connectomes is
 scored alone, then extended by the anchor-warped spatial scaffold, then the Garin point anchors, then
 the curated region packs, which gives the production coupling. Two further arms drop the connectivity
-term entirely, to separate what connectivity contributes from what position contributes. Results
-section 2 and Figure 2a; Extended Data Fig. 3 uses the alpha=0 arms.
+term entirely, to separate what connectivity contributes from what position contributes.
 
 Each arm's coupling is written to outputs/coupling/pi_ladder_<arm>.npy, because
 03_downstream_by_arm.py and 04_gradient_components.py score the same arms on downstream measures and
@@ -39,7 +38,7 @@ OUT = ROOT / "outputs" / "logs" / "out_a1_ladder.json"
 COUPLINGS = ROOT / "outputs" / "coupling"
 METRICS = ("auroc", "top1", "mass_in_region", "centroid_disp_mm")
 
-# The rungs, in the order Figure 2a plots them. Names are the keys used by the downstream scripts.
+# The rungs, in plotting order. Names are the keys used by the downstream scripts.
 ARMS: dict[str, dict] = {
     "1_connectivity_only":         dict(alpha=0.5, xyz_weight=0.0,  garin=False, packs=False),
     "2_+spatial":                  dict(alpha=0.5, xyz_weight=0.25, garin=False, packs=False),
@@ -93,7 +92,7 @@ def main() -> int:
 
     # Region-level AUROC falls slightly across the last two rungs while parcel-exact recovery rises.
     # Several packs subdivide a Beauchamp region into sub-targets outside its broad validation ball,
-    # so the anatomy sharpens while the benchmark metric stays coarse. Figure 2a's caption says this.
+    # so the anatomy sharpens while the benchmark metric stays coarse.
     if {"3_+anchors", "4_+packs_CANONICAL"} <= set(out):
         d_auroc = out["4_+packs_CANONICAL"]["auroc"] - out["3_+anchors"]["auroc"]
         d_top1 = out["4_+packs_CANONICAL"]["top1"] - out["3_+anchors"]["top1"]

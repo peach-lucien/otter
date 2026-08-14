@@ -48,7 +48,7 @@
     "spearman_partial_hierarchy": 0.2009852216748768
   },
   "_meta": {
-    "coverage": "reconstruction-fidelity (mean per-parcel FC recon r) on pi_canonical",
+    "coverage": "reconstruction-accuracy (mean per-parcel FC recon r) on pi_canonical",
     "atlas": "Desikan-Killiany (abagen)",
     "n_spin": 2000
   },

@@ -142,9 +142,8 @@ class MultimodalFGW(SupervisedFGW):
                # tested its primary motivating use-case, zeroing xyz for
                # topology-inverted regions (Motor / Tectum / Piriform), and
                # found per-row weighting cannot reproduce the global xyz
-               # effect (the FGW equilibrium is non-local). See docs/archive/iteration_log.md
-               # §5.11 for the convergent negative. Pass None (default) for
-               # the uniform scalar behaviour.
+               # effect (the FGW equilibrium is non-local). Pass None
+               # (default) for the uniform scalar behaviour.
                xyz_weight_per_mouse_parcel: Optional[np.ndarray] = None,
                **kw):
         idx_m = get_anchor_index(mouse_ad.var)

@@ -4,7 +4,7 @@
 Tests whether the coupling depends on the particular subjects it was fitted on. Each species cohort
 is split in two, connectivity is averaged within each half, and the full model is refitted on each
 half in turn. Recovery on the held-out Beauchamp benchmark and agreement between the two couplings
-are reported. Results section 1.
+are reported.
 
 Structural connectivity, the spatial warp and the curation are held fixed across arms, so the only
 thing that varies is which subjects contributed to functional connectivity.

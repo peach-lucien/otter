@@ -1,6 +1,6 @@
 # End-to-end replication pipeline
 
-How to reproduce the headline results from a clean checkout. Every step is
+Reproduction of the headline results from a clean checkout. Every step is
 idempotent and saves to `outputs/`.
 
 ## 0. Environment
@@ -23,7 +23,7 @@ PYTHONPATH=src python pipeline/00_external/04_human_genes.py
 PYTHONPATH=src python pipeline/00_external/05_orthologs.py
 ```
 
-You'll need `~3 GB` of disk in `data_external/`. See
+`~3 GB` of disk is required in `data_external/`. See
 [`pipeline/00_external/README.md`](../pipeline/00_external/README.md) for
 details on each dataset.
 
@@ -62,8 +62,8 @@ PYTHONPATH=src python pipeline/04_solve_production.py --multistart       # 5-ini
 ```
 
 Saves:
-- `outputs/coupling/pi_fc_plus_SC.npy`, point-anchor coupling (1864 × 2094), retired 2026-07.
-  `pi_canonical.npy` is the coupling the paper uses; `load_pi()` returns it
+- `outputs/coupling/pi_fc_plus_SC.npy`, point-anchor coupling (1864 × 2094), retired.
+  `pi_canonical.npy` is the canonical coupling; `load_pi()` returns it
 - `outputs/coupling/pi_fc_plus_SC.json`, config + fit info sidecar
 
 ## 5. Evaluate
@@ -118,11 +118,11 @@ PYTHONPATH=src python pipeline/08_build_gui.py --publish    # region-first explo
 ```
 
 `08a` writes `outputs/coupling/trust_multisource_canonical.npz` (the evidence
-map the GUI and `notebooks/fig1_coupling.ipynb` read); `08_build_gui.py` builds
+map the GUI and `notebooks/03_coupling.ipynb` read); `08_build_gui.py` builds
 `outputs/gui/index.html` and, with `--publish`, copies it to `docs/index.html`
 for GitHub Pages.
 
-## One-shot: reproduce the recommended model
+## Single-command reproduction
 
 `pipeline/run_recommended_model.py` chains solve → compose packs → bootstrap →
 multi-source trust → GUI in the correct order:
@@ -132,7 +132,7 @@ PYTHONPATH=src python pipeline/run_recommended_model.py              # full run
 PYTHONPATH=src python pipeline/run_recommended_model.py --start-from trust   # reuse fits, refresh trust + GUI
 ```
 
-## Headline numbers you should see
+## Expected headline numbers
 
 After running steps 1–7 end-to-end on the original cohort:
 

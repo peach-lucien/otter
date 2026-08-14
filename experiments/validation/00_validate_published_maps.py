@@ -18,7 +18,7 @@ minimum correlation. If a map drifts, this fails before any figure or number doe
 
 Also records the Fulcher structural-translation test under the null the repo's own
 nulls.py designates as correct for TRANSLATION claims (null B: spin the mouse input and
-route it through the real pi), so that all of section 3's claims are judged by one
+route it through the real pi), so that all translation claims are judged by one
 standard.
 
 Requires: neuromaps.

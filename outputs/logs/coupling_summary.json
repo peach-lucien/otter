@@ -8,7 +8,7 @@
     "mean": 0.35604795187246113,
     "fraction_above_0.5": 0.20118025751072963
   },
-  "spatial_fidelity": {
+  "spatial_accuracy": {
     "pearson_r": 0.5340437498381436,
     "n_parcels": 1864,
     "permuted_null_mean": -0.0008574573469479013,

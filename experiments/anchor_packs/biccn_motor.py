@@ -21,7 +21,7 @@ This experiment adds the two BICCN-aligned region anchors:
               ↔  human PMd (parcels within 12 mm of MNI ±28,-5,62)
 
 Soft constraint (lam_outside=0.15 default) so the anchors push without
-forbidding alternatives, see docs/archive/iteration_log.md §5.6.0a.
+forbidding alternatives.
 
 Outputs:
   - outputs/coupling/pi_fc_plus_SC_with_biccn_motor.npy

@@ -87,3 +87,29 @@ outputs/logs/abide_per_subject_scores.csv
 
 # resume state for experiments/section2_supervision/05_heldout_three_config.py
 outputs/logs/.05_heldout_progress.json
+
+# Local authoring tools and drafts. Kept out of the release: these serve the write-up
+# rather than reproducing an analysis.
+tools/check_manuscript_numbers.py
+tools/check_prose_style.py
+tools/patch_readme.py
+tools/audit_pi.py
+experiments/REVIEW_ROUND.md
+experiments/reverse_translation/SECTION_DRAFT.md
+
+# Output of the local pi-audit tool, which scans paths outside this repository.
+outputs/audit/
+
+# Development history: iteration log, pre-pack diagnostics, superseded summaries.
+# Kept locally, not part of the release.
+docs/archive/
+
+# Correspondence and dated internal validation notes.
+experiments/**/email_draft_*.md
+experiments/**/DATA_VALIDATION_*.md
+
+# ABIDE-derived results. The data are redistributable only from the 1000 Functional
+# Connectomes Project after registration, so only the analysis scripts are released.
+outputs/logs/abide_*
+outputs/logs/out_abide_*
+outputs/logs/autism_subtypes_abide.json

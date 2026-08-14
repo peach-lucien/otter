@@ -47,7 +47,7 @@ CONVERGENCE (reverse view, reported not gated)
     same mouse structure. We report, for each split, whether the top-2 human targets
     name this mouse structure as their dominant mouse origin (column-normalised pi).
 
-Run (needs transbrain for the Brainnetome atlas, as in the Fig. 4 dumps):
+Run (needs transbrain for the Brainnetome atlas):
     cd otter && PYTHONPATH=src python experiments/one_to_many/01_diagnostic.py
 Read-only; writes outputs/logs/one_to_many_diagnostic.json (pi-provenance stamped).
 """

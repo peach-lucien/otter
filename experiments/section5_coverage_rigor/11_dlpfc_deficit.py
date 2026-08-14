@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Section 5, rebuilt around the actual finding: a discrete dlPFC coverage hole.
+"""The coverage result, rebuilt around a discrete dlPFC coverage hole.
 
-The retired §5 claimed a smooth sensorimotor->association coverage GRADIENT. It is not a
+The retired analysis claimed a smooth sensorimotor->association coverage GRADIENT. It is not a
 gradient. Coverage is roughly flat across cortex (every myelin decile within +-0.25 SD) with
 one exception: Yeo-17 network Control B = dorsolateral / rostrolateral prefrontal cortex, which
 is under-covered by ~1.2 SD. See otter-section5-dlpfc memory and 08_anchorfree_control.py for
@@ -22,7 +22,7 @@ This script establishes four things, and writes one log:
 
 NOTE ON COUPLINGS: canonical (-1.03 SD) is the reported arm. The retired pre-warp coupling
 "production" gave -1.20 SD; the conclusion is unchanged in direction and significance, only the
-magnitude moves. This is the one §5 result that survived the canonical repoint — the
+magnitude moves. This is the one coverage result that survived the canonical repoint. The
 medial->lateral gradient (script 12) and the sensorimotor/association tertile gap (script 01)
 did not.
 
@@ -71,7 +71,7 @@ def coverage(pi):
 
 def coverage_recon(pi, Mfc, Hfc):
     """Reconstruction-coverage: how well each human parcel's FC fingerprint is rebuilt by
-    routing mouse FC through pi. This is the metric Figure 5 uses; the log-column-mass
+    routing mouse FC through pi. This is the reported metric; the log-column-mass
     above is the older, position-confounded one, kept for comparison."""
     pit = pi / np.maximum(pi.sum(0), 1e-300)
     pred = pit.T @ Mfc @ pit
@@ -217,7 +217,7 @@ def main():
         "transcriptomic_similarity_recon_support": block_gap(zr_mol, sel_r, perms3),
         "n_parcels_recon": int(mr.sum()),
         "_metric_note": ("connectivity_coverage is log-column-mass; reconstruction_coverage is "
-                         "the Figure 5 metric. Both are tested against the same ContB block gap."),
+                         "the reported metric. Both are tested against the same ContB block gap."),
         "n_parcels": int(mm.sum()),
         "_reading": ("Coverage dips in Control B; transcriptomic similarity does not. The dlPFC "
                      "territory is molecularly mouse-like but connectionally unreachable."),

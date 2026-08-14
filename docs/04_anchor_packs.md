@@ -4,17 +4,17 @@ A **pack** is a small, self-contained Python module that builds one or more cros
 
 Packs are modular. Compose any subset, drop any subset. Default packs are layered together into the canonical coupling `outputs/coupling/pi_canonical.npy`, which also applies the anchor-warped spatial cost. The recipe below omits that warp and reproduces the retired pre-warp coupling; use `load_pi()` for the canonical one.
 
-## Philosophy
+## Pack construction
 
-Each pack reflects a **single published cross-species correspondence**. The mouse-side set comes from the DSURQE atlas overlay; the human-side set comes from canonical MNI cytoarchitectural centroids (Mai/Paxinos, Glasser HCP-MMP360, or atlas-specific references).
+Each pack reflects a single published cross-species correspondence. The mouse-side set comes from the DSURQE atlas overlay; the human-side set comes from canonical MNI cytoarchitectural centroids (Mai/Paxinos, Glasser HCP-MMP360, or atlas-specific references).
 
-This is *not* a generative method, packs encode what's already known about anatomy, not what OTTER discovered. The FGW solver then propagates the constraints through FC + SC structure to fill in the unanchored ~80 % of parcels.
+Packs encode published anatomy rather than model output. The FGW solver then propagates the constraints through FC + SC structure to fill in the unanchored ~80 % of parcels.
 
 ## Pid registry
 
-All citations have been verified against the literature (Consensus search, May 2026). Citation count + journal links provided per pack data sheet below.
+Citation counts and journal links are given in the pack data sheets below.
 
-The **"In recommended π?"** column is authoritative against `src/otter/data/anchor_packs/registry.py`, the single source of truth for which packs are composed into the canonical coupling. **All 15 packs are in the recommended composition** (26 region-anchor entries): a multi-benchmark comparison showed the full set wins the TransBrain region-level homology benchmark decisively and ties for best on Beauchamp. A few packs carry a Beauchamp-metric trade-off (flagged in their data sheets below); they are kept because the broader evidence favours inclusion.
+The "In recommended π?" column follows `src/otter/data/anchor_packs/registry.py`, which determines which packs are composed into the canonical coupling. All 15 packs are in the recommended composition (26 region-anchor entries). A multi-benchmark comparison put the full set first on the TransBrain region-level homology benchmark and level with the best on Beauchamp. A few packs carry a Beauchamp-metric trade-off, flagged in their data sheets below, and are kept because the broader evidence favours inclusion.
 
 | pid range | Pack | In recommended π? | Primary reference |
 |---|---|---|---|
@@ -67,7 +67,7 @@ The **"In recommended π?"** column is authoritative against `src/otter/data/anc
 - **pid 34**: Mouse Piriform area (47 parcels) ↔ Human Piriform cortex at MNI(±25, 5, −20) r=10 mm (13 parcels)
 - **pid 35**: Mouse Anterior olfactory nucleus (9 parcels) ↔ Human AON at MNI(±15, 25, −15) r=10 mm (6 parcels)
 - **Lifts**: Beauchamp Piriform 0 → 100 %
-- **Off-target**: None, cleanest pack
+- **Off-target**: None detected.
 - **Composition caveat**: shares 2 human parcels (L/R Olfactory cortex) with the amygdala pack, see amygdala below.
 
 ### cingulate, pids 36, 37 (in recommended π; Beauchamp trade-off)
@@ -224,15 +224,15 @@ model.fit(M, H, Cm_SC=costs["Cm_SC"], Ch_SC=costs["Ch_SC"],
 np.save("outputs/coupling/pi_fc_plus_SC_with_all_packs.npy", model.pi)
 ```
 
-To add a pack to the recommended composition, flip its `default` flag in the
-registry, every consumer (compose script, GUI, trust step) picks it up.
+To add a pack to the recommended composition, set its `default` flag in the
+registry; every consumer (compose script, GUI, trust step) picks it up.
 
 Run end-to-end via `experiments/anchor_packs/compose_all.py`, or the whole
 recommended-model pipeline via `pipeline/run_recommended_model.py`. The
 non-default packs above remain available, compose them explicitly (or run
 `experiments/anchor_packs/<pack>.py`) for ablations and targeted queries.
 
-## Tuning the soft constraint
+## Soft-constraint strength
 
 Each region anchor uses `lam_outside=0.15` (soft) by default. To override:
 
@@ -240,24 +240,19 @@ Each region anchor uses `lam_outside=0.15` (soft) by default. To override:
 model.fit(..., region_anchors=entries, region_lam_outside=1.0)  # hard 0/1 wall
 ```
 
-The soft default gives the same argmax as hard, with better-calibrated probability tails, see [archive/iteration_log.md §5.6.0a](archive/iteration_log.md).
+The soft default gives the same argmax as the hard variant, with better-calibrated probability tails.
 
-## Working around the DSURQE granularity limit
+## Structures without DSURQE labels
 
-**The problem**: DSURQE doesn't expose some well-conserved cross-species structures as labels (habenula, locus coeruleus, substantia nigra, VTA, claustrum, raphe nuclei). For each, we know the cross-species homology is real and published (Aizawa 2011 habenula; Manger 2021 LC; Krashia 2017 SN/VTA; Smith 2018 claustrum), but we can't get a mouse-side parcel set via DSURQE label lookup.
+DSURQE does not expose some well-conserved cross-species structures as labels (habenula, locus coeruleus, substantia nigra, VTA, claustrum, raphe nuclei). For each, the cross-species homology is published (Aizawa 2011 habenula; Manger 2021 LC; Krashia 2017 SN/VTA; Smith 2018 claustrum), but no mouse-side parcel set is reachable by DSURQE label lookup.
 
-**The workaround**: ``otter.data.anchor_packs._dsurqe.mouse_parcels_in_mouse_sphere``, symmetric to the human-side helper. Pass a centroid in M_var coords + radius; get back the mouse parcels in that vicinity. Lets you build packs without going through DSURQE labels.
+``otter.data.anchor_packs._dsurqe.mouse_parcels_in_mouse_sphere`` is symmetric to the human-side helper. Given a centroid in M_var coords and a radius, it returns the mouse parcels in that vicinity, so packs can be built without DSURQE labels.
 
-**What it does and doesn't deliver**:
+The helper works for medium-sized structures (claustrum, SN region) at r ≈ 0.5−1.0 mm. Anatomical specificity is lost, since the captured parcels lie in the right spatial neighbourhood but are not labelled as the target structure. For very small structures (habenula ~0.5 mm³, LC ~0.1 mm³) at the 200μm parcel resolution, even tight balls (r=0.3-0.5) capture neighbouring thalamic and midbrain parcels rather than the structure proper. No Beauchamp validation pair exists for any of these structures, so empirical assessment is not possible.
 
-- **Mechanically works** for medium-sized structures (claustrum, SN region) at r ≈ 0.5−1.0 mm.
-- **Anatomical specificity is lost**, the captured parcels are in the right spatial neighbourhood but not labelled as the target structure. We're trusting coordinates rather than verified labels.
-- **Very small structures** (habenula ~0.5 mm³, LC ~0.1 mm³) at our 200μm parcel resolution. Even tight balls (r=0.3-0.5) capture neighbouring thalamic/midbrain parcels rather than the structure proper.
-- **No Beauchamp validation pair** for any of these structures, so empirical assessment isn't possible.
+A Habenula or LC pack would require external verification, for example comparing the captured parcels' gene expression against habenular and LC-specific markers from Allen ISH data, or against Yao 2023 cell-type composition. No pack of this kind ships by default.
 
-**Conclusion**: the workaround is real infrastructure but **not yet a recipe we trust enough to ship as default packs**. Building a Habenula or LC pack would require external verification (e.g. comparing captured parcels' gene expression against habenular/LC-specific markers from Allen ISH data, or against Yao 2023 cell-type composition). That's a larger curation effort, left as a deliberate future-work item.
-
-## Roadmap, remaining candidate packs
+## Candidate packs
 
 The recommended composition is all 15 packs / 26 region-anchor entries (pids 30−61). Remaining candidates with strong literature support but not yet implemented:
 
@@ -271,8 +266,8 @@ The recommended composition is all 15 packs / 26 region-anchor entries (pids 30�
 | **Primate Insular subdivisions** | Evrard 2019 | DSURQE doesn't expose insular sub-divisions; **not feasible** at current parcellation | |
 | **Whole-brain cell-type homology** | Yao 2023, *Nature*; Siletti 2023, *Science* | Different kind of pack, needs ABCA pipeline integration | (separate module) |
 
-For brainstem/midbrain nuclei (LC, habenula, SN, VTA, claustrum), the verification step before shipping is to cross-check that the spatially-selected mouse parcels actually express markers of that structure (Allen ISH or Yao 2023 cell-type composition). Without that, we'd be shipping packs whose anatomical specificity is asserted but not verified.
+For brainstem and midbrain nuclei (LC, habenula, SN, VTA, claustrum), the verification step before shipping is to cross-check that the spatially selected mouse parcels express markers of that structure (Allen ISH or Yao 2023 cell-type composition).
 
-## Adding a new pack
+## New packs
 
 See [06_extending.md](06_extending.md) for the recipe. Pattern: pick a pid range ≥ 47 (so it doesn't clash with existing packs), drop a new module into `src/otter/data/anchor_packs/`, expose `build_<name>_region_anchors(M_var, H_var)`, add an integration test.

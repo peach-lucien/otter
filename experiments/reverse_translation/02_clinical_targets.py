@@ -12,7 +12,7 @@ model this in a mouse". The expected contrast:
       but existing homolog;
   a primate-elaborated target (dorsolateral PFC, the antidepressant TMS site) -> diffuse, low
       confidence, no adequate mouse home -- consistent with the dlPFC connectional
-      reorganisation reported in Section 5.
+      reorganisation reported in `docs/03_results.md`.
 
 The human target is defined as the K human parcels nearest the published MNI coordinate; the
 reverse operator is row-normalised pi (human -> mouse), aggregated to mouse structures.

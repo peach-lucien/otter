@@ -15,7 +15,7 @@
   },
   "self_mass_homology_diagonal": 0.408,
   "self_mass_uniform": 0.048,
-  "spatial_fidelity_r": 0.53,
+  "spatial_accuracy_r": 0.53,
   "beauchamp_parcel_top1": 0.567,
   "region_level_top1": {
     "anchor_overlapping": 0.747,

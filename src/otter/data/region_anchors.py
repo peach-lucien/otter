@@ -12,7 +12,7 @@ Why region anchors:
     preprocessing does) loses the within-region structure: every
     sub-parcel of motor cortex is forced to map to a single human anchor
     that's the centroid of motor + premotor + FEF + ... ~14mm anterior of
-    canonical M1 (see `docs/archive/diagnostics.md`).
+    canonical M1.
   - With a region anchor instead, each mouse motor sub-parcel is free to
     map to any human precentral parcel, letting the FC/SC structure pick
     the right one within the supervised set.

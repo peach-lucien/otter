@@ -1,19 +1,17 @@
 
-"""Persist every headline statistic in section 1 so the method's own numbers are checkable.
+"""Persist every headline coupling statistic so the method's own numbers are checkable.
 
 WHY THIS EXISTS
 ---------------
-tools/check_manuscript_numbers.py reports that section 1 contains 39 numbers and NOT ONE of
-them traces to an output file: the Fig 1 caption cites "notebooks 01 and 02", and those
-notebooks never wrote a JSON. The method section -- the part a reviewer will scrutinise
-hardest -- was the least verifiable part of the paper.
+The coupling summary numbers used to be quoted from notebooks that never wrote a JSON, so none
+of them traced to an output file.
 
-That is not hypothetical. The evidence-tier percentages in section 1 (32/24/12/12/21) are
-STALE: they predate the 2026-07-08 regrade and disagree with evidence_tiers_v2.json
-(31/22/13/14/21). They also sum to 101 %, which is the tell.
+That is not hypothetical. The earlier evidence-tier percentages (32/24/12/12/21) are STALE.
+They predate the 2026-07-08 regrade and disagree with evidence_tiers_v2.json (31/22/13/14/21).
+They also sum to 101 %, which is the tell.
 
-This script recomputes section 1's coupling claims directly from the canonical pi and
-writes them to a JSON so every number can be verified.
+This script recomputes the coupling claims directly from the canonical pi and writes them to a
+JSON so every number can be verified.
 
 Run: cd otter && PYTHONPATH=src python experiments/coupling_summary/01_dump_coupling_stats.py
 Writes outputs/logs/coupling_summary.json
@@ -62,13 +60,11 @@ def main():
     }
 
     # --- self-correspondence: NOT computed here, deliberately -----------------------
-    # Fig 1e's own script (manuscript/figures/fig1/make_fig1b.py) computes the class-diagonal
-    # mean using _common.coarse_region(), and writes it to fig1_coupling_matrix.json (0.262).
-    # Recomputing it here with a nearest-anchor assignment gave 0.275 -- a different quantity
-    # that would have contradicted the figure. The script that builds a panel owns that
-    # panel's numbers. Do not duplicate them.
+    # The class-diagonal mean is computed with a coarse-region assignment and written to
+    # outputs/logs/fig1_coupling_matrix.json (0.262). Recomputing it here with a nearest-anchor
+    # assignment gave 0.275, which is a different quantity. Do not duplicate it.
 
-    # --- spatial fidelity: mouse parcel distance vs routed human centroid distance --
+    # --- spatial accuracy: mouse parcel distance vs routed human centroid distance --
     w = pi / np.maximum(pi.sum(1, keepdims=True), 1e-300)
     routed = w @ human_xyz                                       # routed human centroid
     rng = np.random.default_rng(SEED)
@@ -80,7 +76,7 @@ def main():
     for _ in range(50):
         rn = w[rng.permutation(n_m)] @ human_xyz
         null.append(float(pearsonr(d_mouse, pdist(rn))[0]))
-    out["spatial_fidelity"] = {
+    out["spatial_accuracy"] = {
         "pearson_r": r_spatial,
         "n_parcels": int(n_m),
         "permuted_null_mean": float(np.mean(null)),
@@ -88,9 +84,9 @@ def main():
     }
 
     # --- evidence tiers + per-tier recovery ----------------------------------------
-    # These lived ONLY in an .npz, so no JSON-based check could see them -- which is how
-    # section 1 came to say "67 % top-1 versus 17 %" and "55 % of the brain" while its own
-    # ED1 caption said 0.69, 0.18 and 52 %. The npz is right; the main text was stale.
+    # These lived ONLY in an .npz, so no JSON-based check could see them, which is how the
+    # summary came to quote "67 % top-1 versus 17 %" and "55 % of the brain" while the values
+    # computed alongside it were 0.69, 0.18 and 52 %. The npz is right; the quoted text was stale.
     tiers = json.loads((ROOT / "outputs/logs/evidence_tiers_v2.json").read_text())
     n_tier = tiers["n"]
     out["evidence_tiers_percent"] = {
@@ -114,9 +110,9 @@ def main():
     print(f"pi {n_m} x {n_h}")
     print(f"  top-target prob: median {out['top_target_probability']['median']:.2f}, "
           f"{out['top_target_probability']['fraction_above_0.5']:.1%} of parcels > 0.5")
-    print("  self-mass: owned by make_fig1b.py -> fig1_coupling_matrix.json (0.262)")
-    print(f"  spatial fidelity r = {r_spatial:.2f} (permuted null "
-          f"{out['spatial_fidelity']['permuted_null_mean']:+.2f})")
+    print("  self-mass: see outputs/logs/fig1_coupling_matrix.json (0.262)")
+    print(f"  spatial accuracy r = {r_spatial:.2f} (permuted null "
+          f"{out['spatial_accuracy']['permuted_null_mean']:+.2f})")
     print(f"  tiers %: {out['evidence_tiers_percent']}")
     print("wrote", OUT)
 

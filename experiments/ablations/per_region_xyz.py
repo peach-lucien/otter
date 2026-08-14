@@ -1,8 +1,8 @@
 """Per-region xyz ablation (TOPO-1) report.
 
 Tests whether the failure of motor/tectum/piriform under production
-(documented in docs/archive/diagnostics.md as spatial-topology inversion) can be
-fixed by zeroing the xyz cost for parcels in those regions.
+(spatial-topology inversion) can be fixed by zeroing the xyz cost for parcels
+in those regions.
 
 Two configurations are fit and compared against production:
   1. ``xyz=0 globally``, xyz cost removed entirely
@@ -51,7 +51,7 @@ LOG  = ROOT / "outputs" / "logs"
 LOG.mkdir(parents=True, exist_ok=True)
 
 
-# Topology-inversion candidates from docs/archive/diagnostics.md
+# Topology-inversion candidates
 XYZ_OFF_PAIR_IDS = {2, 11, 21}    # Motor, Piriform/Olfactory, Tectum
 KEY_PAIRS = [
     ('Hyp',  'Hypothalamus -> hypothalamus'),
@@ -140,7 +140,7 @@ def main():
               f"g={gd:+4.0f}  r={rd:+4.0f}{targ}")
 
     print(f"\n{'-'*75}")
-    print("Conclusion (see docs/archive/iteration_log.md §5.11):")
+    print("Conclusion:")
     print("  - Global xyz=0 is mixed (net negative); xyz helps most regions overall.")
     print("  - Per-region xyz=0 targeting topology-inversion candidates does NOT")
     print("    reproduce the (modest) global gains on those regions. The xyz effect")

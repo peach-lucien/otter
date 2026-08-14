@@ -1,4 +1,4 @@
-"""Generate all data Figure 6 needs: full Yeo-17 network z-profiles for the AI-opto circuit and the
+"""Generate the circuit-translation data: full Yeo-17 network z-profiles for the AI-opto circuit and the
 5 autism-mutation circuits (canonical pi), the AI-opto salience-enrichment permuted-pi null
 distribution, and the OTTER-vs-TransBrain head-to-head numbers.
 

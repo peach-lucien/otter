@@ -5,7 +5,7 @@
   "as_published": {
     "mean_pearson_r": 0.22818848135814734,
     "n_significant": 6,
-    "matches_manuscript_0.23": true
+    "matches_published_0.23": true
   },
   "like_for_like": {
     "mean_pearson_r": 0.07178892204231753,

@@ -1,6 +1,6 @@
 > Refreshed 2026-07-20 for the canonical coupling. The per-region table below is from the
 > earlier pre-warp fit and is kept for the ordering it shows rather than its absolute values;
-> the aggregate figures and Figure 2c come from
+> the aggregate figures come from
 > `outputs/logs/anchor_recovery_loo_combined_canonical.json`.
 
 # Leave-one-region-out generalisation test (full production model)

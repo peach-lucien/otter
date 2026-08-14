@@ -9,7 +9,7 @@ held-out correspondence (its own mouse-set -> its own human-set). No benchmark.
 
 Scored with the full battery (AUROC/top-k/displacement/mass + nulls). Resumable.
 -> outputs/logs/anchor_recovery_loo.json
-Run: cd otter && PYTHONPATH=src python ../manuscript/figures/fig_2_ED/anchor_recovery_loo.py
+Run: cd otter && PYTHONPATH=src python experiments/section2_supervision/anchor_recovery_loo.py
 """
 import sys, json, time, importlib.util
 from pathlib import Path

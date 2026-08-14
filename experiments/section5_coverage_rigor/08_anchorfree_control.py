@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Section 5, rebuilt: coverage on a scale-free footing, with an ANCHOR-FREE control.
+"""Coverage on a scale-free footing, with an ANCHOR-FREE control.
 
 WHY THIS SCRIPT EXISTS
 ----------------------
@@ -17,7 +17,7 @@ association cortex; 53 % of parcels receive negligible mass") does not survive s
     figure moves to 41 % / 58 % under other equally arbitrary thresholds.
 
 3.  The 6.7 log-unit gap therefore lives in the numerical underflow tail. Floored at 1e-6
-    (the paper's own definition of negligible) it is 0.27 log-units, and it no longer clears
+    (the repo's own threshold for negligible mass) it is 0.27 log-units, and it no longer clears
     a spin null. In linear mass, sensorimotor cortex receives only 1.5x association cortex.
 
 WHAT SURVIVES, AND THE CONTROL THAT ESTABLISHES IT

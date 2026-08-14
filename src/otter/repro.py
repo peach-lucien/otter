@@ -1,10 +1,10 @@
 """The production recipe for fitting a OTTER coupling.
 
-Every analysis in the paper starts either from the released coupling or from a coupling refitted
-under some ablation of the production recipe. That recipe was previously written out separately in
-each experiment script and again in the harness used for the review round, so a change had to be
-applied in several places and a notebook could disagree with the script that produced the
-manuscript number. Scripts and notebooks now import the recipe from here instead.
+Every analysis here starts either from the released coupling or from a coupling refitted under
+some ablation of the production recipe. That recipe was previously written out separately in each
+experiment script, so a change had to be applied in several places and a notebook could disagree
+with the script that produced the reported number. Scripts and notebooks now import the recipe
+from here instead.
 
 Typical use::
 
@@ -84,7 +84,6 @@ def anchor_warped_xyz(M, H) -> np.ndarray:
     [0, 1], becomes the spatial term of the cross-species cost.
 
     The warp is fitted to the Garin landmark pairs, so the spatial scaffold is not supervision-free.
-    The Figure 2 caption states this.
     """
     from scipy.interpolate import RBFInterpolator
 
@@ -117,7 +116,7 @@ def fit_coupling(M, H, costs, pack_entries, M_xyz, *,
                  Cm_FC=None, Ch_FC=None, Cm_SC=None, Ch_SC=None) -> np.ndarray:
     """Fit a coupling. Defaults reproduce ``pi_canonical.npy``.
 
-    The four switches are the rungs of the Figure 2a ablation ladder:
+    The four switches are the rungs of the supervision ablation ladder:
 
     ``alpha=0``        drop the connectivity term entirely (space and curation only)
     ``xyz_weight=0``   drop the spatial scaffold (connectivity and curation only)

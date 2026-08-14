@@ -51,7 +51,7 @@ def main():
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
     pi = load_pi().astype(np.float64)   # canonical coupling. Repointed 2026-07-20: this was
-    # hardcoded to the retired pi, so the spin null behind Fig 3a was computed on a
+    # hardcoded to the retired pi, so the spin null was computed on a
     # different coupling than the observed statistic it was compared against.
     mc = M.var[["x", "y", "z"]].to_numpy(float)
     out = {}

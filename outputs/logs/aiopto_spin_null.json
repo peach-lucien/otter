@@ -1,0 +1,26 @@
+{
+ "n_rotations": 1000,
+ "arms": {
+  "canonical (eps 0.05)": {
+   "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+   "median_top1_row_probability": 0.315,
+   "mean_effective_targets": 5.87,
+   "salience_enrichment_vs_all_parcels": 0.8594,
+   "salience_enrichment_vs_cortex_only": 0.8716,
+   "rotated_input_null_mean": -0.0017,
+   "rotated_input_null_p95": 0.6184,
+   "rotated_input_p": 0.003
+  },
+  "sharp (eps 0.005)": {
+   "pi_sha256": "972955cf7d0b795367f486dd278e6cfc1f5c3747a8a93a70d1d9328ec3947ef3",
+   "median_top1_row_probability": 0.9597,
+   "mean_effective_targets": 1.59,
+   "salience_enrichment_vs_all_parcels": 0.9883,
+   "salience_enrichment_vs_cortex_only": 1.0984,
+   "rotated_input_null_mean": -0.006,
+   "rotated_input_null_p95": 0.7265,
+   "rotated_input_p": 0.013
+  }
+ },
+ "argmax_agreement_between_couplings": 0.7269
+}

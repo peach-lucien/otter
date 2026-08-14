@@ -3,7 +3,7 @@
 
 WHY THIS EXISTS
 ---------------
-Section 3 contrasts two numbers:
+Two numbers were contrasted:
 
     individual markers   mean r = 0.23,  6 of 7 significant   (01_layer_marker_validation.py)
     layer contrasts      mean r = 0.07,  3 of 4 non-significant (03_areal_type_reframe.py)
@@ -21,7 +21,7 @@ are not comparable, in two independent ways:
      "6 of 7 significant" and "3 of 4 non-significant" are therefore counts against different and
      non-comparable nulls.
 
-Section 3 also states that spin nulls were used "throughout", which is not true of the per-marker
+The write-up also stated that spin nulls were used "throughout", which is not true of the per-marker
 test as it stands.
 
 This script re-scores the seven markers cortex-only against the translation spin null, so the two
@@ -139,13 +139,13 @@ def main():
     out = {
         "_what": ("The seven Hodge individual layer markers scored two ways: as published "
                   "(whole brain, permuted-pi null) and like-for-like with the layer contrasts of "
-                  "03_areal_type_reframe.py (Schaefer-400 cortex, translation spin null). Section 3 "
-                  "compares the marker mean against the contrast mean; only the like-for-like "
+                  "03_areal_type_reframe.py (Schaefer-400 cortex, translation spin null). The "
+                  "marker mean is compared against the contrast mean; only the like-for-like "
                   "column is comparable to the contrasts."),
         "_compare_against": "outputs/logs/hodge_areal_type_reframe.json (contrasts, cortex + spin)",
         "n_markers": len(rows),
         "as_published": {"mean_pearson_r": float(pub.mean()), "n_significant": n_pub,
-                         "matches_manuscript_0.23": bool(abs(pub.mean() - 0.228) < 0.02)},
+                         "matches_published_0.23": bool(abs(pub.mean() - 0.228) < 0.02)},
         "like_for_like": {"mean_pearson_r": float(lfl.mean()), "n_significant": n_lfl},
         "markers": rows,
         **prov,
@@ -160,7 +160,7 @@ def main():
           f"(cortex, translation spin)")
     print(f"layer contrasts mean r = +0.067   1/4 significant   "
           f"(cortex, translation spin; hodge_areal_type_reframe.json + refined)")
-    print("\nIf the like-for-like marker mean is close to +0.07, section 3's areal-versus-laminar")
+    print("\nIf the like-for-like marker mean is close to +0.07, the areal-versus-laminar")
     print("dissociation is carried by the mask and the null, not by the biology. Read it before")
     print("editing that paragraph.")
     print(f"\nWrote {p}")

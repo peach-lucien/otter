@@ -12,9 +12,9 @@ We want a (1864 × 2094) **soft coupling π** that, for every mouse parcel, give
 a probability distribution over human parcels indicating cross-species
 correspondence.
 
-## Why optimal transport
+## Optimal transport setting
 
-Mapping atlases of different sizes and modalities is a classic OT setup:
+Mapping atlases of different sizes and modalities is an optimal transport problem:
 - The two spaces don't share coordinates (mouse CCFv3 ≠ human MNI152).
 - We have *intrinsic structure* on each side (FC matrix = pairwise relational
   information) but no node-to-node correspondence outside the 42 anchors.
@@ -82,9 +82,8 @@ each region anchor with mouse-set `Mset` and human-set `Hset`:
 `lam_outside = 0.15` is the default ("soft region anchor"). Compared to the
 legacy hard variant (`lam_outside = 1.0`), the soft constraint produces
 better-calibrated probability tails (held-out region CV mean rank ↓ 43 %)
-while leaving the trained-π argmax unchanged, see
-[iteration log §5.6.0a](archive/iteration_log.md)
-for the sweep. Pass `region_lam_outside=1.0` to recover the hard wall.
+while leaving the trained-π argmax unchanged. Pass `region_lam_outside=1.0`
+to recover the hard wall.
 
 ## Modality combinations
 
@@ -112,7 +111,7 @@ Optional terms (off by default in the production config, available as ablations)
 | ε                | 0.05     | Selected by nested CV on held-out Beauchamp homologies. 5e-3 gives a near-deterministic π with no gain in held-out recovery. |
 | `xyz_weight`     | 0.25     | Selected by the same nested CV. Applied in an anchor-warped frame: a thin-plate spline fitted to the 42 Garin coordinate pairs carries mouse coordinates into human space, and the cross-species spatial cost is computed there. |
 | `lam_anchor`     | 1.0      | Point-anchor forbidden-cell penalty; large vs the [0, 1] cost scale |
-| `region_lam_outside` | 0.15 | Region-anchor outside-region penalty (soft default, see archive/iteration_log.md §5.6.0a) |
+| `region_lam_outside` | 0.15 | Region-anchor outside-region penalty (soft default) |
 | `fc_weight`      | 0.7      | Production FC + SC mix                                 |
 | `sc_weight`      | 0.3      | Production FC + SC mix                                 |
 | `cost_normalisation` | "max" | Each cost matrix divided by its max off-diagonal entry |
@@ -140,12 +139,12 @@ Optional terms (off by default in the production config, available as ablations)
 All cost matrices are normalised with `normalise_cost(scheme="max")` before
 combination so weighting parameters are interpretable as relative shares.
 
-## Why semirelaxed (not balanced)
+## Semirelaxed versus balanced formulations
 
 With balanced FGW, the human marginal is fixed at uniform `1/n_h`, forcing the
 solver to assign positive mass to every human node, including human parcels
-that have no clear mouse counterpart. This produces a
-"smeared" π with no clean per-mouse-row interpretation.
+that have no clear mouse counterpart. This produces a smeared π with no
+per-mouse-row interpretation.
 
 Semirelaxed lets the human marginal float, so the coupling can leave human parcels poorly
 reconstructed rather than forcing mass onto them. We report reconstruction accuracy
@@ -153,7 +152,7 @@ reconstructed rather than forcing mass onto them. We report reconstruction accur
 threshold chosen. Each column of π is normalised before the push-forward, so the score reflects
 whether some mouse tissue is wired like the human parcel rather than how much mass that parcel
 received, and §5 of `03_results.md` builds its central measurement on it. Every mouse row keeps
-an interpretable distribution over human nodes, and no correspondence is forced.
+an interpretable distribution over human nodes.
 
 ## Validation pipeline
 

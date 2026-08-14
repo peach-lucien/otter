@@ -23,15 +23,17 @@ would capture unrelated midbrain parcels):
 References (verified Consensus search 2026):
   - Isa, T. et al. (2021). The tectum/superior colliculus as the vertebrate
     solution for spatial sensory integration and action. *Current Biology*
-    31, R741-R762. DOI: 10.1016/j.cub.2021.04.020.
+    31, R741-R762. DOI: 10.1016/j.cub.2021.04.001.
+    (Checked against Crossref 2026-08-09. An earlier version of this docstring
+    gave 10.1016/j.cub.2021.04.020, which is a different Current Biology paper.)
   - Winer, J. A. & Schreiner, C. E. (Eds.) (2005). *The Inferior Colliculus*.
     Springer. ISBN: 978-0-387-22038-1.
 
 Why this targets a documented failure
 -------------------------------------
-``docs/archive/diagnostics.md`` calls out tectum as spatially-inverted between
-species: mouse SC is dorsal whereas human SC is ventral in MNI space, so
-the xyz cross-species cost actively misleads non-anchor tectum parcels.
+Tectum is spatially inverted between species. Mouse SC is dorsal whereas
+human SC is ventral in MNI space, so the xyz cross-species cost actively
+misleads non-anchor tectum parcels.
 The Garin pair_id 21 (Tectum) gives a single point anchor for both
 colliculi combined; sub-region anchors let OTTER target SC↔SC and IC↔IC
 distinctly. Beauchamp validation gives 0 % top-1 for both colliculi under

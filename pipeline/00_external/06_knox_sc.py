@@ -3,10 +3,13 @@ the cortical Garin anchors, falling back to existing summary-structure SC for
 everything else.
 
 The existing `data_external/mouse_sc.npy` is the Allen *summary-structure*
-aggregation (~290 regions for 1864 parcels), which gives only 192 unique SC
+aggregation (~290 regions for 1864 parcels), which gives only 167 unique SC
 fingerprints across the atlas. For example,
 "L_Somatosensory cortex" and "L_Posterior parietal cortex" share an SC
 fingerprint, and "L_Auditory cortex" and "R_Auditory cortex" share one too.
+Augmenting the cortical anchors takes that to 208. Both counts are
+len(np.unique(m, axis=0)) on the saved matrices, rechecked 2026-08-09. An
+earlier version of this docstring said 192, which does not match the file.
 
 Knox 2019's voxel-level model evaluated at the *leaf* cortical structure level
 gives 43 distinct cortical fingerprints. For each Garin anchor mapped to a
@@ -180,8 +183,8 @@ def main():
 
     # How many unique rows now? (compare like-for-like against the existing
     # *cost* matrix Cm_SC, NOT the raw streamline-density matrix mouse_sc.npy
-    # which has only 192 unique rows. The cost-matrix version of the existing
-    # SC has 454 unique rows after sc_correlation_distance + normalise_cost.)
+    # which has only 167 unique rows. The cost-matrix version of the existing
+    # SC has 340 unique rows after sc_correlation_distance + normalise_cost.)
     ann_path = ROOT / "outputs" / "anndata" / "full_costs.npz"
     existing = dict(np.load(ann_path))
     Cm_SC_existing = existing["Cm_SC"]

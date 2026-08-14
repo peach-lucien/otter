@@ -3,10 +3,10 @@
 How to add a new modality, a new species, or a new model class without
 touching the rest of the codebase.
 
-## Add a new modality
+## New modalities
 
-Suppose you want to add a within-species cost matrix from a new modality
-(e.g. dMRI tractography). Three integration points:
+A within-species cost matrix from a new modality (e.g. dMRI tractography)
+has three integration points.
 
 ### 1. A within-species cost function
 
@@ -18,8 +18,8 @@ def tractography_correlation_distance(tract: np.ndarray) -> np.ndarray:
     # ... return symmetric, zero-diagonal, finite (n, n) distance
 ```
 
-Make sure it returns a `(n, n)` symmetric, zero-diagonal, non-negative,
-finite matrix. The tests in `tests/test_costs.py::_is_valid_cost_matrix`
+It must return a `(n, n)` symmetric, zero-diagonal, non-negative, finite
+matrix. The tests in `tests/test_costs.py::_is_valid_cost_matrix`
 encode the contract.
 
 ### 2. A pipeline step to precompute and cache it
@@ -70,30 +70,30 @@ Then re-run `pipeline/05a_anchor_cv.py --configs fc_plus_tract`. The result
 will appear in the comparison table the next time `pipeline/07_build_artefacts.py`
 runs.
 
-## Add a new species
+## New species
 
-Suppose you want to add macaque alongside mouse and human. Most of the codebase
-is species-agnostic, the work is in the data layer.
+Adding macaque alongside mouse and human is a data-layer change. The rest of
+the codebase is species-agnostic.
 
 ### 1. Update the I/O constants
 
 `otter.data.io._MAT_TOPKEY` currently maps `"mouse" → "m"` and `"human" → "h"`.
-Extend it for your new species and the corresponding `corrs_<species>.mat`
+Extend it for the new species and the corresponding `corrs_<species>.mat`
 file under `data_external/`.
 
 ### 2. Anchor definition
 
-The 42 Garin anchors are mouse-human-specific. For a new species pair, you
-need new putative homologue pairs. Two options:
+The 42 Garin anchors are mouse-human-specific. A new species pair needs new
+putative homologue pairs. Two options:
 
 - Hand-curate them and update `otter.data.networks.PAIRID_TO_NETWORK` with
-  your new species' pair labels.
+  the new species' pair labels.
 - Use a published atlas (e.g. for macaque-human, the Markov 2014 hierarchy
   has ~30 well-defined cortical homologues).
 
 ### 3. Model use
 
-Once the data layer accepts your new species, the model classes work
+Once the data layer accepts the new species, the model classes work
 unchanged:
 
 ```python
@@ -104,13 +104,12 @@ H, _ = load_cached("human", cache_dir=...)
 model = MultimodalFGW(use_sc=True).fit(M, H)
 ```
 
-## Add a new region anchor (supplementary supervision)
+## New region anchors (supplementary supervision)
 
-If you want to add a new mouse↔human region pair on top of the 15 atlas-derived
-region anchors, you can either modify a YAML config or build the anchor entries
-programmatically.
+A new mouse↔human region pair on top of the 15 atlas-derived region anchors is
+added either through a YAML config or programmatically.
 
-YAML form (see `config/region_anchors_motor.yaml` for an example):
+YAML form (see `config/supplementary_anchors_motor.yaml` for an example):
 
 ```yaml
 - pair_id: 30        # must be > 21 to avoid clashing with Garin point anchors
@@ -139,13 +138,11 @@ M_cost = apply_region_supervision(M_cost, entries)
 M_cost = apply_region_supervision(M_cost, entries, lam_outside=1.0)
 ```
 
-Region anchors are most useful when the mouse and/or human side is a multi-parcel
-set rather than a single point, and when you trust the *set* of permitted
-partners but don't want to commit to a specific 1-to-1 pairing. See
-[iteration log §5.6.0a](archive/iteration_log.md)
-for the soft-vs-hard tradeoff.
+Region anchors apply when the mouse or human side is a multi-parcel set rather
+than a single point, and when the set of permitted partners is known but a
+specific 1-to-1 pairing is not.
 
-## Add a new model class
+## New model classes
 
 The base class contract is in `otter.models.base.FGWModel`. To add a new
 solver:
@@ -178,12 +175,11 @@ __all__.append("MyNewSolverFGW")
 Test it the same way the other models are tested in `tests/test_models.py`
 (parametrise over the new class).
 
-## Use a custom evaluation metric
+## Custom evaluation metrics
 
 Add a new function to `otter.eval` and re-export from `otter.eval.__init__`.
-Then add it to `pipeline/07_build_artefacts.py` if you want it to appear in
-the headline comparison table.
+Then add it to `pipeline/07_build_artefacts.py` for it to appear in the
+headline comparison table.
 
-The clean library API is built around the assumption that `model.evaluate()`
-returns a dict; downstream code (notebooks, comparison generators) iterates
+The library API assumes `model.evaluate()` returns a dict; downstream code (notebooks, comparison generators) iterates
 over the dict keys generically.

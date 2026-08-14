@@ -1,4 +1,4 @@
-"""Section 6 (translation): route MOUSE autism-model brain phenotypes through the
+"""Translation: route MOUSE autism-model brain phenotypes through the
 canonical coupling into human space, and test whether the translated mouse ASD
 phenotype recovers the HUMAN autism (ENIGMA cortical-thinning) pattern.
 

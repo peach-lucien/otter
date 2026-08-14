@@ -4,8 +4,8 @@ mouse circuit?  (go/no-go for a reverse-translation / experiment-design section)
 
 IDEA
 ----
-OTTER's coupling is bidirectional. Column-normalised it carries mouse -> human
-(Section 6). ROW-normalised it carries human -> mouse: a human map v_h (over the
+OTTER's coupling is bidirectional. Column-normalised it carries mouse -> human.
+ROW-normalised it carries human -> mouse: a human map v_h (over the
 2,094 human parcels) becomes a mouse prediction v_m = rownorm(pi) @ v_h. If OTTER is
 a faithful reverse translator, a human meta-analytic activation map for a function
 (e.g. "reward") should land on the mouse structure the field uses to study it

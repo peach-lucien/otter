@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""The simplest model that could work, as a floor for section 2.
+"""The simplest model that could work, as a floor for the ablation ladder.
 
-Every arm of the Figure 2a ablation ladder solves a transport problem. Even the alpha = 0 arm,
+Every arm of the ablation ladder solves a transport problem. Even the alpha = 0 arm,
 which carries no connectivity, still solves an entropic semi-relaxed transport problem with a
 spatial cost and curated anchors. So the ladder cannot answer the question a reader will ask,
 which is whether the transport machinery is needed at all.
@@ -23,7 +23,7 @@ Two arms are scored:
     heldout     each region's own Garin landmark withheld from the warp before refitting it,
                 against the three configurations in out_a1b_loro.json
 
-The held-out arm is the informative one. Section 2 argues that connectivity earns its place on
+The held-out arm is the informative one. The claim under test is that connectivity earns its place on
 regions whose cross-species position is misleading, so if that argument is right this baseline
 should fail hardest in the tectum and the hippocampal subfields.
 
@@ -53,7 +53,7 @@ OUT = ROOT / "outputs" / "logs" / "out_b2_landmark_baseline.json"
 LADDER = ROOT / "outputs" / "logs" / "out_a1_ladder.json"
 HELDOUT = ROOT / "outputs" / "logs" / "out_a1b_loro.json"
 
-WHAT = ("Landmark-only baseline for section 2. The 42 bilateral Garin anchors define a "
+WHAT = ("Landmark-only baseline for the ablation ladder. The 42 bilateral Garin anchors define a "
         "thin-plate-spline warp; mouse parcel centroids are pushed through it and assigned to the "
         "nearest human parcel. No connectivity, no region packs, no transport. Top-1, "
         "mass_in_region and centroid_disp_mm come from the hard assignment. AUROC comes from the "

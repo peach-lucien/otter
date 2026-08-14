@@ -18,9 +18,9 @@ run stamps ``pi_file`` / ``pi_sha256`` into ``_meta``. The stored ``schaefer_ids
 ``map_values`` are PUBLISHED MAPS: they are pi-independent and are preserved byte-for-byte
 by default (``--reuse-maps``), so a re-run changes only the pi-dependent quantities.
 
-The manuscript's Figure 5 does NOT use the ``spearman`` / ``spin_p`` stored here. Fig 5
-correlates RECONSTRUCTION-coverage (see 22_reconstruction_coverage.py and the reference
-implementation 37_fig5_gallery.py) against these maps, computed live; it reads only
+The headline evolution result does NOT use the ``spearman`` / ``spin_p`` stored here. It
+correlates RECONSTRUCTION-coverage (see 22_reconstruction_coverage.py) against these maps,
+computed live, and reads only
 ``schaefer_ids`` and ``map_values`` from this log. The correlations below are the legacy
 MASS-coverage battery, kept for the record and now on the canonical coupling.
 
@@ -168,8 +168,8 @@ def main():
                                    "schaefer_ids / map_values preserved from the previous log "
                                    "(published maps are pi-independent)",
                     "not_used_by_fig5": (
-                        "Figure 5 uses RECONSTRUCTION-coverage computed live (see "
-                        "37_fig5_gallery.py); it reads only schaefer_ids and map_values from "
+                        "The headline result uses RECONSTRUCTION-coverage computed live (see "
+                        "22_reconstruction_coverage.py); it reads only schaefer_ids and map_values from "
                         "this log. The spearman / spin_p stored here are the legacy "
                         "MASS-coverage battery."),
                     **prov}

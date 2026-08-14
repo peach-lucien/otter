@@ -14,7 +14,7 @@ This is a single-entry pack because DSURQE exposes "Entorhinal area" (84
 parcels) and "Entorhinal area, lateral part" (33 parcels) but NOT a
 distinct "medial part" label, so we can't cleanly split into the lateral
 EC (object/contextual memory) vs medial EC (spatial / grid-cell) subdivisions
-that Franjic 2021 and Ohara et al. 2021 distinguish. The whole-entorhinal
+that Franjic et al. 2022 and Ohara et al. 2021 distinguish. The whole-entorhinal
 anchor still captures the broad EC↔EC homology, and is non-conflicting
 with all existing packs (entorhinal is anatomically distinct from any
 other anchored region).
@@ -27,14 +27,14 @@ centroid (Mai/Paxinos):
   Entorhinal cortex: (±20, –10, –30) r=10 mm → 6 parcels
 
 References (verified Consensus search 2026):
-  - Franjic, D. et al. (2021). Transcriptomic taxonomy and neurogenic
+  - Franjic, D. et al. (2022). Transcriptomic taxonomy and neurogenic
     trajectories of adult human, macaque, and pig hippocampal and
     entorhinal cells. *Neuron* 110, 452-469.e14.
     DOI: 10.1016/j.neuron.2021.10.036. (222 citations).
   - Ohara, S. et al. (2021). Laminar Organization of the Entorhinal Cortex
     in Macaque Monkeys Based on Cell-Type-Specific Markers and Connectivity.
-    *Frontiers in Neural Circuits* 15:649571.
-    DOI: 10.3389/fncir.2021.649571. (15 citations). Companion paper for
+    *Frontiers in Neural Circuits* 15:790116.
+    DOI: 10.3389/fncir.2021.790116. (15 citations). Companion paper for
     laminar correspondences.
 
 Future extension
@@ -79,6 +79,8 @@ def build_entorhinal_region_anchors(
     return [
         RegionAnchorEntry(
             pair_id=49,
+            # The label is a stored key that appears in logs, so the year is left as it was
+            # written even though Crossref dates the paper 2022. See the reference above.
             label="Entorhinal cortex (Franjic 2021)",
             mouse_indices=mouse_idx, human_indices=human_idx,
         ),

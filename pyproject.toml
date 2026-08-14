@@ -36,9 +36,11 @@ dev  = ["pytest", "ruff", "jupyterlab", "ipywidgets"]
 docs = ["mkdocs", "mkdocs-material"]
 
 [project.urls]
-Documentation = "./docs/pipeline.md"
-Methods       = "./docs/methods.md"
-Results       = "./docs/results.md"
+Homepage      = "https://github.com/peach-lucien/otter"
+Repository    = "https://github.com/peach-lucien/otter"
+Documentation = "https://github.com/peach-lucien/otter/blob/main/docs/README.md"
+Explorer      = "https://peach-lucien.github.io/otter/"
+Issues        = "https://github.com/peach-lucien/otter/issues"
 
 [project.scripts]
 # CLI shortcuts for the most-run pipeline steps. After `pip install -e .`

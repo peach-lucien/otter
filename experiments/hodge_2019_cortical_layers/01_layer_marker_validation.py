@@ -18,7 +18,7 @@ with high CUX2 expression**, and the same should hold for the other markers.
 This is a Beauchamp-independent test: Hodge's data comes from Allen ISH (mouse)
 and AHBA microarray (human), which are different platforms from Beauchamp's
 Mouse-Human Transcriptomic Similarity dataset. So agreement here is
-independent evidence about π's anatomical fidelity.
+independent evidence about π's anatomical accuracy.
 
 Procedure:
   1. For each Hodge marker, pull mouse per-parcel expression from OTTER's

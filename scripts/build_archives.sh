@@ -65,7 +65,7 @@ REPRODUCE=(
   outputs/anndata/human_voxel_counts.npy
   outputs/anndata/full_costs.npz
   outputs/anndata/_schaefer_order.txt
-  # volumetric references for the glass-brain panels (Fig 1a-c/g, Fig 3b). outputs/coupling/ is
+  # volumetric references for the glass-brain panels. outputs/coupling/ is
   # gitignored, so these are only available through the archive; without them the volumetric
   # panel scripts fail even though every statistic still computes.
   outputs/coupling/mouse_parcel_filled_100um.nii.gz

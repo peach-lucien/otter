@@ -98,7 +98,7 @@ def load_human_node_region() -> np.ndarray:
 def load_human_myelin() -> np.ndarray:
     """HCP T1w/T2w myelin per Schaefer region, indexed [1..400]."""
     vals = np.full(401, np.nan)
-    with open(DATA / "human_myelinmap_schaefer400_OTTERorder.csv") as f:
+    with open(DATA / "human_myelinmap_schaefer400_HOMERorder.csv") as f:
         for row in csv.DictReader(f):
             vals[int(row["otter_region_id"])] = float(row["t1t2_myelin"])
     return vals

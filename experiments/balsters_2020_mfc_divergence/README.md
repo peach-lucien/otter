@@ -1,6 +1,6 @@
 > Numbers refreshed 2026-07-20 against the canonical coupling
-> (`outputs/logs/balsters_2020_mfc_divergence.json`, sha bb4cae00…). This result is cited in
-> §5 of the manuscript as the falsification control.
+> (`outputs/logs/balsters_2020_mfc_divergence.json`, sha bb4cae00…). This result is the
+> falsification control.
 
 # Schaeffer et al. 2020, rodent MFC divergence (falsification test)
 

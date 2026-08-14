@@ -9,7 +9,7 @@ Four stages, each a fresh fit, scored with AUROC / displacement / mass / top-k
   + packs      : + region-anchor packs   (= production)
 
 Resumable per stage. -> outputs/logs/ablation_ladder_battery.json
-Run: cd otter && PYTHONPATH=src python ../manuscript/figures/fig_2_ED/ablation_ladder.py
+Run: cd otter && PYTHONPATH=src python experiments/section2_supervision/ablation_ladder.py
 """
 import sys, json, time, importlib.util
 from pathlib import Path

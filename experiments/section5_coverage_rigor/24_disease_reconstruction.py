@@ -1,8 +1,8 @@
-"""Section 6 on the NEW coverage: does disorder cortical thinning concentrate where human
+"""Disorder reachability on the NEW coverage. Does disorder cortical thinning concentrate where human
 connectivity is least reconstructable from the mouse?
 
 Same DK-atlas + ENIGMA pipeline as 06_disorder_vs_coverage.py, but coverage per DK region is the
-reconstruction-fidelity coverage (mean per-parcel FC reconstruction r) on the CANONICAL pi, not the
+reconstruction-accuracy coverage (mean per-parcel FC reconstruction r) on the CANONICAL pi, not the
 mass-normalised column-sum. Low recon-coverage = connectivity has no mouse basis. ENIGMA d is
 negative for thinning, so if thinning concentrates in low-recon cortex we expect POSITIVE rho.
 
@@ -120,7 +120,7 @@ def main():
     for k, q in zip(keys, false_discovery_control(np.array(ps))):
         res[k]["fdr_q"] = float(q)
     print("\nFDR q:", {k: round(res[k]["fdr_q"], 4) for k in keys})
-    res["_meta"] = {"coverage": "reconstruction-fidelity (mean per-parcel FC recon r) on pi_canonical",
+    res["_meta"] = {"coverage": "reconstruction-accuracy (mean per-parcel FC recon r) on pi_canonical",
                     "atlas": "Desikan-Killiany (abagen)", "n_spin": N_SPIN}
     res.update(pi_provenance())   # which coupling produced these numbers
     OUT.write_text(json.dumps(res, indent=2)); print("wrote", OUT)

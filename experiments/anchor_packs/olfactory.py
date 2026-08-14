@@ -10,8 +10,7 @@ This experiment adds the two olfactory anchor-pack entries:
   pid 34: Mouse Piriform area ↔ Human Piriform cortex (Mori 2014; Carlén 2017)
   pid 35: Mouse Anterior olfactory nucleus ↔ Human AON (Mori 2014)
 
-Tests three configurations on Beauchamp top-1 with the same pattern
-as §5.12-§5.13:
+Tests three configurations on Beauchamp top-1:
 
   1. Production fc_plus_SC point-anchor π          (baseline)
   2. Production + olfactory pack                   (full)

@@ -2,7 +2,7 @@
  "_retired": {
   "date": "2026-07-29",
   "why": "Fitted at epsilon = 5e-3 and xyz_weight = 0.5, not the canonical epsilon = 0.05 / xyz_weight = 0.25. Its headline result (connectivity alone localises held-out regions better than connectivity plus space) does NOT replicate at canonical settings: canonical gives both 11.2 mm, xyz_only 11.4 mm, conn_only 24.2 mm over the same 19 regions.",
-  "use_instead": "the canonical three-config disentanglement reported in manuscript/HOMER_review_analyses_results.md (A1b) and drawn as ED-6",
+  "use_instead": "the canonical three-config disentanglement in outputs/logs/heldout_three_config_canonical.json",
   "note": "Kept rather than deleted so the superseded values remain traceable. Nothing in the repository reads this file."
  },
  "Piriform area -> piriform cortex": {

@@ -3,12 +3,11 @@
 
 RETIRED ENTRY POINT — run `beauchamp_battery_canonical.py` instead.
     This module is still LIVE as a *library*: `beauchamp_battery_canonical.py`
-    imports its `build()` and `score_all()`, and those are the scoring functions
-    behind Fig. 2b,d,e and ED Fig. 2e. What is retired is its own `main()`, which
+    imports its `build()` and `score_all()`, and so do the other live scoring
+    scripts. What is retired is its own `main()`, which
     scored the pre-canonical coupling and wrote
     `outputs/logs/beauchamp_metric_battery.json` /
-    `beauchamp_metric_battery_loro.json`. Every live consumer
-    (`fig_2_ED/make_beauchamp_report.py`, `make_beauchamp_heatgrid.py`) now reads the
+    `beauchamp_metric_battery_loro.json`. Every live consumer now reads the
     `*_canonical.json` logs written by `beauchamp_battery_canonical.py`.
 
     The hardcoded pre-warp coupling `pi_fc_plus_SC_with_all_packs` in `main()` was repointed to
@@ -17,9 +16,9 @@ RETIRED ENTRY POINT — run `beauchamp_battery_canonical.py` instead.
     owns were left untouched — running it would merely duplicate
     `beauchamp_battery_canonical.py` under a filename that live scripts do not read.
 
-    NOTE: the Fig. 2 and ED Fig. 2 legends in `docs/03_results.md` still
-    cite `beauchamp_metric_battery.json` (+ `_loro.json`); they should cite the
-    `_canonical` logs the panels are actually built from.
+    NOTE: the Beauchamp results in `docs/03_results.md` still cite
+    `beauchamp_metric_battery.json` (+ `_loro.json`); they should cite the
+    `_canonical` logs the numbers are actually built from.
 
 Modes:
   (default)  score the canonical coupling via load_pi() (RETIRED entry point; see above),

@@ -46,33 +46,27 @@ transfers through π; microstructure does not.** π was fitted on connectivity.
 See `docs/03_results.md` §3.
 
 This is a *brain-wide* organisational test that no anchor pair drives, so it
-establishes that OTTER's cross-species fidelity extends beyond the Beauchamp
+establishes that OTTER's cross-species accuracy extends beyond the Beauchamp
 anchor pairs and the network-aggregated level.
 
 ---
 
-## ⚠️ The bug this experiment once had
+## ⚠️ The principal gradient is the second eigenvector
 
-This README previously reported **|r| = 0.402, spin p = 0.16, "does not survive"**,
-and the method section below prescribed the **second-smallest eigenvalue's
-eigenvector** as the principal gradient.
-
-That instruction is **wrong for this data**. The first non-trivial component here is
-an **anterior–posterior spatial axis**; the unimodal→transmodal hierarchy is the
-**second**. We verified this in both species:
+Do not take the **second-smallest eigenvalue's eigenvector** as the principal gradient.
+The first non-trivial component here is an **anterior–posterior spatial axis**; the
+unimodal→transmodal hierarchy is the **second**. We verified this in both species:
 
 | component | vs published Margulies G1 | vs that species' own T1w:T2w |
 |---|---:|---:|
-| comp 1 (what the old code took) | \|ρ\| = 0.12 | human −0.13 / mouse −0.28 |
+| comp 1 | \|ρ\| = 0.12 | human −0.13 / mouse −0.28 |
 | **comp 2 (correct)** | **\|ρ\| = 0.93** | **human +0.59 / mouse +0.57** |
 
-The consequence was severe. Routing an A–P **spatial** axis and then testing it
-against a **spatial-autocorrelation-preserving** spin null is close to tautological.
-It produced a confident *false negative* that the project believed for months, and
-the result went unexamined because it agreed with what the project expected of the
-gradient at the time.
+Routing an A–P **spatial** axis and then testing it against a
+**spatial-autocorrelation-preserving** spin null is close to tautological and produces
+a false negative.
 
-The component index is no longer hard-coded. `principal_gradient()` in
+The component index is not hard-coded. `principal_gradient()` in
 `01_gradient_validation.py` *selects* the component by its correlation with an
 external hierarchy reference (that species' own T1w:T2w map), and
 `experiments/validation/00_validate_published_maps.py` asserts that every named
@@ -133,6 +127,5 @@ Outputs:
 
 The gradient survives reduction to discrete structure: network rank order is recovered at
 ρ = 0.80 (spin p = 0.029) and a three-tier discretisation is classified at 56 % against 33 %
-chance. An earlier version of this section reported ρ = 0.73 at spin p = 0.098 and concluded
-the signal was not significant; that was computed before the `principal_gradient()` fix.
+chance.
 

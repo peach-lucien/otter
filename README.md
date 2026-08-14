@@ -12,46 +12,39 @@ Output: a coupling matrix **π** of shape (1864 mouse parcels × 2094 human parc
 
 ---
 
-## Try it in your browser (no install)
+## Interactive explorer
 
 **→ [Open the OTTER Mapping Explorer](https://peach-lucien.github.io/otter/)**
 
-A self-contained 3D viewer for the canonical coupling. Search a mouse region or parcel, see its top-K human partners ranked by coupling mass, toggle the cortical surface or mouse atlas shell, and inspect the trust evidence behind every prediction. No Python, no install, no backend. It is a single HTML file with the canonical coupling baked in. Use this if you want to *look at* OTTER. The rest of the README is for using it programmatically or reproducing it.
+A self-contained 3D viewer for the canonical coupling, distributed as a single HTML file that requires no Python, no installation and no backend. It searches a mouse region or parcel, ranks its top-K human partners by coupling mass, toggles the cortical surface and the mouse atlas shell, and shows the trust evidence behind each prediction.
 
 ---
 
-## What π is, in one sentence
+## Interpretation of π
 
 π carries areal position on the cortical hierarchy, and with it the properties that vary across
-that axis.
+that axis. π is fitted on functional and structural connectivity, though what travels through it
+is not limited to connectivity. Microstructure transfers at r = 0.47. Properties varying through
+the cortical depth do not transfer. The boundary is areal against laminar.
 
-That is the organising claim, and it sets what follows. π is fitted on functional and structural
-connectivity, but what travels through it is not limited to connectivity. Microstructure comes
-across too, at r = 0.47. What does not come across is anything varying through the cortical
-depth. The boundary is areal against laminar, rather than connectional against everything else.
-
-## Headline numbers
-
-Every value here is recomputed in [`notebooks/`](notebooks/), one notebook per figure, and
-checked against the manuscript.
+## Principal results
 
 The coupling concentrates on the homology diagonal (mean self-mass across the 21 Garin classes
 0.40, against 0.048 under a size-matched uniform mapping) and preserves topography (distance
 between two mouse parcels predicts distance between their routed human centroids at r = 0.53,
 against a permuted-coupling null of ≈ 0). Each mouse parcel's best human partner carries a median
 probability of 0.31, above 0.5 for 20 % of parcels, so the coupling spreads mass rather
-than committing to one partner. That concentration is set by the entropic regularisation, not by
-anatomy: re-fitting at ε = 0.005 gives a near-deterministic coupling with no gain in held-out
-recovery, so sharpness is a dial rather than evidence of correctness.
+than committing to one partner. That concentration is set by the entropic regularisation. Re-fitting
+at ε = 0.005 gives a near-deterministic coupling with no gain in held-out recovery.
 
 Scored against Beauchamp 2022's transcriptomic homology set, which never enters the fit, the
 coupling reaches region-level AUROC 0.90 (parcel-weighted across the 19 pairs; 0.93
 unweighted) at 57 % parcel-level top-1, with mass enrichment significant for 19 of 19
 regions under a parcel-set permutation null (FDR q < 0.05).
 
-### What carries the correspondence
+### Cost-term ablation
 
-Removing the cost terms one at a time separates two quantities that move independently:
+Removing the cost terms one at a time separates two quantities that move independently.
 
 | cost terms | region-level (AUROC) | parcel-exact (top-1) | displacement |
 |---|---:|---:|---:|
@@ -66,15 +59,13 @@ supervision units (15 Garin classes, 26 region packs) in turn and re-fitting, le
 recovery at held-out AUROC 0.74 while parcel-exact recovery collapses to roughly 10 %.
 
 The spatial scaffold is itself fitted to the Garin landmark pairs, so the
-ladder separates kinds of supervision rather than supervision from none. Connectivity alone is
-unidentifiable rather than uninformative: Gromov–Wasserstein aligns two connectomes only up to
-relabelling, so with nothing fixing the global orientation the coupling cannot be placed. OTTER
-is therefore neither a connectivity-only method nor a landmark look-up.
+ladder separates kinds of supervision. Connectivity alone is unidentifiable. Gromov–Wasserstein
+aligns two connectomes only up to relabelling, and with nothing fixing the global orientation the
+coupling cannot be placed.
 
-### What transfers through π
+### Properties transferred through π
 
-Each test below uses data OTTER never saw and a spatial-autocorrelation-preserving spin null, a
-bar most cross-species analyses do not set.
+Each test uses data OTTER never saw and a spatial-autocorrelation-preserving spin null.
 
 | test | modality | result |
 |---|---|---|
@@ -87,19 +78,17 @@ Grouping fourteen properties by their relation to the areal hierarchy, all nine 
 "hierarchy maps" and "varies along the hierarchy" groups clear their spin nulls, and none of the
 five orthogonal to it does.
 
-The comparison is internally controlled. Eight of the fourteen are cell-class maps scored on the
+Eight of the fourteen are cell-class maps scored on the
 same 2,094 parcels against the same null, and they span the full range, from −0.03 for microglial
-density to +0.35 for the neuronal-glial contrast. What separates them is their relation to the
-areal hierarchy rather than how they were measured. Granular L4 minus infragranular is the
+density to +0.35 for the neuronal-glial contrast. Their separation follows their relation to the
+areal hierarchy rather than their measurement modality. Granular L4 minus infragranular is the
 expected exception among the laminar contrasts, since cortical granularity is itself areal.
 
-An earlier version of this README offered individual cortical-layer marker genes as the control,
-at mean r = 0.23 with 6 of 7 significant. That scored the markers over the whole brain against a
-null that shuffled the coupling. Scored like for like, over Schaefer-400 cortex against a null that
-rotates the mouse input, the markers give 0.072 with 3 of 7 significant, and the dissociation does
-not survive. The claim was withdrawn.
+Scored over Schaefer-400 cortex against a null that rotates the mouse input, individual
+cortical-layer marker genes give r = 0.072 with 3 of 7 significant, inside the range of the
+laminar contrasts.
 
-### Where the mouse cannot reconstruct human connectivity
+### Reconstruction of human connectivity
 
 Reconstruction accuracy asks how well each human parcel's connectivity fingerprint is rebuilt by
 routing mouse connectivity through π. Each column of π is normalised before the push-forward, so the
@@ -138,7 +127,7 @@ coupling's own concentration predicts top-1 accuracy at r = 0.06 and bootstrap s
 r = −0.04, neither significant. Because the regularisation sets concentration directly, a
 confident-looking coupling can be produced on demand, so the grades are external by necessity.
 
-### Translation in both directions
+### Bidirectional translation
 
 π is an operator, so it runs forward and back. Multiplying a mouse map by π gives a
 transport-weighted average over the human brain, and transposing π turns a human map into a
@@ -159,14 +148,14 @@ mouse, the dysphoric one onto medial prefrontal cortex and the anxiosomatic one 
 insula, with the contrast clearing a spin null (C = +0.59, p = 0.0005).
 
 Full results in [`docs/03_results.md`](docs/03_results.md). The notebooks in [`notebooks/`](notebooks/)
-derive every number above.
+derive every number above. Limitations are set out in [`docs/05_limitations.md`](docs/05_limitations.md).
 
-## Install + quickstart (for programmatic use)
+## Installation and quickstart
 
-Skip this section if you only want to look at the couplings. Use the [explorer](https://peach-lucien.github.io/otter/) above. Install only if you need to query π in code, re-train the model, or extend it.
+The [explorer](https://peach-lucien.github.io/otter/) covers inspection of the couplings. Installation is required only to query π in code, re-train the model, or extend it.
 
 ```bash
-git clone <this-repo> otter && cd otter
+git clone https://github.com/peach-lucien/otter.git && cd otter
 conda env create -f env.yml && conda activate otter
 pip install -e ".[dev]"
 pytest -q                            # ~10s, runs on a bare checkout (synthetic fixtures)
@@ -175,9 +164,9 @@ python scripts/fetch_data.py         # pull the couplings + caches from Zenodo (
 
 The repository ships code only. The coupling, the processed AnnData caches, and
 the validation inputs live in a versioned Zenodo archive and are pulled by
-`scripts/fetch_data.py`; the committed result logs in `outputs/logs/` already let
-you read every headline number without downloading anything. See
-[`DATA.md`](DATA.md) for the tiers and what each contains. Data DOI: [10.5281/zenodo.21458106](https://doi.org/10.5281/zenodo.21458106). If you call into the library before fetching, it prompts you to download then; set `OTTER_AUTO_FETCH=1` to fetch automatically whenever data is needed.
+`scripts/fetch_data.py`; the committed result logs in `outputs/logs/` carry every
+headline number without any download. See
+[`DATA.md`](DATA.md) for the tiers and what each contains. Data DOI: [10.5281/zenodo.21458106](https://doi.org/10.5281/zenodo.21458106). A call into the library before fetching prompts for the download; `OTTER_AUTO_FETCH=1` fetches automatically whenever data is needed.
 
 Query a region after installation (requires the fetched data):
 
@@ -199,9 +188,9 @@ trust = np.load("outputs/coupling/trust_multisource_canonical.npz", allow_pickle
 reliable = trust["evidence_tier"] == "anchored_and_validated"     # 31% of parcels
 ```
 
-`load_pi()` defaults to `pi_canonical.npy`, the canonical coupling used throughout the paper. Always call `load_pi()` rather than loading a filename. The earlier couplings (`pi_fc_plus_SC*.npy`) are retired, give different answers, and are kept only so that published comparisons remain reproducible. `pi_provenance()` returns the file and its sha256.
+`load_pi()` defaults to `pi_canonical.npy`, the canonical coupling used throughout this repo. Always call `load_pi()` rather than loading a filename. The retired couplings (`pi_fc_plus_SC*.npy`) give different answers and are kept so that published comparisons remain reproducible. `pi_provenance()` returns the file and its sha256.
 
-For interactive exploration, see `notebooks/01_quickstart.ipynb` (Python) or the browser-only [OTTER Mapping Explorer](https://peach-lucien.github.io/otter/) (no install).
+Interactive exploration is covered by `notebooks/01_quickstart.ipynb` and by the [OTTER Mapping Explorer](https://peach-lucien.github.io/otter/).
 
 ## Mouse data preprocessing
 
@@ -220,15 +209,15 @@ Entry points:
 - `src/otter/data/io.py`, exposes the per-parcel voxel-index fields for
   downstream code.
 
-## What's in this repo
+## Repository layout
 
 ```
 otter/
 ├── docs/                # 7-doc reading path + the published GUI (docs/index.html)
 ├── src/otter/           # The library (data, models, eval, viz, costs)
 ├── pipeline/            # End-to-end reproduction scripts (02 → 08)
-├── experiments/         # Analyses, grouped by the manuscript section they support
-├── tools/               # Provenance, number and prose checks
+├── experiments/         # Analyses, grouped by topic and by the published study they test
+├── tools/               # Reproduction-harness smoke test
 ├── notebooks/           # 8 walkthroughs, in reading order
 ├── tests/               # pytest
 ├── outputs/             # Result logs (committed) + generated artefacts (gitignored)
@@ -237,21 +226,11 @@ otter/
 
 Documentation navigation hub: [`docs/README.md`](docs/README.md). To rebuild the explorer locally, run `python pipeline/08_build_gui.py --publish`. This regenerates `docs/index.html` from the current model.
 
-## How the method works in one paragraph
+## Method
 
 We solve a **Fused Gromov-Wasserstein optimal transport** problem (POT's `entropic_semirelaxed_fused_gromov_wasserstein`) that finds a soft coupling π minimising (within-mouse FC + SC distance ↔ within-human FC + SC distance) + (cross-species xyz + anchor cost). The mouse row marginal is fixed uniform; the human column marginal is free (semirelaxed), so the coupling can report that a human parcel has **no** mouse counterpart. The result is supervised by **21 Garin point anchors** (single-parcel) plus **15 region-anchor packs** (26 multi-parcel sub-region homology entries curated from the published literature, see [`docs/04_anchor_packs.md`](docs/04_anchor_packs.md)). Anchors are *soft* by default. The FGW solver can violate the constraint if structural cost strongly disagrees. See [`docs/02_methods.md`](docs/02_methods.md).
 
-## What OTTER does not do
-
-- **It does not translate properties orthogonal to the areal hierarchy.** What travels through π is areal position, so a mouse measurement transfers if it varies along the sensory-to-association axis and does not if it varies through the cortical depth. Myelin and cytoarchitecture do transfer, each clearing a translation null that rotates the mouse input and routes it through the real π (|r| = 0.50, p = 0.005 and |r| = 0.53, p = 0.003), and reaching r = 0.47 against the human myelin map. Cell-class composition transfers when it tracks that axis (neuronal minus glial 0.35, excitatory minus inhibitory 0.34). Laminar contrasts do not (supragranular minus infragranular 0.01, supragranular minus granular 0.02), and neither do spatially uniform cell classes (GABAergic 0.00, oligodendrocyte 0.07, microglial −0.03). Earlier versions of this README reported myelin as failing its null. That used a null which shuffled the coupling rather than rotating the input, and it was replaced.
-- **It reconstructs association cortex poorly.** Reconstruction accuracy runs low over prefrontal and lateral temporal cortex, with dorsolateral prefrontal cortex the clearest case (Control B, −0.69 SD below the cortical mean). The coupling reports the shortfall rather than hiding it, and we read it as a measurement, but a mouse model still cannot address phenotypes living in that territory. Note that uncovered-parcel percentages quoted in earlier drafts were threshold-dependent and have been dropped.
-- **It is not a parcel-level oracle without supervision.** Curation buys parcel precision. Withhold it and region-level correspondence largely survives (held-out mean AUROC 0.74) while parcel-exact recovery collapses to roughly 10 % top-1. Trust the tier: parcel-level for `anchored_and_validated`, region-level across the validated tiers.
-- **It does not localise better than a transcriptomic translator.** We once claimed it did; that was a reduction artefact. TransBrain's output is region-level, so scoring at parcel resolution flatters OTTER by construction. On region identity the two are level on TransBrain's own benchmark, AUROC 0.83 against 0.84, a paired per-region difference that is not significant (Wilcoxon p = 0.36). OTTER leads where the modality is connectional. It tracks the human gradient at r = 0.56 against 0.52, recovers a phenotype routed mouse to human and back at 0.97, 0.86 and 0.91 against 0.89, 0.82 and 0.83, concentrates its predictions on an effective 6 target regions against 60, and places three times as much mass on the correct region, 0.21 against 0.07. They are complementary instruments rather than competitors.
-- **Cerebellum and medulla** are excluded from the parcellation. **dlPFC homology** is contested and opt-in only.
-
-See [`docs/05_limitations.md`](docs/05_limitations.md) for the full list.
-
-## The four model levels
+## Model classes
 
 `otter.models` exposes four sklearn-style classes:
 
@@ -264,11 +243,7 @@ See [`docs/05_limitations.md`](docs/05_limitations.md) for the full list.
 
 Plus two comparative additions kept as ablations: `FUGWModel` (unbalanced FGW) and a Knox 2019 voxel-SC variant. Neither moves the headline numbers.
 
-## A note on numbers
-
-Every statistic in this repo is written to a JSON in `outputs/logs/` by the script that computes it, and the notebooks recompute each headline number and check it against the value printed in the manuscript. This is deliberate. A 2026 audit found statistics that had been typed into figure titles by hand and existed in no output file, a diffusion component selected by a hard-coded index that turned out to be the wrong axis, and two right numbers computed different ways sitting side by side in a table. `tools/audit_pi.py` and `experiments/validation/00_validate_published_maps.py` exist to stop all three. If you add a result, write it to a log; do not type it into prose.
-
-## Citing
+## Citation
 
 Manuscript in preparation. The repo bundles 21 Garin homologue anchors (Garin 2021) + 15 published anchor packs (26 region-anchor entries, all in the recommended composition) as listed in `docs/04_anchor_packs.md`. Beauchamp 2022 (eLife) provides external validation.
 

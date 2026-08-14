@@ -1,6 +1,6 @@
-"""§5 coverage collapse, re-tested with the repo's spatial-autocorrelation (spin) null.
+"""Coverage collapse, re-tested with the repo's spatial-autocorrelation (spin) null.
 
-The manuscript's Fig 5b reports the sensorimotor->association coverage gap under a
+An earlier analysis reported the sensorimotor->association coverage gap under a
 *permuted-axis* null (shuffle the myelin labels), which does NOT preserve spatial
 autocorrelation and therefore over-states significance (p = 3.4e-7). Here we re-test
 the SAME statistic with `otter.eval.nulls.spin_null` (Alexander-Bloch / Vazquez-
@@ -8,7 +8,7 @@ Rodriguez), which rotates parcel centroids on a sphere and so keeps spatial
 smoothness in the null. Two statistics are reported:
 
   (1) continuous Pearson r between per-parcel coverage and the myelin axis
-  (2) the sensorimotor-tertile minus association-tertile coverage gap (Fig 5b)
+  (2) the sensorimotor-tertile minus association-tertile coverage gap
 
 both with a proper spin p.
 
@@ -69,7 +69,7 @@ def main():
 
     # sensorimotor->association axis: HCP T1w/T2w myelin per Schaefer region
     myelin_reg = {}
-    with open(DATA / "fulcher_2019_gradients/human_myelinmap_schaefer400_OTTERorder.csv") as f:
+    with open(DATA / "fulcher_2019_gradients/human_myelinmap_schaefer400_HOMERorder.csv") as f:
         for row in csv.DictReader(f):
             myelin_reg[int(row["otter_region_id"])] = float(row["t1t2_myelin"])
     myelin = np.array([myelin_reg.get(r, np.nan) for r in node_region])
@@ -78,7 +78,7 @@ def main():
     cov, mye, xyzc = coverage[ctx], myelin[ctx], xyz[ctx]
 
     cont = spin_null(cov, mye, xyzc, n_trials=N_SPIN, seed=SEED)          # continuous r
-    tert = tertile_gap_spin(cov, mye, xyzc)                               # Fig 5b statistic
+    tert = tertile_gap_spin(cov, mye, xyzc)                               # tertile-gap statistic
 
     print(f"n cortical parcels = {ctx.sum()}")
     print(f"[continuous]  coverage vs myelin: r = {cont['r_observed']:+.3f}   "

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Section 5 evolution battery, corrected.
+"""Evolution battery, corrected.
 
 BUG THIS FIXES
 --------------
 07_evolution_battery.py stored `spearman` (a RANK correlation) alongside `spin_p` taken from
-`spin_null`, which computes a PEARSON correlation. Fig 5f then coloured its bars by that p
-while printing the rho. The two statistics disagree because coverage's Pearson correlation is
+`spin_null`, which computes a PEARSON correlation. The downstream plot then coloured its bars by
+that p while printing the rho. The two statistics disagree because coverage's Pearson correlation is
 inflated by the entropic-OT underflow tail (see 08_anchorfree_control.py), while its Spearman
 is not.
 

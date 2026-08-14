@@ -18,10 +18,9 @@ cytoarchitectural centroids (Mayka 2006; Glasser HCP-MMP360): BA4 at
 (±37, -22, 55) r=10 mm → 12 parcels; PMd at (±28, -5, 62) r=12 mm → 23
 parcels.
 
-Caveat (docs/archive/iteration_log.md §5.12): the mouse M1 set is identical to the
-set used by Beauchamp 2022's "Primary motor area → precentral gyrus"
-validation, and the BA4 human set is a subset of Beauchamp's precentral
-ball. Top-1 = 100 % after fitting is largely *tautological*; the held-out
+Caveat: the mouse M1 set is identical to the set used by Beauchamp 2022's
+"Primary motor area → precentral gyrus" validation, and the BA4 human set is
+a subset of Beauchamp's precentral ball. Top-1 = 100 % after fitting is largely *tautological*; the held-out
 control (M2 anchor only, M1 omitted) gives Motor top-1 = 0 %, structure
 does NOT independently recover M1 ↔ BA4. The pack is useful as a
 practical mechanism (OTTER queries for motor parcels return defensible

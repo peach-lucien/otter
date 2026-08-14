@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Section 5 as a continuum: coverage is a graded quantity, and on the canonical coupling it
+"""Coverage as a continuum. Coverage is a graded quantity, and on the canonical coupling it
 follows NO spatial axis (the medial->lateral gradient was a retired-coupling artefact).
 
 The dlPFC hole (script 11) is the extreme low end of a continuous distribution, not a separate

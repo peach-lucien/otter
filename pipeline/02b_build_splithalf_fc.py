@@ -3,7 +3,8 @@
 
 Splits each resting-state cohort into two halves of subjects and averages the connectivity within
 each half. Refitting the coupling on each half separately tests whether it depends on the particular
-subjects it was fitted on. Results section 1 reports the outcome.
+subjects it was fitted on. experiments/section1_stability/01_split_half_refit.py reports the
+outcome.
 
 The split is drawn from a fixed seed, so the halves are the same on every run. Averaging is done in
 column blocks because the per-subject connectivity tensors do not fit in memory. NaN entries are

@@ -1,4 +1,4 @@
-"""Section 6: does OTTER's coverage map separate the REACHABLE part of a human
+"""Does OTTER's coverage map separate the REACHABLE part of a human
 psychiatric disorder from the unreachable part?
 
 The cortical result (from section5_coverage_rigor/06): case-control cortical THINNING in

@@ -26,8 +26,8 @@ Why this is OTTER's most-tested failure region
 All five hippocampal subfields show 0 % Beauchamp top-1 under production
 point-anchor π, the cleanest documented evidence that OTTER's FC/SC
 structure does NOT recover hippocampal homology unsupervised. Earlier
-work (EXP-1 / SPLIT-1, docs/archive/iteration_log.md §5.2) added four hippocampal *point*
-anchors and moved 3 of 4 from 0 → 7-9 % top-1. This pack is the
+work (EXP-1 / SPLIT-1) added four hippocampal *point* anchors and moved 3 of 4
+from 0 → 7-9 % top-1. This pack is the
 region-anchor analogue: each subfield's full DSURQE parcel set forced to
 map into the matching human subfield MNI ball.
 

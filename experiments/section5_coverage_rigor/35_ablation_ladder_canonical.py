@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Section 2 ablation ladder, recomputed on the CANONICAL model (warp + xyz_weight=0.25 + eps=0.05).
+"""Supervision ablation ladder, recomputed on the CANONICAL model (warp + xyz_weight=0.25 + eps=0.05).
 Four stages, fresh fit each, scored with the Beauchamp metric battery:
   connectivity : FC+SC only (xyz_weight=0, no anchors/packs)
   + spatial    : + warped xyz (xyz_weight=0.25)
@@ -15,7 +15,9 @@ from scipy.interpolate import RBFInterpolator
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
-BBP = ROOT.parent / "manuscript/figures/fig_2_ED/beauchamp_battery.py"
+BBP = ROOT / "experiments/section2_supervision/beauchamp_battery.py"
+if not BBP.exists():
+    raise SystemExit(f"Beauchamp metric battery not found at {BBP}; it provides build() and score_all().")
 spec = importlib.util.spec_from_file_location("bb", BBP); BB = importlib.util.module_from_spec(spec); spec.loader.exec_module(BB)
 from otter.data import load_cached                          # noqa: E402
 from otter.data.anchors import get_anchor_index             # noqa: E402

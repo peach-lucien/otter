@@ -1,4 +1,4 @@
-"""Section 6 (translation, FC target): route the MOUSE ASD-model dysconnectivity
+"""Translation, FC target: route the MOUSE ASD-model dysconnectivity
 map through the canonical coupling into human space and test whether it predicts
 the HUMAN ASD *functional-connectivity* deviation pattern (TransBrain 2025), a
 non-null target — unlike the near-null ENIGMA cortical-thinning map used by

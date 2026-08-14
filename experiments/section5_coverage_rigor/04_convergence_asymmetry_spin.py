@@ -1,7 +1,7 @@
-"""§5: directional asymmetry / convergence of the coupling, with a spin null.
+"""Directional asymmetry / convergence of the coupling, with a spin null.
 
 Two faces of human cortical reorganisation:
-  - ABSENCE  : human territory that receives almost no mouse mass (coverage; §5a).
+  - ABSENCE  : human territory that receives almost no mouse mass (coverage).
   - CONVERGENCE : human territory that pools MANY mouse sources (this script).
 
 Per human parcel, the effective number of mouse sources = exp(entropy of the
@@ -63,7 +63,7 @@ def main():
     print(f"reverse eff sources: mean {eff_sources.mean():.2f} median {np.median(eff_sources):.2f}")
 
     myelin_reg = {}
-    with open(DATA / "fulcher_2019_gradients/human_myelinmap_schaefer400_OTTERorder.csv") as f:
+    with open(DATA / "fulcher_2019_gradients/human_myelinmap_schaefer400_HOMERorder.csv") as f:
         for row in csv.DictReader(f):
             myelin_reg[int(row["otter_region_id"])] = float(row["t1t2_myelin"])
     myelin = np.array([myelin_reg.get(r, np.nan) for r in node_region])

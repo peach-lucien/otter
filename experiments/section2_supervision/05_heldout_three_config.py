@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Held-out three-config comparison, the evidence behind section 2 and Figure 2c.
+"""Held-out three-config comparison of the supervision terms.
 
 For each of the 19 Beauchamp homology pairs, that region's own curation is withheld (its Garin
 point anchor and every region pack whose mouse-side set touches it), the model is refitted, and
@@ -11,12 +11,12 @@ recovery of the held-out region is scored under three configurations:
 
 No configuration wins everywhere. Connectivity alone recovers the structures
 whose position differs most between the species, superior colliculus and the hippocampal
-subfields, and fails elsewhere. Section 2 reads the comparison through the minimax and regret
-summary computed by 06_regret.py from this log.
+subfields, and fails elsewhere. The comparison is read through the minimax and regret summary
+computed by 06_regret.py from this log.
 
 Writes outputs/logs/out_a1b_loro.json. outputs/logs/heldout_three_config_canonical.json holds the
-same per-region values and is what manuscript/figures/fig2/make_fig2c_heldout_delta.py reads;
---also-canonical writes both so they cannot drift apart.
+same per-region values under the canonical name; --also-canonical writes both so they cannot
+drift apart.
 
 This supersedes disentangle_loro.py, which is the ancestor of this analysis. That script fitted at
 epsilon = 5e-3 and xyz_weight = 0.5, not the canonical epsilon = 0.05 and xyz_weight = 0.25, and
@@ -54,9 +54,8 @@ MIRROR = ROOT / "outputs" / "logs" / "heldout_three_config_canonical.json"
 # invocation find nothing to do, fit nothing, and still rewrite the log with no provenance.
 PROGRESS = ROOT / "outputs" / "logs" / ".05_heldout_progress.json"
 
-# The mirror is read by the figure script, which the log records so the dependency is visible.
-CONSUMERS = ("manuscript/figures/fig2/make_fig2c_heldout_delta.py (Fig. 2c); "
-             "Extended Data Fig. 4 panels b and c")
+# The mirror's consumers, recorded in the log so the dependency is visible.
+CONSUMERS = "notebooks/; experiments/section2_supervision/06_regret.py"
 
 # The production recipe with one term switched off at a time. Everything not named here comes
 # from otter.repro, so a change to the recipe reaches this script rather than being restated.
@@ -193,8 +192,8 @@ def main() -> int:
             print(f"\nDIFFERS from the committed log in {len(drift)} place(s):", file=sys.stderr)
             for d in drift[:15]:
                 print(f"  {d}", file=sys.stderr)
-            print("\nSection 2's numbers come from the committed values. Do not adjust the "
-                  "manuscript to match this run; work out why the port disagrees first.",
+            print("\nThe reported numbers come from the committed values. Do not adjust them "
+                  "to match this run; work out why the port disagrees first.",
                   file=sys.stderr)
             return 1
         print(f"\nreproduces the committed {OUT.name} on all "

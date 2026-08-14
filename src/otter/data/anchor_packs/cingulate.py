@@ -46,10 +46,9 @@ Human-side: MNI spheres.
   Subgenual ACC: (±5, 10, 35) r=10 mm  → 6 parcels
   RSC:           (±15, -55, 10) r=10 mm → 8 parcels
 
-Caveat (see docs/archive/iteration_log.md §5.12 / §5.13 / §5.14): for Beauchamp validation,
-the ACC subgenual anchor's mouse-side set (ACA ventral) and human-side ball
-do NOT exactly match the Beauchamp "Anterior cingulate area → cingulate
-gyrus" validation pair (which uses full mouse ACA and a different MNI
+Caveat: for Beauchamp validation, the ACC subgenual anchor's mouse-side set
+(ACA ventral) and human-side ball do NOT exactly match the Beauchamp
+"Anterior cingulate area → cingulate gyrus" validation pair (which uses full mouse ACA and a different MNI
 centroid). So Beauchamp recovery for ACG is NOT tautological for this
 pack, actual measurement (rather than mechanical satisfaction).
 Retrosplenial isn't in Beauchamp's 22 pairs so its effect is also not

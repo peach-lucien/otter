@@ -18,7 +18,7 @@ Headline results from the comparison table:
     Coverage:          787 human nodes kept (vs 1450 for flat. HALVED)
 
 Use this when: full anchor supervision is available AND you care more about
-within-network FC fidelity than cross-network coverage.
+within-network FC accuracy than cross-network coverage.
 """
 from __future__ import annotations
 

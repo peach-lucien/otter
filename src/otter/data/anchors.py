@@ -81,7 +81,7 @@ def assign_parcels_to_nearest_anchor_region(
     Distance is computed in xyz mm. Each parcel is assigned to the pair_id of
     its single nearest anchor across both hemispheres. General-purpose helper
     for region-level operations on parcels (e.g. building per-region weight
-    arrays for the TOPO-1 ablation, see docs/archive/iteration_log.md §5.11).
+    arrays for the TOPO-1 ablation).
 
     Parameters
     ----------

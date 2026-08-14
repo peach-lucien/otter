@@ -1,108 +1,114 @@
 # TransBrain 2025, sibling-method benchmark
 
-A **methods-landscape** comparison rather than a validation "pass". It
-positions OTTER against the current state-of-the-art mouse↔human translator.
+A comparison of OTTER against TransBrain on a shared homology benchmark and on
+shared phenotypes.
 
 ## Why this experiment
 
 [Huang et al. 2025, Nature Methods](https://doi.org/10.1038/s41592-025-02961-3),
 [TransBrain](https://github.com/ibpshangzheng/transbrain), is a published
-mouse↔human phenotype-translation framework, a direct sibling of OTTER. It
-works at **region level** (68-region mouse atlas; Brainnetome / DK / AAL human
-atlases) via graph embeddings + dual regression, where OTTER produces a soft
-parcel-level coupling π via Fused Gromov-Wasserstein optimal transport. Two
-methods, different principles, this experiment asks how they compare.
+mouse↔human phenotype-translation framework. It works at region level (68 mouse
+regions; Brainnetome, DK and AAL human atlases) via graph embeddings and dual
+regression. OTTER produces a soft parcel-level coupling π by Fused
+Gromov-Wasserstein optimal transport. The two rest on different principles, and
+this experiment measures how they compare.
+
+Unless stated otherwise, every number below is read from
+`outputs/logs/transbrain_2025_benchmark.json` or
+`outputs/logs/transbrain_roundtrip_maps.json`. Both record the canonical
+coupling `outputs/coupling/pi_canonical.npy`, sha256
+`bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77`.
 
 ## Result
 
 `outputs/figures/transbrain_2025_benchmark.png`, 3 panels.
 
 **Part A. Homology benchmark.** TransBrain ships a literature-curated set of
-classic mouse↔human homologous region pairs (`homo_cortex.csv`,
-`homo_subcortex.csv`), a benchmark OTTER has never seen, independent of the
-Garin anchors and the Beauchamp set. Routing OTTER's π for the 17 scorable
-cortical mouse regions: the literature-homolog Brainnetome region lands in
-OTTER's **top-3 41 %** of the time (permuted-π null 4 %, p < 0.001) and top-5
-47 %, modest on a fine 127-region atlas. The resolution-fair metric is
-clearer: OTTER's predicted human centroid sits **25.3 mm** from the literature
-homolog vs **39.8 mm** for the null (p < 0.001). OTTER places mouse regions in
-the right neighbourhood, and 25.3 mm is squarely within its own stated
-~25–45 mm resolution, but does not pinpoint the exact Brainnetome parcel. The
-7-region subcortical benchmark comes out at chance.
+mouse↔human homologous region pairs (`data_external/transbrain_2025/homo_cortex.csv`,
+`data_external/transbrain_2025/homo_subcortex.csv`), a benchmark OTTER has not
+been fitted to, and independent of the Garin anchors and the Beauchamp set.
+Routing OTTER's π for the 17 scorable cortical mouse regions, the
+literature-homolog Brainnetome region lands in OTTER's top-1 35.3 % of the time,
+top-3 64.7 % and top-5 76.5 %, on an atlas of 127 Brainnetome regions where
+top-1 chance is 1.9 %. The permuted-π null reaches top-3 2.5 %, and no null draw
+out of 200 matched the observed top-3 (empirical p = 0.0). On the
+resolution-fair metric, OTTER's predicted human centroid sits 16.21 mm from the
+literature homolog against 39.53 mm for the permuted-π null (empirical p = 0.0).
 
-**Part B. Head-to-head.** The same mouse phenotype translated by both methods,
-compared at Brainnetome-region level:
+The 7-region subcortical benchmark separates into two results. On rank it is at
+chance: top-1 and top-3 are both 0.0, and the top-3 empirical p against the
+permuted-π null is 1.0. Top-5 is 42.9 %, for which the log records no null. On
+distance it is not at chance: the predicted centroid sits 10.12 mm from the
+literature homolog against 24.42 mm for the null (empirical p = 0.0).
 
-| Phenotype | OTTER vs human | TransBrain vs human | OTTER ↔ TransBrain |
+**Part B. Head-to-head.** The same mouse phenotype translated by both methods
+and compared at Brainnetome-region level.
+
+| Phenotype | OTTER vs human | TransBrain vs human | OTTER vs TransBrain |
 |---|---:|---:|---:|
-| resting-fMRI gradient | \|r\| = 0.393 | \|r\| = 0.463 | \|r\| = 0.23 |
-| Magel2 autism pattern | | | r = 0.10 (maps); 0.05 (risk scores) |
+| resting-fMRI gradient, 101 BN cortical regions | \|r\| = 0.562 | \|r\| = 0.517 | \|r\| = 0.826 |
+| Magel2 mutation pattern, 122 BN regions, 233 individuals | not scored | not scored | r = 0.584 (maps), r = 0.606 (risk scores) |
 
-On the smooth gradient both methods recover the human reference, with
-TransBrain, a tool purpose-built for region-level phenotype translation
-scoring higher. On the noisy Magel2 autism mutation pattern the two methods
-diverge. The per-individual ASD risk-score workflow (TransBrain's own case 3,
-reproduced) gives near-zero concordance: the autism phenotype is noisy for
-both methods.
+Both methods recover the human gradient. OTTER scores 0.562 and TransBrain
+0.517. The log records no test of that difference, so the two are reported as
+point estimates. The two translated gradients agree with each other at 0.826.
 
-**Assessment.** OTTER and TransBrain are different tools that agree
-only moderately (\|r\| ≈ 0.2–0.3). TransBrain is stronger for region-level
-phenotype translation, its home turf. OTTER's complementary contribution is a
-*soft, parcel-level* coupling with per-parcel trust tiers and explicit anchor
-supervision. This experiment is best read as positioning rather than as a contest.
+The Magel2 run scores no human reference map, so the only comparison available
+is between the methods. Their translated maps correlate at r = 0.584. The
+per-individual ASD risk-score workflow (TransBrain's own case 3, reproduced)
+gives r = 0.606 across 233 individuals.
+
+## Round-trip consistency
+
+Round-tripping a phenotype mouse→human→mouse, a metric that needs no ground
+truth. From `outputs/logs/transbrain_roundtrip_maps.json`, which scores both
+methods over the identical 52 mouse regions in which each phenotype is measured.
+
+| Phenotype | OTTER | TransBrain |
+|---|---:|---:|
+| resting-fMRI gradient | r = 0.968 | r = 0.891 |
+| anterior-insula optogenetic circuit | r = 0.863 | r = 0.821 |
+| Magel2 mutation pattern | r = 0.910 | r = 0.834 |
+
+OTTER's value is higher on all three. The log records no test of these
+differences.
+
+## Anterior-insula optogenetic circuit
+
+`05_aiopto_headtohead.py` translates TransBrain's own anterior-insula
+optogenetic map with both methods and scores each translated human map with the
+same salience-versus-rest enrichment metric, on the shared support of 1,635
+human parcels. From `outputs/logs/section6_transbrain_aiopto.json`, which
+records the canonical π sha256. OTTER's enrichment is z = 0.867, above its
+permutation null (1,000 permutations of the mouse region-to-value assignment,
+p = 0.016). TransBrain's is z = 0.277, which its own null does not separate
+(p = 0.228). The log records no test of the difference between the two methods.
 
 ## Advanced comparison
 
-Four follow-ups (`03_transbrain_advanced.py`, figure `transbrain_2025_advanced.png`)
-dig past the average.
+`03_transbrain_advanced.py` writes `outputs/logs/transbrain_2025_advanced.json`.
+That log records no π sha256, so the coupling that produced it cannot be
+confirmed from the log alone. Agreement here is measured as the distance between
+OTTER's and TransBrain's top human Brainnetome region for a given mouse region.
 
-**Bidirectional cycle-consistency.** Round-tripping a phenotype
-mouse→human→mouse, an even-handed, ground-truth-free metric with no home-turf
-advantage. OTTER recovers the original at **0.98 / 0.95 / 0.97** (gradient, optogenetic
-circuit, Magel2 autism pattern) versus **0.89 / 0.82 / 0.83** for TransBrain, both
-scored over the same 52 mouse regions in which the phenotype is measured.
+**Trust-stratified agreement.** Over 52 mouse regions, top-region distance and
+OTTER's per-parcel trust score correlate at r = -0.034 (Spearman -0.057). Tier
+means run from 19.2 mm (anchored_only) to 30.9 mm (anchored_and_validated), with
+validated_only 24.6 mm, structural 28.6 mm and low_evidence 29.8 mm, and do not
+order by tier. OTTER's trust map does not predict where the two methods agree.
 
-> ⚠️ **Corrected July 2026.** This previously read "0.81–0.91 for TransBrain". Those
-> numbers scored OTTER on the 52 regions its parcellation covers but TransBrain on all
-> 68 of `Config.MOUSE_REGIONS`, 16 of them **mean-filled** for the gradient. The two
-> were not comparable, and the error did not bias consistently: it inflated
-> TransBrain on the optogenetic map (0.82 → 0.91) and deflated it on the gradient
-> (0.89 → 0.87). Both are now scored on the identical region set. OTTER still leads all
-> three; the margin is narrowest on the smooth gradient (+0.09) and widest on the two
-> focal maps (+0.13 each). OTTER's soft optimal-transport coupling is more internally
-> coherent in both directions, which is a real strength of the method.
-
-**Optogenetic circuit → human cognition.** Reproducing TransBrain's Case 2: a
-mouse anterior-insula optogenetic circuit routed through π and decoded against
-114 Neurosynth cognitive-term maps. OTTER's top terms emphasise language /
-cognitive-control; TransBrain's emphasise interoception / reward, both genuine
-insula functions, overlapping 2/10.
-
-**Trust-stratified agreement, a negative result.** OTTER↔TransBrain agreement
-does *not* track OTTER's trust tiers (r ≈ 0, flat across all five). OTTER's
-trust map reflects its own anchor/validation evidence, not inter-method
-consensus, so the methods' disagreement is not explained by OTTER's confidence.
-
-**Consensus / disagreement map.** Mouse regions ranked by OTTER↔TransBrain
-top-region distance flag which homologies the two methods concur on versus
-contest.
-
-## TransBrain's own example notebooks
-
-We ran all five TransBrain tutorial notebooks. `gene_mutations.ipynb` (autism
-case) executes fully end-to-end. The core `SpeciesTrans` translation API works
-and is used directly in this experiment. The remaining notebooks' translation
-cells execute but their visualisation cells need surface-plotting dependencies
-not present in our environment, and `fMRI_gradients.ipynb` needs gradient
-NIfTI files not bundled in the TransBrain repo.
+**Consensus and disagreement map.** Mouse regions ranked by OTTER↔TransBrain
+top-region distance. Four regions share the same top Brainnetome region (ACAd,
+VISpm, PERI, RT). The largest distances are PL (82.0 mm), VISam (77.1 mm),
+SSp-n (70.8 mm) and CA2 (65.3 mm).
 
 ## Method
 
-1. Build a OTTER-parcel → Brainnetome-region map by sampling TransBrain's BN
+1. Build an OTTER-parcel → Brainnetome-region map by sampling TransBrain's BN
    atlas at each OTTER human parcel's MNI centroid (3×3×3 fallback).
 2. Part A, for each benchmarked mouse region, route π and rank BN regions by
    received mass; also measure the predicted-centroid distance to the
-   literature homolog. Permuted-π null (200 trials).
+   literature homolog. Permuted-π null, 200 trials.
 3. Part B, translate the mouse principal gradient and the Magel2 mutation
    pattern with both methods; compare at BN-region level.
 
@@ -112,9 +118,13 @@ NIfTI files not bundled in the TransBrain repo.
 |---|---|
 | `01_transbrain_benchmark.py` | Homology benchmark + both head-to-heads |
 | `02_plot.py` | 3-panel figure (benchmark + head-to-heads) |
-| `03_transbrain_advanced.py` | Cycle-consistency, optogenetic decode, trust-stratified, consensus map |
-| `04_advanced_plot.py` | 3-panel advanced figure |
+| `03_transbrain_advanced.py` | Trust-stratified agreement, consensus map |
+| `05_aiopto_headtohead.py` | Anterior-insula optogenetic head-to-head |
 | `README.md` | This file |
+
+`outputs/logs/transbrain_roundtrip_maps.json` is read by
+`notebooks/06_vs_transbrain.ipynb` and by the repository's number-checking
+tools. No script in this directory writes it.
 
 ## Reproduce
 
@@ -122,13 +132,10 @@ NIfTI files not bundled in the TransBrain repo.
 pip install transbrain          # Apache-2.0; supplies the human BN atlas
 PYTHONPATH=src python experiments/transbrain_2025_benchmark/01_transbrain_benchmark.py
 PYTHONPATH=src python experiments/transbrain_2025_benchmark/02_plot.py
-# advanced (the optogenetic decode needs the TransBrain repo's neurosynth_data;
-# point NEUROSYNTH_DIR at it)
 PYTHONPATH=src python experiments/transbrain_2025_benchmark/03_transbrain_advanced.py
-PYTHONPATH=src python experiments/transbrain_2025_benchmark/04_advanced_plot.py
+PYTHONPATH=src python experiments/transbrain_2025_benchmark/05_aiopto_headtohead.py
 ```
 
-Depends on the Margulies experiment's output (`outputs/logs/margulies_2016_gradient.json`)
-for the gradient head-to-head. TransBrain benchmark + case data are staged in
-`data_external/transbrain_2025/`.
-
+The gradient head-to-head depends on the Margulies experiment's output
+(`outputs/logs/margulies_2016_gradient.json`). TransBrain benchmark and case
+data are staged in `data_external/transbrain_2025/`.

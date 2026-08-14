@@ -3,8 +3,8 @@
 
 Run this in the `retune` environment. It does no fitting and takes a couple of minutes. It checks
 that the harness imports, that the released coupling is present and hashes to the value the logs
-claim, and that every log the manuscript cites exists and records which coupling produced it. A
-failure here would otherwise surface later as a broken notebook.
+claim, and that every cited log exists and records which coupling produced it. A failure here
+would otherwise surface later as a broken notebook.
 
     conda activate retune
     cd otter && python3 tools/check_repro_harness.py
@@ -19,7 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]                       # .../otter
 sys.path.insert(0, str(ROOT / "src"))
 
-# The logs the manuscript is allowed to draw on, per tools/check_manuscript_numbers.py.
+# The logs the reported results are allowed to draw on.
 CITED = """beauchamp_metric_battery_canonical beauchamp_metric_battery_loro_canonical
 transbrain_benchmark_summary coupling_summary_canonical evidence_tiers_canonical fig1_coupling_matrix
 out_a2_splithalf out_a1c_downstream out_a1d_robust region_level_eval_canonical
@@ -40,8 +40,8 @@ reverse_translation_symptom_dissociation fig7h_homologue_transfer""".split()
 # Paths are relative to the repository root, not to its parent, so the check does not depend on
 # what the checkout directory happens to be called.
 EXTERNAL_INPUTS = [
-    ("split-half FC (section 1)",   "outputs/splithalf/human_splithalf.npz"),
-    ("split-half FC (section 1)",   "outputs/splithalf/mouse_splithalf.npz"),
+    ("split-half FC (stability)",   "outputs/splithalf/human_splithalf.npz"),
+    ("split-half FC (stability)",   "outputs/splithalf/mouse_splithalf.npz"),
     ("split-half producer",         "pipeline/02b_build_splithalf_fc.py"),
     ("ABIDE scores, de-identified", "outputs/logs/abide_otter_scores_deidentified.csv"),
 ]

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Minimax and regret summary of the held-out three-config comparison, for section 2.
+"""Minimax and regret summary of the held-out three-config comparison.
 
-Section 2 argues that connectivity, spatial structure and curation cover each other's failures.
+The claim under test is that connectivity, spatial structure and curation cover each other's failures.
 The evidence is that no single configuration wins everywhere, and that the combination has the
 best worst case and the smallest gap to whichever configuration was best for a given region.
 This script computes that summary.
@@ -18,7 +18,7 @@ configurations, with that region's own curation withheld and the model refitted:
 Definitions. Regret for a region under a configuration is that configuration's displacement
 minus the smallest displacement any configuration achieved for that region, so the best
 configuration for a region has zero regret there. A configuration's mean regret is the average
-over the 19 regions, and is the quantity section 2 quotes. `n_best` counts the regions where a
+over the 19 regions, and is the quantity reported. `n_best` counts the regions where a
 configuration is strictly best.
 
 Provenance. This script neither loads nor fits a coupling, so neither ``provenance()`` nor
@@ -44,14 +44,14 @@ SRC = ROOT / "outputs" / "logs" / "out_a1b_loro.json"
 OUT = ROOT / "outputs" / "logs" / "out_g2_regret.json"
 
 CONFIGS = ["both", "xyz_only", "conn_only"]
-FAR_MM = 25.0            # chance displacement, derived in Extended Data Fig. 4
+FAR_MM = 25.0            # chance displacement for the benchmark regions
 VERY_FAR_MM = 40.0
 BIG_REGRET_MM = 10.0
 
 WHAT = ("Minimax and regret summary of the held-out three-config comparison. Derived from "
         "out_a1b_loro.json by experiments/section2_supervision/06_regret.py; no refitting. "
         "Regret is a configuration's displacement for a region minus the best displacement any "
-        "configuration achieved for that region. Section 2 quotes mean_regret and n_best.")
+        "configuration achieved for that region. mean_regret and n_best are the reported values.")
 
 
 def is_region(value) -> bool:
@@ -172,8 +172,8 @@ def main() -> int:
                 print(f"  {d}", file=sys.stderr)
             if len(diffs) > 20:
                 print(f"  ... and {len(diffs) - 20} more", file=sys.stderr)
-            print("\nNot written. Do not adjust the manuscript to match this; find out why "
-                  "the producer disagrees with the log first.", file=sys.stderr)
+            print("\nNot written. Do not adjust the reported numbers to match this; find out "
+                  "why the producer disagrees with the log first.", file=sys.stderr)
             return 1
         drift = max_rel_drift(theirs, mine)
         print(f"\nreproduces {OUT.relative_to(ROOT)}; "

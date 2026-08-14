@@ -147,7 +147,7 @@ def test_multimodal_use_sc_without_costs_raises(mouse_ad, human_ad):
 
 
 # ---------------------------------------------------------------------------
-# Per-mouse-parcel xyz weighting (TOPO-1, §5.11)
+# Per-mouse-parcel xyz weighting (TOPO-1)
 
 
 def test_multimodal_xyz_weight_per_parcel_changes_pi(mouse_ad, human_ad):

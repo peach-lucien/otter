@@ -35,7 +35,7 @@ The π matrix (1864 × 2094) is OTTER's core output. We ship several variants:
 | `pi_fc_plus_SC_with_amygdala.npy` | Production + amygdala pack only (pid 38) | Per-pack ablation |
 | `pi_fc_plus_SC_with_hippocampal.npy` | Production + hippocampal pack only (pids 39-42) | Per-pack ablation |
 | `pi_fc_plus_SC_with_lateral_pfc.npy` | Production + lateral PFC pack only (pids 45, 46) | Per-pack ablation (opt-in dlPFC) |
-| `pi_fc_plus_SC_per_region_xyz_*.npy` | TOPO-1 ablation outputs | Convergent negative; see archive iteration log |
+| `pi_fc_plus_SC_per_region_xyz_*.npy` | TOPO-1 ablation outputs | Convergent negative |
 | `pi_fc_plus_SC_xyz_zero.npy` | Production with xyz=0 globally | TOPO-1 control |
 | `pi_quickstart.npy` | Demo π for `notebooks/01_quickstart.ipynb` | Notebook only |
 

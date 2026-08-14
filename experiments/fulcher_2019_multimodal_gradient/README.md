@@ -1,98 +1,100 @@
-> Rewritten 2026-07-20. This experiment was previously reported as a negative result
-> (r = 0.37 / 0.36, spin p = 0.11 / 0.10, "microstructure does not translate"). Those values
-> came from the retired pre-warp coupling, and the conclusion also depended on a bug in
-> `principal_gradient()`. On the canonical coupling both measurements clear their nulls.
-
 # Fulcher 2019 multimodal-gradient validation
 
-We asked whether OTTER's π carries the **mouse multimodal cortical hierarchy**,
-the sensorimotor → prefrontal axis that Fulcher et al. showed is shared across
-cytoarchitecture, gene expression, cell density and connectivity, across to
-the human cortex.
+We ask whether OTTER's π carries the **mouse multimodal cortical hierarchy**, the
+sensorimotor to prefrontal axis that Fulcher et al. showed is shared across
+cytoarchitecture, gene expression, cell density and connectivity, across to the
+human cortex.
 
 ## Why this experiment
 
 [Fulcher, Murray, Zerbi & Wang 2019 (PNAS)](https://doi.org/10.1073/pnas.1814144116)
-showed that several independent modalities of mouse cortex all vary along a
-single hierarchical axis from primary sensory to prefrontal areas. Their
-modality-spanning measurement is the **T1w:T2w ratio**, an intracortical-myelin
-proxy reported for 40 mouse isocortical areas; they also use Goulas et al.'s
-**cytoarchitectural type** (eulamination 1–4) for 38 areas.
+showed that several independent modalities of mouse cortex vary along a single
+hierarchical axis from primary sensory to prefrontal areas. Their modality-spanning
+measurement is the **T1w:T2w ratio**, an intracortical-myelin proxy reported for 40
+mouse isocortical areas. They also use Goulas et al.'s **cytoarchitectural type**, an
+ordinal eulamination scale, reported for 38 areas.
 
-This is a Beauchamp-independent, anchor-orthogonal test on two counts: both
-mouse maps are *structural* (OTTER's π is built from FC + SC), and the human
-reference, the [HCP S1200 T1w/T2w myelin map](https://github.com/netneurolab/neuromaps),
-is independent published data rather than an anchor pair. If OTTER's π is
-anatomically faithful, translating the mouse myelin hierarchy through π should
-reproduce the human myelin map: heavily myelinated sensory cortex, lightly
-myelinated association cortex.
+The test is Beauchamp-independent and anchor-orthogonal on two counts. Both mouse maps are
+structural, while π is built from FC and SC, and the human reference, the
+[HCP S1200 T1w/T2w myelin map](https://github.com/netneurolab/neuromaps), is independent
+published data rather than an anchor pair.
 
 ## Result
 
-Three panels (`outputs/figures/fulcher_2019_multimodal_gradient.png`):
+π is `outputs/coupling/pi_canonical.npy`, sha256 `bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77`.
+Three panels (`outputs/figures/fulcher_2019_multimodal_gradient.png`).
 
-**1. Mouse T1w:T2w → human myelin.** We routed the mouse T1w:T2w myelin proxy
-through π and correlated the resulting predicted map with the observed human HCP
-myelin map. Across 174 Schaefer regions the two agree at **Pearson r = +0.373,
-Spearman ρ = +0.321** (analytical p = 2.5×10⁻⁵), with **empirical p = 0.000**
-against a 200-trial permuted-π null (null mean r ≈ 0).
+**1. Mouse T1w:T2w → human myelin.** The mouse T1w:T2w proxy, covering 570 mouse parcels
+across 39 Allen areas, is routed through π and the predicted map compared to the observed
+human HCP myelin map. Over 388 Schaefer regions the two agree at **Pearson r = +0.470,
+Spearman ρ = +0.494**. None of 200 permuted-π trials reached that r, and the permuted null
+has mean r = −0.011.
 
+**2. Routed territory on the principal gradient.** π reaches 388 of 400 Schaefer regions.
+On the human principal connectivity gradient those regions have the same spread as the whole
+cortex, SD 0.00157 against 0.00157, ratio 1.00, so the routed territory spans the human
+unimodal to transmodal axis rather than a slice of it. The predicted T1w:T2w map tracks that
+gradient at **r = +0.560** over 388 regions, with the gradient oriented so its high end is
+heavily myelinated cortex.
 
-**2. Routed territory is gradient-compressed.** π concentrates the whole mouse
-brain onto a compact human territory: the 417 mouse isocortical parcels map onto
-just **174 of 400 Schaefer regions**. On the human principal connectivity
-gradient those 174 regions have **half the brain-wide spread** (SD 0.0108 vs
-0.0217, compression ×0.50). Mouse isocortex lands on a narrow middle slice of
-the human unimodal–transmodal axis, so within this territory the principal
-gradient does not act as a hierarchy ruler (predicted-vs-gradient r = −0.204),
-and the result echoes the disproportionate evolutionary expansion of human
-association cortex.
+**3. Cytoarchitecture → human myelin.** The same routing applied to a second, independent
+mouse modality. Goulas cytoarchitectural type, covering 37 Allen areas, predicts the human
+myelin map at **r = +0.473, ρ = +0.560** over 388 regions. None of 200 permuted-π trials
+reached that r, and the permuted null has mean r = −0.011.
 
-**3. Cytoarchitecture → human myelin (independent modality).** We repeated the
-routing with a second, independent mouse modality. Goulas cytoarchitectural type,
-routed through π, also predicts the human myelin map at **r = +0.47, ρ = +0.325**
-(p = 3.4×10⁻⁴, empirical p = 0.000). Two unrelated mouse structural modalities
-converge on the same human target. Neither clears a spin null, so the convergence
-rules out a single-measurement artefact **without** establishing that π carries the
-hierarchy. Two smooth maps agreeing at the level spatial smoothness already predicts
-do not constitute a correspondence.
+### Spin nulls
 
-**What this experiment shows.** π was fitted on connectivity. Microstructure
-is the modality it never saw, and it does not transfer. The method has not failed
-here. This is the negative half of the paper's organising claim (`docs/03_results.md`
-§3): *connectional organisation transfers through π; microstructure does not.*
+`outputs/logs/out_c2_nulls.json` scores both transfers at parcel level against two spatial
+nulls. The translation spin rotates the mouse input and routes the rotated map through the
+real coupling. The human-side spin rotates the human target map. Both preserve spatial
+autocorrelation, so neither null sits at zero.
 
-| Panel | Test | Pearson r | Empirical p |
-|---|---|---:|:---:|
-| 1 | mouse T1w:T2w → human myelin | **+0.373** | 0.000 |
-| 2 | routed territory gradient SD vs all-cortex | ×0.50 | |
-| 3 | mouse cytoarchitecture → human myelin | **+0.362** | 0.000 |
+| Transfer | \|r\| | parcels | translation spin p | human-side spin p |
+|---|---:|---:|---:|---:|
+| mouse T1w:T2w → human myelin | 0.505 | 1,789 | 0.005 | < 0.001 |
+| mouse cytoarchitecture → human myelin | 0.534 | 1,787 | < 0.001 | < 0.001 |
+
+Null mean \|r\| across these four tests runs from 0.138 to 0.243. The nulls use 1,000
+rotations, so p values logged as 0.000 are reported here as p < 0.001.
+
+### Resolution of the mouse inputs
+
+The mouse cytoarchitecture map takes five distinct values and the T1w:T2w proxy takes 39,
+each spread over about 1,790 parcels. The parcel count is therefore not a count of
+independent observations, and no analytic p-value is quoted for these correlations. The
+spin nulls carry the inference.
+
+**What this experiment shows.** Two mouse structural measurements that π never saw, an
+intracortical-myelin proxy and cytoarchitectural type, both predict the human HCP myelin
+map when routed through π. Each clears a translation spin and a human-side spin at parcel
+level, and each clears a permuted-π null at region level. Microstructure transfers through π.
 
 ## Method
 
-1. Assign every OTTER mouse parcel its Allen-acronym value from Fulcher's
-   tables (T1w:T2w → 417 parcels / 36 areas; cytoarchitecture → 414 / 35).
-   PTLp has no acronym in OTTER's parcellation (split into VISa/VISrl in the
-   newer Allen CCF); VISal/PERI/AUDpo carry no parcels.
-2. Translate each mouse map through π as a transport-weighted average:
+1. Assign every OTTER mouse parcel its Allen-acronym value from Fulcher's tables. 39 of the
+   40 T1w:T2w areas and 37 of the 38 cytoarchitecture areas have parcels in OTTER's mouse
+   parcellation.
+2. Route each mouse map through π as a transport-weighted average,
    `predicted_h[j] = Σ_i m[i]·π[i,j] / Σ_i π[i,j]` over the assigned parcels.
-3. Aggregate the predicted human map to Schaefer-400 regions; compare against
-   the HCP myelin map (Pearson + Spearman).
-4. Permuted-π null (200 trials, row shuffle).
-5. Panel 2: compare the principal-gradient SD over all cortex vs the routed
-   territory.
+3. Aggregate the predicted human map to Schaefer-400 regions and compare against the HCP
+   myelin map with Pearson and Spearman correlation.
+4. Permuted-π null, 200 trials, row shuffle.
+5. Panel 2 compares the principal-gradient SD over all cortex against the routed territory.
 
-The human myelin map is the HCP S1200 T1w/T2w annotation (neuromaps), parcellated
-onto Domhof's Schaefer-400 17Networks parcellation, in OTTER's human
-parcellation order. See `data_external/fulcher_2019_gradients/SOURCES.md`.
+The human myelin map is the HCP S1200 T1w/T2w annotation (neuromaps), parcellated onto
+Domhof's Schaefer-400 17Networks parcellation, in OTTER's human parcellation order. See
+`data_external/fulcher_2019_gradients/SOURCES.md`.
 
 ## Files
 
 | File | What |
 |---|---|
-| `01_gradient_validation.py` | Route both mouse modalities through π, compare to human myelin, characterise the routed territory, permuted-π null |
-| `02_plot.py` | 3-panel figure |
+| `01_gradient_validation.py` | Routes both mouse modalities through π, compares to human myelin, characterises the routed territory, runs the permuted-π null. Writes `outputs/logs/fulcher_2019_gradient.json` |
+| `02_plot.py` | Reads that log, writes `outputs/figures/fulcher_2019_multimodal_gradient.png` |
 | `README.md` | This file |
+
+The parcel-level spin nulls come from `outputs/logs/out_c2_nulls.json`. No producer script
+for that log is present in the repo.
 
 ## Reproduce
 
@@ -102,7 +104,3 @@ PYTHONPATH=src python experiments/margulies_2016_principal_gradient/01_gradient_
 PYTHONPATH=src python experiments/fulcher_2019_multimodal_gradient/01_gradient_validation.py
 PYTHONPATH=src python experiments/fulcher_2019_multimodal_gradient/02_plot.py
 ```
-
-Outputs:
-- `outputs/logs/fulcher_2019_gradient.json` (per-region predicted/observed maps + stats)
-- `outputs/figures/fulcher_2019_multimodal_gradient.png` (3-panel figure)

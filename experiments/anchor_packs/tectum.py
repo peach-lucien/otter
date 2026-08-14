@@ -2,10 +2,9 @@
 
 The tectum (midbrain colliculi) is one of OTTER's documented failure
 regions, both SC and IC have 0 % Beauchamp top-1 under the production
-point-anchor π. ``docs/archive/diagnostics.md`` calls out tectum's spatial
-inversion as the failure mechanism: mouse SC is dorsal whereas human SC
-is ventral in MNI space, so the xyz cross-species cost actively misleads
-non-anchor tectum parcels.
+point-anchor π. The failure mechanism is tectum's spatial inversion. Mouse SC
+is dorsal whereas human SC is ventral in MNI space, so the xyz cross-species
+cost actively misleads non-anchor tectum parcels.
 
 This experiment adds the two tectum-pack region anchors:
 
@@ -13,7 +12,7 @@ This experiment adds the two tectum-pack region anchors:
   pid 33: Mouse Inferior Colliculus ↔ Human IC (Mai/Paxinos, Schreiner 2007)
 
 Tests three configurations on Beauchamp top-1 (with the same caveat
-as BICCN motor, see docs/archive/iteration_log.md §5.12.2):
+as BICCN motor):
 
   1. Production fc_plus_SC point-anchor π        (baseline)
   2. Production + tectum pack                     (full)
