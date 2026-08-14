@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
-"""The coverage result, rebuilt around a discrete dlPFC coverage hole.
+"""The coverage result, built around a discrete dlPFC coverage hole.
 
-The retired analysis claimed a smooth sensorimotor->association coverage GRADIENT. It is not a
-gradient. Coverage is roughly flat across cortex (every myelin decile within +-0.25 SD) with
-one exception: Yeo-17 network Control B = dorsolateral / rostrolateral prefrontal cortex, which
-is under-covered by ~1.2 SD. See otter-section5-dlpfc memory and 08_anchorfree_control.py for
-why the gradient framing failed (log-column-mass is an eps-amplified transport cost, coverage
-L/R reliability is only 0.22, and the tertile contrast was carried by a single anomalous
-myelin decile that turns out to be this same dlPFC territory).
+Coverage is roughly flat across cortex (every myelin decile within +-0.25 SD) with one
+exception: Yeo-17 network Control B = dorsolateral / rostrolateral prefrontal cortex, which
+is under-covered by ~1.2 SD. It is not a smooth sensorimotor->association gradient:
+log-column-mass is an eps-amplified transport cost, coverage L/R reliability is 0.22, and the
+tertile contrast is carried by a single myelin decile corresponding to this same dlPFC
+territory (08_anchorfree_control.py).
 
 This script establishes four things, and writes one log:
 
@@ -20,11 +19,10 @@ This script establishes four things, and writes one log:
    supervision at all, -1.44 SD) and is much weaker in the base coupling (Garin points, no
    FC/SC packs: -0.33 SD, spin p = 0.06).
 
-NOTE ON COUPLINGS: canonical (-1.03 SD) is the reported arm. The retired pre-warp coupling
-"production" gave -1.20 SD; the conclusion is unchanged in direction and significance, only the
-magnitude moves. This is the one coverage result that survived the canonical repoint. The
-medial->lateral gradient (script 12) and the sensorimotor/association tertile gap (script 01)
-did not.
+COUPLINGS: canonical (-1.03 SD) is the reported arm. The retired pre-warp coupling
+"production" gives -1.20 SD; direction and significance are unchanged. The medial->lateral
+gradient (script 12) and the sensorimotor/association tertile gap (script 01) are null on the
+canonical coupling.
 
 3. IT IS CONNECTIONAL, NOT MOLECULAR. Transcriptomic similarity to the mouse does NOT dip in
    Control B, so the territory is molecularly mouse-like but connectionally unreachable.
@@ -33,12 +31,12 @@ did not.
    granular type-4 cortex exists in the mouse only in primary sensorimotor areas. Human dlPFC
    is granular association cortex, so it has no granular-prefrontal counterpart in the rodent to
    receive mouse mass. This is the connectional face of the absent rodent granular-PFC homologue
-   (cf. the Balsters/Schaeffer dlPFC control: mouse medial-frontal cortex routes ~0% to dlPFC).
+   (cf. the Schaeffer dlPFC control: mouse medial-frontal cortex routes ~0% to dlPFC).
 
 Spin-null note: the signal spun here is COVERAGE (asymmetric); it is correlated against network
 membership / myelin (symmetric). That configuration is calibrated (5.5% FPR). Do NOT bilaterally
 average coverage before spinning: that makes both maps symmetric and the whole-brain spin null
-then over-rejects (37% FPR). See the memory.
+then over-rejects (37% FPR).
 
 Run:  cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/11_dlpfc_deficit.py
 Writes: outputs/logs/section5_dlpfc_deficit.json

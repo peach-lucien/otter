@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Clean held-out anchor CV for the warp: does it help anchors held out of BOTH warp + supervision?
 
-Beauchamp overlaps the Garin anchors, so it can't fairly judge an anchor-fitted warp. Here we use the
-anchors themselves as a held-out test, removing the confound:
+Beauchamp overlaps the Garin anchors, so it cannot judge an anchor-fitted warp. The anchors
+themselves are used as a held-out test instead, removing the confound:
 
   k-fold on unique homolog pair_ids. For each fold:
     - test anchors = anchors whose pair_id is in the fold; train = the rest.

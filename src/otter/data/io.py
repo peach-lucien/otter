@@ -5,7 +5,7 @@ Public API:
     load_struct(species), return the raw dict for a species.
     parse_t_table(...), turn the cell-array t into a tidy DataFrame.
     build_anndata(...), assemble an AnnData per species, optionally cache to disk.
-    load_cached(...), reload a previously cached AnnData + FC tensor.
+    load_cached(...), reload a cached AnnData + FC tensor.
     stream_mean_fc(...), chunked compute of the mean FC matrix without
                             materialising the full per-subject tensor.
 
@@ -76,9 +76,8 @@ def _detect_schema(ht: list[str]) -> str:
     """Return 'v1' or 'v2' based on exact equality of the ht column list.
 
     Raises ValueError on any other arrangement, including a 19-column list
-    with a 20th column appended or columns reordered. The strictness is
-    intentional: silently mis-decoding an unexpected column layout would be
-    much worse than a loud failure here.
+    with a 20th column appended or columns reordered, so that an unexpected
+    column layout fails loudly rather than being mis-decoded.
     """
     ht_list = list(ht)
     if ht_list == _V1_HT:
@@ -102,8 +101,8 @@ def _mat_path(species: str, data_dir: Path | None) -> Path:
     _V2_MOUSE_FILENAME``, then falls back to v1 ``data_dir / corrs_mouse.mat``.
     For ``"human"`` it returns ``data_dir / corrs_human.mat``.
 
-    Signature unchanged, still returns ``Path`` only. The schema detected at
-    that path is available via the sibling helper ``_mat_path_and_schema``.
+    Returns ``Path`` only. The schema detected at that path is available via
+    the sibling helper ``_mat_path_and_schema``.
     """
     p, _schema = _mat_path_and_schema(species, data_dir)
     return p
@@ -245,7 +244,7 @@ def stream_mean_fc_subset(
     data_dir: Path | None = None,
     block: int | None = None,
 ) -> tuple[np.ndarray, np.ndarray, int]:
-    """Like stream_mean_fc but lets you exclude (or include only) specific
+    """Like stream_mean_fc, but excluding (or including only) specific
     subjects by their 0-based index."""
     p = _mat_path(species, data_dir)
     top = _MAT_TOPKEY[species]
@@ -334,9 +333,9 @@ def parse_t_table(t: list[list[Any]], ht: list[str]) -> pd.DataFrame:
             voxel_indices, populated from DS_ix (SS grid, 0-based,
                                             F-order). DIFFERENT GRID from v1
                                             (181×274×139 at 70 µm vs 62×94×47
-                                            at 200 µm). Consumers that previously
-                                            unravelled into the rsmask grid must
-                                            migrate to SS or NS grid.
+                                            at 200 µm). Consumers unravelling
+                                            into the rsmask grid must use the
+                                            SS or NS grid.
             centre_ns_x/y/z. AS_center_mm, NS world mm.
             centre_ss_x/y/z. DS_center_mm, SS world mm.
             ns_center_ix, scalar 0-based linear index into NS
@@ -366,7 +365,7 @@ def parse_t_table(t: list[list[Any]], ht: list[str]) -> pd.DataFrame:
               resulting values are int64 and ready for
               ``np.unravel_index(idx, shape, order='F')`` directly, do NOT
               subtract 1 again downstream.
-            - Order convention (F) lives in consumers; not encoded in the value.
+            - Order convention (F) lives in consumers, not in the value.
             - Grid shape is ``_NS_SHAPE`` for ``ns_*`` / ``AS_*``, ``_SS_SHAPE``
               for ``ss_*`` / ``DS_*``.
 
@@ -385,7 +384,7 @@ def parse_t_table(t: list[list[Any]], ht: list[str]) -> pd.DataFrame:
 
 
 def _parse_t_table_v1(t: list[list[Any]]) -> pd.DataFrame:
-    """v1 path, unchanged from the original implementation. Kept verbatim."""
+    """v1 path, 7 columns."""
     types     = np.fromiter((int(row[0]) for row in t), dtype=np.int8,  count=len(t))
     numids    = np.fromiter((int(row[1]) for row in t), dtype=np.int32, count=len(t))
     pairids   = np.fromiter((int(row[2]) for row in t), dtype=np.int32, count=len(t))
@@ -418,9 +417,9 @@ def _parse_t_table_v1(t: list[list[Any]]) -> pd.DataFrame:
     df.index = df["numid"].astype(int).astype(str)
     df.index.name = "node_id"
 
-    # Tag schema on the DataFrame for runtime introspection. Note: df.attrs
-    # does NOT survive serialisation, used only for in-process loader→consumer
-    # hand-off. AnnData equivalents are populated by build_anndata into A.uns.
+    # Tag schema on the DataFrame for runtime introspection. df.attrs does
+    # NOT survive serialisation and is used only for the in-process
+    # loader→consumer hand-off. build_anndata writes the equivalents to A.uns.
     df.attrs.update({
         "schema": "v1",
         "voxel_indices_grid": "rsmask",
@@ -545,9 +544,9 @@ def _parse_t_table_v2(t: list[list[Any]]) -> pd.DataFrame:
     rv_ss_dsq = [str(row[17]) for row in t]
     rv_ss_aba = [str(row[18]) for row in t]
 
-    # Backward-compat: x/y/z = DS_center_mm (SS frame, matches v1 frame to
-    # sub-voxel precision). voxel_indices = ss_voxel_indices (distinct list
-    # copy to avoid aliasing, see I8 in the design review).
+    # x/y/z = DS_center_mm (SS frame, matches the v1 frame to sub-voxel
+    # precision). voxel_indices = ss_voxel_indices, as a distinct list copy so
+    # the two columns do not alias.
     df = pd.DataFrame({
         "type":      types,
         "numid":     numids,
@@ -609,7 +608,7 @@ def _parse_t_table_v2(t: list[list[Any]]) -> pd.DataFrame:
         "voxel_indices_order": "F",
         "voxel_indices_one_based": False,  # already decremented at load
         "xyz_frame": "SS",
-        "ss_center_voxel_is_com": False,   # see B2/L16: max 0.55 mm offset
+        "ss_center_voxel_is_com": False,   # max 0.55 mm offset
         "ns_center_voxel_is_com": True,    # NS round-trip is exact
         "ns_grid_shape": _NS_SHAPE,
         "ss_grid_shape": _SS_SHAPE,
@@ -689,8 +688,8 @@ def build_anndata(
         A.uns["ns_affine_origin"] = np.array((0.0, 0.0, 0.0), dtype=np.float64)
         A.uns["ss_affine_origin"] = np.array((-6.27, -8.19, -4.20), dtype=np.float64)
         A.uns["ns_center_voxel_is_com"] = True   # NS round-trip is exact
-        A.uns["ss_center_voxel_is_com"] = False  # max 0.55 mm offset; see L16
-        # Distinct list copies for aliasing safety (B6 / I8 in REVIEW.md).
+        A.uns["ss_center_voxel_is_com"] = False  # max 0.55 mm offset
+        # Distinct list copies, so the two entries do not alias.
         A.uns["ns_voxel_indices"] = [v.astype(np.int64).copy() for v in var["ns_voxel_indices"]]
         A.uns["ss_voxel_indices"] = [v.astype(np.int64).copy() for v in var["ss_voxel_indices"]]
         # Strip the new ragged columns from var (anndata can't serialise ragged
@@ -714,8 +713,8 @@ def build_anndata(
                 popped[key] = A.uns.pop(key)
         A.write_h5ad(h5_path)
         if cache_voxels:
-            # Aliases for backward compatibility: node_{i} is the legacy
-            # filename pattern, ns_node_{i} / ss_node_{i} are v2 explicit.
+            # node_{i} is the v1 filename pattern; ns_node_{i} / ss_node_{i}
+            # name the v2 frame explicitly.
             payload: dict[str, np.ndarray] = {}
             primary = popped.get("voxel_indices") or popped.get("ss_voxel_indices") or []
             for i, v in enumerate(primary):
@@ -745,7 +744,7 @@ def load_cached(
     data_dir: Path | None = None,
     strict_schema: bool = True,
 ) -> tuple[ad.AnnData, np.ndarray | None]:
-    """Load a previously cached AnnData and (if present) the per-subject FC tensor.
+    """Load a cached AnnData and (if present) the per-subject FC tensor.
 
     Parameters
     ----------
@@ -787,17 +786,16 @@ def load_cached(
         if expected_schema is not None:
             schema_key = "mouse_schema" if species == "mouse" else f"{species}_schema"
             cached_schema = A.uns.get(schema_key)
-            # Treat a missing schema key as legacy v1 cache, accept silently
-            # if the on-disk file is also v1. The schema key was added when
-            # we introduced v2 support; pre-existing v1 caches don't have it
-            # but their content is still correct under v1 semantics.
+            # A missing schema key marks a v1 cache written before the key
+            # existed; its content is correct under v1 semantics, so accept it
+            # when the on-disk file is also v1.
             if cached_schema is None and expected_schema == "v1":
-                pass  # legacy v1 cache compatible with v1 .mat file
+                pass  # v1 cache, compatible with a v1 .mat file
             elif cached_schema is None or str(cached_schema) != expected_schema:
                 h5ad_path = cache_dir / f"{species}.h5ad"
                 fc_path   = cache_dir / f"{species}.fc.npy"
                 voxels    = cache_dir / f"{species}.voxels.npz"
-                cached_repr = "legacy (no schema tag)" if cached_schema is None else repr(cached_schema)
+                cached_repr = "untagged" if cached_schema is None else repr(cached_schema)
                 raise CacheSchemaMismatch(
                     f"Cached {species!r} AnnData has schema "
                     f"{cached_repr} but the current source .mat file is "
@@ -821,9 +819,9 @@ def load_pi(name: str = "pi_canonical.npy",
     spatial cost + region packs, xyz_weight=0.25, epsilon=0.05; selected by
     held-out Beauchamp CV). For the sharp confidence-graded showcase pass
     ``pi_canonical_sharp.npy`` (epsilon=0.005); the pre-warp coupling is
-    ``pi_fc_plus_SC_with_all_packs.npy``. Prefer this over a bare
-    ``np.load("outputs/coupling/...")`` so a fresh user is prompted to fetch the
-    data (or gets a clear error) rather than a bare ``FileNotFoundError``.
+    ``pi_fc_plus_SC_with_all_packs.npy``. Preferred over a bare
+    ``np.load("outputs/coupling/...")``, which raises ``FileNotFoundError``
+    when the data bundle has not been fetched.
     """
     from otter.data.fetch import ensure_data, find_root
     root = find_root()
@@ -837,9 +835,8 @@ def pi_provenance(name: str = "pi_canonical.npy",
                   *, coupling_dir: Path | None = None) -> dict:
     """Provenance stamp for a coupling file: ``{"pi_file", "pi_sha256"}``.
 
-    Every script that writes a log MUST record this alongside its results, so an
-    audit can tell which coupling produced the numbers. A re-run proves nothing
-    about which input was used; the sha256 does.
+    Every script that writes a log records this alongside its results, so an
+    audit can tell which coupling produced the numbers.
     """
     import hashlib
 

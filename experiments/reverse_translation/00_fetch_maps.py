@@ -9,7 +9,7 @@ usable here.
 
 This uses NiMARE. The API drifts between versions, so the script tries several candidate
 term spellings per function and several candidate map keys, and prints what it used.
-If a step fails in your NiMARE version, the fix is almost always a single name in
+If a step fails under a given NiMARE version, the fix is usually a single name in
 FUNCTION_TERMS or MAP_KEYS below.
 
 Run once (downloads the Neurosynth v7 database, ~a few hundred MB, then builds 12 maps):
@@ -123,10 +123,10 @@ def main():
             if lab:
                 used = term; break
         if not lab:
-            print(f"  {fn:14s} NO Neurosynth term matched {terms} — edit FUNCTION_TERMS"); continue
+            print(f"  {fn:14s} no Neurosynth term matched {terms}; edit FUNCTION_TERMS"); continue
         ids = dset.get_studies_by_label(labels=[lab], label_threshold=LABEL_THRESHOLD)
         if len(ids) < 30:
-            print(f"  {fn:14s} term '{used}' has only {len(ids)} studies — weak; consider another term")
+            print(f"  {fn:14s} term '{used}' has only {len(ids)} studies; weak, consider another term")
         img, mapkey = association_map(dset, ids)
         img.to_filename(str(OUT / f"{fn}.nii.gz"))
         print(f"  {fn:14s} term '{used}' ({len(ids)} studies) map '{mapkey}' -> {fn}.nii.gz")

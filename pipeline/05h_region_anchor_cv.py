@@ -5,14 +5,13 @@ hold it out (don't pass it to the solver as a constraint), solve with the
 remaining anchors, then score recovery: do mouse parcels in the held-out
 region's mouse-set argmax to parcels in the held-out region's human-set?
 
-If the answer is "yes" without supervision → the model has captured the
-homology from FC/SC structure (real generalisation).
-If the answer is "no" without supervision → the supervision is what was
-giving us the appearance of recovery (which is fine, we built region
-anchors with that purpose, but the headline claim should be qualified).
+Recovery without supervision indicates that the model has captured the
+homology from FC/SC structure. Failure without supervision indicates that the
+supervision produced the apparent recovery, and the corresponding claim is
+qualified accordingly.
 
-This avoids the circularity exposed in S4: declaring + testing the same
-region gives 100% by construction. Held-out CV gives the generalisation number.
+Declaring and testing the same region gives 100% by construction. Held-out CV
+gives the generalisation number.
 
 Usage:
     PYTHONPATH=src python pipeline/05h_region_anchor_cv.py

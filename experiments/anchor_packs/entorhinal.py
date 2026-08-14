@@ -1,6 +1,6 @@
-"""ENTORHINAL-1: Add entorhinal cortex anchor (Franjic 2021).
+"""Add entorhinal cortex anchor (Franjic 2021).
 
-Single-entry pack. DSURQE doesn't expose medial entorhinal. The whole-EC
+Single-entry pack. DSURQE does not expose medial entorhinal. The whole-EC
 anchor captures the broad cross-species EC homology documented by Franjic
 2021 (transcriptomic taxonomy across human, macaque, pig).
 
@@ -10,9 +10,9 @@ Outputs:
   - outputs/coupling/pi_fc_plus_SC_with_entorhinal.npy
   - outputs/logs/beauchamp_validation_entorhinal.json
 
-Beauchamp doesn't have an entorhinal validation pair, so the direct
-effect isn't measurable; the experiment confirms zero off-target effects
-on other Beauchamp pairs.
+Beauchamp has no entorhinal validation pair, so the direct effect is not
+measurable; the experiment reports off-target effects on other Beauchamp
+pairs.
 
 Usage:
     PYTHONPATH=src python experiments/anchor_packs/entorhinal.py

@@ -1,9 +1,9 @@
-"""Reachability, done correctly: SPIN null (not label-shuffle) + specificity vs a hierarchy map.
+"""Reachability under a spin null, with a specificity check against a hierarchy map.
 
-The first reachability test used a plain permutation of burden across regions, which destroys spatial
-autocorrelation and inflates significance (both coverage and disease maps are smooth). Redo with a
-spin null (rotate the coverage map on the sphere, preserving autocorrelation). Also test whether the
-disease burden aligns with reconstruction-coverage MORE than with a generic myelin/hierarchy map -
+A plain permutation of burden across regions destroys spatial autocorrelation and inflates
+significance, since both coverage and disease maps are smooth. The spin null used here rotates the
+coverage map on the sphere and preserves autocorrelation. This also tests whether the disease burden
+aligns with reconstruction-coverage MORE than with a generic myelin/hierarchy map -
 if myelin does just as well, the signal is 'disorders hit association cortex', not OTTER-specific.
 
 reachability(disorder) = burden-weighted mean of a reference-map PERCENTILE across 52 hemi-regions,

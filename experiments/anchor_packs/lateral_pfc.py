@@ -1,6 +1,6 @@
-"""LATERAL-PFC: Add OFC + dlPFC region anchors.
+"""Add OFC + dlPFC region anchors.
 
-Coverage of lateral PFC regions Beauchamp doesn't validate but which
+Coverage of lateral PFC regions that Beauchamp does not validate but that
 matter for downstream cognitive-neuroscience use cases (decision-making,
 working memory, executive control).
 

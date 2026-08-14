@@ -15,11 +15,11 @@ Procedure:
   5. Correlate predicted vs observed over the 36 upper-triangle entries.
   6. Permuted-π null: shuffle π rows, repeat 200 trials.
 
-Critically, we map mouse parcels to Pagani's *9* mouse networks (separating
-Caudate Putamen from Thalamus, which OTTER's PAIRID_TO_NETWORK lumps as
-"subcortical"). We do this via per-parcel nearest-Garin-anchor assignment using
-the same xyz logic in otter.data.networks.assign_networks, but exposing the
-*anchor pair_id* rather than the network name.
+Mouse parcels are mapped to Pagani's 9 mouse networks (separating Caudate
+Putamen from Thalamus, which OTTER's PAIRID_TO_NETWORK lumps as "subcortical")
+by per-parcel nearest-Garin-anchor assignment, using the same xyz logic as
+otter.data.networks.assign_networks but exposing the anchor pair_id rather than
+the network name.
 """
 from __future__ import annotations
 
@@ -66,7 +66,7 @@ GARIN_PID_TO_PAGANI_MOUSE = {
     18: None,              # Hypothalamus. Pagani's mouse atlas (Liska 2015) excludes
                            # hypothalamus from its 9-net partition. Lumping into "Thalamus"
                            # biases the Thalamus row of T toward subcortical/hypothalamic
-                           # routing. Drop it like pons/tectum (audit fix M4).
+                           # routing. Drop it like pons/tectum.
     19: "Thalamus",        # Thalamus ← KEY for splitting subcortical
     20: None,              # Pons. Pagani has no brainstem
     21: None,              # Tectum. Pagani has no brainstem
@@ -75,11 +75,11 @@ GARIN_PID_TO_PAGANI_MOUSE = {
 
 def assign_mouse_pagani_networks(M_var: pd.DataFrame) -> tuple[np.ndarray, list[str]]:
     """Assign each of 1864 mouse parcels to one of Pagani's 9 mouse networks
-    (plus a -1 sentinel for parcels that don't map cleanly. Pons/Tectum).
+    (plus a -1 sentinel for parcels that do not map cleanly, Pons/Tectum).
 
     Uses the same nearest-anchor-by-normalised-xyz logic as
     otter.data.networks.assign_networks, but maps to Pagani names via
-    GARIN_PID_TO_PAGANI_MOUSE so we can split Caudate Putamen vs Thalamus.
+    GARIN_PID_TO_PAGANI_MOUSE to split Caudate Putamen from Thalamus.
     """
     idx_m = get_anchor_index(M_var)
     coords = M_var[["x", "y", "z"]].values.astype(np.float64)
@@ -228,11 +228,10 @@ def main():
     print(f"  Spearman ρ = {r_s:+.3f} (analytical p = {p_s:.4f})")
 
     # Permuted-π null
-    # NB: permute rows WITHIN the kept 1613 mouse parcels (i.e., shuffle the
-    # mouse-parcel-to-network assignment among kept parcels). Earlier version
-    # permuted all 1864 rows then re-selected via keep_m, which mixed in
-    # brainstem rows whose coupling structure differs from forebrain, that
-    # null was wider than it should have been. (Audit fix B1.)
+    # Permute rows within the kept 1613 mouse parcels, i.e. shuffle the
+    # mouse-parcel-to-network assignment among kept parcels. Permuting all
+    # 1864 rows and then re-selecting via keep_m mixes in brainstem rows whose
+    # coupling structure differs from forebrain, and widens the null.
     print(f"\nPermuted-π null (200 trials, within-kept-rows):")
     rng = np.random.default_rng(seed=42)
     n_trials = 200

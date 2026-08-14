@@ -21,7 +21,7 @@ Usage:
     python pipeline/07_build_artefacts.py --viewer-only       # viewer only
     python pipeline/07_build_artefacts.py --viewer --pi-file pi_fc_plus_SC_with_M1_hippo.npy
 
-This is a pure reporting step, it doesn't run any solves. Re-run any time
+This is a pure reporting step, it does not run any solves. Re-run any time
 you want a fresh table after `pipeline/05_evaluate.py` or a fresh viewer
 after `pipeline/04_solve_production.py`.
 """

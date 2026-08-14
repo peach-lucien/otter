@@ -15,10 +15,10 @@ panel, compute the mouse-parcel mean expression score, route through π →
 predicted human-parcel score (2094-vec). Save these as `predicted_pattern.npy`
 for Phase 2 comparison against ENIGMA observed disease spatial maps.
 
-Also: compute pairwise cross-disorder correlation matrix at parcel level
-this tells us how disorder-specific OTTER's predictions are even before we
-get to ENIGMA. If all disorders predict highly similar patterns, that confirms
-the shared-geometry result we found in the per-network specificity test
+The script also computes the pairwise cross-disorder correlation matrix at
+parcel level, which measures how disorder-specific OTTER's predictions are
+independently of ENIGMA. If all disorders predict similar patterns, that
+matches the shared-geometry result of the per-network specificity test
 (cross_disease_specificity.py).
 """
 from __future__ import annotations

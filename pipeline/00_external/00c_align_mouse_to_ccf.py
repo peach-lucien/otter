@@ -22,10 +22,10 @@ in raw CCFv3 coordinates. This script:
   4. Reports the best transform and saves it for use by
      experiments/autism_subtypes/allen_expansion/ (via _mouse_transform.py).
 
-If the best transform achieves >90% brain coverage, you're done. If 50–90%,
-the transform is approximately right but a fine-tuning ANTs step is recommended.
-If <50%, the colleague's space is not a simple permutation of CCFv3, proper
-registration required.
+If the best transform achieves >90% brain coverage, no further step is needed.
+At 50–90%, the transform is approximately right but a fine-tuning ANTs step is
+recommended. If <50%, the colleague's space is not a simple permutation of
+CCFv3 and full registration is required.
 
 Output: data_external/_diagnostics/mouse_to_ccf_transform.json
 """

@@ -1,14 +1,13 @@
-"""VISUAL-1: Add mouse LM ↔ human V2 region anchor (Wang & Burkhalter 2007).
+"""Add mouse LM ↔ human V2 region anchor (Wang & Burkhalter 2007).
 
 Single-entry pack. Mouse Lateral visual area (LM, 9 parcels) ↔ human V2
 at MNI(±20, –85, 10) r=10 mm (12 parcels).
 
 Beauchamp validates "Visual areas → cuneus" using all 54 mouse Visual
-parcels → human cuneus at (±10, -85, 5). Our pack uses a subset (just
-LM, 9 of 54) → a slightly different human target (V2 lateral, not
-cuneus). So the pack's effect on Beauchamp Visual→cuneus is null
-empirically 7 % → 7 %. The value is making LM↔V2 queries explicitly
-trustworthy.
+parcels → human cuneus at (±10, -85, 5). This pack uses a subset (LM, 9 of
+54) → a different human target (V2 lateral, not cuneus), so its effect on
+Beauchamp Visual→cuneus is null, 7 % → 7 %. It makes the LM↔V2
+correspondence explicit.
 
 Usage:
     PYTHONPATH=src python experiments/anchor_packs/visual.py

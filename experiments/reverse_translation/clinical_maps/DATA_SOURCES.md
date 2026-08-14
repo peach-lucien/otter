@@ -1,7 +1,7 @@
-# Clinical network maps — exact download links
+# Clinical network maps, download links
 
-Robust, distributed whole-brain MNI152 voxel network maps (not point seeds), so they route
-through the coupling the same way the Neurosynth functional maps did. All four below are
+Distributed whole-brain MNI152 voxel network maps (not point seeds), so they route
+through the coupling the same way the Neurosynth functional maps do. All four below are
 directly downloadable from **NeuroVault collection 13075** ("Causal mapping of human brain
 function", Siddiqi lab): https://neurovault.org/collections/13075/
 
@@ -23,10 +23,10 @@ curl -L -o ms_depression.nii.gz   https://neurovault.org/media/images/13075/DepM
 ```
 
 The script `03_clinical_networks.py` reads whatever of these are present and skips the rest.
-NeuroVault persistent citation IDs (cite these if you use a map), e.g. the
+NeuroVault persistent citation IDs (cite these when using a map), e.g. the
 anxdys atlas: `https://identifiers.org/neurovault.image:787858`.
 
-## Subcortical DBS optimal targets (OCD / PD) — extra conversion needed
+## Subcortical DBS optimal targets (OCD / PD), extra conversion needed
 The Li/Baldermann OCD-DBS and Horn PD-STN-DBS *optimal targets* are published as **fiber-tract
 atlases** (streamlines) distributed inside Lead-DBS (https://www.lead-dbs.org), not as MNI voxel
 NIfTIs. To feed them here they must first be rendered to an MNI voxel volume (e.g. tract density

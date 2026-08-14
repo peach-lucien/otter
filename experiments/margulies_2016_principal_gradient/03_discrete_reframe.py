@@ -1,24 +1,21 @@
 """Discrete reframes of the Margulies/Huntenburg principal-gradient test.
 
 Under the canonical coupling the continuous correlation (routed mouse gradient
-vs human gradient) is |r|=0.54 and clears a spatial spin null at p=0.032 -- but
-only just, and it weakened relative to the retired coupling (p=0.004). Two
+vs human gradient) is |r|=0.54 and clears a spatial spin null at p=0.032. Two
 smooth monotone maps can correlate by spatial autocorrelation alone (see
 01_gradient_validation.py and experiments/spatial_null_check/), so the
-continuous number should not carry the claim on its own. OTTER's *strong* mode
-is discrete correspondence (the network bridge and Coletta RSNs survive spin),
-so here we ask the gradient question categorically, does π preserve the
-discrete content of the gradient? and test it against the fair spin null.
-The continuous reference numbers are read live from
-outputs/logs/margulies_2016_gradient.json rather than quoted here, so they
-cannot go stale when the coupling changes.
+continuous number does not carry the claim on its own. This script asks the
+gradient question categorically, whether π preserves the discrete content of
+the gradient, and tests it against the spin null. The continuous reference
+numbers are read from outputs/logs/margulies_2016_gradient.json rather than
+quoted here.
 
 Two tests:
   A. Gradient-TIER classification. Bin the human gradient into 3 tiers
      (unimodal → transmodal). Route the mouse gradient through π, bin the
      prediction by the human tier edges, and measure exact + adjacent tier
      accuracy. Null = spin the mouse gradient on the mouse sphere, route through
-     the REAL π, re-bin, recompute accuracy (the fair translation-spin null).
+     the real π, re-bin, recompute accuracy (the translation-spin null).
   B. Network RANK-ORDER. Order the mouse networks by their mean mouse-gradient
      and the human networks by their mean human-gradient; route the per-network
      mouse gradient through the network-aggregated π and ask whether the
@@ -70,7 +67,7 @@ def tier_accuracy(pred_vals, human_tier, edges):
 
 def main():
     print("=" * 78)
-    print("Margulies gradient. DISCRETE reframes vs a fair spin null")
+    print("Margulies gradient. DISCRETE reframes vs a spin null")
     print("=" * 78)
 
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))
@@ -82,7 +79,7 @@ def main():
 
     # Read the gradients from 01_gradient_validation.py's output rather than recomputing.
     # principal_gradient() now requires an external hierarchy reference to select the
-    # correct diffusion component (it used to take the wrong one; see its docstring),
+    # correct diffusion component (see its docstring),
     # so recomputing here would duplicate that logic and risk it drifting out of sync.
     _g = json.loads((ROOT / "outputs/logs/margulies_2016_gradient.json").read_text())
     mouse_grad = np.asarray(_g["mouse_gradient"], float)

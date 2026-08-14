@@ -9,17 +9,17 @@ neurons, Gfap for astrocytes, etc.) maintaining their spatial distributions
 across species.
 
 This tests whether OTTER's π preserves cell-type marker spatial patterns
-across species. It's parallel to the Hodge 2019 layer-marker test
+across species. It parallels the Hodge 2019 layer-marker test
 (experiments/hodge_2019_cortical_layers) but tests cell-type-defining markers
 instead of cortical-layer markers.
 
-Hypothesis: cell-type markers (especially interneuron class markers) should
-translate cross-species *better* than layer markers, because:
-  - Cell-type spatial distributions are largely AREA-SPECIFIC (Pvalb high in
+Cell-type markers, and interneuron class markers in particular, are expected to
+translate cross-species better than layer markers, because:
+  - Cell-type spatial distributions are largely area-specific (Pvalb high in
     sensorimotor, Vip preferring associative cortex), so OTTER's area-level
-    anchors should capture them.
-  - Layer markers are WITHIN-AREA structure (laminar), which OTTER's anchors
-    don't supervise.
+    anchors capture them.
+  - Layer markers are within-area structure (laminar), which OTTER's anchors
+    do not supervise.
 
 Procedure (same as Hodge 2019 validation):
   1. For each cell-type marker, look up mouse and human per-parcel expression
@@ -214,7 +214,7 @@ def main():
                        f"(+{biccn_mean_r - hodge_mean_r:.3f} difference). "
                        f"Supports the hypothesis that area-specific cell-type "
                        f"distributions translate cross-species while within-area "
-                       f"laminar markers don't.")
+                       f"laminar markers do not.")
         elif biccn_mean_r > hodge_mean_r:
             verdict = (f"BICCN markers translate slightly better than layer "
                        f"markers (+{biccn_mean_r - hodge_mean_r:.3f}).")

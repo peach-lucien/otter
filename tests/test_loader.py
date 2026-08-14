@@ -335,7 +335,7 @@ def test_v2_indices_decode_to_ss_centres_within_threshold():
     assert mag.max() < 0.8, (
         f"SS round-trip max |diff| {mag.max():.4f} mm exceeds 0.8 mm. "
         f"Empirical max was 0.7688 mm; if this regresses past 0.8, something "
-        f"upstream of the loader changed (Paul's voxel-set or COM definition)."
+        f"upstream of the loader changed (the voxel-set or COM definition)."
     )
     # Also assert MOST parcels round-trip exactly (the loose-tail is small).
     assert (mag < 1e-6).mean() > 0.99, (
@@ -420,7 +420,7 @@ def test_v2_numid_pairid_region_identical_to_v1():
 @needs_v2
 @pytest.mark.slow
 def test_v2_rr_unchanged_sampled():
-    """m.rr should be bit-identical between v1 and v2. Paul did NOT recompute FC.
+    """m.rr should be bit-identical between v1 and v2; FC is not recomputed.
 
     Marked slow because reads two 1.3 GB files. Skip in fast runs with
     ``pytest -m 'not slow'`` or env var OTTER_TEST_FAST=1.
@@ -439,8 +439,8 @@ def test_v2_rr_unchanged_sampled():
         assert rr1.shape == rr2.shape
         # Sample subjects at first / middle / last positions. The 1.3 GB
         # files are slow to read; 3 samples is sufficient to catch any
-        # systematic difference. If you want exhaustive verification,
-        # run with OTTER_TEST_EXHAUSTIVE=1 set.
+        # systematic difference. Set OTTER_TEST_EXHAUSTIVE=1 for an
+        # exhaustive comparison.
         import os
         if os.environ.get("OTTER_TEST_EXHAUSTIVE") == "1":
             sample = np.linspace(0, rr1.shape[0] - 1, 10, dtype=int)

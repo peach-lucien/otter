@@ -6,17 +6,17 @@ motor cortex, striatum; hyper = amygdala, hippocampus, striatum. Methods, Supp
 Fig 2b) and then score the *same-named* human regions. That mouse→human step is
 exactly what OTTER's learned coupling π replaces.
 
-Here we:
+Steps:
   1. Mark the mouse parcels in Pagani's 5 hypo-prominent / 3 hyper-prominent
-     conserved regions (Allen region-name bridge, verified in audit P3.3).
-  2. Route each prominent region through π (transport-weighted) → which HUMAN
-     Yeo-7/subcortical networks does OTTER actually send it to? (the region-by-
-     region homology test vs Pagani's name assumption).
+     conserved regions (Allen region-name bridge).
+  2. Route each prominent region through π (transport-weighted) to give the human
+     Yeo-7/subcortical networks OTTER sends it to, the region-by-region homology
+     test against Pagani's name assumption.
   3. Aggregate → data-driven human hypo/hyper coupling maps → thresholded masks,
      saved for the ABIDE re-subtyping step (05_*).
 
-This uses OTTER's *validated* strength (discrete region/network correspondence,
-which survives spin nulls), not the continuous-map correlation that does not.
+This uses discrete region/network correspondence, which survives spin nulls,
+rather than the continuous-map correlation, which does not.
 
 Usage:
     PYTHONPATH=src python experiments/pagani_2026_per_model/04_otter_human_masks.py
@@ -40,7 +40,7 @@ ncv = import_module("01_network_crossvalidation")
 
 PI_PATH = ROOT / "outputs" / "coupling" / "pi_fc_plus_SC_with_all_packs.npy"
 
-# Allen region-vote → Pagani 13 conserved regions (verified bridge, audit P3.3).
+# Allen region-vote → Pagani 13 conserved regions.
 RULES = {
     "amygdala":             ["amygdal"],
     "auditory_cortex":      ["auditory area"],

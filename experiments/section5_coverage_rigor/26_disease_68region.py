@@ -1,15 +1,15 @@
-"""Disorder reachability redone at correct resolution + valid spin geometry.
+"""Disorder reachability at hemisphere resolution, with valid spin geometry.
 
-BUG in the DK analysis: abagen DK labels are identical L/R (e.g. 'bankssts' = id 1 AND id 35), so
-grouping by label pools BOTH hemispheres into 34 bilateral regions, and each region's centroid
-becomes mean-over-both-hemispheres -> x ~ 0. The spin null then rotates a midline-collapsed point
-cloud (degenerate, like the Hill half-sphere problem). This script keeps L and R SEPARATE (68 hemi-
-regions, real centroids, valid whole-brain spin) and matches ENIGMA's own L_/R_ rows.
+abagen DK labels are identical L/R (e.g. 'bankssts' = id 1 AND id 35), so grouping by label pools
+BOTH hemispheres into 34 bilateral regions and each region's centroid becomes the mean over both
+hemispheres, x ~ 0. A spin null then rotates a midline-collapsed point cloud, which is degenerate
+in the same way as the Hill half-sphere. This script keeps L and R SEPARATE (68 hemi-regions, real
+centroids, valid whole-brain spin) and matches ENIGMA's own L_/R_ rows.
 
 Compares mass-coverage, FC-recon, and FC+SC-recon coverage on the canonical pi, all disorders +
-transdiagnostic, Spearman + spin + FDR. Also prints the centroid-x diagnostic proving the bug.
+transdiagnostic, Spearman + spin + FDR. Also prints the centroid-x diagnostic.
 
-Run under: PYTHONPATH=/var/tmp/pylib:...:src ABAGEN_DATA=/var/tmp/abagen HOME=/var/tmp
+Run: cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/26_disease_68region.py
 Writes outputs/logs/section6_disease_68region.json
 """
 from __future__ import annotations

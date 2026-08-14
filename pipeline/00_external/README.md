@@ -1,7 +1,7 @@
 # External-data scripts
 
 Scripts that download and project public neuroscience datasets onto the
-colleague's specific 1864 (mouse) / 2094 (human) parcellation. Run these on a
+colleague's 1864 (mouse) / 2094 (human) parcellation. Run these on a
 machine with internet access and the colleague's `rsmask.nii` /
 `rsmask_human.nii` files at the locations expected by `otter.data.DATA_DIR`.
 
@@ -26,14 +26,14 @@ data_external/
 ## Install dependencies
 
 ```bash
-pip install -r scripts/external/requirements.txt
+pip install -r pipeline/00_external/requirements.txt
 ```
 
 ## Run order
 
 1. **`00_inspect_masks.py`**. Examines `rsmask.nii` / `rsmask_human.nii` and
-   reports their affine, dims, and likely coordinate system. **Run this first**
-   so we know what we're working with before downloading datasets.
+   reports their affine, dims, and likely coordinate system. **Run this first**,
+   before downloading datasets.
 
 2. **`01_mouse_sc.py`**. Downloads the Allen Mouse Connectivity Atlas
    (Oh et al. 2014, Nature) summary-structure connectivity matrix (~290 regions).
@@ -62,8 +62,8 @@ pip install -r scripts/external/requirements.txt
    that contains the node's voxels.
    Output: `human_sc.npy`.
 
-   Alternative: if you have HCP credentials, the script has a `--source hcp1065`
-   flag that uses Yeh's HCP1065 atlas via DSI Studio's published files.
+   Alternative: with HCP credentials, the script's `--source hcp1065` flag uses
+   Yeh's HCP1065 atlas via DSI Studio's published files.
 
 5. **`04_human_genes.py`**. Uses `abagen` (Markello et al. 2021, eLife) to
    pull Allen Human Brain Atlas microarray data and average it within each of
@@ -76,7 +76,7 @@ pip install -r scripts/external/requirements.txt
    that exist in both `mouse_genes.npy` and `human_genes.npy`. Re-saves both
    matrices restricted to orthologs only.
 
-## What to do if things break
+## Troubleshooting
 
 On the **mouse** side, no mask registration is needed, voxel indices are
 pre-warped into CCFv3 (NS) and DSURQE (SS) space inside the mouse `.mat` file.

@@ -1,17 +1,16 @@
 """Translation, FC target: route the MOUSE ASD-model dysconnectivity
 map through the canonical coupling into human space and test whether it predicts
-the HUMAN ASD *functional-connectivity* deviation pattern (TransBrain 2025), a
-non-null target — unlike the near-null ENIGMA cortical-thinning map used by
-`27_translate_autism.py`.
+the HUMAN ASD *functional-connectivity* deviation pattern (TransBrain 2025). This
+target is non-null, whereas the ENIGMA cortical-thinning map used by
+`27_translate_autism.py` is near-null.
 
 HUMAN TARGET  data_external/transbrain_2025/z_autism_regress.csv
-  233 ABIDE ASD individuals x 127 bilateral Brainnetome (BN) regions. TRAP: every
+  233 ABIDE ASD individuals x 127 bilateral Brainnetome (BN) regions. Every
   COLUMN is z-scored across the 233 subjects (col mean == 0, one-sample t == 0),
-  so the naive "mean z across subjects" carries NO group signal. The recoverable
-  group pattern is the per-subject *consensus*: standardise each subject's row
-  (across regions) and average across subjects -> G (non-zero, anatomically
-  sensible). Equivalently, the mean per-subject Spearman(T, row_i) is the
-  subject-level statistic; we report both.
+  so the mean z across subjects carries no group signal. The recoverable group
+  pattern is the per-subject consensus: each subject's row is standardised across
+  regions and averaged across subjects -> G. The mean per-subject
+  Spearman(T, row_i) is the equivalent subject-level statistic; both are reported.
 
 ATLAS BRIDGE  transbrain's bn_atlas_2mm_symmetry.nii.gz (127 bilateral labels,
   MNI 2mm). Each OTTER human parcel (H.var xyz, MNI mm) is assigned to its nearest
@@ -30,7 +29,7 @@ NULLS
   - per-subject Wilcoxon across the 233 individuals.
   - pi-row-permutation (does the real coupling beat a scrambled one?).
   - translation spin (null B): spin the MOUSE input, route through the REAL pi
-    (the fair null for a translation claim).
+    (the null used for translation claims).
   - SPECIFICITY: shuffled / smooth-random / A-P-gradient mouse maps that are not
     ASD-specific should NOT predict the human ASD pattern.
 
@@ -50,10 +49,9 @@ from otter.eval.nulls import _route_normalized, spin_null
 
 PAGANI = Path(DATA_DIR) / "pagani"
 TB = ROOT / "data_external/transbrain_2025/z_autism_regress.csv"
-# transbrain package atlas (installed in the sandbox pylib)
-ATLAS_CANDIDATES = [
-    Path("/var/tmp/pylibs/transbrain/atlas"),
-    Path("/sessions/modest-tender-carson/mnt/outputs/.pylibs3/transbrain/atlas"),
+# transbrain package atlas; set TRANSBRAIN_ATLAS to point at it directly.
+ATLAS_CANDIDATES = [Path(p) for p in (os.environ.get("TRANSBRAIN_ATLAS"),) if p] + [
+    Path(p) / "transbrain" / "atlas" for p in sys.path if p
 ]
 N_SPIN = 2000
 N_PIPERM = 1000

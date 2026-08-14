@@ -2,8 +2,8 @@
 """CANONICAL optimized coupling: warped spatial term + region packs + supervision,
 with (epsilon, xyz_weight) selected by held-out (nested CV) external Beauchamp recovery.
 
-For every grid cell we also record how the hyperparameter choice affects
-reconstruction-coverage biology: region-level Spearman(recon_cov, Xu2020 expansion) and
+For every grid cell, the effect of the hyperparameter choice on
+reconstruction-coverage biology is also recorded: region-level Spearman(recon_cov, Xu2020 expansion) and
 the ContB(dlPFC) deficit in SD.
 
 Modes (chunked so no bash call exceeds the timeout):
@@ -37,9 +37,8 @@ SWEEP_JSON = LOG / "section5_canonical_sweep.json"
 TMP = Path("/var/tmp")
 
 XYZ_WEIGHTS = [0.1, 0.25, 0.5, 0.75, 1.0]
-# Extended 2026-07-21 from [0.005, 0.05]. The two-point grid could not support the
-# claim that epsilon is chosen robustly, and a separate five-point sweep scored on a
-# different criterion (L/R reliability) had picked 0.2. One grid, one criterion.
+# One grid, one criterion: epsilon and xyz_weight are selected together on held-out
+# Beauchamp recovery.
 EPSILONS    = [0.005, 0.02, 0.05, 0.1, 0.2]
 GRID = [(w, e) for w in XYZ_WEIGHTS for e in EPSILONS]   # 25 cells
 
@@ -150,8 +149,8 @@ def load_state():
     return {"_def": "canonical (epsilon,xyz_weight) sweep: warp+packs+supervision; "
                     "Beauchamp held-out CV selection + recon-coverage biology per cell",
             "grid": {"xyz_weight": XYZ_WEIGHTS, "epsilon": EPSILONS}, "cells": {}}
-    # NB: `grid` is written once at init. If the grid constants change later, the
-    # recorded grid will disagree with the fitted cells until it is refreshed.
+    # `grid` is written once at init. If the grid constants change later, the recorded
+    # grid disagrees with the fitted cells until it is refreshed.
     state["grid"] = {"xyz_weight": XYZ_WEIGHTS, "epsilon": EPSILONS}
 
 

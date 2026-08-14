@@ -10,14 +10,13 @@ six-layered neocortex.
 
   pid 49: Mouse Entorhinal area ↔ Human entorhinal cortex
 
-This is a single-entry pack because DSURQE exposes "Entorhinal area" (84
-parcels) and "Entorhinal area, lateral part" (33 parcels) but NOT a
-distinct "medial part" label, so we can't cleanly split into the lateral
-EC (object/contextual memory) vs medial EC (spatial / grid-cell) subdivisions
-that Franjic et al. 2022 and Ohara et al. 2021 distinguish. The whole-entorhinal
-anchor still captures the broad EC↔EC homology, and is non-conflicting
-with all existing packs (entorhinal is anatomically distinct from any
-other anchored region).
+The pack has a single entry because DSURQE exposes "Entorhinal area" (84
+parcels) and "Entorhinal area, lateral part" (33 parcels) but no distinct
+"medial part" label, so the lateral EC (object/contextual memory) and medial EC
+(spatial / grid-cell) subdivisions distinguished by Franjic et al. 2022 and
+Ohara et al. 2021 cannot be separated. The whole-entorhinal anchor captures the
+EC↔EC homology and does not conflict with the other packs, entorhinal cortex
+being anatomically distinct from every other anchored region.
 
 Mouse-side: DSURQE atlas overlay.
   Entorhinal area: 84 parcels
@@ -26,7 +25,7 @@ Human-side: MNI sphere at the anterior medial temporal lobe entorhinal
 centroid (Mai/Paxinos):
   Entorhinal cortex: (±20, –10, –30) r=10 mm → 6 parcels
 
-References (verified Consensus search 2026):
+References:
   - Franjic, D. et al. (2022). Transcriptomic taxonomy and neurogenic
     trajectories of adult human, macaque, and pig hippocampal and
     entorhinal cells. *Neuron* 110, 452-469.e14.
@@ -37,12 +36,10 @@ References (verified Consensus search 2026):
     DOI: 10.3389/fncir.2021.790116. (15 citations). Companion paper for
     laminar correspondences.
 
-Future extension
-----------------
-If DSURQE adds the "Entorhinal area, medial part" label in a future atlas
-release, this pack can be extended to two entries (lateral EC ↔ anterolateral
-human EC; medial EC ↔ posteromedial human EC) along the lines proposed by
-Ohara 2021. The pid range 49-50 is reserved for that.
+If DSURQE adds an "Entorhinal area, medial part" label, this pack extends to
+two entries (lateral EC ↔ anterolateral human EC; medial EC ↔ posteromedial
+human EC) along the lines proposed by Ohara 2021. The pid range 49-50 is
+reserved for that.
 """
 from __future__ import annotations
 
@@ -79,8 +76,8 @@ def build_entorhinal_region_anchors(
     return [
         RegionAnchorEntry(
             pair_id=49,
-            # The label is a stored key that appears in logs, so the year is left as it was
-            # written even though Crossref dates the paper 2022. See the reference above.
+            # This label is a stored key that appears in logs. Crossref dates
+            # the paper 2022; see the reference above.
             label="Entorhinal cortex (Franjic 2021)",
             mouse_indices=mouse_idx, human_indices=human_idx,
         ),

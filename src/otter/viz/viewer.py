@@ -15,11 +15,11 @@ Public API
         Convenience: build payload + HTML and save both as
         ``output_dir/viewer_data.json`` and ``output_dir/index.html``.
 
-Architecture (v2):
-  - Two separate Plotly divs (no subplots), each renders independently
+Architecture:
+  - Two separate Plotly divs (no subplots), each rendering independently
   - Three traces per side: base (static, network-coloured), overlay (partners),
-    selected (1 point in orange), clicks only restyle the small overlay
-  - Click handler uses curveNumber + pointNumber for robust scatter3d events
+    selected (1 point in orange); clicks restyle the overlay only
+  - Click handler uses curveNumber + pointNumber for scatter3d events
 """
 from __future__ import annotations
 
@@ -187,7 +187,7 @@ def write_viewer(
 
 
 # ---------------------------------------------------------------------------
-# HTML template (large, but already battle-tested in pipeline/07b_build_viewer.py)
+# HTML template
 # ---------------------------------------------------------------------------
 def build_viewer_html(payload: dict) -> str:
     """Self-contained HTML+JS viewer with embedded data."""

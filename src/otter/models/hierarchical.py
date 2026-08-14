@@ -1,24 +1,22 @@
 """HierarchicalFGW, per-network sub-FGW solves, assembled into a block-sparse π.
 
-Motivation
-----------
-The flat FGW solver handles the entire 1864 × 2094 problem at once. Within-network
-disambiguation (V1 vs V2, motor vs somato) is a *local* problem that can drown
-in the noise of cross-network nodes. Hierarchical OT solves each functional
-network in isolation, giving the within-network optimization full attention.
+The flat FGW solver handles the entire 1864 × 2094 problem at once.
+Within-network disambiguation (V1 vs V2, motor vs somato) is a local problem
+that can drown in the noise of cross-network nodes. Hierarchical OT solves
+each functional network in isolation.
 
-Trade-off: cross-network constraints are lost. In leave-one-network-out CV,
-when an entire network is held out, that network's sub-solve has zero anchor
-supervision. For *standard* CV where some anchors of every network are visible,
-hierarchical can do better on within-network FC translation.
+Cross-network constraints are lost. In leave-one-network-out CV, when an
+entire network is held out, that network's sub-solve has no anchor
+supervision. Under standard CV, where some anchors of every network are
+visible, the hierarchical model can improve within-network FC translation.
 
-Headline results from the comparison table:
-    Anchor CV (LONO):   45% top-1 (HURTS, the held network has no supervision)
-    FC translation:    r=0.39 overall, r=0.55 within-network (HELPS)
-    Coverage:          787 human nodes kept (vs 1450 for flat. HALVED)
+Results from the comparison table:
+    Anchor CV (LONO):   45% top-1 (the held network has no supervision)
+    FC translation:    r=0.39 overall, r=0.55 within-network
+    Coverage:          787 human nodes kept, vs 1450 for the flat solver
 
-Use this when: full anchor supervision is available AND you care more about
-within-network FC accuracy than cross-network coverage.
+Applicable when full anchor supervision is available and within-network FC
+accuracy matters more than cross-network coverage.
 """
 from __future__ import annotations
 
@@ -89,8 +87,8 @@ def hierarchical_semirelaxed_fgw(
     tol: float = 1e-5,
     verbose: bool = False,
 ) -> tuple[np.ndarray, dict]:
-    """Functional API for hierarchical FGW. Used by HierarchicalFGW class
-    and also exported for backward-compatibility with existing scripts.
+    """Functional API for hierarchical FGW, used by the HierarchicalFGW class
+    and by scripts that call the solver directly.
     """
     visible_set = set(int(p) for p in visible_pair_ids)
     net_m = assign_networks(var_m, idx_m)

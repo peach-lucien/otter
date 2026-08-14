@@ -9,13 +9,13 @@ cross-species correspondence is **by name**. Somatomotor in mouse ↔ Somatomoto
 human, etc.
 
 OTTER provides a quantitative π (1864 mouse × 2094 human) that can be aggregated to a
-network-network mapping matrix. This script asks: **does π preferentially route mass
-between like-named networks?**
+network-network mapping matrix. This script tests whether π preferentially routes mass
+between like-named networks.
 
-If yes, OTTER's structural+anchor evidence corroborates the name-based correspondence
-the paper relies on, providing a quantitative bridge for the paper's workflow.
-If no, the name-based shortcut is over-confident in places OTTER thinks the structural
-evidence disagrees.
+If it does, OTTER's structural and anchor evidence corroborates the name-based
+correspondence the paper relies on, providing a quantitative bridge for the paper's
+workflow. If it does not, the name-based shortcut is over-confident where the
+structural evidence disagrees.
 
 Method:
   1. Assign each mouse parcel to a network using PAIRID_TO_NETWORK (nearest-anchor
@@ -56,7 +56,7 @@ from otter.data.networks import PAIRID_TO_NETWORK, NETWORKS, assign_networks
 
 # Mapping: OTTER's 11-network mouse scheme → Pagani paper's network names
 # (matches paper's ED Fig 1 nine-network scheme + collapses some mouse-specific
-# distinctions that don't have a clean human counterpart).
+# distinctions that do not have a clean human counterpart).
 OTTER_NET_TO_PAPER_MOUSE: dict[str, str] = {
     "auditory":      "Auditory",
     "sensorimotor":  "SomatoMotor",
@@ -264,10 +264,10 @@ def main():
     M, _ = load_cached("mouse", cache_dir="outputs/anndata")
     H, _ = load_cached("human", cache_dir="outputs/anndata")
 
-    # Canonical coupling. This log is the BASELINE that experiments/whitesell_2021_dmn
+    # Canonical coupling. This log is the baseline that experiments/whitesell_2021_dmn
     # compares against, so it must be on the same coupling as that experiment or the
-    # comparison is not like-for-like. Print the sha256: a re-run proves nothing about
-    # which input was used.
+    # comparison is not like-for-like. The sha256 is printed to record which input
+    # was used.
     pi = load_pi()
     prov = pi_provenance()
     print(f"\nLoading π: {prov['pi_file']}")

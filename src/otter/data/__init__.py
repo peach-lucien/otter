@@ -1,6 +1,6 @@
 """Data layer: I/O, anchors, network labels, and exploratory metrics.
 
-Re-exports the public API at the package root for backward compatibility:
+Re-exports the public API at the package root:
     from otter.data import load_cached, build_anndata, parse_t_table
     from otter.data import DATA_DIR, stream_mean_fc_subset, ...
 

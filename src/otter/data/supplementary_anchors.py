@@ -157,8 +157,8 @@ def apply_supplementary_anchors(
     var_m_out = var_m.copy()
     var_h_out = var_h.copy()
 
-    # Cast `subregion` from Categorical to plain object so we can set new
-    # tagged values without "Cannot setitem on a Categorical" errors.
+    # Cast `subregion` from Categorical to plain object, so new tagged
+    # values can be set without a "Cannot setitem on a Categorical" error.
     for v in (var_m_out, var_h_out):
         if isinstance(v["subregion"].dtype, pd.CategoricalDtype):
             v["subregion"] = v["subregion"].astype("object")
@@ -179,7 +179,7 @@ def apply_supplementary_anchors(
                 )
             var_out.iat[idx, var_out.columns.get_loc("garin_anchor")] = True
             var_out.iat[idx, var_out.columns.get_loc("anchor_pair_id")] = e.pair_id
-            # `subregion` is purely informational; tag it for traceability
+            # `subregion` is informational; tag it for traceability
             sub_col = var_out.columns.get_loc("subregion")
             var_out.iat[idx, sub_col] = f"[supp:{e.label}] {row['subregion']}"
 

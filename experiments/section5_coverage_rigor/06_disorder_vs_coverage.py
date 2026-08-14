@@ -1,21 +1,12 @@
 """Do human cortical disorders concentrate in the cortex OTTER leaves UNCOVERED?
 
-Definitive version. Supersedes two earlier attempts, both of which were wrong:
-
-  v1 (null result)  - SUMMED coverage per region instead of the mass-normalised MEAN.
-                      This is the parcel-count confound already fixed elsewhere in S5.
-                      Re-running the final pipeline with summed coverage reproduces the
-                      false null exactly (bipolar rho=+0.08, p=0.74), confirming the bug
-                      was the whole story.
-  v2 (sphere ROIs)  - approximated each DK region by a 20 mm sphere around its centroid.
-                      Overlapping ROIs, an arbitrary radius, and results that flipped
-                      between 12 mm and 20 mm. Not trustworthy.
-
-This version uses the REAL volumetric Desikan-Killiany atlas (abagen, MNI152 1 mm,
-68 cortical regions) and assigns every OTTER human parcel to the DK label at its MNI
+Regions are the volumetric Desikan-Killiany atlas (abagen, MNI152 1 mm,
+68 cortical regions) and every OTTER human parcel is assigned to the DK label at its MNI
 coordinate; parcels landing outside the labelled ribbon are rescued to the nearest
 cortical voxel within 4 mm. Coverage per DK region is the MASS-NORMALISED MEAN of the
-pi column-sums (log10). Statistics are rank-based (Spearman), because log-coverage is
+pi column-sums (log10); a summed coverage carries the parcel-count confound, and sphere
+ROIs around region centroids overlap and give radius-dependent results. Statistics are
+rank-based (Spearman), because log-coverage is
 heavy-tailed - one region (parsorbitalis) sits at ~1e-15 and single-handedly wrecks a
 Pearson correlation. Significance comes from the repo's spin null over DK centroids.
 

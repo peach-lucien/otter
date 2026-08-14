@@ -1,6 +1,6 @@
 """Refined Hodge 2019 validation, restrict to cortex, combine layer-group markers.
 
-Test 1 (single-marker, all 2094 parcels) gave null results. Two issues to address:
+The single-marker test over all 2094 parcels gave null results, for two reasons:
   (a) Subcortical parcels dilute the layer-marker signal (Hodge's findings are
       cortex-specific; subcortex has near-zero expression for these markers).
   (b) Single-marker noise (Allen ISH vs AHBA microarray cross-platform variance).
@@ -11,7 +11,7 @@ Refinement:
   - For each layer group (upper L2/3, middle L4, deep L5-L6), combine markers
     into a single z-scored composite score before testing.
 
-Hypothesis: if OTTER's π preserves cortical layer-marker geometry at the area
+If OTTER's π preserves cortical layer-marker geometry at the area
 level (not the layer level, π has no layer awareness), then the area-level
 spatial pattern of "where is upper-layer expression highest" should agree
 between species after π translation.

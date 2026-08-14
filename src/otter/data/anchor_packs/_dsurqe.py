@@ -66,9 +66,8 @@ def _build_dsurqe_ancestor_map(tree_path: Path) -> dict[str, set[str]]:
     """Return ``{node_name: set(ancestor_names_including_self)}`` from the DSURQE tree.
 
     Helper for resolving the parcel table's precomputed DSURQE vote labels
-    against the tree; currently unused by the production lookup (see
-    ``mouse_parcels_in_dsurqe_region`` for why we use the live atlas volume
-    instead).
+    against the tree. It is unused by the production lookup, which reads the
+    live atlas volume (see ``mouse_parcels_in_dsurqe_region``).
     """
     tree = json.loads(Path(tree_path).read_text())
     out: dict[str, set[str]] = {}
@@ -100,19 +99,16 @@ def mouse_parcels_in_dsurqe_region(
     whose DSURQE label lies in that subtree. Uses Beauchamp 2022's live
     atlas volume + the hand-calibrated ``DSURQE_OFFSET_MM``.
 
-    .. note::
-       We resolve regions via the live DSURQE atlas volume rather than the
-       parcel table's precomputed DSURQE vote labels (``region_vote_ss_dsq``).
-       The precomputed vote vocabulary uses different region names than the
-       anchor packs query for, e.g. packs ask for "Caudoputamen" but the
-       votes say "striatum" (a parent in the tree), and "Periaqueductal gray"
-       (American) vs "periaqueductal grey" (British), so a direct
-       subtree-membership check against those labels returns empty sets for
-       most queries. Consuming them directly would first require a
-       name-mapping table from pack names to the vote vocabulary (see
-       ``_paul_vote_bridge.py``). For the quantitative live-vs-votes
-       comparison that backs this choice, see
-       ``experiments/dsurqe_lookup_crosscheck/``.
+    Regions resolve via the live DSURQE atlas volume rather than the parcel
+    table's precomputed DSURQE vote labels (``region_vote_ss_dsq``). The
+    precomputed vote vocabulary uses different region names from those the
+    anchor packs query: packs ask for "Caudoputamen" while the votes give
+    "striatum", a parent in the tree, and "Periaqueductal gray" against
+    "periaqueductal grey", so a direct subtree-membership check against those
+    labels returns empty sets for most queries. Consuming them directly
+    requires a name-mapping table from pack names to the vote vocabulary (see
+    ``_paul_vote_bridge.py``). The quantitative live-versus-votes comparison
+    is in ``experiments/dsurqe_lookup_crosscheck/``.
 
     Raises FileNotFoundError if the Beauchamp 2022 DSURQE atlas isn't
     present at ``data_external/MouseHumanTranscriptomicSimilarity/AMBA/data/``.
@@ -161,12 +157,12 @@ def mouse_parcels_in_mouse_sphere(
     radius_mm: float, *, mirror_to_right: bool = True,
 ) -> list[int]:
     """Return positional indices of *mouse* parcels within ``radius_mm`` of
-    the centroid, expressed in M_var's coordinate system (NOT bregma-centered
-    CCFv3, apply the DSURQE_OFFSET_MM correction first if your reference
-    centroid is in bregma coords).
+    the centroid, expressed in M_var's coordinate system, not bregma-centered
+    CCFv3; a reference centroid in bregma coords needs the DSURQE_OFFSET_MM
+    correction applied first.
 
-    Symmetric to ``human_parcels_in_mni_sphere``. Use this for structures
-    that DSURQE doesn't expose as labels at the 200μm parcel resolution
+    Symmetric to ``human_parcels_in_mni_sphere``, and applicable to structures
+    that DSURQE does not expose as labels at the 200μm parcel resolution
     (habenula, locus coeruleus, substantia nigra, claustrum, raphe nuclei).
 
     Bregma → M_var coordinate translation
@@ -178,10 +174,9 @@ def mouse_parcels_in_mouse_sphere(
 
         M_var_xyz = bregma_xyz - DSURQE_OFFSET_MM
 
-    Example: if Allen CCFv3 reports LC at bregma (±0.85, -5.4, -3.85),
-    then M_var-space coords are (±0.88, -3.07, -4.87). Pass those to
-    this function. We provide ``M_var_coords_from_bregma`` as a helper
-    below.
+    Example: Allen CCFv3 reports LC at bregma (±0.85, -5.4, -3.85), giving
+    M_var-space coords (±0.88, -3.07, -4.87). ``M_var_coords_from_bregma``
+    below performs the conversion.
     """
     m_xyz = M_var[["x", "y", "z"]].to_numpy()
     xL, y, z = centroid_xyz_left
@@ -199,9 +194,9 @@ def M_var_coords_from_bregma(
 ) -> tuple[float, float, float]:
     """Convert a bregma-relative CCFv3 coordinate (mm) to M_var space.
 
-    Our mouse parcel xyz coordinates are offset from bregma by
-    ``DSURQE_OFFSET_MM = (-0.027, -2.334, +1.018)`` (calibrated from 6
-    Garin anchors with unambiguous DSURQE leaf IDs; see
+    The mouse parcel xyz coordinates are offset from bregma by
+    ``DSURQE_OFFSET_MM = (-0.027, -2.334, +1.018)``, calibrated from 6 Garin
+    anchors with unambiguous DSURQE leaf IDs (see
     pipeline/05f_beauchamp_validation.py).
 
     To convert from a published bregma centroid to M_var coords:

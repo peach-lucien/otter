@@ -1,6 +1,6 @@
 """Pipeline step 08a, multi-source per-parcel trust map for the recommended π.
 
-This step is the missing link between the trust machinery and the GUI.
+This step connects the trust computation to the GUI.
 
   * ``05g_compute_trust.py`` writes ``trust_score_<config>.npz``, the
     *internal* composite (bootstrap stability + argmax concentration + FC
@@ -10,10 +10,8 @@ This step is the missing link between the trust machinery and the GUI.
     *multi-source evidence map* (five evidence tiers) produced by
     :func:`otter.eval.trust_score.compute_multisource_trust`.
 
-Until now nothing wrote that file inside the documented pipeline:
-``compute_multisource_trust`` had no caller, and the GUI silently fell back
-to "unknown" trust tiers when the file was absent or stale. This step is
-that caller.
+This step is the caller for ``compute_multisource_trust``. The GUI falls back
+to "unknown" trust tiers when the file is absent or stale.
 
 It layers external supervision (anchor-pack membership, Beauchamp region
 validation) on top of the internal composite and classifies every mouse
@@ -42,10 +40,9 @@ Outputs:
 Usage:
     PYTHONPATH=src python pipeline/08a_multisource_trust.py
 
-The defaults are the canonical coupling; run it with no arguments unless you are deliberately
-regrading a comparison coupling. The worked example that used to sit here passed
---pi-file pi_fc_plus_SC_with_all_packs.npy, which is RETIRED -- copying it would silently
-regrade the evidence tiers on the wrong coupling, which is how the 2026-07 tier mix-up happened.
+The defaults are the canonical coupling. Run it with no arguments unless a comparison
+coupling is being regraded. Passing --pi-file pi_fc_plus_SC_with_all_packs.npy regrades
+the evidence tiers on a retired coupling.
 """
 from __future__ import annotations
 

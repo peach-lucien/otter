@@ -1,4 +1,4 @@
-"""Visualise the OTTER × Balsters 2020 MFC-divergence falsification test."""
+"""Visualise the OTTER × Schaeffer 2020 MFC-divergence falsification test."""
 from __future__ import annotations
 
 import json
@@ -18,7 +18,7 @@ COL = {"dlPFC": "#e76f51", "premotor": "#2a9d8f", "medial_PFC": "#264653",
 
 
 def main():
-    j = json.loads((ROOT / "outputs/logs/balsters_2020_mfc_divergence.json").read_text())
+    j = json.loads((ROOT / "outputs/logs/schaeffer_2020_mfc_divergence.json").read_text())
     rec = j["recommended_pi"]
     rois = j["rois"]
     fig, axes = plt.subplots(1, 3, figsize=(16, 4.9))
@@ -44,7 +44,7 @@ def main():
 
     # --- Panel 2: contrast, what the contested anchor does ----------------
     ax = axes[1]
-    tags = ["baseline (Garin only)", "recommended", "+lateral_pfc pack"]
+    tags = ["baseline (Garin only)", "canonical", "+lateral_pfc pack"]
     mfc_dl = [j["contrast"][t]["mfc_to_dlpfc"] * 100 for t in tags]
     pl_dl = [j["contrast"][t]["pl_to_dlpfc"] * 100 for t in tags]
     x = np.arange(3)
@@ -56,7 +56,7 @@ def main():
     ax.set_ylabel("Mouse-frontal mass routed to human dlPFC (%)")
     ax.set_title("2 · The contested Prelimbic→dlPFC anchor is opt-in\n"
                  "only forcing that anchor puts mass on dlPFC, "
-                 "Balsters 2020 argues it shouldn't", fontsize=9.5)
+                 "Schaeffer 2020 argues it shouldn't", fontsize=9.5)
     ax.legend(fontsize=8)
 
     # --- Panel 3: argmax landing in MNI space ------------------------------
@@ -79,16 +79,16 @@ def main():
     ax.set_xlabel("MNI x (mm)  ·  ←L   R→")
     ax.set_ylabel("MNI y (mm)  ·  posterior → anterior")
     ax.set_title("3 · Top-1 landing of mouse MFC, 0 of 39 in dlPFC\n"
-                 "(red = dlPFC target; teal/green = Balsters-consistent)",
+                 "(red = dlPFC target; teal/green = Schaeffer-consistent)",
                  fontsize=9.5)
     ax.legend(fontsize=7.5, loc="lower center")
     ax.set_aspect("equal")
 
-    plt.suptitle("OTTER × Balsters 2020, π routes mouse medial frontal cortex "
+    plt.suptitle("OTTER × Schaeffer 2020, π routes mouse medial frontal cortex "
                  "away from human dlPFC, as the connectivity evidence predicts",
                  fontsize=12, y=1.04)
     plt.tight_layout()
-    out = ROOT / "outputs" / "figures" / "balsters_2020_mfc_divergence.png"
+    out = ROOT / "outputs" / "figures" / "schaeffer_2020_mfc_divergence.png"
     out.parent.mkdir(parents=True, exist_ok=True)
     plt.savefig(out, dpi=150, bbox_inches="tight")
     print(f"Wrote {out}")

@@ -1,10 +1,9 @@
 """Posterior parietal cortex (PPC) anchor pack (Whitlock 2017).
 
-Mouse posterior parietal cortex has documented cross-species homology
-to primate PPC (BA7), serving similar functions in spatial attention,
-navigation, and sensorimotor integration. The Allen mouse atlas
-"Posterior parietal association areas" corresponds anatomically to
-the PPC region described in cross-species reviews.
+Mouse posterior parietal cortex has a documented cross-species homology to
+primate PPC (BA7), with similar functions in spatial attention, navigation and
+sensorimotor integration. The Allen mouse atlas "Posterior parietal association
+areas" corresponds to the PPC region described in cross-species reviews.
 
   pid 61: Mouse Posterior parietal association ↔ Human PPC BA7
 
@@ -18,7 +17,7 @@ Mouse-side: DSURQE atlas overlay.
 Human-side: MNI sphere at BA7 centroid (superior parietal lobule).
   PPC BA7: (±35, –55, 50) r=10 mm → 14 parcels
 
-References (verified Consensus search 2026):
+References:
   - Whitlock, J. R. (2017). Posterior parietal cortex. *Current
     Biology* 27, R691-R695. DOI: 10.1016/j.cub.2017.06.007.
     Cross-species PPC review.
@@ -27,9 +26,8 @@ References (verified Consensus search 2026):
     14-22. DOI: 10.1016/j.neures.2018.10.008. Mouse-specific PPC
     review.
 
-Anatomical-credibility supervision. PPC isn't in Beauchamp's 22
-pairs, so direct lift can't be measured. The Garin pid 4 anchor gets
-expanded supervision via the 10-parcel region anchor.
+PPC is not among Beauchamp's 22 pairs, so the effect cannot be measured
+directly. The Garin pid 4 anchor is extended by the 10-parcel region anchor.
 """
 from __future__ import annotations
 

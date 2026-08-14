@@ -1,11 +1,10 @@
 """Olfactory cortex anchor pack.
 
-Cross-species olfactory cortex anatomy is among the most conserved in
-mammalian brains. The primary olfactory cortex (piriform) and the anterior
-olfactory nucleus (AON) have direct homologues with conserved
-cytoarchitecture and connectivity.
+Cross-species olfactory cortex anatomy is conserved in mammalian brains. The
+primary olfactory cortex (piriform) and the anterior olfactory nucleus (AON)
+have direct homologues with conserved cytoarchitecture and connectivity.
 
-References (verified Consensus search 2026):
+References:
   - Mori, K. (2014). The Olfactory System: From Odor Molecules to
     Motivational Behaviors. Springer. (260 citations).
   - Carlén, M. (2017). What constitutes the prefrontal cortex? *Science*
@@ -23,22 +22,18 @@ Human-side sets are MNI spheres at canonical Mai/Paxinos centroids:
   Piriform cortex: (±25, 5, -20) r=10 mm → 13 parcels
   AON: (±15, 25, -15) r=10 mm → 6 parcels
 
-Why this targets a documented failure
--------------------------------------
 Beauchamp validation gives 0 % top-1 for "Piriform area → piriform cortex"
-under the production point-anchor π (mean rank 657 / 2094), one of the
-larger failures. The Garin pair_id 11 (Olfactory cortex) gives a single
-point anchor; sub-region region anchors let OTTER target the bulk of mouse
-piriform → human piriform directly. The AON entry is included because the
-anatomy is clean and both species have a well-defined AON region in our
-atlases, it's a small but cheap supplementary constraint.
+under the production point-anchor π, at mean rank 657 / 2094. The Garin
+pair_id 11 (Olfactory cortex) gives a single point anchor; the region anchors
+here target the bulk of mouse piriform → human piriform directly. The AON entry
+is included because both species have a well-defined AON region in these
+atlases.
 
-Same caveat as the other packs:
-the mouse Piriform set used here is identical to Beauchamp's validation
-set, so any improvement on the Beauchamp Piriform pair is partly
-tautological. The pack's value is *practical* (OTTER queries for olfactory
-parcels become trustworthy) rather than evidence of independent
-structural recovery.
+As with the other packs, the mouse Piriform set is identical to Beauchamp's
+validation set, so any improvement on the Beauchamp Piriform pair is partly
+tautological. The pack's value is practical: queries for olfactory parcels
+return defensible answers, rather than evidence of independent structural
+recovery.
 """
 from __future__ import annotations
 

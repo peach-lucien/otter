@@ -18,10 +18,9 @@ Writes outputs/logs/out_a1b_loro.json. outputs/logs/heldout_three_config_canonic
 same per-region values under the canonical name; --also-canonical writes both so they cannot
 drift apart.
 
-This supersedes disentangle_loro.py, which is the ancestor of this analysis. That script fitted at
-epsilon = 5e-3 and xyz_weight = 0.5, not the canonical epsilon = 0.05 and xyz_weight = 0.25, and
-its log loro_disentangle_connectivity_vs_xyz.json is retired in place. Retire disentangle_loro.py
-once this script has been run and reproduces.
+disentangle_loro.py runs the same comparison at epsilon = 5e-3 and xyz_weight = 0.5 rather than
+the canonical epsilon = 0.05 and xyz_weight = 0.25, so its log
+loro_disentangle_connectivity_vs_xyz.json is not comparable with this one.
 
 57 fits. Resumable: each region is written as it completes, and re-running skips what is done.
 
@@ -50,7 +49,7 @@ from otter.repro import (ALPHA, EPSILON, FC_WEIGHT, SC_WEIGHT, XYZ_WEIGHT,   # n
 
 OUT = ROOT / "outputs" / "logs" / "out_a1b_loro.json"
 MIRROR = ROOT / "outputs" / "logs" / "heldout_three_config_canonical.json"
-# Resume state, deliberately NOT the output log. Keying resume off the output would let a second
+# Resume state, not the output log. Keying resume off the output would let a second
 # invocation find nothing to do, fit nothing, and still rewrite the log with no provenance.
 PROGRESS = ROOT / "outputs" / "logs" / ".05_heldout_progress.json"
 
@@ -105,7 +104,7 @@ def withhold(M, H, entries, entry_mouse_idx, m_mask, garin_M, garin_H, apid_m, a
 
     Returns the surviving pack entries. The caller restores the Garin columns afterwards. A pack
     is dropped on any overlap rather than on majority overlap, so the held-out region keeps no
-    curation of its own even partially. This is the rule the ancestor disentangle_loro.py used.
+    curation of its own even partially.
     """
     finite = np.isfinite(apid_m)
     pids = set(apid_m[garin_M & m_mask & finite].astype(int).tolist()) or {-999}
@@ -192,9 +191,7 @@ def main() -> int:
             print(f"\nDIFFERS from the committed log in {len(drift)} place(s):", file=sys.stderr)
             for d in drift[:15]:
                 print(f"  {d}", file=sys.stderr)
-            print("\nThe reported numbers come from the committed values. Do not adjust them "
-                  "to match this run; work out why the port disagrees first.",
-                  file=sys.stderr)
+            print("\nNot written; the committed values stand.", file=sys.stderr)
             return 1
         print(f"\nreproduces the committed {OUT.name} on all "
               f"{len(CONFIGS) * len([k for k in out if not k.startswith('_')])} displacements")
@@ -205,8 +202,8 @@ def main() -> int:
                   "log would go out unstamped. Re-run with --force to refit all 19 regions.",
                   file=sys.stderr)
             return 1
-        # The production arm is a refit, so the honest record is the recipe plus its measured
-        # distance from the release, not a coupling sha this run never opened.
+        # The production arm is a refit, so the record is the recipe plus its measured distance
+        # from the release rather than a coupling sha this run never opened.
         prov = refit_provenance(last_pi, recipe={**CONFIGS["both"], "epsilon": EPSILON,
                                                  "garin": True, "packs": True,
                                                  "note": "last held-out arm; curation withheld "

@@ -1,6 +1,6 @@
 """Cost-matrix builders for FGW: relational + cross-species + normalisation.
 
-Re-exports the public API at the package root for backward compatibility:
+Re-exports the public API at the package root:
     from otter.costs import correlation_distance, cross_species_anchor_M, normalise_cost
 """
 from otter.costs.relational import (

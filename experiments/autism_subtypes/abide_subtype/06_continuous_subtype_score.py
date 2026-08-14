@@ -1,25 +1,25 @@
 """Continuous OTTER cross-species subtype score for every ABIDE individual.
 
 Pagani assign a *binary* subtype (hypo / hyper / unsubtyped) by a hard ±1 s.d.
-threshold, which leaves ~75–78 % of individuals unclassified, yet they note
-autism connectivity "exists along a subtle continuum". The mask-definition method
-isn't the bottleneck (OTTER vs name-matched masks subtype the same ~22 %, 93 %
-agreement, see 05); the *hard threshold* is.
+threshold, which leaves ~75–78 % of individuals unclassified, while they note
+autism connectivity "exists along a subtle continuum". The mask definition is not
+the bottleneck (OTTER and name-matched masks subtype the same ~22 %, 93 %
+agreement, see 05); the hard threshold is.
 
-This script instead gives EVERY individual a continuous position on a OTTER-defined
+This script gives every individual a continuous position on an OTTER-defined
 hyper↔hypo axis, so the whole sample is placed on the continuum:
 
-  • From π (04_otter_human_masks.py) we have human hypo and hyper coupling maps.
+  • π (04_otter_human_masks.py) gives human hypo and hyper coupling maps.
     Their contrast (hyper − hypo) defines a per-region weight emphasising where the
     two subtypes diverge (the maps are distinct: coupling r=0.41, mask Jaccard 0.28).
   • For each individual, axis = Σ_region contrast_weight · (z-scored regional global
     connectivity vs controls). Positive ⇒ hyper-like, negative ⇒ hypo-like.
 
-Then we test the new question Pagani's binary scheme can't:
-  (1) does the continuous axis recover their hard labels? (sanity)
-  (2) does ASD differ from controls on the axis? (population)
-  (3) **does the axis track ADOS symptom severity across ALL individuals**, not just
-      the ~22 % hard-subtyped, i.e. is the hyper↔hypo continuum dose-responsive?
+Three questions follow that the binary scheme cannot address:
+  (1) whether the continuous axis recovers the hard labels
+  (2) whether ASD differs from controls on the axis
+  (3) whether the axis tracks ADOS symptom severity across all individuals, not just
+      the ~22 % hard-subtyped, i.e. whether the hyper↔hypo continuum is dose-responsive
 
 Needs the ABIDE download (run like 05). Prereqs: 04 (masks JSON) + ideally 05
 (hard labels, for the sanity check).

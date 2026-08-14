@@ -1,28 +1,28 @@
 """Per-parcel trust score for the production π.
 
-Combines three independent signals to estimate, for each mouse parcel, how
-much we should trust its predicted human partner:
+Combines three independent signals into a per-parcel estimate of how far the
+predicted human partner can be trusted:
 
 1. **Bootstrap argmax stability** (`per_row_stability` from
    `outputs/coupling/bootstrap_aggregate_*.npz`): how consistent is the
-   argmax across 40 subject-bootstrap samples?  High → π is reproducible.
+   argmax across 40 subject-bootstrap samples? High → π is reproducible.
 
 2. **Argmax mass concentration** (mass on argmax / mass on whole row):
-   how peaked is the row's distribution? A sharp peak means the model is
-   confident; a diffuse row means it's torn between many candidates.
+   how peaked is the row's distribution? A sharp peak indicates a confident
+   prediction; a diffuse row indicates competing candidates.
 
 3. **FC similarity to nearest mouse anchor** (Pearson r of the parcel's
    mouse-FC profile against the nearest anchor's mouse-FC profile):
    high → the parcel is in the same FC-coherent neighborhood as the anchor,
    so the supervision signal is well-supported by FC structure.
 
-The composite score is in [0, 1] (higher = more trustworthy).  Three tiers
+The composite score is in [0, 1] (higher = more trustworthy). Three tiers
 (high / medium / low) are assigned by quantile cuts.
 
-Note: "distance to nearest mouse anchor in mm" is deliberately not used as a
-component, it is uninformative because every mouse parcel is within ~4mm of
-*some* anchor (the mouse brain is small). Argmax mass concentration is a much
-better signal of model confidence.
+"Distance to nearest mouse anchor in mm" is not used as a component: every
+mouse parcel lies within ~4 mm of some anchor, so the quantity is
+uninformative. Argmax mass concentration carries the confidence signal
+instead.
 
 Usage::
 

@@ -1,14 +1,15 @@
 """Cell-CLASS composition test through π, using the pre-aligned per-parcel gene
 matrices (no atlas download / no coordinate mapping needed).
 
-03 tested single class CONTRASTS (E-I, neuronal-glial). This asks the fuller
-compositional question: build a per-parcel profile over several cell classes for
-both species (mean z over each class's markers), route the mouse profile through π,
-and test
-  (1) per-class translation-spin (does each class's map translate beyond spatial AC),
-  (2) DOMINANT-CLASS agreement: does π map each human parcel to the cell class that
-      actually dominates there? scored vs a fair translation-spin null (rotate the
-      mouse profiles on the mouse sphere, route through the real π, recompute).
+03 tested single class contrasts (E-I, neuronal-glial). This asks the compositional
+question. A per-parcel profile over several cell classes is built for both species
+(mean z over each class's markers), the mouse profile is routed through π, and two
+quantities are tested:
+  (1) per-class translation-spin, whether each class's map translates beyond spatial
+      autocorrelation,
+  (2) dominant-class agreement, whether π maps each human parcel to the cell class
+      that dominates there, scored against a translation-spin null (rotate the mouse
+      profiles on the mouse sphere, route through the real π, recompute).
 
 Run: cd otter && PYTHONPATH=src python experiments/biccn_2023_cell_types/05_composition_from_markers.py
 Writes outputs/logs/biccn_composition_from_markers.json

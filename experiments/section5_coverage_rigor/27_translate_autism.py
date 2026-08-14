@@ -2,10 +2,10 @@
 canonical coupling into human space, and test whether the translated mouse ASD
 phenotype recovers the HUMAN autism (ENIGMA cortical-thinning) pattern.
 
-Reframes the disease question from a static coverage correlation into a
-*translation validation*: mouse ASD dysconnectivity -> pi -> human parcels ->
-DK hemi-regions -> vs human ASD thinning (Spearman + whole-brain spin null,
-L/R kept separate for valid geometry).
+The disease question is posed as a translation validation: mouse ASD
+dysconnectivity -> pi -> human parcels -> DK hemi-regions -> vs human ASD
+thinning (Spearman + whole-brain spin null, L/R kept separate for valid
+geometry).
 
 MOUSE ASD phenotype source (Pagani 2026, data_crossspecies/pagani/):
   - cluster1_AMBA_occurrence_map_pos ...: per-voxel count (0-5) of models with a
@@ -17,7 +17,7 @@ MOUSE ASD phenotype source (Pagani 2026, data_crossspecies/pagani/):
   20x1491 feature matrix (see pagani_2026_per_model/README.md).
 
 HUMAN target: ENIGMA ASD cortical thickness d_icv (68 DK L_/R_ rows). Near-null
-(mean d~0.003, std 0.091), so power is intrinsically low; reported honestly.
+(mean d~0.003, std 0.091), so power is low.
 
 Writes outputs/logs/section6_translate_autism.json
 """

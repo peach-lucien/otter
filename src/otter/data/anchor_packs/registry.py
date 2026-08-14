@@ -1,27 +1,24 @@
 """Single source of truth for anchor-pack composition.
 
-Before this module, "which packs are default?" had four different answers
-scattered across the codebase (compose_all.py, 08_build_gui.py, two READMEs).
-This module makes the registry canonical: every consumer imports
-:data:`DEFAULT_PACK_NAMES` / :func:`build_default_pack_entries` from here, so
-the recommended composition can never silently disagree with itself again.
+Every consumer imports :data:`DEFAULT_PACK_NAMES` /
+:func:`build_default_pack_entries` from this module, so the recommended
+composition has one definition.
 
-The **recommended model**, ``outputs/coupling/pi_fc_plus_SC_with_all_packs.npy``,
-is composed from every pack flagged ``default=True`` below: **all 15 packs**
-(26 region-anchor entries). A multi-benchmark
-comparison showed that the full set wins the TransBrain literature-homology
-benchmark decisively and ties for best on Beauchamp, while a smaller set only
-ever wins Beauchamp narrowly by exploiting that benchmark's coarse validation
-balls.
+The recommended model, ``outputs/coupling/pi_fc_plus_SC_with_all_packs.npy``,
+is composed from every pack flagged ``default=True`` below: all 15 packs, 26
+region-anchor entries. In a multi-benchmark comparison the full set leads on
+the TransBrain literature-homology benchmark and ties for best on Beauchamp,
+while a smaller set leads on Beauchamp alone and by a narrow margin,
+reflecting that benchmark's coarse validation balls.
 
 Adding or removing a pack from the recommended model is a one-line change here
-(flip ``default``), and every consumer, the compose script, the GUI builder,
-the multi-source trust step, picks it up automatically.
+(flip ``default``); the compose script, the GUI builder and the multi-source
+trust step all read the result.
 
-NOTE: changing :data:`DEFAULT_PACK_NAMES` changes which packs the recommended
-π is fitted with. After any such change, re-run
-``experiments/anchor_packs/compose_all.py`` (or ``pipeline/run_recommended_model.py``)
-so the saved π matches this registry again.
+Changing :data:`DEFAULT_PACK_NAMES` changes which packs the recommended π is
+fitted with. After any such change, re-run
+``experiments/anchor_packs/compose_all.py`` (or
+``pipeline/run_recommended_model.py``) so the saved π matches this registry.
 """
 from __future__ import annotations
 
@@ -59,7 +56,7 @@ class PackSpec:
         Whether this pack is part of the recommended all-packs composition
         (``pi_fc_plus_SC_with_all_packs.npy``).
     note : str
-        Short rationale, what the pack covers and any metric trade-off.
+        What the pack covers and any metric trade-off.
     """
     name: str
     builder: Callable
@@ -68,13 +65,12 @@ class PackSpec:
 
 
 # ---------------------------------------------------------------------------
-# The registry. ``default=True`` packs, IN THIS ORDER, are composed into the
-# recommended π. The order matters here. It determines pair_id ordering in
-# the fit, so keep it stable unless you intend to re-fit.
+# The registry. ``default=True`` packs, in this order, are composed into the
+# recommended π. The order determines pair_id ordering in the fit and must
+# stay stable unless the coupling is re-fitted.
 #
-# All 15 packs are currently in the recommended composition, see the module
-# docstring for the multi-benchmark rationale. A few carry trade-offs
-# (noted below); they are kept because the broader evidence favours inclusion.
+# All 15 packs are in the recommended composition; see the module docstring
+# for the multi-benchmark rationale. A few carry trade-offs, noted below.
 # ---------------------------------------------------------------------------
 PACKS: dict[str, PackSpec] = {
     "biccn_motor": PackSpec(
@@ -99,7 +95,7 @@ PACKS: dict[str, PackSpec] = {
     "lateral_pfc": PackSpec(
         "lateral_pfc", build_lateral_pfc_region_anchors, default=True,
         note="OFC only (Wallis 2011). The Prelimbic->dlPFC entry is excluded by "
-             "default, contested (Preuss 1995) and contradicted by the Balsters "
+             "default, contested (Preuss 1995) and contradicted by the Schaeffer "
              "2020 falsification test; pass include_dlpfc=True for ablations."),
     "striatum": PackSpec(
         "striatum", build_striatum_region_anchors, default=True,

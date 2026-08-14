@@ -1,8 +1,8 @@
 """Visualise the OTTER × TransBrain advanced comparison (3 panels)."""
-# RETIRED 2026-07-20. This script read transbrain_2025_advanced.json["cycle_consistency"],
-# which scored TransBrain on a different region set than OTTER. The reported comparison uses
-# transbrain_roundtrip_maps.json (both methods on the same 52 mouse regions). The block has been
-# removed from the log. Per-panel scripts (make_panelA/B/C/D_*.py) supersede this composite.
+# Retired. This script read transbrain_2025_advanced.json["cycle_consistency"], which scored
+# TransBrain on a different region set than OTTER, and that block is no longer in the log. The
+# reported comparison uses transbrain_roundtrip_maps.json, which scores both methods on the same
+# 52 mouse regions. The per-panel scripts (make_panelA/B/C/D_*.py) supersede this composite.
 raise SystemExit(__doc__.splitlines()[0] if __doc__ else "retired; see header")
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ def main():
     j = json.loads((ROOT / "outputs/logs/transbrain_2025_advanced.json").read_text())
     fig, axes = plt.subplots(1, 3, figsize=(16, 4.9))
 
-    # --- Panel 1: bidirectional cycle-consistency (the OTTER win) ----------
+    # --- Panel 1: bidirectional cycle-consistency -------------------------
     ax = axes[0]
     cyc = j["cycle_consistency"]
     names = list(cyc)
@@ -39,7 +39,7 @@ def main():
     ax.legend(fontsize=8, loc="lower right")
     ax.set_title("1 · Bidirectional cycle-consistency\n"
                  "OTTER's round-trip is more self-consistent. \n"
-                 "a fair, ground-truth-free metric", fontsize=9.5)
+                 "a ground-truth-free metric", fontsize=9.5)
 
     # --- Panel 2: optogenetic AI circuit → human cognition ----------------
     ax = axes[1]

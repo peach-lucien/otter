@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Clinical-target reverse translation — which human therapeutic targets can a mouse model?
+"""Clinical-target reverse translation: which human therapeutic targets a mouse can model.
 
 Routes established human neuromodulation targets (DBS / TMS sites) through the coupling to
-mouse, and reports not just WHERE each lands but HOW CONFIDENTLY -- so the output is a
-prescription with a trust flag: "target the mouse X" or "no adequate mouse homolog, do not
-model this in a mouse". The expected contrast:
+mouse, and reports where each lands and with what confidence, so the output carries a trust
+flag, either "target the mouse X" or "no adequate mouse homolog, do not model this in a
+mouse". The expected contrast:
 
   conserved subcortical/limbic targets (nucleus accumbens, subthalamic nucleus) -> a sharp,
       significant mouse prescription;
@@ -17,7 +17,7 @@ model this in a mouse". The expected contrast:
 The human target is defined as the K human parcels nearest the published MNI coordinate; the
 reverse operator is row-normalised pi (human -> mouse), aggregated to mouse structures.
 
-Coordinates below are REPRESENTATIVE published targets; confirm against your preferred source
+Coordinates below are representative published targets; confirm against a primary source
 before publication. The method contrast is robust to a few mm.
 
 Run: cd otter && PYTHONPATH=src python experiments/reverse_translation/02_clinical_targets.py
@@ -33,7 +33,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from otter.data import load_cached, load_pi, pi_provenance      # noqa: E402
 
 K_NEAREST = 8          # human parcels forming the target ROI
-MIN_PARCELS = 2        # allow small nuclei (STN) — parcel counts are printed
+MIN_PARCELS = 2        # allow small nuclei (STN); parcel counts are printed
 N_SPINS = 1000
 
 # name: (MNI xyz, expected mouse structures, class, source)

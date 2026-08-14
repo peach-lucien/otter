@@ -6,23 +6,22 @@ coverage with the repo's spin null over parcel centroids.
 
 Coverage per Schaefer region is the MASS-NORMALISED MEAN of the pi column-sums, not the
 sum: summed coverage scales with the number of OTTER parcels inside a region (rho = 0.35
-with parcel count), which is a size confound rather than a biological signal. Every
-conclusion in the battery is unchanged under mass-normalisation, but the rho values move
-slightly, so this is the version the figures must be built from.
+with parcel count), which is a size confound rather than a biological signal. The rho
+values move slightly under mass-normalisation, so this is the version the figures are
+built from.
 
-PI PROVENANCE (2026-07-18)
---------------------------
-The stored correlations were previously computed on an unrecorded coupling, and the log
-carried no pi_file / pi_sha256. Coverage now comes from ``load_pi()`` (canonical) and the
-run stamps ``pi_file`` / ``pi_sha256`` into ``_meta``. The stored ``schaefer_ids`` and
-``map_values`` are PUBLISHED MAPS: they are pi-independent and are preserved byte-for-byte
-by default (``--reuse-maps``), so a re-run changes only the pi-dependent quantities.
+PI PROVENANCE
+-------------
+Coverage comes from ``load_pi()`` (canonical) and the run stamps ``pi_file`` /
+``pi_sha256`` into ``_meta``. The stored ``schaefer_ids`` and ``map_values`` are PUBLISHED
+MAPS: they are pi-independent and are preserved byte-for-byte by default
+(``--reuse-maps``), so a re-run changes only the pi-dependent quantities.
 
 The headline evolution result does NOT use the ``spearman`` / ``spin_p`` stored here. It
 correlates RECONSTRUCTION-coverage (see 22_reconstruction_coverage.py) against these maps,
 computed live, and reads only
-``schaefer_ids`` and ``map_values`` from this log. The correlations below are the legacy
-MASS-coverage battery, kept for the record and now on the canonical coupling.
+``schaefer_ids`` and ``map_values`` from this log. The correlations below are the
+MASS-coverage battery on the canonical coupling.
 
 Requires: neuromaps, netneurotools (only when re-fetching the maps).
 Run: cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/07_evolution_battery.py
@@ -147,9 +146,9 @@ def main():
             s = spin_null(c, m, C, n_trials=N_SPIN, seed=0)
             res[label] = {"n": len(keep), "spearman": float(spearmanr(c, m).statistic),
                           "pearson_spin_r": s["r_observed"], "spin_p": s["p_spin"],
-                          # NB spin_p above is a PEARSON p attached to a SPEARMAN rho. Do not
-                          # quote them together. 09_evolution_battery_v2.py recomputes a
-                          # Spearman spin p, and needs these arrays to do it.
+                          # spin_p above is a PEARSON p attached to a SPEARMAN rho; the two
+                          # are not quotable together. 09_evolution_battery_v2.py recomputes
+                          # a Spearman spin p and needs these arrays to do it.
                           "schaefer_ids": [int(k) for k in keep],
                           "coverage_values": [float(x) for x in c],
                           "map_values": [float(x) for x in m]}
@@ -170,7 +169,7 @@ def main():
                     "not_used_by_fig5": (
                         "The headline result uses RECONSTRUCTION-coverage computed live (see "
                         "22_reconstruction_coverage.py); it reads only schaefer_ids and map_values from "
-                        "this log. The spearman / spin_p stored here are the legacy "
+                        "this log. The spearman / spin_p stored here are the "
                         "MASS-coverage battery."),
                     **prov}
     OUT.write_text(json.dumps(res, indent=2))

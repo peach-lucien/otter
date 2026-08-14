@@ -1,11 +1,10 @@
 """Cell-type ABUNDANCE / composition test through π (real cell types, not markers).
 
-The marker test correlates single-gene smooth maps (weak, mean r=0.089). The
-contrast reframe (03) already recovered a real positive, the excitatory↔inhibitory
-axis survives a spin null (r=+0.262, p=0.001). This script is the higher-resolution
-upgrade flagged as future work: instead of ~23 gene-marker proxies, use the ACTUAL
-per-region cell-type ABUNDANCE tables and ask whether π maps mouse regions to human
-regions of matching cell-type *composition*.
+The marker test correlates single-gene smooth maps (mean r=0.089). The contrast
+reframe (03) recovers a positive result, the excitatory-inhibitory axis surviving a
+spin null (r=+0.262, p=0.001). This script is the higher-resolution version. Instead
+of ~23 gene-marker proxies it uses the per-region cell-type abundance tables and asks
+whether π maps mouse regions to human regions of matching cell-type composition.
 
   Mouse  : Yao 2023 Allen Brain Cell (ABC) atlas, per-CCFv3-region class/subclass
            abundance (fraction of cells per type).  Access via `abc_atlas_access`.
@@ -18,15 +17,14 @@ Pipeline (once the two abundance tables are present):
      shared class/subclass label set.
   2. Map each abundance table's regions to OTTER's parcels (CCFv3 centroids for mouse;
      MNI/dissection centroids for human) → per-parcel composition.
-  3. For each cell type t: route the mouse abundance map of t through π and correlate
-     with the human abundance map of t, but TEST THE CONTRAST/COMPOSITION, not the
-     single smooth map: (a) per-type, against the fair translation-spin null; and
-     (b) compositional, does π map mouse parcels to human parcels whose dominant
-     cell class matches (argmax-class agreement, scored vs a spin null)?
+  3. For each cell type t, route the mouse abundance map of t through π and correlate
+     with the human abundance map of t, testing the contrast and composition rather
+     than the single smooth map. (a) per-type, against the translation-spin null; and
+     (b) compositional, whether π maps mouse parcels to human parcels whose dominant
+     cell class matches (argmax-class agreement, scored against a spin null).
 
-ENVIRONMENT NOTE: this needs the two cell atlases (multi-GB) + abc_atlas_access /
-cellxgene-census, which are NOT available in the Cowork sandbox (disk-limited, and
-the packages aren't on the mirror). Run locally:
+This needs the two cell atlases (multi-GB) and abc_atlas_access /
+cellxgene-census. Run locally:
 
     pip install abc_atlas_access cellxgene-census
     # mouse: download ABC atlas cell metadata, group by CCF region + subclass
@@ -38,7 +36,7 @@ the packages aren't on the mirror). Run locally:
 
 The script below implements steps 1–3 given those two CSVs (rows=regions with
 centroid columns x,y,z; remaining columns = per-type fractions). It exits with this
-recipe if they are absent, so the analysis is reproducible the moment the data lands.
+recipe if they are absent.
 """
 from __future__ import annotations
 

@@ -10,9 +10,9 @@ Three modules:
                             Jupyter notebooks (3D scatter, partner highlight,
                             per-network heatmaps, multi-metric bars).
 
-  ``otter.viz.reports``, comparison-table generator that pulls all the
+  ``otter.viz.reports``, comparison-table generator that reads the
                             ``outputs/logs/*.json`` results and produces a
-                            wide CSV / long CSV / markdown summary +
+                            wide CSV / long CSV / markdown summary and
                             comparison figures.
 
   ``otter.viz.gui``, region-first static GUI builder for

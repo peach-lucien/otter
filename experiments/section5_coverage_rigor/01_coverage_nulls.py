@@ -1,23 +1,21 @@
 """Coverage collapse, re-tested with the repo's spatial-autocorrelation (spin) null.
 
-An earlier analysis reported the sensorimotor->association coverage gap under a
-*permuted-axis* null (shuffle the myelin labels), which does NOT preserve spatial
-autocorrelation and therefore over-states significance (p = 3.4e-7). Here we re-test
-the SAME statistic with `otter.eval.nulls.spin_null` (Alexander-Bloch / Vazquez-
-Rodriguez), which rotates parcel centroids on a sphere and so keeps spatial
-smoothness in the null. Two statistics are reported:
+The sensorimotor->association coverage gap is tested with `otter.eval.nulls.spin_null`
+(Alexander-Bloch / Vazquez-Rodriguez), which rotates parcel centroids on a sphere and so
+keeps spatial smoothness in the null. A permuted-axis null (shuffling the myelin labels)
+does not preserve spatial autocorrelation and over-states significance. Two statistics are
+reported:
 
   (1) continuous Pearson r between per-parcel coverage and the myelin axis
   (2) the sensorimotor-tertile minus association-tertile coverage gap
 
 both with a proper spin p.
 
-RESULT ON THE CANONICAL COUPLING (pi_canonical.npy, 2026-07-18): BOTH statistics are
-null. Continuous r = +0.14 (spin p = 0.17); tertile gap = 0.68 log units (spin p = 0.29).
-On the RETIRED pre-warp coupling (pi_fc_plus_SC_with_all_packs.npy) the tertile gap was
-6.74 log units at spin p = 0.002, and that is what the earlier "spin-ROBUST tertile
-contrast" note in this file described. It does not survive the canonical coupling. Do
-not reinstate the tertile contrast as a positive result without re-deriving it here.
+RESULT ON THE CANONICAL COUPLING (pi_canonical.npy): both statistics are null.
+Continuous r = +0.14 (spin p = 0.17); tertile gap = 0.68 log units (spin p = 0.29). On the
+retired pre-warp coupling (pi_fc_plus_SC_with_all_packs.npy) the tertile gap is 6.74 log
+units at spin p = 0.002. The tertile contrast is not a positive result on the canonical
+coupling.
 
 Run: cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/01_coverage_nulls.py
 Writes outputs/logs/section5_coverage_nulls.json
@@ -91,7 +89,7 @@ def main():
            "coverage_collapse_tertile": tert,
            "note": ("On the canonical coupling BOTH statistics are null under the spin: "
                     "continuous r spin p ~ 0.17, tertile gap spin p ~ 0.29. The 6.7-log-unit "
-                    "tertile gap (spin p ~ 0.002) was a property of the retired pre-warp "
+                    "tertile gap (spin p ~ 0.002) is a property of the retired pre-warp "
                     "coupling pi_fc_plus_SC_with_all_packs.npy, not of the canonical one.")}
     (ROOT / "outputs/logs/section5_coverage_nulls.json").write_text(json.dumps(out, indent=2))
     print("wrote outputs/logs/section5_coverage_nulls.json")

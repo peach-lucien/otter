@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Why does the coverage<->expansion link break at visual cortex and default-mode? Is it xyz?
+"""Why the coverage-expansion link breaks at visual cortex and default-mode, and whether the
+spatial (xyz) cost term is responsible.
 
 At network level, sound coverage vs Xu2020 expansion is weakly negative (expected direction) but
 diluted by two breakers:

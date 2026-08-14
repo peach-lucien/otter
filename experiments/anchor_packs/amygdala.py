@@ -1,21 +1,20 @@
-"""AMYGDALA-1: Add the amygdala / cortical subplate region anchor.
+"""Add the amygdala / cortical subplate region anchor.
 
-This is the closing anchor pack, it covers the last remaining 0 %
-Beauchamp top-1 failure pair without dedicated sub-region supervision
-("Cortical subplate-other → amygdala").
+This pack covers the remaining 0 % Beauchamp top-1 failure pair without
+dedicated sub-region supervision ("Cortical subplate-other → amygdala").
 
   pid 38: Mouse Cortical subplate (54 parcels) ↔ Human amygdala (6 parcels)
 
-Single-entry pack. DSURQE doesn't distinguish amygdala sub-nuclei. No
-held-out test possible for the same reason: with only one entry, there's
-nothing to hold out and compare against the FC/SC-driven recovery.
+Single-entry pack. DSURQE does not distinguish amygdala sub-nuclei, so no
+held-out test is possible: with one entry there is nothing to hold out and
+compare against the FC/SC-driven recovery.
 
 Outputs:
   - outputs/coupling/pi_fc_plus_SC_with_amygdala.npy
   - outputs/logs/beauchamp_validation_amygdala.json
 
 Usage:
-    PYTHONPATH=src python experiments/amygdala/01_add_amygdala_anchor.py
+    PYTHONPATH=src python experiments/anchor_packs/amygdala.py
 """
 from __future__ import annotations
 

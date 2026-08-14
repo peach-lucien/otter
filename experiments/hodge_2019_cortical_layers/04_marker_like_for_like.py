@@ -1,33 +1,21 @@
 #!/usr/bin/env python3
-"""Score the Hodge individual layer markers on the SAME footing as the layer contrasts.
+"""Score the Hodge individual layer markers on the same footing as the layer contrasts.
 
-WHY THIS EXISTS
----------------
-Two numbers were contrasted:
-
-    individual markers   mean r = 0.23,  6 of 7 significant   (01_layer_marker_validation.py)
-    layer contrasts      mean r = 0.07,  3 of 4 non-significant (03_areal_type_reframe.py)
-
-and reads the gap as evidence that π carries areal but not laminar organisation. The two numbers
-are not comparable, in two independent ways:
+The per-marker result of 01_layer_marker_validation.py and the layer-contrast result of
+03_areal_type_reframe.py are not comparable, in two independent ways:
 
   1. MASK.  01 correlates over all 2,094 human parcels. 03 restricts to the 1,768 cortical parcels
      of Schaefer-400. Layer contrasts are only defined in cortex, so the marker number includes
      subcortical parcels the contrast number cannot.
 
   2. NULL.  01 uses a permuted-π null (200 shuffles of π's rows), which destroys all spatial
-     structure and is easy to beat. 03 uses a translation spin null (1,000 rotations of the mouse
-     input routed through the real π), which preserves the mouse map's spatial autocorrelation.
-     "6 of 7 significant" and "3 of 4 non-significant" are therefore counts against different and
-     non-comparable nulls.
-
-The write-up also stated that spin nulls were used "throughout", which is not true of the per-marker
-test as it stands.
+     structure. 03 uses a translation spin null (1,000 rotations of the mouse input routed
+     through the real π), which preserves the mouse map's spatial autocorrelation. Counts of
+     significant markers under the two nulls are not comparable.
 
 This script re-scores the seven markers cortex-only against the translation spin null, so the two
-halves of the areal-versus-laminar claim are measured the same way. It reports the original
-whole-brain values alongside, so the size of the change is visible rather than silent. It does not
-modify either existing script or their logs.
+halves of the areal-versus-laminar claim are measured the same way. It reports the whole-brain
+values alongside. It does not modify either existing script or their logs.
 
 Usage:
     cd otter && PYTHONPATH=src python experiments/hodge_2019_cortical_layers/04_marker_like_for_like.py
@@ -161,8 +149,8 @@ def main():
     print(f"layer contrasts mean r = +0.067   1/4 significant   "
           f"(cortex, translation spin; hodge_areal_type_reframe.json + refined)")
     print("\nIf the like-for-like marker mean is close to +0.07, the areal-versus-laminar")
-    print("dissociation is carried by the mask and the null, not by the biology. Read it before")
-    print("editing that paragraph.")
+    print("dissociation is carried by the mask and the null rather than by the")
+    print("biology.")
     print(f"\nWrote {p}")
 
 

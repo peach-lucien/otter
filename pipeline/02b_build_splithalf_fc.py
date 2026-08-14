@@ -13,7 +13,7 @@ stays NaN.
 
 Writes outputs/splithalf/{species}_splithalf.npz with A, B, idxA, idxB and n_subj.
 
-    conda activate retune
+    conda activate otter
     cd otter && python3 pipeline/02b_build_splithalf_fc.py
 """
 from __future__ import annotations

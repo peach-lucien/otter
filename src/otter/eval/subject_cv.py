@@ -87,8 +87,8 @@ def subject_kfold_cv(
         #   sum_test = sum_total - sum_train = total*n_total - train*n_train
         #   n_test   = n_total - n_train  (per-cell, since human n_obs is 100-113 not uniform)
         #   mean_test = sum_test / n_test
-        # Old code assumed uniform coverage and divided by len(test_m), which is
-        # slightly biased on the human side where some cells have <113 obs.
+        # Coverage is not uniform: on the human side some cells have <113 obs,
+        # so dividing by len(test_m) instead of n_test biases the test mean.
         fc_train_m, n_obs_train_m, _ = stream_mean_fc_subset("mouse", include_subjects=train_m)
         fc_train_h, n_obs_train_h, _ = stream_mean_fc_subset("human", include_subjects=train_h)
         n_obs_train_m = n_obs_train_m.astype(np.float64)

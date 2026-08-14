@@ -1,10 +1,8 @@
 """The production recipe for fitting a OTTER coupling.
 
 Every analysis here starts either from the released coupling or from a coupling refitted under
-some ablation of the production recipe. That recipe was previously written out separately in each
-experiment script, so a change had to be applied in several places and a notebook could disagree
-with the script that produced the reported number. Scripts and notebooks now import the recipe
-from here instead.
+some ablation of the production recipe. Scripts and notebooks import that recipe from this
+module.
 
 Typical use::
 
@@ -116,7 +114,7 @@ def fit_coupling(M, H, costs, pack_entries, M_xyz, *,
                  Cm_FC=None, Ch_FC=None, Cm_SC=None, Ch_SC=None) -> np.ndarray:
     """Fit a coupling. Defaults reproduce ``pi_canonical.npy``.
 
-    The four switches are the rungs of the supervision ablation ladder:
+    The four switches define the supervision ablation arms:
 
     ``alpha=0``        drop the connectivity term entirely (space and curation only)
     ``xyz_weight=0``   drop the spatial scaffold (connectivity and curation only)
@@ -162,9 +160,7 @@ def beauchamp_scorer(root: Path | None = None):
     Scores a coupling against the 19 mouse-human region correspondences of Beauchamp et al.,
     derived from whole-brain transcriptomic similarity and used by no part of the fit.
 
-    Loaded by path because it still lives under ``experiments/``. It belongs in ``otter.eval``;
-    moving it is deferred until the notebooks run green, so that the move is protected by something
-    that would catch a mistake.
+    Loaded by path from ``experiments/``.
     """
     root = Path(root) if root is not None else repo_root()
     path = root / "experiments/section2_supervision/beauchamp_battery.py"
@@ -179,23 +175,22 @@ def beauchamp_scorer(root: Path | None = None):
 def load_canonical(name: str = "pi_canonical.npy") -> tuple[np.ndarray, dict]:
     """The released coupling and its provenance stamp, as ``(pi, {"pi_file", "pi_sha256"})``.
 
-    Compare the returned sha against the ``pi_sha256`` recorded in whichever log you are trying to
-    reproduce. If they differ, the number came from a different coupling and no amount of re-running
-    will reconcile them.
+    Compare the returned sha against the ``pi_sha256`` recorded in the log being reproduced. A
+    differing sha indicates the number came from a different coupling.
     """
     from otter.data import load_pi, pi_provenance
     return load_pi(name), pi_provenance(name)
 
 
 # ---------------------------------------------------------------------------------------------
-# Provenance. Every log records which coupling produced it, because a re-run does not establish
-# which input was used. The form of the record depends on whether the producer loads or refits.
+# Provenance. Every log records which coupling produced it. The form of the record depends on
+# whether the producer loads or refits.
 # ---------------------------------------------------------------------------------------------
 def provenance(name: str = "pi_canonical.npy") -> dict:
     """Stamp for a producer that LOADS a coupling: ``{"pi_file", "pi_sha256"}``.
 
-    Use when the script reads a coupling off disk. The sha is of the file this run actually opened,
-    so it cannot claim an input it did not use.
+    Used when the script reads a coupling off disk. The sha is computed on the file this run
+    opened.
     """
     from otter.data import pi_provenance
     return pi_provenance(name)
@@ -205,9 +200,8 @@ def refit_provenance(pi: np.ndarray, *, recipe: dict | None = None,
                      reference: str = "pi_canonical.npy") -> dict:
     """Stamp for a producer that FITS its own coupling.
 
-    There is no loaded file to hash, so borrowing the released sha would assert something this run
-    never checked. Instead record the recipe, and measure how far the coupling fitted here agrees
-    with the released one::
+    There is no loaded file to hash. The stamp records the recipe and measures how far the
+    coupling fitted here agrees with the released one::
 
         {"fitted_here": True,
          "recipe": {...},
@@ -238,8 +232,7 @@ def stamp(payload: dict, **prov) -> dict:
         json.dumps(stamp(out, **provenance()), indent=2)
         json.dumps(stamp(out, **refit_provenance(pi)), indent=2)
 
-    The call belongs at the write site. A stamp added elsewhere in the file can come to describe
-    something other than what the script wrote.
+    The call belongs at the write site, so the stamp describes the object actually written.
     """
     clash = set(payload) & set(prov)
     if clash:
@@ -250,9 +243,8 @@ def stamp(payload: dict, **prov) -> dict:
 def coupling_sha_index(coupling_dir: Path | None = None) -> dict[str, str]:
     """``{sha256: filename}`` over every coupling in ``outputs/coupling``.
 
-    Allows an audit to resolve a stamped sha to the coupling it names, rather than only testing
-    whether it equals the released one. A log that compares couplings, such as the Control B
-    sensitivity analysis, carries several shas. Each should resolve here.
+    Resolves a stamped sha to the coupling it names. A log that compares several couplings
+    carries several shas; each resolves through this index.
     """
     import hashlib
 

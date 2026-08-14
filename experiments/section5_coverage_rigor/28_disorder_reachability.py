@@ -1,8 +1,7 @@
 """Disorder-level 'mouse-reachability': how much of each disorder's cortical thinning burden lands
 on cortex the mouse CAN reconstruct, vs cortex it cannot.
 
-Reframes the failed region-wise correlation into a per-disorder descriptive statistic that is robust
-to near-null disease maps. For each disorder:
+A per-disorder descriptive statistic, robust to near-null disease maps. For each disorder:
   burden(region) = max(0, -d)                      # thinning magnitude, 0 if thickening
   reachability   = burden-weighted mean of the reconstruction-coverage PERCENTILE across regions
 A disorder whose burden is spatially uniform scores ~50. Concentrated in LOW-reconstruction (mouse-

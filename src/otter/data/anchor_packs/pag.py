@@ -1,9 +1,9 @@
 """Periaqueductal Gray anchor pack (Bandler & Shipley 1994; Ezra 2015).
 
-The midbrain periaqueductal gray (PAG) is a key homeostatic structure
-involved in pain modulation, autonomic function, and defensive behaviour.
-Its columnar organisation (dorsolateral, lateral, ventrolateral) is
-conserved from rodent through human:
+The midbrain periaqueductal gray (PAG) is a homeostatic structure involved in
+pain modulation, autonomic function and defensive behaviour. Its columnar
+organisation (dorsolateral, lateral, ventrolateral) is conserved from rodent
+through human:
 
   - Bandler & Shipley 1994 *TINS*, established the columnar functional
     model in rodent.
@@ -15,11 +15,10 @@ conserved from rodent through human:
 
   pid 54: Mouse Periaqueductal gray ↔ Human PAG
 
-Caveat from Ezra 2015, columnar *structure* is conserved but cortical
-connectivity differs between humans and other mammals. So the gross
-PAG↔PAG anchor is defensible; sub-column splits (dorsolateral vs lateral
-vs ventrolateral) are *not* attempted here. They could be added if a
-human PAG-column atlas becomes available.
+Ezra 2015 reports that columnar structure is conserved while cortical
+connectivity differs between humans and other mammals, so only the gross
+PAG↔PAG anchor is defined. Sub-column splits (dorsolateral, lateral,
+ventrolateral) require a human PAG-column atlas.
 
 Mouse-side: DSURQE atlas overlay.
   Periaqueductal gray: 16 parcels
@@ -27,7 +26,7 @@ Mouse-side: DSURQE atlas overlay.
 Human-side: MNI sphere at canonical PAG centroid (Mai/Paxinos).
   PAG: (±5, –30, –10) r=6 mm → ~4-6 parcels (tight ball; PAG is small)
 
-References (verified Consensus search 2026):
+References:
   - Ezra, M., Faull, O. K., Jbabdi, S., & Pattinson, K. T. (2015).
     Connectivity-based segmentation of the periaqueductal gray matter
     in human with brainstem optimized diffusion MRI. *Human Brain Mapping*

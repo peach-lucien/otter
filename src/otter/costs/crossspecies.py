@@ -4,9 +4,9 @@ Public:
     cross_species_anchor_M, cosine distance over anchor-relationship features
     cross_species_gene_cost, cosine distance over ortholog-aligned gene vectors
 
-The xyz cross-species cost is computed inline in pipeline scripts (it's a
-straightforward Euclidean distance between per-species-normalised xyz coordinates
-plus a normalisation factor) so it doesn't need its own helper.
+The xyz cross-species cost is computed inline in pipeline scripts, as a
+Euclidean distance between per-species-normalised xyz coordinates plus a
+normalisation factor, and has no helper here.
 """
 from __future__ import annotations
 
@@ -22,10 +22,10 @@ def cross_species_anchor_M(
 ) -> np.ndarray:
     """Cross-species cost matrix from anchor-relationship feature vectors.
 
-    Each node gets a vector of FC values to each anchor. Since the 42 anchors
-    are in known 1-to-1 cross-species correspondence (sorted by pair_id+hemi
-    in both species), these vectors are directly comparable between species.
-    Returns (n_m, n_h) cosine-distance matrix.
+    Each node gets a vector of FC values to each anchor. The 42 anchors are in
+    known 1-to-1 cross-species correspondence, sorted by pair_id+hemi in both
+    species, so these vectors are directly comparable between species. Returns
+    an (n_m, n_h) cosine-distance matrix.
     """
     af_m = anchor_relationship_features(fc_m, anchor_pos_m)
     af_h = anchor_relationship_features(fc_h, anchor_pos_h)

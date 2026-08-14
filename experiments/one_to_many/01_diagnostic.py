@@ -1,26 +1,24 @@
 #!/usr/bin/env python3
-"""One-to-many correspondence diagnostic (v2) — meaningful, artefact-guarded.
+"""One-to-many correspondence diagnostic.
 
 QUESTION
 --------
 Which mouse structures correspond to >=2 GENUINELY DISTINCT human structures
 (one-to-many)? The textbook case is mouse caudoputamen (CP) -> human caudate AND
 putamen. If OTTER recovers that and surfaces further, non-obvious, connectionally
-coherent splits that a single-assignment method cannot represent, it is the
-demonstrated payoff of the probabilistic parcel-level coupling.
+coherent splits that a single-assignment method cannot represent, that is what the
+probabilistic parcel-level coupling provides.
 
-WHY v1 WAS NOT ENOUGH
----------------------
-v1 aggregated to 127 named Brainnetome structures, which fixed the parcel-count
-confound but NOT the "the atlas subdivides one continuous system" confound: mouse
-primary somatosensory cortex (SSp) mapped across several Brainnetome subfields of the
-human S1 body-map strip (A1/2/3ulhf, A1/2/3tru, ...) and was wrongly flagged
-one-to-many. Those subfields are one system, not distinct structures.
+DEFINING "DISTINCT" BY CONNECTIVITY, NOT BY ATLAS LABELS
+--------------------------------------------------------
+Aggregating to the 127 named Brainnetome structures removes the parcel-count confound
+but not the confound that the atlas subdivides one continuous system: mouse primary
+somatosensory cortex (SSp) maps across several Brainnetome subfields of the human S1
+body-map strip (A1/2/3ulhf, A1/2/3tru, ...), which are one system rather than distinct
+structures.
 
-THE FIX — define "distinct" by CONNECTIVITY, not by atlas labels
-----------------------------------------------------------------
-Two human structures are genuinely distinct only if they are wired differently. We
-therefore weight the count of human targets by how connectionally SIMILAR they are:
+Two human structures are distinct only if they are wired differently. The count of
+human targets is therefore weighted by how connectionally SIMILAR they are:
 
     D(structure) = 1 / (q^T S q)
 
@@ -39,13 +37,13 @@ VALIDATION (hard asserts)
     * CP must have D >= 1.8 with caudate AND putamen among its top targets.
     * VISp (primary visual) must be ~one-to-one (D < 1.6).
     * At least one SSp (somatosensory) case must have its plain effective number
-      (1/sum q^2) COLLAPSE under S-weighting (D << effN) — i.e. the metric removes the
-      atlas-subdivision artefact rather than us removing it by hand.
+      (1/sum q^2) COLLAPSE under S-weighting (D << effN), so that the metric removes the
+      atlas-subdivision artefact rather than a hand-applied correction.
 
 CONVERGENCE (reverse view, reported not gated)
     A genuine evolutionary split predicts the two human targets both point BACK to the
-    same mouse structure. We report, for each split, whether the top-2 human targets
-    name this mouse structure as their dominant mouse origin (column-normalised pi).
+    same mouse structure. For each split, whether the top-2 human targets name this
+    mouse structure as their dominant mouse origin (column-normalised pi) is reported.
 
 Run (needs transbrain for the Brainnetome atlas):
     cd otter && PYTHONPATH=src python experiments/one_to_many/01_diagnostic.py
@@ -189,7 +187,7 @@ def main():
     s1 = [r for r in rows if r["structure"].startswith("SSp")]
     collapsed = [r for r in s1 if r["effN"] >= 2.5 and r["D"] < D_ONE2MANY]
     if s1 and not collapsed:
-        problems.append("no SSp case collapsed under S-weighting — metric may not be removing the atlas artefact")
+        problems.append("no SSp case collapsed under S-weighting; the metric may not be removing the atlas artefact")
 
     o2m = sorted([r for r in rows if r["one_to_many"]], key=lambda r: -r["D"])
     novel = [r for r in o2m if r["anchored"] is False]

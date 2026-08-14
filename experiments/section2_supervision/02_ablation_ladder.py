@@ -16,7 +16,7 @@ Writes outputs/logs/out_a1_ladder.json.
     conda activate retune
     cd otter && python3 experiments/section2_supervision/02_ablation_ladder.py
 
-Six fits. Expect this to take a while; --arms restricts it to a subset for a partial rerun.
+Six fits; --arms restricts it to a subset for a partial rerun.
 """
 from __future__ import annotations
 

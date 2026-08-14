@@ -12,7 +12,7 @@ For each marginal, run leave-one-region-out CV across the 15 atlas-derived
 region anchors (S7) and compare top-1 / mean rank.
 
 Usage:
-    PYTHONPATH=src python experiments/marginal_weighting/01_compare_marginals.py
+    PYTHONPATH=src python experiments/ablations/marginal_weighting.py
 """
 from __future__ import annotations
 

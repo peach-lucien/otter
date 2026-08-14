@@ -71,23 +71,23 @@ This test uses OTTER's curated 61-gene panel + AHBA microarray as proxies for ce
 3. Map both to OTTER's parcellations via centroid alignment
 4. Test cross-species correlations for actual transcriptomically-defined cell types, not gene-marker proxies
 
-This would extend from ~25 cell-type-marker proxies to thousands of actual cell types, closer to BICCN's intended use case. Tractable but a multi-day data engineering project.
+This would extend from ~25 cell-type-marker proxies to thousands of actual cell types, closer to BICCN's intended use case.
 
-## Contrast reframe (2026-06-19), `03_contrast_reframe.py`
+## Contrast reframe, `03_contrast_reframe.py`
 
 Per-gene smooth-map correlations are weak (mean r=0.089) and share cortical spatial
-autocorrelation. We therefore tested cell-class contrasts instead (magnitude-cancelling,
-like the Pagani contrast), against the fair translation-spin null:
+autocorrelation. Cell-class contrasts were tested instead (magnitude-cancelling, as in
+the Pagani contrast), against the translation-spin null:
 - **Excitatory − inhibitory** (Glut − interneuron): r=+0.262, **spin p=0.001, survives.**
-- Neuronal − glial: r=+0.049, spin p=0.58 (n.s.); glia aren't network-organised.
+- Neuronal − glial: r=+0.049, spin p=0.58 (n.s.); glia are not network-organised.
 - Dopaminergic subcortical hotspot: top-decile overlap 17/124, hypergeometric p=0.10
   (marginal); full-map spin n.s.
 
-**The E/I axis is a specific cross-species result** that the per-marker test
-missed. OTTER preserves where excitatory versus inhibitory neurons dominate, beyond
-spatial smoothness. Log: `outputs/logs/biccn_contrast_reframe.json`.
+The E/I axis is a cross-species result that the per-marker test does not show. OTTER
+preserves where excitatory versus inhibitory neurons dominate, beyond spatial
+smoothness. Log: `outputs/logs/biccn_contrast_reframe.json`.
 
-A higher-resolution upgrade (real per-region cell-type *abundance* from Yao 2023 +
-Siletti 2023, not marker proxies) is scaffolded in `04_abundance_composition.py`
-needs the two cell atlases + `abc_atlas_access`/`cellxgene-census`, so run locally
-(not feasible in the disk-limited sandbox).
+A higher-resolution version (per-region cell-type *abundance* from Yao 2023 and
+Siletti 2023 rather than marker proxies) is scaffolded in `04_abundance_composition.py`.
+It needs the two cell atlases and `abc_atlas_access`/`cellxgene-census`, so run it
+locally.

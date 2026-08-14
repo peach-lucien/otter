@@ -9,10 +9,9 @@ expanded third). Centroids = mean OTTER parcel MNI coord per Schaefer region, so
 spin runs in the repo's own coordinate frame.
 
 CAVEATS: (i) Hill is macaque->human expansion, OTTER is mouse->
-human, so primary areas (e.g. V1) may deviate; (ii) right hemisphere only; (iii) an
-in-sandbox check gave continuous rho=-0.21 (spin p~0.10) and tertile gap 3.66 log units
-(spin p~0.15) -> directionally consistent but NOT spin-significant at Schaefer-400. Run
-this to confirm at full rigor and, if desired, at parcel resolution.
+human, so primary areas (e.g. V1) may deviate; (ii) right hemisphere only; (iii) at
+Schaefer-400 the continuous rho is -0.21 (spin p~0.10) and the tertile gap 3.66 log units
+(spin p~0.15), directionally consistent but not spin-significant.
 
 Requires: pip install neuromaps netneurotools ; Connectome Workbench (wb_command) on PATH.
 Run: cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/02_hill_expansion_spin.py

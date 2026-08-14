@@ -32,12 +32,12 @@ def main():
     ax1.legend(loc="upper left")
 
     # Right: null distribution
-    # Re-run to collect null distribution? It's already summarized, just show CI
+    # The null is already summarised in the log, so only the CI is shown
     ax2.set_title("Permuted-π null distribution\n"
                   f"(200 row-shuffles, mean {j['null']['pearson_mean']:+.2f}, CI shaded)")
     ax2.set_xlabel("Pearson r (predicted Δ vs observed Δ)")
     ax2.set_ylabel("count")
-    # We can't reconstruct the exact null without re-running, show CI band + real
+    # The exact null cannot be reconstructed without re-running, so plot the CI band
     null_mean = j["null"]["pearson_mean"]
     null_ci = j["null"]["pearson_ci95"]
     ax2.axvspan(null_ci[0], null_ci[1], color="#cccccc", alpha=0.6, label="null 95% CI")

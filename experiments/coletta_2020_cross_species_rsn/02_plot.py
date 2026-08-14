@@ -60,7 +60,7 @@ def main():
     ax.set_title("Sub-test B: ICA-derived data-driven\n"
                  "Mouse ICA component → predicted Yeo-7 argmax\n"
                  "(green = match anatomical label; weaker test because ICA components\n"
-                 " don't cleanly partition into single anatomical networks)", fontsize=9)
+                 " do not cleanly partition into single anatomical networks)", fontsize=9)
 
     # Panel 3: Network coherence, bar of real vs null spread
     ax = axes[2]

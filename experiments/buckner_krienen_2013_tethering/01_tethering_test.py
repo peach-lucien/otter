@@ -4,23 +4,23 @@
 "The evolution of distributed association networks in the human brain", argue
 that human association cortex expanded so much it became evolutionarily
 **"untethered"** from the sensory hierarchies and molecular gradients that
-organise primary cortex. Implication for a mouse↔human mapping: there is no
-well-defined mouse homologue of the expanded human association cortex, so a
-faithful coupling should be **confident over sensorimotor cortex and sparse /
-unconfident over association cortex**.
+organise primary cortex. The implication for a mouse↔human mapping is that there
+is no well-defined mouse homologue of the expanded human association cortex, so an
+accurate coupling should be confident over sensorimotor cortex and sparse or
+unconfident over association cortex.
 
-This is a negative-control / falsification test: if OTTER's π were uniformly
+This is a negative-control / falsification test. If OTTER's π were uniformly
 confident everywhere, including over association cortex that the field says
 has no clear mouse homologue, that would signal over-fitting.
 
-Test: for every human cortical parcel, measure OTTER's **coverage**, the total
+Test: for every human cortical parcel, measure OTTER's coverage, the total
 π mass it receives from the mouse brain (the per-column mass of the coupling)
 and ask whether it collapses toward association cortex along the sensorimotor →
 association axis (the HCP T1w/T2w myelin map; high myelin = sensorimotor).
 
-Note: π's per-parcel *entropy* (the diffuseness of a parcel's mouse origin) is
-reported too but is flat, it is the *amount* of coverage, not its diffuseness,
-that carries the tethering signal.
+π's per-parcel entropy (the diffuseness of a parcel's mouse origin) is reported
+too but is flat. It is the amount of coverage, not its diffuseness, that carries
+the tethering signal.
 """
 from __future__ import annotations
 

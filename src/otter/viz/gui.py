@@ -1,13 +1,14 @@
 """Region-first static GUI for exploring OTTER couplings.
 
-This module builds a self-contained HTML application plus a JSON sidecar.
-It is intentionally static: all expensive work happens in Python, and the
-browser only searches, aggregates top-K rows, and renders browser-side
-3D views from precomputed mesh/point payloads.
+This module builds a self-contained HTML application plus a JSON sidecar. The
+application is static: the expensive work happens in Python, and the browser
+searches, aggregates top-K rows, and renders 3D views from precomputed
+mesh/point payloads.
 """
 from __future__ import annotations
 
 import json
+import hashlib
 from pathlib import Path
 from typing import Any, Optional, Sequence
 
@@ -35,10 +36,10 @@ def _var_text(var, name: str, n: int, default: str = "") -> list[str]:
     if name not in var:
         return [default] * n
     # .astype(object) first: several var columns load from h5ad as pandas
-    # Categorical, and .fillna() on a Categorical raises on modern pandas
-    # (>=2.0) when the fill value is not already a category. Demoting to
-    # object dtype makes fillna accept any value; behaviour is unchanged
-    # when the column has no missing entries.
+    # Categorical, and .fillna() on a Categorical raises on pandas >=2.0
+    # when the fill value is not already a category. Demoting to object
+    # dtype makes fillna accept any value; behaviour is unchanged when the
+    # column has no missing entries.
     return var[name].astype(object).fillna(default).astype(str).tolist()
 
 
@@ -359,8 +360,8 @@ def _build_mouse_shell_layer(
 
     The atlas surface provides anatomical context for the interactive GUI;
     selected groups are rendered as opaque browser-side alpha hulls/markers on
-    top of it. If the external DSURQE files are missing, fall back to a parcel
-    convex hull so the mode remains usable on fresh checkouts.
+    top of it. When the external DSURQE files are absent, a parcel convex hull
+    is used instead, so the mode remains usable on a fresh checkout.
 
     A sparse per-parcel vertex stencil is attached (analogous to the human
     pial layer) so selections can paint a heat overlay onto the mouse shell.
@@ -426,9 +427,9 @@ def _build_mouse_shell_layer(
             raise ValueError("Need at least four mouse parcels to build a shell")
         hull = ConvexHull(parcel_xyz)
         faces = np.asarray(hull.simplices, dtype=np.int64)
-        # Hull fallback: each parcel maps directly onto its own vertex so the
-        # stencil is trivial. Still emit it for code-path symmetry with the
-        # DSURQE branch.
+        # Hull fallback: each parcel maps onto its own vertex, so the
+        # stencil is trivial. It is emitted for symmetry with the DSURQE
+        # branch.
         stencils = [[[int(i), 1.0]] for i in range(len(parcel_xyz))]
         distances = [0.0] * len(parcel_xyz)
         return {
@@ -456,6 +457,20 @@ def build_visual_layers(mouse_ad, human_ad, *, root: str | Path = ".") -> dict:
         "human_surface": _build_human_surface_layer(human_ad),
         "mouse_shell": _build_mouse_shell_layer(mouse_ad, root=root),
     }
+
+
+def _sha256(path) -> str:
+    """Hash of the coupling the payload was built from, or an empty string."""
+    if path is None:
+        return ""
+    p = Path(path)
+    if not p.is_file():
+        return ""
+    h = hashlib.sha256()
+    with p.open("rb") as fh:
+        for block in iter(lambda: fh.read(1 << 20), b""):
+            h.update(block)
+    return h.hexdigest()
 
 
 def build_gui_payload(
@@ -497,7 +512,8 @@ def build_gui_payload(
         models.append({
             "id": str(spec["id"]),
             "label": str(spec["label"]),
-            "pi_file": str(spec.get("pi_file", spec.get("pi_path", "(in-memory)"))),
+            "pi_file": Path(spec.get("pi_file", spec.get("pi_path", "(in-memory)"))).name,
+            "pi_sha256": _sha256(spec.get("pi_file", spec.get("pi_path"))),
             "top_k": int(top_k),
             "top_mouse_to_human": topk_per_row(pi, top_k),
             "top_human_to_mouse": topk_per_col(pi, top_k),

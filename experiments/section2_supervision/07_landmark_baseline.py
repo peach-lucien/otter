@@ -3,10 +3,10 @@
 
 Every arm of the ablation ladder solves a transport problem. Even the alpha = 0 arm,
 which carries no connectivity, still solves an entropic semi-relaxed transport problem with a
-spatial cost and curated anchors. So the ladder cannot answer the question a reader will ask,
-which is whether the transport machinery is needed at all.
+spatial cost and curated anchors, so the ladder cannot answer whether the transport machinery is
+needed at all.
 
-This baseline answers it. It takes the 42 bilateral Garin landmark pairs, fits the same
+This baseline does. It takes the 42 bilateral Garin landmark pairs, fits the same
 thin-plate-spline warp the production model uses (otter.repro.warped_mouse_xyz), pushes the mouse
 parcel centroids onto the human brain, and assigns each mouse parcel to the nearest human parcel.
 No connectivity, no region packs, no transport, no free parameters.
@@ -23,9 +23,9 @@ Two arms are scored:
     heldout     each region's own Garin landmark withheld from the warp before refitting it,
                 against the three configurations in out_a1b_loro.json
 
-The held-out arm is the informative one. The claim under test is that connectivity earns its place on
-regions whose cross-species position is misleading, so if that argument is right this baseline
-should fail hardest in the tectum and the hippocampal subfields.
+The held-out arm is the informative one. Connectivity is expected to matter most for regions whose
+cross-species position is misleading, so this baseline should fail hardest in the tectum and the
+hippocampal subfields.
 
 Writes outputs/logs/out_b2_landmark_baseline.json.
 

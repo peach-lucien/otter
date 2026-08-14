@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 """Hemispheric replication of the coverage deficit, and the retirement of the Hill result.
 
-WHY
----
 The Hill 2010 macaque->human expansion map is RIGHT-HEMISPHERE ONLY (Schaefer ids 201-400).
-It was published as "coverage aligns with macaque->human expansion, rho = -0.18, spin p = 0.046".
-Two things are wrong with that.
+Two problems affect a coverage-vs-Hill correlation (rho = -0.18, spin p = 0.046).
 
 1.  The spin null was computed by projecting a single hemisphere of centroids onto a sphere and
     applying a Haar rotation. That is not a valid spin: the point cloud occupies a half-sphere,
@@ -20,16 +17,14 @@ Two things are wrong with that.
 
     A real signature of cortical expansion would not be one-sided. Hill is retired.
 
-That test is only decisive if the CLAIM WE KEEP survives it. So we apply the same check to the
-coverage deficit and the connectional-vs-molecular dissociation. They do survive: the effect
-size is essentially unchanged in each hemisphere taken alone.
+The same check is applied to the coverage deficit and the connectional-vs-molecular
+dissociation. Both survive: the effect size is unchanged in each hemisphere taken alone.
 
-We deliberately do NOT report spin p values for the single-hemisphere fits, for the same reason
-we discarded Hill's: a Haar rotation of a half-sphere is not a spin test. The effect SIZE is the
-evidence here.
+Spin p values are not reported for the single-hemisphere fits, for the same reason they are
+not reported for Hill: a Haar rotation of a half-sphere is not a spin test. The effect size
+is the evidence.
 
-Incidental finding worth knowing: coverage on the left correlates with coverage on the mirrored
-right at only rho = +0.22. Semi-relaxed OT never constrains the human marginal, so nothing forces
+Coverage on the left correlates with coverage on the mirrored right at only rho = +0.22. Semi-relaxed OT never constrains the human marginal, so nothing forces
 the coupling to be bilaterally symmetric, and entropic amplification lets small cost asymmetries
 send mass preferentially to one side. Coverage is therefore noisy per parcel, which is a further
 reason to report it as a tertile contrast rather than a per-parcel map.
@@ -91,7 +86,7 @@ def main():
                     "(-0.18 right, +0.06 left with the map mirrored) and is retired. The "
                     "coverage deficit and the dissociation do NOT reverse: their effect size "
                     "is stable in each hemisphere alone. Single-hemisphere spin p values are "
-                    "deliberately omitted: a Haar rotation of a half-sphere is not a spin."),
+                    "omitted: a Haar rotation of a half-sphere is not a spin."),
            "n_spin_whole_brain": N_SPIN}
 
     def block(sel, label, with_p):
@@ -133,7 +128,7 @@ def main():
     out["left"] = block(xyz[:, 0] < 0, "left", False)
     out["right"] = block(xyz[:, 0] > 0, "right", False)
 
-    # ---- the Hill reversal, recorded so it cannot quietly come back ------------------
+    # ---- the Hill reversal -----------------------------------------------------------
     nr = np.asarray(json.loads(
         (ROOT / "data_external/human_sc_meta.json").read_text())["node_region"], int)
     ev = json.loads((ROOT / "outputs/logs/section5_evolution_battery.json").read_text())

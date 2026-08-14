@@ -1,4 +1,4 @@
-# Reverse-translation ground truth — human function → mouse structure
+# Reverse-translation ground truth, human function to mouse structure
 
 Each human function is paired *a priori* with the mouse structure(s) established as its
 substrate in the canonical mouse-circuit literature, decided before scoring. A hit = a
@@ -20,21 +20,20 @@ reverse-translated human map ranks one of the listed mouse structures in the top
 | audition | auditory | AUDp, MG | Tsukano et al. 2017, *Front Neural Circuits* | 10.3389/fncir.2017.00014 |
 | interoception | interoception | AId, AIv, AIp, PB | Palmiter 2018, *Trends Neurosci* | 10.1016/j.tins.2018.03.007 |
 
-## Two refinements over the first draft, and why they are a priori (not post hoc)
+## Two structures added on review authority
 
-- **anxiety → amygdala (BLA added).** Tovote, Fadok & Lüthi 2015 make the amygdala central to
+- **anxiety → amygdala (BLA).** Tovote, Fadok & Lüthi 2015 make the amygdala central to
   anxiety, not only fear. BLA belongs in the anxiety set on the review's authority.
-- **interoception → parabrachial nucleus (PB added).** Palmiter 2018 establishes the PBN as
+- **interoception → parabrachial nucleus (PB).** Palmiter 2018 establishes the PBN as
   the mouse relay of interoceptive (visceral/taste/temperature/pain) signals to the forebrain.
-  PB belongs in the interoception set on the review's authority. OTTER independently routing
-  interoception to PB is corroboration, not the reason for the edit.
+  PB belongs in the interoception set on the review's authority.
 
 ## Notes
 
-- addiction is deliberately narrow (ACB/VTA) and is *expected* to be the weakest / no-clean-
-  target case — a distributed, human-elaborated construct without a single mouse home. Its
-  failure to clear the spin null is a feature (the "primate-unique, no adequate mouse target"
-  signal), not a bug.
-- spatial memory's specific review DOI was not tool-verified this session; the hippocampus↔
-  spatial-memory pairing itself is uncontroversial. Confirm the Moser 2008 DOI
+- addiction is narrow by construction (ACB/VTA) and is *expected* to be the weakest,
+  no-clean-target case, a distributed, human-elaborated construct without a single mouse
+  home. Its failure to clear the spin null is the "primate-unique, no adequate mouse target"
+  signal.
+- the spatial-memory review DOI is unverified; the hippocampus↔spatial-memory pairing itself
+  is uncontroversial. Confirm the Moser 2008 DOI
   (likely 10.1146/annurev.neuro.31.061307.090723) before publication.

@@ -64,7 +64,7 @@ def main(resolution_um: int = 100):
         manifest_file=str(cache_dir / "manifest.json"),
     )
 
-    # -- 1. AllenSDK CCFv3 annotation (still used to derive summary IDs) ----
+    # -- 1. AllenSDK CCFv3 annotation (used to derive summary IDs) ---------
     # Note: a shipped 25 µm CCFv3 annotation (ANO_ABA_NS.nii.gz) is also
     # available alongside the mouse package, but we use the AllenSDK version
     # for the structure-tree mapping (descendant_ids), which is independent

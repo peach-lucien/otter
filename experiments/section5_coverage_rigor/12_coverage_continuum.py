@@ -17,11 +17,10 @@ phenomenon. This script establishes the continuum and its spatial organisation:
 
 3. ROBUSTNESS. The medial->lateral gradient is present on the base, production (retired) and
    anchor-free couplings but ABSENT on the canonical one, so it does not generalise across
-   couplings. The per-coupling arms below are what establishes that; canonical is the arm to
-   report.
+   couplings. The per-coupling arms below establish that; canonical is the reported arm.
 
-Spin note (see otter-section5-dlpfc memory): spin the SIGNAL (coverage, asymmetric) against the
-symmetric axis map. Do NOT bilaterally average coverage first (walks into the 37% FPR regime).
+Spin note: spin the SIGNAL (coverage, asymmetric) against the symmetric axis map. Do NOT
+bilaterally average coverage first; that gives a 37% FPR.
 
 Run:  cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/12_coverage_continuum.py
 Writes: outputs/logs/section5_coverage_continuum.json

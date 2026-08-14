@@ -8,7 +8,7 @@ Vogt et al. 2013 (*J Comp Neurology*) extends this to macaque area 32
 subdivisions. van Heukelum et al. 2020 (*Trends in Neurosciences*)
 provides a recent cross-species framework.
 
-References (verified Consensus search 2026):
+References:
   - Vogt, B. A., Hof, P. R., Zilles, K., Vogt, L. J., Herold, C., & Palomero-
     Gallagher, N. (2012). Cytoarchitecture of mouse and rat cingulate cortex
     with human homologies. *Brain Structure and Function* 219, 185-192.
@@ -20,24 +20,21 @@ References (verified Consensus search 2026):
   pid 36:  Mouse ACA ventral ↔ Human subgenual ACC (BA24/25)
   pid 37:  Mouse Retrosplenial area ↔ Human RSC (BA29/30)
 
-Why we deliberately avoid pregenual ACC
----------------------------------------
-The most-studied cingulate sub-division is pregenual ACC (BA32). Its
-canonical MNI centroid (±5, 25, 25) sits inside our human "Medial
-prefrontal cortex" parcel, which is the *same* parcel anchored by
-Garin pair_id 1 (Medial PFC). Adding a region anchor for pregenual ACC
-would conflict with the existing Garin point anchor, and the soft
-constraints would compete rather than compose. Subgenual ACC at
-(±5, 10, 35) is anatomically distinct from mPFC in our parcellation
-and pairs cleanly with mouse ACA ventral.
+Pregenual ACC is excluded
+-------------------------
+The canonical MNI centroid of pregenual ACC (BA32), (±5, 25, 25), sits inside
+the human "Medial prefrontal cortex" parcel, the same parcel anchored by Garin
+pair_id 1 (Medial PFC). A region anchor for pregenual ACC would conflict with
+that point anchor, and the soft constraints would compete rather than compose.
+Subgenual ACC at (±5, 10, 35) is anatomically distinct from mPFC in this
+parcellation and pairs with mouse ACA ventral.
 
-Why no PCC entry
-----------------
-Mouse "Posterior parietal association areas" is not a defensible
-homologue of primate posterior cingulate cortex (Vogt & Paxinos 2014).
-The cleanest cingulate pairs are subgenual ACC + RSC. We skip PCC; if a
-specific user needs it, a dedicated pack should curate a primate
-specifically-trained correspondence.
+PCC is excluded
+---------------
+Mouse "Posterior parietal association areas" is not a defensible homologue of
+primate posterior cingulate cortex (Vogt & Paxinos 2014). The cingulate pairs
+used here are subgenual ACC and RSC; a PCC correspondence would require a
+dedicated pack.
 
 Mouse-side: DSURQE atlas overlay.
   ACA ventral: 15 parcels
@@ -46,13 +43,12 @@ Human-side: MNI spheres.
   Subgenual ACC: (±5, 10, 35) r=10 mm  → 6 parcels
   RSC:           (±15, -55, 10) r=10 mm → 8 parcels
 
-Caveat: for Beauchamp validation, the ACC subgenual anchor's mouse-side set
-(ACA ventral) and human-side ball do NOT exactly match the Beauchamp
-"Anterior cingulate area → cingulate gyrus" validation pair (which uses full mouse ACA and a different MNI
-centroid). So Beauchamp recovery for ACG is NOT tautological for this
-pack, actual measurement (rather than mechanical satisfaction).
-Retrosplenial isn't in Beauchamp's 22 pairs so its effect is also not
-directly measurable.
+For Beauchamp validation, the ACC subgenual anchor's mouse-side set (ACA
+ventral) and human-side ball do not match the Beauchamp "Anterior cingulate
+area → cingulate gyrus" validation pair, which uses the full mouse ACA and a
+different MNI centroid, so Beauchamp recovery for ACG is not tautological for
+this pack. Retrosplenial is not among Beauchamp's 22 pairs, so its effect is
+not directly measurable.
 """
 from __future__ import annotations
 

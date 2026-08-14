@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""Subcortical-coverage disease-substrate reverse translation (the retry).
+"""Subcortical-coverage disease-substrate reverse translation.
 
-Neurosynth disease maps failed because they don't image the subcortex/midbrain, so the
-disease substrate wasn't in the input (Parkinson landed in thalamus, SNc unsampled). This
-uses the neuromaps molecular atlas (Hansen 2022) instead: PET neurotransmitter-system maps,
-MNI152 volumetric, with real striatal/midbrain coverage.
+Neurosynth disease maps do not image the subcortex/midbrain, so the disease substrate is
+absent from the input (Parkinson lands in thalamus, SNc unsampled). This script uses the
+neuromaps molecular atlas (Hansen 2022) instead: PET neurotransmitter-system maps, MNI152
+volumetric, with striatal and midbrain coverage.
 
-KEY TEST (Parkinson): the human DOPAMINE system map (DAT / dopamine synthesis / D1/D2) is the
-substrate that mouse PD models target (nigrostriatal). Does it reverse-translate to the mouse
-dopamine system (CP, ACB, SNc, SNr, VTA)?  Serotonin and mu-opioid maps are carried as
-reference systems for specificity.
+Key test (Parkinson): the human dopamine system map (DAT / dopamine synthesis / D1/D2) is the
+substrate that mouse PD models target (nigrostriatal). The test is whether it
+reverse-translates to the mouse dopamine system (CP, ACB, SNc, SNr, VTA). Serotonin and
+mu-opioid maps are carried as reference systems for specificity.
 
 Requires neuromaps:  pip install neuromaps
 Run: cd otter && PYTHONPATH=src python experiments/reverse_translation/06_neuromaps_substrate.py
@@ -139,7 +139,7 @@ def main():
         print("  -> anchored clinical hit" if da_hit >= max(1, len(da)//2) else
               "  -> still not landing on the dopamine substrate")
     else:
-        print("no dopamine MNI maps matched — inspect the printed available-annotation keywords.")
+        print("no dopamine MNI maps matched; inspect the printed available-annotation keywords.")
     print("wrote outputs/logs/reverse_translation_neuromaps.json")
 
 

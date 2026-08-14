@@ -48,24 +48,16 @@ def _default_anchor_entries(M, H):
 
 
 def _default_models():
-    models = []
-    baseline = COUP / "pi_fc_plus_SC.npy"
-    if baseline.exists():
-        models.append({
-            "id": "baseline",
-            "label": "Baseline - Garin point anchors",
-            "pi_file": baseline,
-            "region_eval_file": LOG / "region_level_eval.json",
-        })
-    all_packs = COUP / "pi_fc_plus_SC_with_all_packs.npy"
-    if all_packs.exists():
-        models.append({
-            "id": "recommended",
-            "label": "Recommended - region anchor packs",
-            "pi_file": all_packs,
-            "region_eval_file": LOG / "region_level_eval_all_packs.json",
-        })
-    return models
+    """The canonical coupling, which is what load_pi() returns."""
+    pi = COUP / "pi_canonical.npy"
+    if not pi.exists():
+        return []
+    return [{
+        "id": "canonical",
+        "label": "OTTER canonical coupling",
+        "pi_file": pi,
+        "region_eval_file": LOG / "region_level_eval_canonical.json",
+    }]
 
 
 def main(args):
@@ -97,7 +89,7 @@ def main(args):
     for m in models:
         print(f"  {m['id']:>12s}: {m['pi_file']}")
 
-    trust_path = COUP / "trust_multisource_all_packs.npz"
+    trust_path = COUP / "trust_multisource_canonical.npz"
     if not trust_path.exists():
         print(f"  warning: {trust_path} missing; trust tiers will be unknown")
         trust_path = None

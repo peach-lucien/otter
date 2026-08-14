@@ -3,23 +3,23 @@
 > **Source-data-dependent (not in the public release).** `download_pagani_ish.py`
 > needs the mouse resting-state mask `data_crossspecies/_mouse_mask/rsmask.nii`
 > (raw source, not shipped in the Zenodo bundles) and performs a multi-day Allen
-> API download. It exits with a clear message if the mask is absent. This is a
-> maintainer/source-data-only script; the per-parcel result it produces
-> (`pagani_mouse_expr.npy`) is already committed so downstream steps don't need it.
+> API download. It exits with a message if the mask is absent. The per-parcel
+> result it produces (`pagani_mouse_expr.npy`) is committed, so downstream steps
+> do not need to run it.
 
 Standalone pipeline to expand OTTER's mouse Allen ISH atlas from 61 curated genes to **all 6,415 genes implicated by Pagani et al. 2026** (1,952 hypo-only + 4,463 hyper-only from MOESM4). Required to power Test 3 (gene-spatial translation) properly.
 
 ## Why this exists
 
-The in-conversation proof-of-concept used OTTER's 51-gene panel, of which only 36 overlap with Pagani's lists. Spearman ρ = +0.619 (empirical p = 0.045) is suggestive but underpowered. With the full 6,415-gene panel, or however much of it Allen has usable ISH data for (expected 30–50%). Test 3 becomes a properly-powered cross-species spatial replication of Pagani's pathway claim.
+The proof-of-concept used OTTER's 51-gene panel, of which only 36 overlap with Pagani's lists. Spearman ρ = +0.619 (empirical p = 0.045) is suggestive but underpowered. With the full 6,415-gene panel, or however much of it Allen has usable ISH data for (expected 30–50%), Test 3 becomes a properly-powered cross-species spatial replication of Pagani's pathway claim.
 
-## Why this isn't run in-conversation
+## Why this runs separately
 
-- **Disk**: each ISH zip is 1–2 MB, so 6,000 genes ≈ 6–12 GB cache. The conversation sandbox has ~20 MB available.
+- **Disk**: each ISH zip is 1–2 MB, so 6,000 genes ≈ 6–12 GB cache.
 - **Time**: even with 4 parallel workers, Allen's API rate-limits aggressively; realistic wall-clock 1–3 days for the full pull.
-- **Dependencies**: `allensdk` is heavy (~50 MB install) and fails in disk-constrained environments. This script uses raw `requests` to bypass it.
+- **Dependencies**: `allensdk` is heavy (~50 MB install) and fails in disk-constrained environments. This script uses raw `requests` instead.
 
-So this directory contains a portable script you run on your own machine.
+This directory therefore holds a portable script for running on a local machine.
 
 ## What's here
 
@@ -43,9 +43,9 @@ The script imports OTTER's existing transform helpers (`_mouse_transform.py`) an
 - `data_external/_diagnostics/mouse_to_ccf_transform.json` (exists)
 - `data_crossspecies/_mouse_mask/rsmask.nii` (OTTER's mouse mask, exists)
 
-### Step 1, small test (optional but recommended)
+### Step 1, small test (optional)
 
-Validate the pipeline on 30 Pagani genes first to confirm the API + parsing chain works on your machine:
+Validate the pipeline on 30 Pagani genes first to confirm the API and parsing chain work:
 
 ```bash
 cd <otter-repo-root>
@@ -62,7 +62,7 @@ python experiments/autism_subtypes/allen_expansion/download_pagani_ish.py \
     --max-genes 6415 --workers 4
 ```
 
-Expected: 1–3 days wall-clock, 6–12 GB cache, ~30–50% yield. The script is idempotent, kill and resume freely; cached zips are reused.
+Expected: 1–3 days wall-clock, 6–12 GB cache, ~30–50% yield. The script is idempotent; it can be stopped and resumed, and cached zips are reused.
 
 To run in chunks across machines:
 ```bash
@@ -84,11 +84,11 @@ Writes `outputs/logs/autism_subtypes_gene_spatial_expanded.json`. With ~2,000+ g
 ## Expected outcome
 
 If Pagani's claim 4 is correct AND OTTER's π carries cross-species spatial signal:
-- Pearson r should be substantially above the underpowered +0.44 we got with 36 genes
-- Empirical p should drop well below 0.045 (Spearman) / 0.13 (Pearson)
+- Pearson r should be above the underpowered +0.44 obtained with 36 genes
+- Empirical p should drop below 0.045 (Spearman) / 0.13 (Pearson)
 - Same-sign agreement should rise from 4/8 toward 6-8/8
 
-If the result *doesn't* improve, that would suggest the cross-species pathway signal is real for the small marker-gene subset but not for the broader Pagani gene lists, informative either way.
+If the result does not improve, the cross-species pathway signal is present for the small marker-gene subset but not for the broader Pagani gene lists.
 
 ## Allen API notes
 

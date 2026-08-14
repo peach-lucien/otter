@@ -1,10 +1,9 @@
 """POT-backed wrappers for entropic (Fused) Gromov–Wasserstein.
 
-Why a wrapper instead of calling POT directly:
+The wrapper provides:
   - Multi-restart with diverse G0 init to escape GW's local minima.
   - Consistent return type (FGWResult) across solvers.
-  - Insulation point: lets us swap in OTT-JAX or moscot later without touching
-    the model classes.
+  - A single insulation point between the model classes and the OT backend.
 
 This module is internal, model classes in otter.models import from it.
 """
@@ -48,8 +47,8 @@ def gw_loss(C1: np.ndarray, C2: np.ndarray, pi: np.ndarray,
     """GW objective Σ_{i,j,k,l} L(C1[i,k], C2[j,l]) π[i,j] π[k,l].
 
     Uses the Peyré 2016 closed-form for square_loss to avoid materialising the
-    (n1, n2, n1, n2) outer-product tensor (which would be 111 TiB for our
-    1864×2094 production size). The formula:
+    (n1, n2, n1, n2) outer-product tensor (111 TiB at the 1864×2094 production
+    size). The formula:
 
         L = Σ C1²[i,k]·p[i]·p[k] + Σ C2²[j,l]·q[j]·q[l]
             − 2·trace(C1 @ π @ C2 @ π.T)

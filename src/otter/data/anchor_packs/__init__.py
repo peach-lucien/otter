@@ -10,7 +10,7 @@ list of :class:`RegionAnchorEntry` objects. Pack modules:
   - ``cingulate``. Subgenual ACC + Retrosplenial (Vogt 2012)
   - ``amygdala``. Cortical subplate / amygdala (Janak & Tye 2015)
   - ``hippocampal``. Subiculum + CA1 + CA3 + Dentate gyrus (Strange 2014)
-  - ``lateral_pfc``. OFC + dlPFC (Wallis 2011; Carlén 2017; **dlPFC contested**)
+  - ``lateral_pfc``. OFC + dlPFC (Wallis 2011; Carlén 2017; dlPFC contested)
   - ``striatum``. Caudoputamen dorsolateral/ventromedial (Voorn 2004)
   - ``entorhinal``. Entorhinal cortex (Franjic 2021)
   - ``visual``. Mouse LM ↔ Human V2 (Wang & Burkhalter 2007)
@@ -20,10 +20,10 @@ list of :class:`RegionAnchorEntry` objects. Pack modules:
   - ``somatosensory``. S1 face/hand/leg body-map (Penfield 1937; Seelke 2012)
   - ``ppc``. Posterior parietal cortex / BA7 (Whitlock 2017)
 
-Packs are designed to compose: pass the concatenation of several packs as
-``region_anchors=...`` to ``MultimodalFGW.fit`` to layer multiple sources
-of supervision. Each pack reserves a non-overlapping ``pair_id`` range so
-the entries stay distinguishable in logs and trust maps. Pid registry:
+Packs compose: pass the concatenation of several packs as
+``region_anchors=...`` to ``MultimodalFGW.fit`` to layer multiple sources of
+supervision. Each pack reserves a non-overlapping ``pair_id`` range, so the
+entries stay distinguishable in logs and trust maps. Pid registry:
 
   ============= ============================================
   pid range     pack
@@ -42,16 +42,15 @@ the entries stay distinguishable in logs and trust maps. Pid registry:
   54            Periaqueductal gray (PAG)
   55            Perirhinal cortex
   56, 57        Auditory core + belt
-  58, 59, 60    Somatosensory body-map (face, hand, leg), opt-in (hurts Beauchamp S1 by 5 pp)
+  58, 59, 60    Somatosensory body-map (face, hand, leg), opt-in (lowers Beauchamp S1 by 5 pp)
   61            Posterior parietal cortex
   ============= ============================================
 
 The systematic atlas-derived pack
 (:func:`otter.data.atlas_regions.build_garin_region_anchors_from_atlases`,
 pid range 31..51 with ``pid_offset=30``) covers all 21 Garin pairs at once
-and lives separately because it's a single object rather than per-region.
-For per-region curation (literature-derived single homology pairs), use
-the modules here.
+and is a single object rather than per-region. For per-region curation
+(literature-derived single homology pairs), use the modules here.
 
 Which packs make up the recommended model
 -----------------------------------------
@@ -62,12 +61,10 @@ rather than re-listing the default pack builders by hand.
 
 Designing a new pack
 --------------------
-Create a new file ``my_region.py`` in this directory exposing one
-function ``build_my_region_anchors(M_var, H_var) -> list[RegionAnchorEntry]``.
-Pick a pair_id range above 33 that doesn't clash with the existing packs.
-Add the import below.
-
-See :file:`biccn_motor.py` for the canonical pattern.
+Create a file ``my_region.py`` in this directory exposing one function
+``build_my_region_anchors(M_var, H_var) -> list[RegionAnchorEntry]``, using a
+pair_id range above 33 that does not clash with the existing packs, and add the
+import below. :file:`biccn_motor.py` gives the pattern.
 """
 from otter.data.anchor_packs.biccn_motor import build_biccn_motor_region_anchors
 from otter.data.anchor_packs.tectum import build_tectum_region_anchors

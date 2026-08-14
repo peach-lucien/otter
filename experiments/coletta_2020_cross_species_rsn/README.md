@@ -14,7 +14,7 @@ This is a stricter version of Pagani's Test 1, with three improvements: (i) uses
 
 **6/10 canonical pairs are diagonal-argmax**, with up to 7.5× over null:
 
-> **Fair-null confirmation.** This discrete result **survives a spatially-fair mouse-parcel spin null**: rotating the mouse networks on a sphere and re-aggregating π drops the diagonal-argmax count to **mean 1.23/10** (95th pct 2); the observed 6/10 beats it at **p=0.002**. The mouse↔human RSN correspondence is therefore specific rather than a product of spatial autocorrelation. (Run `experiments/spatial_null_check/fair_nulls_coletta_test2c.py`.)
+> **Spin null.** This discrete result survives a mouse-parcel spin null. Rotating the mouse networks on a sphere and re-aggregating π drops the diagonal-argmax count to mean 1.23/10 (95th pct 2); the observed 6/10 beats it at p=0.002. The mouse↔human RSN correspondence is therefore specific rather than a product of spatial autocorrelation. (Run `experiments/spatial_null_check/fair_nulls_coletta_test2c.py`.)
 
 | Pair | OTTER mass | Null | Ratio | Argmax? |
 |---|---:|---:|---:|:---:|
@@ -33,15 +33,15 @@ Same Schaefer-definition misses as Pagani's Test 1. Schaefer-17's "Visual" is V1
 
 ### Sub-test B. Data-driven ICA
 
-2/7 ICA components map cleanly to their expected Yeo-7 network (Salience, sensorimotor). The others are noisier because ICA decomposition mixes anatomical regions: each component is a *mode of FC variation* rather than a clean network. This is an inherent property of ICA rather than a OTTER failure.
+2/7 ICA components map cleanly to their expected Yeo-7 network (Salience, sensorimotor). The others are noisier because ICA decomposition mixes anatomical regions, so each component is a mode of FC variation rather than a clean network. This is a property of ICA rather than a failure of OTTER.
 
 ### Sub-test C. Network coherence
 
-**9/11 networks have OTTER-mapped images MORE compact than permuted-π null.** Best compression: frontoparietal (0.58× null), frontal_dmn (0.63×), brainstem (0.68×), subcortical (0.70×). The two networks that don't beat null (auditory, temporal_dmn) are the smallest in OTTER's PAIRID scheme (62 + 66 parcels) and the most spatially distributed.
+**9/11 networks have OTTER-mapped images MORE compact than permuted-π null.** Best compression: frontoparietal (0.58× null), frontal_dmn (0.63×), brainstem (0.68×), subcortical (0.70×). The two networks that do not beat null (auditory, temporal_dmn) are the smallest in OTTER's PAIRID scheme (62 + 66 parcels) and the most spatially distributed.
 
-## What this tells us
+## Interpretation
 
-OTTER's π preserves the cross-species network structure under both labeled-correspondence (A) and spatial-coherence (C) tests. The data-driven ICA test (B) is noisier because of an inherent ambiguity in ICA decomposition rather than a OTTER failure. Together, A + C provide robust evidence that OTTER captures the cross-species RSN topology.
+OTTER's π preserves the cross-species network structure under both labeled-correspondence (A) and spatial-coherence (C) tests. The data-driven ICA test (B) is noisier because of an ambiguity inherent to ICA decomposition rather than a failure of OTTER. Together, A and C indicate that OTTER captures the cross-species RSN topology.
 
 ## Files
 

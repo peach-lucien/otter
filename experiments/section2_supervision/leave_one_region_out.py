@@ -1,22 +1,22 @@
 #!/usr/bin/env python3
 """Leave-one-region-out generalisation test of the FULL OTTER model.
 
-For each Beauchamp pair, remove ALL curated supervision that anchors that
-region -- its Garin point anchor(s) AND any region-anchor pack whose mouse
-parcels fall in the region -- re-fit the full FGW coupling with everything
-else, and score that pair's Beauchamp recovery. This is the honest
-"would we recover this region if we had NOT curated it" number for the
-production model (Garin + all packs), unlike 05h which is Garin-only.
+For each Beauchamp pair, all curated supervision that anchors that region (its
+Garin point anchor(s) and any region-anchor pack whose mouse parcels fall in the
+region) is removed, the full FGW coupling is re-fitted with everything else, and
+that pair's Beauchamp recovery is scored. This gives the "would we recover this
+region if we had NOT curated it" number for the production model (Garin + all
+packs), whereas pipeline/05h_region_anchor_cv.py is Garin-only.
 
-Resumable: caches per-pair to .loro_results.json; exits after TIME_GUARD s so
-it fits the sandbox's per-call limit. Re-run until 'ALL DONE'.
+Resumable: caches per-pair to .loro_results.json; exits after TIME_GUARD s.
+Re-run until 'ALL DONE'.
 """
 import sys, json, time, importlib.util
 from pathlib import Path
 import numpy as np
 
-ROOT = Path("/sessions/modest-tender-carson/mnt/brain_crossspecies_translation/otter")
-OUT = Path("/sessions/modest-tender-carson/mnt/outputs")
+ROOT = Path(__file__).resolve().parents[2]
+OUT = ROOT / "outputs"
 CACHE = OUT / ".loro_results_v2.json"
 TIME_GUARD = 34.0
 t_start = time.time()

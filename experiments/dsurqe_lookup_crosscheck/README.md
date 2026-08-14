@@ -34,7 +34,7 @@ Jaccard. The pattern is consistent:
   motor, cortical subplate), substantial agreement, not identical (the live
   lookup uses the centroid; the vote uses the full voxel set).
 - **Only ~74 % of votes resolve to a tree node** even with comma/case-tolerant
-  matching; the rest use names the bridge doesn't cover.
+  matching; the rest use names the bridge does not cover.
 
 Net: roughly **half** the anchor-pack queries are at a granularity the votes
 cannot reach, so the live atlas lookup stays the default. The votes are best

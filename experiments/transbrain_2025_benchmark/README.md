@@ -120,11 +120,14 @@ SSp-n (70.8 mm) and CA2 (65.3 mm).
 | `02_plot.py` | 3-panel figure (benchmark + head-to-heads) |
 | `03_transbrain_advanced.py` | Trust-stratified agreement, consensus map |
 | `05_aiopto_headtohead.py` | Anterior-insula optogenetic head-to-head |
+| `06_bn_distributions.py` | Per-region Brainnetome distributions for both methods; writes `outputs/logs/transbrain_bn_distributions.json` |
+| `07_benchmark_summary.py` | AUROC, top-k, mass-in-region, sharpness and win counts; writes `outputs/logs/transbrain_benchmark_summary.json` |
+| `08_roundtrip_maps.py` | Round-trip maps and correlations for both methods; writes `outputs/logs/transbrain_roundtrip_maps.json` |
+| `09_localization_distributions.py` | Predicted distributions for five example regions; writes `outputs/logs/localization_distributions.json` |
 | `README.md` | This file |
 
-`outputs/logs/transbrain_roundtrip_maps.json` is read by
-`notebooks/06_vs_transbrain.ipynb` and by the repository's number-checking
-tools. No script in this directory writes it.
+`notebooks/06_vs_transbrain.ipynb` and the repository's number-checking tools
+read the four logs written by `06` to `09`.
 
 ## Reproduce
 
@@ -134,8 +137,18 @@ PYTHONPATH=src python experiments/transbrain_2025_benchmark/01_transbrain_benchm
 PYTHONPATH=src python experiments/transbrain_2025_benchmark/02_plot.py
 PYTHONPATH=src python experiments/transbrain_2025_benchmark/03_transbrain_advanced.py
 PYTHONPATH=src python experiments/transbrain_2025_benchmark/05_aiopto_headtohead.py
+PYTHONPATH=src python experiments/transbrain_2025_benchmark/06_bn_distributions.py
+PYTHONPATH=src python experiments/transbrain_2025_benchmark/07_benchmark_summary.py
+PYTHONPATH=src python experiments/transbrain_2025_benchmark/08_roundtrip_maps.py
+PYTHONPATH=src python experiments/transbrain_2025_benchmark/09_localization_distributions.py
 ```
 
 The gradient head-to-head depends on the Margulies experiment's output
 (`outputs/logs/margulies_2016_gradient.json`). TransBrain benchmark and case
 data are staged in `data_external/transbrain_2025/`.
+
+`07_benchmark_summary.py` reads `outputs/logs/transbrain_bn_distributions.json`,
+which is committed, and runs on a fresh clone. The other scripts read
+`data_external/`, `outputs/coupling/` and `outputs/anndata/`, which are gitignored
+and come from the Zenodo reproduce bundle. Run `06_bn_distributions.py` before
+`07_benchmark_summary.py`.

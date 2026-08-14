@@ -8,8 +8,7 @@ fingerprints across the atlas. For example,
 "L_Somatosensory cortex" and "L_Posterior parietal cortex" share an SC
 fingerprint, and "L_Auditory cortex" and "R_Auditory cortex" share one too.
 Augmenting the cortical anchors takes that to 208. Both counts are
-len(np.unique(m, axis=0)) on the saved matrices, rechecked 2026-08-09. An
-earlier version of this docstring said 192, which does not match the file.
+len(np.unique(m, axis=0)) on the saved matrices.
 
 Knox 2019's voxel-level model evaluated at the *leaf* cortical structure level
 gives 43 distinct cortical fingerprints. For each Garin anchor mapped to a
@@ -161,7 +160,7 @@ def main():
     # Also save a dedicated COST matrix derived from this feature matrix,
     # using log1p-correlation (same recipe as sc_correlation_distance), then
     # apply the same `normalise_cost(scheme="max")` step the production
-    # pipeline applies to Cm_SC (see pipeline/03c_build_multimodal_costs.py).
+    # pipeline applies to Cm_SC (see pipeline/03_build_costs.py).
     # Without this, Cm_SC_knox lives in [0, ~1.32] while every other cost
     # matrix in the cache lives in [0, 1], that scale mismatch silently
     # over-weights SC by ~30% in any FGW solve that uses Cm_SC_knox.

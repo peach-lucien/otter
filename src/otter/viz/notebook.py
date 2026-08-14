@@ -178,7 +178,7 @@ def plot_brain_3d(ad, *,
 
 
 def _dark_scene() -> dict:
-    """Plotly 3D scene config with a dark background, markers pop better."""
+    """Plotly 3D scene config with a dark background."""
     return dict(
         aspectmode="data",
         bgcolor="#111",
@@ -266,7 +266,7 @@ def plot_pi_partners_pair(model, source_idx: int, *,
     top_k : int, default 20
         How many partners to highlight on the other side.
     dark : bool, default True
-        Black background, easier to see small markers.
+        Black background, for visibility of small markers.
     """
     go = _import_plotly()
     from plotly.subplots import make_subplots
@@ -761,7 +761,7 @@ def plot_pi_heatmap_ordered(
     """Render the cross-species π map with rows + columns reordered by network.
 
     Adds coloured network sidebars (left + top) so the block structure is
-    visible at a glance. The diagonal-ish band you'll see if anchor supervision
+    visible at a glance. The diagonal band present when anchor supervision
     works comes from each network's mouse anchors mapping to its human anchors.
 
     Parameters

@@ -1,4 +1,4 @@
-"""OLFACTORY-1: Add Piriform + AON sub-region anchors.
+"""Add Piriform + AON sub-region anchors.
 
 Olfactory cortex is a documented OTTER failure region. Beauchamp gives
 0 % top-1 for "Piriform area → piriform cortex" under the production
@@ -23,7 +23,7 @@ Outputs:
   - outputs/logs/beauchamp_validation_olfactory_pir_only.json
 
 Usage:
-    PYTHONPATH=src python experiments/olfactory/01_add_olfactory_anchors.py
+    PYTHONPATH=src python experiments/anchor_packs/olfactory.py
 """
 from __future__ import annotations
 

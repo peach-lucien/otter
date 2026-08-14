@@ -3,9 +3,9 @@
 The 42 Garin anchors per species form 21 pair_ids × 2 hemispheres. Anchors with
 the same (pair_id, hemisphere) are putative cross-species homologues.
 
-Splitting note: the *network* assignment (PAIRID_TO_NETWORK, assign_networks) lives
-in `otter.data.networks`. This module contains only the anchor-index machinery
-and held-out recovery metrics.
+The network assignment (PAIRID_TO_NETWORK, assign_networks) lives in
+`otter.data.networks`. This module contains only the anchor-index machinery and
+held-out recovery metrics.
 """
 from __future__ import annotations
 
@@ -79,9 +79,7 @@ def assign_parcels_to_nearest_anchor_region(
     """For each parcel in ``var``, return the ``pair_id`` of the nearest Garin anchor.
 
     Distance is computed in xyz mm. Each parcel is assigned to the pair_id of
-    its single nearest anchor across both hemispheres. General-purpose helper
-    for region-level operations on parcels (e.g. building per-region weight
-    arrays for the TOPO-1 ablation).
+    its single nearest anchor across both hemispheres.
 
     Parameters
     ----------
@@ -128,8 +126,8 @@ def build_xyz_weight_array(
         Per-region overrides.
     default_weight : float, default 1.0
         Weight used for parcels whose nearest-anchor pair_id is not in
-        ``weights_per_pair_id``. Typically set to ``self.config["xyz_weight"]``
-        so the experiment matches the production scalar where not overridden.
+        ``weights_per_pair_id``. Set to ``self.config["xyz_weight"]`` to match
+        the production scalar where not overridden.
 
     Returns
     -------

@@ -10,8 +10,8 @@ mouse→human mask-definition step:
   • OTTER: human mask = the human regions OTTER's π actually routes the mouse
     prominent regions to (data-driven; from 04_otter_human_masks.py).
 
-It runs BOTH and compares: does the learned coupling subtype MORE than Pagani's
-~25 % of individuals, and how much do the two subtypings agree?
+It runs both and reports whether the learned coupling subtypes more than Pagani's
+~25 % of individuals, and how far the two subtypings agree.
 
 Needs the ABIDE-pcp download (nilearn), run on a machine with the data, e.g.:
     OTTER_ALLOW_INSECURE_SSL=1 PYTHONPATH=src python \

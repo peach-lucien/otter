@@ -1,12 +1,11 @@
-"""PAG-1: Add periaqueductal gray anchor (Ezra 2015; Kingsbury 2011).
+"""Add periaqueductal gray anchor (Ezra 2015; Kingsbury 2011).
 
 Single-entry pack. Mouse PAG (16 parcels) ↔ Human PAG at MNI(±5, –30,
 –10) r=6 mm (4 parcels).
 
-No PAG validation pair in Beauchamp, so direct effect can't be measured.
-Empirically: NAc gains +4 pp top-1 (side benefit, possibly via mass
-redistribution along midbrain → forebrain projections); all other
-Beauchamp pairs unchanged.
+Beauchamp has no PAG validation pair, so the direct effect is not
+measurable. NAc gains +4 pp top-1, possibly via mass redistribution along
+midbrain → forebrain projections; all other Beauchamp pairs are unchanged.
 
 Usage:
     PYTHONPATH=src python experiments/anchor_packs/pag.py

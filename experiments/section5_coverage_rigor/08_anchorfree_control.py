@@ -1,49 +1,42 @@
 #!/usr/bin/env python3
 """Coverage on a scale-free footing, with an ANCHOR-FREE control.
 
-WHY THIS SCRIPT EXISTS
-----------------------
-The original section-5 headline ("coverage collapses 6.7 log-units from sensorimotor to
-association cortex; 53 % of parcels receive negligible mass") does not survive scrutiny:
-
-1.  Coverage was defined per parcel as log10(max(pi.sum(0), 1e-300)) and then AVERAGED IN
-    LOG SPACE. Entropic OT gives pi_ij ~ exp(-C_ij / eps), so with eps = 5e-3 the log of the
-    mass is the transport COST rescaled by 1/eps. The observed 91-log-unit spread implies a
-    cost spread of 1.05, and the costs are max-normalised to exactly [0, 1]. The quantity
-    being reported as "mouse mass received" was a cost readout, exponentially amplified.
-
-2.  No human parcel is actually uncovered. The minimum column mass is 7.2e-94. "53 %
-    uncovered" is a statement about where a threshold is placed, not about biology, and the
-    figure moves to 41 % / 58 % under other equally arbitrary thresholds.
-
-3.  The 6.7 log-unit gap therefore lives in the numerical underflow tail. Floored at 1e-6
-    (the repo's own threshold for negligible mass) it is 0.27 log-units, and it no longer clears
-    a spin null. In linear mass, sensorimotor cortex receives only 1.5x association cortex.
-
-WHAT SURVIVES, AND THE CONTROL THAT ESTABLISHES IT
---------------------------------------------------
-Standardised (SD) tertile gaps are scale-free and DO hold. The obvious objection to them is
-that coverage might simply track distance from the curated anchors: rho(coverage, anchor
-distance) = -0.31, three times its correlation with the cortical hierarchy (+0.09).
-
-So we re-fit the model with EVERY anchor removed (garin_anchor cleared, zero region packs)
-and recompute. If the association deficit were an artefact of where we placed supervision,
-stripping the supervision would destroy it.
-
-It does the opposite. The deficit GROWS (+0.47 -> +0.54 SD), as does the dissociation
-(+0.64 -> +0.71 SD). The p-values rise only because the anchor-free map is spatially noisier,
-which widens the spin null (95th pct 0.36 -> 0.55); the effect itself is larger. The curated
-packs, several of which deliberately supply coverage to association territory (lateral PFC,
-PPC, cingulate), slightly ATTENUATE the deficit rather than creating it.
-
-NOTE ON THE ABLATION COUPLINGS ALREADY ON DISK
+WHY COVERAGE IS REPORTED AS A STANDARDISED GAP
 ----------------------------------------------
-Do NOT use outputs/coupling/pi_ablation_xyz_only.npy as the anchor-free model. It was fitted
-with lam_anchor=0, and in supervised.py that does `M[mp, :] = lam` -- with lam = 0 it zeroes
-the ENTIRE cross-species cost row for the 42 anchor parcels rather than removing the anchors,
-leaving them free to go anywhere. Its sidecar JSON still reports n_visible_anchors = 21. The
-correct way to drop anchors is to clear M.var["garin_anchor"], which is what we do below (and
-what ablation_ladder.py does).
+1.  Coverage defined per parcel as log10(max(pi.sum(0), 1e-300)) and averaged in log space
+    is a transport-cost readout rather than a mass. Entropic OT gives
+    pi_ij ~ exp(-C_ij / eps), so at eps = 5e-3 the log of the mass is the transport COST
+    rescaled by 1/eps. The 91-log-unit spread implies a cost spread of 1.05, and the costs
+    are max-normalised to exactly [0, 1].
+
+2.  No human parcel is uncovered. The minimum column mass is 7.2e-94, so a "53 % uncovered"
+    figure states where a threshold is placed rather than a property of the biology; it
+    moves to 41 % / 58 % under other thresholds.
+
+3.  The 6.7 log-unit sensorimotor-to-association gap lies in the numerical underflow tail.
+    Floored at 1e-6 (the repo's threshold for negligible mass) it is 0.27 log-units and
+    does not clear a spin null. In linear mass, sensorimotor cortex receives 1.5x
+    association cortex.
+
+THE ANCHOR-FREE CONTROL
+-----------------------
+Standardised (SD) tertile gaps are scale-free and hold. Coverage might instead track
+distance from the curated anchors: rho(coverage, anchor distance) = -0.31, three times its
+correlation with the cortical hierarchy (+0.09). The model is therefore re-fitted with every
+anchor removed (garin_anchor cleared, zero region packs).
+
+The deficit grows (+0.47 -> +0.54 SD), as does the dissociation (+0.64 -> +0.71 SD). The
+p-values rise because the anchor-free map is spatially noisier, which widens the spin null
+(95th pct 0.36 -> 0.55). The curated packs, several of which supply coverage to association
+territory (lateral PFC, PPC, cingulate), attenuate the deficit rather than creating it.
+
+ABLATION COUPLINGS ON DISK
+--------------------------
+outputs/coupling/pi_ablation_xyz_only.npy is not the anchor-free model. It was fitted with
+lam_anchor=0, and in supervised.py that does `M[mp, :] = lam`; at lam = 0 this zeroes the
+ENTIRE cross-species cost row for the 42 anchor parcels rather than removing the anchors,
+leaving them free to go anywhere, and its sidecar JSON reports n_visible_anchors = 21.
+Anchors are dropped by clearing M.var["garin_anchor"], as below and in ablation_ladder.py.
 
 Run:  cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/08_anchorfree_control.py
 Writes: outputs/coupling/pi_anchorfree_control.npy
@@ -156,7 +149,7 @@ def main():
 
     out = {"_why": ("Coverage is reported as a SCALE-FREE standardised gap, never as log-units. "
                     "log10(pi column mass) is a transport-cost readout (pi ~ exp(-C/eps), "
-                    "eps=5e-3), not a mass; the old 6.7 log-unit gap lived in the underflow "
+                    "eps=5e-3), not a mass; the 6.7 log-unit gap lies in the underflow "
                     "tail and does not survive a physical floor or a rank transform."),
            "epsilon": 5e-3,
            "min_column_mass": float(pi_prod.sum(0).min()),
@@ -181,7 +174,7 @@ def main():
         "rho_coverage_vs_anchor_distance_anchorfree": float(
             spearmanr(np.log10(np.maximum(pi_af.sum(0), 1e-300))[cortex], adist[cortex]).statistic),
         "_note": ("The anchor-free model contains NO anchors, so its residual correlation with "
-                  "anchor distance is biology: we placed anchors where the connectomes "
+                  "anchor distance is biology: the anchors sit where the connectomes "
                   "independently agree."),
     }
 

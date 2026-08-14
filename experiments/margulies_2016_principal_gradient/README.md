@@ -16,7 +16,7 @@ dominant organisational axis of cortex.
 extended the same procedure to mouse rsfMRI and showed an analogous gradient
 exists in mouse, broadly conserved across species.
 
-If OTTER's π is anatomically faithful, routing the mouse principal gradient
+If OTTER's π is anatomically accurate, routing the mouse principal gradient
 through π should reproduce the human principal gradient. That is a single global
 correlation, with no anchor pair involved.
 
@@ -51,20 +51,15 @@ anchor pairs and the network-aggregated level.
 
 ---
 
-## ⚠️ The principal gradient is the second eigenvector
+## The principal gradient is the second eigenvector
 
-Do not take the **second-smallest eigenvalue's eigenvector** as the principal gradient.
-The first non-trivial component here is an **anterior–posterior spatial axis**; the
-unimodal→transmodal hierarchy is the **second**. We verified this in both species:
+The first non-trivial component here is an anterior-posterior spatial axis; the
+unimodal→transmodal hierarchy is the second. Verified in both species:
 
 | component | vs published Margulies G1 | vs that species' own T1w:T2w |
 |---|---:|---:|
 | comp 1 | \|ρ\| = 0.12 | human −0.13 / mouse −0.28 |
-| **comp 2 (correct)** | **\|ρ\| = 0.93** | **human +0.59 / mouse +0.57** |
-
-Routing an A–P **spatial** axis and then testing it against a
-**spatial-autocorrelation-preserving** spin null is close to tautological and produces
-a false negative.
+| **comp 2** | **\|ρ\| = 0.93** | **human +0.59 / mouse +0.57** |
 
 The component index is not hard-coded. `principal_gradient()` in
 `01_gradient_validation.py` *selects* the component by its correlation with an
@@ -74,10 +69,10 @@ external hierarchy reference (that species' own T1w:T2w map), and
 
 ### Routing note
 
-The gradient is routed as a **transport-weighted average**. The bare
+The gradient is routed as a transport-weighted average. The bare
 un-normalised `mouse_grad @ π` conflates the translated gradient with π's
-per-column mass (which varies widely under the semirelaxed coupling) and
-scores only r = 0.144. Normalising by the column mass removes that confound.
+per-column mass, which varies widely under the semirelaxed coupling, and
+scores r = 0.144. Normalising by the column mass removes that confound.
 Routing as
 
     predicted_h[j] = Σ_i mouse_grad[i]·π[i,j] / Σ_i π[i,j]
@@ -96,7 +91,7 @@ Standard Margulies-style diffusion-map embedding per species:
    raw symmetric-Laplacian eigenvector; the two differ by a degree weighting)
 6. **SELECT** the unimodal→transmodal component by its |ρ| with that species' own
    T1w:T2w myelin map, a reference external to the FC data. Both species select
-   component 2. It is not safe to assume the first component; see the bug note above.
+   component 2. The first component is not assumed; see above.
 
 Then route the mouse gradient through π as a transport-weighted average,
 compare to the observed human gradient (Pearson + Spearman, parcel level and

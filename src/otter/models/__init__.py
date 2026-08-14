@@ -3,8 +3,8 @@
 Four production levels (in order of complexity):
     UnsupervisedGW, plain entropic GW on FC, no anchors, no spatial
     SupervisedFGW, anchor-supervised semirelaxed FGW + xyz spatial
-    MultimodalFGW, adds SC, gene, M_anchor terms (the production winner)
-    HierarchicalFGW, per-network sub-solves (cleaner WN, hurts global CV)
+    MultimodalFGW, adds SC, gene, M_anchor terms (the production model)
+    HierarchicalFGW, per-network sub-solves
 
 Plus the underlying solver helpers in `otter.models._solver`.
 """
@@ -22,9 +22,9 @@ from otter.models.supervised import SupervisedFGW
 from otter.models.multimodal import MultimodalFGW
 from otter.models.hierarchical import HierarchicalFGW, hierarchical_semirelaxed_fgw
 
-# FUGW is a comparative addition, requires fugw + torch optional deps.
-# Lazy-load so importing otter.models doesn't pull in the heavy chain when
-# the user hasn't installed them.
+# FUGW is a comparative addition, requiring the optional fugw + torch deps.
+# Lazy-loaded so importing otter.models does not pull in that chain when they
+# are absent.
 try:
     from otter.models.fugw import FUGWModel
     _HAS_FUGW = True

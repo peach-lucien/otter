@@ -1,17 +1,17 @@
-"""Disorder-UNIQUE gene-set test, a fair probe of cross-species specificity.
+"""Disorder-unique gene-set test of cross-species specificity.
 
-Phase 1 found that routing each disorder's FULL gene set through π gives
-near-identical human predictions (off-diagonal r = +0.988), concluding "shared
-psychiatric geometry, not disorder-specific". But the full sets overlap heavily
-(autism 1,713 genes; SCZ 530; bipolar 109; ADHD 30, with large pairwise
-intersections), so identical inputs trivially give identical outputs. That does
-not actually test specificity.
+Phase 1 found that routing each disorder's full gene set through π gives
+near-identical human predictions (off-diagonal r = +0.988), indicating shared
+psychiatric geometry rather than disorder-specific geometry. The full sets
+overlap heavily (autism 1,713 genes; SCZ 530; bipolar 109; ADHD 30, with large
+pairwise intersections), so identical inputs give identical outputs and the
+comparison does not test specificity.
 
-Here we strip each disorder to the genes UNIQUE to it (present in that disorder's
-set and NO other), route those through the same π, and recompute the
+This script strips each disorder to the genes unique to it (present in that
+disorder's set and no other), routes those through the same π, and recomputes the
 cross-disorder correlation matrix. If the unique predictions still correlate at
-~0.99, the shared-geometry conclusion is robust. If they diverge, there
-IS disorder-specific spatial information that the overlapping full sets washed out.
+~0.99, the shared-geometry conclusion holds. If they diverge, there is
+disorder-specific spatial information that the overlapping full sets washed out.
 
 Usage:
     PYTHONPATH=src python experiments/enigma_cross_disorder/04_disorder_unique.py
@@ -88,8 +88,8 @@ def main():
     print("(Note: the non-autism gene sets are essentially NESTED in the 1,713-gene autism set,\n"
           " so the full-set similarity partly reflects gene-set OVERLAP, not just smooth routing.)")
 
-    # PAIRWISE relative-unique test: genes in A-not-B vs B-not-A, routed separately.
-    # This is the fair specificity probe, it removes the shared genes for each pair.
+    # Pairwise relative-unique test: genes in A-not-B vs B-not-A, routed separately,
+    # which removes the shared genes for each pair.
     print(f"\nPairwise relative-unique test  (r of A-only vs B-only predicted maps):")
     pairwise = {}
     big = [d for d in names_full]
@@ -112,7 +112,7 @@ def main():
         "full_disorders": names_full,
         "full_offdiag_mean": float(Cf[iu_f].mean()),
         "full_corr_matrix": Cf.tolist(),
-        "note": "non-autism gene sets are nested in the autism set; pairwise relative-unique is the fair probe",
+        "note": "non-autism gene sets are nested in the autism set; pairwise relative-unique is the probe",
         "pairwise_relative_unique": pairwise,
     }
     out_path = ROOT / "outputs" / "logs" / "enigma_disorder_unique.json"

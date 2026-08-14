@@ -8,13 +8,13 @@ M.var; human: MNI mm, matching H.var). Subclass columns = FRACTION of cells of e
 subclass in the region (rows ~sum to 1). Only subclasses whose column names match
 across species are used by 04, so keep the label level comparable.
 
-MOUSE  : MERFISH-C57BL6J-638850 (Zhuang/Yao 2023 spatial) — has per-cell CCF coords.
+MOUSE  : MERFISH-C57BL6J-638850 (Zhuang/Yao 2023 spatial), has per-cell CCF coords.
          join: cluster-annotation (subclass)  x  CCF coords  x  parcellation region.
-HUMAN  : WHB-10Xv3 (Siletti 2023, via the ABC atlas — no CELLxGENE dataset id needed).
+HUMAN  : WHB-10Xv3 (Siletti 2023, via the ABC atlas; no CELLxGENE dataset id needed).
          cells carry a region-of-interest but NO MNI coordinate, so supply an
          ROI->MNI centroid lookup with --human-roi-mni (roi_name,x,y,z).
 
-Install + run (multi-GB download; needs disk + time, so run locally not in a sandbox):
+Install + run (multi-GB download; needs disk and time, so run locally):
     pip install "abc_atlas_access @ git+https://github.com/AllenInstitute/abc_atlas_access.git"
     python experiments/biccn_2023_cell_types/00_fetch_abundance.py --list          # inspect names
     python experiments/biccn_2023_cell_types/00_fetch_abundance.py --species mouse
@@ -69,7 +69,7 @@ def build_mouse(out_dir: Path) -> Path:
     df = ann[[sub_col]].join(par[[reg_col]], how="inner").join(ccf[[xcol, ycol, zcol]], how="inner")
     out = _frac_and_centroid(df, reg_col, sub_col, (xcol, ycol, zcol))
     print(f"[MOUSE] {out.shape[0]} CCF regions x {out.shape[1]-4} subclasses. "
-          f"CCF x-range {out.x.min():.2f}..{out.x.max():.2f} — verify vs M.var frame/units.")
+          f"CCF x-range {out.x.min():.2f}..{out.x.max():.2f}; verify vs M.var frame/units.")
     p = out_dir / "mouse_yao2023_region_by_subclass.csv"; out.to_csv(p, index=False); return p
 
 

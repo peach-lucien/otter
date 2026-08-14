@@ -1,4 +1,4 @@
-"""BICCN-MOTOR-1: Add motor sub-region anchors and test for Motor recovery.
+"""Add motor sub-region anchors and test for Motor recovery.
 
 Bakken et al. 2021 (Nature; the BICCN Motor Cortex Consortium) identifies two
 strongly-conserved motor sub-region homologies across mouse and human:
@@ -6,8 +6,8 @@ strongly-conserved motor sub-region homologies across mouse and human:
   - Mouse Primary motor area (M1)  ↔ Human Area 4 / BA4 (primary motor)
   - Mouse Secondary motor area (M2) ↔ Human Area 6 dorsal premotor (PMd)
 
-Our current 21 Garin anchors include one Motor anchor (pair_id 2) at a single
-mouse parcel that the colleague's preprocessing labels as "Motor and premotor"
+The 21 Garin anchors include one Motor anchor (pair_id 2) at a single mouse
+parcel that the source preprocessing labels as "Motor and premotor"
 (containing only Secondary motor area / M2 anatomically) mapped to one human
 parcel that lumps Primary Motor + Premotor + FEF + SMA + others. The
 Beauchamp validation shows this single anchor gives Motor → precentral
@@ -28,7 +28,7 @@ Outputs:
   - outputs/logs/beauchamp_validation_biccn_motor.json
 
 Usage:
-    PYTHONPATH=src python experiments/biccn_motor/01_add_motor_subregion_anchors.py
+    PYTHONPATH=src python experiments/anchor_packs/biccn_motor.py
 """
 from __future__ import annotations
 

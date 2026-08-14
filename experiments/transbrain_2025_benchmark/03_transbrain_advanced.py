@@ -9,7 +9,7 @@ Building on `01_transbrain_benchmark.py`, this digs past the head-line
      optogenetic circuit through π, decode it with Neurosynth cognitive-term
      maps, compare the cognitive annotation against TransBrain's.
   3. Bidirectional cycle-consistency, round-trip a phenotype
-     mouse→human→mouse with each method; a fair, ground-truth-free metric.
+     mouse→human→mouse with each method; a ground-truth-free metric.
   4. Consensus + disagreement map, rank mouse regions by OTTER↔TransBrain
      agreement: a consensus set and a flagged set of contested homologies.
 

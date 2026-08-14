@@ -10,9 +10,8 @@ including primate homology.
 
   pid 55: Mouse Perirhinal area ↔ Human perirhinal cortex
 
-Completes OTTER's medial temporal lobe coverage: combined with the
-hippocampal (Subi/CA1/CA3/DG) and entorhinal packs, all major MTL
-memory structures are now anchored.
+Combined with the hippocampal (Subi/CA1/CA3/DG) and entorhinal packs, this
+pack completes the medial temporal lobe coverage.
 
 Mouse-side: DSURQE atlas overlay.
   Perirhinal area: 6 parcels (small but anatomically distinct)
@@ -21,7 +20,7 @@ Human-side: MNI sphere at canonical perirhinal centroid (rostral medial
 temporal lobe, just lateral to entorhinal cortex):
   Perirhinal cortex: (±35, -10, -30) r=10 mm → 6 parcels
 
-References (verified Consensus search 2026):
+References:
   - Burwell, R. D., Witter, M. P., & Amaral, D. G. (1995). Perirhinal
     and postrhinal cortices of the rat: A review of the neuroanatomical
     literature and comparison with findings from the monkey brain.

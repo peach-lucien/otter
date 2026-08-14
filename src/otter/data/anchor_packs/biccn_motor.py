@@ -4,7 +4,7 @@ The BICCN Motor Cortex Consortium (Bakken et al. 2021, *Nature*) identified
 two strongly conserved mouse↔human motor sub-region homologies via
 cross-species single-cell transcriptomics.
 
-Reference (verified Consensus search 2026):
+Reference:
   Bakken, T. E. et al. (2021). Comparative cellular analysis of motor cortex
   in human, marmoset and mouse. *Nature* 598, 111-119.
   DOI: 10.1038/s41586-021-03465-8.
@@ -18,14 +18,13 @@ cytoarchitectural centroids (Mayka 2006; Glasser HCP-MMP360): BA4 at
 (±37, -22, 55) r=10 mm → 12 parcels; PMd at (±28, -5, 62) r=12 mm → 23
 parcels.
 
-Caveat: the mouse M1 set is identical to the set used by Beauchamp 2022's
-"Primary motor area → precentral gyrus" validation, and the BA4 human set is
-a subset of Beauchamp's precentral ball. Top-1 = 100 % after fitting is largely *tautological*; the held-out
-control (M2 anchor only, M1 omitted) gives Motor top-1 = 0 %, structure
-does NOT independently recover M1 ↔ BA4. The pack is useful as a
-practical mechanism (OTTER queries for motor parcels return defensible
-BA4-centred answers), not as evidence of unsupervised cross-species
-recovery.
+The mouse M1 set is identical to the set used by Beauchamp 2022's "Primary
+motor area → precentral gyrus" validation, and the BA4 human set is a subset of
+Beauchamp's precentral ball, so top-1 = 100 % after fitting is largely
+tautological. The held-out control (M2 anchor only, M1 omitted) gives Motor
+top-1 = 0 %: structure does not independently recover M1 ↔ BA4. The pack is a
+practical mechanism, in which queries for motor parcels return defensible
+BA4-centred answers, not evidence of unsupervised cross-species recovery.
 """
 from __future__ import annotations
 

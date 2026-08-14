@@ -2,20 +2,20 @@
 
 Both methods translate the SAME mouse phenotype (data_external/transbrain_2025/ai_opto.csv,
 TransBrain's own AI-opto case study; Allen acronym -> effect size) into human space, and
-we score each translated human map with the IDENTICAL salience-vs-rest enrichment metric
+each translated human map is scored with the identical salience-vs-rest enrichment metric
 used by experiments/section5_coverage_rigor/32_translate_aiopto.py.
 
 Apples-to-apples: both methods produce a value per OTTER human parcel.
   * OTTER: transport-weighted average of the mouse map through pi_canonical.
   * TransBrain: SpeciesTrans(bn).mouse_to_human(...) -> human Brainnetome region values,
     broadcast onto each OTTER human parcel via that parcel's BN label.
-Then, on the SHARED support (parcels with a BN label AND a Yeo-17 network AND a finite
-value from each method), we z-score the map across parcels and compute
+Then, on the shared support (parcels with a BN label, a Yeo-17 network and a finite
+value from each method), the map is z-scored across parcels and used to compute
     salience_enrichment = mean(z[SalVentAttn parcels]) - mean(z[rest]).
 Salience = Yeo-17 SalVentAttnA/B, the same mask OTTER uses.
 
-Specificity null: for each method we permute which mouse region carries which value
-(shuffling the mouse->value assignment) and recompute the enrichment. This is the
+Specificity null: for each method, which mouse region carries which value is permuted
+(shuffling the mouse->value assignment) and the enrichment recomputed. This is the
 analogue of OTTER's permuted-coupling null for a fixed-mapping method like TransBrain.
 
 Writes outputs/logs/section6_transbrain_aiopto.json
@@ -194,24 +194,23 @@ def main():
     h_p = float((np.sum(h_null >= h_enr) + 1) / (len(h_null) + 1))
 
     # TransBrain null (permute mouse assignment; re-translate).
-    # MATCHED to OTTER's N_PERM as of 2026-07-20. This used to be 120 because re-translating
-    # through SpeciesTrain is slow, but an unequal number of permutations makes the two
-    # p-values non-comparable — the head-to-head is the whole point of this script, so the
-    # nulls must be estimated at the same resolution.
+    # Matched to OTTER's N_PERM. An unequal number of permutations would make the two
+    # p-values non-comparable, and the head-to-head comparison requires both nulls to be
+    # estimated at the same resolution.
     N_TB = N_PERM
     rng2 = np.random.default_rng(SEED)
     t_null = []
 
     # Translating the identity matrix once yields TransBrain's mapping operator, turning each
-    # permutation into a matrix-vector product instead of a full re-translation. Without this
-    # a matched 1000-permutation null needs ~30 min, which is why it used to run at only 120.
+    # permutation into a matrix-vector product instead of a full re-translation. Without it a
+    # matched 1000-permutation null takes ~30 min.
     #
     # mouse_to_human is NOT strictly linear: OP @ v reproduces the direct call with
     # correlation 1.000000 but a different scale and offset (direct = a*(OP@v) + b, a > 0).
-    # That affine difference is irrelevant HERE because enrichment() z-scores its input
+    # That affine difference is irrelevant here because enrichment() z-scores its input
     # before differencing group means, so any positive affine transform cancels exactly.
-    # The assertion below therefore checks the quantity we actually use — the enrichment
-    # statistic — rather than the raw translated values.
+    # The assertion below therefore checks the enrichment statistic, the quantity used,
+    # rather than the raw translated values.
     acr_used = list(pd.DataFrame({"v": value_by_acr}).dropna().index)
     assert len(acr_used) == len(acrs), "NaN mouse values would change the index set per permutation"
     eye = pd.DataFrame(np.eye(len(acr_used)), index=acr_used, columns=acr_used)

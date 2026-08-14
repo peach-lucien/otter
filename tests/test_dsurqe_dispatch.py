@@ -1,4 +1,4 @@
-"""Why ``_dsurqe.py`` uses the live atlas lookup, not the precomputed votes.
+"""``_dsurqe.py`` uses the live atlas lookup, not the precomputed votes.
 
 This test locks in the reason ``mouse_parcels_in_dsurqe_region`` resolves
 regions via the live DSURQE atlas volume rather than the parcel table's
@@ -19,8 +19,8 @@ A naïve subtree-membership check against those votes would return EMPTY
 sets for most pack queries because the names don't line up; consuming
 them directly needs a name-mapping table first.
 
-This test asserts the *fact* of the vocabulary mismatch so the lookup
-isn't naively switched over without addressing it.
+This test asserts the vocabulary mismatch so that the lookup is not
+switched over without addressing it.
 """
 from __future__ import annotations
 
@@ -62,11 +62,11 @@ def _load_io():
 
 @needs_v2
 def test_paul_vote_vocabulary_smaller_than_pack_query_vocabulary():
-    """Paul's vote vocabulary is coarser than pack queries, they don't align.
+    """The vote vocabulary is coarser than the pack queries, and the two do not align.
 
-    Empirically: Paul ships ~114 unique vote strings, the DSURQE tree
+    The parcel table ships ~114 unique vote strings, the DSURQE tree
     has ~590 named nodes, and the anchor-pack query names include
-    region names that don't appear in Paul's vote vocabulary at all.
+    region names that do not appear in the vote vocabulary at all.
     """
     IO = _load_io()
     meta = IO.load_metadata("mouse")
@@ -74,35 +74,35 @@ def test_paul_vote_vocabulary_smaller_than_pack_query_vocabulary():
 
     votes = set(df["region_vote_ss_dsq"].fillna("").to_list())
     votes.discard("")
-    # ~114 distinct votes in the v2 file as of 2026-06-09.
+    # ~114 distinct votes in the v2 file.
     assert 50 < len(votes) < 200, (
         f"unexpected vote-vocabulary size {len(votes)}; "
         f"v2 baseline was 114 distinct votes."
     )
 
-    # Common anchor-pack query names, none should be in Paul's vote
+    # Common anchor-pack query names, none should be in the vote
     # vocabulary, demonstrating the naming mismatch.
     pack_query_names_that_dont_appear = {
-        "Caudoputamen",        # Paul has 'striatum' (parent)
-        "Periaqueductal gray", # Paul has 'periaqueductal grey'
-        "Lateral visual area", # Paul has 'Secondary visual cortex,lateral area'
-        "Primary motor area",  # Paul has 'Primary motor cortex'
-        "Field CA1",           # Paul has 'CA1Or'/'CA1Rad'/'CA1Py'
-        "Visual areas",        # Paul has subdivisions
+        "Caudoputamen",        # vote is 'striatum' (parent)
+        "Periaqueductal gray", # vote is 'periaqueductal grey'
+        "Lateral visual area", # vote is 'Secondary visual cortex,lateral area'
+        "Primary motor area",  # vote is 'Primary motor cortex'
+        "Field CA1",           # votes are 'CA1Or'/'CA1Rad'/'CA1Py'
+        "Visual areas",        # votes are subdivisions
     }
     misses = pack_query_names_that_dont_appear & votes
     assert misses == set(), (
         f"naming convergence detected: {misses}. The vocabulary-mismatch "
-        f"finding may no longer hold; re-evaluate the option-(c) refactor."
+        f"finding may no longer hold."
     )
 
 
 @needs_v2
 def test_dsurqe_offset_constant_still_present():
-    """``DSURQE_OFFSET_MM`` is still defined and used.
+    """``DSURQE_OFFSET_MM`` is defined and used.
 
-    The option-(c) refactor would remove this constant. It's still here
-    because the live atlas lookup is still the production code path.
+    The constant is required while the live atlas lookup is the production
+    code path.
     """
     spec = importlib.util.spec_from_file_location(
         "otter.data.anchor_packs._dsurqe",

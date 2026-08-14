@@ -1,6 +1,6 @@
 """Pipeline step 04, solve the production model and save π.
 
-Uses the new sklearn-style API to fit MultimodalFGW (FC + SC, anchor +
+Uses the sklearn-style API to fit MultimodalFGW (FC + SC, anchor +
 xyz supervision) on full data and save the resulting coupling.
 
 Outputs:

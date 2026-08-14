@@ -1,6 +1,5 @@
-> Refreshed 2026-07-20 for the canonical coupling. The per-region table below is from the
-> earlier pre-warp fit and is kept for the ordering it shows rather than its absolute values;
-> the aggregate figures come from
+> The per-region table below is from the pre-warp fit and is kept for the ordering it shows
+> rather than its absolute values; the aggregate figures come from
 > `outputs/logs/anchor_recovery_loo_combined_canonical.json`.
 
 # Leave-one-region-out generalisation test (full production model)
@@ -8,8 +7,8 @@
 For each Beauchamp pair, **all** curated supervision located in that region (its
 Garin point anchor(s) *and* any region-anchor pack overlapping its mouse parcels)
 is removed, the full FGW coupling is re-fit with everything else, and the region
-is re-scored. This is the honest "would we recover this region if we had **not**
-curated it" test for the production model (Garin + all 15 packs).
+is re-scored. This is the "would we recover this region if we had **not** curated
+it" test for the production model (Garin + all 15 packs).
 
 Script: `leave_one_region_out.py`. Raw data:
 `otter/outputs/logs/beauchamp_leave_one_region_out.json`.
@@ -43,21 +42,21 @@ Harness reproduces the logged full-model per-pair top-1 exactly.
 value); exclude it from the generalisation aggregate.
 
 **Parcel-weighted aggregate:** top-1 0.46 → 0.08; mass 0.46 → 0.08;
-chance centroid displacement is 25 mm on the canonical benchmark; the per-region distances in the table below are from the earlier pre-warp fit.
+chance centroid displacement is 25 mm on the canonical benchmark; the per-region distances in the table are from the pre-warp fit.
 
 ## Interpretation
 
 1. **Parcel-exact homology requires curation.** Parcel-exact recovery collapses to
    roughly 10 % when a region's own supervision is held out, against 57 % for the
-   full model. That full-model figure is therefore largely a faithfulness check
-   that curated homologies are embedded, rather than evidence of discovery.
+   full model. That full-model figure therefore largely checks that curated
+   homologies are embedded, rather than demonstrating discovery.
 2. **Connectivity provides coarse localisation on its own.** Held-out regions
    still route close to target: held-out region-level AUROC averages 0.74 across the 41 units, against 0.90 for the full model, and chance centroid displacement is 25 mm. Top-1 = 0 hid this; the
    distance metric reveals it (piriform 10 mm, motor 23 mm, thalamus 11 mm,
    striatum 6 mm, caudoputamen 14 mm, somatosensory 15 mm, pallidum 17 mm).
 3. **Heterogeneous.** Some regions do not generalise even coarsely
    (inferior colliculus 70 mm, superior colliculus 60 mm, CA1 55 mm, visual
-   63 mm) — entirely anchor-dependent.
+   63 mm); these are entirely anchor-dependent.
 
-Caveats: 28 mm is coarse (~20% of brain span); the somatosensory pack *hurts*
-(0.15 with it, 0.18 without) — consistent with its registry note.
+28 mm is coarse (~20% of brain span). The somatosensory pack lowers recovery
+(0.15 with it, 0.18 without), consistent with its registry note.

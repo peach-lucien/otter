@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
-"""Mouse-modelability contrast: do conserved functional systems reverse-translate to a
-FOCAL mouse home, while human clinical neuromodulation circuits SMEAR across the mouse brain?
+"""Mouse-modelability contrast: whether conserved functional systems reverse-translate to a
+focal mouse home while human clinical neuromodulation circuits spread across the mouse brain.
 
 This turns the reverse-translation coupling into a quantitative "when is a mouse model
-adequate" axis. For every human map we route it to mouse and measure how CONCENTRATED the
-mouse prediction is (effective number of structures, effN = 1/sum p^2; and top-structure
+adequate" axis. Every human map is routed to mouse and the concentration of the mouse
+prediction is measured (effective number of structures, effN = 1/sum p^2; and top-structure
 concentration). Low effN = a sharp mouse home (modelable); high effN = distributed, no
 adequate single mouse substrate (primate-elaborated).
 
 THE CONFOUND, AND THE CONTROL
 -----------------------------
 Clinical maps are smooth whole-brain connectivity t-maps; Neurosynth functional maps are
-focal. A raw effN gap could just inherit that input-smoothness difference. So we EQUALISE
-input focality: every map is thresholded to the same top-FRAC of human parcels before
-routing. If clinical circuits still smear in mouse after inputs are made equally focal, the
-diffuseness is a property of the cross-species mapping, not the input. We report several FRAC
-values for robustness, plus the raw (unmatched) numbers for completeness.
+focal. A raw effN gap could inherit that input-smoothness difference, so input focality is
+equalised: every map is thresholded to the same top-FRAC of human parcels before routing.
+If clinical circuits still spread in mouse after inputs are made equally focal, the
+diffuseness is a property of the cross-species mapping rather than the input. Several FRAC
+values are reported, together with the raw (unmatched) numbers.
 
 Groups:
   conserved-functional : the 12 GROUND_TRUTH Neurosynth maps in human_maps/ (script 01)

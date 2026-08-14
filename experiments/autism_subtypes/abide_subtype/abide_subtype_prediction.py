@@ -5,7 +5,7 @@ network maps can distinguish ASD subjects from controls at the individual
 level, and whether ASD subjects split into hyper/hypo subtypes by their
 projection onto the OTTER templates.
 
-This does NOT re-implement Pagani's clustering pipeline. We just:
+This does not re-implement Pagani's clustering pipeline. Procedure:
   1. Build two OTTER-translated human templates (one per Pagani subtype) by
      routing the mouse 9×9 network perturbation matrices through π.
   2. For each ABIDE subject, compute a per-parcel FC strength profile,
@@ -44,11 +44,10 @@ try:
 except ImportError:
     pass
 
-# If env-level CA fix isn't enough (very old certifi), allow opting in to
-# skipping SSL verification via env var. This is OPT-IN, the user has to
-# explicitly set it, never on by default. Must monkey-patch BOTH stdlib ssl
-# (used by urllib) AND requests.Session (used by nilearn), since they have
-# independent SSL configurations.
+# If the env-level CA fix is not enough (very old certifi), an env var opts in to
+# skipping SSL verification. It is opt-in and never on by default. Both stdlib ssl
+# (used by urllib) and requests.Session (used by nilearn) must be patched, since
+# they have independent SSL configurations.
 if os.environ.get("OTTER_ALLOW_INSECURE_SSL", "").lower() in {"1", "true", "yes"}:
     import ssl
     ssl._create_default_https_context = ssl._create_unverified_context
@@ -81,10 +80,10 @@ sys.path.insert(0, str(ROOT / "experiments" / "autism_subtypes"))
 
 from otter.data import load_cached
 
-ABIDE_DERIVATIVE = "rois_aal"   # was rois_cc400; CC400 atlas host (NITRC) has
-                                 # an SSL/hostname problem as of 2026. AAL-116
-                                 # is universally available + nilearn's fetcher
-                                 # works against a different (GIN/CNRS) host.
+ABIDE_DERIVATIVE = "rois_aal"   # the CC400 atlas host (NITRC) has an SSL/hostname
+                                 # problem. AAL-116 is universally available and
+                                 # nilearn's fetcher works against a different
+                                 # (GIN/CNRS) host.
 
 
 def build_otter_templates(mouse_M_hypo, mouse_M_hyper, mouse_pagani_net,
@@ -184,9 +183,9 @@ def main():
         print(f"  (limiting to first {args.n_subjects} for smoke test)")
 
     # ---- Step 3: AAL atlas → OTTER mapping ----
-    # (Switched from CC400 because cluster_roi.projects.nitrc.org has an SSL
-    #  cert mismatch as of 2026 and nilearn's Craddock fetcher fails. AAL is
-    #  hosted at www.gin.cnrs.fr which works reliably.)
+    # CC400 is not used because cluster_roi.projects.nitrc.org has an SSL cert
+    # mismatch and nilearn's Craddock fetcher fails against it. AAL is hosted at
+    # www.gin.cnrs.fr.
     print(f"\nStep 3: aligning AAL atlas → OTTER parcels...")
     import nibabel as nib
     aal = ndatasets.fetch_atlas_aal(data_dir=args.abide_data_dir)
@@ -275,7 +274,7 @@ def main():
     #   "abs", mean(|FC|) per parcel (weighted degree; loses sign, same for hyper/hypo)
     #   "signed", mean(FC) per parcel (signed degree; positive = locally hyperconnected,
     #             negative = locally hypoconnected). This is what Pagani's signal lives in.
-    # Audit M1: original abs-only feature destroyed the hyper/hypo distinction.
+    # An abs-only feature destroys the hyper/hypo distinction.
     subject_pat_abs    = np.full((len(rois), n_h), np.nan, dtype=np.float32)
     subject_pat_signed = np.full((len(rois), n_h), np.nan, dtype=np.float32)
     skipped = 0
@@ -309,8 +308,8 @@ def main():
         print(f"  skip reasons: {dict(skipped_reasons)}")
 
     # Site-matched control mean, computed separately for each feature variant.
-    # Audit B3 fix: track sites with control coverage and exclude subjects from
-    # sites without any controls (otherwise they get uncorrected = biased).
+    # Track sites with control coverage and exclude subjects from sites without
+    # any controls, which would otherwise be left uncorrected and biased.
     def _site_correct(pattern):
         valid = np.isfinite(pattern).all(axis=1)
         sites_with_ctrl = set()
@@ -329,8 +328,8 @@ def main():
         pert[ok] = pattern[ok] - site_mean[site_idx[ok]]
         return pert, ok
 
-    # Test for both features. The audit M1 fix predicts that "signed" should be
-    # informative whereas "abs" is not (loses sign).
+    # Test for both features. "signed" is expected to be informative whereas
+    # "abs" is not (loses sign).
     results_by_feature = {}
     for feat_name, pattern in [("abs", subject_pat_abs), ("signed", subject_pat_signed)]:
         pert, ok = _site_correct(pattern)
@@ -374,7 +373,7 @@ def main():
              if density[i] > density[i-1] > density[i-2]
              and density[i] > density[i+1] > density[i+2]]
     print(f"  density peaks within ASD: {len(peaks)} (≥2 suggests bimodal)")
-    # Hartigan's dip test would be more rigorous but isn't in scipy; use AIC of
+    # Hartigan's dip test would be more rigorous but is not in scipy; use AIC of
     # 1-component vs 2-component GMM as a heuristic
     try:
         from sklearn.mixture import GaussianMixture
@@ -408,7 +407,7 @@ def main():
                             if kk in {"asd_mean","asd_sd","ctrl_mean","ctrl_sd",
                                       "u","p","cliffs","n_asd","n_ctrl"}}
                        for k, v in results_by_feature.items()},
-        # Keep legacy keys mirroring the "signed" feature (the audit-fixed one)
+        # Keys mirroring the "signed" feature
         "asd_score_mean":  float(asd_s.mean()),
         "asd_score_sd":    float(asd_s.std()),
         "ctrl_score_mean": float(ctrl_s.mean()),

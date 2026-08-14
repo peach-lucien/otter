@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Smoke-test otter.repro before the notebooks are built on top of it.
 
-Run this in the `retune` environment. It does no fitting and takes a couple of minutes. It checks
+Run this in the `otter` environment. It does no fitting and takes a couple of minutes. It checks
 that the harness imports, that the released coupling is present and hashes to the value the logs
 claim, and that every cited log exists and records which coupling produced it. A failure here
 would otherwise surface later as a broken notebook.
 
-    conda activate retune
+    conda activate otter
     cd otter && python3 tools/check_repro_harness.py
 """
 from __future__ import annotations

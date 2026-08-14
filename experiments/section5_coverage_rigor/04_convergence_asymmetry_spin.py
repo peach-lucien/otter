@@ -7,9 +7,9 @@ Two faces of human cortical reorganisation:
 Per human parcel, the effective number of mouse sources = exp(entropy of the
 column-normalised coupling). Mouse->human is near one-to-one (forward effective
 targets ~1-2); human->mouse is heavier-tailed (reverse effective sources ~3), i.e.
-some human cortex integrates several mouse regions. We test whether this convergence
-is organised along the sensorimotor->association (myelin) axis with the repo's spin
-null, and whether convergence tracks (low) coverage.
+some human cortex integrates several mouse regions. This script tests whether the
+convergence is organised along the sensorimotor->association (myelin) axis with the
+repo's spin null, and whether convergence tracks (low) coverage.
 
 Run: cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/04_convergence_asymmetry_spin.py
 Writes outputs/logs/section5_convergence_asymmetry.json

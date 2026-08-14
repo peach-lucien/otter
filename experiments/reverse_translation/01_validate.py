@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Reverse translation validation — does a HUMAN functional map route to the RIGHT
-mouse circuit?  (go/no-go for a reverse-translation / experiment-design section)
+"""Reverse-translation validation: whether a human functional map routes to the
+correct mouse circuit.
 
 IDEA
 ----
 OTTER's coupling is bidirectional. Column-normalised it carries mouse -> human.
 ROW-normalised it carries human -> mouse: a human map v_h (over the
 2,094 human parcels) becomes a mouse prediction v_m = rownorm(pi) @ v_h. If OTTER is
-a faithful reverse translator, a human meta-analytic activation map for a function
+an accurate reverse translator, a human meta-analytic activation map for a function
 (e.g. "reward") should land on the mouse structure the field uses to study it
 (nucleus accumbens / VTA). This is the direction reverse-translational neuroscience
 asks for but has no whole-brain computational tool for.
@@ -15,18 +15,18 @@ asks for but has no whole-brain computational tool for.
 WHAT THIS SCRIPT TESTS
 ----------------------
 For each of a curated set of human functions with an established mouse substrate, it
-routes the human map to mouse, ranks mouse STRUCTURES by the translated value, and asks:
-  * does a ground-truth mouse structure land in the top-k?                (accuracy)
-  * is its enrichment significant against a spatial spin null?            (rigour)
-  * how confident is OTTER at that target, and does ANY mouse structure
-    clear the null -- or is the human target "primate-unique" with no
-    adequate mouse home? (the actionable output: when NOT to use a mouse)  (confidence)
+routes the human map to mouse, ranks mouse structures by the translated value, and reports:
+  * whether a ground-truth mouse structure lands in the top-k             (accuracy)
+  * whether its enrichment is significant against a spatial spin null     (significance)
+  * how confident OTTER is at that target, and whether any mouse structure
+    clears the null, or whether the human target is "primate-unique" with
+    no adequate mouse home, the case for not using a mouse    (confidence)
 
 HUMAN MAPS (the one external dependency)
 ----------------------------------------
 Put one MNI152 volume per function in  experiments/reverse_translation/human_maps/
-named  <term>.nii.gz  (e.g. reward.nii.gz). Fetch them however you like; the intended
-source is neuromaps / Neurosynth association maps, e.g.:
+named  <term>.nii.gz  (e.g. reward.nii.gz). They can come from any source; the intended
+one is neuromaps / Neurosynth association maps, e.g.:
 
     from neuromaps.datasets import fetch_annotation           # or nimare Neurosynth
     # fetch a Neurosynth 'association-test' map for each term, save as MNI152 .nii.gz

@@ -3,7 +3,7 @@ AI-opto (canonical + sharp pi, full + cortical-only input) and the 5 autism-muta
 Report Yeo-17 network landing, salience/default enrichment, and a permuted-pi null for each.
 Save the AI-opto human percentile map for a figure.
 
-Run under: PYTHONPATH=/var/tmp/pylib:...:src
+Run: cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/33_translate_circuits.py
 Writes outputs/logs/section6_circuit_translation.json
 """
 from __future__ import annotations

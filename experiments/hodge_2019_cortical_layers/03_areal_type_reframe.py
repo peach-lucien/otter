@@ -1,18 +1,17 @@
 """Areal-type reframe of the Hodge cortical-layer-marker test.
 
 Schaefer-400 cannot separate layers within an area, so the per-marker test
-(mean r=+0.119) can only ever measure the *area-level* distribution of layer
-genes, not lamination, the README says as much. Rather than present it as a
-(impossible) laminar test, we recast it as the question it CAN answer and that
-OTTER is good at: does π preserve cortical AREAL TYPE, the supragranular↔
-infragranular (eulaminate↔agranular) axis that distinguishes sensory/granular
-from limbic/agranular cortex? This is the same cytoarchitectural hierarchy that
-Fulcher's T1w:T2w + Goulas type test captured and that DID survive a spin null.
+(mean r=+0.119) measures the area-level distribution of layer genes rather than
+lamination. This script instead asks whether π preserves cortical areal type,
+the supragranular-infragranular (eulaminate-agranular) axis that distinguishes
+sensory/granular from limbic/agranular cortex. That is the same cytoarchitectural
+hierarchy the Fulcher T1w:T2w and Goulas type test captured and that survived a
+spin null.
 
-We build the supragranular−infragranular contrast (upper L2/3 markers minus deep
-L5/6 markers), high in granular sensory cortex, low in agranular cortex, and
-the granular-L4 axis, route the mouse contrast through π, and test against the
-FAIR translation-spin null, cortex-only.
+The supragranular-infragranular contrast (upper L2/3 markers minus deep L5/6
+markers) is high in granular sensory cortex and low in agranular cortex. That
+contrast and the granular-L4 axis are routed through π and tested against the
+translation-spin null, cortex-only.
 
 Usage:
     PYTHONPATH=src python experiments/hodge_2019_cortical_layers/03_areal_type_reframe.py
@@ -93,7 +92,7 @@ def main():
         pred = _route_normalized(m_vec, pi)
         ok = cortex & np.isfinite(pred) & np.isfinite(h_vec)
         r = float(pearsonr(pred[ok], h_vec[ok])[0])
-        # fair spin null, cortex-restricted comparison
+        # spin null, cortex-restricted comparison
         spin = translation_spin_null(m_vec, np.where(cortex, h_vec, np.nan),
                                      pi, mouse_coords, n_trials=1000, seed=0)
         sp = spin["p_translation_spin"]

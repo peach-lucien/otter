@@ -14,10 +14,10 @@ def _symmetrise(d: np.ndarray) -> np.ndarray:
 
 
 def correlation_distance(fc: np.ndarray) -> np.ndarray:
-    """1 - r, symmetrised, zero-diagonal. The simplest FC-derived cost.
+    """1 - r, symmetrised, zero-diagonal. The basic FC-derived cost.
 
-    Output values lie in [0, 2] (since r ∈ [-1, 1]). Negative correlations →
-    distance > 1, which is fine for GW.
+    Output values lie in [0, 2], since r ∈ [-1, 1]. Negative correlations give
+    distance > 1, which GW admits.
     """
     if not np.allclose(fc, fc.T, equal_nan=True, atol=1e-4):
         raise ValueError("input FC is not symmetric")

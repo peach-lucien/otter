@@ -2,10 +2,10 @@
 
 Tests reconstruction-accuracy coverage (FC, and FC+SC combined) on the canonical (soft) and
 canonical_sharp couplings, against all 6 ENIGMA disorders + transdiagnostic, DK region level,
-Spearman + spin null + FDR. If nothing robust clears, the disorder-reachability claim has no
-defensible home on the new metric.
+Spearman + spin null + FDR. If nothing clears, the disorder-reachability claim has no support on
+this metric.
 
-Run under: PYTHONPATH=/var/tmp/pylib:...:src ABAGEN_DATA=/var/tmp/abagen HOME=/var/tmp
+Run: cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/25_disease_search.py
 Writes outputs/logs/section6_disease_search.json
 """
 from __future__ import annotations

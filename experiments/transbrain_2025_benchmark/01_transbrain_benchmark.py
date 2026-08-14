@@ -13,12 +13,12 @@ This is a **methods-landscape** comparison, not a validation "pass".
 literature-curated set of classic mouse↔human homologous region pairs
 (`homo_cortex.csv`, `homo_subcortex.csv`), a set OTTER has never seen
 (independent of the Garin anchors and the Beauchamp benchmark). For each
-benchmarked mouse region we route OTTER's π and measure (1) whether the
+benchmarked mouse region, OTTER's π is routed to measure (1) whether the
 literature-homolog human Brainnetome region is in the top-K, and (2) how
 far OTTER's predicted human centroid is from the homolog (mm), the
 resolution-fair metric.
 
-**Part B. Head-to-head.** We translate the same mouse phenotype with BOTH
+**Part B. Head-to-head.** The same mouse phenotype is translated with both
 methods, on two phenotypes from TransBrain's own case studies:
   * a **smooth** one, the resting-fMRI principal gradient (expect convergence);
   * a **noisy** one, the Magel2 autism-model mutation pattern, with
@@ -51,10 +51,9 @@ except ImportError as e:  # pragma: no cover
 
 ANN = ROOT / "outputs" / "anndata"
 DATA = ROOT / "data_external" / "transbrain_2025"
-# Resolved through load_pi() rather than hardcoded: the name is right today, but a
-# hardcoded path is how the July 2026 mix-up survived a re-run. pi_provenance() then
-# records the sha256 actually loaded, so the log states which coupling it used rather
-# than which one it intended to use.
+# Resolved through load_pi() rather than hardcoded, so the script follows the current
+# default rather than a pinned filename. pi_provenance() records the sha256 actually
+# loaded, so the log states which coupling was used rather than which one was intended.
 N_NULL = 200
 SEED = 42
 

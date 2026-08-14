@@ -30,7 +30,7 @@ Procedure:
   5. Compare against permuted-π null (200 trials, within-row permutation).
 
 Headline statistic: mean cross-species Pearson r over the 7 markers, vs null
-mean. If OTTER preserves layer geometry, we expect r ≈ +0.3 to +0.6 per marker.
+mean. If OTTER preserves layer geometry, r ≈ +0.3 to +0.6 per marker is expected.
 """
 from __future__ import annotations
 

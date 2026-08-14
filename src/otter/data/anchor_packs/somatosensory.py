@@ -1,12 +1,11 @@
 """Somatosensory body-map anchor pack (Penfield 1937; Roe et al. 2007).
 
-Primary somatosensory cortex (S1, BA3b) has a well-conserved somatotopic
-organization across mammals, a body map with foot/leg medial, trunk
-adjacent, hand/forelimb mid-lateral, and face/lips most lateral.
-Penfield 1937 (canonical homunculus) established this in humans; modern
-electrophysiology + fMRI confirmed similar organization in rodents,
-non-human primates, and other mammals (Freire 2024; Seelke 2012; Gordon
-2023).
+Primary somatosensory cortex (S1, BA3b) has a conserved somatotopic
+organization across mammals: a body map with foot/leg medial, trunk adjacent,
+hand/forelimb mid-lateral, and face/lips most lateral. Penfield 1937
+established this in humans; electrophysiology and fMRI report a similar
+organization in rodents, non-human primates and other mammals (Freire 2024;
+Seelke 2012; Gordon 2023).
 
   pid 58: Mouse Barrel field + Nose S1 ↔ Human Face S1 (BA3b ventral)
   pid 59: Mouse Upper limb S1 ↔ Human Hand S1 (BA3b mid)
@@ -16,11 +15,11 @@ The mouse Barrel field is the vibrissa (whisker) representation, a
 specialised face-related sensory map. Cross-species, the barrel field
 maps onto the primate face/lip region of S1 (the mouse whisker
 representation occupies the cortical space that primate face S1 occupies).
-We combine barrel field + nose for the face anchor.
+Barrel field and nose are combined for the face anchor.
 
-Mouse trunk has only 1 DSURQE parcel, too small to anchor; the trunk
-representation falls under the Beauchamp-level "Primary somatosensory
-area" anchor (Garin pid 3) and is not split out here.
+The mouse trunk has 1 DSURQE parcel, too small to anchor; the trunk
+representation falls under the "Primary somatosensory area" anchor (Garin
+pid 3) and is not split out here.
 
 Mouse-side: DSURQE atlas overlay.
   Barrel field: 61 parcels (whisker representation)
@@ -35,23 +34,20 @@ Human-side: MNI spheres at Penfield-aligned body-map centroids.
 
 Empirical effect, opt-in
 -------------------------
-Beauchamp validates "Primary somatosensory area → postcentral gyrus"
-using all 155 mouse S1 parcels onto a *single broad* postcentral ball
-centred at hand S1 (±40, –25, 55) r=15. Our pack splits 126 of those
-155 parcels into 3 body-map-specific human balls (face at ±55, hand at
-±40, leg at ±10). The face S1 ball at (±55, –15, 25) is **outside
-Beauchamp's r=15 validation ball** (distance ≈ 35 mm), so mass
-concentrated there counts as a Beauchamp miss. Empirically Beauchamp
-S1 drops from 20 % → 15 %.
+Beauchamp validates "Primary somatosensory area → postcentral gyrus" using all
+155 mouse S1 parcels onto a single broad postcentral ball centred at hand S1
+(±40, –25, 55) r=15. This pack splits 126 of those 155 parcels into 3
+body-map-specific human balls (face at ±55, hand at ±40, leg at ±10). The face
+S1 ball at (±55, –15, 25) lies outside Beauchamp's r=15 validation ball, at a
+distance of about 35 mm, so mass concentrated there counts as a Beauchamp miss.
+Beauchamp S1 drops from 20 % to 15 %.
 
-This is the same dynamic as the cingulate pack (anchor target ≠
-validation target). The pack remains **anatomically defensible**
-Penfield's homunculus is uncontested cross-species anatomy, but
-ships as **opt-in** because it hurts the Beauchamp metric. Use it
-when you want body-map-specific S1 queries and don't care about
-Beauchamp's broad-ball validation.
+The anchor target differs from the validation target, as in the cingulate pack.
+The pack ships as opt-in because it lowers the Beauchamp metric, and applies
+where body-map-specific S1 queries matter more than Beauchamp's broad-ball
+validation.
 
-References (verified Consensus search 2026):
+References:
   - Roe, A. W., Chen, L. M., & Friedman, R. M. (2007). Somatosensory
     cortex from a comparative perspective. *Trends in Neurosciences* /
     *Behav Brain Res* (cross-species somatotopic organization).

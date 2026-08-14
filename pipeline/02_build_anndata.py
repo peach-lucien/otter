@@ -1,7 +1,7 @@
 """Build & cache AnnData for both species.
 
 Run from otter/ root:
-    PYTHONPATH=src python scripts/build_anndata.py [--species human|mouse|both]
+    PYTHONPATH=src python pipeline/02_build_anndata.py [--species human|mouse|both]
 
 Outputs:
     outputs/anndata/{species}.h5ad

@@ -1,6 +1,6 @@
 # Outputs
 
-All generated artefacts. Files here are recreated by the pipeline (see `pipeline/README.md`) — nothing in this directory is hand-edited.
+All generated artefacts. Files here are recreated by the pipeline (see `pipeline/README.md`). Nothing in this directory is hand-edited.
 
 ## Layout
 
@@ -21,13 +21,13 @@ The π matrix (1864 × 2094) is OTTER's core output. We ship several variants:
 
 | File | What | When to use |
 |---|---|---|
-| `pi_fc_plus_SC.npy` | Point-anchor π (21 Garin anchors only, no packs), pre-warp | RETIRED 2026-07 — kept so published comparisons reproduce |
-| `pi_canonical.npy` | **Canonical π** — packs + anchor-warped spatial cost (ε = 0.05, xyz 0.25) | **Use this. `load_pi()` returns it.** |
-| `pi_fc_plus_SC_with_all_packs.npy` | pre-warp coupling, superseded 2026-07 | RETIRED — do not use for new work |
+| `pi_fc_plus_SC.npy` | Point-anchor π (21 Garin anchors only, no packs), pre-warp | Retired. Kept so published comparisons reproduce |
+| `pi_canonical.npy` | **Canonical π**, packs + anchor-warped spatial cost (ε = 0.05, xyz 0.25) | **Use this. `load_pi()` returns it.** |
+| `pi_fc_plus_SC_with_all_packs.npy` | pre-warp coupling, superseded | Retired, do not use for new work |
 | `pi_fc_plus_SC_with_atlas_regions.npy` | Production + 15 atlas-derived Garin region anchors | Ablation; superseded by per-pack |
 | `pi_fc_plus_SC_with_soft_atlas_regions.npy` | Same as above but with soft anchors (lam_outside=0.15) | Justification for the soft default |
-| `pi_fc_plus_SC_with_M1.npy` | Production + supplementary M1 point anchor | Historical (EXP-1, hippocampal supp) |
-| `pi_fc_plus_SC_with_M1_hippo.npy` | Production + M1 + 4 hippocampal point anchors | Earlier hippocampal coverage experiment |
+| `pi_fc_plus_SC_with_M1.npy` | Production + supplementary M1 point anchor | Supplementary-anchor ablation |
+| `pi_fc_plus_SC_with_M1_hippo.npy` | Production + M1 + 4 hippocampal point anchors | Hippocampal coverage ablation |
 | `pi_fc_plus_SC_with_biccn_motor.npy` | Production + BICCN motor pack only (pids 30, 31) | Per-pack ablation |
 | `pi_fc_plus_SC_with_tectum.npy` | Production + tectum pack only (pids 32, 33) | Per-pack ablation |
 | `pi_fc_plus_SC_with_olfactory.npy` | Production + olfactory pack only (pids 34, 35) | Per-pack ablation |
@@ -41,7 +41,7 @@ The π matrix (1864 × 2094) is OTTER's core output. We ship several variants:
 
 ## Bootstrap (`coupling/bootstrap_*.npz`)
 
-40 subject-bootstrap iterations on the production π — used by the trust map (`per_row_stability`) and for confidence intervals.
+40 subject-bootstrap iterations on the production π, used by the trust map (`per_row_stability`) and for confidence intervals.
 
 ## Trust maps (`coupling/trust_*.npz`)
 
@@ -49,25 +49,25 @@ The π matrix (1864 × 2094) is OTTER's core output. We ship several variants:
 |---|---|
 | `trust_score_fc_plus_SC.npz` | 3-signal internal trust (bootstrap + concentration + FC similarity) on production π |
 | `trust_score_fc_plus_SC_with_M1_hippo.npz` | Same on the supplementary-anchor π |
-| `trust_multisource_canonical.npz` | **5-tier multi-source trust** on the canonical π — use this one |
+| `trust_multisource_canonical.npz` | **5-tier multi-source trust** on the canonical π. Use this one |
 
 ## Logs (`logs/`)
 
 JSON outputs from every evaluation script:
 
-- `beauchamp_validation*.json` — Beauchamp 2022 external validation results (one per π variant)
-- `region_level_eval*.json` — Region-level top-K with Beauchamp-22 or JuBrain candidate sets
-- `anchor_cv_*.json` — Held-out anchor CV results
-- `fc_translation.json` — FC translation Pearson r
-- `bootstrap_summary_*.json` — Bootstrap aggregate stats
-- `null_*.json` — Null distribution results
+- `beauchamp_validation*.json`, Beauchamp 2022 external validation results (one per π variant)
+- `region_level_eval*.json`, region-level top-K with Beauchamp-22 or JuBrain candidate sets
+- `anchor_cv_*.json`, held-out anchor CV results
+- `fc_translation.json`, FC translation Pearson r
+- `bootstrap_summary_*.json`, bootstrap aggregate stats
+- `null_*.json`, null distribution results
 - Most file names indicate the π file they were computed on.
 
 ## Comparison + figures + viewer + GUI
 
-Built by `pipeline/07_build_artefacts.py`. Standalone HTML viewer at `viewer/index.html` is the most useful exploration surface — click a mouse parcel, see top-K human partners + trust tier.
+Built by `pipeline/07_build_artefacts.py`. The standalone HTML viewer at `viewer/index.html` reports the top-K human partners and trust tier for a selected mouse parcel.
 
-For the newer region-first explorer, run:
+For the region-first explorer, run:
 
 ```bash
 PYTHONPATH=src python pipeline/08_build_gui.py

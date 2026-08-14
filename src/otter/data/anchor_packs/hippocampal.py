@@ -1,8 +1,7 @@
 """Hippocampal subfield anchor pack.
 
 Cross-species correspondence of hippocampal subfields with conserved
-laminar organisation between rodent and primate (verified Consensus
-search 2026):
+laminar organisation between rodent and primate:
 
   - Strange, B. A., Witter, M. P., Lein, E. S., & Moser, E. I. (2014).
     Functional organization of the hippocampal longitudinal axis. *Nature
@@ -18,18 +17,13 @@ search 2026):
   pid 41:  CA3
   pid 42:  Dentate gyrus
 
-We skip CA2 (not present in our DSURQE tree, its parcels likely fall
-into CA3 in this atlas resolution).
+CA2 is omitted: it is not present in the DSURQE tree, and its parcels fall
+into CA3 at this atlas resolution.
 
-Why this is OTTER's most-tested failure region
-----------------------------------------------
-All five hippocampal subfields show 0 % Beauchamp top-1 under production
-point-anchor π, the cleanest documented evidence that OTTER's FC/SC
-structure does NOT recover hippocampal homology unsupervised. Earlier
-work (EXP-1 / SPLIT-1) added four hippocampal *point* anchors and moved 3 of 4
-from 0 → 7-9 % top-1. This pack is the
-region-anchor analogue: each subfield's full DSURQE parcel set forced to
-map into the matching human subfield MNI ball.
+All five hippocampal subfields show 0 % Beauchamp top-1 under the production
+point-anchor π, so OTTER's FC/SC structure does not recover hippocampal
+homology without supervision. This pack forces each subfield's full DSURQE
+parcel set into the matching human subfield MNI ball.
 
 Mouse-side: DSURQE atlas overlay.
   Subiculum: 29 parcels
@@ -45,12 +39,12 @@ Human-side: MNI spheres at canonical hippocampal subfield centroids
   CA3:           (±25, -22, -10) r=8 mm →  4 parcels
   Dentate gyrus: (±25, -28, -10) r=8 mm →  4 parcels
 
-Caveat: as with all other anchor packs, the mouse-side sets here
-are identical to Beauchamp's validation sets, so Beauchamp top-1 → 100 %
-for each anchored subfield is largely tautological. The pack's value is
-practical (OTTER queries for hippocampal subfield parcels become
-trustworthy). Independent confirmation would require non-Beauchamp
-validation (e.g. Iglesias 2015 hippocampal subfield atlas tracing).
+As with the other anchor packs, the mouse-side sets are identical to
+Beauchamp's validation sets, so Beauchamp top-1 → 100 % for each anchored
+subfield is largely tautological. The pack's value is practical: queries for
+hippocampal subfield parcels return defensible answers. Independent
+confirmation would require non-Beauchamp validation, for example Iglesias 2015
+hippocampal subfield atlas tracing.
 """
 from __future__ import annotations
 

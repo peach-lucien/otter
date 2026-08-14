@@ -11,20 +11,19 @@ no clear mouse homologue.
 argue that human association cortex expanded so much it became evolutionarily
 **"untethered"** from the sensory hierarchies and molecular gradients that
 organise primary cortex. The implication for a mouse↔human mapping: there is
-no well-defined mouse homologue of the expanded human association cortex, so a
-faithful coupling should be confident over sensorimotor cortex and **sparse /
-unconfident over association cortex**.
+no well-defined mouse homologue of the expanded human association cortex, so an
+accurate coupling should be confident over sensorimotor cortex and sparse or
+unconfident over association cortex.
 
-The falsification logic follows from that. If OTTER's π were *uniformly* confident
+The falsification logic follows from that. If OTTER's π were uniformly confident
 everywhere, including over association cortex that has no clear mouse
-homologue, that would signal over-fitting. OTTER should know what it can't
-map.
+homologue, that would signal over-fitting.
 
 ## Result
 
 Three panels (`outputs/figures/buckner_krienen_2013_tethering.png`).
 
-For every human cortical parcel we measure OTTER's **coverage**, the π mass it
+For every human cortical parcel the analysis measures OTTER's coverage, the π mass it
 receives from the mouse brain (the per-column mass of the coupling), and place it on
 the sensorimotor → association axis (the HCP T1w/T2w myelin map; high myelin =
 sensorimotor).
@@ -62,9 +61,9 @@ which does track expansion and hierarchy maps under a spin null (see
 mouse origin, correlates with the axis at ρ = −0.435. (2) OTTER's
 Garin anchors are weighted toward sensorimotor cortex, which contributes to the
 sensorimotor–association coverage gap alongside the underlying evolutionary
-untethering. The two are not fully separable, but both push the same way: a
-faithful coupling and a sensible anchor set agree that association cortex is
-the hard, weakly-tethered territory. The same boundary appears in the Fulcher
+untethering. The two are not fully separable, but both push the same way. An
+accurate coupling and the anchor set agree that association cortex is the
+weakly-tethered territory. The same boundary appears in the Fulcher
 2019 experiment, where mouse isocortex routes onto a gradient-compressed human
 territory that never reaches the transmodal extreme.
 

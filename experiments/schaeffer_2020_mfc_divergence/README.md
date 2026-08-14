@@ -1,12 +1,9 @@
-> Numbers refreshed 2026-07-20 against the canonical coupling
-> (`outputs/logs/balsters_2020_mfc_divergence.json`, sha bb4cae00…). This result is the
-> falsification control.
-
 # Schaeffer et al. 2020, rodent MFC divergence (falsification test)
 
-A **falsification** test: it states, with a direction, where a faithful
-mouse↔human mapping should *not* send mouse medial frontal cortex, and
-checks whether OTTER's π obeys.
+A falsification test. It states, with a direction, where an accurate
+mouse↔human mapping should not send mouse medial frontal cortex, and
+checks whether OTTER's π obeys. Numbers are from the canonical coupling
+(`outputs/logs/schaeffer_2020_mfc_divergence.json`, sha bb4cae00…).
 
 ## Why this experiment
 
@@ -40,24 +37,24 @@ marmoset/human mismatches make re-routing their data unjustified.
 ## Result
 
 **OTTER passes, and its π is Schaeffer-consistent.** Three panels
-(`outputs/figures/balsters_2020_mfc_divergence.png`):
+(`outputs/figures/schaeffer_2020_mfc_divergence.png`):
 
 **1. Where π routes mouse MFC.** Of the coupling mass leaving OTTER's 39
 mouse rodent-MFC parcels (ACAd/ACAv/PL/ILA), **0.0 %** reaches human dlPFC,
 an enrichment of **×0.0** against the permuted-π null (empirical p = 0.99,
 i.e. observed mass is at the *bottom* of the null distribution). The
-Schaeffer-consistent territories are strongly favoured: medial PFC ×10.1,
+Schaeffer-consistent territories are favoured: medial PFC ×10.1,
 premotor ×6.0, mid-cingulate ×4.3 (all p ≤ 0.025). Of the 39 MFC parcels,
 **0** have their top-1 human partner in dlPFC; 7 land in medial PFC, 6 in
 premotor, 2 in mid-cingulate.
 
-**2. The contested anchor is correctly quarantined.** Mouse-MFC mass onto
+**2. The contested anchor is quarantined.** Mouse-MFC mass onto
 human dlPFC is 0.0 % under the Garin-only baseline and 0.0 % under the
 production coupling. It only appears, jumping to **23.1 %** (and 18.2 % for
 Prelimbic specifically), when the opt-in `lateral_pfc` pack's contested
 Prelimbic→dlPFC anchor is forced in. Schaeffer et al. 2020 is the independent FC
 evidence that this anchor encodes a homology the data argues against, and
-supports OTTER's decision to keep it opt-in.
+supports keeping it opt-in.
 
 **3. dlPFC is a low-homology territory.** Human dlPFC receives only 0.6 %
 of *all* mouse→human coupling mass while occupying 1.1 % of human parcels, so it
@@ -96,11 +93,11 @@ with the evolutionary expansion of human lateral PFC.
 ## Reproduce
 
 ```bash
-PYTHONPATH=src python experiments/balsters_2020_mfc_divergence/01_mfc_divergence.py
-PYTHONPATH=src python experiments/balsters_2020_mfc_divergence/02_plot.py
+PYTHONPATH=src python experiments/schaeffer_2020_mfc_divergence/01_mfc_divergence.py
+PYTHONPATH=src python experiments/schaeffer_2020_mfc_divergence/02_plot.py
 ```
 
 Outputs:
-- `outputs/logs/balsters_2020_mfc_divergence.json`
-- `outputs/figures/balsters_2020_mfc_divergence.png`
+- `outputs/logs/schaeffer_2020_mfc_divergence.json`
+- `outputs/figures/schaeffer_2020_mfc_divergence.png`
 

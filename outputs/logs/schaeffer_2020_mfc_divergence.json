@@ -169,7 +169,7 @@
     "global_mass_fraction": 0.0002857675342288654,
     "parcel_share": 0.010506208213944603
   },
-  "verdict": "PASS. Balsters-consistent",
+  "verdict": "PASS. Schaeffer-consistent",
   "roi_labels": [
     "medial_PFC",
     "medial_PFC",

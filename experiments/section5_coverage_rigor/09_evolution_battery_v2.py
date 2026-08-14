@@ -1,18 +1,11 @@
 #!/usr/bin/env python3
-"""Evolution battery, corrected.
+"""Evolution battery: a Spearman rho tested against a Spearman spin null.
 
-BUG THIS FIXES
---------------
-07_evolution_battery.py stored `spearman` (a RANK correlation) alongside `spin_p` taken from
-`spin_null`, which computes a PEARSON correlation. The downstream plot then coloured its bars by
-that p while printing the rho. The two statistics disagree because coverage's Pearson correlation is
-inflated by the entropic-OT underflow tail (see 08_anchorfree_control.py), while its Spearman
-is not.
-
-Consequence: the HCP T1w/T2w map was reported at "rho = +0.11, spin p = 0.037" and counted
-among the maps that clear the null. Its Spearman spin p is 0.10, i.e. NOT significant; the
-0.037 belongs to Pearson r = +0.151. The claim "four of the seven clear a conservative spin
-null" is not supportable as published.
+07_evolution_battery.py stores `spearman` (a RANK correlation) alongside `spin_p` taken from
+`spin_null`, which computes a PEARSON correlation. The two statistics disagree because
+coverage's Pearson correlation is inflated by the entropic-OT underflow tail (see
+08_anchorfree_control.py), while its Spearman is not. For the HCP T1w/T2w map the Spearman
+spin p is 0.10, while the 0.037 belongs to Pearson r = +0.151.
 
 This script spin-tests the statistic it reports: a Spearman correlation against a
 Spearman-based spin null, on rank-transformed coverage (scale-free, so immune to epsilon).
@@ -77,13 +70,14 @@ def main():
     if not maps:
         raise SystemExit(
             "section5_evolution_battery.json does not store the per-region map values, so the "
-            "battery cannot be recomputed. Re-run 07_evolution_battery.py (which now persists "
-            "schaefer_ids / coverage_values / map_values), then re-run this script. Do NOT copy "
-            "the old p-values across: they are Pearson p-values attached to Spearman rhos."
+            "battery cannot be recomputed. Re-run 07_evolution_battery.py (which persists "
+            "schaefer_ids / coverage_values / map_values), then re-run this script. Its stored "
+            "p-values are Pearson p-values attached to Spearman rhos and are not transferable."
         )
 
-    out = {"_why": ("Reports a Spearman rho tested against a Spearman spin null. The previous "
-                    "battery attached a Pearson spin p to a Spearman rho. The two disagree "
+    out = {"_why": ("Reports a Spearman rho tested against a Spearman spin null. "
+                    "07_evolution_battery.py attaches a Pearson spin p to a Spearman rho. "
+                    "The two disagree "
                     "because coverage's Pearson correlation is inflated by a handful of "
                     "deep-underflow regions, which a rank statistic is immune to."),
            "_source": ("derives entirely from outputs/logs/section5_evolution_battery.json; "

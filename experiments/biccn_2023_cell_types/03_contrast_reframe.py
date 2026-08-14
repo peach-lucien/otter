@@ -1,9 +1,9 @@
 """Contrast / hotspot reframe of the BICCN cell-type-marker test.
 
 The per-marker test correlates each gene's smooth z-scored expression map
-mouse→human (mean r=+0.089, weak). Two problems make that the wrong question:
-single-gene maps are noisy, and any two smooth cortical maps share spatial
-autocorrelation. Here we ask sharper, OTTER-strong-mode questions:
+mouse→human (mean r=+0.089). Single-gene maps are noisy, and any two smooth
+cortical maps share spatial autocorrelation. This script asks two narrower
+questions:
 
   1. CLASS CONTRASTS (magnitude-cancelling, like the Pagani contrast). Build a
      per-parcel class score (mean z over a class's markers) for both species and
@@ -12,8 +12,8 @@ autocorrelation. Here we ask sharper, OTTER-strong-mode questions:
      baseline. Scored against the FAIR translation-spin null (spin the mouse map
      on the mouse sphere, route through the real π).
   2. SUBCORTICAL HOTSPOT (discrete). Dopaminergic markers (Th/Drd1/Drd2/Slc6a3)
-     peak in striatum/midbrain. Does the mouse dopaminergic hotspot route through
-     π to the human dopaminergic hotspot? Measured as top-decile overlap
+     peak in striatum/midbrain. Whether the mouse dopaminergic hotspot routes
+     through π to the human dopaminergic hotspot. Measured as top-decile overlap
      (hypergeometric) and hotspot-centroid agreement.
 
 Usage:
@@ -63,7 +63,7 @@ def class_score(expr, gene_df, genes, sym_col, upper):
 
 def main():
     print("=" * 78)
-    print("BICCN cell types. CONTRAST + HOTSPOT reframe vs a fair spin null")
+    print("BICCN cell types. CONTRAST + HOTSPOT reframe vs a spin null")
     print("=" * 78)
 
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))

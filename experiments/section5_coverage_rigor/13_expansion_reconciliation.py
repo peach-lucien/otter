@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
-"""Reconcile: on the retired pre-warp coupling, coverage vs |x| was strong (-0.30) while coverage
-vs published expansion maps was ~null. Which is the error? Check geometric confound, region vs
-parcel level, log vs linear, spin config, bilateral handling, parametric vs non-parametric.
-Non-parametric (Spearman) throughout unless noted.
+"""Reconcile: on the retired pre-warp coupling, coverage vs |x| is strong (-0.30) while coverage
+vs published expansion maps is ~null. Geometric confound, region vs parcel level, log vs linear,
+spin config, bilateral handling and parametric vs non-parametric are checked. Non-parametric
+(Spearman) throughout unless noted.
 
-RESOLUTION ON THE CANONICAL COUPLING (2026-07-18): the discrepancy dissolves because the
+RESOLUTION ON THE CANONICAL COUPLING: the discrepancy dissolves because the
 coverage~|x| side collapses. Canonical rho(coverage,|x|) = -0.03 (spin p = 0.83) at parcel level
 and +0.06 (p = 0.73) at region level; the -0.30 belonged to the retired coupling only. Coverage
 vs the published expansion maps remains null.
 
-CAVEAT: the `region_level_maps` block reads `coverage_values` out of the stored
+The `region_level_maps` block reads `coverage_values` out of the stored
 section5_evolution_battery.json rather than recomputing them, so those cov~map and cov~|x|
-numbers carry whatever coupling that battery was run on. Re-run the battery before trusting them.
+numbers carry whatever coupling that battery was run on.
 
 Writes: outputs/logs/section5_expansion_reconciliation.json
 """
@@ -104,9 +104,8 @@ def main():
             "n": int(len(sid)), "cov_vs_map_rho": r_cov, "cov_vs_map_spin_p": p_cov,
             "map_vs_absX_rho": float(r_mapx), "cov_vs_absX_rho": float(r_covx),
             "_coverage_source": ("section5_evolution_battery.json (stored, NOT recomputed here). "
-                                 "That battery was re-run on the canonical coupling and now "
-                                 "carries pi_file / pi_sha256 in its _meta; check them rather "
-                                 "than assuming.")}
+                                 "That battery carries pi_file / pi_sha256 in its _meta; read "
+                                 "them to identify the coupling.")}
         print(f"  {label:<38} n={len(sid):3d}  cov~map {r_cov:+.3f}(p={p_cov:.3f})  "
               f"map~|x| {r_mapx:+.3f}  cov~|x| {r_covx:+.3f}")
 
@@ -146,7 +145,7 @@ def main():
         "pearson_log_vs_absX": float(pearsonr(lg, ax)[0]),
         "pearson_linear_vs_absX": float(pearsonr(lin, ax)[0]),
         "_note": "Spearman is identical for log and linear (monotone). Pearson differs: the eps tail "
-                 "dominates Pearson-on-log. Spearman is the honest statistic here."}
+                 "dominates Pearson-on-log, so Spearman is the appropriate statistic here."}
     print("\nLOG vs LINEAR (parcel, production):", {k: round(v, 3) if isinstance(v, float) else v
           for k, v in out["log_vs_linear_parcel"].items() if k != "_note"})
 

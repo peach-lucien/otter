@@ -21,7 +21,7 @@ in three ways:
       OTTER's anchor-derived PAIRID_TO_NETWORK.
 
   (C) **Network coherence (compactness)**, for each mouse network, how
-      spatially compact is its predicted human-side image? A coherent mapping
+      spatially compact its predicted human-side image is. A coherent mapping
       yields tight clusters; an incoherent one scatters mass across human
       space. Compared against permuted-π null.
 
@@ -124,7 +124,7 @@ def ica_mouse_rsns(fc_mouse, n_components=7, top_pct=10.0, seed=42):
     fcz_thr = np.where(fcz >= thresh, fcz, 0.0)
     # ICA, each parcel's connectivity row treated as an observation
     ica = FastICA(n_components=n_components, random_state=seed, max_iter=2000)
-    # FastICA expects (n_samples, n_features); we want each parcel to be a sample
+    # FastICA expects (n_samples, n_features); each parcel is a sample
     components = ica.fit_transform(fcz_thr).T   # (n_components, n_parcels)
     # Sign-flip so peak weight is positive
     for k in range(n_components):
@@ -198,7 +198,7 @@ def main():
     mouse_net_otter = assign_networks(M.var, idx_m)
     print(f"  Mouse PAIRID_TO_NETWORK assigns 1864 parcels to {len(NETWORKS)} networks")
 
-    # Human network via Schaefer-Yeo7 (audit-corrected version)
+    # Human network via Schaefer-Yeo7
     from importlib import import_module
     nc = import_module("01_network_crossvalidation")
     human_net, human_paper_names = nc.assign_human_paper_networks(H.var, separate_aud=True)
@@ -324,7 +324,7 @@ def main():
         null_mean = nulls.mean()
         ci = (np.percentile(nulls, 2.5), np.percentile(nulls, 97.5))
         ratio = real / null_mean if null_mean > 0 else float("nan")
-        # ratio < 1 means OTTER more compact than null (good)
+        # ratio < 1 means OTTER more compact than null
         print(f"  {net_name:<16s} | {n_m:>8d} | {real:>20.1f} | "
               f"{null_mean:>10.1f} ({ci[0]:.0f}, {ci[1]:.0f})       | {ratio:>5.2f}")
         coh_results.append({

@@ -6,9 +6,8 @@ in the top-K of π[m, :]?". This script asks the region-level analogue:
     Given a mouse region M (set of parcels), which *human region* does the
     model predict, out of a candidate set of named human regions?
 
-This is the right question for a downstream user who thinks in regions, and
-it's much more aligned with what π actually is, a soft probabilistic mapping
-that spreads mass across multiple human parcels in a region.
+π is a soft probabilistic mapping that spreads mass across multiple human
+parcels in a region, so the region-level question matches its structure.
 
 Pipeline
 --------
@@ -176,7 +175,7 @@ def main(args):
         pairs_to_run = renamed_pairs
         print(f"Candidate set: JuBrain ∪ Beauchamp-extras = "
               f"{len(candidate_masks)} regions")
-        # Print the Beauchamp → JuBrain mapping for transparency
+        # Print the Beauchamp → JuBrain mapping
         print("\nBeauchamp → JuBrain mapping (by Jaccard overlap):")
         for bname, jname in beauchamp_to_jubrain.items():
             tag = jname if jname else "(no JuBrain match, kept as Beauchamp mask)"

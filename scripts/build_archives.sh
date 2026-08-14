@@ -7,7 +7,7 @@
 # Produces (next to the repo):
 #   ../homer-reproduce-v1.0.0.tar.gz   (~173 MB gzipped)  -> Zenodo Archive 1
 #   ../homer-raw-inputs-v1.0.0.tar.gz  (~606 MB gzipped)  -> Zenodo Archive 2
-# and prints the sha256 of each so you can record it.
+# and prints the sha256 of each for the record.
 #
 # Paths inside the tarballs are repo-relative, so scripts/fetch_data.py unpacks
 # them cleanly at the repo root. Missing entries are skipped with a warning.
@@ -15,7 +15,7 @@ set -uo pipefail
 
 REPRODUCE_VERSION="v1.3.0"   # ships every data file the notebooks/experiments load (full audit).
 # v1.3.0 adds pi_canonical.npy, pi_canonical_sharp.npy and
-# trust_multisource_canonical.npz, which v1.2.0 omitted.
+# trust_multisource_canonical.npz.
 RAW_VERSION="v1.0.0"         # unchanged content
 # Stop macOS bsdtar from writing AppleDouble (._*) sidecars into the archives.
 export COPYFILE_DISABLE=1
@@ -25,9 +25,9 @@ OUT_DIR="$(dirname "$ROOT")"
 
 # ---- Archive 1: reproduce bundle -------------------------------------------
 REPRODUCE=(
-  # --- canonical: what load_pi() returns and what every notebook needs. Added 2026-07-20;
-  # the bundle previously shipped only the retired pre-warp couplings, so a fresh user who ran
-  # fetch_data.py and opened any notebook hit FileNotFoundError on the first cell.
+  # --- canonical: what load_pi() returns and what every notebook needs. Without these the
+  # bundle carries only the retired pre-warp couplings, and every notebook fails with
+  # FileNotFoundError on its first cell.
   outputs/coupling/pi_canonical.npy
   outputs/coupling/pi_canonical_sharp.npy
   outputs/coupling/trust_multisource_canonical.npz

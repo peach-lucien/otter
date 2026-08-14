@@ -1,9 +1,8 @@
 """Paired statistical comparisons between two configurations.
 
-When two configs both report e.g. 81% top-1 across 42 anchors, "Config A is
-better than Config B" is unjustified without a paired test. The differences
-are typically a single anchor (~Bernoulli SE 0.06 for n=42), well within
-random variation.
+When two configs both report e.g. 81% top-1 across 42 anchors, ranking one
+above the other requires a paired test. The differences are typically a single
+anchor (Bernoulli SE 0.06 for n=42), within random variation.
 
 Public:
     mcnemar_paired_anchors(correct_a, correct_b)

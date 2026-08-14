@@ -1,20 +1,19 @@
-"""CINGULATE-1: Add subgenual ACC + Retrosplenial region anchors (Vogt 2019).
+"""Add subgenual ACC + Retrosplenial region anchors (Vogt 2019).
 
 Beauchamp validation gives 13 % top-1 for "Anterior cingulate area →
-cingulate gyrus", better than the other failure regions but well below
-where it could be. We add Vogt 2019's two best-conserved cingulate
-sub-domains. This is the first pack whose mouse-side set
-DIFFERS from the corresponding Beauchamp validation set, so the
-Beauchamp comparison is informative rather than tautological.
+cingulate gyrus", above the other failure regions. This pack adds Vogt
+2019's two best-conserved cingulate sub-domains. Its mouse-side set differs
+from the corresponding Beauchamp validation set, so the Beauchamp
+comparison is informative rather than tautological.
 
   pid 36: Mouse ACA ventral (15 parcels)   ↔ Human subgenual ACC (6 parcels)
   pid 37: Mouse Retrosplenial (27 parcels) ↔ Human RSC (8 parcels)
 
-Note: Beauchamp's ACG validation uses *full* mouse ACA (23 parcels,
-includes the dorsal part we omit) and a different human centroid
-(pregenual ACC at ±5,25,25 r=15). Our pack uses mouse ACA-ventral (15
-of 23) and human subgenual at ±5,10,35 r=10. The intersection is small,
-so the Beauchamp ACG metric is a partly-independent measurement.
+Beauchamp's ACG validation uses the full mouse ACA (23 parcels, including
+the dorsal part omitted here) and a different human centroid (pregenual ACC
+at ±5,25,25 r=15). This pack uses mouse ACA-ventral (15 of 23) and human
+subgenual at ±5,10,35 r=10. The intersection is small, so the Beauchamp ACG
+metric is a partly-independent measurement.
 
 Outputs:
   - outputs/coupling/pi_fc_plus_SC_with_cingulate.npy
@@ -23,7 +22,7 @@ Outputs:
   - outputs/logs/beauchamp_validation_cingulate_rsc_only.json
 
 Usage:
-    PYTHONPATH=src python experiments/cingulate/01_add_cingulate_anchors.py
+    PYTHONPATH=src python experiments/anchor_packs/cingulate.py
 """
 from __future__ import annotations
 

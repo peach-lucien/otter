@@ -19,12 +19,10 @@ Three panels:
 
   1. **T1w:T2w → human myelin.** Translate the mouse T1w:T2w map through π and
      compare to the human myelin map. Apples-to-apples, same modality.
-  2. **Routed-territory characterisation.** We quantify how the human territory
-     π actually reaches sits on the human principal connectivity gradient
-     (Margulies/Huntenburg). Under the retired coupling that territory was a
-     compact 205 of 400 Schaefer regions; the canonical coupling reaches 388,
-     so the "concentration" framing no longer describes it, and the gradient-SD
-     compression ratio is now ~1.00.
+  2. **Routed-territory characterisation.** Where the human territory π reaches
+     sits on the human principal connectivity gradient (Margulies/Huntenburg).
+     The canonical coupling reaches 388 of 400 Schaefer regions and the
+     gradient-SD compression ratio is ~1.00.
   3. **Cytoarchitecture → human myelin.** A second, independent mouse modality
      routed through π, multimodal convergence in the spirit of Fulcher's paper.
 
@@ -46,9 +44,8 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 DATA = ROOT / "data_external" / "fulcher_2019_gradients"
 # The canonical coupling is whatever otter.data.load_pi() defaults to
-# (pi_canonical.npy). Do NOT hard-code a path here: this script previously
-# pinned pi_fc_plus_SC_with_all_packs.npy and so kept using the RETIRED
-# coupling after the 2026-07-17 switch, silently, through several re-runs.
+# (pi_canonical.npy). Do not hard-code a path here; a pinned filename keeps the
+# script on a retired coupling after the default changes.
 RETIRED_PI_FILE = "pi_fc_plus_SC_with_all_packs.npy"   # for the coverage control only
 N_NULL = 200
 SEED = 42

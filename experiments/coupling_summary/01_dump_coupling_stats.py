@@ -1,17 +1,8 @@
 
 """Persist every headline coupling statistic so the method's own numbers are checkable.
 
-WHY THIS EXISTS
----------------
-The coupling summary numbers used to be quoted from notebooks that never wrote a JSON, so none
-of them traced to an output file.
-
-That is not hypothetical. The earlier evidence-tier percentages (32/24/12/12/21) are STALE.
-They predate the 2026-07-08 regrade and disagree with evidence_tiers_v2.json (31/22/13/14/21).
-They also sum to 101 %, which is the tell.
-
-This script recomputes the coupling claims directly from the canonical pi and writes them to a
-JSON so every number can be verified.
+The coupling claims are recomputed directly from the canonical pi and written to a JSON, so
+every number traces to an output file.
 
 Run: cd otter && PYTHONPATH=src python experiments/coupling_summary/01_dump_coupling_stats.py
 Writes outputs/logs/coupling_summary.json
@@ -35,10 +26,9 @@ OUT = ROOT / "outputs/logs/coupling_summary.json"
 SEED = 0
 
 
-# NOTE 2026-07-29: this hardcoded trust_multisource_all_packs_v2.npz (the 8 July
-# grading) while stamping its output with the canonical pi, so coupling_summary.json
-# looked verified and carried superseded tier numbers. Repointed to the canonical
-# trust map. RE-RUN THIS SCRIPT to regenerate outputs/logs/coupling_summary.json.
+# The trust map read here must be the canonical one. Stamping the output with the
+# canonical pi while reading a superseded trust map reports tier numbers that do not
+# correspond to the coupling named in the log.
 def main():
     pi = load_pi()
     M, _ = load_cached("mouse", cache_dir=ROOT / "outputs/anndata")
@@ -59,10 +49,10 @@ def main():
         },
     }
 
-    # --- self-correspondence: NOT computed here, deliberately -----------------------
-    # The class-diagonal mean is computed with a coarse-region assignment and written to
-    # outputs/logs/fig1_coupling_matrix.json (0.262). Recomputing it here with a nearest-anchor
-    # assignment gave 0.275, which is a different quantity. Do not duplicate it.
+    # --- self-correspondence: not computed here ------------------------------------
+    # The class-diagonal mean uses a coarse-region assignment and is written to
+    # outputs/logs/fig1_coupling_matrix.json (0.262). A nearest-anchor assignment gives a
+    # different quantity, so it is not duplicated here.
 
     # --- spatial accuracy: mouse parcel distance vs routed human centroid distance --
     w = pi / np.maximum(pi.sum(1, keepdims=True), 1e-300)
@@ -84,9 +74,7 @@ def main():
     }
 
     # --- evidence tiers + per-tier recovery ----------------------------------------
-    # These lived ONLY in an .npz, so no JSON-based check could see them, which is how the
-    # summary came to quote "67 % top-1 versus 17 %" and "55 % of the brain" while the values
-    # computed alongside it were 0.69, 0.18 and 52 %. The npz is right; the quoted text was stale.
+    # These live only in an .npz, which no JSON-based check can read, so they are re-emitted here.
     tiers = json.loads((ROOT / "outputs/logs/evidence_tiers_v2.json").read_text())
     n_tier = tiers["n"]
     out["evidence_tiers_percent"] = {

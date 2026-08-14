@@ -944,7 +944,7 @@
    "ContB_deficit_SD": -0.6177017146506774,
    "loss": 0.012591886828211028,
    "converged": true,
-   "pi_path": "/sessions/modest-tender-carson/mnt/brain_crossspecies_translation/otter/outputs/coupling/pi_canonical.npy"
+   "pi_path": "outputs/coupling/pi_canonical.npy"
   },
   "why_wrong": "This block claimed cell w0.5_e0.05 (xyz_weight=0.5). The file actually saved at outputs/coupling/pi_canonical.npy scores expansion_rho=-0.3207 and ContB=-0.6137, which match cell w0.25_e0.05 EXACTLY (w0.5_e0.05 gives -0.2915 / -0.6177). Verified 2026-07-18 by re-scoring the saved pi with 23_canonical_pi.py biology(). The deployed coupling is xyz_weight=0.25, epsilon=0.05.",
   "hazard": "23_canonical_pi.py --select picks deploy_id = argmax(mean per-pair top1), which on the current sweep table is w0.5_e0.05. RE-RUNNING --select WOULD OVERWRITE pi_canonical.npy with a DIFFERENT coupling. Do not re-run --select without pinning the cell to w0.25_e0.05."

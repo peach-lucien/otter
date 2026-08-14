@@ -13,37 +13,31 @@ across mouse and primate brains, with conserved layered organisation:
   pid 33:  Mouse Inferior Colliculus            ↔ Human Inferior Colliculus
 
 Mouse-side sets come from the DSURQE atlas overlay (53 parcels for the
-sensory SC; 29 for IC). Human-side sets are *tight* MNI spheres at canonical
-Mai/Paxinos centroids (these are small brainstem structures, broader balls
-would capture unrelated midbrain parcels):
+sensory SC; 29 for IC). Human-side sets are tight MNI spheres at canonical
+Mai/Paxinos centroids; these are small brainstem structures, and broader balls
+capture unrelated midbrain parcels:
 
   SC: (±5, -30, -2) r=6 mm  →  2 human parcels
   IC: (±5, -35, -8) r=8 mm  →  4 human parcels
 
-References (verified Consensus search 2026):
+References:
   - Isa, T. et al. (2021). The tectum/superior colliculus as the vertebrate
     solution for spatial sensory integration and action. *Current Biology*
     31, R741-R762. DOI: 10.1016/j.cub.2021.04.001.
-    (Checked against Crossref 2026-08-09. An earlier version of this docstring
-    gave 10.1016/j.cub.2021.04.020, which is a different Current Biology paper.)
   - Winer, J. A. & Schreiner, C. E. (Eds.) (2005). *The Inferior Colliculus*.
     Springer. ISBN: 978-0-387-22038-1.
 
-Why this targets a documented failure
--------------------------------------
-Tectum is spatially inverted between species. Mouse SC is dorsal whereas
-human SC is ventral in MNI space, so the xyz cross-species cost actively
-misleads non-anchor tectum parcels.
-The Garin pair_id 21 (Tectum) gives a single point anchor for both
-colliculi combined; sub-region anchors let OTTER target SC↔SC and IC↔IC
-distinctly. Beauchamp validation gives 0 % top-1 for both colliculi under
-the production point-anchor π, and we expect this pack to lift those.
+Tectum is spatially inverted between species: mouse SC is dorsal whereas human
+SC is ventral in MNI space, so the xyz cross-species cost misleads non-anchor
+tectum parcels. The Garin pair_id 21 (Tectum) gives a single point anchor for
+both colliculi combined; sub-region anchors target SC↔SC and IC↔IC
+separately. Beauchamp validation gives 0 % top-1 for both colliculi under the
+production point-anchor π.
 
-Same caveat as biccn_motor: the mouse-side set for each anchor is
-identical to the set Beauchamp 2022's validation uses, so any improvement
-on the Beauchamp Tectum pairs is partly *tautological*. The pack's value
-is practical (OTTER queries for tectum parcels become trustworthy), not
-methodological.
+As with biccn_motor, the mouse-side set for each anchor is identical to the set
+used by Beauchamp 2022's validation, so any improvement on the Beauchamp Tectum
+pairs is partly tautological. The pack's value is practical: queries for tectum
+parcels return defensible answers.
 """
 from __future__ import annotations
 

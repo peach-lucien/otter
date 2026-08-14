@@ -43,10 +43,10 @@ def main():
             if lab:
                 used = term; break
         if not lab:
-            print(f"  {d:14s} NO Neurosynth term matched {terms} — edit DISEASE_TERMS"); continue
+            print(f"  {d:14s} no Neurosynth term matched {terms}; edit DISEASE_TERMS"); continue
         ids = dset.get_studies_by_label(labels=[lab], label_threshold=f0.LABEL_THRESHOLD)
         if len(ids) < 30:
-            print(f"  {d:14s} term '{used}' has only {len(ids)} studies — weak; consider another term")
+            print(f"  {d:14s} term '{used}' has only {len(ids)} studies; weak, consider another term")
         img, mapkey = f0.association_map(dset, ids)
         img.to_filename(str(OUT / f"{d}.nii.gz"))
         print(f"  {d:14s} term '{used}' ({len(ids)} studies) map '{mapkey}' -> {d}.nii.gz")

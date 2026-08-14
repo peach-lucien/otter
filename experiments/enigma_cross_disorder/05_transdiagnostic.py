@@ -1,16 +1,16 @@
-"""Transdiagnostic test, turn the 'no disorder-specificity' negative into a positive.
+"""Transdiagnostic test of the shared psychiatric geometry.
 
-Phase 1 + the disorder-unique test (04) showed OTTER's per-disorder predictions are
-near-identical (even disjoint gene sets give r≈0.98): OTTER carries a single SHARED
-psychiatric spatial geometry, not disorder-specific biology. That is a real claim if
-OTTER's generic map matches the actual transdiagnostic cortical signature, the
+Phase 1 and the disorder-unique test (04) showed OTTER's per-disorder predictions
+are near-identical, with even disjoint gene sets giving r≈0.98. OTTER carries a
+single shared psychiatric spatial geometry rather than disorder-specific biology.
+That geometry is testable against the transdiagnostic cortical signature, the
 "p-factor" pattern of shared cortical vulnerability across disorders.
 
-We test exactly that against ENIGMA observed cortical-thickness Cohen's d maps:
-  • Build the ENIGMA TRANSDIAGNOSTIC AVERAGE = mean case-control Cohen's d across the
-    four disorders we have gene sets for (ASD, SCZ, BD, ADHD), per DK region.
-  • OTTER's GENERIC prediction = mean of its per-disorder routed maps (they're
-    near-identical anyway), aggregated to the same DK regions.
+The test uses ENIGMA observed cortical-thickness Cohen's d maps:
+  • Build the ENIGMA transdiagnostic average = mean case-control Cohen's d across the
+    four disorders with gene sets available (ASD, SCZ, BD, ADHD), per DK region.
+  • OTTER's generic prediction = mean of its per-disorder routed maps, which are
+    near-identical, aggregated to the same DK regions.
   • Correlate OTTER-generic vs the ENIGMA transdiagnostic average, vs each disorder,
     and vs two held-out disorders not in OTTER's gene sets (MDD, OCD), and test
     significance with a spin null over the 34 DK region centroids.
@@ -72,7 +72,7 @@ def main():
     dk_to_parcels = cmp_mod.dk_to_otter_parcels(H.var, dk_centroids)
     dk_regions = list(dk_centroids.keys())
 
-    # OTTER generic prediction = mean across disorders (they're ~identical)
+    # OTTER generic prediction = mean across disorders, which are ~identical
     generic = np.mean([preds[d] for d in preds], axis=0)
     otter_dk = cmp_mod.aggregate_per_disorder_to_dk(generic, dk_to_parcels)
     otter_vec = np.array([otter_dk.get(r, np.nan) for r in dk_regions])

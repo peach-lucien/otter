@@ -2,12 +2,11 @@
 
 Run: cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/network_sweep_recon.py
 
-11_dlpfc_deficit.py runs this sweep on log column mass, the retired coverage metric. The only
-spin test of Control B on reconstruction accuracy is a single entry in that log's molecular_control
-block, computed on the 1,040 parcels that also carry gene expression. The claim that Control B
-stands out among the networks has therefore never been tested on the metric Figure 5 uses.
+11_dlpfc_deficit.py runs this sweep on log column mass, the retired coverage metric. In that log
+the only spin test of Control B on reconstruction accuracy is a single entry in the
+molecular_control block, computed on the 1,040 parcels that also carry gene expression.
 
-This runs the same sweep with the same machinery, block_gap and spin_perms copied from
+This runs the same sweep with the same machinery, block_gap and spin_perms taken from
 11_dlpfc_deficit.py, on reconstruction accuracy over the 1,824 cortical parcels, and again on the
 1,040-parcel subset so the two denominators can be compared.
 """

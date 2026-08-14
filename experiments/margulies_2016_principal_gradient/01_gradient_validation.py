@@ -69,30 +69,13 @@ def diffusion_components(fc: np.ndarray, *, top_pct: float = 10.0,
 
 def principal_gradient(fc: np.ndarray, hierarchy_ref: np.ndarray, *,
                        top_pct: float = 10.0, n_comp: int = 3):
-    """The unimodal->transmodal (Margulies) gradient, selected against an EXTERNAL
+    """The unimodal->transmodal (Margulies) gradient, selected against an external
     hierarchy reference (that species' own T1w/T2w myelin map).
 
-    BUG HISTORY -- read before changing this.
-    ----------------------------------------
-    This function used to return ``eigvecs[:, 1]``, i.e. it ASSUMED the first
-    non-trivial component is the unimodal->transmodal gradient. That assumption is
-    true of Margulies' HCP dense connectome; it is FALSE for this FC data. Here the
-    leading component is an ANTERIOR-POSTERIOR spatial axis, and the hierarchy
-    gradient is the second. Independently verified in both species:
-
-        component        vs published Margulies G1   vs that species' T1w/T2w
-        comp 1 (old)              |rho| = 0.12          human -0.13 / mouse -0.28
-        comp 2 (correct)          |rho| = 0.93          human +0.59 / mouse +0.57
-
-    The consequence was severe: routing an A-P *spatial* axis and then testing it
-    against a spatial-autocorrelation-preserving spin null is close to tautological,
-    which manufactured a false negative ("the gradient does not translate",
-    |r| = 0.41, p = 0.15). With the correct component the gradient DOES translate
-    (under the canonical coupling |r| = 0.537, spin p = 0.032; it was
-    |r| = 0.543, spin p = 0.004 under the retired coupling).
-
-    So do not hard-code an index. Select the component that actually carries the
-    hierarchy, using a reference that is external to the FC data.
+    The component index is not hard-coded. In this FC data the leading non-trivial
+    component is an anterior-posterior spatial axis and the unimodal->transmodal
+    hierarchy is the second, so the component is selected by its correlation with
+    the external reference rather than assumed.
 
     Returns (gradient, diagnostics).
     """
@@ -159,7 +142,7 @@ def main():
     print(f"  π: {prov['pi_file']}  sha256 {prov['pi_sha256']}")
     print(f"  π: {pi.shape}, total mass {pi.sum():.4f}")
 
-    # ---- external hierarchy references, used to SELECT the right component ----
+    # ---- external hierarchy references, used to select the right component ----
     human_ref = np.asarray(json.loads(
         (ROOT / "outputs/logs/buckner_krienen_2013_tethering.json").read_text()
     )["myelin_per_parcel"], float)                                   # human T1w/T2w

@@ -4,15 +4,14 @@ Run: cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/aiopt
 
 33_translate_circuits.py tests the salience enrichment against a permuted-pi null, which shuffles
 which mouse parcel each row of pi belongs to. That destroys the whole cross-species assignment and
-does not preserve mouse spatial autocorrelation, so it is close to a null of zero. Section 5 of the
-manuscript argues at length that such a null is too liberal for spatially structured data.
+does not preserve mouse spatial autocorrelation, so it is close to a null of zero. Such a null is
+too liberal for spatially structured data.
 
 This adds the translation null the paper uses elsewhere: rotate the mouse input map on the mouse
 brain and route the rotated map through the real coupling. Mouse spatial autocorrelation is
 preserved, the coupling is untouched, and only the anatomy of the input is destroyed.
 
-It also reports what softening the coupling does, so the claim that the result is independent of
-softness can be stated with the sharpness numbers attached.
+It also reports the effect of softening the coupling, with the sharpness numbers attached.
 """
 from __future__ import annotations
 

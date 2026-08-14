@@ -1,22 +1,23 @@
 #!/usr/bin/env python3
-"""TIER-1 control: does connectivity localise a held-out region BEYOND spatial position?
+"""Does connectivity localise a held-out region beyond spatial position?
 
-For each Beauchamp region, remove its curated supervision (Garin anchor + overlapping
-packs) and re-fit the full model under three configs, then score localisation:
+For each Beauchamp region, its curated supervision (Garin anchor and overlapping packs)
+is removed, the full model is re-fitted under three configurations, and localisation is
+scored:
   both      : production  (alpha=0.5 GW + xyz=0.5)          -> connectivity + space
   xyz_only  : alpha=0     (no GW/connectivity) + xyz=0.5     -> space (+ other anchors)
   conn_only : alpha=0.5 GW + xyz=0                           -> connectivity (+ other anchors)
 
-If both ≈ xyz_only, connectivity adds nothing to localisation. If both < xyz_only,
-connectivity helps. conn_only shows connectivity acting alone.
+If both matches xyz_only, connectivity adds nothing to localisation. If both is below
+xyz_only, connectivity helps. conn_only shows connectivity acting alone.
 Resumable; caches to .disentangle_v1.json.
 """
 import sys, json, time, importlib.util
 from pathlib import Path
 import numpy as np
 
-ROOT = Path("/sessions/modest-tender-carson/mnt/brain_crossspecies_translation/otter")
-OUT = Path("/sessions/modest-tender-carson/mnt/outputs")
+ROOT = Path(__file__).resolve().parents[2]
+OUT = ROOT / "outputs"
 CACHE = OUT / ".disentangle_v1.json"
 TIME_GUARD = 33.0
 t_start = time.time()

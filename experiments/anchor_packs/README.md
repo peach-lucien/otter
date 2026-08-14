@@ -37,7 +37,7 @@ The trade-offs (cingulate, somatosensory, visual lower a coarse Beauchamp metric
 PYTHONPATH=src python experiments/anchor_packs/compose_all.py
 ```
 
-This produces `outputs/coupling/pi_fc_plus_SC_with_all_packs.npy`, the **pre-warp** coupling. It was superseded in 2026-07 by `pi_canonical.npy`, which adds the anchor-warped spatial cost; `load_pi()` returns the canonical one. Use this recipe only to reproduce the pre-warp comparison. To run the whole recommended-model pipeline (solve → compose → bootstrap → trust → GUI) end to end:
+This produces `outputs/coupling/pi_fc_plus_SC_with_all_packs.npy`, the **pre-warp** coupling. It is superseded by `pi_canonical.npy`, which adds the anchor-warped spatial cost; `load_pi()` returns the canonical one. Use this recipe only to reproduce the pre-warp comparison. To run the whole recommended-model pipeline (solve → compose → bootstrap → trust → GUI) end to end:
 
 ```bash
 PYTHONPATH=src python pipeline/run_recommended_model.py
@@ -50,4 +50,4 @@ PYTHONPATH=src python experiments/anchor_packs/biccn_motor.py
 # … etc for each runner script above
 ```
 
-Per-pack outputs are useful for ablations ("does removing the cingulate pack change DMN-DMN row-mass?") and for the multi-source trust map.
+Per-pack outputs support ablations, such as the effect of removing the cingulate pack on DMN-DMN row-mass, and the multi-source trust map.

@@ -1,4 +1,4 @@
-"""STRIATUM-1: Add Voorn 2004 striatum subdivision anchors.
+"""Add Voorn 2004 striatum subdivision anchors.
 
 The default Caudoputamen → caudate Beauchamp anchor uses ALL 149 mouse
 CP parcels mapped to a single human caudate ball. Voorn 2004 (TINS,
@@ -12,8 +12,8 @@ Outputs:
   - outputs/coupling/pi_fc_plus_SC_with_striatum.npy
   - outputs/logs/beauchamp_validation_striatum.json
 
-Empirically: Beauchamp Caudoputamen rises 13 → 33 % top-1 (+19 pp);
-NAc rises +4 pp; ACG rises +4 pp. No off-target costs.
+Beauchamp Caudoputamen rises 13 → 33 % top-1 (+19 pp); NAc rises +4 pp;
+ACG rises +4 pp. No off-target costs.
 
 Usage:
     PYTHONPATH=src python experiments/anchor_packs/striatum.py

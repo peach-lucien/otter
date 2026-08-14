@@ -1,26 +1,25 @@
 """Look up atlas labels for each parcel and build region-anchor specs.
 
-Two principled atlases for the human side, both already in
-``data_external/_domhof_extracted/`` (extracted from the Domhof bundle
-the same source as our human FC + SC + parcellation):
+Two atlases for the human side, both in
+``data_external/_domhof_extracted/``, extracted from the Domhof bundle, the
+same source as the human FC, SC and parcellation:
 
   - **Schaefer-400** (cortical): 400 cortical parcels in 17-network order,
     in MNI152 2mm space.
   - **JuBrain (Julich-Brain) 184**: 184 cyto-architectonically-defined regions
     including some subcortical and cerebellar coverage, in MNI152 2mm space.
 
-Why both: Schaefer covers cortex broadly (~84% of our parcels) but not
-subcortex; JuBrain's cytoarchitectonic regions cover some subcortex but
-miss some classic cortical landmarks (e.g. auditory). Together they
-cover ~88% of our parcels with at least one atlas label.
+Both are needed: Schaefer covers cortex broadly (~84% of the parcels) but not
+subcortex; JuBrain's cytoarchitectonic regions cover some subcortex but miss
+some cortical landmarks (e.g. auditory). Together they cover ~88% of the
+parcels with at least one atlas label.
 
-For the mouse side we use the DSURQE atlas already extracted from the
-Beauchamp 2022 repo (see ``pipeline/05f_beauchamp_validation.py``).
+The mouse side uses the DSURQE atlas extracted from the Beauchamp 2022 repo
+(see ``pipeline/05f_beauchamp_validation.py``).
 
-Critical: we **only** define region anchors where the atlas gives us
-labels. Regions without atlas coverage (Septum, Striatum, Pallidum,
-Thalamus, Pons, Tectum, etc.) stay as *point* anchors, we don't
-fabricate ground truth.
+Region anchors are defined only where an atlas supplies labels. Regions
+without atlas coverage (Septum, Striatum, Pallidum, Thalamus, Pons, Tectum,
+and others) stay as point anchors.
 
 Public:
     assign_atlas_labels(var, atlas) -> (n,) int array of atlas IDs
@@ -114,9 +113,9 @@ def build_garin_region_anchors_from_atlases(
     """For each Garin pair_id, build a region anchor using:
 
       - Mouse: parcels with the same DSURQE label as the anchor parcel
-      - Human: parcels with the same Schaefer-400 OR JuBrain label as the
-        anchor parcel (whichever is non-zero; preference Schaefer > JuBrain
-        for cortical, JuBrain > Schaefer for sub-cortical regions)
+      - Human: parcels with the same Schaefer-400 or JuBrain label as the
+        anchor parcel (whichever is non-zero; Schaefer > JuBrain for
+        cortical, JuBrain > Schaefer for sub-cortical regions)
 
     If the anchor parcel has *no* atlas label on the human side, that
     pair is skipped (returned list is shorter than 21). The caller can
@@ -157,11 +156,10 @@ def build_garin_region_anchors_from_atlases(
     for k, mp in enumerate(idx_m.pos):
         pid = int(idx_m.pair_ids[k])
         hemi = idx_m.hemispheres[k]
-        # Build one region per (pid, hemi), but skip if we already did this
-        # (we'll do L and R separately and combine in the entry)
+        # One region per (pid, hemi); L and R are combined in the entry
         pass
 
-    # Instead: pair-level (one entry per pair_id, combining L and R)
+    # Pair-level: one entry per pair_id, combining L and R
     pair_to_pos_m = {}; pair_to_pos_h = {}
     for k in range(len(idx_m)):
         pid = int(idx_m.pair_ids[k])
@@ -171,8 +169,8 @@ def build_garin_region_anchors_from_atlases(
     n_built = n_skipped = 0
     skipped_reasons = []
     for pid in sorted(pair_to_pos_m.keys()):
-        # For both species, derive a set of parcels with the same atlas labels
-        # as the anchor parcels.
+        # For both species, the set of parcels sharing atlas labels with the
+        # anchor parcels.
         # Mouse: DSURQE label
         m_anchor_lbls = {mouse_dsurqe[mp] for _, mp in pair_to_pos_m[pid]
                           if mouse_dsurqe[mp] > 0}
@@ -216,8 +214,8 @@ def build_garin_region_anchors_from_atlases(
         for r in skipped_reasons:
             print(r)
     # Detect human-set overlaps: two region anchors sharing parcels create
-    # ambiguous constraints (the solver can't satisfy both exactly). Warn so
-    # the caller can decide whether to keep, merge, or drop.
+    # ambiguous constraints that the solver cannot satisfy exactly. The warning
+    # lets the caller keep, merge, or drop them.
     n_overlap = 0
     for i in range(len(out)):
         for j in range(i+1, len(out)):

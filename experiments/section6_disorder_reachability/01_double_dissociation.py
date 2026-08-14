@@ -6,18 +6,18 @@ bipolar disorder and schizophrenia concentrates where OTTER's coverage is LOWEST
 (Spearman +0.63 and +0.51, spin p < 0.005). Positive rho = more thinning (more negative
 Cohen's d) where coverage is lower.
 
-The control this script adds: the SUBCORTICAL signature of the same two disorders. OTTER
-covers subcortex well (S5 catalogue), so if coverage really indexes what a mouse model can
-reach -- rather than simply tracking "wherever disease is severe" -- the subcortical
-correlation should NOT show the same deficit. It does not: it reverses. The three
+The control this script adds is the SUBCORTICAL signature of the same two disorders. OTTER
+covers subcortex well (S5 catalogue), so if coverage indexes what a mouse model can reach,
+rather than simply tracking where disease is severe, the subcortical correlation should not
+show the same deficit. It does not; it reverses. The three
 structures with the largest schizophrenia effects (hippocampus, amygdala, thalamus) are
 OTTER's three best-covered structures, giving rho = -0.79 (SCZ) and -0.68 (BD).
 
 The finding is the INTERACTION, tested with a Fisher z on the two independent correlations
 (the subcortical arm alone is only n = 7 and is not independently spin-testable).
 
-Caveats stated in the text: cortical d is thickness, subcortical d is volume, so the
-reversal is across ENIGMA's two standard metrics rather than within one.
+Cortical d is thickness and subcortical d is volume, so the reversal is across ENIGMA's
+two standard metrics rather than within one.
 
 Data: ENIGMA summary statistics. Cortical thickness ships in data_external/enigma/.
 Subcortical volume comes from the ENIGMA toolbox:
@@ -139,7 +139,7 @@ def main():
     plab, id2name, cortical = parcel_labels(xyz)
 
     # confound 1: T1w/T2w hierarchy.  confound 2: distance from the 42 curated anchors
-    # (low coverage might merely index "far from where we placed the anchors").
+    # (low coverage might merely index distance from the curated anchors).
     myelin = np.asarray(json.loads(
         (ROOT / "outputs/logs/buckner_krienen_2013_tethering.json").read_text())["myelin_per_parcel"], float)
     anchor_dist, _ = cKDTree(xyz[get_anchor_index(H.var).pos]).query(xyz)

@@ -1,4 +1,4 @@
-"""Per-region xyz ablation (TOPO-1) report.
+"""Per-region xyz ablation report.
 
 Tests whether the failure of motor/tectum/piriform under production
 (spatial-topology inversion) can be fixed by zeroing the xyz cost for parcels
@@ -22,13 +22,12 @@ beauchamp_validation_per_region_xyz_v2.json):
       The xyz contribution interacts non-locally via the FGW equilibrium,
       so per-row weighting cannot replicate a global xyz change.
 
-Convergent negative: per-region xyz weighting is not the right mechanism
-for fixing topology-inverted regions. The ``xyz_weight_per_mouse_parcel``
-infrastructure is kept in the model API as a general tool, but this
-specific application doesn't deliver.
+Per-region xyz weighting therefore does not fix topology-inverted regions.
+The ``xyz_weight_per_mouse_parcel`` infrastructure is kept in the model API
+as a general tool.
 
 Usage:
-    PYTHONPATH=src python experiments/per_region_xyz/01_ablation.py
+    PYTHONPATH=src python experiments/ablations/per_region_xyz.py
 """
 from __future__ import annotations
 
@@ -75,7 +74,7 @@ KEY_PAIRS = [
 def beauchamp_topk(pi_filename: str, save_as: str) -> dict:
     """Run 05f_beauchamp_validation.py on a saved π, save under a unique name,
     return the dict of top-1 per pair. If save_as == 'beauchamp_validation.json'
-    we leave the file in place (canonical output)."""
+    the file is left in place (canonical output)."""
     env = {**os.environ, "PYTHONPATH": str(ROOT / "src")}
     subprocess.run(
         ["python", str(ROOT / "pipeline" / "05f_beauchamp_validation.py"),
@@ -145,7 +144,7 @@ def main():
     print("  - Per-region xyz=0 targeting topology-inversion candidates does NOT")
     print("    reproduce the (modest) global gains on those regions. The xyz effect")
     print("    interacts non-locally via the FGW equilibrium.")
-    print("  - Convergent negative: per-row xyz weighting is not the fix.")
+    print("  - Per-row xyz weighting does not reproduce the global xyz effect.")
 
 
 if __name__ == "__main__":

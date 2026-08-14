@@ -2,13 +2,13 @@
 
 [Whitesell et al. 2021, Neuron](https://www.cell.com/neuron/fulltext/S0896-6273(21)00006-X)
 characterised the mouse default mode network at high resolution using Allen
-Mouse Brain Connectivity (MBC) tract-tracing + rsfMRI, providing the most
-careful published mouse-DMN boundary. Their cross-species comparison maps the
+Mouse Brain Connectivity (MBC) tract-tracing + rsfMRI, providing a published
+mouse-DMN boundary. Their cross-species comparison maps the
 mouse DMN onto human Yeo-7 DMN regions.
 
 This experiment tests whether OTTER's DMN-DMN correspondence (currently 41 %
-row-mass per Pagani Test 1) sharpens when we use Whitesell's more careful
-mouse-DMN parcel definition rather than OTTER's PAIRID-derived 'frontal_dmn'
+row-mass per Pagani Test 1) sharpens under Whitesell's mouse-DMN parcel
+definition rather than OTTER's PAIRID-derived 'frontal_dmn'
 + 'temporal_dmn' networks.
 
 Mouse-DMN regions per Whitesell 2021 (DSURQE labels):
@@ -26,7 +26,7 @@ Test:
   4. Compare DMN row-mass against the baseline (Pagani Test 1, 41 %).
 
 If Whitesell-DMN produces a higher DMN row-mass than OTTER's PAIRID-derived
-DMN, that's evidence the current PAIRID scheme underspecifies the mouse DMN
+DMN, that is evidence the current PAIRID scheme underspecifies the mouse DMN
 (missing PPC, RSC, dorsal hippocampus), and an opportunity for a
 whitesell_dmn anchor pack.
 """
@@ -96,7 +96,7 @@ def main():
     print(f"\n  Whitesell-DMN mouse parcels (union): {n_dmn}/{len(M.var)} "
           f"({100*n_dmn/len(M.var):.1f}%)")
 
-    # Human network assignment (Yeo-7 + Subcortical, audit-corrected)
+    # Human network assignment (Yeo-7 + Subcortical)
     from importlib import import_module
     nc = import_module("01_network_crossvalidation")
     human_net, human_paper_names = nc.assign_human_paper_networks(H.var, separate_aud=True)

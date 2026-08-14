@@ -3,15 +3,15 @@
 
 epsilon was chosen (docs/02_methods) to maximise anchor-CV accuracy: small eps -> near-hard
 matching. That makes coverage a winner-take-all, noisy quantity (L/R reliability 0.22). A warmer
-eps softens the coupling. We refit a clean eps-family (identical config, only eps varies) and, at
-each eps, record:
+eps softens the coupling. An eps-family is refitted (identical config, only eps varies) and, at
+each eps, the following are recorded:
   - sharpness (median top-1 row probability),
-  - coverage L/R reliability (Schaefer k vs k+200) -- the PRE-REGISTERED criterion for picking eps,
+  - coverage L/R reliability (Schaefer k vs k+200), the criterion for picking eps,
   - Spearman(region coverage, Xu2020 mouse->human expansion) + spin p,
   - medial-lateral rho.
 
-We pick eps by MAX reliability, then read the expansion correlation there. eps is fixed by
-reliability, not by the expansion p-value (no eps-shopping for significance).
+eps is picked by maximum reliability and the expansion correlation is read there. eps is fixed
+by reliability rather than by the expansion p-value.
 
 Writes: outputs/logs/section5_epsilon_sweep.json ; couplings cached in /var/tmp.
 """

@@ -5,17 +5,16 @@ map to any human parcel in human_indices, and forbidden everywhere else*.
 This is a strict generalisation of point-anchor supervision (in which each
 mouse parcel is forced to map to a single human parcel).
 
-Why region anchors:
-  - Garin's original anchors are *named anatomical regions*, not single
-    points. Beauchamp 2022 also gives us region-level pairs natively.
-  - Aggregating each region into a single parcel (as the colleague's
-    preprocessing does) loses the within-region structure: every
-    sub-parcel of motor cortex is forced to map to a single human anchor
-    that's the centroid of motor + premotor + FEF + ... ~14mm anterior of
-    canonical M1.
-  - With a region anchor instead, each mouse motor sub-parcel is free to
-    map to any human precentral parcel, letting the FC/SC structure pick
-    the right one within the supervised set.
+Region anchors are used because:
+  - Garin's anchors are named anatomical regions, not single points, and
+    Beauchamp 2022 supplies region-level pairs natively.
+  - Aggregating each region into a single parcel loses the within-region
+    structure: every sub-parcel of motor cortex is forced onto a single
+    human anchor at the centroid of motor + premotor + FEF, ~14mm
+    anterior of canonical M1.
+  - With a region anchor, each mouse motor sub-parcel maps to any human
+    precentral parcel, and the FC/SC structure selects within the
+    supervised set.
 
 Cost-matrix encoding (in cross-species M), conflict-aware across all entries:
     A cell (mp, hp) is *region-supervised* if mp is named by any entry's mouse
@@ -179,12 +178,12 @@ def apply_region_supervision(
 ) -> np.ndarray:
     """Apply region-anchor supervision to a cross-species cost matrix M.
 
-    **Conflict-aware.** A single global compatibility mask is built across all
-    entries before anything is written, so the result is *order-independent*.
-    A mouse parcel appearing in several entries is allowed to map to the
-    *union* of those entries' human sets (and symmetrically for human
-    parcels), earlier work applied entries sequentially, which let a later
-    overlapping entry overwrite an earlier one's allowed (0-cost) cells.
+    A single global compatibility mask is built across all entries before
+    anything is written, so the result is order-independent. A mouse parcel
+    appearing in several entries maps to the union of those entries' human
+    sets, and symmetrically for human parcels. Entries must not be applied
+    sequentially, which would let a later overlapping entry overwrite an
+    earlier one's allowed (0-cost) cells.
 
     Modifies a copy and returns it.
 
@@ -195,11 +194,11 @@ def apply_region_supervision(
     entries : sequence of RegionAnchorEntry
         Region anchors to apply.
     lam : float, default 1.0
-        Legacy scale. Used only when ``lam_outside`` is ``None`` (back-compat
-        with the original hard behaviour).
+        Scale used only when ``lam_outside`` is ``None``, giving the hard
+        0/1 wall behaviour.
     lam_outside : float, default 0.15
-        Cost assigned to a supervised-but-incompatible cell. The *soft* 0.15
-        default gives better-calibrated π distributions (see docs/03_results.md).
+        Cost assigned to a supervised-but-incompatible cell. The default gives
+        better-calibrated π distributions (see docs/03_results.md).
     beta_in : float, default 0.0
         Cost assigned to a compatible (allowed) mouse-human pair.
     protect : (n_m, n_h) bool ndarray, optional
@@ -216,7 +215,7 @@ def apply_region_supervision(
     left untouched.
     """
     if lam_outside is None:
-        lam_outside = lam   # back-compat hard behaviour
+        lam_outside = lam   # hard 0/1 wall behaviour
     M_out = np.array(M, copy=True)
     entries = [e for e in entries if e.mouse_indices and e.human_indices]
     if not entries:

@@ -1,14 +1,15 @@
 # OTTER notebooks
 
 Eight notebooks: two that introduce the coupling, and six that reproduce the project's analyses.
-Each of the six recomputes its results from the data and compares them against the values this
-project reports, rather than reading them from a results file.
+Each of the six recomputes what can be derived in a cell and compares it against the values this
+project reports. Results that need a model re-fit or a third-party package are read from
+`outputs/logs/` after their coupling provenance is checked.
 
 ```
 python scripts/fetch_data.py      # coupling, parcel tables, reference volumes, external maps
 ```
 
-Nothing under `outputs/logs/` is required for the derivations.
+`03_coupling` and `07_coverage` derive every reported value without reading `outputs/logs/`.
 
 ## Introductory notebooks
 
@@ -45,8 +46,8 @@ says nothing about which input was used. `pi_provenance()` returns the file and 
 is the value to verify against.
 
 `verified_log()` declines a log whose coupling does not match. Where a notebook has to read a
-re-fit result it checks the recorded sha first, and says so when a log carries no provenance at
-all.
+re-fit result it checks the recorded sha first, and reports the case of a log that carries no
+provenance.
 
 Several quantities are reported under two definitions, and the two values answer different
 questions:
@@ -66,7 +67,7 @@ logs are provenance-checked before use.
 Without it the scores still recompute from cached distributions, though the distributions
 themselves cannot be rebuilt. The other four need nothing but the fetched data.
 
-## Removed material
+## Material not distributed
 
-Per-dataset exploration notebooks and their executed copies are not distributed. The analyses
-that survived are in `experiments/`. The figure-rendering scripts are not distributed with this repository.
+Per-dataset exploration notebooks and their executed copies are not distributed. The analyses are
+in `experiments/`. The figure-rendering scripts are not distributed with this repository.

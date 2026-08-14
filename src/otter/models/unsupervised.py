@@ -3,9 +3,8 @@
 The simplest possible model: no anchor supervision, no spatial prior, no SC.
 Just Gromov-Wasserstein matching of the two species' FC distance matrices.
 
-This is the historical baseline (≈ 14% top-1 with anchors as the eval set,
-matching the pre-supervised "Garin only" experiment). Provided here so users
-can see what the relational signal alone gives, before any supervision.
+The baseline model, ≈ 14% top-1 with anchors as the eval set. It measures
+what the relational signal alone gives, before any supervision.
 
 Optional multistart (use_multistart=True) reduces local-minima sensitivity.
 """

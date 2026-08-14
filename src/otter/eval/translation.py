@@ -9,10 +9,9 @@ Mathematically:
 where q[j] = Σ_i π[i,j] is the human-side marginal. The metric is the Pearson
 correlation between Fh_pred[upper-tri] and the actual Fh[upper-tri].
 
-Why this matters: every other metric we have (anchor recovery, hemisphere
-preservation, spot-check) uses the 42 anchors in some form. This one uses the
-*entire* π and a held-out signal (the human FC matrix), the closest thing to
-"downstream task" validation.
+The other metrics (anchor recovery, hemisphere preservation, spot-check) use
+the 42 anchors in some form. This one uses the entire π and a held-out signal,
+the human FC matrix.
 
 Public API:
     predict_human_fc(pi, fc_mouse)         -> (n_h, n_h) prediction

@@ -13,14 +13,13 @@ The mouse table ships labels in two distinct atlas vocabularies:
     DSURQE_tree.json shipped at
     data_external/MouseHumanTranscriptomicSimilarity/AMBA/data/DSURQE_tree.json
 
-The two atlases use disjoint vocabularies and disjoint ID spaces. We keep
-the resolvers separate so a caller cannot accidentally look up a DSURQE
-label in the Allen space (or vice-versa); each helper enumerates only its
-own atlas.
+The two atlases use disjoint vocabularies and disjoint ID spaces. The
+resolvers are kept separate so a DSURQE label cannot be looked up in the Allen
+space, or the reverse; each helper enumerates only its own atlas.
 
 Both helpers are tolerant of:
   - exact case-sensitive match (the canonical form)
-  - all-commas-stripped match (Paul's MATLAB output drops commas inconsistently)
+  - all-commas-stripped match (the upstream table drops commas inconsistently)
   - whitespace-trimmed match
   - case-insensitive match (last resort)
 
@@ -102,7 +101,7 @@ def aba_label_to_allen_id(name: str | None) -> int | None:
     """Resolve an Allen Brain Atlas full NAME string to a Structure ID.
 
     Returns None for None/empty input or if the name doesn't resolve. The
-    lookup is tolerant of Paul's comma-stripping (full names like
+    lookup is tolerant of comma-stripping (full names like
     ``"Anterior cingulate area, ventral part, layer 5"`` may arrive as
     ``"Anterior cingulate area ventral part layer 5"``) and to letter case.
     """
@@ -180,8 +179,8 @@ def dsurqe_label_to_id(name: str | None) -> list[int] | None:
     per named region). Returns None on None/empty input or if the name
     doesn't resolve.
 
-    Tolerant of comma-stripping (Paul's strings sometimes drop commas) and
-    letter case.
+    Tolerant of comma-stripping (the upstream strings sometimes drop commas)
+    and letter case.
     """
     if name is None:
         return None

@@ -1,22 +1,20 @@
 #!/usr/bin/env python
-"""19_region_hyperparam.py
-
-Question (Section-1 framing): is a SINGLE optimal transport coupling optimal
-for translating EVERY brain region, or do different regions want different
-hyperparameters?  We sweep two knobs of the anchor-free MultimodalFGW coupling:
+"""Is a SINGLE optimal transport coupling optimal for translating EVERY brain
+region, or do different regions want different hyperparameters?  Two knobs of
+the anchor-free MultimodalFGW coupling are swept:
 
     - entropic temperature  epsilon  in {0.005, 0.02, 0.05, 0.1, 0.2}
     - spatial weight        xyz_weight in {0.0, 0.25, 0.5, 1.0}   (at eps=5e-3)
 
 and score every coupling against the EXTERNAL Beauchamp mouse->human benchmark
-(19 scorable homologous region pairs).  Anchors are deliberately OFF
+(19 scorable homologous region pairs).  Anchors are OFF
 (region_anchors=[]) because supervised anchors are pinned (mass=1.0) at every
 epsilon and cannot discriminate settings.
 
-For each Beauchamp pair we record top1 / mean_mass_in_region at every setting,
-find the per-pair-best epsilon and xyz_weight, and quantify how much regions
-disagree.  We also compute an ORACLE upper bound (each region uses its own best
-epsilon) vs the single global-best epsilon.
+For each Beauchamp pair, top1 / mean_mass_in_region are recorded at every setting,
+the per-pair-best epsilon and xyz_weight are found, and the disagreement between
+regions is quantified.  An ORACLE upper bound (each region uses its own best
+epsilon) is also computed against the single global-best epsilon.
 
 Writes: outputs/logs/section5_region_hyperparam.json
 """
@@ -155,7 +153,7 @@ def main():
             'xyz_family_fixed_eps': BASE_EPS_FOR_XYZ,
             'region_anchors': [], 'n_pairs': len(pairs),
             'production_agg_top1': prod_agg_top1,
-            'note': 'anchor-free couplings; production shown only as scorer sanity ref',
+            'note': 'anchor-free couplings; production shown as a scorer reference',
             'runtime_s': None,
         },
         'epsilon': {

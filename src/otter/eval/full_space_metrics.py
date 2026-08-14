@@ -7,11 +7,10 @@ the correct one first?". This module answers a strictly harder question:
 "among ALL n_h human nodes (anchors + ~2000 grid nodes), where did the model
 send the held-out mouse anchor?".
 
-Both versions are valid and answer different questions. The restricted version
-is what we report as "anchor-candidate ranking accuracy" (~81% on production);
-the full-space version typically lands at 0–5% top-1 because the model
-naturally lands on a grid node *near* the correct anchor rather than the
-anchor itself.
+The two versions answer different questions. The restricted version is
+reported as anchor-candidate ranking accuracy (~81% on production); the
+full-space version lands at 0-5% top-1, because the model places mass on a
+grid node near the correct anchor rather than on the anchor itself.
 
 Public:
     full_space_metrics(pi, idx_m, idx_h, held_out_pair_ids, *, var_h=None,
@@ -142,8 +141,8 @@ def full_space_metrics_per_anchor(
     var_m=None,
     var_h=None,
 ):
-    """Per-held-anchor breakdown, useful for spotting which anchors fail
-    catastrophically vs which are merely off by a neighbouring node.
+    """Per-held-anchor breakdown, separating anchors that fail outright from
+    those off by a neighbouring node.
 
     Returns a pandas DataFrame, one row per held-out mouse anchor.
     """

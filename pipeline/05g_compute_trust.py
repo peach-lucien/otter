@@ -7,8 +7,8 @@ Two independent trust signals, both saved as outputs/coupling/trust_score_<confi
    nearest anchor → composite score in [0, 1] + tier {high, medium, low}.
 
 2. **Regional-empirical trust** (discrete by validation region):
-   per Beauchamp 2022 region, what is the actual top-1 accuracy of the
-   model in this region? Each parcel gets the accuracy of its region. Tier
+   per Beauchamp 2022 region, the top-1 accuracy of the model in that
+   region. Each parcel gets the accuracy of its region. Tier
    is set by absolute thresholds (high ≥ 15%, low < 3%, else medium,
    `unknown` if not in any validated region).
 

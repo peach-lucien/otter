@@ -1,14 +1,14 @@
 """Test 2b. Subtype CONTRAST translation through π.
 
-Test 2 (script 04) had a confound: per-subtype absolute intensity per network is
-dominated by network-size (large human networks like Subcortical collect most of
-the predicted mass under almost any translation). The permuted-π null was non-zero
-which means our test had no power to distinguish OTTER-specific signal from generic
-column-sum effects.
+In script 04 the per-subtype absolute intensity per network is dominated by
+network size, since large human networks such as Subcortical collect most of the
+predicted mass under almost any translation. The permuted-π null there is non-zero,
+so that test has no power to separate OTTER-specific signal from generic column-sum
+effects.
 
-The cleaner test: use the **subtype contrast** Δ = hyper − hypo. Network-size
-appears equally in both subtypes and cancels out. The remaining signal is *pattern*:
-which networks are differentially perturbed between hyper and hypo subtypes?
+This script uses the subtype contrast Δ = hyper − hypo instead. Network size appears
+equally in both subtypes and cancels. The remaining signal is which networks are
+differentially perturbed between the hyper and hypo subtypes.
 
 Procedure:
   1. mouse_delta[net] = mouse_intensity_hyper[net] − mouse_intensity_hypo[net]

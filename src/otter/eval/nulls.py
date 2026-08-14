@@ -1,11 +1,11 @@
 """Null distributions for held-out anchor CV.
 
-Two principled nulls:
+Two nulls:
   - random_pi_null, sample uniform random π satisfying mouse marginal
   - permuted_anchor_null, shuffle anchor pair_ids before solving FGW
 
 These give the reference distributions for z-scores on the real top-1.
-Headline numbers from the comparison table:
+Values from the comparison table:
     real top-1 81% vs random_pi 28%±7% (z=+7.5)
     real top-1 81% vs permuted_anchor 31%±3% (z=+17.8)
 """
@@ -64,7 +64,7 @@ def permuted_anchor_null(
     pairings drive the result vs "having anchor supervision in general".
 
     `solve_fn(visible_pair_ids, idx_m_perm, idx_h_perm) -> pi` is supplied by
-    the caller (lets you wire in any model/config you want).
+    the caller, so any model or configuration can be substituted.
     """
     idx_m = get_anchor_index(mouse_ad.var)
     idx_h = get_anchor_index(human_ad.var)
@@ -215,27 +215,25 @@ def translation_spin_null(
     n_trials: int = 1000,
     seed: int = 0,
 ) -> dict:
-    """The *fair* null for a cross-species TRANSLATION claim.
+    """Null for a cross-species translation claim.
 
-    Three nulls are possible when asking "does routing ``mouse_map`` through π
+    Three nulls are available when asking "does routing ``mouse_map`` through π
     predict ``observed_human_map``?", and they test different hypotheses:
 
-      C. **Fully shuffle the mouse input** (replace it with spatial noise) →
-         tests only "does a smooth map beat noise?". Too lenient: any smooth
-         brain map clears it, because routed noise predicts nothing. This is the
-         original permuted-input/permuted-π behaviour and it INFLATES significance.
-      A. **Spin the observed human map** (`spin_null`) → tests "do two smooth maps
-         align beyond spatial autocorrelation?". Spatially fair but ignores π's
-         structure in the null.
-      B. **Spin the mouse input and route it through the REAL π** (this function)
-         → tests "is it *this specific* mouse spatial pattern, not a rotated one,
-         that, through OTTER's actual coupling, predicts the human map?". This
-         keeps both the spatial autocorrelation AND π, breaking only the specific
-         mouse→human correspondence. It is the appropriate null for a translation
-         claim.
+      C. Fully shuffle the mouse input (replace it with spatial noise) → tests
+         whether a smooth map beats noise. Any smooth brain map clears it,
+         because routed noise predicts nothing, so it overstates significance.
+      A. Spin the observed human map (`spin_null`) → tests whether two smooth
+         maps align beyond spatial autocorrelation. It controls spatial
+         autocorrelation but ignores π's structure in the null.
+      B. Spin the mouse input and route it through the real π (this function)
+         → tests whether this specific mouse spatial pattern, rather than a
+         rotated one, predicts the human map through the coupling. It retains
+         both the spatial autocorrelation and π, breaking only the
+         mouse→human correspondence.
 
-    Empirically A and B agree closely (both control spatial autocorrelation),
-    while C is far more lenient. Report B (and/or A); do NOT rely on C.
+    A and B agree closely, both controlling spatial autocorrelation, while C is
+    more lenient. B and A are the nulls reported.
 
     Returns observed |r|, the spin-B p-value, and the null summary.
     """

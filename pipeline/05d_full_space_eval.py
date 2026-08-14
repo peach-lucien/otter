@@ -6,8 +6,8 @@ script reports the SAME folds but using the full ``n_h`` human node space
 (typically 0–5% top-1 because the model lands on a non-anchor grid node near
 the correct anchor rather than the anchor itself).
 
-Both numbers matter and answer different questions; this script is the
-"per-voxel mapping" metric your colleague asked for.
+Both numbers answer different questions. This script reports the per-voxel
+mapping metric.
 
 Resumable: outputs/logs/full_space_eval.json caches per-(config, network).
 

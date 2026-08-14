@@ -114,7 +114,7 @@ HUMAN_REGION_MNI = {
 
 # Estimated translation from our mouse coords to DSURQE world coords.
 # Estimated from 6 anchor pairs (left/right Visual, Motor, Auditory) whose
-# DSURQE leaf IDs are unambiguous. See script audit notes.
+# DSURQE leaf IDs are unambiguous.
 DSURQE_OFFSET_MM = np.array([-0.027, -2.334, +1.018])
 
 

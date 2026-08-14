@@ -1,24 +1,24 @@
 #!/usr/bin/env python3
-"""Clinical-network reverse translation — which human therapeutic *networks* can a mouse model?
+"""Clinical-network reverse translation: which human therapeutic networks a mouse can model.
 
-This is the robust version of the clinical showcase. Instead of point seeds (which missed
-small subcortical/ventromedial targets on the coarse human parcellation), it routes the
-published, whole-brain DBS/TMS OPTIMAL CONNECTIVITY NETWORK maps -- distributed maps derived
-from a ~1,000-subject normative connectome, the same kind of distributed input that made the
-functional reverse-translation work (12/12 spin-significant).
+Instead of point seeds, which missed small subcortical/ventromedial targets on the coarse
+human parcellation, this routes the published whole-brain DBS/TMS optimal-connectivity
+network maps, distributed maps derived from a ~1,000-subject normative connectome. That is
+the same kind of distributed input used in the functional reverse-translation (12/12
+spin-significant).
 
 For each therapeutic network it reports where it lands in mouse and how confidently, and
 flags "no adequate mouse target" when a human network does not route to any specific mouse
-structure -- the actionable output for experiment design.
+structure.
 
 HUMAN NETWORK MAPS (put MNI152 volumes in clinical_maps/, named <stem>.nii.gz)
   depression_tms.nii.gz   convergent depression TMS circuit  Siddiqi 2021 NHB (n=713)
   tms_anxdys.nii.gz       dysphoric/anxiosomatic TMS atlas   Siddiqi 2020 AJP  (n=111)
   ptsd_circuit.nii.gz     PTSD circuit                       Siddiqi 2024 NatNeuro (n=193)
   ms_depression.nii.gz    MS-depression circuit              Siddiqi 2023 NMH  (n=281)
-These are directly downloadable from NeuroVault collection 13075 -- see
+These are directly downloadable from NeuroVault collection 13075; see
 clinical_maps/DATA_SOURCES.md for the exact per-file URLs and a curl block.
-Any MNI152 volume works; the script resamples it, so you can add DBS voxel maps too.
+Any MNI152 volume works, since the script resamples it, so DBS voxel maps can be added.
 
 Run: cd otter && PYTHONPATH=src python experiments/reverse_translation/03_clinical_networks.py
 Read-only; writes outputs/logs/reverse_translation_clinical_networks.json
@@ -40,14 +40,14 @@ MAPDIR = ROOT / "experiments/reverse_translation/clinical_maps"
 N_SPINS = 1000
 MIN_PARCELS = 5
 
-# stem -> (class, note). expected structures are deliberately NOT hard-coded: the point is to
-# read out WHERE it lands and HOW confidently, not to grade against a preset answer.
+# stem -> (class, note). Expected structures are not hard-coded; the script reads out where
+# each map lands and how confidently rather than grading against a preset answer.
 NETWORKS = {
     "depression_tms": ("cortico-limbic", "convergent depression TMS circuit (Siddiqi 2021 NHB)"),
     "tms_anxdys":     ("cortico-limbic", "dysphoric/anxiosomatic TMS atlas (Siddiqi 2020 AJP)"),
     "ptsd_circuit":   ("cortico-limbic", "PTSD circuit (Siddiqi 2024 Nat Neurosci)"),
     "ms_depression":  ("cortico-limbic", "MS-depression circuit (Siddiqi 2023 NMH)"),
-    # add DBS voxel maps here if you convert Lead-DBS fiber targets to MNI volumes:
+    # add DBS voxel maps here once Lead-DBS fiber targets are converted to MNI volumes:
     # "ocd_dbs": ("conserved-subcortical", "OCD DBS optimal network (Li/Baldermann)"),
 }
 
@@ -82,7 +82,7 @@ def main():
         top = ranked[0]
         null = np.array([float(np.nanmean((rown @ v_h[perm])[acr == top])) for perm in spins])
         spin_p = float((np.sum(null >= sc[top]) + 1) / (N_SPINS + 1))
-        # honest, simple verdict: does it route to a specific mouse structure at all?
+        # verdict: whether it routes to a specific mouse structure at all
         verdict = "MOUSE HOMOLOG (routes specifically)" if spin_p < 0.05 else \
                   "NO ADEQUATE MOUSE TARGET (does not route specifically)"
         rows.append({"network": stem, "klass": klass, "note": note,

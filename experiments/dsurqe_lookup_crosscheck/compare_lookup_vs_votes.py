@@ -8,12 +8,11 @@ placed into the Beauchamp DSURQE label volume and the majority label in a
 
 The mouse parcel table also ships a **precomputed vote** per parcel
 (``region_vote_ss_dsq``, the majority DSURQE label over the parcel's full
-voxel set, computed upstream). This script quantifies how the two compare,
-so the choice of default is grounded in numbers rather than intuition.
+voxel set, computed upstream). This script quantifies how the two compare.
 
-It is a maintainer diagnostic, intentionally **not** part of the user-facing
-notebooks. Self-contained: needs only numpy / h5py / nibabel + stdlib (no
-pandas / anndata / POT), so it runs without the full solver stack.
+It is a maintainer diagnostic and is not part of the user-facing notebooks. It
+needs only numpy / h5py / nibabel and the standard library (no pandas / anndata
+/ POT), so it runs without the full solver stack.
 
 What it reports
 ---------------

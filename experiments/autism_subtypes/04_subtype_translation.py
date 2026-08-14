@@ -17,10 +17,10 @@ This test replaces the name-based bridge with OTTER's quantitative π:
   4. Aggregate predicted per-parcel values to 8 human networks via Schaefer-Yeo7.
   5. Compare to the observed human 8-network intensity vector from Fig 4e
      using Pearson correlation.
-  6. **Subtype-specificity check**: corr(pred_hypo, obs_hypo) should exceed
-     corr(pred_hypo, obs_hyper), if π is informative, the mouse hypo
-     spatial pattern should predict the *human hypo* pattern better than
-     the *human hyper* pattern.
+  6. Subtype-specificity check. corr(pred_hypo, obs_hypo) should exceed
+     corr(pred_hypo, obs_hyper). If π is informative, the mouse hypo
+     spatial pattern predicts the human hypo pattern better than the
+     human hyper pattern.
 
 Tests one of Pagani's actual claims (subtype spatial patterns recur in
 matching locations), not their scaffolding.
@@ -93,7 +93,7 @@ OTTER_MOUSENET_TO_PAGANI_MOUSE: dict[str, str] = {
     "Subcortical":   "Thalamus",          # OTTER subcortical (pids 13/14/15/18/19) → split below
     "Frontoparietal": None,               # not in Pagani 9-net, drop
     "Brainstem":     None,                # not in Pagani 9-net, drop
-    "Limbic":        None,                # never populated in our scheme (legacy slot)
+    "Limbic":        None,                # not populated in this scheme
     "Control":       None,
     "DorsAtten":     None,
 }
@@ -221,8 +221,8 @@ def main():
     som_idx = human_net_names.index("SomatoMotor")
     human_paper_net_merged = human_paper_net.copy()
     human_paper_net_merged[human_paper_net == aud_idx] = som_idx
-    # We don't shrink the name list because aggregate_human_parcels_to_networks
-    # just looks up by name.
+    # The name list is not shrunk because aggregate_human_parcels_to_networks
+    # looks up by name.
 
     data = load_pagani_subtype_matrices()
 
@@ -311,7 +311,7 @@ def main():
     for trial in range(n_trials):
         perm = rng.permutation(pi.shape[0])
         pi_n = pi[perm]
-        # Mouse intensity → parcels via SAME mouse_paper_net (we shuffle π, not mouse labels)
+        # Mouse intensity → parcels via SAME mouse_paper_net (π is shuffled, not the mouse labels)
         mouse_pv_h = mouse_intensity_to_parcel_values(
             mouse_paper_net, mouse_net_names,
             results["hypo"]["mouse_intensity"])

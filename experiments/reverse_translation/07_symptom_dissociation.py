@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
-"""Beat 3 gate: do the two depression TMS circuits reverse-translate to DIFFERENT mouse
-substrates?  Preregistered, a priori:
+"""Whether the two depression TMS circuits reverse-translate to different mouse
+substrates. Preregistered, a priori:
   * dysphoric circuit (negative side of the Siddiqi anxdys atlas)  -> mouse medial prefrontal
     (PL, ILA, ACAd, ACAv, ORBm, FRP)      [human dysphoria <-> subgenual/medial PFC]
   * anxiosomatic circuit (positive side)                          -> mouse amygdala + insula
     (BLA, BMA, CEA, LA, AId, AIv, AIp)    [human somatic anxiety <-> amygdala/insula]
 
-It is NOT enough that each circuit is individually spin-significant; the claim is a DISSOCIATION.
+Each circuit being individually spin-significant is not sufficient; the claim is a dissociation.
 Test statistic: prefrontal-minus-amygdala "bias" of each routed circuit, and the between-circuit
-contrast  C = bias(dysphoric) - bias(anxiosomatic)  (expected > 0). Significance from a spatial
-spin null that rotates the human map, re-splits by sign, re-routes and re-computes C -- so the
-null preserves each circuit's spatial smoothness and the sign split.
+contrast  C = bias(dysphoric) - bias(anxiosomatic)  (expected > 0). Significance comes from a
+spatial spin null that rotates the human map, re-splits by sign, re-routes and re-computes C,
+so the null preserves each circuit's spatial smoothness and the sign split.
 
 Needs clinical_maps/tms_anxdys.nii.gz. Run:
   cd otter && PYTHONPATH=src python experiments/reverse_translation/07_symptom_dissociation.py

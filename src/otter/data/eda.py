@@ -1,8 +1,7 @@
-"""Exploratory analysis helpers, streaming-friendly so they fit on the sandbox.
+"""Exploratory analysis helpers, streaming-friendly.
 
-Lightweight functions used by the EDA notebook + FC-translation evaluation. The
-main job is to compute things over the per-subject FC tensor *without* ever
-materialising it in memory.
+Functions used by the EDA notebook and FC-translation evaluation. They compute
+over the per-subject FC tensor without materialising it in memory.
 """
 from __future__ import annotations
 

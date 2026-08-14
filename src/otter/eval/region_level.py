@@ -1,11 +1,12 @@
 """Region-level evaluation of the cross-species coupling π.
 
-Parcel-level top-K asks "is the right *human parcel* in the top-K of π[m, :]?".
-That's the right question for a downstream user who wants a specific parcel
-prediction, but it's harsh for a soft probabilistic mapping where the model
-spreads mass across a *region* of human parcels rather than nailing one cell.
+Parcel-level top-K asks whether the correct human parcel is in the top-K of
+π[m, :]. That question suits a user who wants a specific parcel prediction,
+but it is strict for a soft probabilistic mapping in which the model spreads
+mass across a region of human parcels rather than concentrating it on one
+cell.
 
-Region-level top-K asks the natural region-level question:
+Region-level top-K asks instead:
 
     Given a mouse region M (set of parcels), which *human region* does the
     model predict, out of a candidate set of named human regions?
@@ -17,8 +18,8 @@ For mouse region ``M`` with parcel indices ``M_idx`` (size ``k``):
   pi_M     = sum_{m in M_idx} π[m, :]    # (n_h,)  total mass mapped from M
   pi_M    /= pi_M.sum()                  # normalize → distribution over human
 
-(Sum and mean agree up to a constant; we sum for interpretability and
-normalize at the end so the result is a probability distribution.)
+(Sum and mean agree up to a constant; the sum is normalized at the end so the
+result is a probability distribution.)
 
 Scoring
 -------
@@ -43,11 +44,10 @@ Nulls
 Notes
 -----
 - Candidate regions may overlap (e.g. hippocampal subfields). The fold and
-  top-K metrics are well-defined under overlap; they're just not strictly
-  independent across candidate columns. The tests guard against the obvious
-  pathologies.
-- The candidate set defines chance level. With Beauchamp-22 it's roughly
-  1/22 = 4.5%; with JuBrain-184 it's much harder (and we report both).
+  top-K metrics are well-defined under overlap, though not independent across
+  candidate columns.
+- The candidate set defines chance level. With Beauchamp-22 it is roughly
+  1/22 = 4.5%; with JuBrain-184 it is lower. Both are reported.
 """
 from __future__ import annotations
 
@@ -124,8 +124,8 @@ def rank_candidate_regions(
     if true_region not in scores:
         raise KeyError(f"true_region {true_region!r} not in candidate set")
     s_true = scores[true_region]
-    # "<" not "<=", ties favour the true region (conservative against false hits;
-    # if two regions tie, we still consider the truth to be at the better rank)
+    # "<" not "<=", so ties favour the true region: two tied regions place the
+    # truth at the better rank.
     n_strictly_better = sum(1 for n, s in scores.items() if n != true_region and s > s_true)
     return n_strictly_better + 1
 
@@ -168,14 +168,14 @@ def region_topk(
     - ``top_k_hits[k]``: rank-only hit (``rank(H_true) <= k``).
     - ``qualified_top_k_hits[k]``: requires *both* ``rank <= k`` *and*
       ``fold_enrichment >= fold_threshold``. This filters out "vacant"
-      wins where the model put near-zero mass on every candidate and the
-      true region happens to win the noise.
+      wins in which the model put near-zero mass on every candidate and the
+      true region leads only on noise.
 
     Also reports ``total_mass_in_candidates``: how much of the model's
     aggregated π over the mouse region lands inside *any* candidate
     region. If this is small (say < 0.2), the candidate set is too sparse
-    for region-level evaluation to be reliable, the model is putting
-    mass on parcels outside the candidate vocabulary.
+    for region-level evaluation, because the model is putting mass on
+    parcels outside the candidate vocabulary.
     """
     pi_M = aggregate_pi_over_mouse_region(pi, mouse_mask)
     scores = score_candidate_human_regions(pi_M, candidate_masks)
@@ -225,11 +225,11 @@ def evaluate_region_level(
     mouse_masks : {mouse_name: (n_m,) bool ndarray}
     candidate_masks : {candidate_human_name: (n_h,) bool ndarray}
         Must include every ``human_name`` in ``pairs`` plus any other
-        candidates we want to rank against. Larger candidate sets make the
-        task harder (chance top-1 ≈ 1/|candidate set|).
+        candidates to rank against. Larger candidate sets make the task
+        harder (chance top-1 ≈ 1/|candidate set|).
     k_list : K values to report (top-1, top-3, top-5, ...).
     anchor_overlap : optional {mouse_name: bool}, whether this pair overlaps
-        with our anchor supervision (for the anchor-vs-novel breakdown).
+        with the anchor supervision (for the anchor-vs-novel breakdown).
 
     Returns
     -------
@@ -388,8 +388,8 @@ def column_permuted_null(
     top-K hit rate and fold enrichment.
 
     This null preserves total mass but destroys *where* mass falls, so it
-    tells you the chance of the model's mass-magnitude landing in a region
-    of that size by accident.
+    gives the chance of the model's mass-magnitude landing in a region of
+    that size at random.
     """
     rng = rng or np.random.default_rng(0)
     n_h = pi.shape[1]
@@ -452,8 +452,8 @@ def source_permuted_null(
     For each trial, shuffle the (mouse_name -> human_name) mapping. Tests
     whether the mass-on-H_true is specific to the matching M_true, vs being
     a generic model bias toward H_true that any mouse region would also
-    produce. The stronger of the two nulls, it requires the model to be
-    *selective*, not just non-uniform.
+    produce. It is the stronger of the two nulls, requiring the model to be
+    selective rather than merely non-uniform.
     """
     rng = rng or np.random.default_rng(0)
 

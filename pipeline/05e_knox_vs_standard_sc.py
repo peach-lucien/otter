@@ -4,11 +4,10 @@ Tests whether replacing the Allen summary-structure SC fingerprints for the
 22 cortical Garin anchors with Knox 2019 leaf-level SC fingerprints improves
 held-out anchor recovery in MultimodalFGW.
 
-The original Knox comparison was run with an unnormalized Cm_SC_knox (range
-[0, 1.32]) which silently over-weighted SC by ~30% relative to the Allen SC
-(range [0, 1]). This script regenerates the comparison using the properly
-normalized cost matrices so the only thing that changes between configs is the
-SC content, not its scale.
+Cm_SC_knox and the Allen Cm_SC must be on the same scale. An unnormalized
+Cm_SC_knox (range [0, 1.32]) over-weights SC by ~30% relative to the Allen SC
+(range [0, 1]). The comparison uses the normalized cost matrices, so the only
+thing that changes between configs is the SC content, not its scale.
 
 Output: outputs/logs/knox_vs_standard_sc.json (per-network, both configs).
 """

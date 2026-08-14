@@ -15,8 +15,8 @@ This script:
      reference, after rescaling.
   3. Reports a confidence score for "in standard space, just downsampled".
 
-If the report is YES for both: the downstream 01-04 scripts can be patched to do
-simple resampling (no full registration). If NO, you'll need ANTs.
+If the report is YES for both, the downstream 01-04 scripts can use simple
+resampling rather than full registration. If NO, ANTs is required.
 
 Output: data_external/_diagnostics/alignment_verification.json
 """

@@ -1,4 +1,4 @@
-"""The homology boundary is CONNECTIONAL, not MOLECULAR — with proper spin nulls.
+"""The homology boundary is CONNECTIONAL, not MOLECULAR, tested with spin nulls.
 
 `make_boundary_connectional.py` shows the descriptive picture: OTTER coverage (a
 connectivity + anchor quantity) has a large association-cortex deficit, while an

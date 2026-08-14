@@ -1,8 +1,8 @@
 """Functional network labels and assignment over the 21 Garin anchor pair_ids.
 
-Hand-defined coarse network groupings, motivated by the standard human-brain
-functional network atlases (Yeo 7 / 17, Glasser 360) and mouse-rat homologue
-work (Stafford 2014 mouse DMN, Grandjean atlases).
+Coarse network groupings, defined from the human-brain functional network
+atlases (Yeo 7 / 17, Glasser 360) and mouse-rat homologue work (Stafford 2014
+mouse DMN, Grandjean atlases).
 
 Public API:
     NETWORKS, sorted list of unique network names
@@ -19,8 +19,8 @@ import numpy as np
 from otter.data.anchors import AnchorIndex
 
 
-# Hand-curated mapping from anchor pair_id (1..21) → coarse functional network.
-# Intentionally coarse, the labels are a *prior*, not a relabel of anchor identity.
+# Curated mapping from anchor pair_id (1..21) → coarse functional network.
+# The labels are a prior, not a relabelling of anchor identity.
 PAIRID_TO_NETWORK: dict[int, str] = {
     1:  "frontal_dmn",      # Medial PFC
     2:  "sensorimotor",     # Motor & premotor

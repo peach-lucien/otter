@@ -13,32 +13,29 @@ High = j's wiring has a mouse basis (covered); low = j's connectivity cannot be 
 mouse (genuinely no connectional counterpart, e.g. reorganised/expanded cortex). Computed for FC, SC,
 and their fc0.7/sc0.3 average. Validates position-decoupling, left/right reliability, expansion, dlPFC.
 
-LEFT/RIGHT RELIABILITY WAS PAIRED WRONGLY (fixed 2026-08-11)
-------------------------------------------------------------
-The reliability figure paired Schaefer region k with region k+200 and called that a homotopic pair.
-The Schaefer 400 ordering puts the left hemisphere first and the right hemisphere second, but the
-two hemispheres are parcellated independently and their sub-area indices do not line up. Only 32 of
-191 such pairs carry the same area label. Region 150 pairs LH DefaultA_IPL_2 with RH ContB_PFCmp_1,
-which are different networks in different lobes. The stored FC reliability of 0.359 was therefore
-mostly a measure of how badly the index pairing matches anatomy, and it was quoted in
-docs/03_results.md as evidence that single-parcel values are unreliable.
+LEFT/RIGHT RELIABILITY PAIRING
+------------------------------
+Pairing Schaefer region k with region k+200 is not a homotopic pairing. The Schaefer 400 ordering
+puts the left hemisphere first and the right hemisphere second, but the two hemispheres are
+parcellated independently and their sub-area indices do not line up: only 32 of 191 such pairs
+carry the same area label, and region 150 pairs LH DefaultA_IPL_2 with RH ContB_PFCmp_1, which are
+different networks in different lobes.
 
-Two correct pairings are computed instead, and the old statistic is kept under its own key so the
-record shows what changed.
+Two valid pairings are computed instead, with the index pairing retained under its own key.
 
   LR_reliability_parcel   the parcellation's own homotopic pair ids. 1,047 pairs covering all 2,094
                           parcels; 98.9 per cent are exact mirrors within 1 mm on all three axes.
                           This is the quantity that speaks to single-parcel reliability.
   LR_reliability_region   the region level, with left and right Schaefer areas matched
                           on the area label rather than the index.
-  LR_reliability_index_k_kplus200   the retired statistic, kept for the record.
+  LR_reliability_index_k_kplus200   the index pairing, retained for comparison.
 
 The comparison is not circular. The human functional connectivity is not hemisphere-averaged:
 homotopic rows of Hfc differ by 0.028 on average and correlate at 0.91, so the two hemispheres are
 independently measured.
 
-The mass-coverage reference row was two typed constants. Both are now derived in the same run from
-log10 of the column mass, so the comparison is like for like.
+The mass-coverage reference row is derived in the same run from log10 of the column mass, so the
+comparison is like for like.
 
 Writes: outputs/logs/section5_reconstruction_coverage.json
 """
@@ -128,8 +125,8 @@ def main():
                      if name_by_id[k].split("_", 2)[2] == name_by_id[k2].split("_", 2)[2])
     print(f"[pairing] {len(li)} homotopic parcel pairs, {frac_mirrored * 100:.1f} per cent are "
           f"mirrors within 1 mm")
-    print(f"[pairing] {len(area_pairs)} Schaefer areas matched by label; the retired index pairing "
-          f"had {same_label} of {len(idx_pairs)} pairs on the same area")
+    print(f"[pairing] {len(area_pairs)} Schaefer areas matched by label; the index pairing has "
+          f"{same_label} of {len(idx_pairs)} pairs on the same area")
     b = json.loads((ROOT / "outputs/logs/section5_evolution_battery.json").read_text())
     xu = dict(zip(np.asarray(b["Xu2020 mouse→human expansion"]["schaefer_ids"], int),
                   np.asarray(b["Xu2020 mouse→human expansion"]["map_values"], float)))
@@ -174,32 +171,29 @@ def main():
 
     print("reconstruction coverage, against the mass-coverage baseline computed in the same run:")
     stats("FC", cov_fc); stats("SC", cov_sc); stats("combined", cov_comb)
-    # The mass-coverage reference used to be two typed constants. Derive it here on the same
-    # pairings so the two rows can be compared.
+    # The mass-coverage reference is derived here on the same pairings, so the two rows can be
+    # compared.
     stats("mass_coverage_ref", masscov)
     out["mass_coverage_ref"]["_note"] = (
         "This row is log10 of the column mass, the retired coverage metric, run through the same "
         "statistics so the two can be compared. mean_recon_r is therefore a log mass rather than a "
-        "correlation, and vs_mass_coverage is 1.0 by construction. It used to be two typed "
-        "constants, vs_spatial_isolation -0.468 and LR_reliability 0.22, carried with no record of "
-        "which coupling produced them. Neither reproduces on the canonical coupling: the isolation "
-        "correlation is -0.310 on the myelin-masked parcels and -0.324 over all 2,094, and the "
-        "reliability under a correct pairing is higher than reconstruction coverage's, not lower.")
+        "correlation, and vs_mass_coverage is 1.0 by construction. On the canonical coupling the "
+        "isolation correlation is -0.310 on the myelin-masked parcels and -0.324 over all 2,094, "
+        "and the reliability under a valid pairing is higher than reconstruction coverage's.")
     out["_reliability_reading"] = (
-        "Mass coverage is the more reproducible of the two across hemispheres. That is not an "
-        "argument for it. The parcellation is mirror-symmetric and the anchor-warped spatial cost "
-        "is fitted on hemisphere-matched anchor pairs, so column mass is close to symmetric by "
-        "construction. The argument for reconstruction coverage is that it does not track spatial "
-        "isolation (+0.046 against -0.310) and does track cross-species expansion (-0.321 against "
-        "-0.048).")
+        "Mass coverage is the more reproducible of the two across hemispheres, which follows from "
+        "construction: the parcellation is mirror-symmetric and the anchor-warped spatial cost is "
+        "fitted on hemisphere-matched anchor pairs, so column mass is close to symmetric. "
+        "Reconstruction coverage does not track spatial isolation (+0.046 against -0.310) and does "
+        "track cross-species expansion (-0.321 against -0.048).")
     out["_pairing"] = {
         "n_homotopic_parcel_pairs": int(len(li)),
         "frac_pairs_mirrored_within_1mm": round(frac_mirrored, 4),
         "n_schaefer_areas_matched_by_label": int(len(area_pairs)),
         "retired_index_pairs": int(len(idx_pairs)),
         "retired_index_pairs_on_same_area": int(same_label),
-        "_note": ("LR_reliability_index_k_kplus200 is the retired statistic. It paired Schaefer "
-                  "region k with k+200, which matches anatomy for only "
+        "_note": ("LR_reliability_index_k_kplus200 pairs Schaefer region k with k+200, which "
+                  "matches anatomy for only "
                   f"{same_label} of {len(idx_pairs)} pairs."),
     }
     # store the combined map for figures

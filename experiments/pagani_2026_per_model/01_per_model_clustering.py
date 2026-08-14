@@ -1,23 +1,22 @@
 """Per-mouse-model subtype translation through OTTER's π.
 
 The per-model hyper/hypo subtype labels come from the Gozzi lab's clean data
-(`data_crossspecies/pagani/`); see `DATA_VALIDATION_2026-06-10.md`.
+(`data_crossspecies/pagani/`).
 
   1. The clean Fig 1c matrix `sorted_etiology_by_feature_matrix.csv`
      (20 models × 1,491 voxelwise weighted-degree-centrality features) is loaded
      directly, no outlier masking.
 
-  2. The CSV is *sorted* by Pagani's hierarchical clustering, so the subtype
-     split falls exactly on row order: rows 1–9 = hyperconnectivity (n=9),
-     rows 10–20 = hypoconnectivity (n=11). We *verify* this from the data itself
-     (mean global connectivity > 0 for hyper, < 0 for hypo) rather than
-     asserting it.
+  2. The CSV is sorted by Pagani's hierarchical clustering, so the subtype
+     split falls on row order: rows 1–9 = hyperconnectivity (n=9), rows 10–20 =
+     hypoconnectivity (n=11). The split is checked against the data itself,
+     mean global connectivity > 0 for hyper and < 0 for hypo.
 
 The translation itself (mouse subtype signature → human-parcel prediction via π)
-reuses the validated Test 2 machinery in `04_subtype_translation.py`. It does NOT
-depend on decoding the 1,491 features to voxels (which is not robustly possible
-see the validation note); the per-subtype network signatures come from Pagani's
-own ED Fig 1 / Fig 4e network matrices.
+reuses the Test 2 machinery in `04_subtype_translation.py`. It does not depend on
+decoding the 1,491 features to voxels, which is not robustly possible; the
+per-subtype network signatures come from Pagani's own ED Fig 1 / Fig 4e network
+matrices.
 
 Outputs:
   - outputs/logs/pagani_subtype_translation_corrected.json
@@ -83,8 +82,8 @@ def derive_and_verify_subtypes(X: np.ndarray, labels: list[str]) -> list[str]:
     subtype = ["hyper" if i < N_HYPER else "hypo" for i in range(len(labels))]
     row_mean = X.mean(axis=1)
 
-    # Verification: hyper rows should have positive mean global connectivity,
-    # hypo rows negative. This is what makes the row-order split trustworthy.
+    # Hyper rows should have positive mean global connectivity, hypo rows
+    # negative.
     hyper_means = row_mean[:N_HYPER]
     hypo_means = row_mean[N_HYPER:]
     assert (hyper_means > 0).all(), (
@@ -101,8 +100,8 @@ def derive_and_verify_subtypes(X: np.ndarray, labels: list[str]) -> list[str]:
 # ---------------------------------------------------------------------------
 def loo_membership(X: np.ndarray, subtype: list[str]) -> list[dict]:
     """For each model, correlate its 1,491-feature vector with the mean
-    signature of each subtype, *excluding the model itself* from the mean, so
-    the placement isn't circular. Returns hyper/hypo correlations and a signed
+    signature of each subtype, excluding the model itself from the mean, so
+    the placement is not circular. Returns hyper/hypo correlations and a signed
     membership score (hyper minus hypo correlation)."""
     sub = np.array(subtype)
     hyper_idx = np.where(sub == "hyper")[0]
@@ -134,7 +133,7 @@ def subtype_translation_through_pi() -> dict:
 
     mpn, mnames = ncv.assign_mouse_paper_networks(M.var, separate_aud=True)
     hpn, hnames = ncv.assign_human_paper_networks(H.var, separate_aud=True)
-    # Merge our human Auditory into SomatoMotor for the 8-net Pagani comparison.
+    # Merge the human Auditory network into SomatoMotor for the 8-net Pagani comparison.
     a, s = hnames.index("Auditory"), hnames.index("SomatoMotor")
     hpn_m = hpn.copy()
     hpn_m[hpn == a] = s

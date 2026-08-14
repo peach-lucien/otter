@@ -1,9 +1,9 @@
 """Auditory cortex anchor pack (Hackett 2001; Kaas & Hackett 2000).
 
-Primate auditory cortex has a well-characterised core + belt + parabelt
+Primate auditory cortex has a characterised core + belt + parabelt
 organisation. The core (AI, R, RT) is identified by primary-like
-cytoarchitecture and dense MGN input; the belt is a surrounding ring
-of ~7 secondary fields; the parabelt is lateral. Kaas & Hackett 2000
+cytoarchitecture and dense MGN input; the belt is a surrounding ring of ~7
+secondary fields; the parabelt is lateral. Kaas & Hackett 2000
 (*PNAS*, 1025 cit) defined this scheme and Hackett 2001 (*J Comp
 Neurol*, 464 cit) extended the architectonic identification to
 chimpanzees and humans.
@@ -18,16 +18,13 @@ AAF, A2 ventral / VAF). The cross-species correspondence at the gross
 core/belt level is established; finer subdivisions (e.g. which mouse
 secondary field maps to which primate belt field) are still debated.
 
-Why this pack might lift Beauchamp Auditory
--------------------------------------------
-Beauchamp validates "Primary auditory area → Heschl's gyrus" with a
-broad 18-parcel human ball (currently 22 % top-1 under the
-production point-anchor π). Our pid 56 anchors mouse A1 (the SAME 9
-parcels Beauchamp uses) onto a tighter A1 core ball, while pid 57
-provides additional human-belt coverage for mouse secondary auditory
-parcels (which Beauchamp's "Primary auditory area" set doesn't
-include). The combined pack should at minimum hold the 22 % top-1
-and may lift it via the tighter core target.
+Relation to Beauchamp validation
+--------------------------------
+Beauchamp validates "Primary auditory area → Heschl's gyrus" with a broad
+18-parcel human ball, at 22 % top-1 under the production point-anchor π. Pid 56
+anchors mouse A1, the same 9 parcels Beauchamp uses, onto a tighter A1 core
+ball; pid 57 adds human-belt coverage for the mouse secondary auditory parcels
+that Beauchamp's "Primary auditory area" set omits.
 
 Mouse-side: DSURQE atlas overlay.
   Primary auditory area: 9 parcels (A1)
@@ -38,7 +35,7 @@ Human-side: MNI spheres at canonical centroids.
   A1 core (BA41):          (±48, -22, 6) r=6 mm
   Auditory belt (BA42):    (±55, -15, 0) r=8 mm
 
-References (verified Consensus search 2026):
+References:
   - Hackett, T. A., Preuss, T. M., & Kaas, J. H. (2001). Architectonic
     identification of the core region in auditory cortex of macaques,
     chimpanzees, and humans. *Journal of Comparative Neurology* 441,

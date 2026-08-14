@@ -4,17 +4,17 @@ Tests whether **soft** region anchors (mild penalty outside the region instead
 of a hard 0/1 wall) give better held-out region recovery than the current
 hard formulation. The hard version forces the optimizer to satisfy the
 region constraint exactly, which is harmful when atlas regions overlap or
-the Garin anchor is mis-placed (DIAG-1, S7 atlas-region degradations).
+the Garin anchor is mis-placed.
 
-Reports per-config held-out top-1, top-5, top-10, and mean rank, so we can
-pick the best soft penalty by the metric that actually matters for a soft
-probabilistic mapping (top-K, not top-1).
+Reports per-config held-out top-1, top-5, top-10, and mean rank, so the soft
+penalty can be picked by the metric appropriate to a soft probabilistic
+mapping (top-K, not top-1).
 
 Sweep values: {0.05, 0.1, 0.2, 0.3, 0.5, 0.7, 1.0}.
-1.0 reproduces the original hard behaviour and serves as the baseline.
+1.0 reproduces the hard behaviour and serves as the baseline.
 
 Usage:
-    PYTHONPATH=src python experiments/soft_region_anchors/01_sweep_lam_outside.py
+    PYTHONPATH=src python experiments/ablations/soft_region_anchors.py
 """
 from __future__ import annotations
 

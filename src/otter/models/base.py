@@ -4,11 +4,10 @@ The four production subclasses (UnsupervisedGW, SupervisedFGW, MultimodalFGW,
 HierarchicalFGW) all inherit from this. Their :meth:`fit` solves the underlying
 FGW problem and stores the resulting coupling π on ``self.pi_``.
 
-Why a class hierarchy and not just functions: a class lets us bundle
-configuration (alpha, epsilon, weights, …) with the resulting π and any
-diagnostic info (loss, n_iter, multistart spread). It also gives a uniform
-``predict_human_fc`` and ``evaluate`` interface across the four model levels,
-so notebooks can iterate over models with one loop.
+The class bundles configuration (alpha, epsilon, weights, …) with the
+resulting π and the diagnostic info (loss, n_iter, multistart spread), and
+gives a uniform ``predict_human_fc`` and ``evaluate`` interface across the
+four model levels.
 
 Subclass contract
 -----------------
@@ -42,8 +41,7 @@ class FGWModel:
     """Base class for cross-species FGW models.
 
     Subclasses set their own __init__ defaults and implement :meth:`_solve`.
-    Use :meth:`fit` (which internally calls _solve and stores results), never
-    override fit directly.
+    :meth:`fit` calls _solve and stores the results; it is not overridden.
     """
 
     #: Human-readable name for reporting. Subclasses override.
@@ -148,9 +146,9 @@ class FGWModel:
     def load(cls, path: str | Path) -> "FGWModel":
         """Load a saved π file (and optional sidecar) into a model instance.
 
-        Note: the loaded model is "reconstituted", it has self.pi_ but no
-        adata refs, so .predict_human_fc and .evaluate will require explicit
-        arguments (mouse_fc, mouse_ad, human_ad).
+        The loaded model is reconstituted: it has self.pi_ but no adata refs,
+        so .predict_human_fc and .evaluate require explicit arguments
+        (mouse_fc, mouse_ad, human_ad).
         """
         path = Path(path)
         sidecar = path.with_suffix(".json")

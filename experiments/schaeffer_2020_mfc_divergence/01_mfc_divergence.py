@@ -1,6 +1,7 @@
-"""OTTER × Balsters 2020, rodent medial frontal cortex divergence (falsification test).
+"""OTTER × Schaeffer 2020, rodent medial frontal cortex divergence (falsification test).
 
-[Balsters, Zerbi, Sallet, Wenderoth & Mars 2020, PNAS](https://doi.org/10.1073/pnas.2003181117),
+[Schaeffer, Hori, Gilbert, Gati, Menon & Everling 2020,
+PNAS](https://doi.org/10.1073/pnas.2003181117),
 "Divergence of rodent and primate medial frontal cortex functional
 connectivity", compared whole-brain FC of the medial frontal cortex (MFC)
 across rodent, marmoset and human. Their headline, data-backed claim:
@@ -10,20 +11,19 @@ across rodent, marmoset and human. Their headline, data-backed claim:
     the functional analogue of primate LFC.
   * Rodent MFC connectivity instead most resembles **premotor** cortex.
 
-This is a *falsification* test, not a confirmation test. It states, with a
-specific direction, where a faithful mouse↔human mapping should and should
-NOT send mouse MFC:
+This is a falsification test, not a confirmation test. It states, with a
+specific direction, where an accurate mouse↔human mapping should and should
+not send mouse MFC:
 
   PASS, mouse MFC routes to human medial-frontal / cingulate / premotor
           cortex, and **avoids** dorsolateral PFC (BA9/46).
   FAIL, mouse MFC routes confidently onto human dlPFC.
 
-OTTER already encodes a falsifiable design choice here: the Garin point
-anchor for mPFC pairs mouse mPFC with human *medial* frontal cortex, and
-the contested mouse-Prelimbic ↔ human-dlPFC homology (Carlén 2017 vs
-Preuss 1995) is shipped as the **opt-in** `lateral_pfc` pack, not in the
-recommended π. Balsters 2020 is independent FC evidence adjudicating that
-choice. We test three couplings:
+OTTER encodes a falsifiable design choice here. The Garin point anchor for
+mPFC pairs mouse mPFC with human medial frontal cortex, and the contested
+mouse-Prelimbic ↔ human-dlPFC homology (Carlén 2017 vs Preuss 1995) ships as
+the opt-in `lateral_pfc` pack, not in the recommended π. Schaeffer 2020 is
+independent FC evidence adjudicating that choice. The couplings tested are:
 
   * `pi_fc_plus_SC.npy`. Garin anchors only (strict baseline)
   * `pi_canonical.npy`, the canonical coupling (no lateral_pfc pack). All
@@ -33,11 +33,12 @@ choice. We test three couplings:
   * `pi_fc_plus_SC_with_lateral_pfc`, adds the contested Prelimbic→dlPFC anchor
     (pre-warp variant, so compare it against the pre-warp row)
 
-Note on species: Balsters used rat + marmoset + human; OTTER is mouse +
-human. Rodent MFC (anterior cingulate + prelimbic + infralimbic) is the
-comparable structure. The test compares OTTER's π against Balsters'
-*published directional conclusion*, not their FC matrices, the rat/mouse
-and marmoset/human mismatches make re-routing their data unjustified.
+Note on species: Schaeffer et al. used rat + marmoset + human; OTTER is
+mouse + human. Rodent MFC (anterior cingulate + prelimbic + infralimbic)
+is the comparable structure. The test compares OTTER's π against Schaeffer
+et al.'s *published directional conclusion*, not their FC matrices, the
+rat/mouse and marmoset/human mismatches make re-routing their data
+unjustified.
 """
 from __future__ import annotations
 
@@ -61,11 +62,11 @@ SEED = 42
 # dlPFC reuses the lateral_pfc anchor pack's own BA9/46 centroid.
 ROIS = {
     "dlPFC":         (40, 25, 35, 12),   # BA9/46, the contested "should NOT"
-    "premotor":      (28,  0, 54, 14),   # BA6 / PMd. Balsters' "instead"
+    "premotor":      (28,  0, 54, 14),   # BA6 / PMd. Schaeffer et al.'s "instead"
     "medial_PFC":    ( 7, 34, 22, 16),   # mPFC / pregenual ACC, conventional homologue
     "mid_cingulate": ( 5,  8, 40, 14),   # mid-cingulate, conventional homologue
 }
-# Rodent MFC = the medial frontal wall (Balsters' "rat MFC").
+# Rodent MFC = the medial frontal wall (Schaeffer et al.'s "rat MFC").
 MFC_ACRONYMS = ["ACAd", "ACAv", "PL", "ILA"]
 
 
@@ -96,7 +97,7 @@ def mass_fractions(pi: np.ndarray, rows: np.ndarray,
 
 def main():
     print("=" * 80)
-    print("OTTER × Balsters 2020, rodent MFC divergence (falsification test)")
+    print("OTTER × Schaeffer 2020, rodent MFC divergence (falsification test)")
     print("=" * 80)
 
     # ---- human ROIs ---------------------------------------------------------
@@ -175,17 +176,17 @@ def main():
           f"mouse→human mass; its parcel share is {dlpfc_share * 100:.1f}%.")
 
     # ---- verdict ------------------------------------------------------------
-    balsters_consistent = (frac["medial_PFC"] + frac["mid_cingulate"]
+    schaeffer_consistent = (frac["medial_PFC"] + frac["mid_cingulate"]
                            + frac["premotor"])
     passed = (null_stats["dlPFC"]["enrichment"] <= 1.5
               and frac["dlPFC"] < 0.10
-              and balsters_consistent > frac["dlPFC"])
-    verdict = "PASS. Balsters-consistent" if passed else "FAIL"
+              and schaeffer_consistent > frac["dlPFC"])
+    verdict = "PASS. Schaeffer-consistent" if passed else "FAIL"
     print(f"\nVERDICT: {verdict}")
     print(f"  mouse MFC → dlPFC = {frac['dlPFC'] * 100:.1f}% "
           f"(enrichment ×{null_stats['dlPFC']['enrichment']:.1f}, not favoured)")
     print(f"  mouse MFC → medial-frontal + cingulate + premotor = "
-          f"{balsters_consistent * 100:.1f}%")
+          f"{schaeffer_consistent * 100:.1f}%")
 
     # ---- save ---------------------------------------------------------------
     out = {
@@ -206,7 +207,7 @@ def main():
         "verdict": verdict,
         "roi_labels": roi_labels.tolist(),
     }
-    out_path = ROOT / "outputs" / "logs" / "balsters_2020_mfc_divergence.json"
+    out_path = ROOT / "outputs" / "logs" / "schaeffer_2020_mfc_divergence.json"
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(out, indent=2))
     print(f"\nWrote {out_path}")

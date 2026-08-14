@@ -25,8 +25,8 @@ This script then:
   2. Aggregates OTTER's per-disorder predicted patterns (from Phase 1) to
      Desikan-Killiany region-level scores.
   3. Correlates OTTER-predicted region scores vs ENIGMA observed Cohen's d.
-  4. Cross-disorder specificity check: does OTTER's autism prediction
-     correlate more with ENIGMA-autism than with ENIGMA-schizophrenia?
+  4. Cross-disorder specificity check, whether OTTER's autism prediction
+     correlates more with ENIGMA-autism than with ENIGMA-schizophrenia.
 """
 from __future__ import annotations
 
@@ -215,7 +215,7 @@ def main():
     print(f"Off-diagonal pairs (OTTER-X vs ENIGMA-Y): mean r = {np.mean(off_diag_vals):+.3f}")
     print(f"  → If OTTER's predictions are disorder-specific, diagonal should beat off-diagonal.")
     print(f"  → Given Phase 1 showed all OTTER predictions are essentially identical (r>0.97),")
-    print(f"     we EXPECT diagonal ≈ off-diagonal here.")
+    print(f"     diagonal ≈ off-diagonal is expected here.")
 
     out = {
         "otter_disorders":   otter_disorders,

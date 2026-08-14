@@ -4,11 +4,11 @@ The `uncovered_by_region.json` table ranks regions by the FRACTION of their parc
 below a coverage threshold. That metric is confounded by parcel count / relative size:
 finely-parcellated, expanded-but-homologous regions (e.g. human V1) score as highly
 'uncovered' even though the mouse maps to them correctly, just diluted across many
-parcels. Here we rank the SAME 21 macro-regions (each human parcel assigned to its
-nearest Garin homology-class anchor by normalised position — the atlas behind
-uncovered_by_region) by MASS-NORMALISED coverage = mean mouse π-mass per parcel,
-which is not parcel-count-biased. Both metrics are reported side by side so the
-V1-type artefact is visible.
+parcels. The same 21 macro-regions (each human parcel assigned to its nearest Garin
+homology-class anchor by normalised position, the atlas behind uncovered_by_region) are
+ranked here by MASS-NORMALISED coverage = mean mouse π-mass per parcel, which is not
+parcel-count-biased. Both metrics are reported side by side so the V1-type artefact is
+visible.
 
 Run: cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/05_coverage_catalogue.py
 Writes outputs/logs/section5_coverage_catalogue.json

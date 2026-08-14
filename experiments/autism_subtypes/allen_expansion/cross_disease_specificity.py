@@ -4,16 +4,16 @@ Test 3 showed that translating Pagani's 1,713 autism-implicated genes through
 OTTER's π reliably (bootstrap r=+0.428, 95% CI +0.349–+0.497) predicts Pagani's
 observed human ASD subtype Δ pattern.
 
-Is this signal autism-specific, or does OTTER produce the same correlation for
-ANY brain-disorder gene set? Pagani's MOESM5 supplementary lists 4,822 genes
-implicated in five comparison conditions:
+This script tests whether the signal is autism-specific or whether OTTER
+produces the same correlation for any brain-disorder gene set. Pagani's MOESM5
+supplementary lists 4,822 genes implicated in five comparison conditions:
   - bipolar_disorder
   - schizophrenia
   - psoriasis      (non-brain control, strong negative control)
   - dementia
   - adhd
 
-For each condition we:
+For each condition:
   1. Take its gene list.
   2. Intersect with OTTER's 1,713-gene Allen ISH matrix.
   3. Compute mean z-scored expression per mouse parcel.
@@ -22,15 +22,15 @@ For each condition we:
   6. Correlate against Pagani's observed human ASD Δ (hyper−hypo, Fig 4e).
   7. Bootstrap (200 resamples of the gene pool) to get CI per condition.
 
-Hypothesis under autism-specificity:
+Under autism-specificity:
   - Autism: r ≈ +0.43 (replicates Test 3)
-  - Brain psych conditions (bipolar, schizophrenia, adhd, dementia): possibly
-    moderate correlations because they share neural gene biology with autism
-  - Psoriasis: r ≈ 0 (skin disease, no brain-relevance, pure negative control)
+  - Brain psychiatric conditions (bipolar, schizophrenia, adhd, dementia):
+    moderate correlations, since they share neural gene biology with autism
+  - Psoriasis: r ≈ 0 (skin disease, no brain relevance, negative control)
 
-If autism's r is similar to schizophrenia's, the signal isn't autism-specific.
-If psoriasis ALSO produces r ≈ +0.4, the signal is a brain-geometry artifact
-not a disease-specific finding.
+If autism's r is similar to schizophrenia's, the signal is not autism-specific.
+If psoriasis also produces r ≈ +0.4, the signal is a brain-geometry artefact
+rather than a disease-specific finding.
 """
 from __future__ import annotations
 
@@ -169,8 +169,9 @@ def main():
         # Translate to human + aggregate to 8 networks
         pred_h = agg8(score_mouse @ pi)
         # Subtract the across-network mean so the predicted is comparable to Δ (signed)
-        # (we use abs_rowcol_sum for observed but pred is per-network expression intensity;
-        # both are means + a constant, so Pearson is invariant. Don't subtract.)
+        # (the observed uses abs_rowcol_sum but pred is per-network expression intensity;
+        # both are means plus a constant, so Pearson is invariant and no subtraction
+        # is applied.)
         r_obs, p_obs = pearsonr(pred_h, obs_delta)
         # Bootstrap over genes
         boot_r = []

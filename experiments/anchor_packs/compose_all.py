@@ -1,9 +1,9 @@
-"""COMPOSE-ALL: fit MultimodalFGW with all default anchor packs at once.
+"""Fit MultimodalFGW with all default anchor packs at once.
 
 The set of default packs is defined once in
 :mod:`otter.data.anchor_packs.registry` (``DEFAULT_PACK_NAMES``) and built
-here via :func:`build_default_pack_entries`, this script no longer keeps
-its own copy of the list. Currently the default packs are:
+here via :func:`build_default_pack_entries`; this script does not keep its
+own copy of the list. Currently the default packs are:
 
   - biccn_motor (pid 30, 31). Bakken 2021
   - tectum      (pid 32, 33). May 2006; Schreiner & Winer 2007
@@ -21,7 +21,7 @@ Outputs:
   - outputs/logs/region_level_eval_all_packs.json
 
 Usage:
-    PYTHONPATH=src python experiments/compose_all/01_compose_all_default_packs.py
+    PYTHONPATH=src python experiments/anchor_packs/compose_all.py
 """
 from __future__ import annotations
 

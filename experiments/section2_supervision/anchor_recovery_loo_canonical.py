@@ -5,14 +5,14 @@
 Same 41-unit leave-one-out as anchor_recovery_loo.py (15 Garin classes + 26 packs),
 but refit with the CANONICAL coupling recipe:
   - WARPED spatial term (thin-plate-spline RBF over Garin homolog coord pairs)
-  - epsilon = 0.05, xyz_weight = 0.25   (was eps=5e-3, xyz_weight=0.5 naive Euclidean)
+  - epsilon = 0.05, xyz_weight = 0.25
 
-HONESTY: the warp is trained from Garin anchor coord-pairs. For each held-out unit we
-REBUILD the warp EXCLUDING the held-out pair_ids (the same pids whose garin_anchor flags
-are unflagged), so no held-out spatial correspondence leaks into the refit. For pack
-units with no Garin anchor inside them the warp is the full canonical warp.
+The warp is trained from Garin anchor coord-pairs. For each held-out unit the warp is
+rebuilt EXCLUDING the held-out pair_ids (the same pids whose garin_anchor flags are
+unflagged), so no held-out spatial correspondence leaks into the refit. For pack units
+with no Garin anchor inside them the warp is the full canonical warp.
 
-Writes outputs/logs/anchor_recovery_loo_combined_canonical.json  (does NOT touch original).
+Writes outputs/logs/anchor_recovery_loo_combined_canonical.json.
 Resumable (34 s guard). Re-run until 'ALL DONE'.
 """
 import sys, json, time, importlib.util

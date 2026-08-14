@@ -24,8 +24,8 @@ def main():
 
     # Panel 1: Bootstrap distribution
     ax = axes[0]
-    # We don't have raw bootstrap samples in the json, just summary. Draw a
-    # gaussian approximation centred on mean with the reported 95% CI.
+    # The json holds summary statistics rather than raw bootstrap samples. Draw a
+    # gaussian approximation centred on the mean with the reported 95% CI.
     boot_mean = j_diag["bootstrap"]["mean_r"]
     ci_lo, ci_hi = j_diag["bootstrap"]["ci95"]
     sd_approx = (ci_hi - ci_lo) / (2 * 1.96)
@@ -61,7 +61,7 @@ def main():
                  ", driven by hyper signal being much larger than hypo in Pagani data")
 
     # Panel 3: Per-parcel gene-vs-FC translation scatter
-    # We don't have the raw vectors in json, just the r. Plot the summary as text.
+    # The json holds r rather than the raw vectors, so plot the summary as text.
     ax = axes[2]
     ax.axis("off")
     r_gf_p = j_diag["per_parcel_gene_vs_fc_translation"]["pearson_r"]

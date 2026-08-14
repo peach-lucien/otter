@@ -1,26 +1,25 @@
 """Direction 1, parcel-resolution spatial subtype routing through π.
 
-⚠️ SUPERSEDED (2026-06-11). This script tests a *continuous-map correlation*
-(route the occurrence maps → predict the human subtype Δ-matrix), which is
-OTTER's WEAK mode, it does not survive a fair spatial null (F-007/F-027), and it
-does NOT replicate what Pagani actually do. Two problems we found re-reading the
-paper: (1) it aggregates over all 13 conserved regions uniformly, but Pagani use
-only the 5 hypo-prominent / 3 hyper-prominent regions (Methods, Supp Fig 2b); and
-(2) Pagani's human step is a discrete *classification* (score each individual's
-regional global connectivity, threshold ±1 s.d.), not a Δ-matrix correlation.
-→ The corrected, Pagani-faithful analysis lives in:
+Superseded. This script tests a continuous-map correlation (route the occurrence
+maps, predict the human subtype Δ-matrix). That correlation does not survive a
+spatial null, and it does not reproduce Pagani's procedure. It aggregates over
+all 13 conserved regions uniformly, where Pagani use only the 5 hypo-prominent /
+3 hyper-prominent regions (Methods, Supp Fig 2b), and Pagani's human step is a
+discrete classification (score each individual's regional global connectivity,
+threshold ±1 s.d.) rather than a Δ-matrix correlation. The analysis that follows
+Pagani's procedure is in:
    `04_otter_human_masks.py`            (π-derived human hypo/hyper masks)
    `../autism_subtypes/abide_subtype/05_abide_otter_subtyping.py`  (re-subtype ABIDE)
-This script is kept for provenance / the continuous-routing negative result.
+This script is kept for the continuous-routing negative result.
 
-The earlier subtype translation (Test 2c / 01_per_model_clustering.py) drives the
-mouse side from Pagani's coarse 9-network matrices. Here we use the
-spatial **Fig 1d occurrence maps** instead: for each subtype, the per-voxel count
-(0–5) of how many models show a consistent hyper/hypo effect.
+01_per_model_clustering.py drives the mouse side from Pagani's coarse 9-network
+matrices. This script uses the spatial Fig 1d occurrence maps instead: for each
+subtype, the per-voxel count (0–5) of how many models show a consistent
+hyper/hypo effect.
 
-Bridge (verified, no fragile voxel transform):
+Bridge (no voxel transform required):
   • The occurrence maps and the 13 conserved-region masks are co-registered
-    (identical affine), so we read the mean occurrence within each region mask
+    (identical affine), so the mean occurrence within each region mask is read
     directly, in their own space.
   • OTTER's 1,864 mouse parcels carry Allen region-vote names, which map to the
     13 conserved regions by keyword (verified anatomically: thalamus→thalamic

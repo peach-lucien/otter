@@ -17,7 +17,7 @@ The DOI and download URLs are read from `data_manifest.json`.
 Data DOI: [10.5281/zenodo.21458106](https://doi.org/10.5281/zenodo.21458106) (latest;
 the raw-inputs archive remains in the prior version, [10.5281/zenodo.20733163](https://doi.org/10.5281/zenodo.20733163)).
 
-## What a fresh clone can do *without* any download
+## Available without a download
 
 - Run the unit test suite. `tests/conftest.py` builds a small synthetic
   cross-species problem; data-backed tests `pytest.skip` when their files are
@@ -27,22 +27,22 @@ the raw-inputs archive remains in the prior version, [10.5281/zenodo.20733163](h
   `outputs/anndata/_schaefer_order.txt`, the voxel-count arrays, and the
   multi-source trust map.
 
-To **re-run** the validations and notebooks, or to **rebuild the coupling**, you
-need the archive below.
+Re-running the validations and notebooks, or rebuilding the coupling, requires
+the archive below.
 
 ## The three tiers
 
-| Tier | Where | Lets you |
+| Tier | Where | Enables |
 |---|---|---|
 | 0, small artifacts | committed to Git | run unit tests, read all result numbers |
 | 1, reproduce bundle | Zenodo `homer-reproduce-v1.3.0.tar.gz` (~735 MB download) | re-run every experiment/notebook against the precomputed couplings |
 | 2, raw inputs | Zenodo `homer-raw-inputs-v1.0.0.tar.gz` (606 MB download) | rebuild the coupling bitwise from raw data via `pipeline/` |
 
-You do **not** need Tier 2 to use OTTER, only to regenerate `π` from scratch.
+Tier 2 is required only to regenerate `π` from scratch, not to use OTTER.
 
 ---
 
-## Zenodo record, what to upload
+## Zenodo record contents
 
 Create **one Zenodo record** with **two archive files**. Build both from the repo
 root so the paths inside the tarball are repo-relative (the fetch script unpacks
@@ -61,8 +61,8 @@ array).
 |---|---:|---|
 | `outputs/coupling/pi_canonical.npy` | 30 MB | the canonical coupling π (1864×2094), what `load_pi()` returns |
 | `outputs/coupling/pi_canonical_sharp.npy` | 30 MB | same recipe at ε = 0.005; sharper, no more accurate |
-| `outputs/coupling/pi_fc_plus_SC_with_all_packs.npy` | 30 MB | pre-warp coupling, retired 2026-07 |
-| `outputs/coupling/pi_fc_plus_SC.npy` | 15 MB | pre-warp point-anchor coupling, retired 2026-07 |
+| `outputs/coupling/pi_fc_plus_SC_with_all_packs.npy` | 30 MB | pre-warp coupling, retired |
+| `outputs/coupling/pi_fc_plus_SC.npy` | 15 MB | pre-warp point-anchor coupling, retired |
 | `outputs/coupling/pi_fc_plus_SC_with_*.npy` (×15) + `pi_fc_plus_SC_xyz_zero.npy` | ~430 MB | ablation-variant couplings the advanced notebooks load (per-anchor-pack, xyz-zeroed, etc.) |
 | `outputs/coupling/trust_multisource_canonical.npz` | ~0.1 MB | per-parcel evidence tiers on the canonical π, what the docs gate queries on |
 | `outputs/coupling/trust_multisource_all_packs.npz`, `trust_score_fc_plus_SC*.npz` | ~0.5 MB | per-parcel trust tiers + scores on the retired couplings |
@@ -104,13 +104,13 @@ regeneratable via the Allen API (slow, 1–3 days) and documented in
 
 ---
 
-## Licensing, read before you publish the archives
+## Licensing
 
 The files under `data_external/` are **derived from third-party datasets**, each
-with its own terms. Before making the archives public, confirm you may
-redistribute them; where you can't, drop those entries from Archive 1/2 and let
-users re-download via the scripts in `pipeline/00_external/`, which fetch from the
-original sources. The OTTER-generated artifacts (the coupling, trust map,
+with its own terms. Before making the archives public, confirm that
+redistribution is permitted; where it is not, drop those entries from Archive
+1/2 so that users re-download via the scripts in `pipeline/00_external/`, which
+fetch from the original sources. The OTTER-generated artifacts (the coupling, trust map,
 per-disorder predictions, and the processed AnnData caches) are ours to share
 freely. Sources and any redistribution restrictions are recorded per dataset in
 `pipeline/00_external/README.md` and in the `SOURCES.md` files under

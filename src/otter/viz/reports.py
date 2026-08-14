@@ -6,7 +6,7 @@ Pulls all evaluation results from `outputs/logs/*.json` and produces:
     - markdown summary
     - matplotlib figures (multi-metric bars + per-network heatmap)
 
-Design: keep each step a pure function returning data. The pipeline orchestrator
+Each step is a pure function returning data; the pipeline orchestrator
 (`pipeline/07_build_artefacts.py`) handles file I/O.
 
 Public:
@@ -180,8 +180,8 @@ def build_comparison_table(logs_dir: str | Path) -> tuple:
     itr  = _safe_load(logs_dir / "iterative_cv.json")
     fct  = _safe_load(logs_dir / "fc_translation.json")
     nd   = _safe_load(logs_dir / "null_distributions.json")
-    # Bootstrap: prefer the per-config file (post-fix), fall back to the legacy
-    # FC-only one if the new file isn't there yet
+    # Bootstrap: prefer the per-config file, falling back to the FC-only
+    # file when it is absent
     boot_sc  = _safe_load(logs_dir / "bootstrap_summary_fc_plus_SC.json")
     boot_old = _safe_load(logs_dir / "bootstrap_summary.json")
     boot = boot_sc if boot_sc else boot_old
@@ -198,7 +198,7 @@ def build_comparison_table(logs_dir: str | Path) -> tuple:
         ft = (fct or {}).get(ft_key, {}) if ft_key else {}
         scv_key = _SUBJECT_CV_KEYS.get(cfg_key)
         scv = subject_cv.get(scv_key, {}) if scv_key else {}
-        # NEW, full-space metrics from outputs/logs/full_space_eval.json
+        # Full-space metrics from outputs/logs/full_space_eval.json
         # Aggregate weighted across networks if data exists for this config.
         fs_per_net = (full_space or {}).get(cfg_key, {})
         fs = aggregate_full_space(fs_per_net) if fs_per_net else {}
@@ -318,10 +318,10 @@ def render_summary_md(wide_df: pd.DataFrame, long_df: pd.DataFrame,
     if has_fs:
         md.append("## Full-space recovery, global argmax over all 2094 human nodes\n")
         md.append(
-            "The conservative per-voxel metric. The model's full-space argmax typically lands "
-            "on a non-anchor *grid* node near the correct anchor rather than the anchor "
-            "itself. Full-top-1 is much smaller than restricted-top-1 because the search "
-            "space is 2094× larger.\n"
+            "The per-voxel metric. The model's full-space argmax lands on a non-anchor "
+            "grid node near the correct anchor rather than on the anchor itself. "
+            "Full-top-1 is smaller than restricted-top-1 because the search space is "
+            "2094× larger.\n"
         )
         md.append("| Config | full-Top-1 | full-Top-5 | mean rank /2094 | argmax is anchor | "
                   "in 5% neighborhood | mean mass on correct anchor |")
@@ -358,9 +358,9 @@ def render_summary_md(wide_df: pd.DataFrame, long_df: pd.DataFrame,
 
     md.append("## Per-network top-1 heatmap (see fig 14)\n")
     md.append(
-        "Variance across networks is the story, most configs land 100% on the easy "
-        "networks (auditory, frontoparietal, frontal_dmn, etc.) and 25-50% on visual / "
-        "brainstem / sensorimotor.\n"
+        "Top-1 varies across networks: most configs reach 100% on auditory, "
+        "frontoparietal and frontal_dmn, and 25-50% on visual, brainstem and "
+        "sensorimotor.\n"
     )
     return "\n".join(md)
 

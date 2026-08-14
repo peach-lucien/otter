@@ -5,9 +5,9 @@ This module downloads the archive described in ``data_manifest.json`` (at the
 repository root) and unpacks it in place. It is used two ways:
 
 * as a CLI, via ``scripts/fetch_data.py`` (a thin wrapper around :func:`main`);
-* as a guard, via :func:`ensure_data`, which library functions call before they
-  read a data file, so a user who forgot to fetch gets a clear prompt (or a
-  clear error in non-interactive use) instead of a bare ``FileNotFoundError``.
+* as a guard, via :func:`ensure_data`, which library functions call before
+  they read a data file, so that a missing bundle produces a prompt (or a
+  clear error in non-interactive use) instead of a ``FileNotFoundError``.
 
 Set ``OTTER_AUTO_FETCH=1`` to download missing data without prompting.
 See ``DATA.md`` for what each tier contains. Standard library only.
@@ -23,20 +23,17 @@ import tarfile
 import urllib.request
 from pathlib import Path
 
-# Representative files per tier: if these exist, the tier is already unpacked.
-# Files whose presence means a tier is already unpacked. These decide whether fetch_tier()
-# skips the download, so they must include anything a NEWER archive added: a user who fetched
-# v1.2.0 has every pre-warp file on disk, and if the canonical coupling is not listed here they
-# are told "already present, skipping" and never receive v1.3.0. Add an entry whenever the
-# archive gains a file the notebooks require.
+# Representative files per tier: their presence means the tier is already
+# unpacked, and fetch_tier() skips the download. The list must name every file
+# the archive contains that the notebooks require, otherwise a user holding an
+# older archive is told the tier is present and never receives the new files.
 SENTINELS = {
     "reproduce": [
-        # added in v1.3.0 - what load_pi() returns and what every notebook needs
+        # what load_pi() returns and what the notebooks require
         "outputs/coupling/pi_canonical.npy",
         "outputs/coupling/trust_multisource_canonical.npz",
         "outputs/anndata/_schaefer_order.txt",
         "outputs/coupling/mouse_tpl_100um.nii.gz",
-        # present since v1.0.0
         "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy",
         "outputs/coupling/pi_fc_plus_SC.npy",
         "outputs/anndata/mouse.h5ad",

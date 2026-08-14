@@ -1,20 +1,8 @@
-"""Validation suite: every map that CLAIMS to be a published quantity must correlate
-with that published quantity. Fails loudly if it does not.
+"""Validation suite: every map that claims to be a published quantity must correlate
+with that published quantity. Fails if it does not.
 
-WHY THIS EXISTS
----------------
-For months the repo used `margulies_2016_gradient.json["human_gradient"]` as if it were
-the Margulies principal gradient. It was not: principal_gradient() was returning the first
-non-trivial diffusion component, which in this FC data is an ANTERIOR-POSTERIOR spatial
-axis. Correlation with the actual published Margulies map: |rho| = 0.12.
-
-The bug survived because nobody ever compared the map to the thing it was named after.
-The identical check on the myelin map returns |rho| = 0.97 -- which is exactly why the
-myelin pipeline was fine and the gradient was not. One thirty-second check, never run,
-sitting upstream of three results sections.
-
-This script runs that check for every published map the repo depends on, and asserts a
-minimum correlation. If a map drifts, this fails before any figure or number does.
+The check runs for every published map the repo depends on and asserts a minimum
+correlation, so a map that drifts fails here before any figure or number does.
 
 Also records the Fulcher structural-translation test under the null the repo's own
 nulls.py designates as correct for TRANSLATION claims (null B: spin the mouse input and
@@ -44,11 +32,11 @@ from otter.eval.nulls import _haar_rotation              # noqa: E402
 
 OUT = ROOT / "outputs/logs/published_map_validation.json"
 N_TRIALS = 1000
-# The coupling retired on 2026-07-17, kept only to define the smaller human
-# territory it reached, so the canonical result can be scored on equal ground.
+# The retired coupling, kept only to define the smaller human territory it reached,
+# so the canonical result can be scored on the same territory.
 RETIRED_PI_FILE = "pi_fc_plus_SC_with_all_packs.npy"
 
-# map name -> (neuromaps source, desc, repo array, minimum |rho| we require)
+# map name -> (neuromaps source, desc, repo array, minimum |rho| required)
 MIN_RHO = {"margulies_gradient": 0.80, "hcp_myelin": 0.90}
 
 

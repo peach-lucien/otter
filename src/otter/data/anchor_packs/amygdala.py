@@ -1,7 +1,6 @@
 """Amygdala anchor pack.
 
-Cross-species amygdala homology is well established (verified Consensus
-search 2026):
+Cross-species amygdala homology is established:
 
   - Janak, P. H. & Tye, K. M. (2015). From circuits to behaviour in the
     amygdala. *Nature* 517, 284-292. DOI: 10.1038/nature14188.
@@ -11,21 +10,20 @@ search 2026):
     *Nature Reviews Neuroscience* 11, 773-783. DOI: 10.1038/nrn2920.
     (1663 citations).
 
-This is the closing anchor pack, it covers the last remaining 0 %
-Beauchamp top-1 failure pair without dedicated sub-region supervision:
-"Cortical subplate-other → amygdala".
+The pack covers the remaining 0 % Beauchamp top-1 pair without dedicated
+sub-region supervision, "Cortical subplate-other → amygdala".
 
   pid 38: Mouse Cortical subplate ↔ Human amygdala
 
-Why no sub-nuclear pairs
-------------------------
-The DSURQE atlas tree doesn't distinguish basolateral / central / lateral
-amygdaloid nuclei, only the broader "Cortical subplate" category (54
-mouse parcels) and a few small specific entries (Medial amygdalar nucleus
-6 parcels, Cortical amygdalar area 2 parcels) that are too small for
-useful constraints. So we use the same mouse-side set as Beauchamp's
-validation (Cortical subplate, 54 parcels), making the Beauchamp top-1
-recovery tautological as with the other packs.
+No sub-nuclear pairs
+--------------------
+The DSURQE atlas tree does not distinguish basolateral, central and lateral
+amygdaloid nuclei, carrying only the broader "Cortical subplate" category (54
+mouse parcels) and a few entries too small to constrain (Medial amygdalar
+nucleus, 6 parcels; Cortical amygdalar area, 2 parcels). The mouse-side set is
+therefore the same as Beauchamp's validation set (Cortical subplate, 54
+parcels), which makes the Beauchamp top-1 recovery tautological as with the
+other packs.
 
 Mouse-side: DSURQE atlas overlay.
   Cortical subplate: 54 parcels
@@ -33,17 +31,15 @@ Mouse-side: DSURQE atlas overlay.
 Human-side: MNI sphere at canonical amygdala centroid (Mai/Paxinos).
   (±25, -5, -20) r=8 mm → 6 parcels
 
-Composition caveat, minor overlap with olfactory pack
-------------------------------------------------------
+Overlap with the olfactory pack
+-------------------------------
 The amygdala MNI ball at (±25, -5, -20) r=8 captures 2 parcels named
-"L/R_Olfactory cortex" that are ALSO in the olfactory pack's piriform
-ball at (±25, +5, -20) r=10 (the piriform and amygdala centroids are
-only 10 mm apart in MNI space, reflecting the anatomical proximity of
-piriform cortex and amygdala). When composing both packs, the 2 shared
-parcels get conflicting soft constraints, the FGW solver handles this
-(the constraints are soft, not hard walls), but expect mass on those 2
-parcels to be intermediate between the two anchor targets rather than
-fully concentrated on either.
+"L/R_Olfactory cortex" that also fall in the olfactory pack's piriform ball at
+(±25, +5, -20) r=10; the piriform and amygdala centroids are 10 mm apart in MNI
+space. When both packs are composed, the 2 shared parcels receive conflicting
+soft constraints. The constraints are soft rather than hard walls, and mass on
+those 2 parcels is intermediate between the two anchor targets rather than
+concentrated on either.
 """
 from __future__ import annotations
 

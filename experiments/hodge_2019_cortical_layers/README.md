@@ -44,26 +44,21 @@ Outputs:
 - `outputs/figures/hodge_2019_layer_markers.png`
 
 
-## Areal-type reframe (2026-06-19), `03_areal_type_reframe.py`
+## Areal-type reframe, `03_areal_type_reframe.py`
 
-Schaefer-400 can't resolve layers, so a laminar test is impossible by construction.
-We recast it as the question the parcellation *can* answer: does π preserve cortical
-areal type (the supragranular↔infragranular / eulaminate↔agranular axis)? Cortex-only,
-fair spin null:
+Schaefer-400 does not resolve layers, so a laminar test is not possible by construction.
+The reframe asks the question the parcellation can answer, whether π preserves cortical
+areal type (the supragranular-infragranular / eulaminate-agranular axis). Cortex-only,
+spin null:
 - supragranular − infragranular: r=−0.02, spin p=0.71 (n.s.)
-- granular L4 − infragranular: r=+0.19, spin p≤0.004 (the expected exception: cortical granularity is itself the areal hierarchy)
+- granular L4 − infragranular: r=+0.19, spin p≤0.004 (cortical granularity is itself the areal hierarchy)
 - supragranular − granular: r=−0.04, spin p=0.52 (n.s.)
 
 So the layer-marker *gene* contrasts do not recover areal type through π.
 
-> ⚠️ **This section used to end by saying the cytoarchitectural axis "DOES survive
-> when measured structurally (spin p = 0.021/0.010)" and directing the reader to cite
-> Fulcher for cross-species cytoarchitecture. Both halves were wrong.** Those p-values
-> were hardcoded literals that existed in no output file; the values the analysis
-
 **Conclusion.** Layer *contrasts* do not transfer through π, but layer *markers* do (mean
 r = 0.23, 6 of 7 significant), and so do myelin and cytoarchitecture (Fulcher, r = 0.47 each).
-What fails is the laminar component specifically: a contrast subtracts one layer from another
+What fails is the laminar component specifically. A contrast subtracts one layer from another
 and removes the shared areal signal, and it is the areal signal that π carries. Conservation
 reaches broad cell classes too (excitatory − inhibitory, r = 0.34, spin p = 0.001). See
 `docs/03_results.md` §3.

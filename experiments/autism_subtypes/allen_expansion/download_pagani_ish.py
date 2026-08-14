@@ -1,8 +1,8 @@
 """Standalone Allen Mouse ISH downloader for Pagani 2026's 6,415 implicated genes.
 
-**Run this OUTSIDE the conversation sandbox**, it needs ~5-20 GB of disk for
-the cache, takes 1-3 days even with parallel workers, and downloads ~1-2 GB
-of usable per-parcel expression data.
+Run this on a machine with local disk. It needs ~5-20 GB of disk for the
+cache, takes 1-3 days even with parallel workers, and downloads ~1-2 GB of
+usable per-parcel expression data.
 
 What it does:
   1. Reads `pagani_gene_list.csv` (6,415 mouse-symbol-cased gene symbols).
@@ -30,9 +30,8 @@ Usage:
 For a fast test pull on 50 genes:
     python ... --max-genes 50
 
-The downstream analysis (`09_gene_spatial_translation.py`) just loads
-`pagani_mouse_expr.npy` and `pagani_gene_list_resolved.csv`, no other
-plumbing needed.
+The downstream analysis (`09_gene_spatial_translation.py`) loads
+`pagani_mouse_expr.npy` and `pagani_gene_list_resolved.csv`.
 """
 from __future__ import annotations
 

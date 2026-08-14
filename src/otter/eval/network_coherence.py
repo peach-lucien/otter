@@ -4,26 +4,26 @@ For each Garin functional network, measures how tightly the predicted human
 partners cluster in MNI space. Network-preserving mapping means mouse
 parcels in network X end up close to each other in human space.
 
-This is an *internal* multi-source check, it doesn't rely on Beauchamp
-validation. Two complementary metrics per network:
+The check is internal and does not rely on Beauchamp validation. Two
+complementary metrics per network:
 
   - median_pairwise_distance_mm: median pairwise Euclidean distance among
     predicted human partners (sampled to 50 if larger). Smaller = tighter.
   - mean_centroid_spread_mm: mean distance from each predicted human partner
     to the network's predicted-human centroid. Smaller = tighter.
 
-A "network-coherent" mapping has both metrics small. Comparing two π values
-on these metrics reveals whether structural / supervision changes preserve
-or degrade within-network coherence.
+A network-coherent mapping has both metrics small. Comparing two π values on
+these metrics indicates whether structural or supervision changes preserve or
+degrade within-network coherence.
 
 Citation context
 ----------------
 Coletta et al. 2020 (*Sci Adv*) identified ~7 mouse functional networks
 that mirror the canonical human resting-state networks. A good mouse↔human
 mapping should map within-network mouse parcels to within-network human
-parcels. We use the Garin 21 pair_ids → network assignment from
-``otter.data.networks.PAIRID_TO_NETWORK`` as the within-mouse network
-labelling (a curated proxy for Coletta-style network membership).
+parcels. The within-mouse network labelling is the Garin 21 pair_ids → network
+assignment from ``otter.data.networks.PAIRID_TO_NETWORK``, a curated proxy for
+Coletta-style network membership.
 """
 from __future__ import annotations
 

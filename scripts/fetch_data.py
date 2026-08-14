@@ -22,8 +22,7 @@ from otter.data.fetch import main  # noqa: E402
 
 # The coupling load_pi() returns. Checked after fetching so that an incomplete or stale archive
 # reports itself here, rather than surfacing as a bare FileNotFoundError in the first cell of a
-# notebook with no indication that the archive, rather than the code, is at fault. Archives up to
-# v1.2.0 did not contain this file; v1.3.0 onwards do.
+# notebook with no indication that the archive, rather than the code, is at fault.
 CANONICAL = Path(__file__).resolve().parents[1] / "outputs" / "coupling" / "pi_canonical.npy"
 
 if __name__ == "__main__":

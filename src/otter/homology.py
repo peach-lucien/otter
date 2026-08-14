@@ -11,10 +11,8 @@ Public:
     region_aggregate(pi, M, H)         the 21 x 21 class matrix and its labels
 
 The class assignment is nearest same-hemisphere anchor centroid. It is not interchangeable
-with any other parcel-to-region mapping in this repository. Two implementations of the
-collapse once gave 0.262 and 0.275 for the same diagonal mean, which is close enough to look
-right and far enough apart to matter, so there is one definition here and every consumer
-imports it.
+with any other parcel-to-region mapping in this repository, so this module holds the single
+definition and every consumer imports it.
 """
 from __future__ import annotations
 

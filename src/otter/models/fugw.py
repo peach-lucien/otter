@@ -6,12 +6,10 @@ implementation from the ``fugw`` PyPI package as a drop-in alternative to
 existing `FGWModel` API so the same anchor CV / FC translation / null
 distribution / bootstrap evaluation works without modification.
 
-Why FUGW (vs our existing semirelaxed FGW):
-
 The semirelaxed solver fixes the mouse marginal at uniform and lets the human
-marginal float freely. This is *why* held-out anchors usually land on
-non-anchor grid nodes near the correct anchor rather than the anchor itself
-the solver has no incentive to spread mass evenly across human nodes.
+marginal float freely, so it has no incentive to spread mass evenly across
+human nodes; held-out anchors then land on non-anchor grid nodes near the
+correct anchor rather than on the anchor itself.
 
 FUGW formulates the problem as **unbalanced** in both directions, with two
 KL-divergence penalties (`rho_s`, `rho_t`) controlling how strictly each
@@ -65,8 +63,8 @@ class FUGWModel(FGWModel):
         source side.
     rho_t : float, default 1.0
         Target-marginal relaxation (human). Setting ``rho_t = float('inf')``
-        forces uniform human coverage, the opposite of our current
-        semirelaxed config which lets the human marginal float entirely free.
+        forces uniform human coverage, the opposite of the semirelaxed
+        configuration, which lets the human marginal float entirely free.
     fc_weight, sc_weight, use_sc : as in MultimodalFGW.
     xyz_weight, lam_anchor : as in SupervisedFGW.
     nits_bcd : int, default 10
@@ -209,8 +207,8 @@ class FUGWModel(FGWModel):
         else:
             total = float(total) if total is not None else float("nan")
 
-        # Normalise so that mouse rows sum to 1/n_m (matches our other models'
-        # output convention so downstream eval code works unchanged)
+        # Normalise so that mouse rows sum to 1/n_m (the output convention of
+        # the other models, so downstream eval code works unchanged)
         row_sums = pi.sum(axis=1, keepdims=True).clip(min=1e-12)
         pi = pi / row_sums / n_m
 

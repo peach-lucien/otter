@@ -1,11 +1,9 @@
-"""HIPPOCAMPAL-1: Add Subiculum + CA1 + CA3 + Dentate gyrus region anchors.
+"""Add Subiculum + CA1 + CA3 + Dentate gyrus region anchors.
 
 All five hippocampal subfields show 0 % Beauchamp top-1 under production
-point-anchor π. OTTER's cleanest documented failure region. Earlier
-EXP-1 / SPLIT-1 added four hippocampal *point* anchors and moved 3 of 4
-from 0 → 7-9 % top-1. This experiment is the region-anchor analogue:
-each subfield's full DSURQE parcel set is forced into the matching human
-subfield MNI ball.
+point-anchor π, a documented failure region. This experiment is the
+region-anchor analogue of hippocampal point anchors: each subfield's full
+DSURQE parcel set is forced into the matching human subfield MNI ball.
 
   pid 39: Subiculum (29 mouse, 8 human)
   pid 40: CA1       (15 mouse, 6 human)
@@ -19,7 +17,7 @@ Outputs:
   - outputs/logs/beauchamp_validation_hippocampal_subi_only.json
 
 Usage:
-    PYTHONPATH=src python experiments/hippocampal/01_add_hippocampal_anchors.py
+    PYTHONPATH=src python experiments/anchor_packs/hippocampal.py
 """
 from __future__ import annotations
 

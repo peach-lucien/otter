@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""VALIDATION 1 (self-contained, no Beauchamp): anchor-recovery leave-one-out.
+"""Anchor-recovery leave-one-out, self-contained and independent of Beauchamp.
 
 The supervision is a set of curated mouse<->human correspondences (42 Garin point
-anchors + 26 region-anchor packs). For each pack correspondence we hold it out --
-plus the Garin points and any other pack overlapping its mouse territory -- re-fit
-the full model, and ask whether connectivity + the REMAINING anchors recover the
-held-out correspondence (its own mouse-set -> its own human-set). No benchmark.
+anchors + 26 region-anchor packs). Each pack correspondence is held out, together
+with the Garin points and any other pack overlapping its mouse territory, the full
+model is re-fitted, and connectivity plus the REMAINING anchors are tested for
+recovery of the held-out correspondence (its own mouse-set -> its own human-set).
 
 Scored with the full battery (AUROC/top-k/displacement/mass + nulls). Resumable.
 -> outputs/logs/anchor_recovery_loo.json

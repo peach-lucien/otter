@@ -1,4 +1,4 @@
-"""TECTUM-1: Add Superior + Inferior Colliculus sub-region anchors.
+"""Add Superior + Inferior Colliculus sub-region anchors.
 
 The tectum (midbrain colliculi) is one of OTTER's documented failure
 regions, both SC and IC have 0 % Beauchamp top-1 under the production
@@ -25,7 +25,7 @@ Outputs:
   - outputs/logs/beauchamp_validation_tectum_sc_only.json
 
 Usage:
-    PYTHONPATH=src python experiments/tectum/01_add_tectum_anchors.py
+    PYTHONPATH=src python experiments/anchor_packs/tectum.py
 """
 from __future__ import annotations
 

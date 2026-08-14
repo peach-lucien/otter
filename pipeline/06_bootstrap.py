@@ -15,7 +15,7 @@ each other.
 Usage:
     python pipeline/06_bootstrap.py                       # 2 iterations of fc_plus_SC (default)
     python pipeline/06_bootstrap.py --iters 40            # full 40-iter run (~10 min)
-    python pipeline/06_bootstrap.py --config fc_only      # FC-only baseline (the old default)
+    python pipeline/06_bootstrap.py --config fc_only      # FC-only baseline
     python pipeline/06_bootstrap.py --report              # summary on the existing state
 
 Naming convention:
@@ -197,7 +197,7 @@ def main(args):
             "argmax_row_frac_above_0.8":   float((per_row_stability > 0.8).mean()),
             "argmax_row_frac_above_0.5":   float((per_row_stability > 0.5).mean()),
             "argmax_row_frac_perfect":     float((per_row_stability == 1.0).mean()),
-            # Per-cell stability (the previous "mean stability" definition, re-computed)
+            # Per-cell stability
             "cell_stability_mean":         float(cell_stability.mean()),
             "cell_stability_median":       float(np.median(cell_stability)),
             "cell_frac_stable_above_0.8":  float((cell_stability > 0.8).mean()),

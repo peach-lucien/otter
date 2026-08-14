@@ -6,9 +6,9 @@ After ``pip install -e .``:
     otter-evaluate [--recompute] [--skip 05c_null_distributions.py]
     otter-artefacts
 
-These are thin wrappers that just delegate to the corresponding numbered
-script in ``pipeline/``. Running the pipeline scripts directly with
-``PYTHONPATH=src python pipeline/...`` works identically.
+These wrappers delegate to the corresponding numbered script in
+``pipeline/``. Running the pipeline scripts directly with
+``PYTHONPATH=src python pipeline/...`` is equivalent.
 """
 from __future__ import annotations
 

@@ -12,7 +12,7 @@ experiments/
 ├── hodge_2019_cortical_layers/     # Hodge 2019 cortical-layer marker translation
 ├── margulies_2016_principal_gradient/  # Margulies 2016 + Huntenburg 2021 brain-wide gradient
 ├── fulcher_2019_multimodal_gradient/   # Fulcher 2019 multimodal mouse-cortex hierarchy → human myelin
-├── balsters_2020_mfc_divergence/   # Schaeffer et al. 2020 frontal-cortex falsification test
+├── schaeffer_2020_mfc_divergence/  # Schaeffer et al. 2020 frontal-cortex falsification test
 ├── transbrain_2025_benchmark/      # TransBrain 2025 sibling-method head-to-head
 ├── buckner_krienen_2013_tethering/ # Buckner & Krienen 2013 tethering negative control
 ├── coletta_2020_cross_species_rsn/ # Coletta 2020 cross-species RSN correspondence
@@ -27,11 +27,11 @@ Each subdirectory has its own `README.md` documenting its scripts, inputs, and o
 
 ## anchor_packs/, region-anchor experiments
 
-12 per-pack runners that fit production-with-pack π and report Beauchamp + region-level deltas. `compose_all.py` produces the pre-warp `pi_fc_plus_SC_with_all_packs.npy`, retired 2026-07 and kept only to reproduce published comparisons; the canonical coupling adds the anchor-warped spatial cost and is what `load_pi()` returns. See [`anchor_packs/README.md`](anchor_packs/README.md) for the per-pack table and citations.
+12 per-pack runners that fit production-with-pack π and report Beauchamp + region-level deltas. `compose_all.py` produces the pre-warp `pi_fc_plus_SC_with_all_packs.npy`, retired and kept only to reproduce published comparisons; the canonical coupling adds the anchor-warped spatial cost and is what `load_pi()` returns. See [`anchor_packs/README.md`](anchor_packs/README.md) for the per-pack table and citations.
 
 ## ablations/, methodology ablations
 
-Three ablations that justify production design choices (soft anchors, uniform marginal, area-level xyz weighting). All three converged to the same direction: the production defaults outperform variants. See [`ablations/README.md`](ablations/README.md).
+Three ablations that justify production design choices (soft anchors, uniform marginal, area-level xyz weighting). In all three the production defaults outperform the variants. See [`ablations/README.md`](ablations/README.md).
 
 ## Third-party validations
 

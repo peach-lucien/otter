@@ -13,8 +13,8 @@ other packs are kept), then asks whether CP still splits into caudate + putamen.
   * split COLLAPSES -> it was supervised in; the CP result cannot be presented as
                        a discovered one-to-many.
 
-Note the Garin point anchor for CP is retained (it only says CP <-> striatum, not
-the sub-split), so this isolates the effect of the striatum SUBDIVISION supervision.
+The Garin point anchor for CP is retained (it only says CP <-> striatum, not the
+sub-split), so this isolates the effect of the striatum SUBDIVISION supervision.
 
 Run: cd otter && PYTHONPATH=src python experiments/one_to_many/02_anchor_drop_control.py
 Writes /var/tmp/pi_canonical_nostriatum.npy (scratch) and prints PASS/FAIL. Does not
@@ -100,7 +100,7 @@ def main():
     survives = bool(D >= o2m.D_ONE2MANY and "audate" in tn and "utamen" in tn)
     print("\nCP without the striatum pack:")
     print(f"  D = {D:.2f}   top -> " + ", ".join(f"{n} {v:.2f}" for n, v in top))
-    print(f"\nRESULT: split {'SURVIVES — discovered from connectivity+space' if survives else 'COLLAPSES — was supervised by the striatum pack'}")
+    print(f"\nRESULT: split {'SURVIVES: recovered from connectivity and space' if survives else 'COLLAPSES: supervised by the striatum pack'}")
 
 
 if __name__ == "__main__":

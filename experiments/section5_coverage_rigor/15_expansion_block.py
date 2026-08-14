@@ -4,7 +4,7 @@
 Positive controls proved the spin null detects r>=0.25 (script logs). Coverage vs Xu2020 expansion
 is a global-correlation null (-0.05) because coverage is noisy per parcel (reliability 0.22) and its
 deficit is concentrated in the most-expanded frontal cortex, not smoothly graded. A global Pearson is
-underpowered for that shape. Here we test the shape that matches the biology:
+underpowered for that shape. The shape that matches the biology is tested instead:
 
   - bin human regions by Xu2020 mouse->human expansion (tertiles / quintiles),
   - compare SOUND coverage (log10 mass-normalised region mean) across bins,

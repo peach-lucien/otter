@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Disease reverse-translation: does a HUMAN disease map route to the mouse structure where
-the field builds that disease's models?  (the anchored clinical result)
+"""Disease reverse-translation: whether a human disease map routes to the mouse structure
+where the field builds that disease's models.
 
 Same pipeline as 01_validate.py, but the ground truth is the MOUSE-MODEL substrate (see
 disease_ground_truth.md). Prediction, set a priori:

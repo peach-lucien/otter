@@ -1,6 +1,6 @@
 """OTTER as a translator: route a MOUSE anterior-insula optogenetic circuit map into human space and
-check it lands on the human salience network (anterior insula / cingulate) - a causal-circuit
-translation only a cross-species coupling can do.
+check it lands on the human salience network (anterior insula / cingulate), a causal-circuit
+translation that requires a cross-species coupling.
 
 Mouse input: data_external/transbrain_2025/ai_opto.csv (Allen-acronym -> AI-opto effect; TransBrain's
 own case study). Route through pi_canonical via transport-weighted averaging. Validate the translated

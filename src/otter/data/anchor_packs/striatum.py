@@ -2,8 +2,8 @@
 
 Voorn et al. (2004, *Trends in Neurosciences*) "Putting a spin on the
 dorsal-ventral divide of the striatum" (1198 citations, DOI:
-10.1016/j.tins.2004.06.006) reframed the classic dorsal-ventral
-striatum divide as a **mediolateral functional gradient**:
+10.1016/j.tins.2004.06.006) recast the dorsal-ventral striatum divide as a
+mediolateral functional gradient:
 
   - **Dorsolateral striatum** (sensorimotor) maps onto primate dorsal/
     lateral putamen, processes sensorimotor information from motor and
@@ -30,17 +30,14 @@ existing Caudoputamen → caudate validation covers all 149 CP parcels,
 so the unselected parcels fall back to the Garin pid 13 (Striatum)
 point anchor.
 
-Empirical effect, default pack
--------------------------------
-The pack was initially considered opt-in (theoretical concern: would the
-medial/lateral split drop the Beauchamp Caudoputamen → caudate metric).
-The empirical effect is the opposite: Caudoputamen top-1 **rises from
-13 % → 33 %** under this pack (the 46 ventromedial parcels concentrate
-on the canonical caudate ball, while the 18 dorsolateral parcels go to
-putamen). NAc also rises +4 pp; no off-target costs detected. Ship as
-default.
+Empirical effect
+----------------
+Under this pack Caudoputamen top-1 rises from 13 % to 33 %: the 46 ventromedial
+parcels concentrate on the canonical caudate ball and the 18 dorsolateral
+parcels on putamen. NAc rises by 4 pp, with no off-target cost. The pack is
+part of the default composition.
 
-Reference (verified Consensus search 2026):
+Reference:
   Voorn, P., Vanderschuren, L. J. M. J., Groenewegen, H. J., Robbins, T. W.,
   & Pennartz, C. M. A. (2004). Putting a spin on the dorsal-ventral divide
   of the striatum. *Trends in Neurosciences* 27, 468-474.

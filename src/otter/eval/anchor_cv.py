@@ -36,8 +36,8 @@ def anchor_loo_cv(
     Parameters
     ----------
     model_factory : callable returning a fresh FGWModel
-        e.g. `lambda: MultimodalFGW(use_sc=True)`. We need a *factory* (not an
-        instance) because each fold solves a fresh model.
+        e.g. `lambda: MultimodalFGW(use_sc=True)`. A factory rather than an
+        instance, because each fold solves a fresh model.
     mouse_ad, human_ad : AnnData
     networks : list of network names to use as folds (default: all 11)
     fit_kwargs : passed to each model.fit()

@@ -22,10 +22,9 @@ over the 19 regions, and is the quantity reported. `n_best` counts the regions w
 configuration is strictly best.
 
 Provenance. This script neither loads nor fits a coupling, so neither ``provenance()`` nor
-``refit_provenance()`` describes it. Recording either would claim an input this run never
-touched. It records the path and sha256 of the log it read instead. Note that the source log
-carries no coupling stamp of its own, so the chain terminates there rather than at a coupling;
-stamping it is outstanding work, tracked as A3b.
+``refit_provenance()`` describes it. It records the path and sha256 of the log it read instead.
+The source log carries no coupling stamp of its own, so the chain terminates there rather than
+at a coupling.
 
     cd otter && python3 experiments/section2_supervision/06_regret.py --check   # compare only
     cd otter && python3 experiments/section2_supervision/06_regret.py           # write the log
@@ -89,10 +88,8 @@ def build(src: dict) -> dict:
 
 
 # A mean over 19 values computed by this script and by the review harness can differ in the last
-# bit, because the two summed in a different order. That is not a different result. Anything
-# larger than this is, and the reported values are quoted to one decimal place, so a relative
-# tolerance of 1e-9 is roughly seven orders of magnitude tighter than anything that could be read
-# off the page.
+# bit because the two summed in a different order. The reported values are quoted to one decimal
+# place, so a relative tolerance of 1e-9 is far tighter than anything readable from them.
 FLOAT_RTOL = 1e-9
 
 
@@ -159,8 +156,8 @@ def main() -> int:
 
     if OUT.exists():
         committed = json.loads(OUT.read_text())
-        # source_log/source_sha256 are new fields this producer adds; the committed log predates
-        # them, so they are excluded from the comparison rather than counted as a difference.
+        # source_log/source_sha256 are fields this producer adds that the committed log does not
+        # carry, so they are excluded from the comparison rather than counted as a difference.
         derived = ("_what", "source_log", "source_sha256")
         mine = {k: v for k, v in built.items() if k not in derived}
         theirs = {k: v for k, v in committed.items() if k not in derived}
@@ -172,8 +169,7 @@ def main() -> int:
                 print(f"  {d}", file=sys.stderr)
             if len(diffs) > 20:
                 print(f"  ... and {len(diffs) - 20} more", file=sys.stderr)
-            print("\nNot written. Do not adjust the reported numbers to match this; find out "
-                  "why the producer disagrees with the log first.", file=sys.stderr)
+            print("\nNot written; the producer disagrees with the committed log.", file=sys.stderr)
             return 1
         drift = max_rel_drift(theirs, mine)
         print(f"\nreproduces {OUT.relative_to(ROOT)}; "
