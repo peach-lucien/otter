@@ -60,6 +60,42 @@
    "VisPeri": 0.8605223522005612,
    "VisCent": 1.1737454692670317
   },
+  "network_mean_sd_vs_rest": {
+   "ContB": -0.6137360025802371,
+   "ContA": -0.4916223641033217,
+   "SalVentAttnA": -0.45538941725756626,
+   "Limbic": -0.34339603945950253,
+   "SomMotA": -0.34161689017081553,
+   "SalVentAttnB": -0.30207974214854094,
+   "DorsAttnB": -0.284348240813516,
+   "TempPar": -0.25738897826057666,
+   "DefaultB": -0.24599242116213907,
+   "DefaultC": -0.11235800255849021,
+   "DefaultA": -0.11097994934856951,
+   "ContC": 0.3040032047796296,
+   "DorsAttnA": 0.3344883792540472,
+   "SomMotB": 0.5684495958569515,
+   "VisPeri": 0.9200426555766843,
+   "VisCent": 1.2713252588735546
+  },
+  "n_parcels_per_network": {
+   "ContA": 132,
+   "ContB": 115,
+   "ContC": 30,
+   "DefaultA": 152,
+   "DefaultB": 163,
+   "DefaultC": 80,
+   "DorsAttnA": 139,
+   "DorsAttnB": 105,
+   "Limbic": 55,
+   "SalVentAttnA": 145,
+   "SalVentAttnB": 116,
+   "SomMotA": 143,
+   "SomMotB": 131,
+   "TempPar": 60,
+   "VisCent": 140,
+   "VisPeri": 118
+  },
   "n_networks": 16
  },
  "5f_tested_statistic": {

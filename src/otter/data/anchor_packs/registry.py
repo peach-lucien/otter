@@ -4,12 +4,9 @@ Every consumer imports :data:`DEFAULT_PACK_NAMES` /
 :func:`build_default_pack_entries` from this module, so the recommended
 composition has one definition.
 
-The recommended model, ``outputs/coupling/pi_fc_plus_SC_with_all_packs.npy``,
-is composed from every pack flagged ``default=True`` below: all 15 packs, 26
-region-anchor entries. In a multi-benchmark comparison the full set leads on
-the TransBrain literature-homology benchmark and ties for best on Beauchamp,
-while a smaller set leads on Beauchamp alone and by a narrow margin,
-reflecting that benchmark's coarse validation balls.
+The recommended model, ``outputs/coupling/pi_canonical.npy``, is composed from
+every pack flagged ``default=True`` below: all 15 packs, 26 region-anchor
+entries.
 
 Adding or removing a pack from the recommended model is a one-line change here
 (flip ``default``); the compose script, the GUI builder and the multi-source
@@ -54,7 +51,7 @@ class PackSpec:
         ``build_<name>_region_anchors(M_var, H_var, *, atlas_root=...)``.
     default : bool
         Whether this pack is part of the recommended all-packs composition
-        (``pi_fc_plus_SC_with_all_packs.npy``).
+        (``pi_canonical.npy``).
     note : str
         What the pack covers and any metric trade-off.
     """
@@ -69,29 +66,29 @@ class PackSpec:
 # recommended π. The order determines pair_id ordering in the fit and must
 # stay stable unless the coupling is re-fitted.
 #
-# All 15 packs are in the recommended composition; see the module docstring
-# for the multi-benchmark rationale. A few carry trade-offs, noted below.
+# All 15 packs are in the recommended composition. Each note gives the pack's
+# anatomical scope and its source; a few carry caveats, noted below.
 # ---------------------------------------------------------------------------
 PACKS: dict[str, PackSpec] = {
     "biccn_motor": PackSpec(
         "biccn_motor", build_biccn_motor_region_anchors, default=True,
-        note="M1 + M2/PMd (Bakken 2021). Lifts Beauchamp Primary motor 0->100%."),
+        note="M1 + M2/PMd (Bakken 2021)."),
     "tectum": PackSpec(
         "tectum", build_tectum_region_anchors, default=True,
-        note="Superior + Inferior Colliculus (Isa 2021). Lifts SC + IC 0->100%."),
+        note="Superior + Inferior Colliculus (Isa 2021)."),
     "olfactory": PackSpec(
         "olfactory", build_olfactory_region_anchors, default=True,
-        note="Piriform + anterior olfactory nucleus (Mori 2014). Lifts Piriform 0->100%."),
+        note="Piriform + anterior olfactory nucleus (Mori 2014)."),
     "amygdala": PackSpec(
         "amygdala", build_amygdala_region_anchors, default=True,
-        note="Cortical subplate / amygdala (Janak & Tye 2015). Lifts amygdala 0->100%."),
+        note="Cortical subplate / amygdala (Janak & Tye 2015)."),
     "hippocampal": PackSpec(
         "hippocampal", build_hippocampal_region_anchors, default=True,
-        note="Subiculum + CA1 + CA3 + DG (Strange 2014). Lifts all 4 subfields 0->100%."),
+        note="Subiculum + CA1 + CA3 + DG (Strange 2014)."),
     "cingulate": PackSpec(
         "cingulate", build_cingulate_region_anchors, default=True,
-        note="Subgenual ACC + retrosplenial (Vogt 2012). Trade-off: shifts Beauchamp "
-             "ACG 13%->9% (anchor target = subgenual, validation target = pregenual)."),
+        note="Subgenual ACC + retrosplenial (Vogt 2012). The anchor target is "
+             "subgenual; the anterior-cingulate validation target is pregenual."),
     "lateral_pfc": PackSpec(
         "lateral_pfc", build_lateral_pfc_region_anchors, default=True,
         note="OFC only (Wallis 2011). The Prelimbic->dlPFC entry is excluded by "
@@ -99,8 +96,7 @@ PACKS: dict[str, PackSpec] = {
              "2020 falsification test; pass include_dlpfc=True for ablations."),
     "striatum": PackSpec(
         "striatum", build_striatum_region_anchors, default=True,
-        note="Caudoputamen dorsolateral/ventromedial (Voorn 2004). Lifts Beauchamp "
-             "Caudoputamen 12%->33%."),
+        note="Caudoputamen dorsolateral/ventromedial (Voorn 2004)."),
     "entorhinal": PackSpec(
         "entorhinal", build_entorhinal_region_anchors, default=True,
         note="Entorhinal cortex (Franjic 2021)."),
@@ -115,11 +111,11 @@ PACKS: dict[str, PackSpec] = {
         note="Perirhinal cortex (Burwell 1995)."),
     "auditory": PackSpec(
         "auditory", build_auditory_region_anchors, default=True,
-        note="A1 core + belt (Hackett 2001). Lifts Beauchamp Primary auditory 22%->100%."),
+        note="A1 core + belt (Hackett 2001)."),
     "somatosensory": PackSpec(
         "somatosensory", build_somatosensory_region_anchors, default=True,
-        note="Face/hand/leg S1 body-map (Penfield 1937; Seelke 2012). Trade-off: shifts "
-             "Beauchamp S1 20%->15% (face/leg anchors sit outside the validation ball)."),
+        note="Face/hand/leg S1 body-map (Penfield 1937; Seelke 2012). The face and leg "
+             "anchors sit outside the S1 validation ball."),
     "ppc": PackSpec(
         "ppc", build_ppc_region_anchors, default=True,
         note="Posterior parietal cortex / BA7 (Whitlock 2017)."),
@@ -135,7 +131,7 @@ def build_default_pack_entries(M_var, H_var, *, atlas_root="."):
 
     Concatenates, in registry order, the entries from every pack with
     ``default=True``. This is the composition fitted into
-    ``outputs/coupling/pi_fc_plus_SC_with_all_packs.npy``.
+    ``outputs/coupling/pi_canonical.npy``.
 
     Parameters
     ----------
