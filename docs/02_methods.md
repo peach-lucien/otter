@@ -36,7 +36,7 @@ Given:
 - `M`, (n_m × n_h) cross-species feature cost (xyz, network mask, optional gene)
 - `p`, fixed mouse marginal `1/n_m`
 - α ∈ [0, 1]. FGW mixing weight (1 = pure relational, 0 = pure feature)
-- ε > 0, entropic regularisation strength
+- ε > 0, mirror-descent step size
 
 We solve:
 
@@ -44,11 +44,14 @@ $$
 \pi^* = \arg\min_{\pi}
   (1-\alpha) \cdot \langle M, \pi\rangle
   + \alpha \cdot \sum_{i,j,k,l} (C_m[i,k] - C_h[j,l])^2 \, \pi[i,j] \, \pi[k,l]
-  - \varepsilon \cdot H(\pi)
 $$
 
 subject to `π·1 = p` and `π ≥ 0` (the column marginal is free in the
-semirelaxed setting). `H(π)` is the negentropy regulariser.
+semirelaxed setting). The objective carries no entropy term. ε is the step size
+of the mirror-descent iteration used to solve it, so the iterate depends on ε and
+the iteration count only through their ratio τ = iterations / ε. The released
+coupling is τ = 500, reached as 25 iterations at ε = 0.05, and is reproduced by
+any equivalent pair.
 
 We use [POT](https://pythonot.github.io/) (Python Optimal Transport) for the
 underlying solver, specifically
@@ -79,11 +82,10 @@ each region anchor with mouse-set `Mset` and human-set `Hset`:
 - `M[mp, hp] = 0` for `mp ∈ Mset, hp ∈ Hset` (free within the region)
 - Symmetrically along human columns.
 
-`lam_outside = 0.15` is the default ("soft region anchor"). Compared to the
-legacy hard variant (`lam_outside = 1.0`), the soft constraint produces
-better-calibrated probability tails (held-out region CV mean rank ↓ 43 %)
-while leaving the trained-π argmax unchanged. Pass `region_lam_outside=1.0`
-to recover the hard wall.
+`lam_outside = 0.15` is the default, a soft region anchor. Setting
+`lam_outside = 1.0` gives a hard region wall, which raises held-out region CV
+mean rank by 43 % and leaves the trained-π argmax unchanged. Pass
+`region_lam_outside=1.0` to use it.
 
 ## Modality combinations
 
@@ -108,14 +110,15 @@ Optional terms (off by default in the production config, available as ablations)
 | Parameter        | Value    | Rationale                                             |
 |------------------|----------|-------------------------------------------------------|
 | α                | 0.5      | Equal weight to relational + feature terms            |
-| ε                | 0.05     | Selected by nested CV on held-out Beauchamp homologies. 5e-3 gives a near-deterministic π with no gain in held-out recovery. |
+| ε                | 0.05     | Mirror-descent step size. With `max_iter` = 25 this is τ = 500. Selected by nested CV on held-out Beauchamp homologies. A larger τ (25 iterations at ε = 0.005, τ = 5,000) gives a near-deterministic π with no gain in held-out recovery. |
 | `xyz_weight`     | 0.25     | Selected by the same nested CV. Applied in an anchor-warped frame: a thin-plate spline fitted to the 42 Garin coordinate pairs carries mouse coordinates into human space, and the cross-species spatial cost is computed there. |
 | `lam_anchor`     | 1.0      | Point-anchor forbidden-cell penalty; large vs the [0, 1] cost scale |
 | `region_lam_outside` | 0.15 | Region-anchor outside-region penalty (soft default) |
 | `fc_weight`      | 0.7      | Production FC + SC mix                                 |
 | `sc_weight`      | 0.3      | Production FC + SC mix                                 |
 | `cost_normalisation` | "max" | Each cost matrix divided by its max off-diagonal entry |
-| `max_iter`       | 25       | Solutions converge well within 25 iterations           |
+
+| `max_iter`       | 25       | Outer mirror-descent iterations. With ε = 0.05 this is τ = 500. |
 | `tol`            | 1e-5     | Loss change tolerance                                 |
 
 ## Cost matrices
@@ -160,8 +163,9 @@ Three independent metrics, each described in [`docs/03_results.md`](03_results.m
 
 1. **Held-out anchor CV** (binary `top-k`, graded `mean_rank`, `mean_xyz_dist`):
    leave-one-network-out, model gets all anchors except those in the held-out
-   network. Most stringent, held-out anchors have *no* M signal pulling them
-   to the correct partner. 79–81% top-1 in production.
+   network. Held-out anchors receive no M signal pulling them to the correct
+   partner, so this is the strictest of the three metrics. 79–81% top-1 in
+   production.
 
 2. **FC translation quality**: anchor-independent. Push mouse FC through π:
    `Fh_pred = πᵀ · Fm · π / (q · qᵀ)`. Pearson correlation of upper-triangle

@@ -14,15 +14,15 @@ python scripts/fetch_data.py --tier raw # add the full raw inputs (for a from-sc
 ```
 
 The DOI and download URLs are read from `data_manifest.json`.
-Data DOI: [10.5281/zenodo.21458106](https://doi.org/10.5281/zenodo.21458106) (latest;
-the raw-inputs archive remains in the prior version, [10.5281/zenodo.20733163](https://doi.org/10.5281/zenodo.20733163)).
+Data DOI: [10.5281/zenodo.20733162](https://doi.org/10.5281/zenodo.20733162), which resolves to
+the latest version. Both archives are on that record.
 
 ## Available without a download
 
 - Run the unit test suite. `tests/conftest.py` builds a small synthetic
   cross-species problem; data-backed tests `pytest.skip` when their files are
   absent. So `pytest -q` works on a bare checkout.
-- Read every headline number. The validation result logs in `outputs/logs/`
+- Read the headline numbers. The validation result logs in `outputs/logs/`
   (the `*.json`/`*.csv` files) are committed to the repo, along with
   `outputs/anndata/_schaefer_order.txt`, the voxel-count arrays, and the
   multi-source trust map.
@@ -35,8 +35,8 @@ the archive below.
 | Tier | Where | Enables |
 |---|---|---|
 | 0, small artifacts | committed to Git | run unit tests, read all result numbers |
-| 1, reproduce bundle | Zenodo `homer-reproduce-v1.3.0.tar.gz` (~735 MB download) | re-run every experiment/notebook against the precomputed couplings |
-| 2, raw inputs | Zenodo `homer-raw-inputs-v1.0.0.tar.gz` (606 MB download) | rebuild the coupling bitwise from raw data via `pipeline/` |
+| 1, reproduce bundle | Zenodo `otter-reproduce-v1.3.0.tar.gz` (~735 MB download) | re-run every experiment/notebook against the precomputed couplings |
+| 2, raw inputs | Zenodo `otter-raw-inputs-v1.0.0.tar.gz` (606 MB download) | rebuild the coupling bitwise from raw data via `pipeline/` |
 
 Tier 2 is required only to regenerate `π` from scratch, not to use OTTER.
 
@@ -44,12 +44,12 @@ Tier 2 is required only to regenerate `π` from scratch, not to use OTTER.
 
 ## Zenodo record contents
 
-Create **one Zenodo record** with **two archive files**. Build both from the repo
-root so the paths inside the tarball are repo-relative (the fetch script unpacks
-at the repo root). The exact `tar` commands are in
+The record holds two archive files. Both are built from the repository root, so
+the paths inside each tarball are repo-relative and the fetch script unpacks at
+the repository root. The `tar` commands are in
 [`scripts/build_archives.sh`](scripts/build_archives.sh).
 
-### Archive 1, `homer-reproduce-v1.3.0.tar.gz` (~735 MB gzipped)
+### Archive 1, `otter-reproduce-v1.3.0.tar.gz` (~735 MB gzipped)
 
 Everything needed to re-run the experiments **and all the notebooks** on the shipped
 couplings. The exact file list is in `scripts/build_archives.sh` (the `REPRODUCE`
@@ -60,12 +60,12 @@ array).
 | Path | Size | What |
 |---|---:|---|
 | `outputs/coupling/pi_canonical.npy` | 30 MB | the canonical coupling π (1864×2094), what `load_pi()` returns |
-| `outputs/coupling/pi_canonical_sharp.npy` | 30 MB | same recipe at ε = 0.005; sharper, no more accurate |
-| `outputs/coupling/pi_fc_plus_SC_with_all_packs.npy` | 30 MB | pre-warp coupling, retired |
-| `outputs/coupling/pi_fc_plus_SC.npy` | 15 MB | pre-warp point-anchor coupling, retired |
+| `outputs/coupling/pi_canonical_sharp.npy` | 30 MB | same recipe at τ = 5,000, sharper with the same held-out accuracy |
+| `outputs/coupling/pi_fc_plus_SC_with_all_packs.npy` | 30 MB | coupling fitted without the anchor warp |
+| `outputs/coupling/pi_fc_plus_SC.npy` | 15 MB | point-anchor coupling fitted without the anchor warp |
 | `outputs/coupling/pi_fc_plus_SC_with_*.npy` (×15) + `pi_fc_plus_SC_xyz_zero.npy` | ~430 MB | ablation-variant couplings the advanced notebooks load (per-anchor-pack, xyz-zeroed, etc.) |
 | `outputs/coupling/trust_multisource_canonical.npz` | ~0.1 MB | per-parcel evidence tiers on the canonical π, what the docs gate queries on |
-| `outputs/coupling/trust_multisource_all_packs.npz`, `trust_score_fc_plus_SC*.npz` | ~0.5 MB | per-parcel trust tiers + scores on the retired couplings |
+| `outputs/coupling/trust_multisource_all_packs.npz`, `trust_score_fc_plus_SC*.npz` | ~0.5 MB | per-parcel trust tiers and scores on the no-warp couplings |
 | `outputs/coupling/bootstrap_aggregate_fc_plus_SC.npz` | | bootstrap stability aggregate |
 | `outputs/coupling/per_disorder_predictions.npz` | 0.07 MB | ENIGMA per-disorder predicted maps |
 | `outputs/anndata/mouse.h5ad` | 42 MB | processed mouse parcel table + features |
@@ -92,7 +92,7 @@ array).
 | `data_external/MouseHumanTranscriptomicSimilarity/AMBA/data/DSURQE_tree.json` | 0.1 MB | DSURQE label tree |
 | `data_external/p6ebec-hbp-d000038_SC-FC_HCP_eNKI_pub/Schaefer2018_400Parcels_17Networks.zip` | 7.8 MB | Schaefer parcellation |
 
-### Archive 2, `homer-raw-inputs-v1.0.0.tar.gz` (606 MB gzipped, optional)
+### Archive 2, `otter-raw-inputs-v1.0.0.tar.gz` (606 MB gzipped, optional)
 
 The complete `data_external/` directory, for a bitwise rebuild of π through
 `pipeline/`. It is a superset of the inputs in Archive 1 plus the full
@@ -107,19 +107,12 @@ regeneratable via the Allen API (slow, 1–3 days) and documented in
 ## Licensing
 
 The files under `data_external/` are **derived from third-party datasets**, each
-with its own terms. Before making the archives public, confirm that
-redistribution is permitted; where it is not, drop those entries from Archive
-1/2 so that users re-download via the scripts in `pipeline/00_external/`, which
-fetch from the original sources. The OTTER-generated artifacts (the coupling, trust map,
-per-disorder predictions, and the processed AnnData caches) are ours to share
-freely. Sources and any redistribution restrictions are recorded per dataset in
+with its own terms. Entries whose terms do not permit redistribution are
+excluded from the archives, and users re-download them with the scripts in
+`pipeline/00_external/`, which fetch from the original sources. The
+OTTER-generated artifacts, meaning the coupling, the trust map, the per-disorder
+predictions and the processed AnnData caches, carry no redistribution
+restriction. Sources and any redistribution restrictions are recorded per dataset in
 `pipeline/00_external/README.md` and in the `SOURCES.md` files under
 `data_external/*/`.
 
-## After uploading
-
-1. Reserve/publish the DOI on Zenodo.
-2. Put the DOI and the two file URLs into `data_manifest.json`.
-3. Paste each file's checksum (Zenodo shows MD5 per file) into the same manifest
-   so `scripts/fetch_data.py` can verify downloads.
-4. Add the DOI badge to `README.md` (placeholder already in place).

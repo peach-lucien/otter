@@ -8,7 +8,7 @@
 
 A Python package that learns probabilistic cross-species correspondences between mouse and human brain parcels using **Fused Gromov–Wasserstein optimal transport**, anchored on published homologue pairs.
 
-Output: a coupling matrix **π** of shape (1864 mouse parcels × 2094 human parcels) where `π[i, j]` is the model's estimated probability that mouse parcel *i* corresponds to human parcel *j*.
+The output is a coupling matrix **π** of shape (1864 mouse parcels × 2094 human parcels), where `π[i, j]` is the model's estimated probability that mouse parcel *i* corresponds to human parcel *j*.
 
 ---
 
@@ -16,7 +16,7 @@ Output: a coupling matrix **π** of shape (1864 mouse parcels × 2094 human parc
 
 **→ [Open the OTTER Mapping Explorer](https://peach-lucien.github.io/otter/)**
 
-A self-contained 3D viewer for the canonical coupling, distributed as a single HTML file that requires no Python, no installation and no backend. It searches a mouse region or parcel, ranks its top-K human partners by coupling mass, toggles the cortical surface and the mouse atlas shell, and shows the trust evidence behind each prediction.
+The explorer is a 3D viewer for the canonical coupling in a single HTML file that runs in a browser without Python or a backend. It searches a mouse region or parcel, ranks its top-K human partners by coupling mass, toggles the cortical surface and the mouse atlas shell, and shows the trust evidence behind each prediction.
 
 ---
 
@@ -34,8 +34,9 @@ The coupling concentrates on the homology diagonal (mean self-mass across the 21
 between two mouse parcels predicts distance between their routed human centroids at r = 0.53,
 against a permuted-coupling null of ≈ 0). Each mouse parcel's best human partner carries a median
 probability of 0.31, above 0.5 for 20 % of parcels, so the coupling spreads mass rather
-than committing to one partner. That concentration is set by the entropic regularisation. Re-fitting
-at ε = 0.005 gives a near-deterministic coupling with no gain in held-out recovery.
+than committing to one partner. That concentration is set by τ = 500, reached as 25 mirror-descent
+iterations at step size ε = 0.05. Re-fitting at τ = 5,000 gives a near-deterministic coupling with
+no gain in held-out recovery.
 
 Scored against Beauchamp 2022's transcriptomic homology set, which never enters the fit, the
 coupling reaches region-level AUROC 0.90 (parcel-weighted across the 19 pairs; 0.93
@@ -97,7 +98,7 @@ that parcel received. It runs high over sensorimotor, auditory and visual territ
 prefrontal and lateral temporal cortex. Across 1,824 cortical parcels the mean is r = 0.45.
 
 That deficit tracks cortical expansion. Six of seven published maps clear a spin null. Reconstruction
-accuracy falls with macaque-to-human expansion (ρ = −0.47, spin p = 0.003), mouse→human expansion (−0.32,
+accuracy falls with macaque-to-human expansion (ρ = −0.47, spin p = 0.003), a second macaque-to-human expansion map (−0.32,
 p = 0.001), the sensorimotor–association axis (−0.33, p = 0.017) and the principal gradient
 (−0.28, p = 0.017). Only the T1w:T2w myelin map does not (+0.24, n.s.).
 
@@ -124,8 +125,8 @@ The tier grades the resolution at which a prediction can be trusted rather than 
 homologue exists. Parcel-exact recovery separates the two validated tiers (top-1 0.70 against
 0.39). Trust cannot be read from the solver. Across parcels without anchor supervision, the
 coupling's own concentration predicts top-1 accuracy at r = 0.06 and bootstrap stability at
-r = −0.04, neither significant. Because the regularisation sets concentration directly, a
-confident-looking coupling can be produced on demand, so the grades are external by necessity.
+r = −0.04, neither significant. Because τ sets concentration directly, a confident-looking
+coupling can be produced on demand. The evidence grades therefore use external evidence.
 
 ### Bidirectional translation
 
@@ -164,9 +165,9 @@ python scripts/fetch_data.py         # pull the couplings + caches from Zenodo (
 
 The repository ships code only. The coupling, the processed AnnData caches, and
 the validation inputs live in a versioned Zenodo archive and are pulled by
-`scripts/fetch_data.py`; the committed result logs in `outputs/logs/` carry every
-headline number without any download. See
-[`DATA.md`](DATA.md) for the tiers and what each contains. Data DOI: [10.5281/zenodo.21458106](https://doi.org/10.5281/zenodo.21458106). A call into the library before fetching prompts for the download; `OTTER_AUTO_FETCH=1` fetches automatically whenever data is needed.
+`scripts/fetch_data.py`. The result logs committed in `outputs/logs/` carry the
+headline numbers without any download. See
+[`DATA.md`](DATA.md) for the tiers and what each contains. Data DOI: [10.5281/zenodo.20733162](https://doi.org/10.5281/zenodo.20733162). A call into the library before fetching prompts for the download; `OTTER_AUTO_FETCH=1` fetches automatically whenever data is needed.
 
 Query a region after installation (requires the fetched data):
 
@@ -188,7 +189,7 @@ trust = np.load("outputs/coupling/trust_multisource_canonical.npz", allow_pickle
 reliable = trust["evidence_tier"] == "anchored_and_validated"     # 31% of parcels
 ```
 
-`load_pi()` defaults to `pi_canonical.npy`, the canonical coupling used throughout this repo. Always call `load_pi()` rather than loading a filename. The retired couplings (`pi_fc_plus_SC*.npy`) give different answers and are kept so that published comparisons remain reproducible. `pi_provenance()` returns the file and its sha256.
+`load_pi()` defaults to `pi_canonical.npy`, the canonical coupling used throughout this repo. Always call `load_pi()` rather than loading a filename. The other couplings in `outputs/coupling/` are ablation variants and give different answers. `pi_provenance()` returns the file the coupling was loaded from and its sha256.
 
 Interactive exploration is covered by `notebooks/01_quickstart.ipynb` and by the [OTTER Mapping Explorer](https://peach-lucien.github.io/otter/).
 
@@ -241,7 +242,7 @@ We solve a **Fused Gromov-Wasserstein optimal transport** problem (POT's `entrop
 | **`MultimodalFGW`** | **Production: FC + SC + anchors + xyz** |
 | `HierarchicalFGW` | Per-network sub-solves (best within-net FC) |
 
-Plus two comparative additions kept as ablations: `FUGWModel` (unbalanced FGW) and a Knox 2019 voxel-SC variant. Neither moves the headline numbers.
+Two further models are provided as ablations, `FUGWModel` (unbalanced FGW) and a Knox 2019 voxel-SC variant. Both give headline numbers within the reported spread of the production model.
 
 ## Citation
 

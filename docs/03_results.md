@@ -14,14 +14,14 @@ against everything else.
 ## Synthesis
 
 1. The coupling is calibrated and soft. Median top-target probability 0.31, above
-   0.5 for 20 % of parcels. Concentration is set by the entropic regularisation, not by anatomy.
+   0.5 for 20 % of parcels. Concentration is set by τ, not by anatomy.
 2. Connectivity and an anchor-warped spatial scaffold appear to set which human *region* a mouse
    region maps to. Curated anchors and packs set which *parcel*.
 3. Translation follows the areal hierarchy. Networks, the principal gradient, myelin,
    cytoarchitecture and hierarchy-aligned cell densities all clear spin nulls; laminar contrasts
    and spatially uniform cell classes do not.
-4. Against a state-of-the-art transcriptomic translator the two are level on region-level
-   accuracy, on that method's own benchmark, and OTTER leads on the other six capability axes.
+4. Against TransBrain, a transcriptomic translator, the two are level on region-level accuracy on
+   that method's own benchmark, and OTTER leads on the other six capability axes.
 5. Where the mouse cannot rebuild human connectivity is a network-shaped territory tracking
    cortical expansion, with dorsolateral prefrontal cortex the clearest case.
 6. The coupling turns a mouse experiment into a falsifiable human prediction. It does not resolve
@@ -30,17 +30,17 @@ against everything else.
 ## The coupling files
 
 `load_pi()` returns `pi_canonical.npy`, the coupling used throughout this repo. It combines region
-packs with an anchor-warped spatial cost at ε = 0.05 and xyz weight 0.25, both selected by nested
+packs with an anchor-warped spatial cost at τ = 500 (25 iterations at step size ε = 0.05) and xyz
+weight 0.25, both selected by nested
 cross-validation on held-out Beauchamp homologies.
 
 | file | what it is | use |
 |---|---|---|
 | `outputs/coupling/pi_canonical.npy` | canonical coupling | what `load_pi()` returns |
-| `outputs/coupling/pi_canonical_sharp.npy` | same recipe at ε = 0.005 | showcase variant; sharper, no more accurate |
-| `outputs/coupling/pi_fc_plus_SC*.npy` | pre-warp couplings | retired; kept to reproduce published comparisons |
+| `outputs/coupling/pi_canonical_sharp.npy` | same recipe at τ = 5,000 | sharper coupling, same held-out accuracy |
+| `outputs/coupling/pi_fc_plus_SC*.npy` | couplings fitted without the anchor warp | ablation variants |
 
-`pi_provenance()` returns the file and its sha256, and `tools/audit_pi.py` checks that every live
-analysis uses the canonical coupling.
+`pi_provenance()` returns the file the coupling was loaded from and its sha256.
 
 ## 1 · Calibration of the coupling
 
@@ -50,9 +50,9 @@ distance between two mouse parcels predicting the distance between their routed 
 r = 0.53 against a permuted-coupling null of ≈ 0.
 
 The coupling is soft. Each mouse parcel's best human partner carries a median probability of 0.31,
-above 0.5 for 20 % of parcels. Re-fitting at ε = 0.005 gives a near-deterministic coupling (median
-0.96, above 0.5 for 90 %) with no gain in held-out homology recovery, so sharpness reflects the
-regularisation rather than the evidence. ε is selected by held-out recovery.
+above 0.5 for 20 % of parcels. Re-fitting at τ = 5,000 gives a near-deterministic coupling (median
+0.96, above 0.5 for 90 %) with no gain in held-out homology recovery, so sharpness reflects τ
+rather than the evidence. τ is selected by held-out recovery.
 
 ### Evidence tiers
 
@@ -73,8 +73,8 @@ the two validated tiers, at top-1 0.70 against 0.39.
 
 Trust cannot be read from the solver. Across parcels without anchor supervision, the coupling's own
 concentration predicts top-1 accuracy at r = 0.06 and bootstrap stability at r = −0.04, neither
-significant. Since the regularisation sets concentration directly, a confident-looking coupling can
-be produced on demand.
+significant. Since τ sets concentration directly, a confident-looking coupling can be produced on
+demand.
 
 ## 2 · Contributions to homology recovery
 
@@ -160,8 +160,8 @@ five orthogonal to it does.
 
 The comparison is internally controlled. Eight of the fourteen measures are cell-class maps scored
 on the same 2,094 parcels against the same null, and they span the full range, from −0.03 for
-microglial density to +0.35 for the neuronal-glial contrast. What separates them is their relation
-to the areal hierarchy rather than how they were measured. Granular L4 − infragranular is the
+microglial density to +0.35 for the neuronal-glial contrast. Their relation to the areal hierarchy,
+not their measurement modality, separates them. Granular L4 − infragranular is the
 expected exception among the laminar contrasts at r = 0.19, since cortical granularity is itself
 areal.
 
@@ -185,8 +185,8 @@ literature homologue pairs, using TransBrain's own atlas and curation.
 
 The accuracy difference is not significant (paired Wilcoxon p = 0.36), so the two are level there.
 Across the seven capability axes compared, OTTER leads on six and is level on the seventh. The two
-are complementary instruments, region-level phenotype transfer against calibrated whole-brain
-correspondence.
+are complementary. TransBrain transfers phenotypes at region level, and OTTER provides calibrated
+whole-brain correspondence.
 
 ## 5 · Limits of connectivity reconstruction
 
@@ -210,29 +210,28 @@ Six of seven published maps clear a spin null:
 | map | ρ | spin p |
 |---|---:|---:|
 | macaque→human expansion (Hill 2010) | −0.47 | 0.003 |
-| mouse→human expansion (Xu 2020) | −0.32 | 0.001 |
+| macaque→human expansion (Xu 2020) | −0.32 | 0.001 |
 | sensorimotor–association axis (Sydnor 2021) | −0.33 | 0.017 |
 | principal FC gradient (Margulies 2016) | −0.28 | 0.017 |
 | postnatal developmental expansion (Hill 2010) | −0.25 | 0.050 |
-| mouse–human FC homology (Xu 2020) | +0.40 | 0.001 |
+| macaque–human FC homology (Xu 2020) | +0.40 | 0.001 |
 | T1w:T2w myelin (HCP) | +0.24 | 0.106 |
 
 Splitting cortex by the sensorimotor–association axis, the association tertile sits at 0.40 against
-0.50 for sensorimotor (Δ = 0.10, Cohen's d = 0.81, spin p = 0.010). The distributions overlap; what
-separates them is the floor, which reaches 0.07 in association cortex and 0.22 in sensorimotor
-cortex.
+0.50 for sensorimotor (Δ = 0.10, Cohen's d = 0.81, spin p = 0.010). The distributions overlap. The
+floor differs, at 0.07 in association cortex and 0.22 in sensorimotor cortex.
 
 ### Transcriptomic control
 
 Control B, covering dorsolateral and rostrolateral prefrontal cortex, is the only network
 significantly below the cortical mean (−0.69 SD, spin p = 0.006), while transcriptomic similarity
 to mouse over the same parcels is flat (−0.18 SD, p = 0.39). Human dorsolateral prefrontal cortex
-remains molecularly mammalian while having lost its connectional counterpart, so the species
-difference is a reorganisation of connections rather than a replacement of tissue.
+therefore retains transcriptomic similarity to mouse but lacks a connectional counterpart, so the
+species difference is a reorganisation of connections rather than a replacement of tissue.
 
 ### A falsification control
 
-Mouse medial-frontal cortex has no granular prefrontal homologue, and π does not manufacture one.
+Mouse medial-frontal cortex has no granular prefrontal homologue, and π does not assign one.
 Of the mass it sends to the human brain, 32 % arrives in mid-cingulate cortex, 18 % in premotor
 cortex and 11 % in medial prefrontal cortex, while 0.015 % reaches dorsolateral prefrontal cortex,
 indistinguishable from the 0.026 % expected under a permuted coupling.
@@ -267,11 +266,11 @@ data. Reconstruction accuracy carries no disorder-specific information at this r
 ## Caveats
 
 1. Parcel-exact recovery depends on the curation. Held out it collapses to roughly 10 %, while
-   region-level recovery largely holds. The generalisation numbers to quote are the
-   leave-one-region-out mean (0.74) and the curation-removed re-fit (0.90 → 0.73).
+   region-level recovery largely holds. Generalisation is measured by the leave-one-region-out
+   mean (0.74) and by the curation-removed re-fit (0.90 to 0.73).
 2. Parcel-level claims need the right tier. Trust parcel granularity in `anchored_and_validated`;
    use region granularity across the validated tiers.
-3. The spatial scaffold contributes substantially, and is itself fitted to the Garin pairs. No arm of the
+3. The spatial scaffold is itself fitted to the Garin pairs. No arm of the
    ablation is supervision-free, so OTTER is not unsupervised homology discovery.
 4. Laminar structure does not translate. See §3.
 5. Reconstruction of association cortex is poor, and a mouse model cannot address phenotypes
@@ -288,7 +287,7 @@ data. Reconstruction accuracy carries no disorder-specific information at this r
    region-level; `low_evidence` is a hypothesis.
 2. Phenotypes that vary across the areal hierarchy are carried by π; phenotypes that vary through
    cortical depth are not. §3 is the evidence.
-3. Check reconstruction accuracy before translating into association cortex. Where it is low, the
-   absence of a good counterpart is the finding rather than a failed query.
+3. Check reconstruction accuracy before translating into association cortex. A low value indicates
+   the absence of a counterpart rather than a failed query.
 4. Spin-test every spatial correlation (`otter.eval.nulls.spin_null`) before reading it as
-   significant. A permuted-π null is too lenient for a smooth map.
+   significant. A permuted-π null is not conservative enough for a spatially smooth map.
