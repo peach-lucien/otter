@@ -25,7 +25,7 @@ Needs the ABIDE download (run like 05). Prereqs: 04 (masks JSON) + ideally 05
 (hard labels, for the sanity check).
     OTTER_ALLOW_INSECURE_SSL=1 PYTHONPATH=src python \
         experiments/autism_subtypes/abide_subtype/06_continuous_subtype_score.py \
-        --abide-data-dir /tmp/abide_cache
+        --abide-data-dir /path/to/abide_cache
 """
 from __future__ import annotations
 

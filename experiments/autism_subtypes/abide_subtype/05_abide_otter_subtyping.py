@@ -16,7 +16,7 @@ It runs both and reports whether the learned coupling subtypes more than Pagani'
 Needs the ABIDE-pcp download (nilearn), run on a machine with the data, e.g.:
     OTTER_ALLOW_INSECURE_SSL=1 PYTHONPATH=src python \
         experiments/autism_subtypes/abide_subtype/05_abide_otter_subtyping.py \
-        --abide-data-dir /tmp/abide_cache
+        --abide-data-dir /path/to/abide_cache
 (see 01's header for the SSL/atlas notes). Prerequisite:
 `04_otter_human_masks.py` must have been run (writes pagani_otter_human_masks.json).
 """
