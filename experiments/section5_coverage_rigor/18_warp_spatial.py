@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Anchor-driven WARPED cross-species spatial cost vs the naive per-species Euclidean one.
+"""Anchor-driven WARPED cross-species spatial cost vs the per-species Euclidean one.
 
-The production M_xyz is Euclidean distance between PER-SPECIES-normalised coordinates. It is
-naive: the human frontal pole normalises into a coordinate corner the mouse never reaches, so
-human dorsolateral PFC (Yeo-17 Control B) is penalised by construction. This corrupts the
-column-sum "coverage": coverage tracks spatial position (rho ~ -0.62) and the dlPFC deficit
+The production M_xyz is Euclidean distance between PER-SPECIES-normalised coordinates. Under
+that definition the human frontal pole normalises into a coordinate corner the mouse never
+reaches, so human dorsolateral PFC (Yeo-17 Control B) is penalised by construction. The
+column-sum "coverage" then tracks spatial position (rho ~ -0.62), and the dlPFC deficit
 vanishes when the xyz term is zeroed.
 
 Anchor-driven warp: fit a smooth mouse->human coordinate map from the 42 Garin homolog anchor

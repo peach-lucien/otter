@@ -1,8 +1,8 @@
 """Sweep over the soft-region-anchor penalty (``lam_outside``).
 
 Tests whether **soft** region anchors (mild penalty outside the region instead
-of a hard 0/1 wall) give better held-out region recovery than the current
-hard formulation. The hard version forces the optimizer to satisfy the
+of a hard 0/1 wall) give better held-out region recovery than a hard
+formulation. The hard version forces the optimizer to satisfy the
 region constraint exactly, which is harmful when atlas regions overlap or
 the Garin anchor is mis-placed.
 

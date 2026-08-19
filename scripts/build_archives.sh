@@ -5,18 +5,16 @@
 #   bash scripts/build_archives.sh
 #
 # Produces (next to the repo):
-#   ../homer-reproduce-v1.0.0.tar.gz   (~173 MB gzipped)  -> Zenodo Archive 1
-#   ../homer-raw-inputs-v1.0.0.tar.gz  (~606 MB gzipped)  -> Zenodo Archive 2
+#   ../otter-reproduce-v1.3.0.tar.gz   (~173 MB gzipped)  -> Zenodo Archive 1
+#   ../otter-raw-inputs-v1.0.0.tar.gz  (~606 MB gzipped)  -> Zenodo Archive 2
 # and prints the sha256 of each for the record.
 #
 # Paths inside the tarballs are repo-relative, so scripts/fetch_data.py unpacks
 # them cleanly at the repo root. Missing entries are skipped with a warning.
 set -uo pipefail
 
-REPRODUCE_VERSION="v1.3.0"   # ships every data file the notebooks/experiments load (full audit).
-# v1.3.0 adds pi_canonical.npy, pi_canonical_sharp.npy and
-# trust_multisource_canonical.npz.
-RAW_VERSION="v1.0.0"         # unchanged content
+REPRODUCE_VERSION="v1.3.0"   # ships every data file the notebooks and experiments load.
+RAW_VERSION="v1.0.0"
 # Stop macOS bsdtar from writing AppleDouble (._*) sidecars into the archives.
 export COPYFILE_DISABLE=1
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -25,9 +23,8 @@ OUT_DIR="$(dirname "$ROOT")"
 
 # ---- Archive 1: reproduce bundle -------------------------------------------
 REPRODUCE=(
-  # --- canonical: what load_pi() returns and what every notebook needs. Without these the
-  # bundle carries only the retired pre-warp couplings, and every notebook fails with
-  # FileNotFoundError on its first cell.
+  # --- canonical: what load_pi() returns and what every notebook needs. Without these,
+  # every notebook fails with FileNotFoundError on its first cell.
   outputs/coupling/pi_canonical.npy
   outputs/coupling/pi_canonical_sharp.npy
   outputs/coupling/trust_multisource_canonical.npz
@@ -109,22 +106,21 @@ build () {
   shasum -a 256 "$OUT_DIR/$name"
 }
 
-build "homer-reproduce-${REPRODUCE_VERSION}.tar.gz" "${REPRODUCE[@]}"
+build "otter-reproduce-${REPRODUCE_VERSION}.tar.gz" "${REPRODUCE[@]}"
 
-# ---- Archive 2: full raw inputs (optional; content unchanged from v1.0.0) ----
-# Only rebuilt when BUILD_RAW=1, since the raw inputs haven't changed and the
-# existing v1.0.0 file on Zenodo is still valid.
+# ---- Archive 2: full raw inputs (optional) ---------------------------------
+# Built only when BUILD_RAW=1.
 if [ "${BUILD_RAW:-0}" = "1" ]; then
-  echo ">> building homer-raw-inputs-${RAW_VERSION}.tar.gz (full data_external/)"
+  echo ">> building otter-raw-inputs-${RAW_VERSION}.tar.gz (full data_external/)"
   tar --no-xattrs --exclude='.DS_Store' --exclude='data_external/_ish_cache' \
       --exclude='data_external/_ish_cache_v2' \
-      -czf "$OUT_DIR/homer-raw-inputs-${RAW_VERSION}.tar.gz" data_external
-  echo "   wrote $OUT_DIR/homer-raw-inputs-${RAW_VERSION}.tar.gz  ($(du -h "$OUT_DIR/homer-raw-inputs-${RAW_VERSION}.tar.gz" | cut -f1))"
-  shasum -a 256 "$OUT_DIR/homer-raw-inputs-${RAW_VERSION}.tar.gz"
+      -czf "$OUT_DIR/otter-raw-inputs-${RAW_VERSION}.tar.gz" data_external
+  echo "   wrote $OUT_DIR/otter-raw-inputs-${RAW_VERSION}.tar.gz  ($(du -h "$OUT_DIR/otter-raw-inputs-${RAW_VERSION}.tar.gz" | cut -f1))"
+  shasum -a 256 "$OUT_DIR/otter-raw-inputs-${RAW_VERSION}.tar.gz"
 else
   echo ">> skipping raw-inputs archive (unchanged; set BUILD_RAW=1 to rebuild it)"
 fi
 
 echo
-echo "Done. Upload homer-reproduce-${REPRODUCE_VERSION}.tar.gz as a NEW VERSION of the"
+echo "Done. Upload otter-reproduce-${REPRODUCE_VERSION}.tar.gz as a NEW VERSION of the"
 echo "Zenodo record, then give the new record id so the manifest can be refreshed."

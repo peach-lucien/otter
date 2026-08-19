@@ -50,9 +50,7 @@ def _spin_perms(coords, n, seed=0):
 def main():
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
-    pi = load_pi().astype(np.float64)   # canonical coupling. Repointed 2026-07-20: this was
-    # hardcoded to the retired pi, so the spin null was computed on a
-    # different coupling than the observed statistic it was compared against.
+    pi = load_pi().astype(np.float64)   # canonical coupling
     mc = M.var[["x", "y", "z"]].to_numpy(float)
     out = {}
 
@@ -62,11 +60,7 @@ def main():
     human_net, hnames = nc.assign_human_paper_networks(H.var, separate_aud=True)
     a = hnames.index("Auditory"); s = hnames.index("SomatoMotor")
     human_net = human_net.copy(); human_net[human_net == a] = s
-    target_pairs = [("sensorimotor", "SomatoMotor"), ("visual", "Visual"),
-                    ("auditory", "Auditory"), ("salience", "Salience"),
-                    ("frontal_dmn", "DMN"), ("temporal_dmn", "DMN"),
-                    ("limbic", "Limbic"), ("frontoparietal", "DorsAtten"),
-                    ("subcortical", "Subcortical"), ("olfactory", "Limbic")]
+    target_pairs = cm.TARGET_PAIRS   # one definition, in 01_correspondence_validation.py
 
     def coletta_diag(mnet):
         _, _, score = cm.labeled_correspondence(pi, mnet, NETWORKS, human_net,

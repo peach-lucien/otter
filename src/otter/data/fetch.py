@@ -25,8 +25,8 @@ from pathlib import Path
 
 # Representative files per tier: their presence means the tier is already
 # unpacked, and fetch_tier() skips the download. The list must name every file
-# the archive contains that the notebooks require, otherwise a user holding an
-# older archive is told the tier is present and never receives the new files.
+# in the archive that the notebooks require, so that an incomplete local copy is
+# detected here rather than accepted as present.
 SENTINELS = {
     "reproduce": [
         # what load_pi() returns and what the notebooks require

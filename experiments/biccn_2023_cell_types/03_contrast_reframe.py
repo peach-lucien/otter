@@ -34,6 +34,19 @@ sys.path.insert(0, str(ROOT / "src"))
 from otter.data import load_cached, load_pi, pi_provenance      # noqa: E402
 from otter.eval.nulls import translation_spin_null, _route_normalized  # noqa: E402
 
+# Cell-class definitions used by THIS script. They are not the same as the ones
+# in the sibling script 05_composition_from_markers.py, and neither set is a
+# subset of the other. The three concrete differences:
+#   microglia is Cx3cr1 alone here, while 05 uses Cx3cr1, Ctss, Csf1r.
+#   dopaminergic (Th, Drd1, Drd2, Slc6a3) exists here only. 05 has no such class.
+#   the same nine gene GABA set is keyed "interneuron" here and "GABAergic" in 05.
+# 01_cell_type_validation.py is different again. It splits that nine gene set into
+# "interneuron" (seven genes) and "gabaergic_synth" (Gad1, Gad2), and it carries a
+# serotonergic class (Tph2, Slc6a4) that neither 03 nor 05 has.
+# The published numbers in outputs/logs/biccn_contrast_reframe.json were computed
+# with the gene lists exactly as written below. Editing any list silently changes
+# those numbers, so the lists are left as they are and the divergence is recorded
+# here instead.
 CLASS_MARKERS = {
     "glutamatergic": ["Camk2a", "Slc17a7", "Slc17a6", "Grin1", "Grin2a", "Grin2b"],
     "interneuron":   ["Pvalb", "Sst", "Vip", "Calb1", "Calb2", "Reln", "Lhx6",

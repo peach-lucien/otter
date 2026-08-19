@@ -21,14 +21,14 @@ parcellated independently and their sub-area indices do not line up: only 32 of 
 carry the same area label, and region 150 pairs LH DefaultA_IPL_2 with RH ContB_PFCmp_1, which are
 different networks in different lobes.
 
-Two valid pairings are computed instead, with the index pairing retained under its own key.
+Two valid pairings are computed, and the index pairing is reported under its own key.
 
   LR_reliability_parcel   the parcellation's own homotopic pair ids. 1,047 pairs covering all 2,094
                           parcels; 98.9 per cent are exact mirrors within 1 mm on all three axes.
                           This is the quantity that speaks to single-parcel reliability.
   LR_reliability_region   the region level, with left and right Schaefer areas matched
                           on the area label rather than the index.
-  LR_reliability_index_k_kplus200   the index pairing, retained for comparison.
+  LR_reliability_index_k_kplus200   the index pairing, reported for reference.
 
 The comparison is not circular. The human functional connectivity is not hemisphere-averaged:
 homotopic rows of Hfc differ by 0.028 on average and correlate at 0.91, so the two hemispheres are

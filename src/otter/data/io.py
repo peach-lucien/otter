@@ -818,8 +818,8 @@ def load_pi(name: str = "pi_canonical.npy",
     Defaults to the recommended coupling: ``pi_canonical.npy`` (anchor-warped
     spatial cost + region packs, xyz_weight=0.25, epsilon=0.05; selected by
     held-out Beauchamp CV). For the sharp confidence-graded showcase pass
-    ``pi_canonical_sharp.npy`` (epsilon=0.005); the pre-warp coupling is
-    ``pi_fc_plus_SC_with_all_packs.npy``. Preferred over a bare
+    ``pi_canonical_sharp.npy`` (epsilon=0.005). The coupling fitted without
+    the anchor warp is ``pi_fc_plus_SC_with_all_packs.npy``. Preferred over a bare
     ``np.load("outputs/coupling/...")``, which raises ``FileNotFoundError``
     when the data bundle has not been fetched.
     """
@@ -835,8 +835,8 @@ def pi_provenance(name: str = "pi_canonical.npy",
                   *, coupling_dir: Path | None = None) -> dict:
     """Provenance stamp for a coupling file: ``{"pi_file", "pi_sha256"}``.
 
-    Every script that writes a log records this alongside its results, so an
-    audit can tell which coupling produced the numbers.
+    Every script that writes a log records this alongside its results, so the
+    coupling that produced a given set of numbers can be identified.
     """
     import hashlib
 

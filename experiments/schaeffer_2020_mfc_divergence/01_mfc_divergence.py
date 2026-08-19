@@ -28,8 +28,8 @@ independent FC evidence adjudicating that choice. The couplings tested are:
   * `pi_fc_plus_SC.npy`. Garin anchors only (strict baseline)
   * `pi_canonical.npy`, the canonical coupling (no lateral_pfc pack). All
     headline numbers come from this one.
-  * `pi_fc_plus_SC_with_all_packs.npy`, the retired pre-warp coupling, kept in
-    the contrast only to show the conclusion does not depend on the warp
+  * `pi_fc_plus_SC_with_all_packs.npy`, the pre-warp coupling, included in the
+    contrast to show the conclusion does not depend on the warp
   * `pi_fc_plus_SC_with_lateral_pfc`, adds the contested Prelimbic→dlPFC anchor
     (pre-warp variant, so compare it against the pre-warp row)
 

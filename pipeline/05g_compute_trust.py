@@ -43,40 +43,37 @@ from otter.eval.trust_score import (                                    # noqa: 
     assign_regional_trust,
 )
 
+# Reuse the Beauchamp region table from 05f, which is the single source of
+# truth for the pair list and the human MNI centroids.
+# 05j_region_level_eval.py loads the same tables the same way.
+sys.path.insert(0, str(ROOT / "pipeline"))
+from importlib import import_module                                     # noqa: E402
+_beau = import_module("05f_beauchamp_validation")
+
 ANN  = ROOT / "outputs" / "anndata"
 COUP = ROOT / "outputs" / "coupling"
 EXT  = ROOT / "data_external" / "MouseHumanTranscriptomicSimilarity"
 
 
-# Beauchamp pair list, kept in lockstep with `pipeline/05f_beauchamp_validation.py`
-# HUMAN_REGION_MNI. Format: (mouse_DSURQE_region_name, x_left, y, z, radius_mm).
+# Beauchamp region table, derived from `pipeline/05f_beauchamp_validation.py`
+# rather than retyped, so the two cannot drift apart.
+# Format: (mouse_DSURQE_region_name, x_left, y, z, radius_mm), the tuple shape
+# the two helpers below unpack.
+# Pairs whose human region has no curated MNI centroid in 05f (the entry is
+# None, currently Medulla only) carry no sphere and are not evaluable, so they
+# are dropped here. Order follows 05f's BEAUCHAMP_PAIRS, which is the order
+# `parcel_to_dsurqe_region` resolves ties in when a parcel's DSURQE label
+# belongs to more than one Beauchamp region.
 BEAUCHAMP_REGIONS = [
-    ("Anterior cingulate area",            -5,  25,  25, 15),
-    ("Primary motor area",                 -35, -20, 55, 15),
-    ("Primary somatosensory area",         -40, -25, 55, 15),
-    ("Visual areas",                       -10, -85,  5, 15),
-    ("Pallidum",                           -20,  -5,  0,  8),
-    ("Caudoputamen",                       -15,  10, 10, 12),
-    ("Cortical subplate-other",            -25,  -5,-20,  8),
-    ("Pons",                                -5, -25,-35, 10),
-    ("Hypothalamus",                        -5,  -5,-15,  8),
-    ("Thalamus",                           -10, -20,  5, 12),
-    ("Piriform area",                      -25,   5,-20, 10),
-    ("Inferior colliculus",                 -5, -35, -8,  6),
-    ("Superior colliculus, sensory related",-5, -30, -2,  6),
-    ("Striatum ventral region",            -10,  10,-10,  6),
-    ("Primary auditory area",              -50, -20,  5, 10),
-    # Hippocampal, match centroids used in pipeline/05f_*.py exactly
-    ("Field CA1",                          -30, -25, -10,  8),
-    ("Field CA3",                          -25, -22, -10,  8),
-    ("Dentate gyrus",                      -25, -28, -10,  8),
-    ("Subiculum",                          -22, -32,  -8,  8),
+    (mouse_name, *_beau.HUMAN_REGION_MNI[human_name])
+    for mouse_name, human_name in _beau.BEAUCHAMP_PAIRS
+    if _beau.HUMAN_REGION_MNI.get(human_name) is not None
 ]
 
 
 def parcel_to_dsurqe_region(M, dsurqe_volume_path):
     """Return (n_m,) array of DSURQE Beauchamp region names per parcel
-    (or '' if not in any of our 19 evaluable regions)."""
+    (or '' if not in any evaluable region of `BEAUCHAMP_REGIONS`)."""
     img = nib.load(str(dsurqe_volume_path))
     labels = np.asarray(img.get_fdata()).astype(np.int32); sh = labels.shape
     xyz_m = M.var[["x","y","z"]].to_numpy() + np.array([-0.027, -2.334, +1.018])

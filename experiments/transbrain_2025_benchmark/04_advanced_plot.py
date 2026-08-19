@@ -1,8 +1,8 @@
 """Visualise the OTTER × TransBrain advanced comparison (3 panels)."""
-# Retired. This script read transbrain_2025_advanced.json["cycle_consistency"], which scored
-# TransBrain on a different region set than OTTER, and that block is no longer in the log. The
-# reported comparison uses transbrain_roundtrip_maps.json, which scores both methods on the same
-# 52 mouse regions. The per-panel scripts (make_panelA/B/C/D_*.py) supersede this composite.
+# This composite reads transbrain_2025_advanced.json["cycle_consistency"], which scores
+# TransBrain on a different region set than OTTER. The reported comparison instead uses
+# transbrain_roundtrip_maps.json, which scores both methods on the same 52 mouse regions, and
+# the per-panel scripts (make_panelA/B/C/D_*.py) build the reported figure.
 raise SystemExit(__doc__.splitlines()[0] if __doc__ else "retired; see header")
 from __future__ import annotations
 

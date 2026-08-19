@@ -39,13 +39,12 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "autism_subtypes"))
 
-from otter.data import DATA_DIR, load_cached  # noqa: E402
+from otter.data import DATA_DIR, load_cached, load_pi  # noqa: E402
 
 st = import_module("04_subtype_translation")
 ncv = import_module("01_network_crossvalidation")
 
 CLEAN_CSV = Path(DATA_DIR) / "pagani" / "sorted_etiology_by_feature_matrix.csv"
-PI_PATH = ROOT / "outputs" / "coupling" / "pi_fc_plus_SC_with_all_packs.npy"
 
 # Pagani's hierarchical-clustering row split (Fig 1c): first 9 rows are the
 # hyperconnectivity subtype, the remaining 11 the hypoconnectivity subtype.
@@ -129,7 +128,7 @@ def loo_membership(X: np.ndarray, subtype: list[str]) -> list[dict]:
 def subtype_translation_through_pi() -> dict:
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
-    pi = np.load(PI_PATH)
+    pi = load_pi()   # canonical coupling
 
     mpn, mnames = ncv.assign_mouse_paper_networks(M.var, separate_aud=True)
     hpn, hnames = ncv.assign_human_paper_networks(H.var, separate_aud=True)

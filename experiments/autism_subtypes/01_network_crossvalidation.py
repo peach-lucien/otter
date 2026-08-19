@@ -54,6 +54,21 @@ from otter.data.atlas_regions import (
 from otter.data.networks import PAIRID_TO_NETWORK, NETWORKS, assign_networks
 
 
+# Canonical name-based correspondences scored in the network mapping. Defined at module level
+# because 02_plot_network_mapping.py and 03_baseline_comparison.py score the same pairs and
+# import them from here.
+TARGET_PAIRS = [
+    ("Visual", "Visual"),
+    ("Auditory", "Auditory"),
+    ("SomatoMotor", "SomatoMotor"),
+    ("DMN", "DMN"),
+    ("Salience", "Salience"),
+    ("HC_Limbic", "Limbic"),
+    ("Subcortical", "Subcortical"),
+    ("BF_Olfactory", "Subcortical"),   # mouse basal forebrain and olfactory route to subcortex
+]
+
+
 # Mapping: OTTER's 11-network mouse scheme → Pagani paper's network names
 # (matches paper's ED Fig 1 nine-network scheme + collapses some mouse-specific
 # distinctions that do not have a clean human counterpart).
@@ -304,17 +319,7 @@ def main():
         argmax_name = human_names[int(N_rn[i].argmax())]
         print(f"  {m:<18s} | {cells}   (argmax: {argmax_name})")
 
-    # Score the canonical name-based correspondences the paper relies on
-    target_pairs = [
-        ("Visual", "Visual"),
-        ("Auditory", "Auditory"),
-        ("SomatoMotor", "SomatoMotor"),
-        ("DMN", "DMN"),
-        ("Salience", "Salience"),
-        ("HC_Limbic", "Limbic"),
-        ("Subcortical", "Subcortical"),
-        ("BF_Olfactory", "Subcortical"),  # mouse BF/olfactory ≈ human subcortical or limbic
-    ]
+    target_pairs = TARGET_PAIRS
     print("\nDiagonal-dominance scoring (target pairs from the paper):")
     score = score_mapping(N, mouse_names, human_names, target_pairs=target_pairs)
     for r in score["per_pair"]:

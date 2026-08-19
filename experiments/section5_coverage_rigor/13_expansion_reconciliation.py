@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Reconcile: on the retired pre-warp coupling, coverage vs |x| is strong (-0.30) while coverage
-vs published expansion maps is ~null. Geometric confound, region vs parcel level, log vs linear,
-spin config, bilateral handling and parametric vs non-parametric are checked. Non-parametric
-(Spearman) throughout unless noted.
+"""Reconcile: on the comparison coupling fitted without the anchor warp, coverage vs |x| is
+strong (-0.30) while coverage vs published expansion maps is ~null. Geometric confound, region vs
+parcel level, log vs linear, spin config, bilateral handling and parametric vs non-parametric are
+checked. Non-parametric (Spearman) throughout unless noted.
 
 RESOLUTION ON THE CANONICAL COUPLING: the discrepancy dissolves because the
 coverage~|x| side collapses. Canonical rho(coverage,|x|) = -0.03 (spin p = 0.83) at parcel level
-and +0.06 (p = 0.73) at region level; the -0.30 belonged to the retired coupling only. Coverage
+and +0.06 (p = 0.73) at region level; the -0.30 is confined to the comparison coupling. Coverage
 vs the published expansion maps remains null.
 
 The `region_level_maps` block reads `coverage_values` out of the stored
@@ -112,8 +112,8 @@ def main():
     # ---------- geometric confound: coverage~|x| across couplings (parcel level) ---------------
     print("\nGEOMETRIC CONFOUND  coverage~|x| parcel-level across couplings:")
     ctx = np.isfinite(mye)
-    # "canonical" is the reported arm; "production" is the RETIRED pre-warp coupling,
-    # kept (with the others) for cross-coupling comparison.
+    # "canonical" is the reported arm; "production" is the coupling fitted without the anchor
+    # warp. It and the remaining arms provide cross-coupling comparison.
     out["coverage_absX_across_couplings"] = {}
     out["_reported_coupling_arm"] = "canonical"
     coup = [("canonical", "pi_canonical.npy"),

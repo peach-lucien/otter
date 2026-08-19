@@ -2,13 +2,12 @@
 # Rebuild mouse_genes.npy and re-run every validation that consumes it.
 #
 # Allen MetaImage .raw buffers are column-major and must be reshaped with
-# order="F"; a C-order reshape reads every mouse ISH gene volume spatially
-# scrambled. The read is done in:
+# order="F". The read is done in:
 #   - pipeline/00_external/02_mouse_genes.py
 #   - experiments/autism_subtypes/allen_expansion/download_pagani_ish.py
 #
-# The production π is gene-free (use_gene_gw=False), so π and all FC/SC
-# validations are unaffected and are not re-run here.
+# The production π is gene-free (use_gene_gw=False), so π and the FC/SC
+# validations do not depend on the gene matrix and are not re-run here.
 #
 # Prereqs: the otter env (numpy/scipy/pandas/anndata/nibabel/allensdk), the v2
 # mouse .mat present, and the Allen ISH energy zips cached under
@@ -42,20 +41,6 @@ cat <<'NOTE'
 Next:
   * Check the new mouse_genes.npy: Th should peak in olfactory bulb +
     midbrain, Mbp in white-matter tracts.
-  * Update the gene-validation docs from the refreshed logs.
-
-OPTIONAL (not applied here):
-  The gene validations route mouse->human with the bare un-normalised sum
-  `score @ pi`, whereas Margulies/TransBrain use the coverage-normalised
-  transport-weighted average. To make routing consistent, divide by the column
-  mass in each script after loading pi:
-
-      colmass = np.maximum(pi.sum(axis=0), 1e-12)
-      pred    = (score @ pi)        / colmass          # observed
-      pred_n  = (score @ pi[perm])  / colmass          # permuted-pi null
-                                                       # (row-perm leaves colmass unchanged)
-
-  Lines: BICCN 01 (146/154), Hodge 01 (129/143), Hodge 02 (116/130/179),
-  autism 09 (111/112).
+  * Update the gene-validation docs from the regenerated logs.
 ------------------------------------------------------------------------------
 NOTE

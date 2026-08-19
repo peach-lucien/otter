@@ -87,9 +87,9 @@ def build(src: dict) -> dict:
             "disp": disp, "auroc": auroc, "summary": summary}
 
 
-# A mean over 19 values computed by this script and by the review harness can differ in the last
-# bit because the two summed in a different order. The reported values are quoted to one decimal
-# place, so a relative tolerance of 1e-9 is far tighter than anything readable from them.
+# A mean over 19 values computed by this script and by an independent implementation can differ
+# in the last bit because the two summed in a different order. The reported values are quoted to
+# one decimal place, so a relative tolerance of 1e-9 is far tighter than anything readable.
 FLOAT_RTOL = 1e-9
 
 

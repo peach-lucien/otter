@@ -1310,9 +1310,8 @@ function renderModelSummary(){
 
 // Per-species highlight functions live below (renderMouseShellHighlights /
 // renderMousePointsHighlights and renderHumanSurfaceHighlights /
-// renderHumanPointsHighlights). The old positional helpers
-// (renderMousePointSelection, renderHumanPointHighlights, renderParcelHighlights,
-// renderMouseAtlasHighlights) were removed when view-mode became per-species.
+// renderHumanPointsHighlights). Each of these resolves its traces by name
+// through TRACE_LAYOUT, so view mode is handled per species.
 
 // --- Mouse highlights ----------------------------------------------------
 

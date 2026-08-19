@@ -1,16 +1,14 @@
 """Direction 1, parcel-resolution spatial subtype routing through π.
 
-Superseded. This script tests a continuous-map correlation (route the occurrence
-maps, predict the human subtype Δ-matrix). That correlation does not survive a
-spatial null, and it does not reproduce Pagani's procedure. It aggregates over
-all 13 conserved regions uniformly, where Pagani use only the 5 hypo-prominent /
-3 hyper-prominent regions (Methods, Supp Fig 2b), and Pagani's human step is a
-discrete classification (score each individual's regional global connectivity,
-threshold ±1 s.d.) rather than a Δ-matrix correlation. The analysis that follows
-Pagani's procedure is in:
+This script tests a continuous-map correlation (route the occurrence maps, predict the
+human subtype Δ-matrix), and that correlation does not survive a spatial null. It also
+departs from Pagani's procedure in two ways: it aggregates over all 13 conserved regions
+uniformly, where Pagani use only the 5 hypo-prominent / 3 hyper-prominent regions
+(Methods, Supp Fig 2b), and Pagani's human step is a discrete classification (score each
+individual's regional global connectivity, threshold ±1 s.d.) rather than a Δ-matrix
+correlation. The analyses that follow Pagani's procedure are in:
    `04_otter_human_masks.py`            (π-derived human hypo/hyper masks)
    `../autism_subtypes/abide_subtype/05_abide_otter_subtyping.py`  (re-subtype ABIDE)
-This script is kept for the continuous-routing negative result.
 
 01_per_model_clustering.py drives the mouse side from Pagani's coarse 9-network
 matrices. This script uses the spatial Fig 1d occurrence maps instead: for each
@@ -47,7 +45,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "autism_subtypes"))
 
-from otter.data import DATA_DIR, load_cached  # noqa: E402
+from otter.data import DATA_DIR, load_cached, load_pi  # noqa: E402
 
 ncv = import_module("01_network_crossvalidation")
 st = import_module("04_subtype_translation")
@@ -145,7 +143,7 @@ def main():
 
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
-    pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy")
+    pi = load_pi()   # canonical coupling
     assign = parcel_to_region(M.var)
     print(f"\nmouse parcels matched to conserved regions: "
           f"{int((assign != '(none)').sum())}/{len(assign)}")

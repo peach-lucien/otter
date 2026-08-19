@@ -19,8 +19,8 @@ This script establishes four things, and writes one log:
    supervision at all, -1.44 SD) and is much weaker in the base coupling (Garin points, no
    FC/SC packs: -0.33 SD, spin p = 0.06).
 
-COUPLINGS: canonical (-1.03 SD) is the reported arm. The retired pre-warp coupling
-"production" gives -1.20 SD; direction and significance are unchanged. The medial->lateral
+COUPLINGS: canonical (-1.03 SD) is the reported arm. The comparison coupling fitted without
+the anchor warp ("production") gives -1.20 SD; direction and significance agree. The medial->lateral
 gradient (script 12) and the sensorimotor/association tertile gap (script 01) are null on the
 canonical coupling.
 
@@ -69,8 +69,8 @@ def coverage(pi):
 
 def coverage_recon(pi, Mfc, Hfc):
     """Reconstruction-coverage: how well each human parcel's FC fingerprint is rebuilt by
-    routing mouse FC through pi. This is the reported metric; the log-column-mass
-    above is the older, position-confounded one, kept for comparison."""
+    routing mouse FC through pi. This is the reported metric. The log-column-mass defined
+    above is position-confounded and serves as the comparison metric."""
     pit = pi / np.maximum(pi.sum(0), 1e-300)
     pred = pit.T @ Mfc @ pit
     n = pred.shape[0]
@@ -172,8 +172,8 @@ def main():
     print("  most deficient:", ", ".join(f"{k} {v['mean_coverage_sd']:+.2f}" for k, v in ranked[:3]))
 
     # ---- 2. connectional not curational: base / production / anchor-free ---------------
-    # "canonical" is the reported arm (== the main analysis above); the others are kept
-    # for cross-coupling comparison. "production" is the RETIRED pre-warp coupling.
+    # "canonical" is the reported arm (== the main analysis above); the others provide
+    # cross-coupling comparison. "production" is the coupling fitted without the anchor warp.
     out["control_b_across_couplings"] = {}
     out["_reported_coupling_arm"] = "canonical"
     for name, path in [("canonical", "pi_canonical.npy"),

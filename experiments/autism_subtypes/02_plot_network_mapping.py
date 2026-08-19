@@ -6,11 +6,17 @@ name-based pairs marked. Saved to outputs/figures/.
 from __future__ import annotations
 
 import json
+import sys
+from importlib import import_module
 from pathlib import Path
 
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+# One definition of the canonical pairs, in 01_network_crossvalidation.py.
+TARGET_PAIRS = import_module("01_network_crossvalidation").TARGET_PAIRS
 
 
 def main():
@@ -44,17 +50,9 @@ def main():
                 ax.text(k, i, f"{v:.0f}", ha="center", va="center",
                         color="white" if v < 30 else "black", fontsize=8)
 
-    # Mark canonical pairs with red boxes
-    canonical = [
-        ("Visual", "Visual"),
-        ("Auditory", "Auditory"),
-        ("SomatoMotor", "SomatoMotor"),
-        ("DMN", "DMN"),
-        ("Salience", "Salience"),
-        ("HC_Limbic", "Limbic"),
-        ("Subcortical", "Subcortical"),
-    ]
-    for m, h in canonical:
+    # Mark canonical pairs with red boxes. The same list the scoring uses, so the panel and
+    # the reported count cannot disagree.
+    for m, h in TARGET_PAIRS:
         if m in mouse_names_k and h in human_names:
             i = mouse_names_k.index(m)
             k = human_names.index(h)

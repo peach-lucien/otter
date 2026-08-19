@@ -32,11 +32,11 @@ territory (lateral PFC, PPC, cingulate), attenuate the deficit rather than creat
 
 ABLATION COUPLINGS ON DISK
 --------------------------
-outputs/coupling/pi_ablation_xyz_only.npy is not the anchor-free model. It was fitted with
-lam_anchor=0, and in supervised.py that does `M[mp, :] = lam`; at lam = 0 this zeroes the
-ENTIRE cross-species cost row for the 42 anchor parcels rather than removing the anchors,
-leaving them free to go anywhere, and its sidecar JSON reports n_visible_anchors = 21.
-Anchors are dropped by clearing M.var["garin_anchor"], as below and in ablation_ladder.py.
+outputs/coupling/pi_ablation_xyz_only.npy is a different control from the anchor-free model.
+It is fitted with lam_anchor=0, and in supervised.py that does `M[mp, :] = lam`; at lam = 0 this
+zeroes the entire cross-species cost row for the 42 anchor parcels, leaving them free to go
+anywhere, and its sidecar JSON reports n_visible_anchors = 21. The anchor-free fit here instead
+drops anchors by clearing M.var["garin_anchor"], as below and in ablation_ladder.py.
 
 Run:  cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/08_anchorfree_control.py
 Writes: outputs/coupling/pi_anchorfree_control.npy
@@ -198,7 +198,7 @@ def main():
               f"dissociation {out[label]['dissociation_gap']['gap_sd']:+.2f} SD "
               f"(p={out[label]['dissociation_gap']['p_spin']:.3f})")
 
-    # ---- scale sensitivity: what the old headline was actually measuring ---------
+    # ---- scale sensitivity of the log-unit tertile gap --------------------------
     covm, myem = pi_prod.sum(0)[cortex], mye[cortex]
     q = np.quantile(myem, [1 / 3, 2 / 3])
     sens, asso = myem >= q[1], myem <= q[0]
@@ -213,7 +213,7 @@ def main():
         "spearman_coverage_vs_hierarchy_scale_invariant": float(spearmanr(covm, myem).statistic),
     }
 
-    # coverage percentile map for the figure (scale-free, what panel a now plots)
+    # coverage percentile map for the figure (scale-free; plotted in panel a)
     pct = np.full(len(xyz), np.nan)
     pct[cortex] = rankdata(pi_prod.sum(0)[cortex]) / cortex.sum() * 100.0
     out["coverage_percentile_cortex"] = [None if not np.isfinite(v) else round(float(v), 3) for v in pct]

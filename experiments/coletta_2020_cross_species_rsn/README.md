@@ -12,22 +12,22 @@ This is a stricter version of Pagani's Test 1, with three improvements: (i) uses
 
 ### Sub-test A. Labeled correspondence
 
-**6/10 canonical pairs are diagonal-argmax**, with up to 7.5× over null:
+**7/10 canonical pairs are diagonal-argmax**, with up to 10.7× over null:
 
-> **Spin null.** This discrete result survives a mouse-parcel spin null. Rotating the mouse networks on a sphere and re-aggregating π drops the diagonal-argmax count to mean 1.23/10 (95th pct 2); the observed 6/10 beats it at p=0.002. The mouse↔human RSN correspondence is therefore specific rather than a product of spatial autocorrelation. (Run `experiments/spatial_null_check/fair_nulls_coletta_test2c.py`.)
+> **Spin null.** This discrete result survives a mouse-parcel spin null. Rotating the mouse networks on a sphere and re-aggregating π drops the diagonal-argmax count to mean 1.09/10 (95th pct 2); the observed 7/10 beats it at p=0.002. The mouse↔human RSN correspondence is therefore specific rather than a product of spatial autocorrelation. (Run `experiments/spatial_null_check/fair_nulls_coletta_test2c.py`.)
 
 | Pair | OTTER mass | Null | Ratio | Argmax? |
 |---|---:|---:|---:|:---:|
-| olfactory → Limbic | 36.0% | 4.8% | 7.5× | ★ |
-| salience → Salience | 37.8% | 8.8% | 4.3× | ★ |
-| sensorimotor → SomatoMotor | 47.2% | 13.6% | 3.5× | ★ |
-| temporal_dmn → DMN | 45.9% | 16.2% | 2.8× | ★ |
-| frontal_dmn → DMN | 37.8% | 16.2% | 2.3× | ★ |
-| subcortical → Subcortical | 56.5% | 28.6% | 2.0× | ★ |
-| frontoparietal → DorsAtten | 30.9% | 10.1% | 3.1× | (argmax: SomatoMotor) |
-| visual → Visual | 8.3% | 10.0% | 0.8× | (argmax: DorsAtten) |
-| limbic → Limbic | 6.6% | 4.8% | 1.4× | (argmax: Subcortical) |
-| auditory → Auditory | 0.0% | 0.0% | 0.0× | (merged into SomMot) |
+| visual → Visual | 47.2% | 4.4% | 10.7× | ★ |
+| olfactory → Limbic | 49.4% | 7.6% | 6.5× | ★ |
+| salience → Salience | 33.0% | 6.4% | 5.2× | ★ |
+| temporal_dmn → DMN | 49.3% | 9.8% | 5.0× | ★ |
+| sensorimotor → SomatoMotor | 55.2% | 11.9% | 4.6× | ★ |
+| auditory → SomatoMotor | 52.4% | 11.9% | 4.4× | ★ |
+| subcortical → Subcortical | 86.8% | 52.0% | 1.7× | ★ |
+| frontoparietal → DorsAtten | 11.7% | 4.5% | 2.6× | (argmax: DMN) |
+| limbic → Limbic | 13.4% | 7.6% | 1.8× | (argmax: Subcortical) |
+| frontal_dmn → DMN | 11.3% | 9.8% | 1.1× | (argmax: Salience) |
 
 Same Schaefer-definition misses as Pagani's Test 1. Schaefer-17's "Visual" is V1-only and higher-order mouse visual maps to DorsAttn; hippocampus has no cortical Schaefer label so HC routes to Subcortical.
 

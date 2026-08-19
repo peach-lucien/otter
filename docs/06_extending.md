@@ -134,7 +134,7 @@ from otter.data.region_anchors import parse_region_anchors_config, apply_region_
 entries = parse_region_anchors_config("config/my_region.yaml", M.var, H.var)
 # Soft constraint (default 0.15), gives room for FC/SC structure to push back
 M_cost = apply_region_supervision(M_cost, entries)
-# Hard constraint (legacy 0/1 wall), use when you want strict enforcement
+# Hard constraint (0/1 wall), use when you want strict enforcement
 M_cost = apply_region_supervision(M_cost, entries, lam_outside=1.0)
 ```
 

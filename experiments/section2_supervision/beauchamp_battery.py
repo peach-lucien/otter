@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 """Full metric battery + nulls for the Beauchamp benchmark.
 
-Retired entry point. Run `beauchamp_battery_canonical.py` instead.
-    This module remains live as a library: `beauchamp_battery_canonical.py` imports
-    its `build()` and `score_all()`, as do the other scoring scripts. Its own
-    `main()` writes `outputs/logs/beauchamp_metric_battery.json` and
-    `beauchamp_metric_battery_loro.json`, which no consumer reads; consumers read
-    the `*_canonical.json` logs written by `beauchamp_battery_canonical.py`.
-    `main()` scores the canonical coupling through `load_pi()`, so the pre-warp
-    coupling cannot re-enter through this path.
+Run `beauchamp_battery_canonical.py` to produce the reported figures.
+    This module serves as the library behind it: `beauchamp_battery_canonical.py`
+    imports its `build()` and `score_all()`, as do the other scoring scripts. Its
+    own `main()` writes `outputs/logs/beauchamp_metric_battery.json` and
+    `beauchamp_metric_battery_loro.json`; consumers read the `*_canonical.json`
+    logs written by `beauchamp_battery_canonical.py`. `main()` scores the canonical
+    coupling through `load_pi()`, so only the canonical coupling is scored on this
+    path.
 
 Modes:
-  (default)  score the canonical coupling via load_pi() (retired entry point; see above),
-             no re-fit.  -> outputs/logs/beauchamp_metric_battery.json
+  (default)  score the canonical coupling via load_pi(), no re-fit.
+             -> outputs/logs/beauchamp_metric_battery.json
   --loro     leave-one-region-out: remove a region's curation (Garin anchor + overlapping
              packs), re-fit the full model, score the held-out region with the SAME
              battery.  Resumable.  -> outputs/logs/beauchamp_metric_battery_loro.json

@@ -1,5 +1,5 @@
-"""Re-examine the DISCRETE results (network bridge) and the gradient under
-spatially-fair nulls (audit, after the Margulies spin finding).
+"""Score the DISCRETE results (network bridge) and the gradient under
+spatially-fair nulls.
 
 Two checks:
   1. Margulies gradient via the fair TRANSLATION null (spin the mouse input,
@@ -27,7 +27,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "autism_subtypes"))
 
-from otter.data import load_cached                                  # noqa: E402
+from otter.data import load_cached, load_pi, pi_provenance          # noqa: E402
 from otter.eval.nulls import translation_spin_null, _haar_rotation  # noqa: E402
 
 ncv = import_module("01_network_crossvalidation")
@@ -55,7 +55,7 @@ def _diag_count(pi, mouse_net, mouse_names, human_net, human_names):
 def main():
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
-    pi = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy").astype(np.float64)
+    pi = load_pi().astype(np.float64)   # canonical coupling
 
     # ---- 1. Margulies gradient, fair translation null ----
     d = json.loads((ROOT / "outputs/logs/margulies_2016_gradient.json").read_text())

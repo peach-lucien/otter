@@ -1,5 +1,5 @@
-> The per-region table below is from the pre-warp fit and is kept for the ordering it shows
-> rather than its absolute values; the aggregate figures come from
+> The per-region table below comes from the fit without the anchor warp and is read for the
+> ordering it shows rather than for its absolute values; the aggregate figures come from
 > `outputs/logs/anchor_recovery_loo_combined_canonical.json`.
 
 # Leave-one-region-out generalisation test (full production model)
@@ -42,7 +42,7 @@ Harness reproduces the logged full-model per-pair top-1 exactly.
 value); exclude it from the generalisation aggregate.
 
 **Parcel-weighted aggregate:** top-1 0.46 → 0.08; mass 0.46 → 0.08;
-chance centroid displacement is 25 mm on the canonical benchmark; the per-region distances in the table are from the pre-warp fit.
+chance centroid displacement is 25 mm on the canonical benchmark; the per-region distances in the table come from the fit without the anchor warp.
 
 ## Interpretation
 

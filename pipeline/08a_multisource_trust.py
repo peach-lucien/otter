@@ -6,7 +6,7 @@ This step connects the trust computation to the GUI.
     *internal* composite (bootstrap stability + argmax concentration + FC
     similarity) plus the regional-empirical Beauchamp accuracy. Useful, but
     not the file the GUI reads.
-  * ``08_build_gui.py`` reads ``trust_multisource_all_packs.npz``, the
+  * ``08_build_gui.py`` reads ``trust_multisource_canonical.npz``, the
     *multi-source evidence map* (five evidence tiers) produced by
     :func:`otter.eval.trust_score.compute_multisource_trust`.
 
@@ -24,7 +24,7 @@ parcel into one of five evidence tiers:
     low_evidence, none of the above (use predictions with caution)
 
 Outputs:
-    outputs/coupling/trust_multisource_all_packs.npz with:
+    outputs/coupling/trust_multisource_canonical.npz with:
         trust          : (n_m,) internal composite, [0, 1]
         tier           : (n_m,) {high, medium, low}  (internal composite tier)
         bootstrap      : (n_m,) per-row bootstrap argmax stability
@@ -41,8 +41,8 @@ Usage:
     PYTHONPATH=src python pipeline/08a_multisource_trust.py
 
 The defaults are the canonical coupling. Run it with no arguments unless a comparison
-coupling is being regraded. Passing --pi-file pi_fc_plus_SC_with_all_packs.npy regrades
-the evidence tiers on a retired coupling.
+coupling is being graded. Passing --pi-file pi_fc_plus_SC_with_all_packs.npy grades
+the evidence tiers on the coupling fitted without the anchor warp.
 """
 from __future__ import annotations
 
@@ -186,6 +186,9 @@ if __name__ == "__main__":
                     help="Beauchamp validation log filename in outputs/logs/")
     ap.add_argument("--bootstrap-file", default="bootstrap_aggregate_fc_plus_SC.npz",
                     help="bootstrap aggregate filename in outputs/coupling/")
-    ap.add_argument("--output", default="trust_multisource_all_packs.npz",
-                    help="output filename in outputs/coupling/")
+    ap.add_argument("--output", default="trust_multisource_canonical.npz",
+                    help="output filename in outputs/coupling/, the name "
+                         "08_build_gui.py reads by default. Pass "
+                         "trust_multisource_all_packs.npz explicitly when "
+                         "grading a non-canonical --pi-file.")
     main(ap.parse_args())

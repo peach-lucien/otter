@@ -44,9 +44,9 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 DATA = ROOT / "data_external" / "fulcher_2019_gradients"
 # The canonical coupling is whatever otter.data.load_pi() defaults to
-# (pi_canonical.npy). Do not hard-code a path here; a pinned filename keeps the
-# script on a retired coupling after the default changes.
-RETIRED_PI_FILE = "pi_fc_plus_SC_with_all_packs.npy"   # for the coverage control only
+# (pi_canonical.npy). Do not hard-code a path here; a pinned filename would keep the
+# script on one coupling after the default changes.
+RETIRED_PI_FILE = "pi_fc_plus_SC_with_all_packs.npy"   # pre-warp, for the coverage control only
 N_NULL = 200
 SEED = 42
 
@@ -212,10 +212,10 @@ def main():
           f"gradient-degenerate, not a hierarchy ruler here")
 
     # ===== coverage control =================================================
-    # The canonical coupling reaches a LARGER human territory than the retired
+    # The canonical coupling reaches a LARGER human territory than the pre-warp
     # one. Any gain in panels 1/3 could therefore be territory size rather than
     # a better coupling. Re-score the canonical prediction on exactly the region
-    # set the retired coupling reached, so the two are compared on equal ground.
+    # set the pre-warp coupling reached, so the two are compared on equal ground.
     from otter.data import load_pi as _load_pi, pi_provenance as _prov
     pi_retired = _load_pi(RETIRED_PI_FILE)
     prov_retired = _prov(RETIRED_PI_FILE)
@@ -234,7 +234,7 @@ def main():
                                             myelin_reg)
     r3_cov, p3_cov, rs3_cov, n3_cov = _corr(_restrict(pred_cyto, ret_territory),
                                             myelin_reg)
-    # and the retired coupling's own numbers, on its own territory, for reference
+    # and the pre-warp coupling's own numbers, on its own territory, for reference
     r1_ret, _, _, n1_ret = _corr(ret_t1t2, myelin_reg)
     r3_ret, _, _, n3_ret = _corr(ret_cyto, myelin_reg)
 

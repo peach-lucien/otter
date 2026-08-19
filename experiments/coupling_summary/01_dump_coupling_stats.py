@@ -27,8 +27,8 @@ SEED = 0
 
 
 # The trust map read here must be the canonical one. Stamping the output with the
-# canonical pi while reading a superseded trust map reports tier numbers that do not
-# correspond to the coupling named in the log.
+# canonical pi while reading a trust map computed on a different coupling reports tier
+# numbers that do not correspond to the coupling named in the log.
 def main():
     pi = load_pi()
     M, _ = load_cached("mouse", cache_dir=ROOT / "outputs/anndata")

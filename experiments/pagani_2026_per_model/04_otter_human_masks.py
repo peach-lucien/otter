@@ -34,11 +34,10 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "experiments" / "autism_subtypes"))
 
-from otter.data import load_cached  # noqa: E402
+from otter.data import load_cached, load_pi  # noqa: E402
 
 ncv = import_module("01_network_crossvalidation")
 
-PI_PATH = ROOT / "outputs" / "coupling" / "pi_fc_plus_SC_with_all_packs.npy"
 
 # Allen region-vote → Pagani 13 conserved regions.
 RULES = {
@@ -97,7 +96,7 @@ def route(mouse_ind, pi):
 def main():
     M, _ = load_cached("mouse", cache_dir=str(ROOT / "outputs/anndata"))
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
-    pi = np.load(PI_PATH).astype(np.float64)
+    pi = load_pi().astype(np.float64)   # canonical coupling
     assign = parcel_to_region(M.var)
     hnet, hnames = ncv.assign_human_paper_networks(H.var, separate_aud=True)
 

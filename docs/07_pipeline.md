@@ -62,7 +62,7 @@ PYTHONPATH=src python pipeline/04_solve_production.py --multistart       # 5-ini
 ```
 
 Saves:
-- `outputs/coupling/pi_fc_plus_SC.npy`, point-anchor coupling (1864 × 2094), retired.
+- `outputs/coupling/pi_fc_plus_SC.npy`, point-anchor coupling (1864 × 2094).
   `pi_canonical.npy` is the canonical coupling; `load_pi()` returns it
 - `outputs/coupling/pi_fc_plus_SC.json`, config + fit info sidecar
 

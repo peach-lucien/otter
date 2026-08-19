@@ -1,21 +1,20 @@
 #!/usr/bin/env python3
 """Score the Hodge individual layer markers on the same footing as the layer contrasts.
 
-The per-marker result of 01_layer_marker_validation.py and the layer-contrast result of
-03_areal_type_reframe.py are not comparable, in two independent ways:
+Two choices set the footing, and both have to match for a marker count and a contrast count to be
+comparable:
 
-  1. MASK.  01 correlates over all 2,094 human parcels. 03 restricts to the 1,768 cortical parcels
-     of Schaefer-400. Layer contrasts are only defined in cortex, so the marker number includes
-     subcortical parcels the contrast number cannot.
+  1. MASK.  Layer contrasts are defined only in cortex, so the comparison runs over the 1,768
+     cortical parcels of Schaefer-400 rather than over all 2,094 human parcels.
 
-  2. NULL.  01 uses a permuted-π null (200 shuffles of π's rows), which destroys all spatial
-     structure. 03 uses a translation spin null (1,000 rotations of the mouse input routed
-     through the real π), which preserves the mouse map's spatial autocorrelation. Counts of
-     significant markers under the two nulls are not comparable.
+  2. NULL.  A permuted-π null (shuffles of π's rows) destroys all spatial structure, while a
+     translation spin null (rotations of the mouse input routed through the real π) preserves the
+     mouse map's spatial autocorrelation. Counts of significant markers under the two nulls are
+     not comparable.
 
-This script re-scores the seven markers cortex-only against the translation spin null, so the two
-halves of the areal-versus-laminar claim are measured the same way. It reports the whole-brain
-values alongside. It does not modify either existing script or their logs.
+This script scores the seven markers cortex-only against the translation spin null, on the same
+footing as the layer contrasts of 03_areal_type_reframe.py, and reports the whole-brain
+permuted-π values alongside. It writes its own log and modifies nothing else.
 
 Usage:
     cd otter && PYTHONPATH=src python experiments/hodge_2019_cortical_layers/04_marker_like_for_like.py
@@ -39,7 +38,13 @@ from otter.data.atlas_regions import (                                        # 
     ATLAS_PATHS, assign_atlas_labels, assign_atlas_labels_with_hemisphere)
 from otter.eval.nulls import translation_spin_null, _route_normalized         # noqa: E402
 
-# Same seven markers, same layer assignment, as 01_layer_marker_validation.py
+# The same seven markers as 01_layer_marker_validation.py, under a coarser layer
+# grouping than 01 uses. 01 labels Fezf2 "L5 infragranular" and labels Tbr1 and
+# Foxp2 "L6 deep". This script pools all three into a single "L5/6 deep" group,
+# which is the deep group of 02_layer_marker_refined.py (LAYER_GROUPS
+# "deep (L5/6)": Fezf2, Tbr1, Foxp2). The upper and middle labels match 01.
+# These label strings are written into outputs/logs/hodge_markers_like_for_like.json
+# and onto figure axes, so they are left exactly as they are.
 MARKERS = [("Cux1", "L2/3 upper"), ("Cux2", "L2/3 upper"), ("Satb2", "L2/3 upper"),
            ("Rorb", "L4 granular"),
            ("Fezf2", "L5/6 deep"), ("Tbr1", "L5/6 deep"), ("Foxp2", "L5/6 deep")]
@@ -92,7 +97,7 @@ def main():
         m_vec = me[:, int(mm.iloc[0].name)]
         h_obs = he[:, int(hm.iloc[0].name)]
 
-        # ---- as published: whole brain, permuted-pi null -----------------------------------
+        # ---- whole brain, permuted-pi null -------------------------------------------------
         pred_wb = _z(m_vec) @ pi
         h_z = _z(h_obs)
         r_wb = float(pearsonr(pred_wb, h_z)[0])

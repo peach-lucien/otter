@@ -33,16 +33,7 @@ PI_VARIANTS = {
     "fc_plus_SC_xyz_zero":          "outputs/coupling/pi_fc_plus_SC_xyz_zero.npy",
 }
 
-TARGET_PAIRS = [
-    ("Visual", "Visual"),
-    ("Auditory", "Auditory"),
-    ("SomatoMotor", "SomatoMotor"),
-    ("DMN", "DMN"),
-    ("Salience", "Salience"),
-    ("HC_Limbic", "Limbic"),
-    ("Subcortical", "Subcortical"),
-    ("BF_Olfactory", "Subcortical"),
-]
+TARGET_PAIRS = mod.TARGET_PAIRS   # one definition, in 01_network_crossvalidation.py
 
 
 def main():

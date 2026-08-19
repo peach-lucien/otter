@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Hemispheric replication of the coverage deficit, and the retirement of the Hill result.
+"""Hemispheric replication of the coverage deficit and of the Hill expansion correlation.
 
 The Hill 2010 macaque->human expansion map is RIGHT-HEMISPHERE ONLY (Schaefer ids 201-400).
 Two problems affect a coverage-vs-Hill correlation (rho = -0.18, spin p = 0.046).
@@ -15,7 +15,8 @@ Two problems affect a coverage-vs-Hill correlation (rho = -0.18, spin p = 0.046)
         RIGHT hemisphere (Hill's native side) : rho = -0.184  (n = 197)
         LEFT  hemisphere (Hill mirrored)      : rho = +0.055  (n = 191)
 
-    A real signature of cortical expansion would not be one-sided. Hill is retired.
+    A real signature of cortical expansion would not be one-sided, so the Hill correlation
+    is not treated as evidence.
 
 The same check is applied to the coverage deficit and the connectional-vs-molecular
 dissociation. Both survive: the effect size is unchanged in each hemisphere taken alone.

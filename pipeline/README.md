@@ -27,7 +27,7 @@ PYTHONPATH=src python pipeline/08_build_gui.py
 | `00_external/` | External data downloads (Allen, Domhof, Knox, Beauchamp) | `data_external/` |
 | `02_build_anndata.py` | Build mouse + human AnnData caches | `outputs/anndata/*.h5ad` |
 | `03_build_costs.py` | Precompute all FC + SC + xyz + gene cost matrices | `outputs/anndata/full_costs.npz` |
-| `04_solve_production.py` | Fit the fc_plus_SC point-anchor π (retired) | `outputs/coupling/pi_fc_plus_SC.npy` |
+| `04_solve_production.py` | Fit the fc_plus_SC point-anchor π | `outputs/coupling/pi_fc_plus_SC.npy` |
 | `05_evaluate.py` | **Orchestrator**, runs the substeps below in order | |
 | `05g_compute_trust.py` | Per-parcel multi-source trust map | `outputs/coupling/trust_score_*.npz` |
 | `06_bootstrap.py` | 40-iter subject-level bootstrap stability | `outputs/coupling/bootstrap_*.npz` |
@@ -51,13 +51,13 @@ These are run automatically by `05_evaluate.py`. They can also be invoked indivi
 
 ## Fitting with anchor packs (after running 04_solve_production)
 
-The fc_plus_SC π uses only the 21 Garin point anchors. To reproduce the **pre-warp production-with-packs** π, retired and described in `docs/04_anchor_packs.md`, run:
+The fc_plus_SC π uses only the 21 Garin point anchors. To fit the **with-packs π without the anchor warp**, described in `docs/04_anchor_packs.md`, run:
 
 ```bash
 PYTHONPATH=src python experiments/anchor_packs/compose_all.py
 ```
 
-That fit is superseded by `pi_canonical.npy`, which adds the anchor-warped spatial cost and is what `load_pi()` returns. Use the canonical coupling for new work. The individual pack runners in `experiments/anchor_packs/` produce per-pack variants for ablation / inspection.
+`pi_canonical.npy` adds the anchor-warped spatial cost to that fit and is what `load_pi()` returns. The individual pack runners in `experiments/anchor_packs/` produce per-pack variants for ablation and inspection.
 
 ## Skipping slow steps
 

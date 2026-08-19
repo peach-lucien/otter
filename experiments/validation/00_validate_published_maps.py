@@ -32,8 +32,8 @@ from otter.eval.nulls import _haar_rotation              # noqa: E402
 
 OUT = ROOT / "outputs/logs/published_map_validation.json"
 N_TRIALS = 1000
-# The retired coupling, kept only to define the smaller human territory it reached,
-# so the canonical result can be scored on the same territory.
+# The comparison coupling fitted without the anchor warp defines the smaller human territory
+# it reaches, so the canonical result can be scored on the same territory.
 RETIRED_PI_FILE = "pi_fc_plus_SC_with_all_packs.npy"
 
 # map name -> (neuromaps source, desc, repo array, minimum |rho| required)
@@ -167,9 +167,9 @@ def main():
             m &= restrict
         return abs(pearsonr(p[m], repo_myelin[m])[0]), int(m.sum())
 
-    # The retired coupling reached a smaller human territory. Score the canonical
-    # coupling on exactly that territory too, so a change in |r| cannot be
-    # attributed to territory size alone.
+    # The comparison coupling reaches a smaller human territory. The canonical coupling is
+    # scored on exactly that territory too, so a difference in |r| cannot be attributed to
+    # territory size alone.
     retired_territory = np.isfinite(route(maps["t1w_t2w"], pi_retired))
 
     def spin_test(v, pi_use, restrict, tag):

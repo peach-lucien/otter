@@ -48,6 +48,26 @@ from otter.data.networks import PAIRID_TO_NETWORK, NETWORKS, assign_networks
 from otter.data.anchors import get_anchor_index
 
 
+# Canonical Yeo-7 pairings for sub-test A. Defined at module level because the spin-null
+# script in experiments/spatial_null_check/ scores the same pairs and imports them from here.
+TARGET_PAIRS = [
+    ("sensorimotor", "SomatoMotor"),
+    ("visual",       "Visual"),
+
+    # Canonical Yeo-7 merges human Auditory into SomatoMotor, so no human parcel carries an
+    # Auditory label. The expected target for the mouse auditory network is the network it is
+    # merged into.
+    ("auditory",     "SomatoMotor"),
+    ("salience",     "Salience"),
+    ("frontal_dmn",  "DMN"),
+    ("temporal_dmn", "DMN"),
+    ("limbic",       "Limbic"),
+    ("frontoparietal", "DorsAtten"),
+    ("subcortical",  "Subcortical"),
+    ("olfactory",    "Limbic"),
+]
+
+
 # ============================================================================
 # Sub-test A: labeled correspondence (OTTER mouse-nets × Schaefer-Yeo7 human-nets)
 # ============================================================================
@@ -216,23 +236,7 @@ def main():
     print("SUB-TEST A. Labeled correspondence (OTTER mouse-nets × Yeo-7 human-nets)")
     print("=" * 80)
 
-    # OTTER → Yeo-7 canonical pairings (best mapping each direction can be matched)
-    target_pairs = [
-        ("sensorimotor", "SomatoMotor"),
-        ("visual",       "Visual"),
-
-        # Canonical Yeo-7 merges human Auditory into SomatoMotor above, so no human parcel
-        # carries an Auditory label. The expected target for the mouse auditory network is
-        # the network it is merged into.
-        ("auditory",     "SomatoMotor"),
-        ("salience",     "Salience"),
-        ("frontal_dmn",  "DMN"),
-        ("temporal_dmn", "DMN"),
-        ("limbic",       "Limbic"),
-        ("frontoparietal", "DorsAtten"),
-        ("subcortical",  "Subcortical"),
-        ("olfactory",    "Limbic"),
-    ]
+    target_pairs = TARGET_PAIRS
     N, N_norm, score_a = labeled_correspondence(
         pi, mouse_net_otter, NETWORKS, human_net, human_paper_names,
         target_pairs=target_pairs,

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Coverage as a continuum. Coverage is a graded quantity, and on the canonical coupling it
-follows NO spatial axis (the medial->lateral gradient was a retired-coupling artefact).
+follows no spatial axis.
 
 The dlPFC hole (script 11) is the extreme low end of a continuous distribution, not a separate
 phenomenon. This script establishes the continuum and its spatial organisation:
@@ -9,15 +9,15 @@ phenomenon. This script establishes the continuum and its spatial organisation:
    distribution: from strongly reached (sensorimotor, insula) through partially reached to a thin
    under-reached tail (lateral PFC / dlPFC). It is not bimodal; there is no clean "covered vs not".
 
-2. THE AXIS. On the RETIRED pre-warp coupling, coverage declined along the medial->lateral axis
-   (rho(coverage,|x|) = -0.30, spin p = 0.0005). ON THE CANONICAL COUPLING THIS IS GONE:
-   rho = -0.03, spin p = 0.83, and every other axis (A-P, D-V, myelin) is null too. The
-   medial->lateral gradient is a property of the retired coupling, not of the canonical one.
+2. THE AXIS. On the canonical coupling rho(coverage,|x|) = -0.03, spin p = 0.83, and every
+   other axis (A-P, D-V, myelin) is null too. On the comparison coupling fitted without the
+   anchor warp, coverage declines along the medial->lateral axis (rho = -0.30, spin p = 0.0005),
+   so that gradient is a property of that coupling rather than of the canonical one.
    Spin-tested (coverage is asymmetric, |x| is symmetric: the calibrated 5.5% FPR configuration).
 
-3. ROBUSTNESS. The medial->lateral gradient is present on the base, production (retired) and
-   anchor-free couplings but ABSENT on the canonical one, so it does not generalise across
-   couplings. The per-coupling arms below establish that; canonical is the reported arm.
+3. ROBUSTNESS. The medial->lateral gradient is present on the base, production and anchor-free
+   couplings but absent on the canonical one, so it does not generalise across couplings. The
+   per-coupling arms below establish that; canonical is the reported arm.
 
 Spin note: spin the SIGNAL (coverage, asymmetric) against the symmetric axis map. Do NOT
 bilaterally average coverage first; that gives a 37% FPR.
@@ -155,8 +155,8 @@ def main():
         aidx = np.asarray(list(aidx), int) if not isinstance(aidx, np.ndarray) else aidx
     except Exception:
         aidx = None
-    # "canonical" is the reported arm (== the main analysis above); the others are kept
-    # for cross-coupling comparison. "production" is the RETIRED pre-warp coupling.
+    # "canonical" is the reported arm (== the main analysis above); the others provide
+    # cross-coupling comparison. "production" is the coupling fitted without the anchor warp.
     out["medial_lateral_robustness"] = {}
     out["_reported_coupling_arm"] = "canonical"
     for name, path in [("canonical", "pi_canonical.npy"),

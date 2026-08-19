@@ -1,12 +1,17 @@
 """Visualise the Coletta-style cross-species RSN correspondence + coherence test."""
 from __future__ import annotations
 import json
+import sys
+from importlib import import_module
 from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "experiments" / "coletta_2020_cross_species_rsn"))
+# One definition of the canonical pairs, in 01_correspondence_validation.py.
+TARGET_PAIRS = set(import_module("01_correspondence_validation").TARGET_PAIRS)
 
 
 def main():
@@ -46,12 +51,7 @@ def main():
     ax.set_xlim(0, 10); ax.set_ylim(-0.5, len(corr) - 0.5)
     for i, (lbl, p) in enumerate(zip(ic_labels, pred)):
         mouse_lbl = corr[i]['mouse_label']
-        is_match = (mouse_lbl == 'sensorimotor' and p == 'SomatoMotor') or \
-                    (mouse_lbl == 'salience' and p == 'Salience') or \
-                    (mouse_lbl == 'visual' and p == 'Visual') or \
-                    ('dmn' in (mouse_lbl or '') and p == 'DMN') or \
-                    (mouse_lbl == 'subcortical' and p == 'Subcortical') or \
-                    (mouse_lbl == 'limbic' and p == 'Limbic')
+        is_match = (mouse_lbl, p) in TARGET_PAIRS
         c = "#2a9d8f" if is_match else "#999999"
         ax.text(0.5, len(corr) - 1 - i, lbl, fontsize=9, va="center", ha="left", family="monospace")
         ax.text(5, len(corr) - 1 - i, "→", fontsize=12, va="center", ha="center")

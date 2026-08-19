@@ -13,9 +13,9 @@ both with a proper spin p.
 
 RESULT ON THE CANONICAL COUPLING (pi_canonical.npy): both statistics are null.
 Continuous r = +0.14 (spin p = 0.17); tertile gap = 0.68 log units (spin p = 0.29). On the
-retired pre-warp coupling (pi_fc_plus_SC_with_all_packs.npy) the tertile gap is 6.74 log
-units at spin p = 0.002. The tertile contrast is not a positive result on the canonical
-coupling.
+comparison coupling fitted without the anchor warp (pi_fc_plus_SC_with_all_packs.npy) the
+tertile gap is 6.74 log units at spin p = 0.002. The tertile contrast is not a positive result
+on the canonical coupling.
 
 Run: cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/01_coverage_nulls.py
 Writes outputs/logs/section5_coverage_nulls.json
