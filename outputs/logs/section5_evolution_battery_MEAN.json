@@ -1,11 +1,11 @@
 {
-  "Xu2020 mouse\u2192human expansion": {
+  "Xu2020 macaque\u2192human expansion": {
     "n": 391,
     "spearman": -0.05210063958693845,
     "pearson_spin_r": -0.035979262557855864,
     "spin_p": 0.5644355644355644
   },
-  "Xu2020 mouse\u2013human FC homology": {
+  "Xu2020 macaque\u2013human FC homology": {
     "n": 391,
     "spearman": 0.0741712069443162,
     "pearson_spin_r": 0.1142044832759917,

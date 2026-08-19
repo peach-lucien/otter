@@ -45,9 +45,15 @@ from otter.eval.nulls import spin_null               # noqa: E402
 N_SPIN = 1000
 OUT = ROOT / "outputs/logs/section5_evolution_battery.json"
 
+
+# The tuples are the identifiers used by data_external/published_cortical_maps.json and are kept
+# verbatim. The xu2020 annotations compare human with rhesus macaque. Xu et al. 2020 NeuroImage
+# 223, 117346 aligns humans and macaques, and neuromaps describes the two maps as "Evolutionary
+# cortical expansion" and "Cross-species functional homology". The dictionary keys, figure labels
+# and prose name the macaque accordingly.
 MAPS = {
-    "Xu2020 mouse→human expansion":      ("xu2020", "evoexp"),
-    "Xu2020 mouse–human FC homology":    ("xu2020", "FChomology"),
+    "Xu2020 macaque→human expansion":      ("xu2020", "evoexp"),
+    "Xu2020 macaque–human FC homology":    ("xu2020", "FChomology"),
     "Hill2010 macaque→human expansion":  ("hill2010", "evoexp"),
     "Hill2010 developmental expansion":  ("hill2010", "devexp"),
     "Sydnor2021 S–A axis":               ("sydnor2021", "SAaxis"),

@@ -7,7 +7,7 @@ eps softens the coupling. An eps-family is refitted (identical config, only eps 
 each eps, the following are recorded:
   - sharpness (median top-1 row probability),
   - coverage L/R reliability (Schaefer k vs k+200), the criterion for picking eps,
-  - Spearman(region coverage, Xu2020 mouse->human expansion) + spin p,
+  - Spearman(region coverage, Xu2020 macaque->human expansion) + spin p,
   - medial-lateral rho.
 
 eps is picked by maximum reliability and the expansion correlation is read there. eps is fixed
@@ -53,8 +53,8 @@ def main():
     xyz = H.var[["x", "y", "z"]].to_numpy(float)
     nr = np.asarray(json.loads((ROOT / "data_external/human_sc_meta.json").read_text())["node_region"], int)
     b = json.loads((ROOT / "outputs/logs/section5_evolution_battery.json").read_text())
-    xu = dict(zip(np.asarray(b["Xu2020 mouse→human expansion"]["schaefer_ids"], int),
-                  np.asarray(b["Xu2020 mouse→human expansion"]["map_values"], float)))
+    xu = dict(zip(np.asarray(b["Xu2020 macaque→human expansion"]["schaefer_ids"], int),
+                  np.asarray(b["Xu2020 macaque→human expansion"]["map_values"], float)))
 
     ids = [k for k in range(1, 401) if (nr == k).any()]
     cen = {k: xyz[nr == k].mean(0) for k in ids}

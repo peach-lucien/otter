@@ -37,7 +37,7 @@
       ],
       [
         "auditory",
-        "Auditory"
+        "SomatoMotor"
       ],
       [
         "salience",
@@ -91,12 +91,12 @@
       },
       {
         "mouse_net": "auditory",
-        "human_net": "Auditory",
-        "rank": 9,
-        "row_norm_mass": 0.0,
-        "expected_mass_null": 0.0,
-        "ratio_over_null": 0.0,
-        "is_argmax_diagonal": false,
+        "human_net": "SomatoMotor",
+        "rank": 1,
+        "row_norm_mass": 0.5242530848123059,
+        "expected_mass_null": 0.11915782014582274,
+        "ratio_over_null": 4.399653200861986,
+        "is_argmax_diagonal": true,
         "argmax_human_net": "SomatoMotor"
       },
       {
@@ -170,7 +170,7 @@
         "argmax_human_net": "Limbic"
       }
     ],
-    "n_diagonal_argmax": 6,
+    "n_diagonal_argmax": 7,
     "n_pairs_scored": 10
   },
   "sub_test_B_ica_data_driven": {
@@ -212,14 +212,14 @@
         "best_match_yeo7": "Limbic",
         "second_match_yeo7": "Visual",
         "per_net_means": {
-          "Visual": 0.00011945864346230744,
-          "SomatoMotor": 0.00010240392595886795,
-          "DorsAtten": 5.431423592285647e-05,
-          "Salience": 7.467493026840132e-05,
-          "Limbic": 0.0011545156208430621,
-          "Control": 6.862544157400471e-05,
-          "DMN": 6.180645170309452e-05,
-          "Subcortical": -0.0006228068692183268
+          "Visual": 0.00011945864346230654,
+          "SomatoMotor": 0.0001024039259588534,
+          "DorsAtten": 5.43142359228492e-05,
+          "Salience": 7.467493026840004e-05,
+          "Limbic": 0.0011545156208430838,
+          "Control": 6.862544157400113e-05,
+          "DMN": 6.180645170309386e-05,
+          "Subcortical": -0.0006228068692183085
         }
       },
       {
@@ -228,14 +228,14 @@
         "best_match_yeo7": "Salience",
         "second_match_yeo7": "DorsAtten",
         "per_net_means": {
-          "Visual": 2.5132029778985605e-05,
-          "SomatoMotor": 0.00013406986482746095,
-          "DorsAtten": 0.00013859373682919413,
-          "Salience": 0.00020934856805527433,
-          "Limbic": -0.0009143556610983104,
-          "Control": 0.00012178842890363138,
-          "DMN": 3.927163364447451e-05,
-          "Subcortical": -0.00037168725252230547
+          "Visual": 2.5132029778990332e-05,
+          "SomatoMotor": 0.00013406986482746605,
+          "DorsAtten": 0.00013859373682919632,
+          "Salience": 0.00020934856805527273,
+          "Limbic": -0.0009143556610982979,
+          "Control": 0.00012178842890363245,
+          "DMN": 3.927163364447535e-05,
+          "Subcortical": -0.0003716872525223174
         }
       },
       {
@@ -244,14 +244,14 @@
         "best_match_yeo7": "Subcortical",
         "second_match_yeo7": "Visual",
         "per_net_means": {
-          "Visual": 0.00012421500011751706,
-          "SomatoMotor": -0.0003464443987549584,
-          "DorsAtten": -0.0001254395020417664,
-          "Salience": -2.2131405849369735e-05,
-          "Limbic": -0.0001513750514631389,
-          "Control": -4.100927168290352e-05,
-          "DMN": 4.585732314875669e-05,
-          "Subcortical": 0.00028185646273417106
+          "Visual": 0.00012421500011751356,
+          "SomatoMotor": -0.000346444398754968,
+          "DorsAtten": -0.0001254395020417705,
+          "Salience": -2.2131405849365608e-05,
+          "Limbic": -0.00015137505146314284,
+          "Control": -4.1009271682904655e-05,
+          "DMN": 4.585732314875771e-05,
+          "Subcortical": 0.0002818564627341812
         }
       },
       {
@@ -260,14 +260,14 @@
         "best_match_yeo7": "Visual",
         "second_match_yeo7": "Limbic",
         "per_net_means": {
-          "Visual": 0.0002353417469193627,
-          "SomatoMotor": -0.00010810495887537802,
-          "DorsAtten": -1.3276146113622542e-05,
-          "Salience": -2.124153473475975e-06,
-          "Limbic": 0.00020438604790899711,
-          "Control": 3.465735500471516e-05,
-          "DMN": 0.0001748850018752419,
-          "Subcortical": -0.0003906496789941616
+          "Visual": 0.00023534174691936134,
+          "SomatoMotor": -0.00010810495887537617,
+          "DorsAtten": -1.3276146113622008e-05,
+          "Salience": -2.1241534734744473e-06,
+          "Limbic": 0.00020438604790900527,
+          "Control": 3.465735500471569e-05,
+          "DMN": 0.00017488500187524196,
+          "Subcortical": -0.0003906496789941652
         }
       },
       {
@@ -276,14 +276,14 @@
         "best_match_yeo7": "Salience",
         "second_match_yeo7": "Limbic",
         "per_net_means": {
-          "Visual": -4.362530461612268e-05,
-          "SomatoMotor": -0.00017405703516778413,
-          "DorsAtten": -7.515927041168392e-05,
-          "Salience": 0.00032049382533002604,
-          "Limbic": 0.0002339068691952447,
-          "Control": -9.635380588991454e-06,
-          "DMN": -2.477733728206232e-05,
-          "Subcortical": -2.04877779537738e-05
+          "Visual": -4.36253046161241e-05,
+          "SomatoMotor": -0.00017405703516778766,
+          "DorsAtten": -7.515927041168494e-05,
+          "Salience": 0.00032049382533002853,
+          "Limbic": 0.00023390686919526148,
+          "Control": -9.635380588990963e-06,
+          "DMN": -2.477733728206152e-05,
+          "Subcortical": -2.048777795377548e-05
         }
       },
       {
@@ -292,14 +292,14 @@
         "best_match_yeo7": "Limbic",
         "second_match_yeo7": "Salience",
         "per_net_means": {
-          "Visual": -0.00011267255526383103,
-          "SomatoMotor": -0.0002719386225158381,
-          "DorsAtten": -0.00010294595772488046,
-          "Salience": 0.00022545295501055142,
-          "Limbic": 0.0007497965228865347,
-          "Control": 2.3066233642314025e-05,
-          "DMN": 6.106683081149168e-05,
-          "Subcortical": -3.532060552428005e-05
+          "Visual": -0.00011267255526383415,
+          "SomatoMotor": -0.0002719386225158365,
+          "DorsAtten": -0.00010294595772487746,
+          "Salience": 0.00022545295501054936,
+          "Limbic": 0.0007497965228865232,
+          "Control": 2.3066233642315668e-05,
+          "DMN": 6.106683081149087e-05,
+          "Subcortical": -3.5320605524277774e-05
         }
       },
       {
@@ -308,14 +308,14 @@
         "best_match_yeo7": "SomatoMotor",
         "second_match_yeo7": "DorsAtten",
         "per_net_means": {
-          "Visual": -2.403077074260888e-05,
-          "SomatoMotor": 0.0006295623710943134,
-          "DorsAtten": 0.00014435576610283233,
-          "Salience": 9.349716651043888e-05,
-          "Limbic": -0.000661958947347651,
-          "Control": 3.071532809737933e-05,
-          "DMN": -3.49098013333979e-05,
-          "Subcortical": -0.0005047660746231255
+          "Visual": -2.4030770742607668e-05,
+          "SomatoMotor": 0.0006295623710943119,
+          "DorsAtten": 0.00014435576610283214,
+          "Salience": 9.349716651044447e-05,
+          "Limbic": -0.0006619589473476115,
+          "Control": 3.071532809738132e-05,
+          "DMN": -3.490980133339553e-05,
+          "Subcortical": -0.0005047660746231415
         }
       }
     ]

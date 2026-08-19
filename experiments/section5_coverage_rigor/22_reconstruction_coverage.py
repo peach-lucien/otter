@@ -128,8 +128,8 @@ def main():
     print(f"[pairing] {len(area_pairs)} Schaefer areas matched by label; the index pairing has "
           f"{same_label} of {len(idx_pairs)} pairs on the same area")
     b = json.loads((ROOT / "outputs/logs/section5_evolution_battery.json").read_text())
-    xu = dict(zip(np.asarray(b["Xu2020 mouse→human expansion"]["schaefer_ids"], int),
-                  np.asarray(b["Xu2020 mouse→human expansion"]["map_values"], float)))
+    xu = dict(zip(np.asarray(b["Xu2020 macaque→human expansion"]["schaefer_ids"], int),
+                  np.asarray(b["Xu2020 macaque→human expansion"]["map_values"], float)))
 
     cov_fc = recon_coverage(pi, Mfc, Hfc)
     cov_sc = recon_coverage(pi, Msc, Hsc)

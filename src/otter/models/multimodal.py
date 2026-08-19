@@ -35,6 +35,18 @@ from otter.models.base import FitInfo
 from otter.data.region_anchors import apply_region_supervision
 from otter.models.supervised import SupervisedFGW, _apply_anchor_supervision, _build_xyz_M
 
+def _convergence(log, max_iter, tol):
+    """Iterations run and whether the step fell to tol, from the POT solver log.
+
+    The solver records the step norm every tenth iteration, so ``log["err"]`` holds one
+    entry per ten iterations.
+    """
+    errs = list(log.get("err", []))
+    n_iter = (len(errs) - 1) * 10 if errs else int(max_iter)
+    converged = bool(errs) and float(errs[-1]) <= float(tol) and n_iter < int(max_iter)
+    return n_iter, converged
+
+
 
 class MultimodalFGW(SupervisedFGW):
     """Production multimodal semirelaxed FGW.
@@ -90,6 +102,7 @@ class MultimodalFGW(SupervisedFGW):
         use_multistart: bool = False,
         n_restarts: int = 4,
         cost_normalisation: str = "max",
+
         max_iter: int = 25,
         tol: float = 1e-5,
     ):
@@ -292,7 +305,9 @@ class MultimodalFGW(SupervisedFGW):
             max_iter=self.config["max_iter"], tol=self.config["tol"], log=True,
         )
         loss = float(log.get("srfgw_dist", log.get("fgw_dist", float("nan"))))
+        n_iter, converged = _convergence(log, self.config["max_iter"], self.config["tol"])
         return pi, FitInfo(
-            loss=loss, n_iter=self.config["max_iter"], converged=True,
-            extra={"weights": weights, "n_visible_anchors": len(visible)},
+            loss=loss, n_iter=n_iter, converged=converged,
+            extra={"weights": weights, "n_visible_anchors": len(visible),
+                   "final_err": float(log["err"][-1]) if log.get("err") else None},
         )

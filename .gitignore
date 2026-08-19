@@ -113,3 +113,7 @@ experiments/**/DATA_VALIDATION_*.md
 outputs/logs/abide_*
 outputs/logs/out_abide_*
 outputs/logs/autism_subtypes_abide.json
+
+# Solver characterisation kept locally, not part of the release.
+outputs/logs/solver_scale_invariance.json
+outputs/logs/pi_canonical_iter1000_*.json

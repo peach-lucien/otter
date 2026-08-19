@@ -2,12 +2,12 @@
   "_finding": "At network level coverage tracks mouse-human FC homology (Xu2020): more homologous connectivity -> more mouse mass. Diluted per-parcel by coverage noise (reliability 0.22); network averaging recovers it.",
   "n_spin": 2000,
   "level": "Yeo-17 network",
-  "Xu2020 mouse\u2013human FC homology": {
+  "Xu2020 macaque\u2013human FC homology": {
     "n_networks": 16,
     "network_spearman": 0.27941176470588236,
     "spin_p": 0.3888055972013993
   },
-  "Xu2020 mouse\u2192human expansion": {
+  "Xu2020 macaque\u2192human expansion": {
     "n_networks": 16,
     "network_spearman": -0.16176470588235295,
     "spin_p": 0.5537231384307846

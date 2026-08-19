@@ -35,8 +35,8 @@ def main():
     spatial_isolation = Mxyz.min(0)                          # per human parcel: cost of nearest mouse
 
     b = json.loads((ROOT / "outputs/logs/section5_evolution_battery.json").read_text())
-    xu = dict(zip(np.asarray(b["Xu2020 mouse→human expansion"]["schaefer_ids"], int),
-                  np.asarray(b["Xu2020 mouse→human expansion"]["map_values"], float)))
+    xu = dict(zip(np.asarray(b["Xu2020 macaque→human expansion"]["schaefer_ids"], int),
+                  np.asarray(b["Xu2020 macaque→human expansion"]["map_values"], float)))
 
     prod = load_pi().sum(0)
     xyz0 = np.load(ROOT / "outputs/coupling/pi_fc_plus_SC_xyz_zero.npy").sum(0)

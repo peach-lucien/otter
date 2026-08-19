@@ -81,8 +81,8 @@ def build_context():
     net = np.array([{int(p[0]): p[1].split("_", 2)[2].split("_")[0] for p in rows}.get(int(k), "?") for k in nr])
     mye = np.asarray(json.loads((LOG / "buckner_krienen_2013_tethering.json").read_text())["myelin_per_parcel"], float)
     b = json.loads((LOG / "section5_evolution_battery.json").read_text())
-    xu = dict(zip(np.asarray(b["Xu2020 mouse→human expansion"]["schaefer_ids"], int),
-                  np.asarray(b["Xu2020 mouse→human expansion"]["map_values"], float)))
+    xu = dict(zip(np.asarray(b["Xu2020 macaque→human expansion"]["schaefer_ids"], int),
+                  np.asarray(b["Xu2020 macaque→human expansion"]["map_values"], float)))
 
     return dict(M=M, H=H, costs=costs, M_xyz_warp=M_xyz_warp, entries=entries, sc=sc,
                 Mfc=Mfc, Hfc=Hfc, nr=nr, net=net, mye=mye, xu=xu)

@@ -117,6 +117,121 @@ def _haar_rotation(rng: np.random.Generator) -> np.ndarray:
     return Q
 
 
+_MIRROR = np.diag([-1.0, 1.0, 1.0])
+
+_WHOLE_ALIASES = ("whole", "whole_volume", "none", "off")
+_PRESERVE_ALIASES = ("preserve", "preserving", "per_hemisphere", "hemisphere")
+
+
+def _project_to_sphere(xyz: np.ndarray) -> np.ndarray:
+    """Centre a coordinate block on its own centroid and normalise to a unit sphere."""
+    c = xyz - np.nanmean(xyz, axis=0)
+    nrm = np.linalg.norm(c, axis=1, keepdims=True)
+    nrm[nrm == 0] = 1.0
+    return c / nrm
+
+
+def _hemisphere_groups(xyz_centred: np.ndarray, hemi_labels) -> tuple:
+    """Index arrays for the left, right and midline parcels.
+
+    ``hemi_labels`` is used when supplied, matching on the first letter of each
+    label so that "L"/"R", "left"/"right" and "lh"/"rh" all work. Otherwise the
+    sign of the centred x coordinate decides. Parcels sitting exactly on the
+    midline, or carrying a label that is neither left nor right, go into the
+    midline group.
+    """
+    n = int(xyz_centred.shape[0])
+    if hemi_labels is not None:
+        lab = np.asarray(hemi_labels).ravel()
+        if lab.shape[0] != n:
+            raise ValueError("hemi_labels must have one entry per parcel")
+        first = np.array([str(v).strip().lower()[:1] if v is not None else ""
+                          for v in lab])
+        left = first == "l"
+        right = first == "r"
+    else:
+        x = xyz_centred[:, 0]
+        left = x < 0
+        right = x > 0
+    mid = ~(left | right)
+    return np.flatnonzero(left), np.flatnonzero(right), np.flatnonzero(mid)
+
+
+def _spin_permuter(coords, *, hemisphere: str = "whole", hemi_labels=None):
+    """Build the rotation to permutation map used by the spin nulls.
+
+    Returns ``(permute, info)``. Calling ``permute(rng)`` draws one Haar
+    rotation from ``rng`` and returns an index array ``perm`` so that
+    ``values[perm]`` is one spun surrogate of ``values``.
+
+    Modes
+    -----
+    ``hemisphere="whole"``
+        One rotation applied to the whole volume. All parcel centroids are
+        centred on the global centroid, projected to a single sphere, rotated
+        together, and each parcel takes the value of its nearest rotated
+        neighbour. This preserves the spatial autocorrelation of the map and
+        the global shape of the parcellation. It does not preserve hemisphere,
+        so a parcel can inherit a value from the opposite side.
+
+    ``hemisphere="preserve"``
+        Each hemisphere is centred on its own centroid and projected to its own
+        sphere. The left hemisphere is rotated by Q and the right by MQM with
+        M = diag(-1, 1, 1), so the two hemispheres receive mirror image
+        rotations and the surrogate stays symmetric under reflection. Nearest
+        neighbour lookup runs within a hemisphere, so no assignment crosses the
+        midline. This preserves spatial autocorrelation, hemisphere membership
+        and the left/right symmetry of the rotation. It is the right choice
+        when either map is bilaterally symmetric, because a whole volume spin
+        then leaves the two hemispheres of the surrogate aligned with each
+        other and inflates the false positive rate.
+
+    Both modes reassign with replacement, as in Alexander-Bloch et al. The
+    surrogate is a nearest neighbour relabelling, not a bijection.
+    """
+    from scipy.spatial import cKDTree
+
+    xyz = np.asarray(coords, dtype=float)
+    mode = str(hemisphere).strip().lower()
+
+    if mode in _WHOLE_ALIASES:
+        sph = _project_to_sphere(xyz)
+
+        def permute(rng: np.random.Generator) -> np.ndarray:
+            rot = sph @ _haar_rotation(rng).T
+            return cKDTree(rot).query(sph)[1]
+
+        return permute, {"hemisphere": "whole", "n_midline": 0,
+                         "n_left": 0, "n_right": 0}
+
+    if mode not in _PRESERVE_ALIASES:
+        raise ValueError(
+            f"hemisphere must be one of {_WHOLE_ALIASES + _PRESERVE_ALIASES}, "
+            f"got {hemisphere!r}")
+
+    centred = xyz - np.nanmean(xyz, axis=0)
+    left, right, mid = _hemisphere_groups(centred, hemi_labels)
+    sph = np.zeros_like(centred)
+    for grp in (left, right):
+        if grp.size:
+            sph[grp] = _project_to_sphere(centred[grp])
+    n = int(xyz.shape[0])
+
+    def permute(rng: np.random.Generator) -> np.ndarray:
+        Q = _haar_rotation(rng)
+        perm = np.arange(n)
+        for grp, rot_mat in ((left, Q), (right, _MIRROR @ Q @ _MIRROR)):
+            if grp.size == 0:
+                continue
+            s = sph[grp]
+            rotated = s @ rot_mat.T
+            perm[grp] = grp[cKDTree(rotated).query(s)[1]]
+        return perm            # midline parcels keep their own value
+
+    return permute, {"hemisphere": "preserve", "n_midline": int(mid.size),
+                     "n_left": int(left.size), "n_right": int(right.size)}
+
+
 def spin_null(
     map_a,
     map_b,
@@ -124,6 +239,8 @@ def spin_null(
     *,
     n_trials: int = 1000,
     seed: int = 0,
+    hemisphere: str = "whole",
+    hemi_labels=None,
 ) -> dict:
     """Spin test (Alexander-Bloch / Vázquez-Rodríguez) for the correlation
     between two parcel-resolved brain maps.
@@ -141,19 +258,36 @@ def spin_null(
     ----------
     map_a, map_b : array (n_parcels,)
         The two maps to correlate (e.g. observed vs predicted human gradient).
-        NaNs are allowed; only entries finite in both are used.
+        NaNs are allowed; only entries finite in both are used. ``map_b`` is the
+        map that gets spun.
     coords : array (n_parcels, 3)
         Parcel centroid coordinates (e.g. MNI mm). Centred + projected to a unit
-        sphere internally. Whole-brain rotation (subcortex included).
+        sphere internally.
     n_trials : int
         Number of random rotations.
+    hemisphere : {"whole", "preserve"}
+        ``"whole"`` rotates every centroid together about the global centroid.
+        It preserves spatial autocorrelation and the shape of the parcellation,
+        and it allows a parcel to inherit a value from the other hemisphere.
+        ``"preserve"`` rotates each hemisphere about its own centroid, the left
+        by Q and the right by MQM with M = diag(-1, 1, 1), so the two rotations
+        are mirror images and every assignment stays inside its hemisphere. It
+        preserves spatial autocorrelation, hemisphere membership and left/right
+        symmetry, and it is the calibrated choice for bilaterally symmetric
+
+        maps. The default is ``"whole"``.
+    hemi_labels : sequence, optional
+        One hemisphere label per parcel, matched on the first letter, e.g. the
+        ``hemisphere`` column of a var table. Only used when
+        ``hemisphere="preserve"``. Falls back to the sign of the centred x
+        coordinate when omitted. Parcels on the midline keep their own value
+        and are counted in ``n_midline``.
 
     Returns
     -------
     dict with observed Pearson r, spin p-value (two-sided on |r|), and the null
     summary. Compare ``p_spin`` against the (over-optimistic) permuted-π p.
     """
-    from scipy.spatial import cKDTree
     from scipy.stats import pearsonr
 
     a = np.asarray(map_a, dtype=float)
@@ -162,11 +296,8 @@ def spin_null(
     if not (a.shape == b.shape == (xyz.shape[0],)):
         raise ValueError("map_a, map_b, coords must share n_parcels")
 
-    # Project centroids to a unit sphere (centre, then normalise).
-    c = xyz - np.nanmean(xyz, axis=0)
-    nrm = np.linalg.norm(c, axis=1, keepdims=True)
-    nrm[nrm == 0] = 1.0
-    sph = c / nrm
+    permute, info = _spin_permuter(xyz, hemisphere=hemisphere,
+                                   hemi_labels=hemi_labels)
 
     def _corr(x, y):
         m = np.isfinite(x) & np.isfinite(y)
@@ -178,10 +309,7 @@ def spin_null(
     rng = np.random.default_rng(seed)
     null = np.empty(n_trials, dtype=float)
     for t in range(n_trials):
-        rot = sph @ _haar_rotation(rng).T          # rotate the sphere
-        # nearest rotated parcel for each original parcel position
-        _, perm = cKDTree(rot).query(sph)
-        null[t] = _corr(a, b[perm])
+        null[t] = _corr(a, b[permute(rng)])
 
     absnull = np.abs(null)
     p_spin = (np.sum(absnull >= abs(r_obs)) + 1) / (n_trials + 1)
@@ -194,6 +322,7 @@ def spin_null(
         "null_abs_p95": float(np.nanpercentile(absnull, 95)),
         "null_ci95": [float(np.nanpercentile(null, 2.5)),
                        float(np.nanpercentile(null, 97.5))],
+        **info,
     }
 
 
@@ -214,6 +343,8 @@ def translation_spin_null(
     *,
     n_trials: int = 1000,
     seed: int = 0,
+    hemisphere: str = "whole",
+    hemi_labels=None,
 ) -> dict:
     """Null for a cross-species translation claim.
 
@@ -235,9 +366,17 @@ def translation_spin_null(
     A and B agree closely, both controlling spatial autocorrelation, while C is
     more lenient. B and A are the nulls reported.
 
+    ``hemisphere`` and ``hemi_labels`` control the rotation of the mouse input
+    exactly as in :func:`spin_null`. ``"whole"`` rotates the whole mouse volume
+    about its centroid and lets a mouse parcel inherit the value of a parcel in
+    the other hemisphere. ``"preserve"`` rotates each mouse hemisphere about its
+    own centroid with mirror image rotations Q and MQM, so hemisphere membership
+
+    and left/right symmetry survive and nothing crosses the midline. The
+    default is ``"whole"``.
+
     Returns observed |r|, the spin-B p-value, and the null summary.
     """
-    from scipy.spatial import cKDTree
     from scipy.stats import pearsonr
 
     m = np.asarray(mouse_map, dtype=float)
@@ -245,10 +384,8 @@ def translation_spin_null(
     pi = np.asarray(pi, dtype=float)
     mc = np.asarray(mouse_coords, dtype=float)
 
-    c = mc - np.nanmean(mc, axis=0)
-    nrm = np.linalg.norm(c, axis=1, keepdims=True)
-    nrm[nrm == 0] = 1.0
-    sph = c / nrm
+    permute, info = _spin_permuter(mc, hemisphere=hemisphere,
+                                   hemi_labels=hemi_labels)
 
     def _corr(x, y):
         ok = np.isfinite(x) & np.isfinite(y)
@@ -258,9 +395,7 @@ def translation_spin_null(
     rng = np.random.default_rng(seed)
     null = np.empty(n_trials, dtype=float)
     for t in range(n_trials):
-        rot = sph @ _haar_rotation(rng).T
-        _, perm = cKDTree(rot).query(sph)
-        null[t] = _corr(_route_normalized(m[perm], pi), obs)
+        null[t] = _corr(_route_normalized(m[permute(rng)], pi), obs)
 
     absnull = np.abs(null)
     p = (np.sum(absnull >= abs(r_obs)) + 1) / (n_trials + 1)
@@ -270,4 +405,5 @@ def translation_spin_null(
         "n_trials": int(n_trials),
         "null_abs_mean": float(np.nanmean(absnull)),
         "null_abs_p95": float(np.nanpercentile(absnull, 95)),
+        **info,
     }

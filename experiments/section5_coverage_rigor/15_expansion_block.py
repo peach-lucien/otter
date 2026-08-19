@@ -6,7 +6,7 @@ is a global-correlation null (-0.05) because coverage is noisy per parcel (relia
 deficit is concentrated in the most-expanded frontal cortex, not smoothly graded. A global Pearson is
 underpowered for that shape. The shape that matches the biology is tested instead:
 
-  - bin human regions by Xu2020 mouse->human expansion (tertiles / quintiles),
+  - bin human regions by Xu2020 macaque->human expansion (tertiles / quintiles),
   - compare SOUND coverage (log10 mass-normalised region mean) across bins,
   - top-vs-bottom expansion contrast with a spin null on coverage (asymmetric signal vs the
     symmetric expansion map = the calibrated config),
@@ -36,7 +36,7 @@ def main():
     pi = load_pi(); col = pi.sum(0)
 
     b = json.loads((ROOT / "outputs/logs/section5_evolution_battery.json").read_text())
-    xu = b["Xu2020 mouse→human expansion"]
+    xu = b["Xu2020 macaque→human expansion"]
     exp = dict(zip(np.asarray(xu["schaefer_ids"], int), np.asarray(xu["map_values"], float)))
 
     ids = [k for k in range(1, 401) if (nr == k).any() and k in exp]

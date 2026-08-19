@@ -3,8 +3,9 @@
 
 Coverage is noisy per parcel (L/R reliability 0.22), so per-region correlations against smooth
 maps are attenuated. Averaging within Yeo-17 networks cancels that noise. The relationship that
-emerges is with mouse-human FC HOMOLOGY (Xu2020): regions whose functional connectivity is more
-homologous between mouse and human receive more mouse mass. This is the same modality OTTER encodes.
+
+emerges is with macaque-human FC homology (Xu2020). Human regions whose functional connectivity is
+more homologous with the macaque receive more mouse mass, the same modality OTTER encodes.
 
 Significance: spin the parcel-level coverage on the sphere (asymmetric signal vs symmetric network
 structure = the calibrated 5.5% FPR config), re-average within networks, recompute the network-level
@@ -51,12 +52,12 @@ def main():
         # log10 of mass-normalised network mean
         return np.array([np.log10(cov_p[net_parcel == n].mean() + 1e-300) for n in nets_wanted])
 
-    out = {"_finding": ("At network level coverage tracks mouse-human FC homology (Xu2020): more "
+    out = {"_finding": ("At network level coverage tracks macaque-human FC homology (Xu2020): more "
                         "homologous connectivity -> more mouse mass. Diluted per-parcel by coverage "
                         "noise (reliability 0.22); network averaging recovers it."),
            "n_spin": N_SPIN, "level": "Yeo-17 network"}
 
-    for label in ["Xu2020 mouse–human FC homology", "Xu2020 mouse→human expansion",
+    for label in ["Xu2020 macaque–human FC homology", "Xu2020 macaque→human expansion",
                   "Hill2010 macaque→human expansion", "Sydnor2021 S–A axis",
                   "Margulies2016 principal gradient", "HCP T1w/T2w hierarchy"]:
         v = bat.get(label, {})

@@ -31,10 +31,10 @@ from otter.data import load_cached                     # noqa: E402
 from otter.eval.nulls import _haar_rotation            # noqa: E402
 
 MAPS = [
-    ("Xu2020 mouse→human expansion", "Xu2020 expansion", "evolution"),
+    ("Xu2020 macaque→human expansion", "Xu2020 expansion", "evolution"),
     ("Hill2010 macaque→human expansion", "Hill2010 expansion", "evolution"),
     ("Hill2010 developmental expansion", "Hill2010 development", "evolution"),
-    ("Xu2020 mouse–human FC homology", "Xu2020 FC homology", "evolution"),
+    ("Xu2020 macaque–human FC homology", "Xu2020 FC homology", "evolution"),
     ("Sydnor2021 S–A axis", "Sydnor2021 S-A", "hierarchy"),
     ("Margulies2016 principal gradient", "Margulies gradient", "hierarchy"),
     ("HCP T1w/T2w hierarchy", "HCP T1w/T2w", "hierarchy"),

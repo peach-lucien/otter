@@ -220,7 +220,11 @@ def main():
     target_pairs = [
         ("sensorimotor", "SomatoMotor"),
         ("visual",       "Visual"),
-        ("auditory",     "Auditory"),   # technically merged into SomMot; tested separately
+
+        # Canonical Yeo-7 merges human Auditory into SomatoMotor above, so no human parcel
+        # carries an Auditory label. The expected target for the mouse auditory network is
+        # the network it is merged into.
+        ("auditory",     "SomatoMotor"),
         ("salience",     "Salience"),
         ("frontal_dmn",  "DMN"),
         ("temporal_dmn", "DMN"),

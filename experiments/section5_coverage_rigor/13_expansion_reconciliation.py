@@ -82,7 +82,7 @@ def main():
     bat = json.loads((ROOT / "outputs/logs/section5_evolution_battery.json").read_text())
     out["region_level_maps"] = {}
     print("\nREGION-level coverage vs published maps, and each map vs |x|:")
-    for label in ["Xu2020 mouse→human expansion", "Hill2010 macaque→human expansion",
+    for label in ["Xu2020 macaque→human expansion", "Hill2010 macaque→human expansion",
                   "Hill2010 developmental expansion", "Sydnor2021 S–A axis",
                   "Margulies2016 principal gradient", "HCP T1w/T2w hierarchy"]:
         v = bat.get(label, {})

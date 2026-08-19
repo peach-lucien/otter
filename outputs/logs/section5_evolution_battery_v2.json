@@ -4,14 +4,14 @@
   "n_spin": 1000,
   "pi_file": "outputs/coupling/pi_canonical.npy",
   "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
-  "Xu2020 mouse\u2192human expansion": {
+  "Xu2020 macaque\u2192human expansion": {
     "spearman": -0.09137159880674679,
     "spin_p": 0.3146853146853147,
     "null_abs_p95": 0.1877429565970794,
     "n": 391,
     "spin_p_as_published_PEARSON": 0.8821178821178821
   },
-  "Xu2020 mouse\u2013human FC homology": {
+  "Xu2020 macaque\u2013human FC homology": {
     "spearman": 0.04035901986212546,
     "spin_p": 0.6423576423576424,
     "null_abs_p95": 0.17844386014977803,
