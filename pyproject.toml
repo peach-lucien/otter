@@ -43,11 +43,7 @@ Explorer      = "https://peach-lucien.github.io/otter/"
 Issues        = "https://github.com/peach-lucien/otter/issues"
 
 [project.scripts]
-# CLI shortcuts for the most-run pipeline steps. After `pip install -e .`
-# you can call them directly without `python pipeline/...`.
-otter-solve     = "otter.cli:solve_production"
-otter-evaluate  = "otter.cli:evaluate"
-otter-artefacts = "otter.cli:build_artefacts"
+otter-solve = "otter.cli:solve_canonical"
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -59,13 +55,9 @@ target-version = "py311"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts   = "-ra -q"
-# Registered so that `pytest -m "not slow"` actually deselects. Unregistered, the mark is a
-# silent no-op: the filter matches nothing and the slow test runs anyway.
 markers = [
     "slow: long-running test; deselect with -m 'not slow'",
 ]
 filterwarnings = [
-    # Old-API shim modules emit DeprecationWarnings — they're expected and
-    # documented; surfacing them in test output is noise.
     "ignore::DeprecationWarning:otter\\..*",
 ]

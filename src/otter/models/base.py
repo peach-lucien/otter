@@ -1,22 +1,4 @@
-"""FGWModel, base class for all cross-species coupling models.
-
-The four production subclasses (UnsupervisedGW, SupervisedFGW, MultimodalFGW,
-HierarchicalFGW) all inherit from this. Their :meth:`fit` solves the underlying
-FGW problem and stores the resulting coupling π on ``self.pi_``.
-
-The class bundles configuration (alpha, epsilon, weights, …) with the
-resulting π and the diagnostic info (loss, n_iter, multistart spread), and
-gives a uniform ``predict_human_fc`` and ``evaluate`` interface across the
-four model levels.
-
-Subclass contract
------------------
-A subclass must implement:
-    _solve(self, *, mouse_ad, human_ad, **kw) -> (pi, info_dict)
-
-The base class then handles ``.fit``, ``.pi``, ``.predict_human_fc``,
-``.evaluate``, ``.save`` and ``.load`` for free.
-"""
+"""Base class and fit diagnostics for cross-species FGW coupling models."""
 from __future__ import annotations
 
 import json

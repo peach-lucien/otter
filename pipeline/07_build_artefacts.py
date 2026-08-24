@@ -1,30 +1,4 @@
-"""Pipeline step 07, build comparison artefacts + interactive 3D viewer.
-
-Two reporting steps in one script:
-
-1. **Comparison table & figures** (default): Reads every results JSON in
-   ``outputs/logs/`` and produces:
-     outputs/comparison/comprehensive_table.csv     wide CSV: configs × headline metrics
-     outputs/comparison/per_network_top1.csv        long CSV: configs × networks → top1
-     outputs/comparison/comparison_summary.md       markdown summary
-     outputs/figures/13_comprehensive_comparison.png  4-panel headline bars
-     outputs/figures/14_config_x_network_heatmap.png  full heatmap
-
-2. **Interactive 3D viewer** (``--viewer``): Loads a saved π from
-   ``outputs/coupling/``, builds the embedded JSON payload, and writes a
-   self-contained HTML viewer to ``outputs/viewer/index.html``. Pass
-   ``--pi-file`` to choose a non-default π.
-
-Usage:
-    python pipeline/07_build_artefacts.py                     # comparison report only
-    python pipeline/07_build_artefacts.py --viewer            # also build viewer
-    python pipeline/07_build_artefacts.py --viewer-only       # viewer only
-    python pipeline/07_build_artefacts.py --viewer --pi-file pi_fc_plus_SC_with_M1_hippo.npy
-
-This is a pure reporting step, it does not run any solves. Re-run any time
-you want a fresh table after `pipeline/05_evaluate.py` or a fresh viewer
-after `pipeline/04_solve_production.py`.
-"""
+"""Build diagnostic comparison tables, figures and the standalone 3D viewer from saved low-level pipeline outputs."""
 from __future__ import annotations
 
 import argparse
@@ -55,7 +29,7 @@ def build_comparison():
     wide_df, long_df, null_z, bootstrap = build_comparison_table(LOG)
     print(f"  built {len(wide_df)} config rows × {wide_df.shape[1]} columns")
 
-    print("Null z-scores (production = fc_plus_SC):")
+    print("Null z-scores (reference = fc_plus_SC):")
     for k, v in null_z.items():
         print(f"  {k:20s}: real={v['real_top1']:.0%}  null={v['null_mean']:.0%}±{v['null_std']:.0%}  z={v['z_score']:+.1f}")
 

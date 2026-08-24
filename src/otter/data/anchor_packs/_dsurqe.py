@@ -66,7 +66,7 @@ def _build_dsurqe_ancestor_map(tree_path: Path) -> dict[str, set[str]]:
     """Return ``{node_name: set(ancestor_names_including_self)}`` from the DSURQE tree.
 
     Helper for resolving the parcel table's precomputed DSURQE vote labels
-    against the tree. It is unused by the production lookup, which reads the
+    against the tree. It is unused by the main lookup, which reads the
     live atlas volume (see ``mouse_parcels_in_dsurqe_region``).
     """
     tree = json.loads(Path(tree_path).read_text())

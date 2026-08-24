@@ -1,4 +1,4 @@
-"""Phase 1 visualisation: cross-disorder correlation matrix + OTTER predicted spatial pattern."""
+"""Cross-disorder correlation matrix and OTTER predicted spatial pattern."""
 from __future__ import annotations
 import json
 from pathlib import Path
@@ -43,7 +43,7 @@ def main():
     ax.legend(fontsize=8)
 
     plt.suptitle(
-        "Phase 1. OTTER per-disorder spatial predictions\n"
+        "OTTER per-disorder spatial predictions\n"
         "(autism / bipolar / schizophrenia / ADHD genes from MOESM4 + MOESM5)",
         fontsize=12, y=1.02,
     )

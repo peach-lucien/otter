@@ -121,7 +121,7 @@ def main():
     np.save(f_perreg, m_perreg.pi)
     d_perreg = beauchamp_topk(f_perreg.name, "beauchamp_validation_per_region_xyz_v2.json")
 
-    # ---- Production for comparison (uses canonical beauchamp_validation.json)
+    # ---- Point-anchor comparator.
     d_prod = beauchamp_topk("pi_fc_plus_SC.npy", "beauchamp_validation.json")
 
     # ---- Compare

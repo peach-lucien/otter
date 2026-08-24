@@ -98,7 +98,7 @@ def main():
         val_filename="beauchamp_validation_tectum_sc_only.json",
     )
 
-    # Config 3: Production baseline (re-run for consistency)
+    # Config 3: point-anchor comparator.
     print("\n[3/3] Re-running Beauchamp on production π for comparison ...")
     env = {**os.environ, "PYTHONPATH": str(ROOT / "src")}
     subprocess.run(["python", str(ROOT / "pipeline" / "05f_beauchamp_validation.py"),

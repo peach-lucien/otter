@@ -1,21 +1,8 @@
-"""Single source of truth for anchor-pack composition.
+"""Single source of truth for the canonical regional-entry composition.
 
-Every consumer imports :data:`DEFAULT_PACK_NAMES` /
-:func:`build_default_pack_entries` from this module, so the recommended
-composition has one definition.
-
-The recommended model, ``outputs/coupling/pi_canonical.npy``, is composed from
-every pack flagged ``default=True`` below: all 15 packs, 26 region-anchor
-entries.
-
-Adding or removing a pack from the recommended model is a one-line change here
-(flip ``default``); the compose script, the GUI builder and the multi-source
-trust step all read the result.
-
-Changing :data:`DEFAULT_PACK_NAMES` changes which packs the recommended π is
-fitted with. After any such change, re-run
-``experiments/anchor_packs/compose_all.py`` (or
-``pipeline/run_recommended_model.py``) so the saved π matches this registry.
+The canonical coupling uses every entry flagged ``default=True`` below:
+15 modules and 26 regional correspondence entries. Consumers should call
+:func:`build_default_pack_entries` rather than duplicating this list.
 """
 from __future__ import annotations
 
@@ -50,7 +37,7 @@ class PackSpec:
     builder : Callable
         ``build_<name>_region_anchors(M_var, H_var, *, atlas_root=...)``.
     default : bool
-        Whether this pack is part of the recommended all-packs composition
+        Whether this pack is part of the canonical composition
         (``pi_canonical.npy``).
     note : str
         What the pack covers and any metric trade-off.
@@ -62,12 +49,8 @@ class PackSpec:
 
 
 # ---------------------------------------------------------------------------
-# The registry. ``default=True`` packs, in this order, are composed into the
-# recommended π. The order determines pair_id ordering in the fit and must
-# stay stable unless the coupling is re-fitted.
-#
-# All 15 packs are in the recommended composition. Each note gives the pack's
-# anatomical scope and its source; a few carry caveats, noted below.
+# Canonical entries in fitting order. Changing the order or membership requires
+# a new coupling and regenerated dependent analyses.
 # ---------------------------------------------------------------------------
 PACKS: dict[str, PackSpec] = {
     "biccn_motor": PackSpec(
@@ -122,12 +105,12 @@ PACKS: dict[str, PackSpec] = {
 }
 
 
-# Ordered list of the packs in the recommended all-packs composition.
+# Ordered list of modules in the canonical composition.
 DEFAULT_PACK_NAMES: list[str] = [n for n, s in PACKS.items() if s.default]
 
 
 def build_default_pack_entries(M_var, H_var, *, atlas_root="."):
-    """Build the region-anchor entries for the recommended all-packs π.
+    """Build the regional correspondence entries for the canonical coupling.
 
     Concatenates, in registry order, the entries from every pack with
     ``default=True``. This is the composition fitted into

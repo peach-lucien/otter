@@ -1,6 +1,6 @@
 {
  "_source": "outputs/coupling/trust_multisource_canonical.npz",
- "_note": "Canonical evidence-tier grading. Supersedes evidence_tiers_v2.json, which was built from the 8 July trust_multisource_all_packs_v2.npz.",
+ "_note": "Canonical evidence-tier grading on pi_canonical.npy.",
  "n": 1864,
  "tiers": {
   "anchored_and_validated": 587,

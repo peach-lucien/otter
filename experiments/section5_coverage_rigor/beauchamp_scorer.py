@@ -98,7 +98,7 @@ if __name__ == "__main__":
     import json
     sc = BeauchampScorer()
     print(f"masks built: {len(sc.pairs)} scorable pairs")
-    # verify on production + score the eps family
+    # Verify the reference coupling and score the epsilon family.
     from otter.data import load_pi
     prod = load_pi()
     for name, pi in [("production", prod)]:

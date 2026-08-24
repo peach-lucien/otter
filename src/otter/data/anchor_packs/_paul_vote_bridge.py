@@ -117,7 +117,7 @@ def resolve_paul_vote(vote: str) -> str | None:
     for any vote absent from the curated table. Combined with the CSV bridge
     and the direct tree lookup, this covers all 114 distinct vote strings.
 
-    This resolver is not wired into the production lookup, which resolves
+    This resolver is not wired into the main lookup, which resolves
     regions via the live DSURQE atlas volume (see ``_dsurqe.py``).
     """
     if vote in CEREBELLAR_VOTES_EXCLUDED:

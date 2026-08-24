@@ -28,6 +28,11 @@ at a coupling.
 
     cd otter && python3 experiments/section2_supervision/06_regret.py --check   # compare only
     cd otter && python3 experiments/section2_supervision/06_regret.py           # write the log
+    cd otter && python3 experiments/section2_supervision/06_regret.py --rewrite # write over a stale log
+
+By default the script refuses to overwrite a committed log it cannot reproduce, which is the
+right behaviour when the source log is unchanged. When the source log has itself been
+regenerated the committed summary is stale by construction, and ``--rewrite`` replaces it.
 """
 from __future__ import annotations
 
@@ -135,6 +140,9 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true",
                     help="compare against the committed log without writing")
+    ap.add_argument("--rewrite", action="store_true",
+                    help="replace the committed log even when it does not reproduce, for use "
+                         "after out_a1b_loro.json has been regenerated")
     args = ap.parse_args()
 
     if not SRC.exists():
@@ -169,11 +177,15 @@ def main() -> int:
                 print(f"  {d}", file=sys.stderr)
             if len(diffs) > 20:
                 print(f"  ... and {len(diffs) - 20} more", file=sys.stderr)
-            print("\nNot written; the producer disagrees with the committed log.", file=sys.stderr)
-            return 1
-        drift = max_rel_drift(theirs, mine)
-        print(f"\nreproduces {OUT.relative_to(ROOT)}; "
-              f"largest relative difference {drift:.2e} (summation order)")
+            if not args.rewrite:
+                print("\nNot written; the producer disagrees with the committed log. "
+                      "Pass --rewrite if the source log was regenerated.", file=sys.stderr)
+                return 1
+            print("\n--rewrite given; replacing the committed log.", file=sys.stderr)
+        else:
+            drift = max_rel_drift(theirs, mine)
+            print(f"\nreproduces {OUT.relative_to(ROOT)}; "
+                  f"largest relative difference {drift:.2e} (summation order)")
 
     if not args.check:
         OUT.write_text(json.dumps(built, indent=2) + "\n")

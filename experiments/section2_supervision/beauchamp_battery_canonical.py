@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 
-"""CANONICAL Beauchamp metric battery (production scoring + LORO), matching
-beauchamp_battery.py but on the canonical coupling recipe.
+"""Score the canonical coupling and target-wise supervision-withheld refits.
 
 Modes:
-  (default)  score the CANONICAL frozen coupling load_pi() (pi_canonical.npy),
+  (default)  score the released coupling loaded by load_pi(),
              no refit.  -> outputs/logs/beauchamp_metric_battery_canonical.json
-  --loro     leave-one-region-out with WARPED spatial term + eps=0.05,
+  --loro     leave one target region out with the canonical spatial term,
              xyz_weight=0.25.  For each held-out region the warp is rebuilt
              EXCLUDING that region's Garin pids (no leakage). Resumable.
              -> outputs/logs/beauchamp_metric_battery_loro_canonical.json

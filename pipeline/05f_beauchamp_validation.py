@@ -1,34 +1,6 @@
-"""Pipeline 05f, external validation against Beauchamp 2022's curated mouse↔human pairs.
+"""Construct Beauchamp candidate-region masks and score a supplied coupling.
 
-Tests whether the production π predicts homologies that match published
-cross-species region correspondences from Beauchamp et al. 2022 eLife.
-
-Beauchamp's `create_neuro_pairs.R` hard-codes 36 canonical pairs. We use the
-22 non-cerebellar pairs (we exclude cerebellum from our parcellation).
-
-Mouse side: each Beauchamp mouse region name -> set of DSURQE label IDs ->
-overlap with our 1864 parcels via spatial mapping into the
-`DSURQE_CCFv3_labels_200um.mnc` volume (origin offset (-0.027, -2.334, +1.018)
-estimated from 6 anchor pairs whose DSURQE leaf IDs are unambiguous).
-
-Human side: each Beauchamp human region name -> our parcels whose `subregion`
-string contains a curated keyword (e.g. "Heschl's gyrus" -> "Primary Auditory
-Cortex"). Some Beauchamp regions (CA1/2/3, dentate gyrus, medulla) aren't in
-our anchor vocabulary; those pairs are skipped with a note.
-
-Output: outputs/logs/beauchamp_validation.json with per-pair recovery metrics:
-  - n_mouse_parcels, n_human_parcels  (size of each region's parcel set)
-  - top1, top5, top10                 (does our argmax / top-K include any
-                                         parcel in the human region set?)
-  - mean_xyz_dist                     (distance from our argmax to human
-                                         region centroid)
-  - mean_rank_in_region                (rank of best human-region parcel)
-
-Aggregate report grouped by anchor-vs-novel pair.
-
-Usage:
-    PYTHONPATH=src python pipeline/05f_beauchamp_validation.py
-"""
+The table contains 22 non-cerebellar candidates. Downstream manuscript analyses use the 19 pairs that are scorable in both released parcellations."""
 from __future__ import annotations
 
 import argparse

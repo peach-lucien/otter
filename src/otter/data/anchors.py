@@ -127,7 +127,7 @@ def build_xyz_weight_array(
     default_weight : float, default 1.0
         Weight used for parcels whose nearest-anchor pair_id is not in
         ``weights_per_pair_id``. Set to ``self.config["xyz_weight"]`` to match
-        the production scalar where not overridden.
+        the model default where not overridden.
 
     Returns
     -------

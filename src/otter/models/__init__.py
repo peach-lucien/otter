@@ -1,13 +1,4 @@
-"""FGW model classes, sklearn-style fit/pi/predict/save/load API.
-
-Four production levels (in order of complexity):
-    UnsupervisedGW, plain entropic GW on FC, no anchors, no spatial
-    SupervisedFGW, anchor-supervised semirelaxed FGW + xyz spatial
-    MultimodalFGW, adds SC, gene, M_anchor terms (the production model)
-    HierarchicalFGW, per-network sub-solves
-
-Plus the underlying solver helpers in `otter.models._solver`.
-"""
+"""Cross-species FGW model classes and solver helpers."""
 from otter.models._solver import (
     FGWResult,
     entropic_fgw,

@@ -1,152 +1,151 @@
 {
-  "_what": "The seven Hodge individual layer markers scored two ways: as published (whole brain, permuted-pi null) and like-for-like with the layer contrasts of 03_areal_type_reframe.py (Schaefer-400 cortex, translation spin null). Section 3 compares the marker mean against the contrast mean; only the like-for-like column is comparable to the contrasts.",
-  "_compare_against": "outputs/logs/hodge_areal_type_reframe.json (contrasts, cortex + spin)",
-  "n_markers": 7,
-  "as_published": {
-    "mean_pearson_r": 0.22818848135814734,
-    "n_significant": 6,
-    "matches_published_0.23": true
+ "_what": "The seven Hodge individual layer markers scored two ways: as published (whole brain, permuted-pi null) and like-for-like with the layer contrasts of 03_areal_type_reframe.py (Schaefer-400 cortex, translation spin null). Section 3 compares the marker mean against the contrast mean; only the like-for-like column is comparable to the contrasts.",
+ "_compare_against": "outputs/logs/hodge_areal_type_reframe.json (contrasts, cortex + spin)",
+ "n_markers": 7,
+ "as_published": {
+  "mean_pearson_r": 0.22818848135814734,
+  "n_significant": 6,
+  "matches_published_0.23": true
+ },
+ "like_for_like": {
+  "mean_pearson_r": 0.07178892204231753,
+  "n_significant": 3
+ },
+ "markers": [
+  {
+   "gene": "Cux1",
+   "layer": "L2/3 upper",
+   "as_published": {
+    "pearson_r": 0.17083416223813097,
+    "n": 2094,
+    "mask": "whole brain",
+    "null": "permuted pi (200)",
+    "p": 0.0
+   },
+   "like_for_like": {
+    "pearson_r": 0.17427966888694915,
+    "n": 1768,
+    "mask": "Schaefer-400 cortex",
+    "null": "translation spin (1000)",
+    "p": 0.1068931068931069,
+    "null_abs_mean": 0.08590071504506526
+   }
   },
-  "like_for_like": {
-    "mean_pearson_r": 0.07178892204231753,
-    "n_significant": 3
+  {
+   "gene": "Cux2",
+   "layer": "L2/3 upper",
+   "as_published": {
+    "pearson_r": 0.28363652651181365,
+    "n": 2094,
+    "mask": "whole brain",
+    "null": "permuted pi (200)",
+    "p": 0.0
+   },
+   "like_for_like": {
+    "pearson_r": 0.16503269120138245,
+    "n": 1768,
+    "mask": "Schaefer-400 cortex",
+    "null": "translation spin (1000)",
+    "p": 0.002997002997002997,
+    "null_abs_mean": 0.04770750218406184
+   }
   },
-  "markers": [
-    {
-      "gene": "Cux1",
-      "layer": "L2/3 upper",
-      "as_published": {
-        "pearson_r": 0.17083416223813097,
-        "n": 2094,
-        "mask": "whole brain",
-        "null": "permuted pi (200)",
-        "p": 0.0
-      },
-      "like_for_like": {
-        "pearson_r": 0.17427966888694915,
-        "n": 1768,
-        "mask": "Schaefer-400 cortex",
-        "null": "translation spin (1000)",
-        "p": 0.1068931068931069,
-        "null_abs_mean": 0.08590071504506526
-      }
-    },
-    {
-      "gene": "Cux2",
-      "layer": "L2/3 upper",
-      "as_published": {
-        "pearson_r": 0.28363652651181365,
-        "n": 2094,
-        "mask": "whole brain",
-        "null": "permuted pi (200)",
-        "p": 0.0
-      },
-      "like_for_like": {
-        "pearson_r": 0.16503269120138245,
-        "n": 1768,
-        "mask": "Schaefer-400 cortex",
-        "null": "translation spin (1000)",
-        "p": 0.002997002997002997,
-        "null_abs_mean": 0.04770750218406184
-      }
-    },
-    {
-      "gene": "Satb2",
-      "layer": "L2/3 upper",
-      "as_published": {
-        "pearson_r": 0.3571512579633322,
-        "n": 2094,
-        "mask": "whole brain",
-        "null": "permuted pi (200)",
-        "p": 0.0
-      },
-      "like_for_like": {
-        "pearson_r": 0.14338927806858798,
-        "n": 1768,
-        "mask": "Schaefer-400 cortex",
-        "null": "translation spin (1000)",
-        "p": 0.14985014985014986,
-        "null_abs_mean": 0.08099959937233951
-      }
-    },
-    {
-      "gene": "Rorb",
-      "layer": "L4 granular",
-      "as_published": {
-        "pearson_r": 0.13887113027561523,
-        "n": 2094,
-        "mask": "whole brain",
-        "null": "permuted pi (200)",
-        "p": 0.0
-      },
-      "like_for_like": {
-        "pearson_r": 0.22725626250520653,
-        "n": 1768,
-        "mask": "Schaefer-400 cortex",
-        "null": "translation spin (1000)",
-        "p": 0.003996003996003996,
-        "null_abs_mean": 0.056789796857901226
-      }
-    },
-    {
-      "gene": "Fezf2",
-      "layer": "L5/6 deep",
-      "as_published": {
-        "pearson_r": 0.34707560385034864,
-        "n": 2094,
-        "mask": "whole brain",
-        "null": "permuted pi (200)",
-        "p": 0.0
-      },
-      "like_for_like": {
-        "pearson_r": 0.05028533283298141,
-        "n": 1768,
-        "mask": "Schaefer-400 cortex",
-        "null": "translation spin (1000)",
-        "p": 0.5194805194805194,
-        "null_abs_mean": 0.05594053170538543
-      }
-    },
-    {
-      "gene": "Tbr1",
-      "layer": "L5/6 deep",
-      "as_published": {
-        "pearson_r": 0.23532874939825535,
-        "n": 2094,
-        "mask": "whole brain",
-        "null": "permuted pi (200)",
-        "p": 0.0
-      },
-      "like_for_like": {
-        "pearson_r": -0.09764027843851805,
-        "n": 1768,
-        "mask": "Schaefer-400 cortex",
-        "null": "translation spin (1000)",
-        "p": 0.14385614385614387,
-        "null_abs_mean": 0.05468854230946485
-      }
-    },
-    {
-      "gene": "Foxp2",
-      "layer": "L5/6 deep",
-      "as_published": {
-        "pearson_r": 0.06442193926953538,
-        "n": 2094,
-        "mask": "whole brain",
-        "null": "permuted pi (200)",
-        "p": 0.095
-      },
-      "like_for_like": {
-        "pearson_r": -0.16008050076036687,
-        "n": 1768,
-        "mask": "Schaefer-400 cortex",
-        "null": "translation spin (1000)",
-        "p": 0.005994005994005994,
-        "null_abs_mean": 0.049048104931000355
-      }
-    }
-  ],
-  "pi_file": "outputs/coupling/pi_canonical.npy",
-  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
-  "_sandbox_note": "Human expression read from a 7-marker subset of human_genes.npy extracted on the device (columns Cux1, Cux2, Satb2, Rorb, Fezf2, Tbr1, Foxp2), because the full 125 MB matrix would not stage. Column-wise NaN filling is unaffected by the subset. The as-published arm reproduces outputs/logs/hodge_2019_layer_markers.json exactly (mean r 0.228), which verifies the pipeline."
+  {
+   "gene": "Satb2",
+   "layer": "L2/3 upper",
+   "as_published": {
+    "pearson_r": 0.3571512579633322,
+    "n": 2094,
+    "mask": "whole brain",
+    "null": "permuted pi (200)",
+    "p": 0.0
+   },
+   "like_for_like": {
+    "pearson_r": 0.14338927806858798,
+    "n": 1768,
+    "mask": "Schaefer-400 cortex",
+    "null": "translation spin (1000)",
+    "p": 0.14985014985014986,
+    "null_abs_mean": 0.08099959937233951
+   }
+  },
+  {
+   "gene": "Rorb",
+   "layer": "L4 granular",
+   "as_published": {
+    "pearson_r": 0.13887113027561523,
+    "n": 2094,
+    "mask": "whole brain",
+    "null": "permuted pi (200)",
+    "p": 0.0
+   },
+   "like_for_like": {
+    "pearson_r": 0.22725626250520653,
+    "n": 1768,
+    "mask": "Schaefer-400 cortex",
+    "null": "translation spin (1000)",
+    "p": 0.003996003996003996,
+    "null_abs_mean": 0.056789796857901226
+   }
+  },
+  {
+   "gene": "Fezf2",
+   "layer": "L5/6 deep",
+   "as_published": {
+    "pearson_r": 0.34707560385034864,
+    "n": 2094,
+    "mask": "whole brain",
+    "null": "permuted pi (200)",
+    "p": 0.0
+   },
+   "like_for_like": {
+    "pearson_r": 0.05028533283298141,
+    "n": 1768,
+    "mask": "Schaefer-400 cortex",
+    "null": "translation spin (1000)",
+    "p": 0.5194805194805194,
+    "null_abs_mean": 0.05594053170538543
+   }
+  },
+  {
+   "gene": "Tbr1",
+   "layer": "L5/6 deep",
+   "as_published": {
+    "pearson_r": 0.23532874939825535,
+    "n": 2094,
+    "mask": "whole brain",
+    "null": "permuted pi (200)",
+    "p": 0.0
+   },
+   "like_for_like": {
+    "pearson_r": -0.09764027843851805,
+    "n": 1768,
+    "mask": "Schaefer-400 cortex",
+    "null": "translation spin (1000)",
+    "p": 0.14385614385614387,
+    "null_abs_mean": 0.05468854230946485
+   }
+  },
+  {
+   "gene": "Foxp2",
+   "layer": "L5/6 deep",
+   "as_published": {
+    "pearson_r": 0.06442193926953538,
+    "n": 2094,
+    "mask": "whole brain",
+    "null": "permuted pi (200)",
+    "p": 0.095
+   },
+   "like_for_like": {
+    "pearson_r": -0.16008050076036687,
+    "n": 1768,
+    "mask": "Schaefer-400 cortex",
+    "null": "translation spin (1000)",
+    "p": 0.005994005994005994,
+    "null_abs_mean": 0.049048104931000355
+   }
+  }
+ ],
+ "pi_file": "outputs/coupling/pi_canonical.npy",
+ "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77"
 }

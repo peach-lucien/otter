@@ -1,39 +1,36 @@
-# Experiments
+# OTTER analyses
 
-Reproducible one-off experiments. The `src/otter/` library is the production code; every file here is a research script that produced a specific result documented in `docs/`.
+This directory contains analysis and sensitivity scripts. The
+reusable fitting, data and evaluation APIs live under `src/otter/`; scripts here read the released
+coupling or refit a clearly specified model configuration.
 
-## Layout
+## Analysis directories
 
-```
-experiments/
-├── anchor_packs/                   # Per-pack experiment runners (default + opt-in)
-├── ablations/                      # Methodology ablations (soft anchors, marginals, xyz)
-├── autism_subtypes/                # Pagani 2026 4-hypothesis arc + ABIDE + gene-set tests
-├── hodge_2019_cortical_layers/     # Hodge 2019 cortical-layer marker translation
-├── margulies_2016_principal_gradient/  # Margulies 2016 + Huntenburg 2021 brain-wide gradient
-├── fulcher_2019_multimodal_gradient/   # Fulcher 2019 multimodal mouse-cortex hierarchy → human myelin
-├── schaeffer_2020_mfc_divergence/  # Schaeffer et al. 2020 frontal-cortex falsification test
-├── transbrain_2025_benchmark/      # TransBrain 2025 sibling-method head-to-head
-├── buckner_krienen_2013_tethering/ # Buckner & Krienen 2013 tethering negative control
-├── coletta_2020_cross_species_rsn/ # Coletta 2020 cross-species RSN correspondence
-├── biccn_2023_cell_types/          # BICCN (Yao 2023 + Siletti 2023) cell-type markers
-├── enigma_cross_disorder/          # ENIGMA cross-disorder spatial validation
-├── whitesell_2021_dmn/             # Whitesell 2021 DMN refinement note
-├── pagani_2026_per_model/          # Per-mouse-model exploratory translation
-└── outputs/                        # Cached intermediate results from these runs
-```
+| Directory | Scope |
+|---|---|
+| `section1_stability/` | Coupling stability |
+| `section2_supervision/` | Cost-term decomposition and supervision-withheld recovery |
+| `margulies_2016_principal_gradient/` | Principal functional-gradient transfer |
+| `fulcher_2019_multimodal_gradient/` | Microstructural and cytoarchitectural transfer |
+| `biccn_2023_cell_types/` | Cell-class marker-expression transfer |
+| `hodge_2019_cortical_layers/` | Laminar marker-expression transfer |
+| `coletta_2020_cross_species_rsn/` | Functional-network correspondence |
+| `transbrain_2025_benchmark/` | Comparative-method analysis |
+| `section5_coverage_rigor/` | Mouse-based reconstruction of human connectivity |
+| `reverse_translation/` | Human-to-mouse translation and target ranking |
+| `validation/` | Checks against published map resources |
 
-Each subdirectory has its own `README.md` documenting its scripts, inputs, and outputs.
+`anchor_packs/` contains the regional-entry definitions and source-specific runners;
+`ablations/` contains additional model sensitivities. Other named directories contain supporting
+or application-specific analyses and can be run independently.
 
-## anchor_packs/, region-anchor experiments
+The canonical coupling uses 21 Garin homology classes and 26 curated regional entries. The
+19 scorable Beauchamp region pairs provide a common scoring frame and inform hyperparameter
+evaluation. They are not supplied as anatomical correspondence constraints, but some benchmark
+territories overlap the anatomical scaffold, so they should not be described as wholly independent
+validation.
 
-12 per-pack runners that fit production-with-pack π and report Beauchamp + region-level deltas. `compose_all.py` produces the pre-warp `pi_fc_plus_SC_with_all_packs.npy`, retired and kept only to reproduce published comparisons; the canonical coupling adds the anchor-warped spatial cost and is what `load_pi()` returns. See [`anchor_packs/README.md`](anchor_packs/README.md) for the per-pack table and citations.
-
-## ablations/, methodology ablations
-
-Three ablations that justify production design choices (soft anchors, uniform marginal, area-level xyz weighting). In all three the production defaults outperform the variants. See [`ablations/README.md`](ablations/README.md).
-
-## Third-party validations
-
-Each `<paper>_*/` subdirectory takes a published cross-species paper and tests whether OTTER's π reproduces or refines its findings. Outputs are consumed by the notebooks in `notebooks/` and are the source of the numbers in `docs/03_results.md`.
-
+Run scripts from the repository root with `PYTHONPATH=src`. Outputs are written beneath
+`outputs/logs/`, `outputs/coupling/` or `outputs/figures/` as documented by each script. Analysis
+logs should record the input coupling filename and SHA-256; verify these against `pi_provenance()`
+before comparing results.

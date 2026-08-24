@@ -1,19 +1,6 @@
-"""MultimodalFGW, the production model.
+"""Semirelaxed FGW with configurable functional, structural, gene and cross-species costs.
 
-Adds optional modalities on top of SupervisedFGW (anchors + xyz):
-  - SC (structural connectivity), mixed into the relational cost C
-  - gene-expression GW, mixed into C as a separate within-species cost
-  - M_gene, cross-species cosine cost on ortholog vectors
-  - M_anchor, cross-species cost on anchor-relationship FC features
-
-The production configuration (from the comparison table) is:
-    MultimodalFGW(use_sc=True, sc_weight=0.3, fc_weight=0.7,
-                  xyz_weight=0.5, lam_anchor=1.0)
-
-It reaches 81% top-1 on leave-one-network-out CV and r=0.36 FC translation
-quality. The remaining modality switches (gene, M_gene, M_anchor) are opt-in;
-comprehensive_table.csv reports their per-config results.
-"""
+The canonical OTTER recipe is assembled in otter.repro, which supplies the anchor-warped spatial matrix and regional correspondence entries."""
 from __future__ import annotations
 
 from typing import Optional, Sequence
@@ -49,7 +36,7 @@ def _convergence(log, max_iter, tol):
 
 
 class MultimodalFGW(SupervisedFGW):
-    """Production multimodal semirelaxed FGW.
+    """Configurable multimodal semirelaxed FGW.
 
     Parameters
     ----------

@@ -1,41 +1,6 @@
-"""Periaqueductal Gray anchor pack (Bandler & Shipley 1994; Ezra 2015).
+"""Periaqueductal-gray regional correspondence entry.
 
-The midbrain periaqueductal gray (PAG) is a homeostatic structure involved in
-pain modulation, autonomic function and defensive behaviour. Its columnar
-organisation (dorsolateral, lateral, ventrolateral) is conserved from rodent
-through human:
-
-  - Bandler & Shipley 1994 *TINS*, established the columnar functional
-    model in rodent.
-  - Ezra et al. 2015, *Human Brain Mapping*, diffusion-MRI-based
-    segmentation of human PAG into 4 columns concordant with the
-    rodent model (76 cit).
-  - Kingsbury et al. 2011, *PLOS ONE*, extends the columnar model to
-    birds, confirming pan-amniote conservation (93 cit).
-
-  pid 54: Mouse Periaqueductal gray ↔ Human PAG
-
-Ezra 2015 reports that columnar structure is conserved while cortical
-connectivity differs between humans and other mammals, so only the gross
-PAG↔PAG anchor is defined. Sub-column splits (dorsolateral, lateral,
-ventrolateral) require a human PAG-column atlas.
-
-Mouse-side: DSURQE atlas overlay.
-  Periaqueductal gray: 16 parcels
-
-Human-side: MNI sphere at canonical PAG centroid (Mai/Paxinos).
-  PAG: (±5, –30, –10) r=6 mm → ~4-6 parcels (tight ball; PAG is small)
-
-References:
-  - Ezra, M., Faull, O. K., Jbabdi, S., & Pattinson, K. T. (2015).
-    Connectivity-based segmentation of the periaqueductal gray matter
-    in human with brainstem optimized diffusion MRI. *Human Brain Mapping*
-    36, 3459-3471. DOI: 10.1002/hbm.22855. (76 citations).
-  - Kingsbury, M. A., Kelly, A. M., Schrock, S. E., & Goodson, J. L.
-    (2011). Mammal-like organization of the avian midbrain central gray
-    and a reappraisal of the intercollicular nucleus. *PLOS ONE* 6,
-    e20720. DOI: 10.1371/journal.pone.0020720. (93 citations).
-"""
+Pair ID 54 links mouse and human PAG targets at gross-structure resolution. Primary source: Ezra et al., Human Brain Mapping (2015), doi:10.1002/hbm.22855."""
 from __future__ import annotations
 
 from pathlib import Path

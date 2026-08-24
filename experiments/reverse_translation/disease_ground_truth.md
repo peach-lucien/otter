@@ -32,5 +32,3 @@ substrate rather than the normal-function substrate.
 - Autism is the expected negative, as addiction is in the function table: a distributed,
   human-elaborated condition without a single mouse home. Failure to clear the null is the
   "no adequate mouse model" signal.
-- DOIs for the disease-model reviews should be PubMed-verified before publication; the
-  substrate pairings themselves are not in dispute.

@@ -36,7 +36,7 @@ Given:
 - `M`, (n_m × n_h) cross-species feature cost (xyz, network mask, optional gene)
 - `p`, fixed mouse marginal `1/n_m`
 - α ∈ [0, 1]. FGW mixing weight (1 = pure relational, 0 = pure feature)
-- ε > 0, mirror-descent step size
+- ε > 0, Kullback-Leibler proximal weight of the solver
 
 We solve:
 
@@ -47,11 +47,24 @@ $$
 $$
 
 subject to `π·1 = p` and `π ≥ 0` (the column marginal is free in the
-semirelaxed setting). The objective carries no entropy term. ε is the step size
-of the mirror-descent iteration used to solve it, so the iterate depends on ε and
-the iteration count only through their ratio τ = iterations / ε. The released
-coupling is τ = 500, reached as 25 iterations at ε = 0.05, and is reproduced by
-any equivalent pair.
+semirelaxed setting). The objective carries no entropy term.
+
+The solver is a Bregman proximal-point iteration. Each step multiplies the
+current coupling entrywise by `exp(-grad F(pi) / eps)` and rescales its rows to
+`p`, so ε weights a KL penalty tying each iterate to the one before it rather
+than penalising the entropy of the coupling. The released coupling is the 25th
+iterate at ε = 0.05. It is not the converged solution: carried to `tol` the same
+fit takes 591 iterations and returns an almost deterministic coupling that does
+not score better on the held-out benchmark (AUROC 0.894 against 0.899, mean
+centroid displacement 9.88 mm against 8.83 mm). Diffuseness comes from stopping
+early, not from a fixed point.
+
+The iteration approximates a continuous flow in τ = iterations / ε, so ε and the
+iteration count trade off against one another. At matched τ = 500 the couplings
+obtained at ε = 0.05, 0.2 and 1.0 agree on the objective and on the median
+top-ranked probability to three significant figures. The agreement is close but
+not exact, because the discretisation is path dependent. τ is used below as a
+shorthand for the pair (iterations, ε), not as an exact invariant.
 
 We use [POT](https://pythonot.github.io/) (Python Optimal Transport) for the
 underlying solver, specifically
@@ -72,7 +85,7 @@ visible-anchor mouse rows are forced to point at their correct human partner.
 The held-out (CV) anchors get no such constraint and must find their partner
 purely through the FC + xyz + SC signal.
 
-### Region anchors (optional, soft by default)
+### Regional correspondence entries
 
 A region anchor (`otter.data.region_anchors`) generalises a point anchor to a
 *set* of mouse parcels mapping to a *set* of human parcels. Encoding in M for
@@ -82,43 +95,31 @@ each region anchor with mouse-set `Mset` and human-set `Hset`:
 - `M[mp, hp] = 0` for `mp ∈ Mset, hp ∈ Hset` (free within the region)
 - Symmetrically along human columns.
 
-`lam_outside = 0.15` is the default, a soft region anchor. Setting
-`lam_outside = 1.0` gives a hard region wall, which raises held-out region CV
-mean rank by 43 % and leaves the trained-π argmax unchanged. Pass
-`region_lam_outside=1.0` to use it.
+`lam_outside = 0.15` is the canonical soft penalty. The registry contains 26
+entries from 15 comparative-anatomy modules; see
+[04_anchor_packs.md](04_anchor_packs.md).
 
-## Modality combinations
+## Canonical recipe
 
-Each modality contributes either to the relational cost (within-species) or to
-M (cross-species). The four model levels in `otter.models`:
+The relational cost is a 0.7:0.3 mixture of functional- and structural-
+connectivity distances. The cross-species cost contains the anchor-warped
+spatial distance, Garin point-anchor penalties and the 26 regional entries.
+Gene expression is used in transfer analyses, not in the canonical fit.
 
-| Class                   | Relational                | M                           | Headline top-1 |
-|-------------------------|---------------------------|-----------------------------|----------------|
-| `UnsupervisedGW`        | FC                        | (none)                      | ~14% (Garin only) |
-| `SupervisedFGW`         | FC                        | xyz + anchors               | 79% |
-| **`MultimodalFGW`**     | **0.7·FC + 0.3·SC**       | **0.5·xyz + anchors**       | **81%** |
-| `HierarchicalFGW`       | per-network FC + SC       | per-network xyz + anchors   | 45% (LONO) but 0.55 within-net FC |
-
-Optional terms (off by default in the production config, available as ablations):
-- `gene_gw_weight`, gene-coexpression-derived within-species GW cost
-- `M_gene_weight`, cross-species cosine cost on ortholog-aligned gene vectors
-- `M_anchor_weight`, cross-species cost on anchor-relationship FC features
-- `network_mask_weight`, cross-network penalty in M
-
-## Hyperparameters used in production
+## Hyperparameters
 
 | Parameter        | Value    | Rationale                                             |
 |------------------|----------|-------------------------------------------------------|
 | α                | 0.5      | Equal weight to relational + feature terms            |
-| ε                | 0.05     | Mirror-descent step size. With `max_iter` = 25 this is τ = 500. Selected by nested CV on held-out Beauchamp homologies. A larger τ (25 iterations at ε = 0.005, τ = 5,000) gives a near-deterministic π with no gain in held-out recovery. |
-| `xyz_weight`     | 0.25     | Selected by the same nested CV. Applied in an anchor-warped frame: a thin-plate spline fitted to the 42 Garin coordinate pairs carries mouse coordinates into human space, and the cross-species spatial cost is computed there. |
+| ε                | 0.05     | KL proximal weight of the solver. With `max_iter` = 25 this gives τ = 500. The five-fold grid search most often selected ε = 0.2; the released ε = 0.05 had nearly identical benchmark accuracy and a more concentrated parcel-level coupling. |
+| `xyz_weight`     | 0.25     | Selected most often across the five Beauchamp folds. Applied after a thin-plate-spline warp fitted to the 42 bilateral Garin coordinate pairs. |
 | `lam_anchor`     | 1.0      | Point-anchor forbidden-cell penalty; large vs the [0, 1] cost scale |
 | `region_lam_outside` | 0.15 | Region-anchor outside-region penalty (soft default) |
-| `fc_weight`      | 0.7      | Production FC + SC mix                                 |
-| `sc_weight`      | 0.3      | Production FC + SC mix                                 |
+| `fc_weight`      | 0.7      | Functional-connectivity share of the relational cost   |
+| `sc_weight`      | 0.3      | Structural-connectivity share of the relational cost   |
 | `cost_normalisation` | "max" | Each cost matrix divided by its max off-diagonal entry |
 
-| `max_iter`       | 25       | Outer mirror-descent iterations. With ε = 0.05 this is τ = 500. |
+| `max_iter`       | 25       | Outer solver iterations. With ε = 0.05 this is τ = 500. The released fit stops here rather than running to `tol`. |
 | `tol`            | 1e-5     | Loss change tolerance                                 |
 
 ## Cost matrices
@@ -157,25 +158,19 @@ whether some mouse tissue is wired like the human parcel rather than how much ma
 received, and §5 of `03_results.md` builds its central measurement on it. Every mouse row keeps
 an interpretable distribution over human nodes.
 
-## Validation pipeline
+## Evaluation design
 
-Three independent metrics, each described in [`docs/03_results.md`](03_results.md):
+The 19 scorable Beauchamp correspondences provide a region-level scoring frame
+and inform the hyperparameter grid. They are not supplied as anatomical
+constraints, but some territories overlap the Garin-derived spatial scaffold or
+regional entries. The principal generalisation checks therefore refit after
+removing each overlapping target's supervision and leave out each scorable
+Garin class or regional entry in turn.
 
-1. **Held-out anchor CV** (binary `top-k`, graded `mean_rank`, `mean_xyz_dist`):
-   leave-one-network-out, model gets all anchors except those in the held-out
-   network. Held-out anchors receive no M signal pulling them to the correct
-   partner, so this is the strictest of the three metrics. 79–81% top-1 in
-   production.
-
-2. **FC translation quality**: anchor-independent. Push mouse FC through π:
-   `Fh_pred = πᵀ · Fm · π / (q · qᵀ)`. Pearson correlation of upper-triangle
-   vs actual human FC. r = 0.36 in production (vs r = 0 for random π).
-
-3. **Subject-level K-fold CV**: 80/20 random subject splits, K=5. Tests
-   whether the model generalises across cohorts of subjects (not across
-   anchors). ~4 pp generalisation gap.
-
-Plus null distributions (random π, permuted anchors) for z-score reporting.
+Additional analyses test coupling organisation, cross-species map transfer,
+mouse-based reconstruction of human functional connectivity and forward or
+reverse map routing. [03_results.md](03_results.md) links each analysis to its
+current producer and provenance-stamped result log.
 
 ## Citations
 

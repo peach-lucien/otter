@@ -1,163 +1,59 @@
-# End-to-end replication pipeline
+# Reproduction workflow
 
-Reproduction of the headline results from a clean checkout. Every step is
-idempotent and saves to `outputs/`.
+Run commands from the repository root in the otter environment.
 
-## 0. Environment
+## Use the released coupling
 
-```bash
-conda env create -f env.yml && conda activate otter
-pip install -e ".[dev]"
-pytest -q                      # 176 tests, ~10 s
-```
+Most users should download the release bundle rather than refit the model:
 
-## 1. External data download (slow, network-dependent)
+    python scripts/fetch_data.py
 
-```bash
-PYTHONPATH=src python pipeline/00_external/00_inspect_masks.py
-PYTHONPATH=src python pipeline/00_external/00b_verify_alignment.py
-PYTHONPATH=src python pipeline/00_external/01_mouse_sc.py               # projects Allen mouse SC via each parcel's CCFv3 centre voxel
-PYTHONPATH=src python pipeline/00_external/02_mouse_genes.py            # samples Allen ISH over each parcel's CCFv3 voxel set
-PYTHONPATH=src python pipeline/00_external/03_human_sc.py
-PYTHONPATH=src python pipeline/00_external/04_human_genes.py
-PYTHONPATH=src python pipeline/00_external/05_orthologs.py
-```
+This provides outputs/coupling/pi_canonical.npy, the processed parcel tables and
+the inputs used by the notebooks and manuscript analyses. load_pi() loads the
+released coupling by default.
 
-`~3 GB` of disk is required in `data_external/`. See
-[`pipeline/00_external/README.md`](../pipeline/00_external/README.md) for
-details on each dataset.
+## Rebuild the inputs
 
-## 2. Build per-species AnnData
+The raw tier is required only for a from-scratch rebuild:
 
-```bash
-PYTHONPATH=src python pipeline/02_build_anndata.py
-```
+    python scripts/fetch_data.py --tier raw
+    PYTHONPATH=src python pipeline/00_external/01_mouse_sc.py
+    PYTHONPATH=src python pipeline/00_external/02_mouse_genes.py
+    PYTHONPATH=src python pipeline/00_external/03_human_sc.py
+    PYTHONPATH=src python pipeline/00_external/04_human_genes.py
+    PYTHONPATH=src python pipeline/00_external/05_orthologs.py
+    PYTHONPATH=src python pipeline/02_build_anndata.py
+    PYTHONPATH=src python pipeline/03_build_costs.py
 
-Reads the colleague's two `corrs_*.mat` files, produces:
-- `outputs/anndata/mouse.h5ad` (1864 nodes × 105 subjects)
-- `outputs/anndata/human.h5ad` (2094 nodes × 113 subjects)
+Source-specific requirements are documented in
+[pipeline/00_external/README.md](../pipeline/00_external/README.md).
 
-Each h5ad's `uns` carries the mean FC matrix (`fc_mean`), per-cell observation
-count (`fc_n_obs`), and the parsed `var` table with anchor labels.
+## Refit the canonical coupling
 
-## 3. Build cost matrices
+    PYTHONPATH=src python pipeline/run_recommended_model.py \
+      --output outputs/coupling/pi_canonical_refit.npy
 
-```bash
-PYTHONPATH=src python pipeline/03_build_costs.py
-```
+The command uses the recipe in otter.repro: functional and structural
+connectivity, the anchor-warped spatial cost, 21 Garin homology classes and 26
+curated regional entries. It writes a provenance sidecar next to the refitted
+coupling and does not overwrite the released file unless explicitly requested.
 
-One script that builds all cost matrices into `outputs/anndata/full_costs.npz`:
-FC distances (Cm, Ch), within-species xyz (Cm_xyz, Ch_xyz), cross-species xyz
-(M_xyz), SC distances (Cm_SC, Ch_SC), gene-coexpression (Cm_gene, Ch_gene),
-cross-species gene cost (M_gene + M_gene_valid), and anchor-relationship M
-(M_anchor). The Knox-augmented `Cm_SC_knox` is added separately by
-`pipeline/00_external/06_knox_sc.py`.
+## Reproduce analyses
 
-## 4. Solve the production model
+Current manuscript analyses are grouped by purpose under experiments/; see
+[03_results.md](03_results.md) for the directory and log associated with each
+section. Some scripts refit the model for holdouts or nulls, while others load
+the released coupling. Their result logs record the relevant coupling hash or
+refit recipe.
 
-```bash
-PYTHONPATH=src python pipeline/04_solve_production.py                # MultimodalFGW(use_sc=True)
-PYTHONPATH=src python pipeline/04_solve_production.py --config fc_only   # SupervisedFGW
-PYTHONPATH=src python pipeline/04_solve_production.py --multistart       # 5-init multistart sanity
-```
+The notebooks provide the shortest executable walkthrough:
 
-Saves:
-- `outputs/coupling/pi_fc_plus_SC.npy`, point-anchor coupling (1864 × 2094).
-  `pi_canonical.npy` is the canonical coupling; `load_pi()` returns it
-- `outputs/coupling/pi_fc_plus_SC.json`, config + fit info sidecar
+    jupyter lab notebooks/
 
-## 5. Evaluate
+## Build the explorer
 
-```bash
-PYTHONPATH=src python pipeline/05_evaluate.py            # orchestrator (runs the substeps below)
-```
+    PYTHONPATH=src python pipeline/08_build_gui.py --publish
 
-Or individually:
-- `05a_anchor_cv.py`, leave-one-network-out CV across 13 configs (~5 min, resumable)
-- `05b_fc_translation.py`. FC-translation Pearson r per production config
-- `05c_null_distributions.py`, random_pi (50 trials) + permuted_anchors (5 trials) per network
-- `05d_full_space_eval.py`, full-space (n_h=2094) recovery for production configs
-- `05e_knox_vs_standard_sc.py`, comparative: Knox leaf-level vs Allen summary-structure SC LONO
-- `05f_beauchamp_validation.py`, external validation against Beauchamp 2022's 22 mouse↔human pairs
-- `05g_compute_trust.py`, per-parcel model-confidence + regional-empirical trust score
-
-Outputs land in `outputs/logs/*.json`. Already-cached cells are skipped;
-pass `--recompute` to force a full recompute.
-
-## 6. Bootstrap stability
-
-```bash
-PYTHONPATH=src python pipeline/06_bootstrap.py --config fc_plus_SC --iters 40   # ~10 min
-```
-
-Saves `outputs/coupling/bootstrap_aggregate_fc_plus_SC.npz` with per-cell mean
-+ std of π across 40 subject-bootstrap resamples, plus stability summary in
-`outputs/logs/bootstrap_summary_fc_plus_SC.json`. Pass `--config fc_only` to
-also get the FC-only baseline (saves to the corresponding `_fc_only` files).
-
-## 7. Build artefacts
-
-```bash
-PYTHONPATH=src python pipeline/07_build_artefacts.py     # comparison table + figures
-PYTHONPATH=src python pipeline/07_build_artefacts.py --viewer-only       # interactive 3D viewer
-```
-
-Produces:
-- `outputs/comparison/comprehensive_table.csv`, wide table of all configs
-- `outputs/comparison/per_network_top1.csv`, long form, configs × networks
-- `outputs/comparison/comparison_summary.md (build artefact, regenerated by step 07; not documentation and not committed)`, markdown summary
-- `outputs/figures/13_comprehensive_comparison.png`, 4-panel headline bars
-- `outputs/figures/14_config_x_network_heatmap.png`, full heatmap
-- `outputs/viewer/index.html`, self-contained interactive viewer
-
-## 8. Multi-source trust map + GUI
-
-```bash
-PYTHONPATH=src python pipeline/08a_multisource_trust.py     # five-tier per-parcel evidence map
-PYTHONPATH=src python pipeline/08_build_gui.py --publish    # region-first explorer
-```
-
-`08a` writes `outputs/coupling/trust_multisource_canonical.npz` (the evidence
-map the GUI and `notebooks/03_coupling.ipynb` read); `08_build_gui.py` builds
-`outputs/gui/index.html` and, with `--publish`, copies it to `docs/index.html`
-for GitHub Pages.
-
-## Single-command reproduction
-
-`pipeline/run_recommended_model.py` chains solve → compose packs → bootstrap →
-multi-source trust → GUI in the correct order:
-
-```bash
-PYTHONPATH=src python pipeline/run_recommended_model.py              # full run
-PYTHONPATH=src python pipeline/run_recommended_model.py --start-from trust   # reuse fits, refresh trust + GUI
-```
-
-## Expected headline numbers
-
-After running steps 1–7 end-to-end on the original cohort:
-
-| Metric                                | Value           |
-|---------------------------------------|-----------------|
-| Anchor CV top-1 (production)          | **81%**         |
-| Anchor CV top-5                       | **100%**        |
-| FC translation Pearson r (overall)    | **0.36**        |
-| FC translation r (within-network)     | **0.45**        |
-| Null z-score vs random π              | **+7.5**        |
-| Null z-score vs permuted-anchor       | **+17.8**       |
-| Subject-CV gap (test − train)         | **−0.04 ± 0.01** |
-| Bootstrap mean stability              | **0.98**        |
-
-See [`docs/03_results.md`](03_results.md) for the full per-config breakdown.
-
-## Time budget
-
-| Step | Wallclock |
-|------|-----------|
-| 1. External data download | ~3 hours (network-bound, mostly Allen ISH) |
-| 2. Build AnnData          | ~1 minute |
-| 3. Build costs            | ~2 minutes |
-| 4. Solve production       | ~15 seconds |
-| 5. Evaluate               | ~5 minutes (CV) + ~10 minutes (nulls) |
-| 6. Bootstrap (40 iter)    | ~10 minutes |
-| 7. Build artefacts        | ~30 seconds |
-| **Total (excl. download)** | **~25 minutes** |
+This writes outputs/gui/index.html and copies the self-contained explorer to
+docs/index.html. The explorer's categories are display metadata rather than
+confidence or validation tiers.

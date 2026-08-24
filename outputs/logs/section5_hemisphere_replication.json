@@ -1,35 +1,35 @@
 {
-  "_why": "Hill's macaque->human expansion correlation REVERSES between hemispheres (-0.18 right, +0.06 left with the map mirrored) and is retired. The coverage deficit and the dissociation do NOT reverse: their effect size is stable in each hemisphere alone. Single-hemisphere spin p values are deliberately omitted: a Haar rotation of a half-sphere is not a spin.",
-  "n_spin_whole_brain": 1000,
-  "both": {
-    "n": 884,
-    "connectivity_coverage_gap": 0.37032960499952183,
-    "transcriptomic_similarity_gap": -0.16306800788000655,
-    "dissociation_gap": 0.5333976128795284,
-    "connectivity_coverage_gap_spin_p": 0.32667332667332666,
-    "transcriptomic_similarity_gap_spin_p": 0.43456543456543456,
-    "dissociation_gap_spin_p": 0.12687312687312688
-  },
-  "left": {
-    "n": 599,
-    "connectivity_coverage_gap": 0.4668414003433172,
-    "transcriptomic_similarity_gap": -0.1722111180765471,
-    "dissociation_gap": 0.6390525184198643,
-    "_no_spin_p": "A Haar rotation of a single-hemisphere point cloud folds onto a half-sphere and is not a valid spin test. Effect size only."
-  },
-  "right": {
-    "n": 285,
-    "connectivity_coverage_gap": 0.16594299649675284,
-    "transcriptomic_similarity_gap": -0.13443435004452547,
-    "dissociation_gap": 0.30037734654127834,
-    "_no_spin_p": "A Haar rotation of a single-hemisphere point cloud folds onto a half-sphere and is not a valid spin test. Effect size only."
-  },
-  "hill_hemisphere_reversal": {
-    "rho_right_native": -0.13593513085898873,
-    "rho_left_mirrored": 0.04730814273904657,
-    "verdict": "RETIRED: reverses sign between hemispheres; not a robust effect."
-  },
-  "coverage_bilateral_symmetry_rho": 0.31206255166712593,
-  "pi_file": "outputs/coupling/pi_canonical.npy",
-  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77"
+ "_why": "Each statistic is recomputed within each hemisphere. Hill's macaque-to-human expansion correlation does not hold sign across hemispheres and is not reported. The coverage deficit and the dissociation hold in both. Single-hemisphere spin p values are not reported, because a Haar rotation of a half-sphere is not a spin.",
+ "n_spin_whole_brain": 1000,
+ "both": {
+  "n": 884,
+  "connectivity_coverage_gap": 0.37032960499952183,
+  "transcriptomic_similarity_gap": -0.16306800788000655,
+  "dissociation_gap": 0.5333976128795284,
+  "connectivity_coverage_gap_spin_p": 0.32667332667332666,
+  "transcriptomic_similarity_gap_spin_p": 0.43456543456543456,
+  "dissociation_gap_spin_p": 0.12687312687312688
+ },
+ "left": {
+  "n": 599,
+  "connectivity_coverage_gap": 0.4668414003433172,
+  "transcriptomic_similarity_gap": -0.1722111180765471,
+  "dissociation_gap": 0.6390525184198643,
+  "_no_spin_p": "A Haar rotation of a single-hemisphere point cloud folds onto a half-sphere and is not a valid spin test. Effect size only."
+ },
+ "right": {
+  "n": 285,
+  "connectivity_coverage_gap": 0.16594299649675284,
+  "transcriptomic_similarity_gap": -0.13443435004452547,
+  "dissociation_gap": 0.30037734654127834,
+  "_no_spin_p": "A Haar rotation of a single-hemisphere point cloud folds onto a half-sphere and is not a valid spin test. Effect size only."
+ },
+ "hill_hemisphere_reversal": {
+  "rho_right_native": -0.13593513085898873,
+  "rho_left_mirrored": 0.04730814273904657,
+  "verdict": "Not reported: the sign is not stable across hemispheres."
+ },
+ "coverage_bilateral_symmetry_rho": 0.31206255166712593,
+ "pi_file": "outputs/coupling/pi_canonical.npy",
+ "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77"
 }

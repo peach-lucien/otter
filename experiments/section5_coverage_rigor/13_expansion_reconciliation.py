@@ -112,8 +112,8 @@ def main():
     # ---------- geometric confound: coverage~|x| across couplings (parcel level) ---------------
     print("\nGEOMETRIC CONFOUND  coverage~|x| parcel-level across couplings:")
     ctx = np.isfinite(mye)
-    # "canonical" is the reported arm; "production" is the coupling fitted without the anchor
-    # warp. It and the remaining arms provide cross-coupling comparison.
+    # "canonical" is the reported arm; "production" in the stored comparison is the
+    # unwarped regional-entry coupling. The remaining arms are comparators.
     out["coverage_absX_across_couplings"] = {}
     out["_reported_coupling_arm"] = "canonical"
     coup = [("canonical", "pi_canonical.npy"),
@@ -136,7 +136,7 @@ def main():
                                                         **pi_provenance(path)}
         print(f"  {name:<40} rho={r:+.3f}  spin p={pp:.4f}")
 
-    # ---------- log vs linear, parcel vs region (production) ------------------------------------
+    # ---------- Log versus linear, parcel versus region for the comparator -------------------
     m = ctx & np.isfinite(col)
     lin = col[m]; lg = np.log10(np.maximum(lin, 1e-300)); ax = np.abs(xyz[m, 0])
     out["log_vs_linear_parcel"] = {

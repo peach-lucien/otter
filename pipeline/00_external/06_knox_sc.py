@@ -159,7 +159,7 @@ def main():
 
     # Also save a dedicated COST matrix derived from this feature matrix,
     # using log1p-correlation (same recipe as sc_correlation_distance), then
-    # apply the same `normalise_cost(scheme="max")` step the production
+    # Apply the same `normalise_cost(scheme="max")` step as the canonical
     # pipeline applies to Cm_SC (see pipeline/03_build_costs.py).
     # Without this, Cm_SC_knox lives in [0, ~1.32] while every other cost
     # matrix in the cache lives in [0, 1], that scale mismatch silently

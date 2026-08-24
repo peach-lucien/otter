@@ -26,8 +26,8 @@ OUT = ROOT / "outputs/logs/coupling_summary.json"
 SEED = 0
 
 
-# The trust map read here must be the canonical one. Stamping the output with the
-# canonical pi while reading a trust map computed on a different coupling reports tier
+# The interface-metadata file read here must match the canonical coupling. Stamping
+# the output with one coupling while reading metadata built for another yields
 # numbers that do not correspond to the coupling named in the log.
 def main():
     pi = load_pi()
@@ -73,9 +73,9 @@ def main():
         "permuted_null_sd": float(np.std(null)),
     }
 
-    # --- evidence tiers + per-tier recovery ----------------------------------------
+    # --- Explorer display categories -----------------------------------------------
     # These live only in an .npz, which no JSON-based check can read, so they are re-emitted here.
-    tiers = json.loads((ROOT / "outputs/logs/evidence_tiers_v2.json").read_text())
+    tiers = json.loads((ROOT / "outputs/logs/evidence_tiers_canonical.json").read_text())
     n_tier = tiers["n"]
     out["evidence_tiers_percent"] = {
         k: round(100 * v / n_tier, 1) for k, v in tiers["tiers"].items()}

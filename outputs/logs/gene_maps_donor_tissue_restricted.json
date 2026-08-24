@@ -1,0 +1,121 @@
+{
+  "pi_file": "outputs/coupling/pi_canonical.npy",
+  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+  "_what": "Donor-tissue-restricted scoring for the eleven gene-derived measures of Figure 3d. published_r is scored over each measure's own territory, all 2,094 parcels for the eight cell-class measures and the Schaefer-400 cortical parcels for the three laminar contrasts, and is recomputed here and checked against biccn_composition_from_markers.json, biccn_contrast_reframe.json and hodge_areal_type_reframe.json before anything is written. Only the donor-tissue parcels carry measured AHBA expression; in the published values the rest are filled with each gene's column mean, which pulls the correlation toward zero. donor_only_r scores the same routed mouse map over the donor-tissue parcels of that territory alone, against a translation spin null restricted the same way. The laminar contrasts are included because they are the negative result of Figure 3d and have to be re-scored on the same footing as the positives.",
+  "_masks": {
+    "n_human_with_donor_tissue": 1040,
+    "n_human_total": 2094,
+    "n_human_schaefer_cortex": 1768,
+    "n_human_cortex_with_donor_tissue": 860,
+    "n_mouse_with_complete_ish": 1713,
+    "n_mouse_total": 1864,
+    "human_source": "data_external/human_genes.npy (Allen Human Brain Atlas via abagen)",
+    "mouse_source": "data_external/mouse_genes.npy (Allen ISH energy at 200 um)"
+  },
+  "_n_spin": 1000,
+  "glutamatergic": {
+    "territory": "all_parcels",
+    "published_r": 0.302229582215497,
+    "donor_only_r": 0.43379572576013437,
+    "donor_only_spin_p": 0.002997002997002997,
+    "donor_only_spin_null_abs_mean": 0.11616463250386173,
+    "n_parcels_published": 2094,
+    "n_parcels_donor": 1040
+  },
+  "GABAergic": {
+    "territory": "all_parcels",
+    "published_r": 0.00308187413472899,
+    "donor_only_r": 0.004315883729428156,
+    "donor_only_spin_p": 0.955044955044955,
+    "donor_only_spin_null_abs_mean": 0.06334460520768659,
+    "n_parcels_published": 2094,
+    "n_parcels_donor": 1040
+  },
+  "astrocyte": {
+    "territory": "all_parcels",
+    "published_r": 0.24672837920814938,
+    "donor_only_r": 0.3438606660382255,
+    "donor_only_spin_p": 0.002997002997002997,
+    "donor_only_spin_null_abs_mean": 0.11081002553664294,
+    "n_parcels_published": 2094,
+    "n_parcels_donor": 1040
+  },
+  "oligodendrocyte": {
+    "territory": "all_parcels",
+    "published_r": 0.0699784607161994,
+    "donor_only_r": 0.10391776377376297,
+    "donor_only_spin_p": 0.07192807192807193,
+    "donor_only_spin_null_abs_mean": 0.047434772313129044,
+    "n_parcels_published": 2094,
+    "n_parcels_donor": 1040
+  },
+  "microglia": {
+    "territory": "all_parcels",
+    "published_r": -0.032006131942705685,
+    "donor_only_r": -0.04790394087696473,
+    "donor_only_spin_p": 0.5694305694305695,
+    "donor_only_spin_null_abs_mean": 0.06535837811950694,
+    "n_parcels_published": 2094,
+    "n_parcels_donor": 1040
+  },
+  "excitatory_minus_inhibitory": {
+    "territory": "all_parcels",
+    "published_r": 0.3401680729442248,
+    "donor_only_r": 0.4780898842380281,
+    "donor_only_spin_p": 0.000999000999000999,
+    "donor_only_spin_null_abs_mean": 0.09557168176905921,
+    "n_parcels_published": 2094,
+    "n_parcels_donor": 1040
+  },
+  "neuronal_minus_glial": {
+    "territory": "all_parcels",
+    "published_r": 0.3538605350012064,
+    "donor_only_r": 0.4673514773272831,
+    "donor_only_spin_p": 0.000999000999000999,
+    "donor_only_spin_null_abs_mean": 0.09833525397895831,
+    "n_parcels_published": 2094,
+    "n_parcels_donor": 1040
+  },
+  "dopaminergic_hotspot": {
+    "territory": "all_parcels",
+    "published_r": 0.17354981305072653,
+    "donor_only_r": 0.23580330073271877,
+    "donor_only_spin_p": 0.000999000999000999,
+    "donor_only_spin_null_abs_mean": 0.06203833736492497,
+    "n_parcels_published": 2094,
+    "n_parcels_donor": 1040,
+    "donor_only_top_decile": {
+      "n": 1040,
+      "k": 104,
+      "overlap": 31,
+      "hypergeometric_p": 1.2469239489828488e-09
+    }
+  },
+  "supragranular_minus_infragranular": {
+    "territory": "schaefer_cortex",
+    "published_r": 0.008084976451264637,
+    "donor_only_r": 0.01021111238911726,
+    "donor_only_spin_p": 0.9010989010989011,
+    "donor_only_spin_null_abs_mean": 0.05678551070213972,
+    "n_parcels_published": 1768,
+    "n_parcels_donor": 860
+  },
+  "granular_L4_minus_infragranular": {
+    "territory": "schaefer_cortex",
+    "published_r": 0.18712178577391028,
+    "donor_only_r": 0.2760422215573365,
+    "donor_only_spin_p": 0.000999000999000999,
+    "donor_only_spin_null_abs_mean": 0.05821249212362062,
+    "n_parcels_published": 1768,
+    "n_parcels_donor": 860
+  },
+  "supragranular_minus_granular": {
+    "territory": "schaefer_cortex",
+    "published_r": 0.021039663620110366,
+    "donor_only_r": 0.037019273435522956,
+    "donor_only_spin_p": 0.6223776223776224,
+    "donor_only_spin_null_abs_mean": 0.05778717133852737,
+    "n_parcels_published": 1768,
+    "n_parcels_donor": 860
+  }
+}

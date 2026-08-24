@@ -117,3 +117,9 @@ outputs/logs/autism_subtypes_abide.json
 # Solver characterisation kept locally, not part of the release.
 outputs/logs/solver_scale_invariance.json
 outputs/logs/pi_canonical_iter1000_*.json
+
+# Local-only analysis notes and intermediate outputs.
+experiments/ANALYSIS_ORDER.md
+outputs/logs/loro_disentangle_connectivity_vs_xyz.json
+outputs/logs/evidence_tiers_v2.json
+outputs/logs/biccn_donor_tissue_restricted.json

@@ -23,13 +23,11 @@ OUT_DIR="$(dirname "$ROOT")"
 
 # ---- Archive 1: reproduce bundle -------------------------------------------
 REPRODUCE=(
-  # --- canonical: what load_pi() returns and what every notebook needs. Without these,
-  # every notebook fails with FileNotFoundError on its first cell.
+  # Released coupling and notebook inputs.
   outputs/coupling/pi_canonical.npy
   outputs/coupling/pi_canonical_sharp.npy
   outputs/coupling/trust_multisource_canonical.npz
-  # OTTER-generated (we own these), all coupling files the notebooks +
-  # experiments load (recommended pi, strict pi, ablation variants, trust maps).
+  # Analysis-specific couplings and metadata required by retained experiments.
   outputs/coupling/pi_fc_plus_SC_with_all_packs.npy
   outputs/coupling/pi_fc_plus_SC.npy
   outputs/coupling/pi_fc_plus_SC_xyz_zero.npy

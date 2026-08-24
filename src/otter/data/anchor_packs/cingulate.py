@@ -1,55 +1,6 @@
-"""Cingulate cortex anchor pack (Vogt et al. 2012).
+"""Cingulate regional correspondence entries.
 
-Vogt et al. (2012, *Brain Structure and Function*) systematised the
-cytoarchitectural sub-division of cingulate cortex across mouse, rat, and
-human, identifying subgenual ACC (s32 in primates / v32 in rodents) and
-retrosplenial cortex as homologous domains across species. Companion paper
-Vogt et al. 2013 (*J Comp Neurology*) extends this to macaque area 32
-subdivisions. van Heukelum et al. 2020 (*Trends in Neurosciences*)
-provides a recent cross-species framework.
-
-References:
-  - Vogt, B. A., Hof, P. R., Zilles, K., Vogt, L. J., Herold, C., & Palomero-
-    Gallagher, N. (2012). Cytoarchitecture of mouse and rat cingulate cortex
-    with human homologies. *Brain Structure and Function* 219, 185-192.
-    DOI: 10.1007/s00429-012-0493-3.
-  - van Heukelum, S. et al. (2020). Where is Cingulate Cortex? A Cross-
-    Species View. *Trends in Neurosciences* 43, 285-299.
-    DOI: 10.1016/j.tins.2020.03.007.
-
-  pid 36:  Mouse ACA ventral ↔ Human subgenual ACC (BA24/25)
-  pid 37:  Mouse Retrosplenial area ↔ Human RSC (BA29/30)
-
-Pregenual ACC is excluded
--------------------------
-The canonical MNI centroid of pregenual ACC (BA32), (±5, 25, 25), sits inside
-the human "Medial prefrontal cortex" parcel, the same parcel anchored by Garin
-pair_id 1 (Medial PFC). A region anchor for pregenual ACC would conflict with
-that point anchor, and the soft constraints would compete rather than compose.
-Subgenual ACC at (±5, 10, 35) is anatomically distinct from mPFC in this
-parcellation and pairs with mouse ACA ventral.
-
-PCC is excluded
----------------
-Mouse "Posterior parietal association areas" is not a defensible homologue of
-primate posterior cingulate cortex (Vogt & Paxinos 2014). The cingulate pairs
-used here are subgenual ACC and RSC; a PCC correspondence would require a
-dedicated pack.
-
-Mouse-side: DSURQE atlas overlay.
-  ACA ventral: 15 parcels
-  Retrosplenial area: 27 parcels
-Human-side: MNI spheres.
-  Subgenual ACC: (±5, 10, 35) r=10 mm  → 6 parcels
-  RSC:           (±15, -55, 10) r=10 mm → 8 parcels
-
-For Beauchamp validation, the ACC subgenual anchor's mouse-side set (ACA
-ventral) and human-side ball do not match the Beauchamp "Anterior cingulate
-area → cingulate gyrus" validation pair, which uses the full mouse ACA and a
-different MNI centroid, so Beauchamp recovery for ACG is not tautological for
-this pack. Retrosplenial is not among Beauchamp's 22 pairs, so its effect is
-not directly measurable.
-"""
+Pair IDs 36 and 37 link mouse ventral anterior cingulate and retrosplenial parcels to human subgenual ACC and retrosplenial targets. Primary source: Vogt et al., Brain Structure and Function (2012), doi:10.1007/s00429-012-0493-3."""
 from __future__ import annotations
 
 from pathlib import Path

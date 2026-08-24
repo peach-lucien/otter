@@ -1,36 +1,6 @@
-"""Perirhinal cortex anchor pack (Burwell 1995; Kealy & Commins 2011).
+"""Perirhinal regional correspondence entry.
 
-Perirhinal cortex (Brodmann areas 35 and 36 in primates; rostral
-rhinal sulcus cortex in rodents) is a medial temporal lobe memory
-region with established cross-species homology. Burwell et al. 1995
-(*Hippocampus*, 544 cit) is the canonical rat-monkey comparative
-neuroanatomy reference; Kealy & Commins 2011 (*Progress in
-Neurobiology*, 123 cit) reviews rat perirhinal anatomy/physiology
-including primate homology.
-
-  pid 55: Mouse Perirhinal area ↔ Human perirhinal cortex
-
-Combined with the hippocampal (Subi/CA1/CA3/DG) and entorhinal packs, this
-pack completes the medial temporal lobe coverage.
-
-Mouse-side: DSURQE atlas overlay.
-  Perirhinal area: 6 parcels (small but anatomically distinct)
-
-Human-side: MNI sphere at canonical perirhinal centroid (rostral medial
-temporal lobe, just lateral to entorhinal cortex):
-  Perirhinal cortex: (±35, -10, -30) r=10 mm → 6 parcels
-
-References:
-  - Burwell, R. D., Witter, M. P., & Amaral, D. G. (1995). Perirhinal
-    and postrhinal cortices of the rat: A review of the neuroanatomical
-    literature and comparison with findings from the monkey brain.
-    *Hippocampus* 5, 390-408. DOI: 10.1002/hipo.450050503.
-    (544 citations). Canonical rat-monkey perirhinal homology paper.
-  - Kealy, J. & Commins, S. (2011). The rat perirhinal cortex: A review
-    of anatomy, physiology, plasticity, and function. *Progress in
-    Neurobiology* 93, 522-548. DOI: 10.1016/j.pneurobio.2011.03.002.
-    (123 citations).
-"""
+Pair ID 55 links mouse and human perirhinal-cortex targets. Primary source: Burwell et al., Hippocampus (1995), doi:10.1002/hipo.450050503."""
 from __future__ import annotations
 
 from pathlib import Path

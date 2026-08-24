@@ -86,24 +86,5 @@
    "VISam",
    "PL"
   ]
- },
- "_removed_2026_07_20": {
-  "what": "cycle_consistency",
-  "why": "scored TransBrain on a different region set than OTTER; the reported comparison uses transbrain_roundtrip_maps.json, which scores both methods on the same 52 mouse regions. The two disagreed on AI_opto (0.908 here vs 0.821 matched), and this block was the wrong one.",
-  "use_instead": "outputs/logs/transbrain_roundtrip_maps.json",
-  "removed_values": {
-   "gradient": {
-    "otter": 0.9681743858325026,
-    "transbrain": 0.8651855282956633
-   },
-   "AI_opto": {
-    "otter": 0.8633955756702364,
-    "transbrain": 0.908486534204436
-   },
-   "Magel2": {
-    "otter": 0.9099752745877069,
-    "transbrain": 0.8128889439653534
-   }
-  }
  }
 }

@@ -1,92 +1,46 @@
-# External-data scripts
+# External-data preparation
 
-Scripts that download and project public neuroscience datasets onto the
-colleague's 1864 (mouse) / 2094 (human) parcellation. Run these on a
-machine with internet access and the colleague's `rsmask.nii` /
-`rsmask_human.nii` files at the locations expected by `otter.data.DATA_DIR`.
-
-All outputs land in `otter/data_external/`:
-
-```
-data_external/
-├── README.md                    # auto-generated, lists what's there
-├── _diagnostics/
-│   └── mask_info.json           # output of 00_inspect_masks.py
-├── mouse_sc.npy                 # (1864, 1864) float32. Allen mouse SC
-├── mouse_sc_meta.json
-├── mouse_genes.npy              # (1864, n_genes). Allen ISH expression
-├── mouse_genes_meta.json
-├── human_sc.npy                 # (2094, 2094), group connectome
-├── human_sc_meta.json
-├── human_genes.npy              # (2094, n_genes), abagen
-├── human_genes_meta.json
-└── orthologs.csv                # mouse_gene ↔ human_gene pairs
-```
-
-## Install dependencies
+These scripts prepare public neuroscience datasets for OTTER's 1,864-parcel mouse and
+2,094-parcel human representations. They require the raw data tier and network access for sources
+that are fetched from their original provider.
 
 ```bash
+python scripts/fetch_data.py --tier raw
 pip install -r pipeline/00_external/requirements.txt
 ```
 
-## Run order
+Run the scripts from the repository root.
 
-1. **`00_inspect_masks.py`**. Examines `rsmask.nii` / `rsmask_human.nii` and
-   reports their affine, dims, and likely coordinate system. **Run this first**,
-   before downloading datasets.
+## Required order
 
-2. **`01_mouse_sc.py`**. Downloads the Allen Mouse Connectivity Atlas
-   (Oh et al. 2014, Nature) summary-structure connectivity matrix (~290 regions).
-   For each of the 1864 mouse nodes it reads the parcel's pre-warped CCFv3 centre
-   voxel (`ns_center_ix`) from the mouse `.mat` file, looks up the CCFv3 region
-   there, and assigns the corresponding row/column of the structure-level SC
-   matrix.
-   Output: `mouse_sc.npy`.
+| Script | Output or purpose |
+|---|---|
+| `00_inspect_masks.py` | Inspect the supplied mouse and human masks and write alignment diagnostics |
+| `00b_verify_alignment.py` | Verify mouse CCFv3 and human MNI152 alignment against reference templates |
+| `01_mouse_sc.py` | Project Allen Mouse Connectivity Atlas data to mouse parcels |
+| `02_mouse_genes.py` | Sample Allen Mouse Brain Atlas ISH expression over mouse parcels |
+| `03_human_sc.py` | Project the Domhof et al. group structural connectome to human parcels |
+| `04_human_genes.py` | Process Allen Human Brain Atlas expression with `abagen` |
+| `05_orthologs.py` | Align the mouse and human expression matrices through gene orthology |
 
-   No coordinate-registration step is needed, the mouse→CCFv3 warp is applied
-   upstream (nonlinear DSURQE→CCFv3 registration) and the resulting voxel indices
-   ship inside the `.mat` file.
+The preparation scripts write matrices and metadata beneath `data_external/`, including:
 
-3. **`02_mouse_genes.py`**. Downloads Allen Mouse Brain ISH atlas
-   (Lein et al. 2007, Nature) energy volumes and samples them at 200 µm over
-   each node's pre-warped CCFv3 voxel set (`AS_ix`).
-   Reads its gene list from the immutable `mouse_gene_list_master.csv` and writes
-   the NaN-pruned list (aligned 1:1 with the matrix) to `mouse_gene_list.csv`.
-   Output: `mouse_genes.npy`.
+```text
+mouse_sc.npy
+mouse_sc_meta.json
+mouse_genes.npy
+mouse_gene_list.csv
+human_sc.npy
+human_sc_meta.json
+human_genes.npy
+human_gene_list.csv
+orthologs.csv
+orthologs_meta.json
+```
 
-4. **`03_human_sc.py`**. Downloads a public group-averaged human structural
-   connectome. Default source is the **Domhof et al. 2022 Scientific Data**
-   release, which is hosted on EBRAINS with no credentials required (the HCP-
-   based versions all need credentialed access). For each of the 2094 human
-   nodes, takes the dMRI streamline count to/from each parcellation region
-   that contains the node's voxels.
-   Output: `human_sc.npy`.
+`00c_align_mouse_to_ccf.py` is available when the alignment check indicates that a mouse-space
+transform must be regenerated. `06_knox_sc.py` prepares the optional Knox structural-connectivity
+comparison input; neither script is required when the corresponding prepared files are present.
 
-   Alternative: with HCP credentials, the script's `--source hcp1065` flag uses
-   Yeh's HCP1065 atlas via DSI Studio's published files.
-
-5. **`04_human_genes.py`**. Uses `abagen` (Markello et al. 2021, eLife) to
-   pull Allen Human Brain Atlas microarray data and average it within each of
-   the 2094 voxel-defined regions. abagen handles all the donor-normalisation
-   and probe-selection internally.
-   Output: `human_genes.npy`.
-
-6. **`05_orthologs.py`**. Aligns the mouse and human gene sets via NCBI
-   Homologene. Outputs `orthologs.csv` with the mouse-gene ↔ human-gene pairs
-   that exist in both `mouse_genes.npy` and `human_genes.npy`. Re-saves both
-   matrices restricted to orthologs only.
-
-## Troubleshooting
-
-On the **mouse** side, no mask registration is needed, voxel indices are
-pre-warped into CCFv3 (NS) and DSURQE (SS) space inside the mouse `.mat` file.
-If `01_mouse_sc.py` / `02_mouse_genes.py` warn that the parcel table is missing
-the pre-warped voxel-index columns, point `otter.data.DATA_DIR` at the mouse
-package that ships them.
-
-On the **human** side, the most likely failure mode is `00_inspect_masks.py`
-reporting that `rsmask_human.nii` is not in MNI152, register it to the standard
-space (ANTs `antsRegistration` / FSL `flirt`) and re-run.
-
-Each script is idempotent, re-running just rebuilds the npy without
-re-downloading raw data (which is cached by allensdk / abagen).
+The scripts preserve a metadata sidecar for each derived matrix. Dataset citations,
+redistribution constraints and archive contents are documented in [`DATA.md`](../../DATA.md).

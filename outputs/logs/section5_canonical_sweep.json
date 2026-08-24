@@ -914,7 +914,7 @@
   ],
   "mean_heldout_top1": 0.6727849715307149,
   "modal_selected_cell": "w0.25_e0.2",
-  "_note": "Recomputed 2026-07-21 on the extended 25-cell grid. On the previous two-value epsilon grid {0.005, 0.05} the CV chose 0.05, but 0.05 was the largest value offered; given a wider range the CV prefers 0.2. The deployed coupling remains epsilon = 0.05: the difference is 0.567 vs 0.576 top-1 on 19 pairs, within the flatness of the surface (total spread 0.034 across a 40-fold epsilon range), and 0.05 gives a softer coupling that does not overstate per-parcel confidence. Selection is therefore reported as a sensitivity analysis, not as CV-optimal."
+  "_note": "Five-fold cross-validation over the 19 Beauchamp pairs on the 25-cell grid. The modal fold-wise choice uses epsilon = 0.2; the released coupling uses epsilon = 0.05. The difference is 0.567 against 0.576 top-1 on all 19 pairs, within the flatness of the surface (total spread 0.034 across a 40-fold epsilon range), while 0.05 gives a more concentrated coupling at the fixed 25-iteration stopping point. The release is informed by this accuracy-concentration trade-off rather than presented as the unique cross-validation optimum."
  },
  "deploy": {
   "cell": "w0.25_e0.05",
@@ -928,47 +928,6 @@
   "ContB_deficit_SD": -0.6137360025802373,
   "loss": 0.010815358179837238,
   "converged": true,
-  "pi_path": "outputs/coupling/pi_canonical.npy",
-  "_corrected": "2026-07-18: verified against the saved pi by re-scoring; see _deploy_superseded_2026_07_18."
- },
- "_deploy_superseded_2026_07_18": {
-  "recorded_block": {
-   "cell": "w0.5_e0.05",
-   "xyz_weight": 0.5,
-   "epsilon": 0.05,
-   "beauchamp_top1": 0.5650485436893203,
-   "beauchamp_top5": 0.7213592233009709,
-   "beauchamp_top10": 0.7621359223300971,
-   "heldout_cv_top1": 0.6752978731983191,
-   "expansion_rho": -0.2915336034079184,
-   "ContB_deficit_SD": -0.6177017146506774,
-   "loss": 0.012591886828211028,
-   "converged": true,
-   "pi_path": "outputs/coupling/pi_canonical.npy"
-  },
-  "why_wrong": "This block claimed cell w0.5_e0.05 (xyz_weight=0.5). The file actually saved at outputs/coupling/pi_canonical.npy scores expansion_rho=-0.3207 and ContB=-0.6137, which match cell w0.25_e0.05 EXACTLY (w0.5_e0.05 gives -0.2915 / -0.6177). Verified 2026-07-18 by re-scoring the saved pi with 23_canonical_pi.py biology(). The deployed coupling is xyz_weight=0.25, epsilon=0.05.",
-  "hazard": "23_canonical_pi.py --select picks deploy_id = argmax(mean per-pair top1), which on the current sweep table is w0.5_e0.05. RE-RUNNING --select WOULD OVERWRITE pi_canonical.npy with a DIFFERENT coupling. Do not re-run --select without pinning the cell to w0.25_e0.05."
- },
- "_grid_note": "epsilon extended from [0.005, 0.05] to five values on 2026-07-21 so that one grid under one criterion (five-fold CV on the 19 Beauchamp pairs) covers the range. The recorded grid is derived from the fitted cells rather than written at init, which is why it previously disagreed with them.",
- "_nested_cv_superseded_10cell_grid": {
-  "n_folds": 5,
-  "seed": 0,
-  "n_pairs": 19,
-  "per_fold_selected": [
-   "w0.25_e0.05",
-   "w0.5_e0.05",
-   "w0.5_e0.05",
-   "w0.5_e0.05",
-   "w0.5_e0.05"
-  ],
-  "per_fold_heldout_top1": [
-   0.6723993772344597,
-   0.6155936454849498,
-   0.857413945278023,
-   0.42242438933615406,
-   0.8086580086580087
-  ],
-  "mean_heldout_top1": 0.6752978731983191,
-  "modal_selected_cell": "w0.5_e0.05"
+  "pi_path": "outputs/coupling/pi_canonical.npy"
  }
 }

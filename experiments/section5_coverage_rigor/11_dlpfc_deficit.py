@@ -171,9 +171,10 @@ def main():
     ranked = sorted(net_res.items(), key=lambda kv: kv[1]["mean_coverage_sd"])
     print("  most deficient:", ", ".join(f"{k} {v['mean_coverage_sd']:+.2f}" for k, v in ranked[:3]))
 
-    # ---- 2. connectional not curational: base / production / anchor-free ---------------
+    # ---- 2. Compare point-anchor, unwarped and anchor-free configurations -----------
     # "canonical" is the reported arm (== the main analysis above); the others provide
-    # cross-coupling comparison. "production" is the coupling fitted without the anchor warp.
+    # The configuration labelled "production" in this stored comparison is the
+    # unwarped regional-entry coupling.
     out["control_b_across_couplings"] = {}
     out["_reported_coupling_arm"] = "canonical"
     for name, path in [("canonical", "pi_canonical.npy"),

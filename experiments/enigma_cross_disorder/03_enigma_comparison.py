@@ -1,4 +1,4 @@
-"""Phase 2. Compare OTTER per-disorder predictions to ENIGMA observed maps.
+"""Compare OTTER per-disorder predictions to ENIGMA observed maps.
 
 REQUIRES external data: ENIGMA per-region Cohen's d cortical-thickness effect
 sizes per disorder. Easiest source is the ENIGMA Toolbox repository:
@@ -22,7 +22,7 @@ This script then:
   1. Maps Desikan-Killiany regions to OTTER's 2,094-parcel atlas via
      nearest-MNI-centroid (Desikan-Killiany centroids in MNI mm are
      well-tabulated).
-  2. Aggregates OTTER's per-disorder predicted patterns (from Phase 1) to
+  2. Aggregates OTTER's per-disorder predicted patterns from 01_per_disorder_prediction.py to
      Desikan-Killiany region-level scores.
   3. Correlates OTTER-predicted region scores vs ENIGMA observed Cohen's d.
   4. Cross-disorder specificity check, whether OTTER's autism prediction
@@ -118,7 +118,7 @@ def aggregate_per_disorder_to_dk(predicted, dk_to_parcels):
 
 def main():
     print("=" * 80)
-    print("OTTER × ENIGMA cross-disorder comparison (Phase 2)")
+    print("OTTER × ENIGMA cross-disorder comparison")
     print("=" * 80)
 
     # ---- Check ENIGMA data is present ----
@@ -133,7 +133,7 @@ def main():
         print(f"  4. Re-run this script.")
         sys.exit(1)
 
-    # ---- Load OTTER per-disorder predictions (from Phase 1) ----
+    # ---- Load OTTER per-disorder predictions ----
     preds = np.load(ROOT / "outputs/coupling/per_disorder_predictions.npz")
     H, _ = load_cached("human", cache_dir=str(ROOT / "outputs/anndata"))
     print(f"\nOTTER per-disorder predictions: {list(preds.keys())}")
@@ -214,7 +214,7 @@ def main():
     print(f"\nDiagonal pairs (OTTER-X vs ENIGMA-X): mean r = {np.mean(diag_vals):+.3f}")
     print(f"Off-diagonal pairs (OTTER-X vs ENIGMA-Y): mean r = {np.mean(off_diag_vals):+.3f}")
     print(f"  → If OTTER's predictions are disorder-specific, diagonal should beat off-diagonal.")
-    print(f"  → Given Phase 1 showed all OTTER predictions are essentially identical (r>0.97),")
+    print(f"  → OTTER's per-disorder predictions are near-identical (r > 0.97), so")
     print(f"     diagonal ≈ off-diagonal is expected here.")
 
     out = {

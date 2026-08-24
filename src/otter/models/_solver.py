@@ -47,7 +47,7 @@ def gw_loss(C1: np.ndarray, C2: np.ndarray, pi: np.ndarray,
     """GW objective Σ_{i,j,k,l} L(C1[i,k], C2[j,l]) π[i,j] π[k,l].
 
     Uses the Peyré 2016 closed-form for square_loss to avoid materialising the
-    (n1, n2, n1, n2) outer-product tensor (111 TiB at the 1864×2094 production
+    (n1, n2, n1, n2) outer-product tensor (111 TiB at the full 1864×2094
     size). The formula:
 
         L = Σ C1²[i,k]·p[i]·p[k] + Σ C2²[j,l]·q[j]·q[l]

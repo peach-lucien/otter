@@ -23,19 +23,15 @@ import tarfile
 import urllib.request
 from pathlib import Path
 
-# Representative files per tier: their presence means the tier is already
-# unpacked, and fetch_tier() skips the download. The list must name every file
-# in the archive that the notebooks require, so that an incomplete local copy is
-# detected here rather than accepted as present.
+# Representative files per tier. Their presence means the requested bundle has
+# already been unpacked.
 SENTINELS = {
     "reproduce": [
-        # what load_pi() returns and what the notebooks require
+        # Released coupling and notebook inputs.
         "outputs/coupling/pi_canonical.npy",
         "outputs/coupling/trust_multisource_canonical.npz",
         "outputs/anndata/_schaefer_order.txt",
         "outputs/coupling/mouse_tpl_100um.nii.gz",
-        "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy",
-        "outputs/coupling/pi_fc_plus_SC.npy",
         "outputs/anndata/mouse.h5ad",
         "outputs/anndata/human.h5ad",
         "outputs/anndata/full_costs.npz",

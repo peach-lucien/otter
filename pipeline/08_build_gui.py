@@ -6,7 +6,7 @@ This creates a static app in ``outputs/gui/``:
     outputs/gui/index.html
 
 The GUI is intentionally static. It embeds compact top-K partner lists,
-node metadata, trust tiers, anchor-pack groups, and region-level summaries.
+node metadata, interface display categories, anchor groups and region summaries.
 It does not run FGW solves or require a backend.
 
 Pass ``--publish`` to additionally copy the rendered HTML into ``docs/``
@@ -34,7 +34,7 @@ DOCS = ROOT / "docs"
 
 
 def _default_anchor_entries(M, H):
-    """Anchor entries matching the current recommended all-packs pi.
+    """Regional correspondence entries in the canonical registry.
 
     Uses the pack registry (``otter.data.anchor_packs.registry``) so the GUI's
     anchor-pack groups stay in lockstep with what ``compose_all.py`` fits.
@@ -83,7 +83,7 @@ def main(args):
                 path = COUP / path_s
             models.append({"id": model_id, "label": label, "pi_file": path})
     if not models:
-        raise SystemExit("No pi files found. Run pipeline/04_solve_production.py first.")
+        raise SystemExit("No coupling files found. Download the release bundle first.")
 
     print("Models:")
     for m in models:
@@ -91,7 +91,7 @@ def main(args):
 
     trust_path = COUP / "trust_multisource_canonical.npz"
     if not trust_path.exists():
-        print(f"  warning: {trust_path} missing; trust tiers will be unknown")
+        print(f"  warning: {trust_path} missing; display categories will be unknown")
         trust_path = None
 
     print("Building anchor-pack group metadata...")

@@ -64,7 +64,7 @@ def topk_per_col(pi: np.ndarray, k: int) -> list[list[list[float]]]:
 
 
 def row_entropy(pi: np.ndarray) -> np.ndarray:
-    """Per-row Shannon entropy in nats. Higher = softer / more uncertain mapping."""
+    """Per-row Shannon entropy in nats. Higher means a more diffuse row."""
     row_sum = pi.sum(axis=1, keepdims=True).clip(min=1e-12)
     p = pi / row_sum
     p = np.clip(p, 1e-12, 1.0)
@@ -72,7 +72,7 @@ def row_entropy(pi: np.ndarray) -> np.ndarray:
 
 
 def col_entropy(pi: np.ndarray) -> np.ndarray:
-    """Per-column Shannon entropy in nats. Higher = softer / more uncertain mapping."""
+    """Per-column Shannon entropy in nats. Higher means a more diffuse column."""
     col_sum = pi.sum(axis=0, keepdims=True).clip(min=1e-12)
     p = pi / col_sum
     p = np.clip(p, 1e-12, 1.0)
@@ -235,7 +235,7 @@ _HTML_TEMPLATE = """<!DOCTYPE html>
 <body>
 <h1>Cross-species brain region map, interactive viewer</h1>
 <div class="meta">
-  Production π = <code id="pilabel"></code> · 1864 mouse nodes (CCFv3) ↔ 2094 human nodes (MNI152) ·
+  Coupling π = <code id="pilabel"></code> · 1864 mouse nodes (CCFv3) ↔ 2094 human nodes (MNI152) ·
   larger dot = Garin anchor · <span style="color:#FFAA00">orange</span> = currently selected ·
   <a href="#" id="toggleHelp" style="color:#6cf">show/hide quick guide ▾</a>
 </div>

@@ -8,7 +8,7 @@ the correct one first?". This module answers a strictly harder question:
 send the held-out mouse anchor?".
 
 The two versions answer different questions. The restricted version is
-reported as anchor-candidate ranking accuracy (~81% on production); the
+reported as anchor-candidate ranking accuracy; the
 full-space version lands at 0-5% top-1, because the model places mass on a
 grid node near the correct anchor rather than on the anchor itself.
 

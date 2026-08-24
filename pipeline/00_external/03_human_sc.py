@@ -1,5 +1,5 @@
 """Project the Domhof et al. 2022 group-averaged human structural connectome
-onto the colleague's 2094-node parcellation.
+onto the 2,094-node human parcellation.
 
 Default behaviour: looks for the Domhof bundle at
   data_external/p6ebec-hbp-d000038_SC-FC_HCP_eNKI_pub/Schaefer2018_400Parcels_17Networks.zip
@@ -9,9 +9,9 @@ and uses:
 
 Pipeline:
   1. Extract the Schaefer 2 mm parcellation NIfTI + the SC tsv from the zip.
-  2. Resample the parcellation onto the colleague's rsmask grid (3 mm MNI152).
+  2. Resample the parcellation onto the input rsmask grid (3 mm MNI152).
   3. For each of the 2094 human nodes, take the modal Schaefer parcel ID across
-     its voxels (using the colleague's voxel_indices and rsmask affine).
+     its voxels (using the input voxel_indices and rsmask affine).
   4. Build the (2094, 2094) SC matrix by indexing the (400, 400) Schaefer matrix.
      Nodes outside Schaefer cortex get all-zero rows/cols.
 
@@ -97,7 +97,7 @@ def main(args):
         print("  symmetrising via 0.5*(M + M.T)")
         SC = 0.5 * (SC + SC.T)
 
-    # 3. Resample parcellation onto the colleague's rsmask grid -------------
+    # 3. Resample parcellation onto the input rsmask grid -------------------
     print("loading colleague's human mask + node table...")
     rsmask = nib.load(MASK)
     rsmask_data = np.asarray(rsmask.dataobj)

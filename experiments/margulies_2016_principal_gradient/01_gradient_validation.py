@@ -208,9 +208,8 @@ def main():
         "routing": "transport-weighted average (normalised)",
         "top_pct_threshold": 10.0,
         "component_selection": {"mouse": mouse_diag, "human": human_diag,
-                                "note": "component chosen by |rho| with that species' "
-                                        "T1w/T2w map; see principal_gradient docstring "
-                                        "for the bug this fixes"},
+                                "note": "component chosen by |rho| against that species' "
+                                        "own T1w/T2w map"},
         "spin": {"p_spin": sp["p_spin"], "r_observed": sp["r_observed"],
                  "n_trials": 1000},
         "parcel_level": {"abs_pearson_r": abs(r_p), "abs_spearman_r": abs(rho_p),

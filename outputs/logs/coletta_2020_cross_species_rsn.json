@@ -211,15 +211,18 @@
         "mouse_label": "frontoparietal",
         "best_match_yeo7": "Limbic",
         "second_match_yeo7": "Visual",
+        "expected_yeo7": "DorsAtten",
+        "scorable": true,
+        "matches_expected": false,
         "per_net_means": {
-          "Visual": 0.00011945864346230654,
-          "SomatoMotor": 0.0001024039259588534,
-          "DorsAtten": 5.43142359228492e-05,
-          "Salience": 7.467493026840004e-05,
-          "Limbic": 0.0011545156208430838,
-          "Control": 6.862544157400113e-05,
-          "DMN": 6.180645170309386e-05,
-          "Subcortical": -0.0006228068692183085
+          "Visual": 0.00011945864346251055,
+          "SomatoMotor": 0.00010240392595796634,
+          "DorsAtten": 5.431423592268456e-05,
+          "Salience": 7.467493026886595e-05,
+          "Limbic": 0.001154515620842901,
+          "Control": 6.862544157411637e-05,
+          "DMN": 6.180645170333825e-05,
+          "Subcortical": -0.0006228068692184034
         }
       },
       {
@@ -227,15 +230,18 @@
         "mouse_label": "frontal_dmn",
         "best_match_yeo7": "Salience",
         "second_match_yeo7": "DorsAtten",
+        "expected_yeo7": "DMN",
+        "scorable": true,
+        "matches_expected": false,
         "per_net_means": {
-          "Visual": 2.5132029778990332e-05,
-          "SomatoMotor": 0.00013406986482746605,
-          "DorsAtten": 0.00013859373682919632,
-          "Salience": 0.00020934856805527273,
-          "Limbic": -0.0009143556610982979,
-          "Control": 0.00012178842890363245,
-          "DMN": 3.927163364447535e-05,
-          "Subcortical": -0.0003716872525223174
+          "Visual": 2.513202977863723e-05,
+          "SomatoMotor": 0.00013406986482676034,
+          "DorsAtten": 0.00013859373682889714,
+          "Salience": 0.00020934856805572414,
+          "Limbic": -0.0009143556610980757,
+          "Control": 0.0001217884289036076,
+          "DMN": 3.927163364456971e-05,
+          "Subcortical": -0.0003716872525217625
         }
       },
       {
@@ -243,15 +249,18 @@
         "mouse_label": "brainstem",
         "best_match_yeo7": "Subcortical",
         "second_match_yeo7": "Visual",
+        "expected_yeo7": null,
+        "scorable": false,
+        "matches_expected": false,
         "per_net_means": {
-          "Visual": 0.00012421500011751356,
-          "SomatoMotor": -0.000346444398754968,
-          "DorsAtten": -0.0001254395020417705,
-          "Salience": -2.2131405849365608e-05,
-          "Limbic": -0.00015137505146314284,
-          "Control": -4.1009271682904655e-05,
-          "DMN": 4.585732314875771e-05,
-          "Subcortical": 0.0002818564627341812
+          "Visual": 0.00012421500011745002,
+          "SomatoMotor": -0.0003464443987551058,
+          "DorsAtten": -0.00012543950204186682,
+          "Salience": -2.213140584933309e-05,
+          "Limbic": -0.0001513750514642042,
+          "Control": -4.1009271682977954e-05,
+          "DMN": 4.585732314876214e-05,
+          "Subcortical": 0.0002818564627346353
         }
       },
       {
@@ -259,15 +268,18 @@
         "mouse_label": "temporal_dmn",
         "best_match_yeo7": "Visual",
         "second_match_yeo7": "Limbic",
+        "expected_yeo7": "DMN",
+        "scorable": true,
+        "matches_expected": false,
         "per_net_means": {
-          "Visual": 0.00023534174691936134,
-          "SomatoMotor": -0.00010810495887537617,
-          "DorsAtten": -1.3276146113622008e-05,
-          "Salience": -2.1241534734744473e-06,
-          "Limbic": 0.00020438604790900527,
-          "Control": 3.465735500471569e-05,
-          "DMN": 0.00017488500187524196,
-          "Subcortical": -0.0003906496789941652
+          "Visual": 0.0002353417469192258,
+          "SomatoMotor": -0.00010810495887526307,
+          "DorsAtten": -1.3276146113608662e-05,
+          "Salience": -2.124153473510492e-06,
+          "Limbic": 0.00020438604790866264,
+          "Control": 3.465735500468551e-05,
+          "DMN": 0.00017488500187518366,
+          "Subcortical": -0.00039064967899396296
         }
       },
       {
@@ -275,15 +287,18 @@
         "mouse_label": "salience",
         "best_match_yeo7": "Salience",
         "second_match_yeo7": "Limbic",
+        "expected_yeo7": "Salience",
+        "scorable": true,
+        "matches_expected": true,
         "per_net_means": {
-          "Visual": -4.36253046161241e-05,
-          "SomatoMotor": -0.00017405703516778766,
-          "DorsAtten": -7.515927041168494e-05,
-          "Salience": 0.00032049382533002853,
-          "Limbic": 0.00023390686919526148,
-          "Control": -9.635380588990963e-06,
-          "DMN": -2.477733728206152e-05,
-          "Subcortical": -2.048777795377548e-05
+          "Visual": -4.3625304616187556e-05,
+          "SomatoMotor": -0.00017405703516761627,
+          "DorsAtten": -7.515927041163822e-05,
+          "Salience": 0.00032049382532997215,
+          "Limbic": 0.00023390686919470152,
+          "Control": -9.635380589007717e-06,
+          "DMN": -2.4777337282114066e-05,
+          "Subcortical": -2.0487777953663053e-05
         }
       },
       {
@@ -291,15 +306,18 @@
         "mouse_label": "limbic",
         "best_match_yeo7": "Limbic",
         "second_match_yeo7": "Salience",
+        "expected_yeo7": "Limbic",
+        "scorable": true,
+        "matches_expected": true,
         "per_net_means": {
-          "Visual": -0.00011267255526383415,
-          "SomatoMotor": -0.0002719386225158365,
-          "DorsAtten": -0.00010294595772487746,
-          "Salience": 0.00022545295501054936,
-          "Limbic": 0.0007497965228865232,
-          "Control": 2.3066233642315668e-05,
-          "DMN": 6.106683081149087e-05,
-          "Subcortical": -3.5320605524277774e-05
+          "Visual": -0.00011267255526403513,
+          "SomatoMotor": -0.0002719386225160392,
+          "DorsAtten": -0.00010294595772519618,
+          "Salience": 0.00022545295501009182,
+          "Limbic": 0.0007497965228876571,
+          "Control": 2.3066233641991726e-05,
+          "DMN": 6.106683081131987e-05,
+          "Subcortical": -3.5320605523087604e-05
         }
       },
       {
@@ -307,18 +325,24 @@
         "mouse_label": "sensorimotor",
         "best_match_yeo7": "SomatoMotor",
         "second_match_yeo7": "DorsAtten",
+        "expected_yeo7": "SomatoMotor",
+        "scorable": true,
+        "matches_expected": true,
         "per_net_means": {
-          "Visual": -2.4030770742607668e-05,
-          "SomatoMotor": 0.0006295623710943119,
-          "DorsAtten": 0.00014435576610283214,
-          "Salience": 9.349716651044447e-05,
-          "Limbic": -0.0006619589473476115,
-          "Control": 3.071532809738132e-05,
-          "DMN": -3.490980133339553e-05,
-          "Subcortical": -0.0005047660746231415
+          "Visual": -2.4030770742563917e-05,
+          "SomatoMotor": 0.0006295623710945096,
+          "DorsAtten": 0.0001443557661028957,
+          "Salience": 9.349716651036274e-05,
+          "Limbic": -0.0006619589473470188,
+          "Control": 3.0715328097396074e-05,
+          "DMN": -3.4909801333404364e-05,
+          "Subcortical": -0.0005047660746234236
         }
       }
-    ]
+    ],
+    "n_matches_expected": 3,
+    "n_scorable": 6,
+    "_note": "A component is scored against TARGET_PAIRS by its dominant anatomical label. Labels with no Yeo-7 counterpart, such as brainstem, are not scorable. The ICA is computed on M.uns['fc_mean'], the same mouse functional connectivity used in the relational term, so this sub-test is not independent of the coupling."
   },
   "sub_test_C_network_coherence": {
     "n_null_trials": 100,

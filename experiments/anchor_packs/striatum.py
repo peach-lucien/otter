@@ -69,7 +69,7 @@ def main():
         src.rename(dst)
     d_str = json.loads(dst.read_text())
 
-    # Re-run production
+    # Recompute the point-anchor comparator.
     subprocess.run(["python", str(ROOT / "pipeline" / "05f_beauchamp_validation.py"),
                     "--pi-file", "pi_fc_plus_SC.npy"], env=env, check=True, capture_output=True)
     d_prod = json.loads((LOG / "beauchamp_validation.json").read_text())

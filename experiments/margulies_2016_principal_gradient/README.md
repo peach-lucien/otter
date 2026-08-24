@@ -1,126 +1,58 @@
-# Margulies 2016 + Huntenburg 2021 principal-gradient validation
+# Principal functional-connectivity gradient
 
-We asked whether OTTER's π preserves the cross-species principal connectivity
-gradient, a single brain-wide ordering that is orthogonal to the specific-pair
-anchor benchmarks.
+This experiment evaluates whether the mouse unimodal-to-transmodal
+functional-connectivity gradient retains its broad organisation after
+translation through OTTER. It follows the human gradient described by
+[Margulies et al. (2016)](https://doi.org/10.1073/pnas.1608282113) and the
+cross-species analysis of
+[Huntenburg et al. (2021)](https://doi.org/10.1038/s41467-021-26703-z).
 
-## Why this experiment
+The gradient is derived separately from each species' functional connectome.
+The unimodal-to-transmodal component is selected by its correspondence with
+that species' own T1w:T2w map, then the mouse component is routed through the
+coupling and compared with the human component. Eigenvector signs are arbitrary,
+so the analysis aligns component orientation before comparison.
 
-[Margulies et al. 2016 (PNAS)](https://www.pnas.org/doi/10.1073/pnas.1608282113)
-introduced the principal connectivity gradient, derived by diffusion-map
-embedding on the resting-state FC matrix. It spans from primary sensorimotor
-cortex (unimodal end) to default-mode network (transmodal end), and it is the
-dominant organisational axis of cortex.
+This is an internal consistency test rather than independent validation: the
+same connectomes contribute to OTTER's relational cost. The scripts also report
+spatially constrained nulls and discrete network-level summaries.
 
-[Huntenburg et al. 2021 (Nat Comm)](https://www.nature.com/articles/s41467-021-26703-z)
-extended the same procedure to mouse rsfMRI and showed an analogous gradient
-exists in mouse, broadly conserved across species.
+## Scripts
 
-If OTTER's π is anatomically accurate, routing the mouse principal gradient
-through π should reproduce the human principal gradient. That is a single global
-correlation, with no anchor pair involved.
-
-## Result
-
-We routed the mouse principal gradient through π and correlated the predicted
-human gradient with the observed one.
-
-**|r| = 0.54 (parcel-level, n = 1,244), |r| = 0.56 (region-level)**
-**Permuted-π null |r| mean = 0.03 (p < 0.001). Spin null: p = 0.032, so the correlation survives.**
-
-The principal functional-connectivity gradient, the unimodal→transmodal axis,
-translates across species through π. It also survives reduction to discrete
-structure: the rank order of the nine human networks along the gradient is
-recovered at ρ = 0.80 (spin p = 0.029), and a three-tier discretisation is
-classified at 56 % against 33 % chance and a 34 % spin null (p = 0.001).
-
-| Test | Granularity | \|r\| | Spin null |
-|---|---|---:|:---:|
-| **Margulies/Huntenburg gradient** | **Brain-wide ordering** | **0.54** | **p = 0.004, survives** |
-| Coletta 2020 resting-state networks | Network correspondence | 6/10 vs 1.2 expected | p = 0.002, survives |
-| Fulcher 2019 T1w:T2w → myelin | Cortical region | +0.47 | p = 0.005, survives |
-| Fulcher 2019 cytoarchitecture → myelin | Cortical region | +0.47 | p = 0.003, survives |
-
-Those four rows are the paper's organising claim: **connectional organisation
-transfers through π; microstructure does not.** π was fitted on connectivity.
-See `docs/03_results.md` §3.
-
-This is a *brain-wide* organisational test that no anchor pair drives, so it
-establishes that OTTER's cross-species accuracy extends beyond the Beauchamp
-anchor pairs and the network-aggregated level.
-
----
-
-## The principal gradient is the second eigenvector
-
-The first non-trivial component here is an anterior-posterior spatial axis; the
-unimodal→transmodal hierarchy is the second. Verified in both species:
-
-| component | vs published Margulies G1 | vs that species' own T1w:T2w |
-|---|---:|---:|
-| comp 1 | \|ρ\| = 0.12 | human −0.13 / mouse −0.28 |
-| **comp 2** | **\|ρ\| = 0.93** | **human +0.59 / mouse +0.57** |
-
-The component index is not hard-coded. `principal_gradient()` in
-`01_gradient_validation.py` *selects* the component by its correlation with an
-external hierarchy reference (that species' own T1w:T2w map), and
-`experiments/validation/00_validate_published_maps.py` asserts that every named
-"published" map still matches the source it is named after.
-
-### Routing note
-
-The gradient is routed as a transport-weighted average. The bare
-un-normalised `mouse_grad @ π` conflates the translated gradient with π's
-per-column mass, which varies widely under the semirelaxed coupling, and
-scores r = 0.144. Normalising by the column mass removes that confound.
-Routing as
-
-    predicted_h[j] = Σ_i mouse_grad[i]·π[i,j] / Σ_i π[i,j]
-
-roughly trebles the correlation. Human parcels
-that receive negligible π mass are left undefined (n = 1,435 of 2,094).
-
-## Method
-
-Standard Margulies-style diffusion-map embedding per species:
-1. Fisher-z transform FC correlations
-2. Threshold (keep top 10% per row)
-3. Cosine similarity of row-profiles → affinity W
-4. Symmetric-normalised graph Laplacian L = I − D^{−½} W D^{−½}
-5. Take the first `n_comp` non-trivial diffusion components (D^-1/2 · u_k, and not the
-   raw symmetric-Laplacian eigenvector; the two differ by a degree weighting)
-6. **SELECT** the unimodal→transmodal component by its |ρ| with that species' own
-   T1w:T2w myelin map, a reference external to the FC data. Both species select
-   component 2. The first component is not assumed; see above.
-
-Then route the mouse gradient through π as a transport-weighted average,
-compare to the observed human gradient (Pearson + Spearman, parcel level and
-Schaefer-400 region level), permuted-π null. Eigenvectors are sign-ambiguous,
-so |r| is the headline.
-
-## Files
-
-| File | What |
+| File | Purpose |
 |---|---|
-| `01_gradient_validation.py` | Compute per-species gradient, route mouse through π, correlate, null |
-| `02_plot.py` | 3-panel figure (mouse gradient distribution, scatter, null CI) |
-| `README.md` | This file |
+| `01_gradient_validation.py` | Computes both gradients, translates the mouse gradient and evaluates correspondence. |
+| `02_plot.py` | Plots the translated gradient and null distribution. |
+| `03_discrete_reframe.py` | Evaluates network ordering and a three-tier discretisation. |
+| `04_gradient_components.py` | Evaluates the gradient across precomputed ablation couplings. |
 
-## Reproduce
+## Inputs and outputs
+
+The main analysis uses the canonical coupling, cached connectomes and
+parcellations, the species-specific T1w:T2w references, and
+`outputs/logs/buckner_krienen_2013_tethering.json`. The ablation analysis also
+requires the `pi_ladder_<arm>.npy` couplings generated by the Section 2
+ablation workflow.
+
+Outputs are written to:
+
+- `outputs/logs/margulies_2016_gradient.json`
+- `outputs/logs/margulies_discrete_reframe.json`
+- `outputs/logs/out_c1_gradient.json`
+- `outputs/figures/margulies_2016_gradient.png`
+
+## Run
+
+From the repository root:
 
 ```bash
 PYTHONPATH=src python experiments/margulies_2016_principal_gradient/01_gradient_validation.py
+PYTHONPATH=src python experiments/margulies_2016_principal_gradient/03_discrete_reframe.py
 PYTHONPATH=src python experiments/margulies_2016_principal_gradient/02_plot.py
 ```
 
-Outputs:
-- `outputs/logs/margulies_2016_gradient.json` (per-parcel gradients + stats)
-- `outputs/figures/margulies_2016_gradient.png` (3-panel figure)
+To verify the precomputed ablation summary:
 
-
-## Discrete reframe
-
-The gradient survives reduction to discrete structure: network rank order is recovered at
-ρ = 0.80 (spin p = 0.029) and a three-tier discretisation is classified at 56 % against 33 %
-chance.
-
+```bash
+PYTHONPATH=src python experiments/margulies_2016_principal_gradient/04_gradient_components.py --check
+```

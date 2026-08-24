@@ -1,6 +1,6 @@
 """Disorder-unique gene-set test of cross-species specificity.
 
-Phase 1 found that routing each disorder's full gene set through π gives
+Routing each disorder's full gene set through π gives
 near-identical human predictions (off-diagonal r = +0.988), indicating shared
 psychiatric geometry rather than disorder-specific geometry. The full sets
 overlap heavily (autism 1,713 genes; SCZ 530; bipolar 109; ADHD 30, with large
@@ -70,7 +70,7 @@ def main():
             return None, len(idx)
         return z[:, idx].mean(1) @ pi, len(idx)
 
-    # FULL-set predictions (reproduce Phase 1)
+    # FULL-set predictions
     full_pred, n_full = {}, {}
     print(f"\n{'disorder':<16}{'full overlap':>13}{'globally-unique overlap':>26}")
     for d in low:

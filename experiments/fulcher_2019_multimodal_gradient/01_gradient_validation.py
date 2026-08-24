@@ -212,10 +212,10 @@ def main():
           f"gradient-degenerate, not a hierarchy ruler here")
 
     # ===== coverage control =================================================
-    # The canonical coupling reaches a LARGER human territory than the pre-warp
+    # The canonical coupling reaches a larger human territory than the unwarped
     # one. Any gain in panels 1/3 could therefore be territory size rather than
     # a better coupling. Re-score the canonical prediction on exactly the region
-    # set the pre-warp coupling reached, so the two are compared on equal ground.
+    # comparator, so the two are compared on equal ground.
     from otter.data import load_pi as _load_pi, pi_provenance as _prov
     pi_retired = _load_pi(RETIRED_PI_FILE)
     prov_retired = _prov(RETIRED_PI_FILE)
@@ -234,7 +234,7 @@ def main():
                                             myelin_reg)
     r3_cov, p3_cov, rs3_cov, n3_cov = _corr(_restrict(pred_cyto, ret_territory),
                                             myelin_reg)
-    # and the pre-warp coupling's own numbers, on its own territory, for reference
+    # and the comparator's own numbers on its territory.
     r1_ret, _, _, n1_ret = _corr(ret_t1t2, myelin_reg)
     r3_ret, _, _, n3_ret = _corr(ret_cyto, myelin_reg)
 

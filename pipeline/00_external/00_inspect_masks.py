@@ -1,4 +1,4 @@
-"""Inspect the colleague's mask files to determine coordinate systems.
+"""Inspect the input mask files to determine coordinate systems.
 
 This is the first thing to run. The downstream alignment of public datasets
 (Allen mouse atlas, MNI152 human atlas) depends on knowing:
@@ -51,7 +51,7 @@ def _classify_mouse_space(affine: np.ndarray, shape: tuple) -> str:
     if shape == (528, 320, 456):  return "Allen CCFv3 25µm"
     if shape == (264, 160, 228):  return "Allen CCFv3 50µm"
     if shape == (132, 80, 114):   return "Allen CCFv3 100µm"
-    # SIGMA / Dorr atlases have different shapes; likely the colleague
+    # SIGMA / Dorr atlases have different shapes; the input
     # rescaled to mm
     return f"unknown mouse space (vox≈{vox.round(3).tolist()} mm, shape={shape})"
 
@@ -93,7 +93,7 @@ def inspect_mask(path: Path, species: str) -> dict:
 def check_voxel_indices(species: str, mask_data: np.ndarray) -> dict:
     """Verify that the t-table's voxel_indices actually point into the mask.
 
-    The colleague stored voxel indices as 1-based linear MATLAB indices into
+    Voxel indices are stored as 1-based linear MATLAB indices into
     the 3D mask volume. We need to confirm:
     - They're 1-based (so we subtract 1 to use as 0-based numpy indices)
     - They fit in the mask volume

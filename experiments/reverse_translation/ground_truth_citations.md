@@ -20,13 +20,12 @@ reverse-translated human map ranks one of the listed mouse structures in the top
 | audition | auditory | AUDp, MG | Tsukano et al. 2017, *Front Neural Circuits* | 10.3389/fncir.2017.00014 |
 | interoception | interoception | AId, AIv, AIp, PB | Palmiter 2018, *Trends Neurosci* | 10.1016/j.tins.2018.03.007 |
 
-## Two structures added on review authority
+## Two structures with a broader assignment
 
-- **anxiety → amygdala (BLA).** Tovote, Fadok & Lüthi 2015 make the amygdala central to
-  anxiety, not only fear. BLA belongs in the anxiety set on the review's authority.
-- **interoception → parabrachial nucleus (PB).** Palmiter 2018 establishes the PBN as
-  the mouse relay of interoceptive (visceral/taste/temperature/pain) signals to the forebrain.
-  PB belongs in the interoception set on the review's authority.
+- **anxiety → amygdala (BLA).** Tovote, Fadok & Lüthi 2015 place the amygdala at the centre of
+  anxiety rather than fear alone, so BLA is in the anxiety set.
+- **interoception → parabrachial nucleus (PB).** Palmiter 2018 establishes the PBN as the mouse
+  relay of interoceptive signals to the forebrain, so PB is in the interoception set.
 
 ## Notes
 
@@ -34,6 +33,3 @@ reverse-translated human map ranks one of the listed mouse structures in the top
   no-clean-target case, a distributed, human-elaborated construct without a single mouse
   home. Its failure to clear the spin null is the "primate-unique, no adequate mouse target"
   signal.
-- the spatial-memory review DOI is unverified; the hippocampus↔spatial-memory pairing itself
-  is uncontroversial. Confirm the Moser 2008 DOI
-  (likely 10.1146/annurev.neuro.31.061307.090723) before publication.

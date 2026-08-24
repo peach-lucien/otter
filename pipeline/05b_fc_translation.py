@@ -1,16 +1,4 @@
-"""E1: FC translation quality, evaluate π via downstream FC prediction.
-
-For each named config in CONFIGS:
-  1. Solve the production semirelaxed FGW (no held-out anchors).
-  2. Compute predicted human FC = πᵀ @ Fm @ π / (q ⊗ q).
-  3. Pearson r vs actual mean human FC, overall + within-net + cross-net.
-
-Plus baselines:
-  - random π (Sinkhorn-projected random matrix)
-  - uniform π = p ⊗ q (predicts constant FC; r = 0)
-
-Saves outputs/logs/fc_translation.json + outputs/figures/10_fc_translation.png.
-"""
+"""Evaluate functional-connectivity push-forward for the configurations defined in this script."""
 from __future__ import annotations
 
 import argparse

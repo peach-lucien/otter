@@ -225,8 +225,8 @@ def main():
         ],
         "loo_consistency": f"{n_consistent}/{len(labels)}",
         "translation": trans,
-        "note": ("Supersedes inverted-prior version. Subtype labels verified "
-                 "from data; translation independent of 1,491-feature decode."),
+        "note": ("Subtype labels are assigned from the connectivity data in this script; "
+                 "the translation does not use the 1,491-feature decode."),
     }
     out_path = ROOT / "outputs" / "logs" / "pagani_subtype_translation_corrected.json"
     out_path.parent.mkdir(parents=True, exist_ok=True)

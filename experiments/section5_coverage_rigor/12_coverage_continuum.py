@@ -156,7 +156,8 @@ def main():
     except Exception:
         aidx = None
     # "canonical" is the reported arm (== the main analysis above); the others provide
-    # cross-coupling comparison. "production" is the coupling fitted without the anchor warp.
+    # The configuration labelled "production" in this stored comparison is the
+    # unwarped regional-entry coupling.
     out["medial_lateral_robustness"] = {}
     out["_reported_coupling_arm"] = "canonical"
     for name, path in [("canonical", "pi_canonical.npy"),
@@ -175,7 +176,7 @@ def main():
                                                   **pi_provenance(path)}
         print(f"  {name:<24} rho(cov,|x|)={rho:+.3f}  spin p={pp:.4f}")
 
-    # partial correlation controlling anchor distance (production)
+    # Partial correlation controlling anchor distance for that comparator.
     if aidx is not None and len(aidx):
         tree = cKDTree(xyz[aidx])
         adist = tree.query(xyz[m])[0]

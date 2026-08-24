@@ -1,81 +1,165 @@
 {
- "_what": "Review-round analysis, 2026-07-28/29. Produced by the harness in _audit/HOMER_review_analyses.tar.gz, which reproduces pi_canonical.npy exactly before any experiment (argmax match 1.0000, entrywise r 1.00000).",
+ "_what": "Cost-term ablation ladder scored on the 19 Beauchamp homology pairs. The coupling used here reproduces pi_canonical.npy exactly (argmax match 1.0000, entrywise r 1.00000).",
  "1_connectivity_only": {
   "auroc": 0.69384860010984,
   "top1": 0.0,
   "mass_in_region": 0.013806620352594313,
-  "centroid_disp_mm": 29.071048066626453,
+  "centroid_disp_mm": 29.071048066626457,
   "cfg": {
    "alpha": 0.5,
-   "xyzw": 0.0,
+   "xyz_weight": 0.0,
    "garin": false,
    "packs": false
   },
-  "secs": 15
+  "secs": 6,
+  "coupling": "pi_ladder_1_connectivity_only.npy",
+  "fitted_here": true,
+  "recipe": {
+   "alpha": 0.5,
+   "xyz_weight": 0.0,
+   "garin": false,
+   "packs": false
+  },
+  "reproduces": {
+   "reference": "outputs/coupling/pi_canonical.npy",
+   "reference_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+   "argmax_match": 0.0,
+   "entrywise_r": 0.04757517328428267
+  }
  },
  "2_+spatial": {
   "auroc": 0.9744679168668517,
   "top1": 0.2737864077669903,
-  "mass_in_region": 0.22839258769574416,
-  "centroid_disp_mm": 11.207050587303238,
+  "mass_in_region": 0.22839258769574616,
+  "centroid_disp_mm": 11.20705058730318,
   "cfg": {
    "alpha": 0.5,
-   "xyzw": 0.25,
+   "xyz_weight": 0.25,
    "garin": false,
    "packs": false
   },
-  "secs": 14
+  "secs": 7,
+  "coupling": "pi_ladder_2_+spatial.npy",
+  "fitted_here": true,
+  "recipe": {
+   "alpha": 0.5,
+   "xyz_weight": 0.25,
+   "garin": false,
+   "packs": false
+  },
+  "reproduces": {
+   "reference": "outputs/coupling/pi_canonical.npy",
+   "reference_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+   "argmax_match": 0.43508583690987124,
+   "entrywise_r": 0.5228681897724352
+  }
  },
  "3_+anchors": {
   "auroc": 0.9298778535674547,
   "top1": 0.2611650485436893,
-  "mass_in_region": 0.22082276451495417,
-  "centroid_disp_mm": 11.118948929159886,
+  "mass_in_region": 0.22082276451495567,
+  "centroid_disp_mm": 11.118948929159824,
   "cfg": {
    "alpha": 0.5,
-   "xyzw": 0.25,
+   "xyz_weight": 0.25,
    "garin": true,
    "packs": false
   },
-  "secs": 15
+  "secs": 6,
+  "coupling": "pi_ladder_3_+anchors.npy",
+  "fitted_here": true,
+  "recipe": {
+   "alpha": 0.5,
+   "xyz_weight": 0.25,
+   "garin": true,
+   "packs": false
+  },
+  "reproduces": {
+   "reference": "outputs/coupling/pi_canonical.npy",
+   "reference_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+   "argmax_match": 0.47854077253218885,
+   "entrywise_r": 0.5716270614734331
+  }
  },
  "4_+packs_CANONICAL": {
   "auroc": 0.8987621871990727,
   "top1": 0.566990291262136,
-  "mass_in_region": 0.5407463140555259,
-  "centroid_disp_mm": 8.83011401752322,
+  "mass_in_region": 0.5407463140555263,
+  "centroid_disp_mm": 8.830114017523226,
   "cfg": {
    "alpha": 0.5,
-   "xyzw": 0.25,
+   "xyz_weight": 0.25,
    "garin": true,
    "packs": true
   },
-  "secs": 15
+  "secs": 7,
+  "coupling": "pi_ladder_4_+packs_CANONICAL.npy",
+  "fitted_here": true,
+  "recipe": {
+   "alpha": 0.5,
+   "xyz_weight": 0.25,
+   "garin": true,
+   "packs": true
+  },
+  "reproduces": {
+   "reference": "outputs/coupling/pi_canonical.npy",
+   "reference_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+   "argmax_match": 1.0,
+   "entrywise_r": 1.0
+  }
  },
  "5_NOCONN_spatial_only": {
   "auroc": 0.9718886429043557,
   "top1": 0.27475728155339807,
-  "mass_in_region": 0.2652294356828881,
-  "centroid_disp_mm": 11.490519874545155,
+  "mass_in_region": 0.26522943568289076,
+  "centroid_disp_mm": 11.49051987454508,
   "cfg": {
    "alpha": 0.0,
-   "xyzw": 0.25,
+   "xyz_weight": 0.25,
    "garin": false,
    "packs": false
   },
-  "secs": 15
+  "secs": 6,
+  "coupling": "pi_ladder_5_NOCONN_spatial_only.npy",
+  "fitted_here": true,
+  "recipe": {
+   "alpha": 0.0,
+   "xyz_weight": 0.25,
+   "garin": false,
+   "packs": false
+  },
+  "reproduces": {
+   "reference": "outputs/coupling/pi_canonical.npy",
+   "reference_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+   "argmax_match": 0.33530042918454933,
+   "entrywise_r": 0.44045723902545475
+  }
  },
  "6_NOCONN_spatial+anch+packs": {
   "auroc": 0.8924267120755129,
-  "top1": 0.5737864077669903,
-  "mass_in_region": 0.561973131687085,
-  "centroid_disp_mm": 7.7544855734052565,
+  "top1": 0.5621359223300971,
+  "mass_in_region": 0.5619731316870863,
+  "centroid_disp_mm": 7.754485573405268,
   "cfg": {
    "alpha": 0.0,
-   "xyzw": 0.25,
+   "xyz_weight": 0.25,
    "garin": true,
    "packs": true
   },
-  "secs": 15
+  "secs": 7,
+  "coupling": "pi_ladder_6_NOCONN_spatial+anch+packs.npy",
+  "fitted_here": true,
+  "recipe": {
+   "alpha": 0.0,
+   "xyz_weight": 0.25,
+   "garin": true,
+   "packs": true
+  },
+  "reproduces": {
+   "reference": "outputs/coupling/pi_canonical.npy",
+   "reference_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+   "argmax_match": 0.47317596566523606,
+   "entrywise_r": 0.8295009233136751
+  }
  }
 }

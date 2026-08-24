@@ -1,48 +1,9 @@
-"""Pipeline step 08a, multi-source per-parcel trust map for the recommended π.
+"""Build the compatibility file containing explorer display metadata.
 
-This step connects the trust computation to the GUI.
-
-  * ``05g_compute_trust.py`` writes ``trust_score_<config>.npz``, the
-    *internal* composite (bootstrap stability + argmax concentration + FC
-    similarity) plus the regional-empirical Beauchamp accuracy. Useful, but
-    not the file the GUI reads.
-  * ``08_build_gui.py`` reads ``trust_multisource_canonical.npz``, the
-    *multi-source evidence map* (five evidence tiers) produced by
-    :func:`otter.eval.trust_score.compute_multisource_trust`.
-
-This step is the caller for ``compute_multisource_trust``. The GUI falls back
-to "unknown" trust tiers when the file is absent or stale.
-
-It layers external supervision (anchor-pack membership, Beauchamp region
-validation) on top of the internal composite and classifies every mouse
-parcel into one of five evidence tiers:
-
-    anchored_and_validated, in an anchor pack AND Beauchamp top-1 > 0
-    anchored_only, in an anchor pack, no Beauchamp validation
-    validated_only. Beauchamp top-1 > 0, not in any anchor pack
-    structural, high internal trust, no external evidence
-    low_evidence, none of the above (use predictions with caution)
-
-Outputs:
-    outputs/coupling/trust_multisource_canonical.npz with:
-        trust          : (n_m,) internal composite, [0, 1]
-        tier           : (n_m,) {high, medium, low}  (internal composite tier)
-        bootstrap      : (n_m,) per-row bootstrap argmax stability
-        concentration  : (n_m,) argmax mass / row sum
-        fc_sim         : (n_m,) Pearson r to nearest anchor FC profile
-        weights        : (3,)   the (boot, concentration, fc) component weights
-        garin_anchored : (n_m,) bool, one of the Garin point anchors
-        pack_anchored  : (n_m,) bool, in any default region-anchor pack
-        beauchamp_top1 : (n_m,) float, its Beauchamp pair's top-1 (NaN if N/A)
-        evidence_tier  : (n_m,) {anchored_and_validated, anchored_only,
-                                 validated_only, structural, low_evidence}
-
-Usage:
-    PYTHONPATH=src python pipeline/08a_multisource_trust.py
-
-The defaults are the canonical coupling. Run it with no arguments unless a comparison
-coupling is being graded. Passing --pi-file pi_fc_plus_SC_with_all_packs.npy grades
-the evidence tiers on the coupling fitted without the anchor warp.
+The output combines anchor membership, benchmark-region membership and internal
+stability summaries. Its historical field names are retained because the
+self-contained explorer reads them, but the categories are interface metadata:
+they are not calibrated confidence estimates or additional validation results.
 """
 from __future__ import annotations
 
@@ -83,7 +44,7 @@ def main(args):
     if not pi_path.exists():
         raise SystemExit(
             f"π not found: {pi_path}\n"
-            f"  run experiments/anchor_packs/compose_all.py first."
+            f"  download the release bundle or pass an existing --pi-file."
         )
     M, _ = load_cached("mouse", cache_dir=ANN)
     H, _ = load_cached("human", cache_dir=ANN)
@@ -92,15 +53,14 @@ def main(args):
     assert pi.shape == (len(M.var), len(H.var)), \
         f"π shape {pi.shape} != ({len(M.var)}, {len(H.var)})"
 
-    boot_path = COUP / args.bootstrap_file
-    if not boot_path.exists():
+    boot_path = COUP / args.bootstrap_file if args.bootstrap_file else None
+    if boot_path is not None and not boot_path.exists():
         print(f"  ⚠ bootstrap aggregate {boot_path.name} missing, "
               f"bootstrap component will be a constant 0.5")
         boot_path = None
 
     # ---- Region-anchor packs (external supervision signal #1).
-    # The pack registry is the single source of truth for the recommended
-    # composition, this stays in lockstep with compose_all.py automatically.
+    # The registry defines the canonical regional-entry composition.
     print(f"\nBuilding default region-anchor packs "
           f"({', '.join(DEFAULT_PACK_NAMES)}) ...")
     entries = build_default_pack_entries(M.var, H.var, atlas_root=ROOT)
@@ -112,9 +72,7 @@ def main(args):
     beau_path = LOG / args.beauchamp_file
     if not beau_path.exists():
         raise SystemExit(
-            f"Beauchamp validation log not found: {beau_path}\n"
-            f"  run experiments/anchor_packs/compose_all.py (it writes "
-            f"beauchamp_validation_all_packs.json) first."
+            f"Benchmark-region metadata not found: {beau_path}"
         )
     beauchamp_per_pair = json.loads(beau_path.read_text())
     print(f"\nLoaded {args.beauchamp_file} "
@@ -133,8 +91,8 @@ def main(args):
     print(f"  {(mouse_dsurqe_labels > 0).sum()}/{len(mouse_dsurqe_labels)} "
           f"parcels assigned a DSURQE label")
 
-    # ---- Multi-source trust
-    print("\nComputing multi-source trust map ...")
+    # ---- Explorer display metadata
+    print("\nComputing explorer display metadata ...")
     out = compute_multisource_trust(
         M, H, pi,
         bootstrap_path=boot_path,
@@ -145,10 +103,10 @@ def main(args):
     )
 
     # ---- Report
-    print(f"\nInternal composite trust:")
+    print(f"\nInternal stability composite:")
     print(f"  range=[{out['trust'].min():.3f}, {out['trust'].max():.3f}], "
           f"mean={out['trust'].mean():.3f}")
-    print(f"\nEvidence-tier distribution ({len(out['evidence_tier'])} parcels):")
+    print(f"\nDisplay-category distribution ({len(out['evidence_tier'])} parcels):")
     tier_counts = Counter(str(t) for t in out["evidence_tier"])
     for tier in ("anchored_and_validated", "anchored_only", "validated_only",
                  "structural", "low_evidence"):
@@ -181,14 +139,11 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--pi-file", default="pi_canonical.npy",
-                    help="recommended π filename in outputs/coupling/")
-    ap.add_argument("--beauchamp-file", default="beauchamp_validation_all_packs.json",
-                    help="Beauchamp validation log filename in outputs/logs/")
-    ap.add_argument("--bootstrap-file", default="bootstrap_aggregate_fc_plus_SC.npz",
-                    help="bootstrap aggregate filename in outputs/coupling/")
+                    help="coupling filename in outputs/coupling/")
+    ap.add_argument("--beauchamp-file", default="beauchamp_validation_canonical.json",
+                    help="benchmark-region metadata filename in outputs/logs/")
+    ap.add_argument("--bootstrap-file", default=None,
+                    help="matching bootstrap aggregate in outputs/coupling/; omitted by default")
     ap.add_argument("--output", default="trust_multisource_canonical.npz",
-                    help="output filename in outputs/coupling/, the name "
-                         "08_build_gui.py reads by default. Pass "
-                         "trust_multisource_all_packs.npz explicitly when "
-                         "grading a non-canonical --pi-file.")
+                    help="output filename in outputs/coupling/ read by the explorer")
     main(ap.parse_args())

@@ -50,7 +50,7 @@ warnings.filterwarnings("ignore")
 
 def _build_M_visible(M_xyz, idx_m, idx_h, visible_pair_ids,
                      *, lam=1.0, xyz_w=0.5):
-    """Standard production M build (FC-only baseline config)."""
+    """Point-anchor cross-species cost used by this diagnostic."""
     M = (xyz_w * M_xyz).astype(np.float64)
     visible = set(int(p) for p in visible_pair_ids)
     for k, mp in enumerate(idx_m.pos):

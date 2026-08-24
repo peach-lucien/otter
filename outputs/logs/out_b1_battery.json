@@ -1,5 +1,5 @@
 {
- "_what": "Review-round analysis, 2026-07-28/29. Produced by the harness in _audit/HOMER_review_analyses.tar.gz, which reproduces pi_canonical.npy exactly before any experiment (argmax match 1.0000, entrywise r 1.00000).",
+ "_what": "Transfer battery of published mouse maps routed through the coupling. The coupling used here reproduces pi_canonical.npy exactly (argmax match 1.0000, entrywise r 1.00000).",
  "4_+packs_CANONICAL": {
   "label": "canonical (alpha=0.5)",
   "fulcher_t1t2": 0.5045941644709661,

@@ -1,7 +1,7 @@
 """Transdiagnostic test of the shared psychiatric geometry.
 
-Phase 1 and the disorder-unique test (04) showed OTTER's per-disorder predictions
-are near-identical, with even disjoint gene sets giving r≈0.98. OTTER carries a
+OTTER's per-disorder predictions are near-identical, with even disjoint gene sets
+giving r≈0.98 (01_per_disorder_prediction.py, 04_disorder_unique.py). OTTER carries a
 single shared psychiatric spatial geometry rather than disorder-specific biology.
 That geometry is testable against the transdiagnostic cortical signature, the
 "p-factor" pattern of shared cortical vulnerability across disorders.

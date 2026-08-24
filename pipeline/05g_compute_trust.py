@@ -1,28 +1,6 @@
-"""Pipeline 05g, compute per-parcel trust score for the production π.
+"""Compute uncalibrated stability summaries for the point-anchor configurations defined by the low-level pipeline.
 
-Two independent trust signals, both saved as outputs/coupling/trust_score_<config>.npz:
-
-1. **Model-confidence trust** (continuous):
-   bootstrap row-stability + argmax mass concentration + FC similarity to
-   nearest anchor → composite score in [0, 1] + tier {high, medium, low}.
-
-2. **Regional-empirical trust** (discrete by validation region):
-   per Beauchamp 2022 region, the top-1 accuracy of the model in that
-   region. Each parcel gets the accuracy of its region. Tier
-   is set by absolute thresholds (high ≥ 15%, low < 3%, else medium,
-   `unknown` if not in any validated region).
-
-Saves:
-    outputs/coupling/trust_score_<config>.npz with:
-        - trust              : (n_m,) model-confidence composite, [0, 1]
-        - tier               : (n_m,) {high, medium, low}
-        - bootstrap          : per-row bootstrap argmax stability
-        - concentration      : argmax mass / row sum
-        - fc_sim             : Pearson r to nearest anchor's FC profile
-        - regional_trust     : per-parcel empirical Beauchamp top-1 (NaN if unknown)
-        - regional_tier      : (n_m,) {high, medium, low, unknown}
-        - parcel_to_region   : Beauchamp region label per parcel ('' if not in one)
-"""
+The historical output field names are retained for compatibility and must not be interpreted as calibrated confidence."""
 from __future__ import annotations
 
 import argparse
@@ -133,19 +111,19 @@ def main(args):
     pi = np.load(COUP / args.pi_file).astype(np.float64)
     print(f"Loaded {args.pi_file} ({pi.shape})")
 
-    # 1. Model-confidence trust
+    # 1. Internal stability composite.
     boot_path = COUP / args.bootstrap_file
     if not boot_path.exists():
         print(f"  ⚠ {boot_path} missing, bootstrap component will be 0.5")
         boot_path = None
     ts = compute_trust_score(M, H, pi, bootstrap_path=boot_path)
-    print(f"\nModel-confidence trust:")
+    print(f"\nInternal stability composite:")
     print(f"  range=[{ts['trust'].min():.3f}, {ts['trust'].max():.3f}], mean={ts['trust'].mean():.3f}")
     for t in ["high", "medium", "low"]:
         n = (ts["tier"] == t).sum()
         print(f"  {t}: {n}/{len(ts['tier'])}")
 
-    # 2. Regional-empirical trust
+    # 2. Regional empirical summary.
     parcel_to_region = parcel_to_dsurqe_region(
         M, EXT / "AMBA/data/imaging/DSURQE_CCFv3_labels_200um.mnc",
     )
@@ -155,7 +133,7 @@ def main(args):
         len(M.var), parcel_to_region, reg_acc,
         high_threshold=args.high_threshold, low_threshold=args.low_threshold,
     )
-    print(f"\nRegional-empirical trust (per Beauchamp validation):")
+    print(f"\nRegional empirical top-1 summary:")
     for region, info in sorted(reg_acc.items(), key=lambda kv: -kv[1]["top1_accuracy"]):
         n = info["n"]; acc = info["top1_accuracy"]
         marker = "🟢" if acc >= args.high_threshold else "🔴" if acc < args.low_threshold else "🟡"
@@ -171,14 +149,14 @@ def main(args):
     out_path = COUP / f"trust_score_{cfg_name}.npz"
     np.savez(
         out_path,
-        # model-confidence trust
+        # Internal stability fields; names retained for file compatibility.
         trust=ts["trust"].astype(np.float32),
         tier=np.array([str(t) for t in ts["tier"]]),
         bootstrap=ts["bootstrap"].astype(np.float32),
         concentration=ts["concentration"].astype(np.float32),
         fc_sim=ts["fc_sim"].astype(np.float32),
         weights=np.asarray(ts["weights"], dtype=np.float64),
-        # regional empirical trust
+        # Regional empirical summary.
         regional_trust=reg_trust.astype(np.float32),
         regional_tier=np.array([str(t) for t in reg_tier]),
         parcel_to_region=np.array([str(r) for r in parcel_to_region]),

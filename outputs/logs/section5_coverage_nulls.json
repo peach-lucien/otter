@@ -1,25 +1,25 @@
 {
-  "pi_file": "outputs/coupling/pi_canonical.npy",
-  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
-  "n_cortical_parcels": 1824,
-  "n_spin": 1000,
-  "coverage_vs_myelin_continuous": {
-    "r_observed": 0.1441464021088067,
-    "p_spin": 0.16883116883116883,
-    "n_trials": 1000,
-    "null_mean": 0.0009327197902620774,
-    "null_abs_mean": 0.08725502105913899,
-    "null_abs_p95": 0.2012143804361982,
-    "null_ci95": [
-      -0.23347996134255433,
-      0.17466682300075329
-    ]
-  },
-  "coverage_collapse_tertile": {
-    "gap_observed": 0.6825734400893406,
-    "p_spin": 0.2857142857142857,
-    "null_abs_mean": 0.4927780594019422,
-    "null_abs_p95": 1.1435292544914484
-  },
-  "note": "On the canonical coupling BOTH statistics are null under the spin: continuous r spin p ~ 0.17, tertile gap spin p ~ 0.29. The 6.7-log-unit tertile gap (spin p ~ 0.002) was a property of the retired pre-warp coupling pi_fc_plus_SC_with_all_packs.npy, not of the canonical one."
+ "pi_file": "outputs/coupling/pi_canonical.npy",
+ "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+ "n_cortical_parcels": 1824,
+ "n_spin": 1000,
+ "coverage_vs_myelin_continuous": {
+  "r_observed": 0.1441464021088067,
+  "p_spin": 0.16883116883116883,
+  "n_trials": 1000,
+  "null_mean": 0.0009327197902620774,
+  "null_abs_mean": 0.08725502105913899,
+  "null_abs_p95": 0.2012143804361982,
+  "null_ci95": [
+   -0.23347996134255433,
+   0.17466682300075329
+  ]
+ },
+ "coverage_collapse_tertile": {
+  "gap_observed": 0.6825734400893406,
+  "p_spin": 0.2857142857142857,
+  "null_abs_mean": 0.4927780594019422,
+  "null_abs_p95": 1.1435292544914484
+ },
+ "note": "On the canonical coupling both statistics are null under the spin: continuous r spin p ~ 0.17, tertile gap spin p ~ 0.29."
 }

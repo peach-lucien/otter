@@ -1,5 +1,5 @@
 {
- "_what": "Review-round analysis, 2026-07-28/29. Produced by the harness in _audit/HOMER_review_analyses.tar.gz, which reproduces pi_canonical.npy exactly before any experiment (argmax match 1.0000, entrywise r 1.00000).",
+ "_what": "Diffusion-map gradient components of each species' functional connectome, routed through each cost-term arm and matched against that species' own T1w:T2w map. The coupling used here reproduces pi_canonical.npy exactly (argmax match 1.0000, entrywise r 1.00000).",
  "mouse_comp_vs_mouse_myelin": [
   -0.2781957212142547,
   0.564537581019413,

@@ -35,7 +35,7 @@ def load_transform(diagnostics_dir: Path) -> dict:
 def apply_transform(centres: np.ndarray, transform: dict) -> np.ndarray:
     """Convert (N, 3) colleague-mouse mm coords → (N, 3) CCFv3 mm coords.
 
-    centres: per-node centres in the colleague's bregma-centred frame.
+    centres: per-node centres in the input bregma-centred frame.
     transform: dict from load_transform(); keys 'perm', 'signs', 'shift_mm'.
     """
     perm = transform["perm"]; signs = transform["signs"]; shift = np.asarray(transform["shift_mm"])
@@ -54,7 +54,7 @@ def colleague_voxel_to_ccf_world(rsmask_affine: np.ndarray,
                                   transform: dict) -> np.ndarray:
     """Convert a flat array of MATLAB voxel indices into CCFv3 world (mm) coords.
 
-    1. Decode 1D index → 3D ijk in the colleague's mask using the given order.
+    1. Decode 1D index → 3D ijk in the input mask using the given order.
     2. Apply rsmask.affine to get colleague-frame world (mm).
     3. Apply the discovered transform → CCFv3 world (mm).
     """

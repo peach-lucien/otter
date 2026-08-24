@@ -2,7 +2,8 @@
 """Held-out three-config comparison of the supervision terms.
 
 For each of the 19 Beauchamp homology pairs, that region's own curation is withheld (its Garin
-point anchor and every region pack whose mouse-side set touches it), the model is refitted, and
+point anchor, every region pack whose mouse-side set touches it, and that landmark's
+contribution to the thin-plate-spline warp behind the spatial cost), the model is refitted, and
 recovery of the held-out region is scored under three configurations:
 
     both        connectivity + anchor-warped space, at production settings
@@ -23,6 +24,8 @@ the canonical epsilon = 0.05 and xyz_weight = 0.25, so its log
 loro_disentangle_connectivity_vs_xyz.json is not comparable with this one.
 
 57 fits. Resumable: each region is written as it completes, and re-running skips what is done.
+Because the warp is now refitted per held-out region, every value differs from a run that
+shared one warp across regions; --force --rewrite is needed once to replace such a log.
 
     conda activate retune
     cd otter && python3 experiments/section2_supervision/05_heldout_three_config.py --check
@@ -56,7 +59,7 @@ PROGRESS = ROOT / "outputs" / "logs" / ".05_heldout_progress.json"
 # The mirror's consumers, recorded in the log so the dependency is visible.
 CONSUMERS = "notebooks/; experiments/section2_supervision/06_regret.py"
 
-# The production recipe with one term switched off at a time. Everything not named here comes
+# The canonical recipe with one term switched off at a time. Everything not named here comes
 # from otter.repro, so a change to the recipe reaches this script rather than being restated.
 CONFIGS: dict[str, dict] = {
     "both":      dict(alpha=ALPHA, xyz_weight=XYZ_WEIGHT),
@@ -112,7 +115,8 @@ def withhold(M, H, entries, entry_mouse_idx, m_mask, garin_M, garin_H, apid_m, a
     drop_h = garin_H & np.isin(np.nan_to_num(apid_h, nan=-1).astype(int), list(pids))
     M.var["garin_anchor"] = garin_M & ~drop_m
     H.var["garin_anchor"] = garin_H & ~drop_h
-    return [e for e, mi in zip(entries, entry_mouse_idx) if not m_mask[mi].any()]
+    surviving = [e for e, mi in zip(entries, entry_mouse_idx) if not m_mask[mi].any()]
+    return surviving, {p for p in pids if p != -999}
 
 
 def compare(built: dict, committed: dict) -> list[str]:
@@ -136,10 +140,12 @@ def main() -> int:
     ap.add_argument("--force", action="store_true", help="rescore regions already in the log")
     ap.add_argument("--also-canonical", action="store_true",
                     help="write heldout_three_config_canonical.json with the same values")
+    ap.add_argument("--rewrite", action="store_true",
+                    help="write even when the values differ from the committed log. Needed once, "
+                         "because refitting the warp per held-out region changes every value.")
     args = ap.parse_args()
 
     M, H, costs, entries = load_inputs()
-    M_xyz = anchor_warped_xyz(M, H)
     BB = beauchamp_scorer()
     pairs, _, _, h_xyz, _, _ = BB.build(M, H)
 
@@ -165,8 +171,11 @@ def main() -> int:
         m_mask, h_mask = pairs[key]
         start = time.time()
         try:
-            surviving = withhold(M, H, entries, entry_mouse_idx, m_mask,
-                                 garin_M, garin_H, apid_m, apid_h)
+            surviving, held_pids = withhold(M, H, entries, entry_mouse_idx, m_mask,
+                                            garin_M, garin_H, apid_m, apid_h)
+            # The warp is refitted without the held-out landmark, so its position cannot
+            # re-enter through the spatial term.
+            M_xyz = anchor_warped_xyz(M, H, exclude_pids=held_pids)
             row = {}
             for name, config in CONFIGS.items():
                 pi = fit_coupling(M, H, costs, surviving, M_xyz,
@@ -185,7 +194,7 @@ def main() -> int:
               f"xyz={row['xyz_only']['cdist_mm']:6.1f} conn={row['conn_only']['cdist_mm']:6.1f} "
               f"rand={row['both']['rand_mm']:5.1f}mm  ({time.time() - start:.0f}s)", flush=True)
 
-    if committed:
+    if committed and not args.rewrite:
         drift = compare(out, committed)
         if drift:
             print(f"\nDIFFERS from the committed log in {len(drift)} place(s):", file=sys.stderr)
@@ -202,7 +211,7 @@ def main() -> int:
                   "log would go out unstamped. Re-run with --force to refit all 19 regions.",
                   file=sys.stderr)
             return 1
-        # The production arm is a refit, so the record is the recipe plus its measured distance
+        # The canonical arm is a refit, so the record includes its recipe and measured distance.
         # from the release rather than a coupling sha this run never opened.
         prov = refit_provenance(last_pi, recipe={**CONFIGS["both"], "epsilon": EPSILON,
                                                  "garin": True, "packs": True,

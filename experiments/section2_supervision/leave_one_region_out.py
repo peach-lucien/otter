@@ -5,7 +5,7 @@ For each Beauchamp pair, all curated supervision that anchors that region (its
 Garin point anchor(s) and any region-anchor pack whose mouse parcels fall in the
 region) is removed, the full FGW coupling is re-fitted with everything else, and
 that pair's Beauchamp recovery is scored. This gives the "would we recover this
-region if we had NOT curated it" number for the production model (Garin + all
+region if we had not curated it" number for the canonical model (Garin + all
 packs), whereas pipeline/05h_region_anchor_cv.py is Garin-only.
 
 Resumable: caches per-pair to .loro_results.json; exits after TIME_GUARD s.

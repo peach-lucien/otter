@@ -781,7 +781,7 @@ def plot_pi_heatmap_ordered(
     show_boundaries : bool, default True
         White lines at network boundaries on the main heatmap.
     log_scale : bool, default False
-        Plot log1p(π * scale) instead of raw π, useful when the production
+        Plot log1p(π * scale) instead of raw π, useful when the coupling
         solve is mostly one-hot and the off-diagonal structure would otherwise
         be invisible.
     dark : bool, default True

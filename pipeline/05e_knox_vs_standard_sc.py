@@ -34,7 +34,7 @@ LOG  = ROOT / "outputs" / "logs"; LOG.mkdir(parents=True, exist_ok=True)
 
 
 CONFIGS = {
-    "fc_plus_SC_allen":   "Cm_SC",        # production: Allen summary-structure SC
+    "fc_plus_SC_allen":   "Cm_SC",        # Allen summary-structure SC
     "fc_plus_SC_knox":    "Cm_SC_knox",   # comparative: Knox leaf-level SC for 22 cortical anchors
 }
 

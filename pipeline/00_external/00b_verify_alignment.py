@@ -1,4 +1,4 @@
-"""Verify that the colleague's masks are in standard reference spaces (just at
+"""Verify that the input masks are in standard reference spaces (just at
 fMRI-friendly downsampled resolutions), so we can avoid running ANTs/FSL
 registration.
 
@@ -162,7 +162,7 @@ def verify_human():
           f"z [{centres[:,2].min():.1f}, {centres[:,2].max():.1f}]")
 
     # Heuristic: MNI152 centre is roughly origin (0, 0, 0) ± ~80mm.
-    # If the colleague's centres are also centred around origin, it's MNI.
+    # If the parcel centres are also centred around the origin, it is MNI.
     ctr = centres.mean(axis=0)
     spread = (centres.max(axis=0) - centres.min(axis=0))
     print(f"  centroid:           {ctr.round(1).tolist()}")

@@ -815,13 +815,13 @@ def load_pi(name: str = "pi_canonical.npy",
             *, coupling_dir: Path | None = None) -> np.ndarray:
     """Load a coupling matrix, fetching the data bundle first if it's absent.
 
-    Defaults to the recommended coupling: ``pi_canonical.npy`` (anchor-warped
-    spatial cost + region packs, xyz_weight=0.25, epsilon=0.05; selected by
-    held-out Beauchamp CV). For the sharp confidence-graded showcase pass
-    ``pi_canonical_sharp.npy`` (epsilon=0.005). The coupling fitted without
-    the anchor warp is ``pi_fc_plus_SC_with_all_packs.npy``. Preferred over a bare
-    ``np.load("outputs/coupling/...")``, which raises ``FileNotFoundError``
-    when the data bundle has not been fetched.
+    Defaults to the released coupling: ``pi_canonical.npy`` (anchor-warped
+    spatial cost, regional entries, xyz_weight=0.25 and epsilon=0.05). The
+    Beauchamp grid most often selected xyz_weight=0.25 and epsilon=0.2; epsilon
+    0.05 was released because benchmark accuracy was nearly identical and the
+    parcel-level coupling was more concentrated. Prefer this helper to a bare
+    ``np.load("outputs/coupling/...")``, because it can fetch a missing
+    release bundle.
     """
     from otter.data.fetch import ensure_data, find_root
     root = find_root()

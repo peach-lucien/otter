@@ -292,14 +292,29 @@ def main():
                 net_names_seen.append(human_paper_names[hj])
         per_net = np.array(per_net)
         argmax_net = net_names_seen[int(np.argmax(per_net))]
+        label = ica_labels[k][1]
+        # A component is scorable only if its dominant anatomical label appears in
+        # TARGET_PAIRS. The brainstem label has no Yeo-7 counterpart, so a brainstem
+        # component can be neither matched nor missed and is excluded from the count.
+        scorable = any(a == label for a, _ in target_pairs)
+        matched = (label, argmax_net) in set(target_pairs)
         ica_correspondence.append({
             "ic": k,
-            "mouse_label": ica_labels[k][1],
+            "mouse_label": label,
             "best_match_yeo7": argmax_net,
             "second_match_yeo7": net_names_seen[int(np.argsort(-per_net)[1])],
+            "expected_yeo7": next((b for a, b in target_pairs if a == label), None),
+            "scorable": bool(scorable),
+            "matches_expected": bool(matched),
             "per_net_means": dict(zip(net_names_seen, per_net.tolist())),
         })
-        print(f"  IC{k} ({ica_labels[k][1]:<14s}) → predicted human argmax: {argmax_net}")
+        print(f"  IC{k} ({label:<14s}) → predicted human argmax: {argmax_net}"
+              f"{'  [match]' if matched else ('' if scorable else '  [no Yeo-7 target]')}")
+
+    n_ica_match = sum(c["matches_expected"] for c in ica_correspondence)
+    n_ica_scorable = sum(c["scorable"] for c in ica_correspondence)
+    print(f"\n  → {n_ica_match}/{n_ica_scorable} scorable ICA components recover their "
+          f"expected human network ({n_ica} components in total)")
 
     # ========================================================================
     # Sub-test C: Network coherence (compactness in human space)
@@ -362,6 +377,13 @@ def main():
             "n_components": n_ica,
             "labels":       [{"ic": k, "mouse_label": l} for k, l in ica_labels],
             "correspondence": ica_correspondence,
+            "n_matches_expected": int(n_ica_match),
+            "n_scorable":         int(n_ica_scorable),
+            "_note": ("A component is scored against TARGET_PAIRS by its dominant anatomical "
+                      "label. Labels with no Yeo-7 counterpart, such as brainstem, are not "
+                      "scorable. The ICA is computed on M.uns['fc_mean'], the same mouse "
+                      "functional connectivity used in the relational term, so this sub-test "
+                      "is not independent of the coupling."),
         },
         "sub_test_C_network_coherence": {
             "n_null_trials": n_trials,

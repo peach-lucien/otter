@@ -1,21 +1,6 @@
-"""Pipeline step 05, evaluate the production model end-to-end.
+"""Run the low-level diagnostic scripts listed in STEPS.
 
-Runs (in order):
-    05a_anchor_cv.py            leave-one-network-out CV across all 13 configs
-    05b_fc_translation.py       FC-translation Pearson r per production config
-    05c_null_distributions.py   random_pi + permuted_anchor null trials
-    05d_full_space_eval.py      full-space top-K + mean rank
-    05f_beauchamp_validation.py external validation against Beauchamp 2022
-    05j_region_level_eval.py    region-level top-K (Beauchamp-22 candidate set)
-
-Each substep is resumable, already-cached cells are skipped. To force a full
-recompute, pass --recompute (forwards to each substep).
-
-Usage:
-    python pipeline/05_evaluate.py
-    python pipeline/05_evaluate.py --recompute   # blow caches and rerun all
-    python pipeline/05_evaluate.py --skip 05c_null_distributions.py
-"""
+Current manuscript analyses are organised under experiments/ and are not orchestrated by this helper."""
 from __future__ import annotations
 
 import argparse

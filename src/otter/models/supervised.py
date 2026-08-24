@@ -1,23 +1,4 @@
-"""SupervisedFGW, anchor-supervised semirelaxed FGW with optional xyz spatial prior.
-
-The "FC + anchors + xyz" recipe. Adds two things over UnsupervisedGW:
-  1. Anchor supervision via the M cost matrix: forbidden cells (lam=1.0) for
-     mouse-anchor → wrong human-anchor pairings, free cells for the correct one.
-  2. xyz spatial prior in M: per-species-normalised xyz Euclidean distance,
-     so spatial neighbours pull toward each other.
-
-Solver: entropic_semirelaxed_fused_gromov_wasserstein. Mouse marginal fixed
-at uniform; human marginal floats (semirelaxed). Applicable when anchor
-correspondences are available but no other modality (no SC, no gene
-expression).
-
-Result on the 1864×2094 production data: top-1 = 79% with all 42 anchors
-visible, the "fc + xyz_M + anchors" baseline against which multimodal
-extensions are measured.
-
-For held-out anchor CV, pass `holdout_pair_ids=[5, 6]` (visual) to fit() to
-withhold those anchors from supervision and evaluate generalisation.
-"""
+"""Anchor-supervised semirelaxed FGW with an optional spatial cost."""
 from __future__ import annotations
 
 from typing import Optional, Sequence

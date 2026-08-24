@@ -102,7 +102,7 @@ def main():
             vm = rown @ v_h[perm]
             null.append(float(np.nanmean(vm[acr == top])))
         spin_p = float((np.sum(np.array(null) >= sc[top]) + 1) / (N_SPINS + 1))
-        # evidence tier at the top mouse structure (modal)
+        # Modal explorer display category at the top mouse structure.
         tier = None
         if tiers is not None:
             tt = tiers[acr == top]

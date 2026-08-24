@@ -1,45 +1,4 @@
-"""OTTER × Schaeffer 2020, rodent medial frontal cortex divergence (falsification test).
-
-[Schaeffer, Hori, Gilbert, Gati, Menon & Everling 2020,
-PNAS](https://doi.org/10.1073/pnas.2003181117),
-"Divergence of rodent and primate medial frontal cortex functional
-connectivity", compared whole-brain FC of the medial frontal cortex (MFC)
-across rodent, marmoset and human. Their headline, data-backed claim:
-
-  * Rodent MFC does **NOT** correspond to primate **lateral / dorsolateral
-    prefrontal cortex**, contradicting the common proposal that rat MFC is
-    the functional analogue of primate LFC.
-  * Rodent MFC connectivity instead most resembles **premotor** cortex.
-
-This is a falsification test, not a confirmation test. It states, with a
-specific direction, where an accurate mouse↔human mapping should and should
-not send mouse MFC:
-
-  PASS, mouse MFC routes to human medial-frontal / cingulate / premotor
-          cortex, and **avoids** dorsolateral PFC (BA9/46).
-  FAIL, mouse MFC routes confidently onto human dlPFC.
-
-OTTER encodes a falsifiable design choice here. The Garin point anchor for
-mPFC pairs mouse mPFC with human medial frontal cortex, and the contested
-mouse-Prelimbic ↔ human-dlPFC homology (Carlén 2017 vs Preuss 1995) ships as
-the opt-in `lateral_pfc` pack, not in the recommended π. Schaeffer 2020 is
-independent FC evidence adjudicating that choice. The couplings tested are:
-
-  * `pi_fc_plus_SC.npy`. Garin anchors only (strict baseline)
-  * `pi_canonical.npy`, the canonical coupling (no lateral_pfc pack). All
-    headline numbers come from this one.
-  * `pi_fc_plus_SC_with_all_packs.npy`, the pre-warp coupling, included in the
-    contrast to show the conclusion does not depend on the warp
-  * `pi_fc_plus_SC_with_lateral_pfc`, adds the contested Prelimbic→dlPFC anchor
-    (pre-warp variant, so compare it against the pre-warp row)
-
-Note on species: Schaeffer et al. used rat + marmoset + human; OTTER is
-mouse + human. Rodent MFC (anterior cingulate + prelimbic + infralimbic)
-is the comparable structure. The test compares OTTER's π against Schaeffer
-et al.'s *published directional conclusion*, not their FC matrices, the
-rat/mouse and marmoset/human mismatches make re-routing their data
-unjustified.
-"""
+"""Test whether routed mouse medial-frontal cortex concentrates in human medial-frontal rather than lateral-prefrontal territories."""
 from __future__ import annotations
 
 import json
@@ -115,7 +74,7 @@ def main():
     print(f"\nMouse rodent-MFC parcels (ACAd/ACAv/PL/ILA): {len(mfc)}")
     print(f"Mouse Prelimbic (PL) parcels:                {len(pl)}")
 
-    # ---- recommended π: where does mouse MFC land? -------------------------
+    # ---- Canonical coupling: where does mouse MFC land? --------------------
     pi = load_pi()                      # canonical coupling (pi_canonical.npy)
     prov = pi_provenance()
     print(f"\nπ file: {prov['pi_file']}  sha256 {prov['pi_sha256']}")

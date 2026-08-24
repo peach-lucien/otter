@@ -1,37 +1,36 @@
 {
-  "_pi": "pi_canonical.npy (warp+packs, xyz_weight=0.25, eps=0.05, soft)",
-  "pi_shape": [
-    1864,
-    2094
-  ],
-  "sharpness_soft": {
-    "median_top": 0.31,
-    "frac_above_0.5": 0.2
-  },
-  "sharpness_sharp_showcase": {
-    "pi": "pi_canonical_sharp.npy (eps=0.005)",
-    "median_top": 0.96,
-    "frac_above_0.5": 0.9
-  },
-  "self_mass_homology_diagonal": 0.408,
-  "self_mass_uniform": 0.048,
-  "spatial_accuracy_r": 0.53,
-  "beauchamp_parcel_top1": 0.567,
-  "region_level_top1": {
-    "anchor_overlapping": 0.747,
-    "novel": 1.0
-  },
-  "evidence_tiers_percent": {
-    "anchored_and_validated": 31.5,
-    "anchored_only": 12.2,
-    "low_evidence": 21.6,
-    "structural": 10.9,
-    "validated_only": 23.8
-  },
-  "validated_tiers_percent": 55.3,
-  "per_tier_top1": {
-    "anchored_and_validated": 0.7,
-    "validated_only": 0.391
-  },
-  "_caveats": "bootstrap component stale (old pi) -> affects only structural/low boundary; region-AUROC-by-tier + fig1 panel rebuild still pending"
+ "_pi": "pi_canonical.npy (warp+packs, xyz_weight=0.25, eps=0.05, soft)",
+ "pi_shape": [
+  1864,
+  2094
+ ],
+ "sharpness_soft": {
+  "median_top": 0.31,
+  "frac_above_0.5": 0.2
+ },
+ "sharpness_sharp_showcase": {
+  "pi": "pi_canonical_sharp.npy (eps=0.005)",
+  "median_top": 0.96,
+  "frac_above_0.5": 0.9
+ },
+ "self_mass_homology_diagonal": 0.408,
+ "self_mass_uniform": 0.048,
+ "spatial_accuracy_r": 0.53,
+ "beauchamp_parcel_top1": 0.567,
+ "region_level_top1": {
+  "anchor_overlapping": 0.747,
+  "novel": 1.0
+ },
+ "evidence_tiers_percent": {
+  "anchored_and_validated": 31.5,
+  "anchored_only": 12.2,
+  "low_evidence": 21.6,
+  "structural": 10.9,
+  "validated_only": 23.8
+ },
+ "validated_tiers_percent": 55.3,
+ "per_tier_top1": {
+  "anchored_and_validated": 0.7,
+  "validated_only": 0.391
+ }
 }

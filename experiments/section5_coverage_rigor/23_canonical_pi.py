@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-"""CANONICAL optimized coupling: warped spatial term + region packs + supervision,
-with (epsilon, xyz_weight) selected by held-out (nested CV) external Beauchamp recovery.
+"""Evaluate the canonical spatial-weight and proximal-weight grid.
 
 For every grid cell, the effect of the hyperparameter choice on
 reconstruction-coverage biology is also recorded: region-level Spearman(recon_cov, Xu2020 expansion) and
 the ContB(dlPFC) deficit in SD.
 
-Modes (chunked so no bash call exceeds the timeout):
+Modes:
   python 23_canonical_pi.py --fit  [--chunk N]   # fit next N undone grid cells, append to JSON
-  python 23_canonical_pi.py --select             # nested-CV + all-data pick + canonical refit
+  python 23_canonical_pi.py --select             # five-fold summary + release-cell refit
 
 Grid: xyz_weight in {0.1,0.25,0.5,0.75,1.0} x epsilon in {0.005,0.02,0.05,0.1,0.2}  (25 cells).
 Everything is written to outputs/logs/section5_canonical_sweep.json.
@@ -37,10 +36,9 @@ SWEEP_JSON = LOG / "section5_canonical_sweep.json"
 TMP = Path("/var/tmp")
 
 XYZ_WEIGHTS = [0.1, 0.25, 0.5, 0.75, 1.0]
-# One grid, one criterion: epsilon and xyz_weight are selected together on held-out
-# Beauchamp recovery.
 EPSILONS    = [0.005, 0.02, 0.05, 0.1, 0.2]
 GRID = [(w, e) for w in XYZ_WEIGHTS for e in EPSILONS]   # 25 cells
+RELEASE_CELL = (0.25, 0.05)
 
 
 def cell_key(w, e):
@@ -192,7 +190,7 @@ def run_select():
     P = np.array([[cells[c]["per_pair_top1"].get(p, np.nan) for p in all_pairs] for c in cell_ids])
     print(f"[cv] {len(all_pairs)} pairs, {len(cell_ids)} cells")
 
-    # 5-fold nested CV, seed 0
+    # One five-fold partition over the 19 scoring pairs.
     rng = np.random.default_rng(0)
     idx = rng.permutation(len(all_pairs))
     folds = np.array_split(idx, 5)
@@ -209,12 +207,16 @@ def run_select():
     vals, counts = np.unique(selected, return_counts=True)
     modal = str(vals[int(np.argmax(counts))])
 
-    # all-data pick = cell maximising mean per-pair top1 across ALL pairs -> deploy this
+    # Report the all-pair best for context, but refit the documented release
+    # cell. The five-fold modal cell is epsilon=0.2; epsilon=0.05 has nearly
+    # identical accuracy and a more concentrated fixed-iteration coupling.
     all_mean = np.nanmean(P, axis=1)
-    deploy_id = cell_ids[int(np.argmax(all_mean))]
-    dw, de = next((w, e) for (w, e) in GRID if cell_key(w, e) == deploy_id)
+    all_data_best = cell_ids[int(np.argmax(all_mean))]
+    dw, de = RELEASE_CELL
+    deploy_id = cell_key(dw, de)
     print(f"\n[cv] mean held-out top1 = {mean_heldout:.3f}; modal cell = {modal}")
-    print(f"[deploy] all-data best cell = {deploy_id} (mean per-pair top1 {all_mean.max():.3f})")
+    print(f"[grid] all-pair best cell = {all_data_best} (mean top1 {all_mean.max():.3f})")
+    print(f"[deploy] documented release cell = {deploy_id}")
 
     # ---- canonical refit at deploy cell, save to coupling/pi_canonical.npy ----
     ctx = build_context()
@@ -229,6 +231,7 @@ def run_select():
         "n_folds": 5, "seed": 0, "n_pairs": len(all_pairs),
         "per_fold_selected": selected, "per_fold_heldout_top1": heldout_top1,
         "mean_heldout_top1": mean_heldout, "modal_selected_cell": modal,
+        "note": "One five-fold partition; key name retained for log compatibility.",
     }
     state["deploy"] = {
         "cell": deploy_id, "xyz_weight": dw, "epsilon": de,
@@ -238,6 +241,11 @@ def run_select():
         "expansion_rho": r["expansion_rho"], "ContB_deficit_SD": r["ContB_deficit_SD"],
         "loss": r["loss"], "converged": r["converged"],
         "pi_path": str(COUP / "pi_canonical.npy"),
+        "selection_note": (
+            "The five-fold modal cell is w0.25_e0.2. The release uses w0.25_e0.05 "
+            "because benchmark accuracy is nearly identical and the fixed-iteration "
+            "coupling is more concentrated."
+        ),
     }
     save_state(state)
     print(f"\n[done] canonical: top1={r['beauchamp_top1']:.3f} top5={r['beauchamp_top5']:.3f} "

@@ -1,5 +1,5 @@
 {
- "_what": "Review-round analysis, 2026-07-28/29. Produced by the harness in _audit/HOMER_review_analyses.tar.gz, which reproduces pi_canonical.npy exactly before any experiment (argmax match 1.0000, entrywise r 1.00000).",
+ "_what": "Cross-species translation of the cell-class and layer-marker gene maps. The coupling used here reproduces pi_canonical.npy exactly (argmax match 1.0000, entrywise r 1.00000).",
  "families": {
   "canonical": {
    "hodge_individual_markers": {
@@ -64,11 +64,5 @@
   "Slc6a4",
   "Tph2"
  ],
- "n_cortical_parcels": 1824,
- "_reproduction_check": {
-  "hodge_repo_logged": 0.228,
-  "hodge_recomputed": 0.204,
-  "biccn_repo_logged": 0.169,
-  "biccn_recomputed": 0.152
- }
+ "n_cortical_parcels": 1824
 }

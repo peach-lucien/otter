@@ -1,4 +1,4 @@
-"""Estimate the rigid transform from the colleague's bregma-centred mouse
+"""Estimate the rigid transform from the input bregma-centred mouse
 coordinate system into Allen CCFv3 voxel space.
 
 .. note::
@@ -9,12 +9,12 @@ coordinate system into Allen CCFv3 voxel space.
     ``experiments/autism_subtypes/allen_expansion/`` chain consumes the
     transform JSON it produces (via ``_mouse_transform.py``).
 
-The colleague's mouse mask is in a bregma-centred stereotaxic convention
+The input mouse mask is in a bregma-centred stereotaxic convention
 (x symmetric around midline, y/z origin near a stereotaxic landmark), not
 in raw CCFv3 coordinates. This script:
 
   1. Downloads CCFv3 100 µm annotation via AllenSDK.
-  2. Tries all 48 possible signed axis permutations of the colleague's
+  2. Tries all 48 possible signed axis permutations of the input
      coordinates (6 permutations × 8 sign flips), each followed by a translation
      that aligns the brain centroids.
   3. For each candidate transform, computes the fraction of mouse-node centres
@@ -24,7 +24,7 @@ in raw CCFv3 coordinates. This script:
 
 If the best transform achieves >90% brain coverage, no further step is needed.
 At 50–90%, the transform is approximately right but a fine-tuning ANTs step is
-recommended. If <50%, the colleague's space is not a simple permutation of
+recommended. If <50%, the input space is not a simple permutation of
 CCFv3 and full registration is required.
 
 Output: data_external/_diagnostics/mouse_to_ccf_transform.json

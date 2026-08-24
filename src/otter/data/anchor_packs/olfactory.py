@@ -1,40 +1,6 @@
-"""Olfactory cortex anchor pack.
+"""Olfactory regional correspondence entries.
 
-Cross-species olfactory cortex anatomy is conserved in mammalian brains. The
-primary olfactory cortex (piriform) and the anterior olfactory nucleus (AON)
-have direct homologues with conserved cytoarchitecture and connectivity.
-
-References:
-  - Mori, K. (2014). The Olfactory System: From Odor Molecules to
-    Motivational Behaviors. Springer. (260 citations).
-  - Carlén, M. (2017). What constitutes the prefrontal cortex? *Science*
-    358, 478-482. DOI: 10.1126/science.aan8868. (Discusses cross-species
-    olfactory-PFC connectivity homologies.)
-
-  pid 34:  Mouse Piriform area ↔ Human Piriform cortex
-  pid 35:  Mouse Anterior olfactory nucleus ↔ Human AON
-
-Mouse-side sets come from the DSURQE atlas overlay:
-  Piriform area: 47 parcels
-  Anterior olfactory nucleus: 9 parcels
-
-Human-side sets are MNI spheres at canonical Mai/Paxinos centroids:
-  Piriform cortex: (±25, 5, -20) r=10 mm → 13 parcels
-  AON: (±15, 25, -15) r=10 mm → 6 parcels
-
-Beauchamp validation gives 0 % top-1 for "Piriform area → piriform cortex"
-under the production point-anchor π, at mean rank 657 / 2094. The Garin
-pair_id 11 (Olfactory cortex) gives a single point anchor; the region anchors
-here target the bulk of mouse piriform → human piriform directly. The AON entry
-is included because both species have a well-defined AON region in these
-atlases.
-
-As with the other packs, the mouse Piriform set is identical to Beauchamp's
-validation set, so any improvement on the Beauchamp Piriform pair is partly
-tautological. The pack's value is practical: queries for olfactory parcels
-return defensible answers, rather than evidence of independent structural
-recovery.
-"""
+Pair IDs 34 and 35 link mouse piriform and anterior-olfactory-nucleus parcels to the corresponding human targets. Sources: Mori, The Olfactory System (2014); Carlen, Science (2017), doi:10.1126/science.aan8868."""
 from __future__ import annotations
 
 from pathlib import Path

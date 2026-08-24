@@ -22,10 +22,10 @@ the latest version. Both archives are on that record.
 - Run the unit test suite. `tests/conftest.py` builds a small synthetic
   cross-species problem; data-backed tests `pytest.skip` when their files are
   absent. So `pytest -q` works on a bare checkout.
-- Read the headline numbers. The validation result logs in `outputs/logs/`
+- Inspect the machine-readable analysis results in `outputs/logs/`
   (the `*.json`/`*.csv` files) are committed to the repo, along with
-  `outputs/anndata/_schaefer_order.txt`, the voxel-count arrays, and the
-  multi-source trust map.
+  `outputs/anndata/_schaefer_order.txt`, the voxel-count arrays and the
+  explorer's interface metadata.
 
 Re-running the validations and notebooks, or rebuilding the coupling, requires
 the archive below.
@@ -60,13 +60,9 @@ array).
 | Path | Size | What |
 |---|---:|---|
 | `outputs/coupling/pi_canonical.npy` | 30 MB | the canonical coupling π (1864×2094), what `load_pi()` returns |
-| `outputs/coupling/pi_canonical_sharp.npy` | 30 MB | same recipe at τ = 5,000, sharper with the same held-out accuracy |
-| `outputs/coupling/pi_fc_plus_SC_with_all_packs.npy` | 30 MB | coupling fitted without the anchor warp |
-| `outputs/coupling/pi_fc_plus_SC.npy` | 15 MB | point-anchor coupling fitted without the anchor warp |
-| `outputs/coupling/pi_fc_plus_SC_with_*.npy` (×15) + `pi_fc_plus_SC_xyz_zero.npy` | ~430 MB | ablation-variant couplings the advanced notebooks load (per-anchor-pack, xyz-zeroed, etc.) |
-| `outputs/coupling/trust_multisource_canonical.npz` | ~0.1 MB | per-parcel evidence tiers on the canonical π, what the docs gate queries on |
-| `outputs/coupling/trust_multisource_all_packs.npz`, `trust_score_fc_plus_SC*.npz` | ~0.5 MB | per-parcel trust tiers and scores on the no-warp couplings |
-| `outputs/coupling/bootstrap_aggregate_fc_plus_SC.npz` | | bootstrap stability aggregate |
+| `outputs/coupling/pi_canonical_sharp.npy` | 30 MB | canonical recipe with a later effective solver time, included for concentration sensitivity |
+| `outputs/coupling/pi_*.npy` | ~475 MB | analysis-specific ablation and sensitivity couplings |
+| `outputs/coupling/trust_multisource_canonical.npz` | ~0.1 MB | interface display metadata used by the explorer; field names are retained for file compatibility |
 | `outputs/coupling/per_disorder_predictions.npz` | 0.07 MB | ENIGMA per-disorder predicted maps |
 | `outputs/anndata/mouse.h5ad` | 42 MB | processed mouse parcel table + features |
 | `outputs/anndata/human.h5ad` | 52 MB | processed human parcel table + features |
@@ -110,9 +106,8 @@ The files under `data_external/` are **derived from third-party datasets**, each
 with its own terms. Entries whose terms do not permit redistribution are
 excluded from the archives, and users re-download them with the scripts in
 `pipeline/00_external/`, which fetch from the original sources. The
-OTTER-generated artifacts, meaning the coupling, the trust map, the per-disorder
+OTTER-generated artifacts, meaning the couplings, interface metadata, per-disorder
 predictions and the processed AnnData caches, carry no redistribution
 restriction. Sources and any redistribution restrictions are recorded per dataset in
 `pipeline/00_external/README.md` and in the `SOURCES.md` files under
 `data_external/*/`.
-

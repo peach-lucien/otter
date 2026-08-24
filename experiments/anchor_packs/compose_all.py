@@ -94,7 +94,7 @@ def main():
                      "--pi-file", out.name], env=env, check=True, capture_output=True)
     d_all = json.loads((LOG / "beauchamp_validation.json").read_text())
     (LOG / "beauchamp_validation.json").rename(LOG / "beauchamp_validation_all_packs.json")
-    # Re-run production
+    # Recompute the point-anchor comparator.
     subprocess.run(["python", str(ROOT / "pipeline" / "05f_beauchamp_validation.py"),
                      "--pi-file", "pi_fc_plus_SC.npy"], env=env, check=True, capture_output=True)
     d_prod = json.loads((LOG / "beauchamp_validation.json").read_text())

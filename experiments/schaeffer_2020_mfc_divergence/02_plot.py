@@ -23,7 +23,7 @@ def main():
     rois = j["rois"]
     fig, axes = plt.subplots(1, 3, figsize=(16, 4.9))
 
-    # --- Panel 1: enrichment per ROI (recommended π) -----------------------
+    # --- Panel 1: enrichment per ROI (canonical coupling) ------------------
     ax = axes[0]
     names = ["dlPFC", "premotor", "medial_PFC", "mid_cingulate"]
     enr = [rec["null"][n]["enrichment"] for n in names]

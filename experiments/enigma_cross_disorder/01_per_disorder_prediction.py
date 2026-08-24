@@ -1,4 +1,4 @@
-"""OTTER per-disorder spatial pattern prediction (Phase 1 of ENIGMA validation).
+"""OTTER per-disorder spatial pattern prediction.
 
 Generate per-parcel predicted human spatial patterns for each of 5 psychiatric
 disorders + autism, using OTTER's π applied to each disorder's gene set:
@@ -13,7 +13,7 @@ disorders + autism, using OTTER's π applied to each disorder's gene set:
 For each disorder, intersect its gene list with OTTER's 1,713-gene Allen ISH
 panel, compute the mouse-parcel mean expression score, route through π →
 predicted human-parcel score (2094-vec). Save these as `predicted_pattern.npy`
-for Phase 2 comparison against ENIGMA observed disease spatial maps.
+for comparison against ENIGMA observed disease spatial maps in 03_enigma_comparison.py.
 
 The script also computes the pairwise cross-disorder correlation matrix at
 parcel level, which measures how disorder-specific OTTER's predictions are
@@ -71,7 +71,7 @@ def load_disorder_gene_sets() -> dict[str, set[str]]:
 
 def main():
     print("=" * 80)
-    print("OTTER per-disorder spatial pattern prediction (Phase 1)")
+    print("OTTER per-disorder spatial pattern prediction")
     print("=" * 80)
 
     # ---- Load OTTER expanded gene matrix ----

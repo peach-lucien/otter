@@ -1,77 +1,77 @@
 {
-  "margulies_gradient": {
-    "abs_spearman_vs_published": 0.9261401557285873,
-    "n_dk_regions": 30,
-    "required_min": 0.8,
-    "passed": true
+ "margulies_gradient": {
+  "abs_spearman_vs_published": 0.9261401557285873,
+  "n_dk_regions": 30,
+  "required_min": 0.8,
+  "passed": true
+ },
+ "hcp_myelin": {
+  "abs_spearman_vs_published": 0.9679644048943271,
+  "n_dk_regions": 30,
+  "required_min": 0.9,
+  "passed": true
+ },
+ "fulcher_translation_null_b": {
+  "t1w_t2w": {
+   "abs_r": 0.5045941644988947,
+   "n_parcels": 1789,
+   "null_abs_mean": 0.21889637912680046,
+   "p_spin": 0.004995004995004995,
+   "survives": true
   },
-  "hcp_myelin": {
-    "abs_spearman_vs_published": 0.9679644048943271,
-    "n_dk_regions": 30,
-    "required_min": 0.9,
-    "passed": true
+  "cytoarchitecture": {
+   "abs_r": 0.5338470183879771,
+   "n_parcels": 1787,
+   "null_abs_mean": 0.19200496322524882,
+   "p_spin": 0.002997002997002997,
+   "survives": true
+  }
+ },
+ "fulcher_translation_coverage_control": {
+  "note": "canonical pi re-scored on the human regions reached by the pre-warp coupling, isolating territory size from the coupling itself",
+  "retired_pi_file": "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy",
+  "retired_pi_sha256": "ab51f5037e24e8806f7b823aac6ed6444044a4c8b1f829299f8686798b5bc857",
+  "n_parcels_retired_territory": 472,
+  "n_parcels_canonical_territory": 2029,
+  "t1w_t2w": {
+   "canonical_on_retired_territory": {
+    "abs_r": 0.42942451052995395,
+    "n_parcels": 455,
+    "null_abs_mean": 0.17192959728028695,
+    "p_spin": 0.01098901098901099,
+    "survives": true
+   },
+   "retired_coupling": {
+    "abs_r": 0.29290001985966085,
+    "n_parcels": 455,
+    "null_abs_mean": 0.14976260317731363,
+    "p_spin": 0.08591408591408592,
+    "survives": false
+   }
   },
-  "fulcher_translation_null_b": {
-    "t1w_t2w": {
-      "abs_r": 0.5045941644988947,
-      "n_parcels": 1789,
-      "null_abs_mean": 0.21889637912680046,
-      "p_spin": 0.004995004995004995,
-      "survives": true
-    },
-    "cytoarchitecture": {
-      "abs_r": 0.5338470183879771,
-      "n_parcels": 1787,
-      "null_abs_mean": 0.19200496322524882,
-      "p_spin": 0.002997002997002997,
-      "survives": true
-    }
-  },
-  "fulcher_translation_coverage_control": {
-    "note": "canonical pi re-scored on exactly the human parcels the retired coupling reached, isolating territory size from the coupling",
-    "retired_pi_file": "outputs/coupling/pi_fc_plus_SC_with_all_packs.npy",
-    "retired_pi_sha256": "ab51f5037e24e8806f7b823aac6ed6444044a4c8b1f829299f8686798b5bc857",
-    "n_parcels_retired_territory": 472,
-    "n_parcels_canonical_territory": 2029,
-    "t1w_t2w": {
-      "canonical_on_retired_territory": {
-        "abs_r": 0.42942451052995395,
-        "n_parcels": 455,
-        "null_abs_mean": 0.17192959728028695,
-        "p_spin": 0.01098901098901099,
-        "survives": true
-      },
-      "retired_coupling": {
-        "abs_r": 0.29290001985966085,
-        "n_parcels": 455,
-        "null_abs_mean": 0.14976260317731363,
-        "p_spin": 0.08591408591408592,
-        "survives": false
-      }
-    },
-    "cytoarchitecture": {
-      "canonical_on_retired_territory": {
-        "abs_r": 0.4104559567755076,
-        "n_parcels": 453,
-        "null_abs_mean": 0.15857272526762198,
-        "p_spin": 0.011988011988011988,
-        "survives": true
-      },
-      "retired_coupling": {
-        "abs_r": 0.31963302734087984,
-        "n_parcels": 453,
-        "null_abs_mean": 0.13675361203764821,
-        "p_spin": 0.04795204795204795,
-        "survives": true
-      }
-    }
-  },
-  "_meta": {
-    "pi_file": "outputs/coupling/pi_canonical.npy",
-    "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
-    "n_trials": 1000,
-    "note": "null B is the null otter.eval.nulls designates for translation claims"
-  },
+  "cytoarchitecture": {
+   "canonical_on_retired_territory": {
+    "abs_r": 0.4104559567755076,
+    "n_parcels": 453,
+    "null_abs_mean": 0.15857272526762198,
+    "p_spin": 0.011988011988011988,
+    "survives": true
+   },
+   "retired_coupling": {
+    "abs_r": 0.31963302734087984,
+    "n_parcels": 453,
+    "null_abs_mean": 0.13675361203764821,
+    "p_spin": 0.04795204795204795,
+    "survives": true
+   }
+  }
+ },
+ "_meta": {
   "pi_file": "outputs/coupling/pi_canonical.npy",
-  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77"
+  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+  "n_trials": 1000,
+  "note": "null B is the null otter.eval.nulls designates for translation claims"
+ },
+ "pi_file": "outputs/coupling/pi_canonical.npy",
+ "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77"
 }

@@ -1,28 +1,4 @@
-"""Pipeline 05j, region-level evaluation of π.
-
-The parcel-level Beauchamp validation (05f) asks "is the right human *parcel*
-in the top-K of π[m, :]?". This script asks the region-level analogue:
-
-    Given a mouse region M (set of parcels), which *human region* does the
-    model predict, out of a candidate set of named human regions?
-
-π is a soft probabilistic mapping that spreads mass across multiple human
-parcels in a region, so the region-level question matches its structure.
-
-Pipeline
---------
-1. Load π and the Beauchamp 22 mouse↔human region pairs (same masks as 05f).
-2. Use the 22 human regions as the candidate set (Beauchamp-22; chance ~4.5%).
-3. For each pair: aggregate π[M, :], rank candidates, report top-K, fold
-   enrichment, mass on true region.
-4. Run column-permuted null (preserves total mass, shuffles where it lands)
-   and source-permuted null (scores H_true against another mouse region's π_M).
-5. Save per-pair + aggregate to outputs/logs/region_level_eval.json.
-
-Usage:
-    PYTHONPATH=src python pipeline/05j_region_level_eval.py
-    PYTHONPATH=src python pipeline/05j_region_level_eval.py --pi-file pi_fc_plus_SC_with_atlas_regions.npy
-"""
+"""Score a supplied coupling against the named Beauchamp candidate regions.\n\nThis low-level utility exposes the shared region-mask and aggregation code used by current supervision analyses."""
 from __future__ import annotations
 
 import argparse

@@ -1,28 +1,6 @@
-"""Subject-bootstrap uncertainty for the production π.
+"""Subject-bootstrap utility for the point-anchor configurations defined below.
 
-For each bootstrap iteration:
-  1. Subsample subjects per species with replacement
-  2. Stream a weighted mean FC matrix using the subject indices
-  3. Solve **the production** semirelaxed FGW (FC + SC + xyz + anchor supervision)
-  4. Update running mean & std of π entries on the fly
-
-Aggregates running mean & std without keeping all π in memory.
-
-Resumable: state in outputs/coupling/bootstrap_state_<config>.npz, with the
-config name in the filename so FC-only and FC+SC bootstraps don't pollute
-each other.
-
-Usage:
-    python pipeline/06_bootstrap.py                       # 2 iterations of fc_plus_SC (default)
-    python pipeline/06_bootstrap.py --iters 40            # full 40-iter run (~10 min)
-    python pipeline/06_bootstrap.py --config fc_only      # FC-only baseline
-    python pipeline/06_bootstrap.py --report              # summary on the existing state
-
-Naming convention:
-    outputs/coupling/bootstrap_state_<config>.npz       running state
-    outputs/coupling/bootstrap_aggregate_<config>.npz   final aggregate
-    outputs/logs/bootstrap_summary_<config>.json        summary stats
-"""
+These aggregates do not include the canonical regional correspondence entries and must not be used as uncertainty estimates for pi_canonical.npy."""
 from __future__ import annotations
 
 import argparse
@@ -56,9 +34,6 @@ CONFIGS = {
     "fc_only":    dict(use_sc=False, fc_weight=1.0, sc_weight=0.0,
                         xyz_weight=0.5, alpha=0.5, epsilon=5e-3,
                         max_iter=25, tol=1e-5),
-    "canonical":  dict(use_sc=True,  fc_weight=0.7, sc_weight=0.3,
-                        xyz_weight=0.25, alpha=0.5, epsilon=0.05,
-                        max_iter=25, tol=1e-5),   # warp injected in main()
 }
 
 
@@ -110,7 +85,7 @@ def build_M_full(M_xyz, idx_m, idx_h, *, lam=1.0, xyz_w=0.5):
 
 def solve_one(seed: int, idx_m, idx_h, M_xyz_norm, Cm_SC, Ch_SC,
               cfg: dict) -> np.ndarray:
-    """One bootstrap iter, uses production FC + SC if cfg['use_sc'] else FC only."""
+    """Fit one point-anchor bootstrap sample for a named configuration."""
     rng = np.random.default_rng(seed)
     n_h_subj = 113; n_m_subj = 105
     h_idx = rng.choice(n_h_subj, size=n_h_subj, replace=True)
@@ -175,7 +150,7 @@ def main(args):
         mean_pi = st["sum_pi"] / n
         std_pi  = np.sqrt(np.maximum(st["sum_pi2"] / n - mean_pi ** 2, 0))
         argmax_freq = st["sum_argmax_match"] / n
-        # Reference π = the production solve we trust as the "best estimate"
+        # Compare each bootstrap argmax with the matching saved configuration.
         ref_path = PI / f"pi_{args.config}.npy"
         if not ref_path.exists():
             print(f"reference π not found: {ref_path}; using mean_pi argmax instead.")
@@ -191,7 +166,7 @@ def main(args):
         summary = {
             "config":                  args.config,
             "n_iterations":            int(n),
-            # Argmax-row stability (how often the bootstrap argmax matches the production argmax)
+            # Fraction of bootstrap argmaxes matching the saved configuration.
             "argmax_row_stability_mean":   float(per_row_stability.mean()),
             "argmax_row_stability_median": float(np.median(per_row_stability)),
             "argmax_row_frac_above_0.8":   float((per_row_stability > 0.8).mean()),
@@ -219,17 +194,6 @@ def main(args):
     # Build M_xyz_norm + SC costs once
     d = np.load(ANN / "full_costs.npz")
     M_xyz_norm = d["M_xyz"].astype(np.float64)
-    if args.config == "canonical":                      # anchor-driven TPS warp (canonical spatial cost)
-        from scipy.interpolate import RBFInterpolator
-        im = get_anchor_index(M_.var); ih = get_anchor_index(H.var)
-        hl = {(int(p), str(h)): int(k) for k, p, h in zip(ih.pos, ih.pair_ids, ih.hemispheres)}
-        trip = [(int(mp), hl[(int(pid), str(hm))]) for mp, pid, hm in zip(im.pos, im.pair_ids, im.hemispheres)
-                if (int(pid), str(hm)) in hl]
-        mx = M_.var[["x", "y", "z"]].to_numpy(float); hx = H.var[["x", "y", "z"]].to_numpy(float)
-        warp = RBFInterpolator(mx[[a for a, b in trip]], hx[[b for a, b in trip]],
-                               kernel="thin_plate_spline", smoothing=1e-3)
-        dd = np.sqrt(((warp(mx)[:, None, :] - hx[None, :, :]) ** 2).sum(-1))
-        M_xyz_norm = (dd / max(dd.max(), 1e-9)).astype(np.float64)
     Cm_SC = d["Cm_SC"] if cfg["use_sc"] else None
     Ch_SC = d["Ch_SC"] if cfg["use_sc"] else None
 

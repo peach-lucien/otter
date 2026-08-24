@@ -1,7 +1,7 @@
-"""The production recipe for fitting a OTTER coupling.
+"""The canonical recipe for fitting an OTTER coupling.
 
-Every analysis here starts either from the released coupling or from a coupling refitted under
-some ablation of the production recipe. Scripts and notebooks import that recipe from this
+Every current analysis starts either from the released coupling or from a coupling refitted under
+an explicit ablation of the canonical recipe. Scripts and notebooks import that recipe from this
 module.
 
 Typical use::
@@ -36,12 +36,12 @@ __all__ = [
     "provenance", "refit_provenance", "coupling_sha_index", "stamp",
 ]
 
-# ---------------------------------------------------------------------------------------------
-# The production recipe. Selected by five-fold cross-validation on the 19 held-out Beauchamp
-# homology pairs, not tuned by hand; see Methods and 02_methodology.ipynb.
-# ---------------------------------------------------------------------------------------------
+# Canonical fitting constants. The five-fold Beauchamp grid most often selected
+# xyz_weight=0.25 and epsilon=0.2. The release uses epsilon=0.05 because its
+# benchmark accuracy was nearly identical and its parcel-level coupling was more
+# concentrated; see the manuscript Methods.
 ALPHA = 0.5             # weight on the relational (Gromov-Wasserstein) term
-EPSILON = 0.05          # entropic regularisation; 0.005 gives the near-deterministic showcase
+EPSILON = 0.05          # KL proximal weight used for the released 25-iterate fit
 XYZ_WEIGHT = 0.25       # weight on the anchor-warped spatial cost
 FC_WEIGHT = 0.7         # within-species functional connectivity
 SC_WEIGHT = 0.3         # within-species structural connectivity
@@ -73,7 +73,7 @@ def load_inputs(root: Path | None = None):
     return M, H, costs, entries
 
 
-def anchor_warped_xyz(M, H) -> np.ndarray:
+def anchor_warped_xyz(M, H, exclude_pids=frozenset()) -> np.ndarray:
     """Cross-species spatial cost, after warping mouse coordinates onto the human brain.
 
     The two brains share no coordinate frame, so a raw coordinate distance is meaningless. The
@@ -82,6 +82,9 @@ def anchor_warped_xyz(M, H) -> np.ndarray:
     [0, 1], becomes the spatial term of the cross-species cost.
 
     The warp is fitted to the Garin landmark pairs, so the spatial scaffold is not supervision-free.
+    In a held-out analysis the withheld landmark must be excluded here as well as from the anchor
+    cost, otherwise its position re-enters the fit through the warp. Pass its pair_ids in
+    ``exclude_pids``.
     """
     from scipy.interpolate import RBFInterpolator
 
@@ -92,7 +95,7 @@ def anchor_warped_xyz(M, H) -> np.ndarray:
                     for k, p, h in zip(ih.pos, ih.pair_ids, ih.hemispheres)}
     matched = [(int(mp), human_lookup[(int(pid), str(hm))])
                for mp, pid, hm in zip(im.pos, im.pair_ids, im.hemispheres)
-               if (int(pid), str(hm)) in human_lookup]
+               if (int(pid), str(hm)) in human_lookup and int(pid) not in exclude_pids]
     if not matched:
         raise RuntimeError("no bilateral anchor matched between species; check the anchor index")
 
@@ -158,7 +161,8 @@ def beauchamp_scorer(root: Path | None = None):
     """The held-out benchmark scorer, as a module with ``build()`` and ``score_all()``.
 
     Scores a coupling against the 19 mouse-human region correspondences of Beauchamp et al.,
-    derived from whole-brain transcriptomic similarity and used by no part of the fit.
+    derived from whole-brain transcriptomic similarity. These pairs inform hyperparameter
+    evaluation but are not supplied as anatomical constraints.
 
     Loaded by path from ``experiments/``.
     """
@@ -207,7 +211,7 @@ def refit_provenance(pi: np.ndarray, *, recipe: dict | None = None,
          "recipe": {...},
          "reproduces": {"reference", "reference_sha256", "argmax_match", "entrywise_r"}}
 
-    For a production-arm refit ``argmax_match`` should be close to 1.0. For an ablation arm it will
+    For a canonical refit ``argmax_match`` should be close to 1.0. For an ablation arm it will
     be lower, and the recorded value quantifies how far that arm departs from the release.
     """
     ref, ref_prov = load_canonical(reference)

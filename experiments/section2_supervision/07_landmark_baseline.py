@@ -7,7 +7,7 @@ spatial cost and curated anchors, so the ladder cannot answer whether the transp
 needed at all.
 
 This baseline does. It takes the 42 bilateral Garin landmark pairs, fits the same
-thin-plate-spline warp the production model uses (otter.repro.warped_mouse_xyz), pushes the mouse
+thin-plate-spline warp used by the canonical recipe, pushes the mouse
 parcel centroids onto the human brain, and assigns each mouse parcel to the nearest human parcel.
 No connectivity, no region packs, no transport, no free parameters.
 

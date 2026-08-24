@@ -1,72 +1,69 @@
-# Pipeline
+# OTTER pipeline
 
-End-to-end reproduction recipe. Run these in order to recreate every artefact in `outputs/`.
+The pipeline builds processed inputs, generated artefacts and the mapping explorer. Run commands
+from the repository root in the `otter` environment.
 
-## Quick start
+## Use the released coupling
+
+Most users do not need to refit the model:
 
 ```bash
-# Set up env
-conda env create -f env.yml && conda activate otter
-pip install -e ".[dev]"
+python scripts/fetch_data.py
+```
 
-# Run the full pipeline (in order)
+This downloads `outputs/coupling/pi_canonical.npy` and the processed inputs used by the notebooks.
+`load_pi()` returns this coupling by default.
+
+## Rebuild processed inputs
+
+Download the raw tier and then run the preparation steps:
+
+```bash
+python scripts/fetch_data.py --tier raw
+PYTHONPATH=src python pipeline/00_external/00_inspect_masks.py
+PYTHONPATH=src python pipeline/00_external/00b_verify_alignment.py
+PYTHONPATH=src python pipeline/00_external/01_mouse_sc.py
+PYTHONPATH=src python pipeline/00_external/02_mouse_genes.py
+PYTHONPATH=src python pipeline/00_external/03_human_sc.py
+PYTHONPATH=src python pipeline/00_external/04_human_genes.py
+PYTHONPATH=src python pipeline/00_external/05_orthologs.py
 PYTHONPATH=src python pipeline/02_build_anndata.py
 PYTHONPATH=src python pipeline/03_build_costs.py
-PYTHONPATH=src python pipeline/04_solve_production.py
-PYTHONPATH=src python pipeline/05_evaluate.py        # orchestrator for 05a-05j
-PYTHONPATH=src python pipeline/05g_compute_trust.py
-PYTHONPATH=src python pipeline/06_bootstrap.py
-PYTHONPATH=src python pipeline/07_build_artefacts.py
-PYTHONPATH=src python pipeline/08_build_gui.py
 ```
 
-## Scripts
+See [`00_external/README.md`](00_external/README.md) for source-specific requirements.
 
-| Script | Purpose | Outputs |
-|---|---|---|
-| `00_external/` | External data downloads (Allen, Domhof, Knox, Beauchamp) | `data_external/` |
-| `02_build_anndata.py` | Build mouse + human AnnData caches | `outputs/anndata/*.h5ad` |
-| `03_build_costs.py` | Precompute all FC + SC + xyz + gene cost matrices | `outputs/anndata/full_costs.npz` |
-| `04_solve_production.py` | Fit the fc_plus_SC point-anchor π | `outputs/coupling/pi_fc_plus_SC.npy` |
-| `05_evaluate.py` | **Orchestrator**, runs the substeps below in order | |
-| `05g_compute_trust.py` | Per-parcel multi-source trust map | `outputs/coupling/trust_score_*.npz` |
-| `06_bootstrap.py` | 40-iter subject-level bootstrap stability | `outputs/coupling/bootstrap_*.npz` |
-| `07_build_artefacts.py` | Comparison table + figures + interactive viewer | `outputs/comparison/`, `outputs/figures/`, viewer HTML |
-| `08_build_gui.py` | Region-first mapping GUI with model selector, trust filters, and top-K partner summaries | `outputs/gui/index.html`, `outputs/gui/gui_data.json` |
+## Refit the canonical model
 
-## Component evaluation scripts (called by 05_evaluate.py)
+The public fitting recipe is defined in `otter.repro`:
 
-These are run automatically by `05_evaluate.py`. They can also be invoked individually for partial re-runs.
+```python
+import numpy as np
+from otter.repro import CANONICAL, anchor_warped_xyz, fit_coupling, load_inputs
 
-| Script | Evaluation type |
-|---|---|
-| `05a_anchor_cv.py` | Held-out anchor CV (leave-one-network-out) across all configs |
-| `05b_fc_translation.py` | FC translation Pearson r (in-sample + subject-CV held-out) |
-| `05c_null_distributions.py` | `random_pi` + `permuted_anchor` null trials |
-| `05d_full_space_eval.py` | Full-space top-K + mean rank over all 2094 human parcels |
-| `05f_beauchamp_validation.py` | External validation against Beauchamp 2022's 22 pairs |
-| `05h_region_anchor_cv.py` | Held-out region-anchor CV (validates region-anchor mechanism) |
-| `05j_region_level_eval.py` | Region-level top-K (Beauchamp-22 + JuBrain candidate sets) |
-| `05e_knox_vs_standard_sc.py` | Comparative: Knox 2019 voxel SC vs default summary SC |
+mouse, human, costs, regional_entries = load_inputs()
+spatial_cost = anchor_warped_xyz(mouse, human)
+pi = fit_coupling(
+    mouse, human, costs, regional_entries, spatial_cost, **CANONICAL
+)
+np.save("outputs/coupling/pi_canonical_refit.npy", pi)
+```
 
-## Fitting with anchor packs (after running 04_solve_production)
+The canonical fit combines 21 Garin homology classes, 26 curated regional entries and the
+anchor-warped spatial cost. Save a refit under a new name and compare its provenance with the
+released coupling before using existing result logs.
 
-The fc_plus_SC π uses only the 21 Garin point anchors. To fit the **with-packs π without the anchor warp**, described in `docs/04_anchor_packs.md`, run:
+## Analysis and interface artefacts
+
+Analysis scripts are grouped under [`experiments/`](../experiments/). General pipeline components
+can also be run directly:
 
 ```bash
-PYTHONPATH=src python experiments/anchor_packs/compose_all.py
+PYTHONPATH=src python pipeline/08_build_gui.py --publish
 ```
 
-`pi_canonical.npy` adds the anchor-warped spatial cost to that fit and is what `load_pi()` returns. The individual pack runners in `experiments/anchor_packs/` produce per-pack variants for ablation and inspection.
+Generated files are written beneath `outputs/`. The released display categories used by the
+explorer are heuristic interface metadata rather than confidence or validation tiers.
 
-## Skipping slow steps
-
-The null distribution step can take ~30 min. To skip:
-
-```bash
-python pipeline/05_evaluate.py --skip 05c_null_distributions.py
-```
-
-## Path conventions
-
-All scripts expect `PYTHONPATH=src` and operate relative to repository root. They are idempotent (safe to re-run; cached cells are skipped) unless invoked with `--recompute`.
+All scripts use paths relative to the repository root. Existing cached inputs are reused where
+supported; consult a script's `--help` output before forcing recomputation.

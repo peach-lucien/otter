@@ -1,28 +1,27 @@
-"""Per-parcel trust score for the production π.
+"""Internal stability summaries and explorer display metadata.
 
-Combines three independent signals into a per-parcel estimate of how far the
-predicted human partner can be trusted:
+The historical API names are retained for compatibility. The composite is
+heuristic and is not a calibrated estimate of parcel-level correctness:
 
 1. **Bootstrap argmax stability** (`per_row_stability` from
    `outputs/coupling/bootstrap_aggregate_*.npz`): how consistent is the
    argmax across 40 subject-bootstrap samples? High → π is reproducible.
 
 2. **Argmax mass concentration** (mass on argmax / mass on whole row):
-   how peaked is the row's distribution? A sharp peak indicates a confident
-   prediction; a diffuse row indicates competing candidates.
+   how peaked is the row's distribution? This depends on the proximal weight
+   and stopping point and is not a confidence estimate.
 
 3. **FC similarity to nearest mouse anchor** (Pearson r of the parcel's
    mouse-FC profile against the nearest anchor's mouse-FC profile):
    high → the parcel is in the same FC-coherent neighborhood as the anchor,
    so the supervision signal is well-supported by FC structure.
 
-The composite score is in [0, 1] (higher = more trustworthy). Three tiers
-(high / medium / low) are assigned by quantile cuts.
+The composite score is in [0, 1]. Three descriptive bins are assigned by
+quantile cuts.
 
 "Distance to nearest mouse anchor in mm" is not used as a component: every
 mouse parcel lies within ~4 mm of some anchor, so the quantity is
-uninformative. Argmax mass concentration carries the confidence signal
-instead.
+uninformative.
 
 Usage::
 
@@ -96,7 +95,7 @@ def compute_trust_score(
     weights: tuple[float, float, float] = (0.4, 0.4, 0.2),
     tier_quantiles: tuple[float, float] = (0.33, 0.67),
 ) -> dict:
-    """Compute a per-parcel trust score for a mouse → human coupling.
+    """Compute an uncalibrated per-parcel stability composite.
 
     Parameters
     ----------
@@ -147,7 +146,7 @@ def compute_trust_score(
     concentration = _argmax_concentration(pi)
     concentration_norm = _normalise_to_unit(concentration)
 
-    # Component 3: FC similarity to nearest anchor. Larger = more trust.
+    # Component 3: maximum FC similarity to a mouse anchor.
     fc_mean = np.asarray(M_anndata.uns["fc_mean"])
     fc_sim = _nearest_anchor_fc_similarity(fc_mean, idx_m.pos)
     fc_sim_norm = _normalise_to_unit(fc_sim)
@@ -187,7 +186,7 @@ def compute_multisource_trust(
     beauchamp_region_to_mouse_dsurqe: Optional[dict] = None,
     weights: tuple[float, float, float] = (0.4, 0.4, 0.2),
 ) -> dict:
-    """Multi-source per-parcel trust map (v1).
+    """Attach explorer display categories to the stability composite.
 
     Layers external supervision signals (anchor presence, Beauchamp
     region-validation) on top of the existing internal ``compute_trust_score``
@@ -202,7 +201,7 @@ def compute_multisource_trust(
         top-1 > 0 but is not in any anchor pack
       ``"structural"``, parcel has high internal trust
         (bootstrap + concentration + FC) but no anchor and no Beauchamp
-        validation: pure structural confidence
+        benchmark membership
       ``"low_evidence"``, none of the above
 
     Parameters
@@ -228,7 +227,7 @@ def compute_multisource_trust(
         beauchamp_top1   : (n_m,) float, its Beauchamp pair's top-1 (NaN if N/A)
         evidence_tier    : (n_m,) of strings (5 tiers, see above)
     """
-    # Start with the internal composite trust score
+    # Start with the internal stability composite.
     base = compute_trust_score(
         M_anndata, H_anndata, pi,
         bootstrap_path=bootstrap_path, weights=weights,
@@ -263,7 +262,7 @@ def compute_multisource_trust(
             mask = np.isin(mouse_dsurqe_labels, list(labels))
             beau_top1[mask] = float(top1)
 
-    # ---- Evidence tier
+    # Compatibility labels consumed by the explorer.
     evidence_tier = np.full(n_m, "low_evidence", dtype=object)
     is_validated = (beau_top1 > 0)
     is_anchored  = garin_anchored | pack_anchored
@@ -290,7 +289,7 @@ def calibrate_trust_against_validation(
     pi: np.ndarray,
     expected_h_indices: dict[int, set[int]],
 ) -> dict:
-    """Calibration: do high-trust parcels actually achieve higher top-1 accuracy?
+    """Compare stability-score bins with parcel-level top-1 accuracy.
 
     Parameters
     ----------
@@ -325,9 +324,8 @@ def regional_empirical_accuracy(
 ) -> dict[str, dict]:
     """Per-region empirical Beauchamp top-1 accuracy for each region.
 
-    This is the "trust signal", for each region, how often does
-    the model's argmax fall in the published-correct human region. A
-    parcel's trust is then the accuracy of its region.
+    For each region, measure how often the model's argmax falls in the
+    published target region.
 
     Parameters
     ----------
@@ -369,8 +367,7 @@ def assign_regional_trust(
     high_threshold: float = 0.15,
     low_threshold: float = 0.03,
 ) -> tuple[np.ndarray, np.ndarray]:
-    """Assign each mouse parcel a regional-trust score (the empirical top-1
-    of its Beauchamp-validated region) and a tier.
+    """Assign each mouse parcel its region's empirical top-1 summary and bin.
 
     Parcels not in any validated region get NaN score and 'unknown' tier.
 

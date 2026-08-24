@@ -1,48 +1,6 @@
-"""Striatum subdivision anchor pack (Voorn et al. 2004).
+"""Striatal regional correspondence entries.
 
-Voorn et al. (2004, *Trends in Neurosciences*) "Putting a spin on the
-dorsal-ventral divide of the striatum" (1198 citations, DOI:
-10.1016/j.tins.2004.06.006) recast the dorsal-ventral striatum divide as a
-mediolateral functional gradient:
-
-  - **Dorsolateral striatum** (sensorimotor) maps onto primate dorsal/
-    lateral putamen, processes sensorimotor information from motor and
-    somatosensory cortex.
-  - **Ventromedial striatum** (limbic/associative) maps onto primate
-    medial/anterior caudate, processes limbic and prefrontal input.
-
-This pack implements that distinction at OTTER's parcel granularity:
-
-  pid 47: Mouse Caudoputamen dorsolateral subset ↔ Human putamen
-  pid 48: Mouse Caudoputamen ventromedial subset ↔ Human caudate (anterior)
-
-Mouse-side subset selection
----------------------------
-DSURQE doesn't expose dorsolateral / ventromedial as separate labels;
-we partition Caudoputamen parcels by their (|x|, z) coordinates:
-
-  - Dorsolateral: |x| > median AND z > median  →  ~18 parcels (most lateral, most dorsal)
-  - Ventromedial: |x| ≤ median AND z ≤ median  →  ~46 parcels (most medial, most ventral)
-
-The ~85 "middle gradient" parcels are excluded from this pack (Voorn's
-gradient view explicitly says there's no sharp boundary). Beauchamp's
-existing Caudoputamen → caudate validation covers all 149 CP parcels,
-so the unselected parcels fall back to the Garin pid 13 (Striatum)
-point anchor.
-
-Empirical effect
-----------------
-Under this pack Caudoputamen top-1 rises from 13 % to 33 %: the 46 ventromedial
-parcels concentrate on the canonical caudate ball and the 18 dorsolateral
-parcels on putamen. NAc rises by 4 pp, with no off-target cost. The pack is
-part of the default composition.
-
-Reference:
-  Voorn, P., Vanderschuren, L. J. M. J., Groenewegen, H. J., Robbins, T. W.,
-  & Pennartz, C. M. A. (2004). Putting a spin on the dorsal-ventral divide
-  of the striatum. *Trends in Neurosciences* 27, 468-474.
-  DOI: 10.1016/j.tins.2004.06.006. (1198 citations).
-"""
+Pair IDs 47 and 48 link dorsolateral and ventromedial subsets of mouse caudoputamen to human putamen and anterior caudate targets. Primary source: Voorn et al., Trends in Neurosciences (2004), doi:10.1016/j.tins.2004.06.006."""
 from __future__ import annotations
 
 from pathlib import Path

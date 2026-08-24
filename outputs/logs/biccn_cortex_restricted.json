@@ -1,0 +1,49 @@
+{
+  "pi_file": "outputs/coupling/pi_canonical.npy",
+  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+  "_what": "Cortex-restricted sensitivity for four cell-class marker measures. whole_brain_r is recomputed here and checked against biccn_composition_from_markers.json and biccn_contrast_reframe.json. cortex_only_r scores the same routed mouse map over cortical human parcels alone. cortex_only_both_sides additionally drops non-isocortical mouse parcels and renormalises the coupling over the survivors.",
+  "_masks": {
+    "human_radius_mm": 6.0,
+    "n_human_cortical": 1743,
+    "n_mouse_isocortex": 580,
+    "n_human_with_donor_tissue": 1040,
+    "n_human_cortical_with_donor_tissue": 856,
+    "human_atlas": "data_external/_domhof_extracted/HarvardOxford-cortl-maxprob-thr25-2mm.nii.gz"
+  },
+  "glutamatergic": {
+    "whole_brain_r": 0.302229582215497,
+    "cortex_only_r": 0.08939615336072035,
+    "cortex_only_both_sides_r": -0.06795095465542048,
+    "cortex_and_donor_r": 0.12083617436734218,
+    "n_parcels_whole": 2094,
+    "n_parcels_cortex": 1743,
+    "n_parcels_cortex_donor": 856
+  },
+  "excitatory_minus_inhibitory": {
+    "whole_brain_r": 0.3401680729442248,
+    "cortex_only_r": 0.1475098344352898,
+    "cortex_only_both_sides_r": -0.01574826891350356,
+    "cortex_and_donor_r": 0.216179899139447,
+    "n_parcels_whole": 2094,
+    "n_parcels_cortex": 1743,
+    "n_parcels_cortex_donor": 856
+  },
+  "neuronal_minus_glial": {
+    "whole_brain_r": 0.3538605350012064,
+    "cortex_only_r": 0.1814203631180136,
+    "cortex_only_both_sides_r": 0.11796975765168304,
+    "cortex_and_donor_r": 0.25078458888182725,
+    "n_parcels_whole": 2094,
+    "n_parcels_cortex": 1743,
+    "n_parcels_cortex_donor": 856
+  },
+  "dopaminergic_hotspot": {
+    "whole_brain_r": 0.17354981305072653,
+    "cortex_only_r": 0.08174719407150037,
+    "cortex_only_both_sides_r": 0.15662724519063093,
+    "cortex_and_donor_r": 0.11671808087805231,
+    "n_parcels_whole": 2094,
+    "n_parcels_cortex": 1743,
+    "n_parcels_cortex_donor": 856
+  }
+}

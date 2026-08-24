@@ -85,7 +85,7 @@ def main():
     d_biccn = json.loads((LOG / "beauchamp_validation.json").read_text())
     (LOG / "beauchamp_validation.json").rename(LOG / "beauchamp_validation_biccn_motor.json")
 
-    # Re-run production for fresh comparison
+    # Recompute the point-anchor comparator.
     subprocess.run(["python", str(ROOT / "pipeline" / "05f_beauchamp_validation.py"),
                      "--pi-file", "pi_fc_plus_SC.npy"], env=env, check=True, capture_output=True)
     d_prod = json.loads((LOG / "beauchamp_validation.json").read_text())
