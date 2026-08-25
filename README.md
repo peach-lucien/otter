@@ -129,7 +129,7 @@ cite the archived data and software release using
 
 OTTER was developed by the S01 project of the reTune Collaborative Research Centre, a
 collaboration between Würzburg and Berlin. The project is led by Robert Peach, Phillip
-Boehm-Sturm and Martin Reich, with Stefan Koch and Mario Perales.
+Boehm-Sturm and Martin Reich, and first-authored by Stefan Koch, Mario Perales, Tanmoy Sil and Shawn Hiew.
 
 ## License
 
