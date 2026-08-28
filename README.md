@@ -122,7 +122,9 @@ should be checked against their recorded coupling hash.
 
 Associated manuscript: *Probabilistic mouse–human brain correspondence by multimodal optimal
 transport* (submitted). Full citation details will be added when available. Until then, please
-cite the archived data and software release using
+cite the bioarxiv:
+[10.64898/2026.08.24.746652v1](https://www.biorxiv.org/content/10.64898/2026.08.24.746652v1)
+And archived data and software release using
 [10.5281/zenodo.20733162](https://doi.org/10.5281/zenodo.20733162).
 
 ## Acknowledgements
@@ -130,6 +132,7 @@ cite the archived data and software release using
 OTTER was developed by the S01 project of the reTune Collaborative Research Centre, a
 collaboration between Würzburg and Berlin. The project is led by Robert Peach, Phillip
 Boehm-Sturm and Martin Reich, and first-authored by Stefan Koch, Mario Perales, Tanmoy Sil and Shawn Hiew.
+
 
 ## License
 
