@@ -16,7 +16,18 @@ becomes a distribution over human targets after row normalisation. OTTER can rou
 the human brain, rank mouse structures corresponding to human maps and quantify where human
 connectivity is poorly reconstructed from mouse connectivity.
 
+## Citation
+
+Associated manuscript: *Probabilistic mouse–human brain correspondence by multimodal optimal
+transport* (submitted). Full citation details will be added when available. Until then, please
+cite the bioarxiv:
+[10.64898/2026.08.24.746652v1](https://www.biorxiv.org/content/10.64898/2026.08.24.746652v1)
+And archived data and software release using
+[10.5281/zenodo.20733162](https://doi.org/10.5281/zenodo.20733162).
+
+
 ## Interactive explorer
+
 
 The self-contained OTTER Mapping Explorer is bundled as [`docs/index.html`](docs/index.html).
 Open the file locally for region and parcel queries, ranked human targets and the interface
