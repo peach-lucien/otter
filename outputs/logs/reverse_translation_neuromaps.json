@@ -2,14 +2,95 @@
  "pi_file": "outputs/coupling/pi_canonical.npy",
  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
  "n_spins": 1000,
+ "striatal_structures": [
+  "CP",
+  "ACB",
+  "OT"
+ ],
+ "striatal_fraction_definition": "sum of positive translated structure means in CP, ACB and OT divided by total positive translated structure mass",
  "dopamine_maps": 8,
  "dopamine_hit_top3": 8,
  "dopamine_spin_sig": 8,
+ "system_summary": {
+  "dopamine": {
+   "n_maps": 8,
+   "striatal_mass_fractions": [
+    0.13539228665199066,
+    0.10783257262626651,
+    0.172218979817282,
+    0.10910955140224673,
+    0.12717243994818594,
+    0.06131958129917431,
+    0.05560710771149119,
+    0.09181925304404658
+   ],
+   "mean": 0.1075589715625855,
+   "median": 0.10847106201425663
+  },
+  "serotonin": {
+   "n_maps": 9,
+   "striatal_mass_fractions": [
+    0.06373040655303122,
+    0.026981862490406884,
+    0.051556924664830056,
+    0.09838107672492838,
+    0.04946696595878185,
+    0.018397858602579965,
+    0.06083762780136573,
+    0.045571861241115404,
+    0.016681920028031597
+   ],
+   "mean": 0.04795627822945234,
+   "median": 0.04946696595878185
+  },
+  "mu_opioid": {
+   "n_maps": 2,
+   "striatal_mass_fractions": [
+    0.053784244020754504,
+    0.06081131123647832
+   ],
+   "mean": 0.05729777762861642,
+   "median": 0.05729777762861642
+  },
+  "cannabinoid_cb1": {
+   "n_maps": 1,
+   "striatal_mass_fractions": [
+    0.041077927754958096
+   ],
+   "mean": 0.041077927754958096,
+   "median": 0.041077927754958096
+  },
+  "gaba_a": {
+   "n_maps": 2,
+   "striatal_mass_fractions": [
+    0.03490948480714513,
+    0.029662703375540563
+   ],
+   "mean": 0.03228609409134285,
+   "median": 0.03228609409134285
+  }
+ },
+ "specificity_test": {
+  "contrast": "dopamine > pooled non-dopamine reference systems",
+  "test": "one-sided exact Mann-Whitney U",
+  "u": 105.0,
+  "p": 0.00014072614691809738,
+  "n_dopamine": 8,
+  "n_reference": 14
+ },
  "results": [
   {
    "system": "dopamine",
    "map": "jaworska2020/fallypride",
    "anchored": true,
+   "annotation": {
+    "source": "jaworska2020",
+    "desc": "fallypride",
+    "space": "MNI152",
+    "density": "1mm"
+   },
+   "source_file": "experiments/reverse_translation/neuromaps_cache/annotations/jaworska2020/fallypride/MNI152/source-jaworska2020_desc-fallypride_space-MNI152_res-1mm_feature.nii.gz",
+   "source_sha256": "3777c9924af8c549395b3f339fc6008c5a8cd8509e2c31b779746137057d9da7",
    "ground_truth": [
     "CP",
     "ACB",
@@ -18,6 +99,7 @@
    "best_gt_rank": 1,
    "hit_top3": true,
    "spin_p": 0.000999000999000999,
+   "striatal_mass_fraction": 0.13539228665199066,
    "top3": [
     [
      "ACB",
@@ -37,6 +119,14 @@
    "system": "dopamine",
    "map": "sandiego2015/flb457",
    "anchored": true,
+   "annotation": {
+    "source": "sandiego2015",
+    "desc": "flb457",
+    "space": "MNI152",
+    "density": "1mm"
+   },
+   "source_file": "experiments/reverse_translation/neuromaps_cache/annotations/sandiego2015/flb457/MNI152/source-sandiego2015_desc-flb457_space-MNI152_res-1mm_feature.nii.gz",
+   "source_sha256": "57e11c656cfba19271f86e8a60de711807ab5b04448477fb67c7aa5c0418760f",
    "ground_truth": [
     "CP",
     "ACB",
@@ -45,6 +135,7 @@
    "best_gt_rank": 1,
    "hit_top3": true,
    "spin_p": 0.000999000999000999,
+   "striatal_mass_fraction": 0.10783257262626651,
    "top3": [
     [
      "ACB",
@@ -64,6 +155,14 @@
    "system": "dopamine",
    "map": "sasaki2012/fepe2i",
    "anchored": true,
+   "annotation": {
+    "source": "sasaki2012",
+    "desc": "fepe2i",
+    "space": "MNI152",
+    "density": "1mm"
+   },
+   "source_file": "experiments/reverse_translation/neuromaps_cache/annotations/sasaki2012/fepe2i/MNI152/source-sasaki2012_desc-fepe2i_space-MNI152_res-1mm_feature.nii.gz",
+   "source_sha256": "4676ed48ede23c7edd0b6a4b2ff16db5bc933a87fe1e4d93b5b2ab19458bcdf9",
    "ground_truth": [
     "CP",
     "ACB",
@@ -72,6 +171,7 @@
    "best_gt_rank": 1,
    "hit_top3": true,
    "spin_p": 0.000999000999000999,
+   "striatal_mass_fraction": 0.172218979817282,
    "top3": [
     [
      "CP",
@@ -91,6 +191,14 @@
    "system": "dopamine",
    "map": "smith2017/flb457",
    "anchored": true,
+   "annotation": {
+    "source": "smith2017",
+    "desc": "flb457",
+    "space": "MNI152",
+    "density": "1mm"
+   },
+   "source_file": "experiments/reverse_translation/neuromaps_cache/annotations/smith2017/flb457/MNI152/source-smith2017_desc-flb457_space-MNI152_res-1mm_feature.nii.gz",
+   "source_sha256": "c115692acfdf5fe2ae28c0e82e85cd346b76d9ac3e75ef9666ac818e5eb3201a",
    "ground_truth": [
     "CP",
     "ACB",
@@ -99,6 +207,7 @@
    "best_gt_rank": 3,
    "hit_top3": true,
    "spin_p": 0.002997002997002997,
+   "striatal_mass_fraction": 0.10910955140224673,
    "top3": [
     [
      "OT",
@@ -118,6 +227,14 @@
    "system": "dopamine",
    "map": "malen2022/raclopride",
    "anchored": true,
+   "annotation": {
+    "source": "malen2022",
+    "desc": "raclopride",
+    "space": "MNI152",
+    "density": "2mm"
+   },
+   "source_file": "experiments/reverse_translation/neuromaps_cache/annotations/malen2022/raclopride/MNI152/source-malen2022_desc-raclopride_space-MNI152_res-2mm_feature.nii.gz",
+   "source_sha256": "393d420277192c2fa36e6e3c563a6492d15e7b2da8dba5d35278438e42973258",
    "ground_truth": [
     "CP",
     "ACB",
@@ -126,6 +243,7 @@
    "best_gt_rank": 1,
    "hit_top3": true,
    "spin_p": 0.000999000999000999,
+   "striatal_mass_fraction": 0.12717243994818594,
    "top3": [
     [
      "CP",
@@ -145,6 +263,14 @@
    "system": "dopamine",
    "map": "alarkurtti2015/raclopride",
    "anchored": true,
+   "annotation": {
+    "source": "alarkurtti2015",
+    "desc": "raclopride",
+    "space": "MNI152",
+    "density": "3mm"
+   },
+   "source_file": "experiments/reverse_translation/neuromaps_cache/annotations/alarkurtti2015/raclopride/MNI152/source-alarkurtti2015_desc-raclopride_space-MNI152_res-3mm_feature.nii.gz",
+   "source_sha256": "f41712bd4924763aa425d5c4880d6c4440a64348719a068715f5a59b4ca69b09",
    "ground_truth": [
     "CP",
     "ACB",
@@ -153,6 +279,7 @@
    "best_gt_rank": 1,
    "hit_top3": true,
    "spin_p": 0.000999000999000999,
+   "striatal_mass_fraction": 0.06131958129917431,
    "top3": [
     [
      "CP",
@@ -172,6 +299,14 @@
    "system": "dopamine",
    "map": "dukart2018/fpcit",
    "anchored": true,
+   "annotation": {
+    "source": "dukart2018",
+    "desc": "fpcit",
+    "space": "MNI152",
+    "density": "3mm"
+   },
+   "source_file": "experiments/reverse_translation/neuromaps_cache/annotations/dukart2018/fpcit/MNI152/source-dukart2018_desc-fpcit_space-MNI152_res-3mm_feature.nii.gz",
+   "source_sha256": "8e15f109683ffe57d83c7e05aacd59ff38c5a5442193650f4142eae9aae71301",
    "ground_truth": [
     "CP",
     "ACB",
@@ -180,6 +315,7 @@
    "best_gt_rank": 3,
    "hit_top3": true,
    "spin_p": 0.004995004995004995,
+   "striatal_mass_fraction": 0.05560710771149119,
    "top3": [
     [
      "OT",
@@ -199,6 +335,14 @@
    "system": "dopamine",
    "map": "kaller2017/sch23390",
    "anchored": true,
+   "annotation": {
+    "source": "kaller2017",
+    "desc": "sch23390",
+    "space": "MNI152",
+    "density": "3mm"
+   },
+   "source_file": "experiments/reverse_translation/neuromaps_cache/annotations/kaller2017/sch23390/MNI152/source-kaller2017_desc-sch23390_space-MNI152_res-3mm_feature.nii.gz",
+   "source_sha256": "fe069a4be688a91ad0799b784f3cf358f658d2b92ace105f1daeac5c7c169737",
    "ground_truth": [
     "CP",
     "ACB",
@@ -207,6 +351,7 @@
    "best_gt_rank": 2,
    "hit_top3": true,
    "spin_p": 0.000999000999000999,
+   "striatal_mass_fraction": 0.09181925304404658,
    "top3": [
     [
      "OT",
@@ -226,6 +371,14 @@
    "system": "serotonin",
    "map": "beliveau2017/az10419369",
    "anchored": false,
+   "annotation": {
+    "source": "beliveau2017",
+    "desc": "az10419369",
+    "space": "MNI152",
+    "density": "1mm"
+   },
+   "source_file": "experiments/reverse_translation/neuromaps_cache/annotations/beliveau2017/az10419369/MNI152/source-beliveau2017_desc-az10419369_space-MNI152_res-1mm_feature.nii.gz",
+   "source_sha256": "95811f3ec3a82afbff4fd0de16cde6de55c50bd3a5a08688f9ecfc585263e914",
    "ground_truth": [
     "CP",
     "ACB"
@@ -233,6 +386,7 @@
    "best_gt_rank": 7,
    "hit_top3": false,
    "spin_p": 0.08791208791208792,
+   "striatal_mass_fraction": 0.06373040655303122,
    "top3": [
     [
      "OT",
@@ -252,6 +406,14 @@
    "system": "serotonin",
    "map": "beliveau2017/cimbi36",
    "anchored": false,
+   "annotation": {
+    "source": "beliveau2017",
+    "desc": "cimbi36",
+    "space": "MNI152",
+    "density": "1mm"
+   },
+   "source_file": "experiments/reverse_translation/neuromaps_cache/annotations/beliveau2017/cimbi36/MNI152/source-beliveau2017_desc-cimbi36_space-MNI152_res-1mm_feature.nii.gz",
+   "source_sha256": "0ed9800bf9555fa2f98c01635ed62f54928104d1495ddbe716ffad5588abc85b",
    "ground_truth": [
     "CP",
     "ACB"
@@ -259,6 +421,7 @@
    "best_gt_rank": 58,
    "hit_top3": false,
    "spin_p": 1.0,
+   "striatal_mass_fraction": 0.026981862490406884,
    "top3": [
     [
      "AUDv",
@@ -278,6 +441,14 @@
    "system": "serotonin",
    "map": "beliveau2017/dasb",
    "anchored": false,
+   "annotation": {
+    "source": "beliveau2017",
+    "desc": "dasb",
+    "space": "MNI152",
+    "density": "1mm"
+   },
+   "source_file": "experiments/reverse_translation/neuromaps_cache/annotations/beliveau2017/dasb/MNI152/source-beliveau2017_desc-dasb_space-MNI152_res-1mm_feature.nii.gz",
+   "source_sha256": "f9d65eb2b32b63fe19f5424c66da91ba4729354c0d4b1a2abee47c8b02bcac9a",
    "ground_truth": [
     "CP",
     "ACB"
@@ -285,6 +456,7 @@
    "best_gt_rank": 24,
    "hit_top3": false,
    "spin_p": 0.012987012987012988,
+   "striatal_mass_fraction": 0.051556924664830056,
    "top3": [
     [
      "SCm",
@@ -304,6 +476,14 @@
    "system": "serotonin",
    "map": "beliveau2017/sb207145",
    "anchored": false,
+   "annotation": {
+    "source": "beliveau2017",
+    "desc": "sb207145",
+    "space": "MNI152",
+    "density": "1mm"
+   },
+   "source_file": "experiments/reverse_translation/neuromaps_cache/annotations/beliveau2017/sb207145/MNI152/source-beliveau2017_desc-sb207145_space-MNI152_res-1mm_feature.nii.gz",
+   "source_sha256": "0949f9ddcea57ce894d3f22342dbc7d5c05703f8be75c6fed80fe50fcb1b9295",
    "ground_truth": [
     "CP",
     "ACB"
@@ -311,6 +491,7 @@
    "best_gt_rank": 1,
    "hit_top3": true,
    "spin_p": 0.000999000999000999,
+   "striatal_mass_fraction": 0.09838107672492838,
    "top3": [
     [
      "CP",
@@ -330,6 +511,14 @@
    "system": "serotonin",
    "map": "gallezot2010/p943",
    "anchored": false,
+   "annotation": {
+    "source": "gallezot2010",
+    "desc": "p943",
+    "space": "MNI152",
+    "density": "1mm"
+   },
+   "source_file": "experiments/reverse_translation/neuromaps_cache/annotations/gallezot2010/p943/MNI152/source-gallezot2010_desc-p943_space-MNI152_res-1mm_feature.nii.gz",
+   "source_sha256": "a2578c95909ee01f50c54d46600ce5b4e5ce562072a866f3d118cea962773430",
    "ground_truth": [
     "CP",
     "ACB"
@@ -337,6 +526,7 @@
    "best_gt_rank": 41,
    "hit_top3": false,
    "spin_p": 0.8281718281718282,
+   "striatal_mass_fraction": 0.04946696595878185,
    "top3": [
     [
      "SI",
@@ -356,6 +546,14 @@
    "system": "serotonin",
    "map": "savli2012/altanserin",
    "anchored": false,
+   "annotation": {
+    "source": "savli2012",
+    "desc": "altanserin",
+    "space": "MNI152",
+    "density": "3mm"
+   },
+   "source_file": "experiments/reverse_translation/neuromaps_cache/annotations/savli2012/altanserin/MNI152/source-savli2012_desc-altanserin_space-MNI152_res-3mm_feature.nii.gz",
+   "source_sha256": "c938e3234a566908f476cf2d10847f59fab0ef14f5f90e554e2d5c9d921031a5",
    "ground_truth": [
     "CP",
     "ACB"
@@ -363,6 +561,7 @@
    "best_gt_rank": 49,
    "hit_top3": false,
    "spin_p": 1.0,
+   "striatal_mass_fraction": 0.018397858602579965,
    "top3": [
     [
      "AUDd",
@@ -382,6 +581,14 @@
    "system": "serotonin",
    "map": "savli2012/dasb",
    "anchored": false,
+   "annotation": {
+    "source": "savli2012",
+    "desc": "dasb",
+    "space": "MNI152",
+    "density": "3mm"
+   },
+   "source_file": "experiments/reverse_translation/neuromaps_cache/annotations/savli2012/dasb/MNI152/source-savli2012_desc-dasb_space-MNI152_res-3mm_feature.nii.gz",
+   "source_sha256": "5cca8eb46e855235d9126deb1a1ad4c30d2fe72b8868b7cd4dd323b6077c901f",
    "ground_truth": [
     "CP",
     "ACB"
@@ -389,6 +596,7 @@
    "best_gt_rank": 26,
    "hit_top3": false,
    "spin_p": 0.058941058941058944,
+   "striatal_mass_fraction": 0.06083762780136573,
    "top3": [
     [
      "ZI",
@@ -408,6 +616,14 @@
    "system": "serotonin",
    "map": "savli2012/p943",
    "anchored": false,
+   "annotation": {
+    "source": "savli2012",
+    "desc": "p943",
+    "space": "MNI152",
+    "density": "3mm"
+   },
+   "source_file": "experiments/reverse_translation/neuromaps_cache/annotations/savli2012/p943/MNI152/source-savli2012_desc-p943_space-MNI152_res-3mm_feature.nii.gz",
+   "source_sha256": "73885047cd03eac2227eaf12fc6d6986b6b58a15db2ca512322680fd47a0a9c8",
    "ground_truth": [
     "CP",
     "ACB"
@@ -415,6 +631,7 @@
    "best_gt_rank": 37,
    "hit_top3": false,
    "spin_p": 0.9330669330669331,
+   "striatal_mass_fraction": 0.045571861241115404,
    "top3": [
     [
      "AUDd",
@@ -434,6 +651,14 @@
    "system": "serotonin",
    "map": "savli2012/way100635",
    "anchored": false,
+   "annotation": {
+    "source": "savli2012",
+    "desc": "way100635",
+    "space": "MNI152",
+    "density": "3mm"
+   },
+   "source_file": "experiments/reverse_translation/neuromaps_cache/annotations/savli2012/way100635/MNI152/source-savli2012_desc-way100635_space-MNI152_res-3mm_feature.nii.gz",
+   "source_sha256": "7385b5570046fc350d069b6115aef4b0a534a4b19db28349340b2520e279dbea",
    "ground_truth": [
     "CP",
     "ACB"
@@ -441,6 +666,7 @@
    "best_gt_rank": 57,
    "hit_top3": false,
    "spin_p": 1.0,
+   "striatal_mass_fraction": 0.016681920028031597,
    "top3": [
     [
      "BMA",
@@ -460,6 +686,14 @@
    "system": "mu_opioid",
    "map": "turtonen2020/carfentanil",
    "anchored": false,
+   "annotation": {
+    "source": "turtonen2020",
+    "desc": "carfentanil",
+    "space": "MNI152",
+    "density": "1mm"
+   },
+   "source_file": "experiments/reverse_translation/neuromaps_cache/annotations/turtonen2020/carfentanil/MNI152/source-turtonen2020_desc-carfentanil_space-MNI152_res-1mm_feature.nii.gz",
+   "source_sha256": "ccb3c9df4c322085da4aba1ea0c32d51756f28626707e85f707dbde750052a61",
    "ground_truth": [
     "CP",
     "ACB",
@@ -468,6 +702,7 @@
    "best_gt_rank": 7,
    "hit_top3": false,
    "spin_p": 0.04195804195804196,
+   "striatal_mass_fraction": 0.053784244020754504,
    "top3": [
     [
      "OT",
@@ -487,6 +722,14 @@
    "system": "mu_opioid",
    "map": "kantonen2020/carfentanil",
    "anchored": false,
+   "annotation": {
+    "source": "kantonen2020",
+    "desc": "carfentanil",
+    "space": "MNI152",
+    "density": "3mm"
+   },
+   "source_file": "experiments/reverse_translation/neuromaps_cache/annotations/kantonen2020/carfentanil/MNI152/source-kantonen2020_desc-carfentanil_space-MNI152_res-3mm_feature.nii.gz",
+   "source_sha256": "3cc7e704beba2812cdd7362cff62352770fb3d87d7a7339cb9f8f24ccea2f485",
    "ground_truth": [
     "CP",
     "ACB",
@@ -495,6 +738,7 @@
    "best_gt_rank": 11,
    "hit_top3": false,
    "spin_p": 0.07592407592407592,
+   "striatal_mass_fraction": 0.06081131123647832,
    "top3": [
     [
      "OT",
@@ -509,6 +753,103 @@
      44.9009
     ]
    ]
+  },
+  {
+   "system": "cannabinoid_cb1",
+   "map": "laurikainen2018/fmpepd2",
+   "anchored": false,
+   "annotation": {
+    "source": "laurikainen2018",
+    "desc": "fmpepd2",
+    "space": "MNI152",
+    "density": "1mm"
+   },
+   "source_file": "experiments/reverse_translation/neuromaps_cache/annotations/laurikainen2018/fmpepd2/MNI152/source-laurikainen2018_desc-fmpepd2_space-MNI152_res-1mm_feature.nii.gz",
+   "source_sha256": "39a70a39eca869ab081219dc442d6fb0f1c4eff3ebbe500f18f2d42dc41d6aad",
+   "ground_truth": [],
+   "best_gt_rank": null,
+   "hit_top3": false,
+   "spin_p": NaN,
+   "striatal_mass_fraction": 0.041077927754958096,
+   "top3": [
+    [
+     "SSs",
+     9.558
+    ],
+    [
+     "SSp-n",
+     9.3844
+    ],
+    [
+     "SSp-un",
+     9.3311
+    ]
+   ]
+  },
+  {
+   "system": "gaba_a",
+   "map": "norgaard2021/flumazenil",
+   "anchored": false,
+   "annotation": {
+    "source": "norgaard2021",
+    "desc": "flumazenil",
+    "space": "MNI152",
+    "density": "1mm"
+   },
+   "source_file": "experiments/reverse_translation/neuromaps_cache/annotations/norgaard2021/flumazenil/MNI152/source-norgaard2021_desc-flumazenil_space-MNI152_res-1mm_feature.nii.gz",
+   "source_sha256": "2d77c91a725d1884f2d808bbd3a104a609d58a7e810c584f2956b731fc6f7708",
+   "ground_truth": [],
+   "best_gt_rank": null,
+   "hit_top3": false,
+   "spin_p": NaN,
+   "striatal_mass_fraction": 0.03490948480714513,
+   "top3": [
+    [
+     "SSp-n",
+     658.6811
+    ],
+    [
+     "AUDd",
+     655.2231
+    ],
+    [
+     "SSp-un",
+     647.0085
+    ]
+   ]
+  },
+  {
+   "system": "gaba_a",
+   "map": "dukart2018/flumazenil",
+   "anchored": false,
+   "annotation": {
+    "source": "dukart2018",
+    "desc": "flumazenil",
+    "space": "MNI152",
+    "density": "3mm"
+   },
+   "source_file": "experiments/reverse_translation/neuromaps_cache/annotations/dukart2018/flumazenil/MNI152/source-dukart2018_desc-flumazenil_space-MNI152_res-3mm_feature.nii.gz",
+   "source_sha256": "7dfaf29888689ec9363dfe3bf0e6351ecf6546665115a9d1a4757a3984440413",
+   "ground_truth": [],
+   "best_gt_rank": null,
+   "hit_top3": false,
+   "spin_p": NaN,
+   "striatal_mass_fraction": 0.029662703375540563,
+   "top3": [
+    [
+     "AUDd",
+     71.3342
+    ],
+    [
+     "SSs",
+     67.1143
+    ],
+    [
+     "AUDp",
+     66.1145
+    ]
+   ]
   }
- ]
+ ],
+ "failures": []
 }

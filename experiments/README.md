@@ -17,7 +17,7 @@ coupling or refit a clearly specified model configuration.
 | `coletta_2020_cross_species_rsn/` | Functional-network correspondence |
 | `transbrain_2025_benchmark/` | Comparative-method analysis |
 | `section5_coverage_rigor/` | Mouse-based reconstruction of human connectivity |
-| `reverse_translation/` | Human-to-mouse translation and target ranking |
+| `reverse_translation/` | Human-to-mouse translation, clinical disease dimensions and target ranking |
 | `validation/` | Checks against published map resources |
 
 `anchor_packs/` contains the regional-entry definitions and source-specific runners;

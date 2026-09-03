@@ -1,8 +1,7 @@
-# Analysis guide
+# Analysis inventory
 
-The manuscript is the authoritative narrative for the reported results. This
-page identifies the current analysis groups and the interpretation boundary for
-each one without duplicating result tables.
+This page identifies the principal analysis groups and the interpretation
+boundary for each one without duplicating result tables.
 
 ## 1. Coupling organisation
 

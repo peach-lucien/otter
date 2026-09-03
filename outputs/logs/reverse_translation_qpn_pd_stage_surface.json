@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0.0",
+  "status": "completed",
+  "analysis": "QPN-NC Parkinson stage surface-resolution validation",
+  "hypothesis": "Increasing Parkinson stage preferentially increases OTTER-translated mouse interoceptive-versus-primary-motor bias.",
+  "directional_alternative": "interoceptive_minus_primary_motor > 0",
+  "dataset": {
+    "name": "Quebec Parkinson Network Neuroimaging Cohort (QPN-NC)",
+    "doi": "10.5281/zenodo.17246063",
+    "access": "restricted; obtained directly from the data owners"
+  },
+  "seed": 20260903,
+  "n_surface_rotations": 10000,
+  "n_bootstrap": 10000,
+  "n_clinical_permutations": 10000,
+  "sample": {
+    "controls": 69,
+    "PD": 141
+  },
+  "coupling": {
+    "pi_file": "outputs/coupling/pi_canonical.npy",
+    "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77"
+  },
+  "surface_resolution": {
+    "n_regions": 148,
+    "n_left": 74,
+    "n_right": 74,
+    "eligible_reconstructions": 270,
+    "mapped_OTTER_nodes": 1580
+  },
+  "primary_HY_surface": {
+    "D": 0.4702172731656953,
+    "spatial_p_one_sided": 0.20087991200879912,
+    "spatial_p_two_sided": 0.40175982401759824,
+    "spatial_null_ci95": [
+      -0.8782822300397992,
+      0.8781718842999571
+    ],
+    "hemisphere_D": {
+      "L": 0.30496756249450874,
+      "R": 0.1732618581304991
+    },
+    "n": 141,
+    "bootstrap_n": 10000,
+    "bootstrap_ci95": [
+      -0.601360514322823,
+      1.0644004459753527
+    ],
+    "bootstrap_median": 0.3482281949152928,
+    "influence": {
+      "leave_one_pd": {
+        "n": 141,
+        "min_D": 0.27813821328594646,
+        "max_D": 0.8454920882180994,
+        "all_positive": true
+      },
+      "leave_one_control": {
+        "n": 69,
+        "min_D": 0.45125288174448885,
+        "max_D": 0.4821603401073805,
+        "all_positive": true
+      }
+    }
+  },
+  "participant_level_support": {
+    "partial_spearman_rho": 0.12953953643428182,
+    "clinical_residual_permutation_p_one_sided": 0.06329367063293671,
+    "spatial_p_one_sided": 0.055694430556944306,
+    "spatial_null_ci95": [
+      -0.16287277611826007,
+      0.14724950130864273
+    ],
+    "n": 141
+  },
+  "supporting_model_forms": {
+    "HY4_5_Huber": {
+      "D": 0.7810390577421751,
+      "spatial_p_one_sided": 0.050294970502949704,
+      "spatial_p_two_sided": 0.10058994100589941,
+      "spatial_null_ci95": [
+        -0.9375231840254798,
+        0.8791652470113838
+      ],
+      "hemisphere_D": {
+        "L": 0.414586586196635,
+        "R": 0.37859917458235803
+      },
+      "n": 141
+    },
+    "raw_HY1_5_OLS": {
+      "D": 0.4593830252137153,
+      "spatial_p_one_sided": 0.2141785821417858,
+      "spatial_p_two_sided": 0.4283571642835716,
+      "spatial_null_ci95": [
+        -0.8793623067538803,
+        0.8959772317526015
+      ],
+      "hemisphere_D": {
+        "L": 0.2616075900069078,
+        "R": 0.20274827059390893
+      },
+      "n": 141
+    },
+    "advanced_HY3plus_vs_HY1_2": {
+      "D": 0.5761617112481754,
+      "spatial_p_one_sided": 0.1212878712128787,
+      "spatial_p_two_sided": 0.2425757424257574,
+      "spatial_null_ci95": [
+        -0.9297751592933345,
+        0.8678073446121288
+      ],
+      "hemisphere_D": {
+        "L": 0.3520296103536029,
+        "R": 0.22989784973062782
+      },
+      "n": 141
+    },
+    "SurfaceHoles_adjusted": {
+      "D": 0.49631709480209285,
+      "spatial_p_one_sided": 0.19048095190480951,
+      "spatial_p_two_sided": 0.38096190380961903,
+      "spatial_null_ci95": [
+        -0.8884848678403425,
+        0.8959600716651628
+      ],
+      "hemisphere_D": {
+        "L": 0.32849770052817584,
+        "R": 0.17695901902326408
+      },
+      "n": 141
+    }
+  },
+  "input_hashes": {
+    "left.aparc.a2009s.annot": "c2401d6137949f33788283a4926cb61cb3b0bfe5bda1b368c22aa921ea06d38d",
+    "right.aparc.a2009s.annot": "99c028f9f9d8dce617e9f29a5ebdc2f1b187d83650b68128fae53c3669588da7"
+  },
+  "privacy": {
+    "participant_identifiers_written": false,
+    "participant_maps_or_scores_written": false,
+    "regional_QPN_maps_written": false,
+    "restricted_file_manifest_written": false,
+    "small_stage_cell_counts_written": false
+  }
+}

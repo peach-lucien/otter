@@ -1,69 +1,4093 @@
 {
- "pi_file": "outputs/coupling/pi_canonical.npy",
- "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
- "frac": 0.1,
- "n_spins": 2000,
- "contrast_C": 0.5850436384057899,
- "spin_p": 0.0004997501249375312,
- "bias_dysphoric": 0.3364966489657096,
- "bias_anxiosomatic": -0.24854698944008027,
- "dys_set": [
-  "PL",
-  "ACAd",
-  "ACAv",
-  "ORBm",
-  "FRP"
- ],
- "anx_set": [
-  "BLA",
-  "BMA",
-  "CEA",
-  "AId",
-  "AIv",
-  "AIp"
- ],
- "top_dysphoric": [
-  [
-   "PL",
-   0.1176
-  ],
-  [
-   "ACAd",
-   0.1081
-  ],
-  [
-   "FRP",
-   0.1016
-  ],
-  [
-   "MOs",
-   0.0861
-  ],
-  [
-   "AId",
-   0.0826
-  ]
- ],
- "top_anxiosomatic": [
-  [
-   "AUDv",
-   0.1448
-  ],
-  [
-   "TEa",
-   0.0934
-  ],
-  [
-   "BMA",
-   0.0922
-  ],
-  [
-   "VISC",
-   0.081
-  ],
-  [
-   "BLA",
-   0.0798
-  ]
- ]
+  "schema_version": "3.0.0",
+  "analysis": {
+    "name": "TMS symptom-specific circuit dissociation",
+    "directional_hypothesis": "dysphoric -> mPFC/cingulate; anxiosomatic -> amygdala/insula",
+    "primary_weighting": "parcel_mass",
+    "primary_fraction": 0.1,
+    "threshold_family": [
+      0.05,
+      0.1,
+      0.2,
+      0.3
+    ],
+    "n_spatial_surrogates": 10000,
+    "seed": 20260826
+  },
+  "target_sets": {
+    "dysphoric_medial_prefrontal_cingulate": [
+      "PL",
+      "ILA",
+      "ACAd",
+      "ACAv",
+      "ORBm",
+      "FRP"
+    ],
+    "anxiosomatic_amygdala_insula": [
+      "BLA",
+      "BMA",
+      "CEA",
+      "LA",
+      "AId",
+      "AIv",
+      "AIp"
+    ],
+    "parcel_counts": {
+      "PL": 11,
+      "ILA": 4,
+      "ACAd": 19,
+      "ACAv": 12,
+      "ORBm": 5,
+      "FRP": 9,
+      "BLA": 6,
+      "BMA": 9,
+      "CEA": 9,
+      "LA": 1,
+      "AId": 14,
+      "AIv": 9,
+      "AIp": 14
+    },
+    "minimum_parcels": 1
+  },
+  "data": {
+    "map_file": "experiments/reverse_translation/clinical_maps/tms_anxdys.nii.gz",
+    "map_sha256": "423bdcfd5c8bbe2ec7a2e947909a8a3b2ee832f833d9595ed92a8bf71a2df469",
+    "map_sign": {
+      "negative": "dysphoric",
+      "positive": "anxiosomatic"
+    },
+    "sanitation": {
+      "source_shape": [
+        91,
+        109,
+        91
+      ],
+      "source_n_voxels": 902629,
+      "source_n_nonfinite_replaced_with_zero_before_resampling": 13008,
+      "source_finite_min": -0.7510910630226135,
+      "source_finite_max": 0.7372662425041199,
+      "sampled_n_nodes": 2094,
+      "parcel_overlap_n_nodes": 2086,
+      "centroid_fallback_n_nodes": 8,
+      "centroid_fallback_node_indices": [
+        16,
+        17,
+        24,
+        25,
+        28,
+        29,
+        30,
+        31
+      ],
+      "sampled_n_nonfinite_after_fallback": 0,
+      "sampled_min": -0.7077651357761136,
+      "sampled_max": 0.7271376654971391,
+      "sampled_n_negative": 1272,
+      "sampled_n_positive": 822,
+      "sampled_n_zero": 0
+    }
+  },
+  "null": {
+    "role": "primary inferential null",
+    "method": "joint singleton Moran spectral randomization of left/right features at bilateral pair locations, stratified by cortex/noncortex",
+    "spatial_weights": "symmetric inverse Euclidean distance, double centered",
+    "spectrum": "all modes except the constant/zero mode",
+    "strata": {
+      "atlas": "data_external/_domhof_extracted/HarvardOxford-cortl-maxprob-thr25-2mm.nii.gz",
+      "definition": "within 6 mm of a labelled cortical voxel",
+      "radius_mm": 6.0,
+      "n_cortex": 1743,
+      "n_noncortex": 351,
+      "counts": {
+        "L_cortex": 872,
+        "L_noncortex": 175,
+        "R_cortex": 871,
+        "R_noncortex": 176
+      },
+      "distance_mm": {
+        "median": 1.4142135623730951,
+        "p95": 12.383441746051234,
+        "max": 24.186773244895647
+      }
+    },
+    "moran": {
+      "cortex": {
+        "n_bilateral_pairs": 885,
+        "n_components": 884,
+        "eigenvalues_sha256": "cf01557d24ecb62e4ba02199dd4475d4abd9bc76c61bbaa3138562d44634bf19",
+        "basis_sha256": "824ad355b9056fe17de4900868299ccc208b96dbd4eb28392d1afa7a3f489aa1",
+        "reconstruction_max_abs_error": 5.047473806973901e-08
+      },
+      "noncortex": {
+        "n_bilateral_pairs": 162,
+        "n_components": 161,
+        "eigenvalues_sha256": "c727adbf229114f3110cc52917d527bbcadbe1cea4aafde44e664a4b081bf89c",
+        "basis_sha256": "1ed59ee551a87dfbba0f3bf4148f16fc7c9bfdbe162073b388c4cb797e053653",
+        "reconstruction_max_abs_error": 3.637356738028785e-08
+      },
+      "pair_definition": {
+        "pair_column": "H.var['pairid']",
+        "n_bilateral_pairs": 1047,
+        "tissue_rule": "cortex if either member is cortical (inclusive OR), else noncortex",
+        "pair_counts": {
+          "cortex": 885,
+          "noncortex": 162
+        },
+        "discordant_node_tissue_pairids_resolved_by_or": [
+          72,
+          88,
+          126,
+          138,
+          146,
+          151,
+          245,
+          313,
+          318,
+          354,
+          358,
+          364,
+          372,
+          417,
+          422,
+          428,
+          458,
+          476,
+          483,
+          527,
+          583,
+          594,
+          633,
+          634,
+          639,
+          842,
+          869
+        ],
+        "coordinate": "mean of left coordinate and x-reflected right coordinate"
+      },
+      "joint_sign_stream_sha256": {
+        "cortex": "da90a83dd77f0faf242269ec3db4ad5f5e4d61e893b41ac42743ad5c7a270f8a",
+        "noncortex": "0c4764fb93c54e33fe6568155336cc85de94d487528f6714a1065ac667d7a6f1"
+      },
+      "verified_invariants_all_draws": {
+        "cortex": {
+          "max_abs_hemisphere_mean_error": 1.8628182177349295e-08,
+          "max_abs_hemisphere_sd_error": 2.0138585798967767e-09,
+          "max_abs_lr_covariance_error": 1.2270726795771125e-09,
+          "max_abs_lr_correlation_error": 9.977810799810527e-10
+        },
+        "noncortex": {
+          "max_abs_hemisphere_mean_error": 9.606438101592008e-09,
+          "max_abs_hemisphere_sd_error": 2.3783749414363342e-09,
+          "max_abs_lr_covariance_error": 9.949019177946106e-10,
+          "max_abs_lr_correlation_error": 4.6292530919700425e-09
+        }
+      }
+    },
+    "surrogate_maps_sha256": "21a2d1f800144524756f18be50a65d7f3c1baa5aeb4116f4335acf049b894169",
+    "p_value": "upper-tail (exceedances+1)/(N+1); ties within 1e-12 relative tolerance exceed"
+  },
+  "provenance": {
+    "script": "experiments/reverse_translation/07_symptom_dissociation.py",
+    "script_sha256": "a6d41cde00ae58354d6dba0c98d5c553e34254b76a8fe45747e28abe600b69d2",
+    "python": "3.10.14",
+    "packages": {
+      "numpy": "1.26.4",
+      "scipy": "1.15.3",
+      "nibabel": "5.2.1",
+      "nilearn": "0.13.1"
+    },
+    "couplings": {
+      "canonical": {
+        "file": "outputs/coupling/pi_canonical.npy",
+        "file_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+        "array_sha256": "852535884229c9aba5edcd7d6df7677da3a5e633f6ce216d0f9b4c80e772f7f5",
+        "shape": [
+          1864,
+          2094
+        ]
+      },
+      "no_relevant_anchor_packs": {
+        "file": "outputs/coupling/pi_tms_no_pfc_cingulate_amygdala_packs.npy",
+        "file_sha256": "2543bcbedd234170e4a176f3066c876bc1e15816d9783f46e446b1138bc1360f",
+        "array_sha256": "e27aa3cb3f5d4eaf578f9b5f2723bc6eec48849c1787a7d9f95c842571cc7342",
+        "shape": [
+          1864,
+          2094
+        ],
+        "refit": {
+          "excluded_pack_names": [
+            "amygdala",
+            "cingulate",
+            "lateral_pfc"
+          ],
+          "excluded_entry_labels": [
+            "Amygdala / Cortical subplate (Janak & Tye 2015)",
+            "Subgenual ACC / BA24-25 (Vogt 2012)",
+            "Retrosplenial cortex / BA29-30 (Vogt 2012)",
+            "OFC / BA11-47 (Wallis 2011)"
+          ],
+          "kept_pack_names": [
+            "biccn_motor",
+            "tectum",
+            "olfactory",
+            "hippocampal",
+            "striatum",
+            "entorhinal",
+            "visual",
+            "pag",
+            "perirhinal",
+            "auditory",
+            "somatosensory",
+            "ppc"
+          ],
+          "n_kept_entries": 22,
+          "recipe": {
+            "alpha": 0.5,
+            "xyz_weight": 0.25,
+            "garin": true,
+            "packs": true,
+            "epsilon": 0.05
+          },
+          "saved_file": "outputs/coupling/pi_tms_no_pfc_cingulate_amygdala_packs.npy",
+          "array_sha256": "e27aa3cb3f5d4eaf578f9b5f2723bc6eec48849c1787a7d9f95c842571cc7342",
+          "file_sha256": "2543bcbedd234170e4a176f3066c876bc1e15816d9783f46e446b1138bc1360f"
+        }
+      },
+      "matched_no_connectivity": {
+        "file": "outputs/coupling/pi_ladder_6_NOCONN_spatial+anch+packs.npy",
+        "file_sha256": "140e741fcfeef45b5f385079655c10c74f9f2be5edfa4314c5beb7ddd8c2e2f2",
+        "array_sha256": "2ce1af8a2cd6211304d8972e44e47c025843283647fdcffd68022c5aa3f5ac92",
+        "shape": [
+          1864,
+          2094
+        ]
+      }
+    }
+  },
+  "couplings": {
+    "canonical": {
+      "weightings": {
+        "parcel_mass": {
+          "definition": "mouse parcel mass",
+          "target_parcel_counts": {
+            "PL": 11,
+            "ILA": 4,
+            "ACAd": 19,
+            "ACAv": 12,
+            "ORBm": 5,
+            "FRP": 9,
+            "BLA": 6,
+            "BMA": 9,
+            "CEA": 9,
+            "LA": 1,
+            "AId": 14,
+            "AIv": 9,
+            "AIp": 14
+          },
+          "thresholded": {
+            "top_05": {
+              "fraction": 0.05,
+              "contrast_C": 0.27579441164538904,
+              "bias_dysphoric": 0.22399131577894188,
+              "bias_anxiosomatic": -0.05180309586644717,
+              "active_human_nodes": {
+                "dysphoric": 105,
+                "anxiosomatic": 105
+              },
+              "p_one_sided_uncorrected": 0.06829317068293171,
+              "null": {
+                "mean": 0.007702792243415017,
+                "sd": 0.17185642580932714,
+                "ci95": [
+                  -0.34879203988935054,
+                  0.381270173169985
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "MOs",
+                  "mass": 0.19604286567751752
+                },
+                {
+                  "structure": "MOB",
+                  "mass": 0.11598753223735797
+                },
+                {
+                  "structure": "ACAd",
+                  "mass": 0.09765435987464151
+                },
+                {
+                  "structure": "PL",
+                  "mass": 0.0779267263193344
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.050558850230550234
+                },
+                {
+                  "structure": "ACAv",
+                  "mass": 0.04637724836726018
+                },
+                {
+                  "structure": "FRP",
+                  "mass": 0.04568601173583568
+                },
+                {
+                  "structure": "CP",
+                  "mass": 0.04005580976453606
+                },
+                {
+                  "structure": "fiber tracts",
+                  "mass": 0.03521674911301825
+                },
+                {
+                  "structure": "SSp-bfd",
+                  "mass": 0.03397646770626671
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "AUDv",
+                  "mass": 0.3005144428109877
+                },
+                {
+                  "structure": "VISC",
+                  "mass": 0.14563918534026288
+                },
+                {
+                  "structure": "TEa",
+                  "mass": 0.13816490985809787
+                },
+                {
+                  "structure": "AUDp",
+                  "mass": 0.075360660773224
+                },
+                {
+                  "structure": "VISa",
+                  "mass": 0.0617754438270249
+                },
+                {
+                  "structure": "ECT",
+                  "mass": 0.06050268888426463
+                },
+                {
+                  "structure": "AIp",
+                  "mass": 0.052129658147393856
+                },
+                {
+                  "structure": "VISrl",
+                  "mass": 0.034753075704805375
+                },
+                {
+                  "structure": "SSp-bfd",
+                  "mass": 0.028130738668883597
+                },
+                {
+                  "structure": "SSs",
+                  "mass": 0.02486804770269224
+                }
+              ],
+              "p_one_sided_max_fwer": 0.07029297070292971
+            },
+            "top_10": {
+              "fraction": 0.1,
+              "contrast_C": 0.37571667018370336,
+              "bias_dysphoric": 0.179070561278092,
+              "bias_anxiosomatic": -0.19664610890561135,
+              "active_human_nodes": {
+                "dysphoric": 210,
+                "anxiosomatic": 210
+              },
+              "p_one_sided_uncorrected": 0.0105989401059894,
+              "null": {
+                "mean": 0.010308690773663785,
+                "sd": 0.14442763554817,
+                "ci95": [
+                  -0.2779243846375189,
+                  0.316100933046534
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "MOs",
+                  "mass": 0.2031957643807477
+                },
+                {
+                  "structure": "ACAd",
+                  "mass": 0.09172210562146407
+                },
+                {
+                  "structure": "MOB",
+                  "mass": 0.08583793429552136
+                },
+                {
+                  "structure": "PL",
+                  "mass": 0.058175876319924186
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.05167755102348967
+                },
+                {
+                  "structure": "CP",
+                  "mass": 0.05003741634036453
+                },
+                {
+                  "structure": "SSs",
+                  "mass": 0.045116719423691845
+                },
+                {
+                  "structure": "MOp",
+                  "mass": 0.04165287216928821
+                },
+                {
+                  "structure": "FRP",
+                  "mass": 0.04084328877403593
+                },
+                {
+                  "structure": "SSp-bfd",
+                  "mass": 0.039676130858659564
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "AUDv",
+                  "mass": 0.13875161729240076
+                },
+                {
+                  "structure": "BMA",
+                  "mass": 0.07227950801874396
+                },
+                {
+                  "structure": "VISC",
+                  "mass": 0.0705152809659983
+                },
+                {
+                  "structure": "TEa",
+                  "mass": 0.06505127479575296
+                },
+                {
+                  "structure": "COAp",
+                  "mass": 0.05715502067090172
+                },
+                {
+                  "structure": "BLA",
+                  "mass": 0.0417160413172135
+                },
+                {
+                  "structure": "AIp",
+                  "mass": 0.040957121277774025
+                },
+                {
+                  "structure": "CEA",
+                  "mass": 0.03410545529327018
+                },
+                {
+                  "structure": "COAa",
+                  "mass": 0.03249862070738143
+                },
+                {
+                  "structure": "AUDp",
+                  "mass": 0.029385369191549507
+                }
+              ],
+              "p_one_sided_max_fwer": 0.027197280271972803
+            },
+            "top_20": {
+              "fraction": 0.2,
+              "contrast_C": 0.2803740106915878,
+              "bias_dysphoric": 0.12622912662668365,
+              "bias_anxiosomatic": -0.15414488406490415,
+              "active_human_nodes": {
+                "dysphoric": 419,
+                "anxiosomatic": 419
+              },
+              "p_one_sided_uncorrected": 0.011198880111988802,
+              "null": {
+                "mean": 0.011483450967786673,
+                "sd": 0.1128725022306308,
+                "ci95": [
+                  -0.20561352975333802,
+                  0.24444626014399026
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "MOs",
+                  "mass": 0.1753570880682395
+                },
+                {
+                  "structure": "CP",
+                  "mass": 0.07732554477912604
+                },
+                {
+                  "structure": "ACAd",
+                  "mass": 0.07355626808123199
+                },
+                {
+                  "structure": "MOB",
+                  "mass": 0.06349636427026635
+                },
+                {
+                  "structure": "SSs",
+                  "mass": 0.051127512973774845
+                },
+                {
+                  "structure": "MOp",
+                  "mass": 0.04687434821941949
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.04632770201900937
+                },
+                {
+                  "structure": "SSp-m",
+                  "mass": 0.043956321911547615
+                },
+                {
+                  "structure": "SSp-bfd",
+                  "mass": 0.04160759266691241
+                },
+                {
+                  "structure": "PL",
+                  "mass": 0.039985215269080124
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "CA1",
+                  "mass": 0.07973294069740412
+                },
+                {
+                  "structure": "CA3",
+                  "mass": 0.07377880869830888
+                },
+                {
+                  "structure": "AUDv",
+                  "mass": 0.06256564816906662
+                },
+                {
+                  "structure": "PIR",
+                  "mass": 0.05879466250627392
+                },
+                {
+                  "structure": "BMA",
+                  "mass": 0.04890477360892484
+                },
+                {
+                  "structure": "fiber tracts",
+                  "mass": 0.04855879175228316
+                },
+                {
+                  "structure": "AIp",
+                  "mass": 0.041024592346719575
+                },
+                {
+                  "structure": "COAp",
+                  "mass": 0.03903840371563643
+                },
+                {
+                  "structure": "VISC",
+                  "mass": 0.033492916902699885
+                },
+                {
+                  "structure": "BLA",
+                  "mass": 0.029137467688346075
+                }
+              ],
+              "p_one_sided_max_fwer": 0.0675932406759324
+            },
+            "top_30": {
+              "fraction": 0.3,
+              "contrast_C": 0.2007592470159082,
+              "bias_dysphoric": 0.0860948232776112,
+              "bias_anxiosomatic": -0.114664423738297,
+              "active_human_nodes": {
+                "dysphoric": 628,
+                "anxiosomatic": 628
+              },
+              "p_one_sided_uncorrected": 0.024397560243975602,
+              "null": {
+                "mean": 0.010819950093184115,
+                "sd": 0.09376479531942095,
+                "ci95": [
+                  -0.16733434434548836,
+                  0.19926522463269206
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "MOs",
+                  "mass": 0.13328344430928893
+                },
+                {
+                  "structure": "CP",
+                  "mass": 0.10375278107072666
+                },
+                {
+                  "structure": "ACAd",
+                  "mass": 0.054747488466056
+                },
+                {
+                  "structure": "fiber tracts",
+                  "mass": 0.05180510086747245
+                },
+                {
+                  "structure": "SSs",
+                  "mass": 0.050734871579395345
+                },
+                {
+                  "structure": "SSp-bfd",
+                  "mass": 0.04697341817200928
+                },
+                {
+                  "structure": "MOB",
+                  "mass": 0.04672550275414104
+                },
+                {
+                  "structure": "MOp",
+                  "mass": 0.045716242731206724
+                },
+                {
+                  "structure": "SSp-m",
+                  "mass": 0.04531618720290074
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.03769985212765805
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "CA1",
+                  "mass": 0.07400203117109312
+                },
+                {
+                  "structure": "PIR",
+                  "mass": 0.06400389186714385
+                },
+                {
+                  "structure": "CA3",
+                  "mass": 0.0630617174353867
+                },
+                {
+                  "structure": "fiber tracts",
+                  "mass": 0.05843671117829685
+                },
+                {
+                  "structure": "DG",
+                  "mass": 0.04637212584447956
+                },
+                {
+                  "structure": "AUDv",
+                  "mass": 0.03950466415733592
+                },
+                {
+                  "structure": "ENTl",
+                  "mass": 0.03627601816546792
+                },
+                {
+                  "structure": "AIp",
+                  "mass": 0.03474912486673024
+                },
+                {
+                  "structure": "BMA",
+                  "mass": 0.03250885231148101
+                },
+                {
+                  "structure": "COAp",
+                  "mass": 0.026751303392298503
+                }
+              ],
+              "p_one_sided_max_fwer": 0.132986701329867
+            }
+          },
+          "threshold_omnibus": {
+            "statistic": "max C across top 5/10/20/30 percent",
+            "observed_max_C": 0.37571667018370336,
+            "selected_threshold": 0.1,
+            "p_one_sided": 0.027197280271972803,
+            "null": {
+              "mean": 0.04898908792281224,
+              "sd": 0.13526796854976553,
+              "ci95": [
+                -0.16374327422010665,
+                0.3816330875949099
+              ]
+            }
+          },
+          "threshold_free_signed": {
+            "contrast_C": 0.13607505688586752,
+            "bias_dysphoric": 0.04628291158166307,
+            "bias_anxiosomatic": -0.08979214530420444,
+            "p_one_sided": 0.024897510248975102,
+            "null": {
+              "mean": 0.006087815737380828,
+              "sd": 0.06907391278674414,
+              "ci95": [
+                -0.12843854912057656,
+                0.13600742783829753
+              ]
+            },
+            "top_dysphoric": [
+              {
+                "structure": "CP",
+                "mass": 0.11921791521237053
+              },
+              {
+                "structure": "MOs",
+                "mass": 0.08089902339036611
+              },
+              {
+                "structure": "fiber tracts",
+                "mass": 0.07204566317308268
+              },
+              {
+                "structure": "MOp",
+                "mass": 0.050346362902672005
+              },
+              {
+                "structure": "SSs",
+                "mass": 0.04393523981518206
+              },
+              {
+                "structure": "SSp-bfd",
+                "mass": 0.04001106664202548
+              },
+              {
+                "structure": "SSp-m",
+                "mass": 0.03842300528887022
+              },
+              {
+                "structure": "MOB",
+                "mass": 0.03218003172265163
+              },
+              {
+                "structure": "ACAd",
+                "mass": 0.0317329204840077
+              },
+              {
+                "structure": "VISp",
+                "mass": 0.029726077073009647
+              }
+            ],
+            "top_anxiosomatic": [
+              {
+                "structure": "CA1",
+                "mass": 0.06532876881779456
+              },
+              {
+                "structure": "PIR",
+                "mass": 0.06307333107217843
+              },
+              {
+                "structure": "fiber tracts",
+                "mass": 0.0622527512592883
+              },
+              {
+                "structure": "CA3",
+                "mass": 0.05240199303126456
+              },
+              {
+                "structure": "DG",
+                "mass": 0.04501387751045754
+              },
+              {
+                "structure": "ENTl",
+                "mass": 0.03899434410491248
+              },
+              {
+                "structure": "AUDv",
+                "mass": 0.03018110305987323
+              },
+              {
+                "structure": "AIp",
+                "mass": 0.028929340588778343
+              },
+              {
+                "structure": "CP",
+                "mass": 0.02843192069839583
+              },
+              {
+                "structure": "BMA",
+                "mass": 0.024969117766114154
+              }
+            ]
+          },
+          "conditional_axis": {
+            "primary_top_10": {
+              "contrast_C": 1.6057956628244965,
+              "bias_dysphoric": 0.6119209725847957,
+              "bias_anxiosomatic": -0.9938746902397008,
+              "target_union_mass_fraction": {
+                "dysphoric_input": 0.29263674445032634,
+                "anxiosomatic_input": 0.19785805075505508
+              },
+              "p_one_sided": 0.1533846615338466,
+              "null": {
+                "mean": 0.05985227115611435,
+                "sd": 1.2615176842813842,
+                "ci95": [
+                  -1.9266176996477955,
+                  1.9421330153409517
+                ]
+              }
+            },
+            "threshold_free_signed": {
+              "contrast_C": 1.3181636797794825,
+              "bias_dysphoric": 0.4128402454982199,
+              "bias_anxiosomatic": -0.9053234342812626,
+              "target_union_mass_fraction": {
+                "dysphoric_input": 0.11210852644903446,
+                "anxiosomatic_input": 0.09918239372152178
+              },
+              "p_one_sided": 0.07489251074892511,
+              "null": {
+                "mean": 0.07906066788467148,
+                "sd": 0.857136364299499,
+                "ci95": [
+                  -1.4646402262330407,
+                  1.5289791104898862
+                ]
+              }
+            }
+          }
+        },
+        "structure_balanced": {
+          "definition": "mean within each acronym, followed by equal weighting of acronyms",
+          "target_parcel_counts": {
+            "PL": 11,
+            "ILA": 4,
+            "ACAd": 19,
+            "ACAv": 12,
+            "ORBm": 5,
+            "FRP": 9,
+            "BLA": 6,
+            "BMA": 9,
+            "CEA": 9,
+            "LA": 1,
+            "AId": 14,
+            "AIv": 9,
+            "AIp": 14
+          },
+          "thresholded": {
+            "top_05": {
+              "fraction": 0.05,
+              "contrast_C": 0.37731352167224685,
+              "bias_dysphoric": 0.3418360005522422,
+              "bias_anxiosomatic": -0.035477521120004615,
+              "active_human_nodes": {
+                "dysphoric": 105,
+                "anxiosomatic": 105
+              },
+              "p_one_sided_uncorrected": 0.0638936106389361,
+              "null": {
+                "mean": 0.013117882132590821,
+                "sd": 0.21898505698520024,
+                "ci95": [
+                  -0.43821283343101247,
+                  0.49790561316222953
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "PL",
+                  "mass": 0.12530011037552827
+                },
+                {
+                  "structure": "ACAd",
+                  "mass": 0.09090666871690306
+                },
+                {
+                  "structure": "FRP",
+                  "mass": 0.08978389545962992
+                },
+                {
+                  "structure": "DP",
+                  "mass": 0.08932241010875738
+                },
+                {
+                  "structure": "ACAv",
+                  "mass": 0.06835675506960316
+                },
+                {
+                  "structure": "MOs",
+                  "mass": 0.06542336520460079
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.06387440387842504
+                },
+                {
+                  "structure": "MOB",
+                  "mass": 0.05398653056518908
+                },
+                {
+                  "structure": "GU",
+                  "mass": 0.04518145653040059
+                },
+                {
+                  "structure": "ORBm",
+                  "mass": 0.03967688681925607
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "AUDv",
+                  "mass": 0.2624279403476085
+                },
+                {
+                  "structure": "TEa",
+                  "mass": 0.16589953889377881
+                },
+                {
+                  "structure": "VISC",
+                  "mass": 0.1398993346002554
+                },
+                {
+                  "structure": "ECT",
+                  "mass": 0.11623638098028945
+                },
+                {
+                  "structure": "AUDp",
+                  "mass": 0.08043398693053792
+                },
+                {
+                  "structure": "VISa",
+                  "mass": 0.07417598040188131
+                },
+                {
+                  "structure": "VISrl",
+                  "mass": 0.05563901128961778
+                },
+                {
+                  "structure": "AIp",
+                  "mass": 0.03576796642391296
+                },
+                {
+                  "structure": "VISpor",
+                  "mass": 0.015328963314679069
+                },
+                {
+                  "structure": "VISam",
+                  "mass": 0.011245863710295796
+                }
+              ],
+              "p_one_sided_max_fwer": 0.06419358064193581
+            },
+            "top_10": {
+              "fraction": 0.1,
+              "contrast_C": 0.5159593993909736,
+              "bias_dysphoric": 0.2810121727436514,
+              "bias_anxiosomatic": -0.23494722664732215,
+              "active_human_nodes": {
+                "dysphoric": 210,
+                "anxiosomatic": 210
+              },
+              "p_one_sided_uncorrected": 0.0047995200479952005,
+              "null": {
+                "mean": 0.016278129221015597,
+                "sd": 0.17544974413810915,
+                "ci95": [
+                  -0.3313120918453462,
+                  0.39798101608478165
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "PL",
+                  "mass": 0.09848547235718838
+                },
+                {
+                  "structure": "ACAd",
+                  "mass": 0.08989640792774045
+                },
+                {
+                  "structure": "FRP",
+                  "mass": 0.08450844665030169
+                },
+                {
+                  "structure": "MOs",
+                  "mass": 0.07139383393071409
+                },
+                {
+                  "structure": "DP",
+                  "mass": 0.07139124267760105
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.06873782913906666
+                },
+                {
+                  "structure": "ACAv",
+                  "mass": 0.057648011310543465
+                },
+                {
+                  "structure": "GU",
+                  "mass": 0.05168938343418835
+                },
+                {
+                  "structure": "MOB",
+                  "mass": 0.042064679527478124
+                },
+                {
+                  "structure": "SSp-tr",
+                  "mass": 0.04196372844059334
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "AUDv",
+                  "mass": 0.09972164126420356
+                },
+                {
+                  "structure": "TEa",
+                  "mass": 0.06428503336667177
+                },
+                {
+                  "structure": "COAa",
+                  "mass": 0.0642316364469224
+                },
+                {
+                  "structure": "LA",
+                  "mass": 0.06387025624710119
+                },
+                {
+                  "structure": "IA",
+                  "mass": 0.06369877141441059
+                },
+                {
+                  "structure": "BMA",
+                  "mass": 0.06349166662828577
+                },
+                {
+                  "structure": "VISC",
+                  "mass": 0.05574774304106814
+                },
+                {
+                  "structure": "BLA",
+                  "mass": 0.05496622198253186
+                },
+                {
+                  "structure": "NLOT",
+                  "mass": 0.04789923701273261
+                },
+                {
+                  "structure": "PAA",
+                  "mass": 0.04592885856412521
+                }
+              ],
+              "p_one_sided_max_fwer": 0.021097890210978902
+            },
+            "top_20": {
+              "fraction": 0.2,
+              "contrast_C": 0.38646035189237704,
+              "bias_dysphoric": 0.1832883672884502,
+              "bias_anxiosomatic": -0.20317198460392688,
+              "active_human_nodes": {
+                "dysphoric": 419,
+                "anxiosomatic": 419
+              },
+              "p_one_sided_uncorrected": 0.0064993500649935,
+              "null": {
+                "mean": 0.01696348875748504,
+                "sd": 0.13268412662998513,
+                "ci95": [
+                  -0.2400416451626585,
+                  0.29614936460478075
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "ACAd",
+                  "mass": 0.06682353368900341
+                },
+                {
+                  "structure": "PL",
+                  "mass": 0.06274369705682435
+                },
+                {
+                  "structure": "FRP",
+                  "mass": 0.061536626507173155
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.05711840541532146
+                },
+                {
+                  "structure": "MOs",
+                  "mass": 0.05710982209594887
+                },
+                {
+                  "structure": "DP",
+                  "mass": 0.04543524261377218
+                },
+                {
+                  "structure": "GU",
+                  "mass": 0.04433951984324566
+                },
+                {
+                  "structure": "ACAv",
+                  "mass": 0.04021363796516083
+                },
+                {
+                  "structure": "SSp-tr",
+                  "mass": 0.03553101690365515
+                },
+                {
+                  "structure": "SSp-ll",
+                  "mass": 0.031450525179251
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "AUDv",
+                  "mass": 0.05261377680612892
+                },
+                {
+                  "structure": "COAa",
+                  "mass": 0.050714283162610035
+                },
+                {
+                  "structure": "LA",
+                  "mass": 0.05057529006734551
+                },
+                {
+                  "structure": "IA",
+                  "mass": 0.05039268014547199
+                },
+                {
+                  "structure": "BMA",
+                  "mass": 0.050264915698491626
+                },
+                {
+                  "structure": "BLA",
+                  "mass": 0.04492176066698812
+                },
+                {
+                  "structure": "NLOT",
+                  "mass": 0.03914363102380983
+                },
+                {
+                  "structure": "PAA",
+                  "mass": 0.03889423610673112
+                },
+                {
+                  "structure": "CA2",
+                  "mass": 0.038209343880136894
+                },
+                {
+                  "structure": "COAp",
+                  "mass": 0.03611172763451544
+                }
+              ],
+              "p_one_sided_max_fwer": 0.06029397060293971
+            },
+            "top_30": {
+              "fraction": 0.3,
+              "contrast_C": 0.2503695657819296,
+              "bias_dysphoric": 0.11045807877280259,
+              "bias_anxiosomatic": -0.13991148700912698,
+              "active_human_nodes": {
+                "dysphoric": 628,
+                "anxiosomatic": 628
+              },
+              "p_one_sided_uncorrected": 0.0198980101989801,
+              "null": {
+                "mean": 0.01529871621679518,
+                "sd": 0.10844323857283698,
+                "ci95": [
+                  -0.1950867529895803,
+                  0.23941630595188534
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "ACAd",
+                  "mass": 0.04393252824343245
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.04105699957434142
+                },
+                {
+                  "structure": "FRP",
+                  "mass": 0.04087227875834643
+                },
+                {
+                  "structure": "PL",
+                  "mass": 0.03901469105955285
+                },
+                {
+                  "structure": "MOs",
+                  "mass": 0.03834210346022065
+                },
+                {
+                  "structure": "GU",
+                  "mass": 0.03359941061820529
+                },
+                {
+                  "structure": "SSp-n",
+                  "mass": 0.028599575872108454
+                },
+                {
+                  "structure": "SSp-un",
+                  "mass": 0.027918326962747392
+                },
+                {
+                  "structure": "DP",
+                  "mass": 0.02786633115948465
+                },
+                {
+                  "structure": "SSp-tr",
+                  "mass": 0.026484986362183993
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "COAa",
+                  "mass": 0.03250309624838066
+                },
+                {
+                  "structure": "LA",
+                  "mass": 0.0324216497046528
+                },
+                {
+                  "structure": "IA",
+                  "mass": 0.032377446754132004
+                },
+                {
+                  "structure": "BMA",
+                  "mass": 0.03231442361111531
+                },
+                {
+                  "structure": "AUDv",
+                  "mass": 0.03212868678372931
+                },
+                {
+                  "structure": "BLA",
+                  "mass": 0.029856413126453842
+                },
+                {
+                  "structure": "CA2",
+                  "mass": 0.027980761672900655
+                },
+                {
+                  "structure": "NLOT",
+                  "mass": 0.02752594242656894
+                },
+                {
+                  "structure": "PAA",
+                  "mass": 0.026193568167740145
+                },
+                {
+                  "structure": "COAp",
+                  "mass": 0.023932178457638575
+                }
+              ],
+              "p_one_sided_max_fwer": 0.140985901409859
+            }
+          },
+          "threshold_omnibus": {
+            "statistic": "max C across top 5/10/20/30 percent",
+            "observed_max_C": 0.5159593993909736,
+            "selected_threshold": 0.1,
+            "p_one_sided": 0.021097890210978902,
+            "null": {
+              "mean": 0.07031591625818302,
+              "sd": 0.1679264421119185,
+              "ci95": [
+                -0.18730395004883726,
+                0.4980737552128232
+              ]
+            }
+          },
+          "threshold_free_signed": {
+            "contrast_C": 0.15824837455562102,
+            "bias_dysphoric": 0.052313202840495156,
+            "bias_anxiosomatic": -0.10593517171512586,
+            "p_one_sided": 0.025097490250974904,
+            "null": {
+              "mean": 0.008058704731547258,
+              "sd": 0.07820946925630404,
+              "ci95": [
+                -0.14541745764693903,
+                0.15818435147489357
+              ]
+            },
+            "top_dysphoric": [
+              {
+                "structure": "AId",
+                "mass": 0.021607778030829528
+              },
+              {
+                "structure": "ACAd",
+                "mass": 0.021174520294450026
+              },
+              {
+                "structure": "FRP",
+                "mass": 0.02038015507558076
+              },
+              {
+                "structure": "MOs",
+                "mass": 0.019351941699188392
+              },
+              {
+                "structure": "SSp-n",
+                "mass": 0.019059648124517305
+              },
+              {
+                "structure": "PL",
+                "mass": 0.01899132957092577
+              },
+              {
+                "structure": "SSp-un",
+                "mass": 0.018918519496322117
+              },
+              {
+                "structure": "SSp-m",
+                "mass": 0.018042001065535936
+              },
+              {
+                "structure": "GU",
+                "mass": 0.017699039839884925
+              },
+              {
+                "structure": "VISpl",
+                "mass": 0.01756230203281091
+              }
+            ],
+            "top_anxiosomatic": [
+              {
+                "structure": "COAa",
+                "mass": 0.02460095184248798
+              },
+              {
+                "structure": "LA",
+                "mass": 0.024553834762220433
+              },
+              {
+                "structure": "IA",
+                "mass": 0.024528263217101397
+              },
+              {
+                "structure": "BMA",
+                "mass": 0.0244918041317639
+              },
+              {
+                "structure": "AUDv",
+                "mass": 0.024221582414226086
+              },
+              {
+                "structure": "BLA",
+                "mass": 0.02301853252206119
+              },
+              {
+                "structure": "CA2",
+                "mass": 0.021984767147150003
+              },
+              {
+                "structure": "NLOT",
+                "mass": 0.021698306281121127
+              },
+              {
+                "structure": "PAA",
+                "mass": 0.020449238165937588
+              },
+              {
+                "structure": "COAp",
+                "mass": 0.018762124531183727
+              }
+            ]
+          },
+          "conditional_axis": {
+            "primary_top_10": {
+              "contrast_C": 1.634798410662691,
+              "bias_dysphoric": 0.6393524398058519,
+              "bias_anxiosomatic": -0.9954459708568392,
+              "target_union_mass_fraction": {
+                "dysphoric_input": 0.43952623818716413,
+                "anxiosomatic_input": 0.23602207806927902
+              },
+              "p_one_sided": 0.1344865513448655,
+              "null": {
+                "mean": 0.056174496452803716,
+                "sd": 1.235060735620279,
+                "ci95": [
+                  -1.9183170446307007,
+                  1.933446320605831
+                ]
+              }
+            },
+            "threshold_free_signed": {
+              "contrast_C": 1.3326478066484382,
+              "bias_dysphoric": 0.4346912336382675,
+              "bias_anxiosomatic": -0.8979565730101707,
+              "target_union_mass_fraction": {
+                "dysphoric_input": 0.12034565869351783,
+                "anxiosomatic_input": 0.11797360239817073
+              },
+              "p_one_sided": 0.06999300069993,
+              "null": {
+                "mean": 0.08133448803996197,
+                "sd": 0.856480218838352,
+                "ci95": [
+                  -1.483595298243717,
+                  1.5355123688034324
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "no_relevant_anchor_packs": {
+      "weightings": {
+        "parcel_mass": {
+          "definition": "mouse parcel mass",
+          "target_parcel_counts": {
+            "PL": 11,
+            "ILA": 4,
+            "ACAd": 19,
+            "ACAv": 12,
+            "ORBm": 5,
+            "FRP": 9,
+            "BLA": 6,
+            "BMA": 9,
+            "CEA": 9,
+            "LA": 1,
+            "AId": 14,
+            "AIv": 9,
+            "AIp": 14
+          },
+          "thresholded": {
+            "top_05": {
+              "fraction": 0.05,
+              "contrast_C": 0.25877734866539437,
+              "bias_dysphoric": 0.20982499332534618,
+              "bias_anxiosomatic": -0.048952355340048194,
+              "active_human_nodes": {
+                "dysphoric": 105,
+                "anxiosomatic": 105
+              },
+              "p_one_sided_uncorrected": 0.073992600739926,
+              "null": {
+                "mean": 0.0066938947084671,
+                "sd": 0.16789053057624848,
+                "ci95": [
+                  -0.33814671260921153,
+                  0.3699717419706435
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "MOs",
+                  "mass": 0.19192169700091705
+                },
+                {
+                  "structure": "MOB",
+                  "mass": 0.1538619975060007
+                },
+                {
+                  "structure": "ACAd",
+                  "mass": 0.10125100273936513
+                },
+                {
+                  "structure": "PL",
+                  "mass": 0.09062306618846071
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.05006106017540618
+                },
+                {
+                  "structure": "FRP",
+                  "mass": 0.045309335362645635
+                },
+                {
+                  "structure": "CP",
+                  "mass": 0.03932367170870349
+                },
+                {
+                  "structure": "SSp-bfd",
+                  "mass": 0.03367726468166176
+                },
+                {
+                  "structure": "GU",
+                  "mass": 0.03274950703416284
+                },
+                {
+                  "structure": "MOp",
+                  "mass": 0.030884474625443647
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "AUDv",
+                  "mass": 0.2740127272443011
+                },
+                {
+                  "structure": "VISC",
+                  "mass": 0.13613097281412492
+                },
+                {
+                  "structure": "TEa",
+                  "mass": 0.1259397399948394
+                },
+                {
+                  "structure": "AUDp",
+                  "mass": 0.06832315984858191
+                },
+                {
+                  "structure": "ECT",
+                  "mass": 0.05591601520635774
+                },
+                {
+                  "structure": "VISa",
+                  "mass": 0.0554686134146611
+                },
+                {
+                  "structure": "RSPv",
+                  "mass": 0.054431609494408985
+                },
+                {
+                  "structure": "AIp",
+                  "mass": 0.04835024016367104
+                },
+                {
+                  "structure": "VISrl",
+                  "mass": 0.03080541826693054
+                },
+                {
+                  "structure": "RSPd",
+                  "mass": 0.02912311288868858
+                }
+              ],
+              "p_one_sided_max_fwer": 0.07529247075292471
+            },
+            "top_10": {
+              "fraction": 0.1,
+              "contrast_C": 0.3087344107240856,
+              "bias_dysphoric": 0.16368311573210012,
+              "bias_anxiosomatic": -0.14505129499198546,
+              "active_human_nodes": {
+                "dysphoric": 210,
+                "anxiosomatic": 210
+              },
+              "p_one_sided_uncorrected": 0.022097790220977902,
+              "null": {
+                "mean": 0.009108957754893223,
+                "sd": 0.1387902590996437,
+                "ci95": [
+                  -0.26161822615944824,
+                  0.2986897494721199
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "MOs",
+                  "mass": 0.19924320860202485
+                },
+                {
+                  "structure": "MOB",
+                  "mass": 0.11185250751713018
+                },
+                {
+                  "structure": "ACAd",
+                  "mass": 0.09346963999182388
+                },
+                {
+                  "structure": "PL",
+                  "mass": 0.06756446500539981
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.05118110746412249
+                },
+                {
+                  "structure": "CP",
+                  "mass": 0.049508923148262475
+                },
+                {
+                  "structure": "SSs",
+                  "mass": 0.043663168716986375
+                },
+                {
+                  "structure": "MOp",
+                  "mass": 0.04072028311906053
+                },
+                {
+                  "structure": "FRP",
+                  "mass": 0.04047754640609317
+                },
+                {
+                  "structure": "SSp-bfd",
+                  "mass": 0.03934057492708617
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "AUDv",
+                  "mass": 0.15990865002883417
+                },
+                {
+                  "structure": "VISC",
+                  "mass": 0.08286092323008823
+                },
+                {
+                  "structure": "TEa",
+                  "mass": 0.07471794037565892
+                },
+                {
+                  "structure": "RSPv",
+                  "mass": 0.050571688470498664
+                },
+                {
+                  "structure": "BLA",
+                  "mass": 0.05006121767182425
+                },
+                {
+                  "structure": "AIp",
+                  "mass": 0.04184542053885847
+                },
+                {
+                  "structure": "CA3",
+                  "mass": 0.04133349695075234
+                },
+                {
+                  "structure": "BMA",
+                  "mass": 0.039392410194224174
+                },
+                {
+                  "structure": "CA1",
+                  "mass": 0.0337965778269805
+                },
+                {
+                  "structure": "AUDp",
+                  "mass": 0.0337190985865941
+                }
+              ],
+              "p_one_sided_max_fwer": 0.048095190480951906
+            },
+            "top_20": {
+              "fraction": 0.2,
+              "contrast_C": 0.2376167134803115,
+              "bias_dysphoric": 0.10997156445467919,
+              "bias_anxiosomatic": -0.12764514902563232,
+              "active_human_nodes": {
+                "dysphoric": 419,
+                "anxiosomatic": 419
+              },
+              "p_one_sided_uncorrected": 0.020097990200979902,
+              "null": {
+                "mean": 0.009600347009326582,
+                "sd": 0.1069372420805431,
+                "ci95": [
+                  -0.19156662661433363,
+                  0.22621453223544286
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "MOs",
+                  "mass": 0.17297144856670096
+                },
+                {
+                  "structure": "MOB",
+                  "mass": 0.0788149824046798
+                },
+                {
+                  "structure": "CP",
+                  "mass": 0.07672145946133606
+                },
+                {
+                  "structure": "ACAd",
+                  "mass": 0.07424139982601992
+                },
+                {
+                  "structure": "SSs",
+                  "mass": 0.04958632276735428
+                },
+                {
+                  "structure": "MOp",
+                  "mass": 0.0461895192754735
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.04596620728485318
+                },
+                {
+                  "structure": "PL",
+                  "mass": 0.045812717183488144
+                },
+                {
+                  "structure": "SSp-m",
+                  "mass": 0.042710015202715376
+                },
+                {
+                  "structure": "SSp-bfd",
+                  "mass": 0.041391580511132446
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "CA1",
+                  "mass": 0.08587678885330596
+                },
+                {
+                  "structure": "CA3",
+                  "mass": 0.08324286382407553
+                },
+                {
+                  "structure": "AUDv",
+                  "mass": 0.06845846581021761
+                },
+                {
+                  "structure": "PIR",
+                  "mass": 0.05506124201859136
+                },
+                {
+                  "structure": "fiber tracts",
+                  "mass": 0.053445078363398235
+                },
+                {
+                  "structure": "AIp",
+                  "mass": 0.04144283274403462
+                },
+                {
+                  "structure": "VISC",
+                  "mass": 0.03735625721616242
+                },
+                {
+                  "structure": "BLA",
+                  "mass": 0.033186145005079354
+                },
+                {
+                  "structure": "BMA",
+                  "mass": 0.03161663875664045
+                },
+                {
+                  "structure": "TEa",
+                  "mass": 0.03101544005108275
+                }
+              ],
+              "p_one_sided_max_fwer": 0.0918908109189081
+            },
+            "top_30": {
+              "fraction": 0.3,
+              "contrast_C": 0.17173212782130337,
+              "bias_dysphoric": 0.07250337230929209,
+              "bias_anxiosomatic": -0.09922875551201128,
+              "active_human_nodes": {
+                "dysphoric": 628,
+                "anxiosomatic": 628
+              },
+              "p_one_sided_uncorrected": 0.0334966503349665,
+              "null": {
+                "mean": 0.008730779855909077,
+                "sd": 0.08828402302018756,
+                "ci95": [
+                  -0.1556482771630412,
+                  0.18413820191475205
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "MOs",
+                  "mass": 0.13265491320123776
+                },
+                {
+                  "structure": "CP",
+                  "mass": 0.10344427325731703
+                },
+                {
+                  "structure": "MOB",
+                  "mass": 0.056631690157841676
+                },
+                {
+                  "structure": "ACAd",
+                  "mass": 0.0554178836910777
+                },
+                {
+                  "structure": "SSs",
+                  "mass": 0.04989480483737638
+                },
+                {
+                  "structure": "SSp-bfd",
+                  "mass": 0.047128533547504466
+                },
+                {
+                  "structure": "MOp",
+                  "mass": 0.04549064913452245
+                },
+                {
+                  "structure": "SSp-m",
+                  "mass": 0.04472490710985166
+                },
+                {
+                  "structure": "fiber tracts",
+                  "mass": 0.04458493995218202
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.0376804489025486
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "CA1",
+                  "mass": 0.07663771498710145
+                },
+                {
+                  "structure": "CA3",
+                  "mass": 0.0674283112038155
+                },
+                {
+                  "structure": "fiber tracts",
+                  "mass": 0.06212466804482452
+                },
+                {
+                  "structure": "PIR",
+                  "mass": 0.06027810454575437
+                },
+                {
+                  "structure": "DG",
+                  "mass": 0.047775453761751845
+                },
+                {
+                  "structure": "AUDv",
+                  "mass": 0.041610096408859897
+                },
+                {
+                  "structure": "ENTl",
+                  "mass": 0.03908772126686493
+                },
+                {
+                  "structure": "AIp",
+                  "mass": 0.03501706940233551
+                },
+                {
+                  "structure": "OT",
+                  "mass": 0.02547475042047973
+                },
+                {
+                  "structure": "VISC",
+                  "mass": 0.024644500553117347
+                }
+              ],
+              "p_one_sided_max_fwer": 0.1573842615738426
+            }
+          },
+          "threshold_omnibus": {
+            "statistic": "max C across top 5/10/20/30 percent",
+            "observed_max_C": 0.3087344107240856,
+            "selected_threshold": 0.1,
+            "p_one_sided": 0.048095190480951906,
+            "null": {
+              "mean": 0.04625391630963341,
+              "sd": 0.1310201776047697,
+              "ci95": [
+                -0.15467806650238677,
+                0.3705115303551915
+              ]
+            }
+          },
+          "threshold_free_signed": {
+            "contrast_C": 0.11801326524995706,
+            "bias_dysphoric": 0.03950940375647263,
+            "bias_anxiosomatic": -0.07850386149348443,
+            "p_one_sided": 0.033596640335966405,
+            "null": {
+              "mean": 0.004198527640858956,
+              "sd": 0.06446399950022168,
+              "ci95": [
+                -0.12023144385400526,
+                0.1228515505005514
+              ]
+            },
+            "top_dysphoric": [
+              {
+                "structure": "CP",
+                "mass": 0.11807461538793936
+              },
+              {
+                "structure": "MOs",
+                "mass": 0.08059662081026782
+              },
+              {
+                "structure": "fiber tracts",
+                "mass": 0.06945920383016024
+              },
+              {
+                "structure": "MOp",
+                "mass": 0.05025684408407735
+              },
+              {
+                "structure": "SSs",
+                "mass": 0.04341493852683611
+              },
+              {
+                "structure": "SSp-bfd",
+                "mass": 0.040003437202506036
+              },
+              {
+                "structure": "SSp-m",
+                "mass": 0.0381894396624581
+              },
+              {
+                "structure": "MOB",
+                "mass": 0.035275487222117555
+              },
+              {
+                "structure": "ACAd",
+                "mass": 0.03216504057249471
+              },
+              {
+                "structure": "VISp",
+                "mass": 0.030205766610186088
+              }
+            ],
+            "top_anxiosomatic": [
+              {
+                "structure": "CA1",
+                "mass": 0.0664754640508219
+              },
+              {
+                "structure": "fiber tracts",
+                "mass": 0.06496053506435591
+              },
+              {
+                "structure": "PIR",
+                "mass": 0.059770863629218705
+              },
+              {
+                "structure": "CA3",
+                "mass": 0.05474262524988984
+              },
+              {
+                "structure": "DG",
+                "mass": 0.045575749129965266
+              },
+              {
+                "structure": "ENTl",
+                "mass": 0.04089496036466915
+              },
+              {
+                "structure": "CP",
+                "mass": 0.03139005857797657
+              },
+              {
+                "structure": "AUDv",
+                "mass": 0.03118027423088825
+              },
+              {
+                "structure": "AIp",
+                "mass": 0.02899030845970599
+              },
+              {
+                "structure": "OT",
+                "mass": 0.02447873707766747
+              }
+            ]
+          },
+          "conditional_axis": {
+            "primary_top_10": {
+              "contrast_C": 1.578567231534513,
+              "bias_dysphoric": 0.5878672070197128,
+              "bias_anxiosomatic": -0.9907000245148002,
+              "target_union_mass_fraction": {
+                "dysphoric_input": 0.27843552723738063,
+                "anxiosomatic_input": 0.1464129316672067
+              },
+              "p_one_sided": 0.14588541145885411,
+              "null": {
+                "mean": 0.05738083868280808,
+                "sd": 1.228222196311429,
+                "ci95": [
+                  -1.9069343089337663,
+                  1.9282961096894278
+                ]
+              }
+            },
+            "threshold_free_signed": {
+              "contrast_C": 1.2363965614093513,
+              "bias_dysphoric": 0.3577319755391358,
+              "bias_anxiosomatic": -0.8786645858702155,
+              "target_union_mass_fraction": {
+                "dysphoric_input": 0.11044414941361681,
+                "anxiosomatic_input": 0.08934451525178455
+              },
+              "p_one_sided": 0.0746925307469253,
+              "null": {
+                "mean": 0.05851477415296042,
+                "sd": 0.8076164703493951,
+                "ci95": [
+                  -1.3906101302152227,
+                  1.4398183000618736
+                ]
+              }
+            }
+          }
+        },
+        "structure_balanced": {
+          "definition": "mean within each acronym, followed by equal weighting of acronyms",
+          "target_parcel_counts": {
+            "PL": 11,
+            "ILA": 4,
+            "ACAd": 19,
+            "ACAv": 12,
+            "ORBm": 5,
+            "FRP": 9,
+            "BLA": 6,
+            "BMA": 9,
+            "CEA": 9,
+            "LA": 1,
+            "AId": 14,
+            "AIv": 9,
+            "AIp": 14
+          },
+          "thresholded": {
+            "top_05": {
+              "fraction": 0.05,
+              "contrast_C": 0.40727867641322735,
+              "bias_dysphoric": 0.36629236638706913,
+              "bias_anxiosomatic": -0.04098631002615819,
+              "active_human_nodes": {
+                "dysphoric": 105,
+                "anxiosomatic": 105
+              },
+              "p_one_sided_uncorrected": 0.0532946705329467,
+              "null": {
+                "mean": 0.010423331484003125,
+                "sd": 0.22373106117361644,
+                "ci95": [
+                  -0.449375991864286,
+                  0.5070167175752739
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "PL",
+                  "mass": 0.15269547220002366
+                },
+                {
+                  "structure": "ACAd",
+                  "mass": 0.09877017522719883
+                },
+                {
+                  "structure": "FRP",
+                  "mass": 0.09330937370193994
+                },
+                {
+                  "structure": "ORBm",
+                  "mass": 0.09151385175007477
+                },
+                {
+                  "structure": "MOB",
+                  "mass": 0.07504605408004578
+                },
+                {
+                  "structure": "MOs",
+                  "mass": 0.06711634498957281
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.06627536058505686
+                },
+                {
+                  "structure": "GU",
+                  "mass": 0.04669189573529324
+                },
+                {
+                  "structure": "SSp-tr",
+                  "mass": 0.03702483475757248
+                },
+                {
+                  "structure": "SSp-ll",
+                  "mass": 0.03277231910915589
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "AUDv",
+                  "mass": 0.24993471219530689
+                },
+                {
+                  "structure": "TEa",
+                  "mass": 0.15795061914062186
+                },
+                {
+                  "structure": "VISC",
+                  "mass": 0.13658577628371962
+                },
+                {
+                  "structure": "ECT",
+                  "mass": 0.11220565292045273
+                },
+                {
+                  "structure": "AUDp",
+                  "mass": 0.07616824716801082
+                },
+                {
+                  "structure": "VISa",
+                  "mass": 0.06956741241546578
+                },
+                {
+                  "structure": "VISrl",
+                  "mass": 0.051513894802354236
+                },
+                {
+                  "structure": "AIp",
+                  "mass": 0.03465126766074241
+                },
+                {
+                  "structure": "RSPv",
+                  "mass": 0.02874392708370643
+                },
+                {
+                  "structure": "VISpor",
+                  "mass": 0.014373776073904459
+                }
+              ],
+              "p_one_sided_max_fwer": 0.05369463053694631
+            },
+            "top_10": {
+              "fraction": 0.1,
+              "contrast_C": 0.4749460279343428,
+              "bias_dysphoric": 0.2879285790892112,
+              "bias_anxiosomatic": -0.18701744884513163,
+              "active_human_nodes": {
+                "dysphoric": 210,
+                "anxiosomatic": 210
+              },
+              "p_one_sided_uncorrected": 0.0112988701129887,
+              "null": {
+                "mean": 0.012749598623829983,
+                "sd": 0.177115807019749,
+                "ci95": [
+                  -0.3376671007967228,
+                  0.39491113521664595
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "PL",
+                  "mass": 0.118429597151789
+                },
+                {
+                  "structure": "ACAd",
+                  "mass": 0.09485310759915877
+                },
+                {
+                  "structure": "FRP",
+                  "mass": 0.08671740332406445
+                },
+                {
+                  "structure": "MOs",
+                  "mass": 0.07248401678696435
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.070488170415167
+                },
+                {
+                  "structure": "ORBm",
+                  "mass": 0.06672049807403223
+                },
+                {
+                  "structure": "MOB",
+                  "mass": 0.05675403228088885
+                },
+                {
+                  "structure": "GU",
+                  "mass": 0.05269416420489786
+                },
+                {
+                  "structure": "SSp-tr",
+                  "mass": 0.04212824581905184
+                },
+                {
+                  "structure": "SSp-ll",
+                  "mass": 0.03706633406394049
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "AUDv",
+                  "mass": 0.1315797235616281
+                },
+                {
+                  "structure": "TEa",
+                  "mass": 0.0845365661249854
+                },
+                {
+                  "structure": "BLA",
+                  "mass": 0.07551963052397218
+                },
+                {
+                  "structure": "VISC",
+                  "mass": 0.0749996895588911
+                },
+                {
+                  "structure": "ECT",
+                  "mass": 0.05901099354311243
+                },
+                {
+                  "structure": "IA",
+                  "mass": 0.05792798725853256
+                },
+                {
+                  "structure": "COAa",
+                  "mass": 0.04514773173722405
+                },
+                {
+                  "structure": "BMA",
+                  "mass": 0.039616831840014896
+                },
+                {
+                  "structure": "EPv",
+                  "mass": 0.03937771964539803
+                },
+                {
+                  "structure": "LA",
+                  "mass": 0.03491689731119885
+                }
+              ],
+              "p_one_sided_max_fwer": 0.033996600339966
+            },
+            "top_20": {
+              "fraction": 0.2,
+              "contrast_C": 0.3526795835409837,
+              "bias_dysphoric": 0.17372505257616017,
+              "bias_anxiosomatic": -0.17895453096482358,
+              "active_human_nodes": {
+                "dysphoric": 419,
+                "anxiosomatic": 419
+              },
+              "p_one_sided_uncorrected": 0.0091990800919908,
+              "null": {
+                "mean": 0.01199377353234578,
+                "sd": 0.13047676171330172,
+                "ci95": [
+                  -0.24124993048257828,
+                  0.2848843967848604
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "PL",
+                  "mass": 0.07328928155240368
+                },
+                {
+                  "structure": "ACAd",
+                  "mass": 0.06876059873565223
+                },
+                {
+                  "structure": "FRP",
+                  "mass": 0.062357521989748456
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.05777736535957413
+                },
+                {
+                  "structure": "MOs",
+                  "mass": 0.05743090388674874
+                },
+                {
+                  "structure": "GU",
+                  "mass": 0.04448876470917816
+                },
+                {
+                  "structure": "ORBm",
+                  "mass": 0.04330712431943603
+                },
+                {
+                  "structure": "MOB",
+                  "mass": 0.03649827045412413
+                },
+                {
+                  "structure": "RSPagl",
+                  "mass": 0.03628055657675722
+                },
+                {
+                  "structure": "SSp-tr",
+                  "mass": 0.03550493373018331
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "AUDv",
+                  "mass": 0.06315147545469678
+                },
+                {
+                  "structure": "BLA",
+                  "mass": 0.056124770852242004
+                },
+                {
+                  "structure": "CA2",
+                  "mass": 0.045401460434986475
+                },
+                {
+                  "structure": "IA",
+                  "mass": 0.04146156118775841
+                },
+                {
+                  "structure": "TEa",
+                  "mass": 0.03934023819613662
+                },
+                {
+                  "structure": "VISC",
+                  "mass": 0.037906386098782385
+                },
+                {
+                  "structure": "LA",
+                  "mass": 0.037277342910110325
+                },
+                {
+                  "structure": "COAa",
+                  "mass": 0.03685152010916643
+                },
+                {
+                  "structure": "BMA",
+                  "mass": 0.035646936496399606
+                },
+                {
+                  "structure": "EPv",
+                  "mass": 0.03224002403000625
+                }
+              ],
+              "p_one_sided_max_fwer": 0.0755924407559244
+            },
+            "top_30": {
+              "fraction": 0.3,
+              "contrast_C": 0.223623745236312,
+              "bias_dysphoric": 0.09940503915506137,
+              "bias_anxiosomatic": -0.12421870608125063,
+              "active_human_nodes": {
+                "dysphoric": 628,
+                "anxiosomatic": 628
+              },
+              "p_one_sided_uncorrected": 0.025897410258974102,
+              "null": {
+                "mean": 0.01002093232887467,
+                "sd": 0.10457427794998948,
+                "ci95": [
+                  -0.18744512751848177,
+                  0.22626810432539982
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "PL",
+                  "mass": 0.04492734046524372
+                },
+                {
+                  "structure": "ACAd",
+                  "mass": 0.04490910720169477
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.04144060792915719
+                },
+                {
+                  "structure": "FRP",
+                  "mass": 0.04134412434534543
+                },
+                {
+                  "structure": "MOs",
+                  "mass": 0.038537679058897094
+                },
+                {
+                  "structure": "GU",
+                  "mass": 0.03362051317731817
+                },
+                {
+                  "structure": "SSp-n",
+                  "mass": 0.028630763908100997
+                },
+                {
+                  "structure": "SSp-un",
+                  "mass": 0.028215259182997013
+                },
+                {
+                  "structure": "ORBm",
+                  "mass": 0.02699734394889574
+                },
+                {
+                  "structure": "SSp-tr",
+                  "mass": 0.026491425167390382
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "AUDv",
+                  "mass": 0.03520733472017351
+                },
+                {
+                  "structure": "BLA",
+                  "mass": 0.033431522538718166
+                },
+                {
+                  "structure": "CA2",
+                  "mass": 0.030512787746145506
+                },
+                {
+                  "structure": "IA",
+                  "mass": 0.028044913839198424
+                },
+                {
+                  "structure": "LA",
+                  "mass": 0.02678447423525251
+                },
+                {
+                  "structure": "COAa",
+                  "mass": 0.024609168693445205
+                },
+                {
+                  "structure": "EPv",
+                  "mass": 0.02382524324693655
+                },
+                {
+                  "structure": "BMA",
+                  "mass": 0.023664514992107293
+                },
+                {
+                  "structure": "AIp",
+                  "mass": 0.023279780093666515
+                },
+                {
+                  "structure": "VISC",
+                  "mass": 0.022937555553954197
+                }
+              ],
+              "p_one_sided_max_fwer": 0.15948405159484053
+            }
+          },
+          "threshold_omnibus": {
+            "statistic": "max C across top 5/10/20/30 percent",
+            "observed_max_C": 0.4749460279343428,
+            "selected_threshold": 0.1,
+            "p_one_sided": 0.033996600339966,
+            "null": {
+              "mean": 0.06556089654611583,
+              "sd": 0.17094274845267327,
+              "ci95": [
+                -0.18523597267848624,
+                0.5077890433120282
+              ]
+            }
+          },
+          "threshold_free_signed": {
+            "contrast_C": 0.13946507044811624,
+            "bias_dysphoric": 0.04543992563593615,
+            "bias_anxiosomatic": -0.09402514481218009,
+            "p_one_sided": 0.028897110288971104,
+            "null": {
+              "mean": 0.003809816358099063,
+              "sd": 0.0729336187297343,
+              "ci95": [
+                -0.13796850808298083,
+                0.14352326474772859
+              ]
+            },
+            "top_dysphoric": [
+              {
+                "structure": "AId",
+                "mass": 0.021542334001948507
+              },
+              {
+                "structure": "ACAd",
+                "mass": 0.021453001040415535
+              },
+              {
+                "structure": "FRP",
+                "mass": 0.02035818631043038
+              },
+              {
+                "structure": "PL",
+                "mass": 0.02024477733730056
+              },
+              {
+                "structure": "MOs",
+                "mass": 0.019270745462305984
+              },
+              {
+                "structure": "SSp-n",
+                "mass": 0.01896338267686191
+              },
+              {
+                "structure": "SSp-un",
+                "mass": 0.018891279245038105
+              },
+              {
+                "structure": "SSp-m",
+                "mass": 0.01792408823985821
+              },
+              {
+                "structure": "VISpl",
+                "mass": 0.017641828546927137
+              },
+              {
+                "structure": "GU",
+                "mass": 0.017517675232380396
+              }
+            ],
+            "top_anxiosomatic": [
+              {
+                "structure": "AUDv",
+                "mass": 0.025626306906027227
+              },
+              {
+                "structure": "BLA",
+                "mass": 0.024729773663368787
+              },
+              {
+                "structure": "CA2",
+                "mass": 0.023180777761126713
+              },
+              {
+                "structure": "IA",
+                "mass": 0.021726082481457753
+              },
+              {
+                "structure": "LA",
+                "mass": 0.021000777461380942
+              },
+              {
+                "structure": "COAa",
+                "mass": 0.0196013324220776
+              },
+              {
+                "structure": "BMA",
+                "mass": 0.01904826778071941
+              },
+              {
+                "structure": "EPv",
+                "mass": 0.018952004018514088
+              },
+              {
+                "structure": "AIp",
+                "mass": 0.018720764426397533
+              },
+              {
+                "structure": "ECT",
+                "mass": 0.017916440737112054
+              }
+            ]
+          },
+          "conditional_axis": {
+            "primary_top_10": {
+              "contrast_C": 1.6251024778478773,
+              "bias_dysphoric": 0.632279857418463,
+              "bias_anxiosomatic": -0.9928226204294142,
+              "target_union_mass_fraction": {
+                "dysphoric_input": 0.4553815461792433,
+                "anxiosomatic_input": 0.18836944787201074
+              },
+              "p_one_sided": 0.1254874512548745,
+              "null": {
+                "mean": 0.04685764338608418,
+                "sd": 1.2129917513878288,
+                "ci95": [
+                  -1.8984620092171107,
+                  1.9187281261640754
+                ]
+              }
+            },
+            "threshold_free_signed": {
+              "contrast_C": 1.2515103228611508,
+              "bias_dysphoric": 0.37603355590768606,
+              "bias_anxiosomatic": -0.8754767669534647,
+              "target_union_mass_fraction": {
+                "dysphoric_input": 0.1208400817481602,
+                "anxiosomatic_input": 0.10739878927841147
+              },
+              "p_one_sided": 0.066993300669933,
+              "null": {
+                "mean": 0.046762584864565276,
+                "sd": 0.8085065269655309,
+                "ci95": [
+                  -1.4144660750294171,
+                  1.4332758630766063
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "matched_no_connectivity": {
+      "weightings": {
+        "parcel_mass": {
+          "definition": "mouse parcel mass",
+          "target_parcel_counts": {
+            "PL": 11,
+            "ILA": 4,
+            "ACAd": 19,
+            "ACAv": 12,
+            "ORBm": 5,
+            "FRP": 9,
+            "BLA": 6,
+            "BMA": 9,
+            "CEA": 9,
+            "LA": 1,
+            "AId": 14,
+            "AIv": 9,
+            "AIp": 14
+          },
+          "thresholded": {
+            "top_05": {
+              "fraction": 0.05,
+              "contrast_C": 0.24303588369644127,
+              "bias_dysphoric": 0.23162959726032,
+              "bias_anxiosomatic": -0.011406286436121271,
+              "active_human_nodes": {
+                "dysphoric": 105,
+                "anxiosomatic": 105
+              },
+              "p_one_sided_uncorrected": 0.09519048095190481,
+              "null": {
+                "mean": 0.006022665953129081,
+                "sd": 0.17329119269716622,
+                "ci95": [
+                  -0.34771201955989245,
+                  0.36622440449951366
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "MOB",
+                  "mass": 0.20512457832513195
+                },
+                {
+                  "structure": "MOs",
+                  "mass": 0.16994487547975173
+                },
+                {
+                  "structure": "PL",
+                  "mass": 0.08651354930049251
+                },
+                {
+                  "structure": "ACAd",
+                  "mass": 0.07496679268986302
+                },
+                {
+                  "structure": "ACAv",
+                  "mass": 0.060110294229085384
+                },
+                {
+                  "structure": "FRP",
+                  "mass": 0.0436337329376094
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.03996217726462723
+                },
+                {
+                  "structure": "fiber tracts",
+                  "mass": 0.03608315532611369
+                },
+                {
+                  "structure": "CP",
+                  "mass": 0.029029228144538115
+                },
+                {
+                  "structure": "SSp-bfd",
+                  "mass": 0.028241059799313066
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "AUDv",
+                  "mass": 0.27344115995827384
+                },
+                {
+                  "structure": "VISC",
+                  "mass": 0.24201769133524798
+                },
+                {
+                  "structure": "TEa",
+                  "mass": 0.12138011880836494
+                },
+                {
+                  "structure": "ECT",
+                  "mass": 0.09002721992133718
+                },
+                {
+                  "structure": "AUDp",
+                  "mass": 0.0774490431003287
+                },
+                {
+                  "structure": "VISa",
+                  "mass": 0.06724798947698694
+                },
+                {
+                  "structure": "SSs",
+                  "mass": 0.035949031762367974
+                },
+                {
+                  "structure": "VISrl",
+                  "mass": 0.03181886681926269
+                },
+                {
+                  "structure": "SSp-bfd",
+                  "mass": 0.019467774784359453
+                },
+                {
+                  "structure": "AIp",
+                  "mass": 0.011415208982937396
+                }
+              ],
+              "p_one_sided_max_fwer": 0.09829017098290171
+            },
+            "top_10": {
+              "fraction": 0.1,
+              "contrast_C": 0.27542125637578196,
+              "bias_dysphoric": 0.17978237313125095,
+              "bias_anxiosomatic": -0.09563888324453103,
+              "active_human_nodes": {
+                "dysphoric": 210,
+                "anxiosomatic": 210
+              },
+              "p_one_sided_uncorrected": 0.0425957404259574,
+              "null": {
+                "mean": 0.00730777811783827,
+                "sd": 0.14957056944165173,
+                "ci95": [
+                  -0.287510370397006,
+                  0.30879981645467486
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "MOs",
+                  "mass": 0.17639407909054544
+                },
+                {
+                  "structure": "MOB",
+                  "mass": 0.14788000520860795
+                },
+                {
+                  "structure": "ACAd",
+                  "mass": 0.07195455134583437
+                },
+                {
+                  "structure": "PL",
+                  "mass": 0.06368470188013058
+                },
+                {
+                  "structure": "ACAv",
+                  "mass": 0.04817118872010784
+                },
+                {
+                  "structure": "CP",
+                  "mass": 0.04576659139777896
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.044654118069487804
+                },
+                {
+                  "structure": "FRP",
+                  "mass": 0.04218861452041857
+                },
+                {
+                  "structure": "SSs",
+                  "mass": 0.04050442165087092
+                },
+                {
+                  "structure": "fiber tracts",
+                  "mass": 0.03531320753258972
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "AUDv",
+                  "mass": 0.17822796217899659
+                },
+                {
+                  "structure": "VISC",
+                  "mass": 0.1401209801386906
+                },
+                {
+                  "structure": "TEa",
+                  "mass": 0.08087840978554937
+                },
+                {
+                  "structure": "SSs",
+                  "mass": 0.07854029837148853
+                },
+                {
+                  "structure": "ECT",
+                  "mass": 0.05021356940004064
+                },
+                {
+                  "structure": "AUDp",
+                  "mass": 0.03605274247948396
+                },
+                {
+                  "structure": "BMA",
+                  "mass": 0.03595309787952149
+                },
+                {
+                  "structure": "CA3",
+                  "mass": 0.0343261913577835
+                },
+                {
+                  "structure": "VISa",
+                  "mass": 0.034057635125670366
+                },
+                {
+                  "structure": "CA1",
+                  "mass": 0.030110825860104357
+                }
+              ],
+              "p_one_sided_max_fwer": 0.07229277072292771
+            },
+            "top_20": {
+              "fraction": 0.2,
+              "contrast_C": 0.23607326908794332,
+              "bias_dysphoric": 0.12821749022887946,
+              "bias_anxiosomatic": -0.10785577885906386,
+              "active_human_nodes": {
+                "dysphoric": 419,
+                "anxiosomatic": 419
+              },
+              "p_one_sided_uncorrected": 0.032996700329967,
+              "null": {
+                "mean": 0.007582247257487084,
+                "sd": 0.12087998251115459,
+                "ci95": [
+                  -0.22473073862577736,
+                  0.2494706310956538
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "MOs",
+                  "mass": 0.15456266342938416
+                },
+                {
+                  "structure": "MOB",
+                  "mass": 0.10271855754892706
+                },
+                {
+                  "structure": "CP",
+                  "mass": 0.07005914517577634
+                },
+                {
+                  "structure": "ACAd",
+                  "mass": 0.061605720425249554
+                },
+                {
+                  "structure": "fiber tracts",
+                  "mass": 0.04574347486944273
+                },
+                {
+                  "structure": "SSs",
+                  "mass": 0.04573679289432775
+                },
+                {
+                  "structure": "PL",
+                  "mass": 0.042935733333044256
+                },
+                {
+                  "structure": "MOp",
+                  "mass": 0.04198624481391848
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.04140867603673475
+                },
+                {
+                  "structure": "SSp-m",
+                  "mass": 0.04077223063871475
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "CA1",
+                  "mass": 0.08091698505085995
+                },
+                {
+                  "structure": "CA3",
+                  "mass": 0.07755079313704011
+                },
+                {
+                  "structure": "AUDv",
+                  "mass": 0.07244580323572582
+                },
+                {
+                  "structure": "PIR",
+                  "mass": 0.06634898289076538
+                },
+                {
+                  "structure": "VISC",
+                  "mass": 0.051216091932875844
+                },
+                {
+                  "structure": "SSs",
+                  "mass": 0.04541010130684507
+                },
+                {
+                  "structure": "fiber tracts",
+                  "mass": 0.043697625058427864
+                },
+                {
+                  "structure": "DG",
+                  "mass": 0.03790768472355801
+                },
+                {
+                  "structure": "AIp",
+                  "mass": 0.03330998260952981
+                },
+                {
+                  "structure": "TEa",
+                  "mass": 0.032200861954053944
+                }
+              ],
+              "p_one_sided_max_fwer": 0.10288971102889712
+            },
+            "top_30": {
+              "fraction": 0.3,
+              "contrast_C": 0.18499613224528852,
+              "bias_dysphoric": 0.08806628173825659,
+              "bias_anxiosomatic": -0.09692985050703193,
+              "active_human_nodes": {
+                "dysphoric": 628,
+                "anxiosomatic": 628
+              },
+              "p_one_sided_uncorrected": 0.0443955604439556,
+              "null": {
+                "mean": 0.007036965289773379,
+                "sd": 0.10255748568636651,
+                "ci95": [
+                  -0.18779373012695216,
+                  0.20744129172721124
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "MOs",
+                  "mass": 0.11874485471678477
+                },
+                {
+                  "structure": "CP",
+                  "mass": 0.090789727335866
+                },
+                {
+                  "structure": "MOB",
+                  "mass": 0.07184124135392946
+                },
+                {
+                  "structure": "fiber tracts",
+                  "mass": 0.05982851184609555
+                },
+                {
+                  "structure": "ACAd",
+                  "mass": 0.048205426554584346
+                },
+                {
+                  "structure": "SSs",
+                  "mass": 0.04552928196389879
+                },
+                {
+                  "structure": "MOp",
+                  "mass": 0.04390364404632195
+                },
+                {
+                  "structure": "SSp-bfd",
+                  "mass": 0.043810855051938644
+                },
+                {
+                  "structure": "SSp-m",
+                  "mass": 0.04314904849809498
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.0343839407133225
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "PIR",
+                  "mass": 0.07481586960216251
+                },
+                {
+                  "structure": "CA1",
+                  "mass": 0.07277860395801027
+                },
+                {
+                  "structure": "CA3",
+                  "mass": 0.0628521059364126
+                },
+                {
+                  "structure": "fiber tracts",
+                  "mass": 0.0573147034388905
+                },
+                {
+                  "structure": "DG",
+                  "mass": 0.043672662212298215
+                },
+                {
+                  "structure": "AUDv",
+                  "mass": 0.042639665225712255
+                },
+                {
+                  "structure": "ENTl",
+                  "mass": 0.037890620942534176
+                },
+                {
+                  "structure": "AIp",
+                  "mass": 0.032316579687574704
+                },
+                {
+                  "structure": "VISC",
+                  "mass": 0.030559399317652322
+                },
+                {
+                  "structure": "SSs",
+                  "mass": 0.029626270275256474
+                }
+              ],
+              "p_one_sided_max_fwer": 0.1576842315768423
+            }
+          },
+          "threshold_omnibus": {
+            "statistic": "max C across top 5/10/20/30 percent",
+            "observed_max_C": 0.27542125637578196,
+            "selected_threshold": 0.1,
+            "p_one_sided": 0.07229277072292771,
+            "null": {
+              "mean": 0.045251911631253285,
+              "sd": 0.13928913162795686,
+              "ci95": [
+                -0.18569870127362584,
+                0.36734676317223464
+              ]
+            }
+          },
+          "threshold_free_signed": {
+            "contrast_C": 0.12871474854890846,
+            "bias_dysphoric": 0.04904020961557638,
+            "bias_anxiosomatic": -0.07967453893333208,
+            "p_one_sided": 0.051394860513948606,
+            "null": {
+              "mean": 0.003727790699397878,
+              "sd": 0.0774992615218553,
+              "ci95": [
+                -0.1458113308608912,
+                0.14722835646040092
+              ]
+            },
+            "top_dysphoric": [
+              {
+                "structure": "CP",
+                "mass": 0.10469973865119597
+              },
+              {
+                "structure": "MOs",
+                "mass": 0.07634727825184183
+              },
+              {
+                "structure": "fiber tracts",
+                "mass": 0.07557748336804533
+              },
+              {
+                "structure": "MOp",
+                "mass": 0.050697415795943
+              },
+              {
+                "structure": "MOB",
+                "mass": 0.04431472602876401
+              },
+              {
+                "structure": "SSs",
+                "mass": 0.039994931836764766
+              },
+              {
+                "structure": "SSp-bfd",
+                "mass": 0.03893621459672286
+              },
+              {
+                "structure": "SSp-m",
+                "mass": 0.0371065722049746
+              },
+              {
+                "structure": "ACAd",
+                "mass": 0.031096308136888254
+              },
+              {
+                "structure": "VISp",
+                "mass": 0.03007449918807099
+              }
+            ],
+            "top_anxiosomatic": [
+              {
+                "structure": "PIR",
+                "mass": 0.07144187102265273
+              },
+              {
+                "structure": "CA1",
+                "mass": 0.06314472039571024
+              },
+              {
+                "structure": "fiber tracts",
+                "mass": 0.06126291163070347
+              },
+              {
+                "structure": "CA3",
+                "mass": 0.051749307110578624
+              },
+              {
+                "structure": "DG",
+                "mass": 0.04276645723926062
+              },
+              {
+                "structure": "ENTl",
+                "mass": 0.039848228521263615
+              },
+              {
+                "structure": "CP",
+                "mass": 0.03511224009621358
+              },
+              {
+                "structure": "AUDv",
+                "mass": 0.03180738847237618
+              },
+              {
+                "structure": "ENTm",
+                "mass": 0.027876197386902748
+              },
+              {
+                "structure": "AIp",
+                "mass": 0.02733854026998624
+              }
+            ]
+          },
+          "conditional_axis": {
+            "primary_top_10": {
+              "contrast_C": 1.620065497888799,
+              "bias_dysphoric": 0.6203730677476753,
+              "bias_anxiosomatic": -0.9996924301411237,
+              "target_union_mass_fraction": {
+                "dysphoric_input": 0.2897971921701378,
+                "anxiosomatic_input": 0.09566830793250077
+              },
+              "p_one_sided": 0.1954804519548045,
+              "null": {
+                "mean": 0.062337803560024656,
+                "sd": 1.36035858682151,
+                "ci95": [
+                  -1.987230636322527,
+                  1.9935916924545283
+                ]
+              }
+            },
+            "threshold_free_signed": {
+              "contrast_C": 1.332559458062928,
+              "bias_dysphoric": 0.4134692068364186,
+              "bias_anxiosomatic": -0.9190902512265096,
+              "target_union_mass_fraction": {
+                "dysphoric_input": 0.11860667929976762,
+                "anxiosomatic_input": 0.08668848225406355
+              },
+              "p_one_sided": 0.11038896110388961,
+              "null": {
+                "mean": 0.061842270166615615,
+                "sd": 0.9626604959659958,
+                "ci95": [
+                  -1.6166518038514865,
+                  1.6482300384813104
+                ]
+              }
+            }
+          }
+        },
+        "structure_balanced": {
+          "definition": "mean within each acronym, followed by equal weighting of acronyms",
+          "target_parcel_counts": {
+            "PL": 11,
+            "ILA": 4,
+            "ACAd": 19,
+            "ACAv": 12,
+            "ORBm": 5,
+            "FRP": 9,
+            "BLA": 6,
+            "BMA": 9,
+            "CEA": 9,
+            "LA": 1,
+            "AId": 14,
+            "AIv": 9,
+            "AIp": 14
+          },
+          "thresholded": {
+            "top_05": {
+              "fraction": 0.05,
+              "contrast_C": 0.36367485320276294,
+              "bias_dysphoric": 0.3562597604108432,
+              "bias_anxiosomatic": -0.0074150927919197545,
+              "active_human_nodes": {
+                "dysphoric": 105,
+                "anxiosomatic": 105
+              },
+              "p_one_sided_uncorrected": 0.07829217078292171,
+              "null": {
+                "mean": 0.010531198355486857,
+                "sd": 0.23479904573508079,
+                "ci95": [
+                  -0.4628171477213317,
+                  0.5052254827529368
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "PL",
+                  "mass": 0.13588930364897828
+                },
+                {
+                  "structure": "DP",
+                  "mass": 0.1053637074178295
+                },
+                {
+                  "structure": "MOB",
+                  "mass": 0.09326698403343313
+                },
+                {
+                  "structure": "ACAv",
+                  "mass": 0.08654887683362966
+                },
+                {
+                  "structure": "FRP",
+                  "mass": 0.08376714008233545
+                },
+                {
+                  "structure": "ACAd",
+                  "mass": 0.06817249023918157
+                },
+                {
+                  "structure": "MOs",
+                  "mass": 0.055402075192035175
+                },
+                {
+                  "structure": "AOB",
+                  "mass": 0.05037150678695209
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.049319076385512826
+                },
+                {
+                  "structure": "ORBm",
+                  "mass": 0.04269027670796933
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "AUDv",
+                  "mass": 0.22636707033389025
+                },
+                {
+                  "structure": "VISC",
+                  "mass": 0.22038861794391512
+                },
+                {
+                  "structure": "ECT",
+                  "mass": 0.16396301002898397
+                },
+                {
+                  "structure": "TEa",
+                  "mass": 0.13816550188157528
+                },
+                {
+                  "structure": "AUDp",
+                  "mass": 0.07836381930863787
+                },
+                {
+                  "structure": "VISa",
+                  "mass": 0.07654756238362224
+                },
+                {
+                  "structure": "VISrl",
+                  "mass": 0.04829203493451035
+                },
+                {
+                  "structure": "VISam",
+                  "mass": 0.008735192903983953
+                },
+                {
+                  "structure": "SSs",
+                  "mass": 0.008614808914891544
+                },
+                {
+                  "structure": "AIp",
+                  "mass": 0.007425024289430454
+                }
+              ],
+              "p_one_sided_max_fwer": 0.0796920307969203
+            },
+            "top_10": {
+              "fraction": 0.1,
+              "contrast_C": 0.4141625804867899,
+              "bias_dysphoric": 0.2819898962558719,
+              "bias_anxiosomatic": -0.13217268423091796,
+              "active_human_nodes": {
+                "dysphoric": 210,
+                "anxiosomatic": 210
+              },
+              "p_one_sided_uncorrected": 0.025097490250974904,
+              "null": {
+                "mean": 0.010986893322197138,
+                "sd": 0.19348964542417366,
+                "ci95": [
+                  -0.37340353572180623,
+                  0.41382833987845447
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "PL",
+                  "mass": 0.10400619203573373
+                },
+                {
+                  "structure": "DP",
+                  "mass": 0.08778803278017071
+                },
+                {
+                  "structure": "FRP",
+                  "mass": 0.08421113383399925
+                },
+                {
+                  "structure": "ACAv",
+                  "mass": 0.07211454677461383
+                },
+                {
+                  "structure": "MOB",
+                  "mass": 0.06991053433429567
+                },
+                {
+                  "structure": "ACAd",
+                  "mass": 0.06803328313757702
+                },
+                {
+                  "structure": "MOs",
+                  "mass": 0.059789496296656544
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.05729942206584122
+                },
+                {
+                  "structure": "AOB",
+                  "mass": 0.03927698921180717
+                },
+                {
+                  "structure": "GU",
+                  "mass": 0.0343577863751011
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "AUDv",
+                  "mass": 0.14640126316115212
+                },
+                {
+                  "structure": "VISC",
+                  "mass": 0.12660907447165176
+                },
+                {
+                  "structure": "TEa",
+                  "mass": 0.09134910237524727
+                },
+                {
+                  "structure": "ECT",
+                  "mass": 0.09074292145779461
+                },
+                {
+                  "structure": "VISa",
+                  "mass": 0.038466809696220676
+                },
+                {
+                  "structure": "AUDp",
+                  "mass": 0.036195740383887155
+                },
+                {
+                  "structure": "COAa",
+                  "mass": 0.03609570055826361
+                },
+                {
+                  "structure": "IA",
+                  "mass": 0.03609570055826361
+                },
+                {
+                  "structure": "LA",
+                  "mass": 0.03609570055826361
+                },
+                {
+                  "structure": "BMA",
+                  "mass": 0.03609570055826361
+                }
+              ],
+              "p_one_sided_max_fwer": 0.05649435056494351
+            },
+            "top_20": {
+              "fraction": 0.2,
+              "contrast_C": 0.331720072621305,
+              "bias_dysphoric": 0.1808230901545098,
+              "bias_anxiosomatic": -0.1508969824667952,
+              "active_human_nodes": {
+                "dysphoric": 419,
+                "anxiosomatic": 419
+              },
+              "p_one_sided_uncorrected": 0.020097990200979902,
+              "null": {
+                "mean": 0.010054981776773277,
+                "sd": 0.1496854581872987,
+                "ci95": [
+                  -0.2798328600809722,
+                  0.31870082165373254
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "PL",
+                  "mass": 0.06354620704719674
+                },
+                {
+                  "structure": "FRP",
+                  "mass": 0.06186248310068697
+                },
+                {
+                  "structure": "DP",
+                  "mass": 0.060209412383003376
+                },
+                {
+                  "structure": "ACAd",
+                  "mass": 0.05278747312597614
+                },
+                {
+                  "structure": "ACAv",
+                  "mass": 0.04946170242103245
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.04815337626032539
+                },
+                {
+                  "structure": "MOs",
+                  "mass": 0.04747797166967031
+                },
+                {
+                  "structure": "MOB",
+                  "mass": 0.044007707877811546
+                },
+                {
+                  "structure": "GU",
+                  "mass": 0.033337112130936215
+                },
+                {
+                  "structure": "AOB",
+                  "mass": 0.032688999983561624
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "AUDv",
+                  "mass": 0.06707592330137088
+                },
+                {
+                  "structure": "VISC",
+                  "mass": 0.05216179752218649
+                },
+                {
+                  "structure": "ECT",
+                  "mass": 0.04341274718339505
+                },
+                {
+                  "structure": "CA2",
+                  "mass": 0.041073896262766675
+                },
+                {
+                  "structure": "TEa",
+                  "mass": 0.04099431394259365
+                },
+                {
+                  "structure": "LA",
+                  "mass": 0.0360081086988512
+                },
+                {
+                  "structure": "COAa",
+                  "mass": 0.0360081086988512
+                },
+                {
+                  "structure": "BMA",
+                  "mass": 0.0360081086988512
+                },
+                {
+                  "structure": "IA",
+                  "mass": 0.0360081086988512
+                },
+                {
+                  "structure": "NLOT",
+                  "mass": 0.03245008876171187
+                }
+              ],
+              "p_one_sided_max_fwer": 0.09869013098690131
+            },
+            "top_30": {
+              "fraction": 0.3,
+              "contrast_C": 0.2263343930039356,
+              "bias_dysphoric": 0.10733663736444453,
+              "bias_anxiosomatic": -0.11899775563949105,
+              "active_human_nodes": {
+                "dysphoric": 628,
+                "anxiosomatic": 628
+              },
+              "p_one_sided_uncorrected": 0.046495350464953504,
+              "null": {
+                "mean": 0.00866857367576583,
+                "sd": 0.12368034543207262,
+                "ci95": [
+                  -0.22668087408607565,
+                  0.2584614961652702
+                ]
+              },
+              "top_dysphoric": [
+                {
+                  "structure": "FRP",
+                  "mass": 0.040931498539826056
+                },
+                {
+                  "structure": "DP",
+                  "mass": 0.03895784063120361
+                },
+                {
+                  "structure": "PL",
+                  "mass": 0.038673539275179
+                },
+                {
+                  "structure": "ACAd",
+                  "mass": 0.03616348162846749
+                },
+                {
+                  "structure": "AId",
+                  "mass": 0.03500705040061176
+                },
+                {
+                  "structure": "ACAv",
+                  "mass": 0.03200871631597661
+                },
+                {
+                  "structure": "MOs",
+                  "mass": 0.03193499386524471
+                },
+                {
+                  "structure": "VISpl",
+                  "mass": 0.029173950100381242
+                },
+                {
+                  "structure": "GU",
+                  "mass": 0.027647361161491232
+                },
+                {
+                  "structure": "MOB",
+                  "mass": 0.026947478713079176
+                }
+              ],
+              "top_anxiosomatic": [
+                {
+                  "structure": "AUDv",
+                  "mass": 0.03600720613434572
+                },
+                {
+                  "structure": "CA2",
+                  "mass": 0.028625804552807603
+                },
+                {
+                  "structure": "VISC",
+                  "mass": 0.028386584257229515
+                },
+                {
+                  "structure": "ECT",
+                  "mass": 0.026629713193493207
+                },
+                {
+                  "structure": "BMA",
+                  "mass": 0.026427223938463768
+                },
+                {
+                  "structure": "COAa",
+                  "mass": 0.026427223938463768
+                },
+                {
+                  "structure": "IA",
+                  "mass": 0.026427223938463768
+                },
+                {
+                  "structure": "LA",
+                  "mass": 0.026427223938463768
+                },
+                {
+                  "structure": "NLOT",
+                  "mass": 0.025042572217726072
+                },
+                {
+                  "structure": "BLA",
+                  "mass": 0.024199318751487772
+                }
+              ],
+              "p_one_sided_max_fwer": 0.18168183181681832
+            }
+          },
+          "threshold_omnibus": {
+            "statistic": "max C across top 5/10/20/30 percent",
+            "observed_max_C": 0.4141625804867899,
+            "selected_threshold": 0.1,
+            "p_one_sided": 0.05649435056494351,
+            "null": {
+              "mean": 0.06738569270906943,
+              "sd": 0.1831806633709931,
+              "ci95": [
+                -0.22569759753450905,
+                0.5059296702650137
+              ]
+            }
+          },
+          "threshold_free_signed": {
+            "contrast_C": 0.1465448740016047,
+            "bias_dysphoric": 0.05295540827328957,
+            "bias_anxiosomatic": -0.09358946572831515,
+            "p_one_sided": 0.05729427057294271,
+            "null": {
+              "mean": 0.004284831448764237,
+              "sd": 0.08966532243210867,
+              "ci95": [
+                -0.16992003027339272,
+                0.17509653916576584
+              ]
+            },
+            "top_dysphoric": [
+              {
+                "structure": "FRP",
+                "mass": 0.02113686785731039
+              },
+              {
+                "structure": "AId",
+                "mass": 0.020595103934555135
+              },
+              {
+                "structure": "ACAd",
+                "mass": 0.020088009054806306
+              },
+              {
+                "structure": "VISpl",
+                "mass": 0.019592511370738332
+              },
+              {
+                "structure": "PL",
+                "mass": 0.019580421533321065
+              },
+              {
+                "structure": "IGL",
+                "mass": 0.018756705851593395
+              },
+              {
+                "structure": "CLA",
+                "mass": 0.018731643450361966
+              },
+              {
+                "structure": "SSp-n",
+                "mass": 0.017868448090115074
+              },
+              {
+                "structure": "SSp-un",
+                "mass": 0.017713381377743646
+              },
+              {
+                "structure": "MOs",
+                "mass": 0.017680695916643122
+              }
+            ],
+            "top_anxiosomatic": [
+              {
+                "structure": "AUDv",
+                "mass": 0.02624846714024101
+              },
+              {
+                "structure": "CA2",
+                "mass": 0.022246106350485986
+              },
+              {
+                "structure": "VISC",
+                "mass": 0.021212278821836853
+              },
+              {
+                "structure": "ECT",
+                "mass": 0.021122643170019936
+              },
+              {
+                "structure": "LA",
+                "mass": 0.02100935271393477
+              },
+              {
+                "structure": "BMA",
+                "mass": 0.02100935271393477
+              },
+              {
+                "structure": "IA",
+                "mass": 0.02100935271393477
+              },
+              {
+                "structure": "COAa",
+                "mass": 0.02100935271393477
+              },
+              {
+                "structure": "NLOT",
+                "mass": 0.020213894152138256
+              },
+              {
+                "structure": "BLA",
+                "mass": 0.019751781798997097
+              }
+            ]
+          },
+          "conditional_axis": {
+            "primary_top_10": {
+              "contrast_C": 1.6437243166652025,
+              "bias_dysphoric": 0.6439442406266067,
+              "bias_anxiosomatic": -0.9997800760385958,
+              "target_union_mass_fraction": {
+                "dysphoric_input": 0.4379104252589856,
+                "anxiosomatic_input": 0.13220175856536628
+              },
+              "p_one_sided": 0.18938106189381063,
+              "null": {
+                "mean": 0.06591491343053886,
+                "sd": 1.3512860132927074,
+                "ci95": [
+                  -1.9868400162315745,
+                  1.9929156882468437
+                ]
+              }
+            },
+            "threshold_free_signed": {
+              "contrast_C": 1.318375514987593,
+              "bias_dysphoric": 0.427048947727278,
+              "bias_anxiosomatic": -0.891326567260315,
+              "target_union_mass_fraction": {
+                "dysphoric_input": 0.12400313489850334,
+                "anxiosomatic_input": 0.10500019764471133
+              },
+              "p_one_sided": 0.11848815118488151,
+              "null": {
+                "mean": 0.06289900645315699,
+                "sd": 0.9743479054949733,
+                "ci95": [
+                  -1.647690863090232,
+                  1.6744449204671752
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "paired_canonical_minus_no_connectivity": {
+    "parcel_mass": {
+      "interpretation": "positive delta-C means canonical exceeds matched no-connectivity",
+      "thresholded": {
+        "top_05": {
+          "delta_C": 0.03275852794894776,
+          "p_one_sided_uncorrected": 0.19208079192080793,
+          "null": {
+            "mean": 0.0016801262902859367,
+            "sd": 0.04612396620452359,
+            "ci95": [
+              -0.09241033223094197,
+              0.10364115119525472
+            ]
+          },
+          "p_one_sided_max_fwer": 0.2766723327667233
+        },
+        "top_10": {
+          "delta_C": 0.1002954138079214,
+          "p_one_sided_uncorrected": 0.013098690130986902,
+          "null": {
+            "mean": 0.0030009126558255147,
+            "sd": 0.03813542266152069,
+            "ci95": [
+              -0.07256703910093794,
+              0.08674466915593164
+            ]
+          },
+          "p_one_sided_max_fwer": 0.031096890310968902
+        },
+        "top_20": {
+          "delta_C": 0.04430074160364447,
+          "p_one_sided_uncorrected": 0.0994900509949005,
+          "null": {
+            "mean": 0.0039012037102995876,
+            "sd": 0.031463156620049296,
+            "ci95": [
+              -0.05815136611080827,
+              0.07014994431303576
+            ]
+          },
+          "p_one_sided_max_fwer": 0.18738126187381263
+        },
+        "top_30": {
+          "delta_C": 0.015763114770619674,
+          "p_one_sided_uncorrected": 0.3203679632036796,
+          "null": {
+            "mean": 0.0037829848034107378,
+            "sd": 0.027775527728902922,
+            "ci95": [
+              -0.05037559041150199,
+              0.06008528618203774
+            ]
+          },
+          "p_one_sided_max_fwer": 0.47325267473252675
+        }
+      },
+      "threshold_omnibus": {
+        "statistic": "max paired delta-C across top 5/10/20/30 percent",
+        "observed_max_delta_C": 0.1002954138079214,
+        "selected_threshold": 0.1,
+        "p_one_sided": 0.031096890310968902,
+        "null": {
+          "mean": 0.018562262242652092,
+          "sd": 0.03598299706988914,
+          "ci95": [
+            -0.04314800164314222,
+            0.1053692086171099
+          ]
+        }
+      },
+      "sensitivities": {
+        "threshold_free_signed": {
+          "delta_C": 0.007360308336959054,
+          "p_one_sided": 0.42895710428957107,
+          "null": {
+            "mean": 0.0023600250379829497,
+            "sd": 0.022984010067047755,
+            "ci95": [
+              -0.04282666606239681,
+              0.04571865140664451
+            ]
+          }
+        },
+        "conditional_primary_top_10": {
+          "delta_C": -0.01426983506430246,
+          "p_one_sided": 0.5106489351064893,
+          "null": {
+            "mean": -0.0024855324039103075,
+            "sd": 0.32391208543595074,
+            "ci95": [
+              -0.6594416882788796,
+              0.6796296281919715
+            ]
+          }
+        },
+        "conditional_threshold_free_signed": {
+          "delta_C": -0.014395778283445626,
+          "p_one_sided": 0.5489451054894511,
+          "null": {
+            "mean": 0.017218397718055865,
+            "sd": 0.2579849448007063,
+            "ci95": [
+              -0.4769105050958471,
+              0.4975024505810748
+            ]
+          }
+        }
+      }
+    },
+    "structure_balanced": {
+      "interpretation": "positive delta-C means canonical exceeds matched no-connectivity",
+      "thresholded": {
+        "top_05": {
+          "delta_C": 0.013638668469483917,
+          "p_one_sided_uncorrected": 0.37106289371062895,
+          "null": {
+            "mean": 0.0025866837771039634,
+            "sd": 0.06605877645432669,
+            "ci95": [
+              -0.13512054560115236,
+              0.14578924652243302
+            ]
+          },
+          "p_one_sided_max_fwer": 0.5724427557244276
+        },
+        "top_10": {
+          "delta_C": 0.10179681890418368,
+          "p_one_sided_uncorrected": 0.059994000599940006,
+          "null": {
+            "mean": 0.005291235898818458,
+            "sd": 0.058386843292133235,
+            "ci95": [
+              -0.11327306429031331,
+              0.12974435738167722
+            ]
+          },
+          "p_one_sided_max_fwer": 0.09069093090690931
+        },
+        "top_20": {
+          "delta_C": 0.054740279271072056,
+          "p_one_sided_uncorrected": 0.1668833116688331,
+          "null": {
+            "mean": 0.0069085069807117575,
+            "sd": 0.05122098450429916,
+            "ci95": [
+              -0.09388603671953738,
+              0.11378121754100716
+            ]
+          },
+          "p_one_sided_max_fwer": 0.25777422257774224
+        },
+        "top_30": {
+          "delta_C": 0.024035172777993996,
+          "p_one_sided_uncorrected": 0.33896610338966104,
+          "null": {
+            "mean": 0.006630142541029349,
+            "sd": 0.04602308010524738,
+            "ci95": [
+              -0.0826937290012509,
+              0.09915836650073767
+            ]
+          },
+          "p_one_sided_max_fwer": 0.47415258474152583
+        }
+      },
+      "threshold_omnibus": {
+        "statistic": "max paired delta-C across top 5/10/20/30 percent",
+        "observed_max_delta_C": 0.10179681890418368,
+        "selected_threshold": 0.1,
+        "p_one_sided": 0.09069093090690931,
+        "null": {
+          "mean": 0.028025406600143486,
+          "sd": 0.054070918418985314,
+          "ci95": [
+            -0.06924703917643901,
+            0.1517009426911348
+          ]
+        }
+      },
+      "sensitivities": {
+        "threshold_free_signed": {
+          "delta_C": 0.01170350055401631,
+          "p_one_sided": 0.4303569643035696,
+          "null": {
+            "mean": 0.003773873282783022,
+            "sd": 0.03779945579478593,
+            "ci95": [
+              -0.0710681373142891,
+              0.07554586859792768
+            ]
+          }
+        },
+        "conditional_primary_top_10": {
+          "delta_C": -0.00892590600251153,
+          "p_one_sided": 0.49895010498950104,
+          "null": {
+            "mean": -0.009740416977735146,
+            "sd": 0.3491466648215652,
+            "ci95": [
+              -0.7258244794837012,
+              0.7132147841606903
+            ]
+          }
+        },
+        "conditional_threshold_free_signed": {
+          "delta_C": 0.014272291660845093,
+          "p_one_sided": 0.5134486551344866,
+          "null": {
+            "mean": 0.018435481586804976,
+            "sd": 0.33889459703901,
+            "ci95": [
+              -0.6328190583555959,
+              0.6393642503288395
+            ]
+          }
+        }
+      }
+    }
+  },
+  "legacy_reproduction": {
+    "contrast_C": 0.5736101487033678,
+    "original_legacy_output_C_before_finite_mask_normalized_loading": 0.5850492371403845,
+    "note": "contrast_C recomputes the legacy formula using the corrected finite-data loader",
+    "included_dys_targets": [
+      "PL",
+      "ACAd",
+      "ACAv",
+      "ORBm",
+      "FRP"
+    ],
+    "included_anx_targets": [
+      "BLA",
+      "BMA",
+      "CEA",
+      "AId",
+      "AIv",
+      "AIp"
+    ],
+    "silently_omitted_by_old_minimum_5_rule": [
+      "ILA",
+      "LA"
+    ],
+    "purpose": "audit only; not used for inference"
+  },
+  "headline": {
+    "primary_weighting": "parcel_mass",
+    "canonical_primary_top_10": {
+      "contrast_C": 0.37571667018370336,
+      "p_uncorrected": 0.0105989401059894,
+      "p_max_fwer": 0.027197280271972803
+    },
+    "canonical_threshold_omnibus": {
+      "statistic": "max C across top 5/10/20/30 percent",
+      "observed_max_C": 0.37571667018370336,
+      "selected_threshold": 0.1,
+      "p_one_sided": 0.027197280271972803,
+      "null": {
+        "mean": 0.04898908792281224,
+        "sd": 0.13526796854976553,
+        "ci95": [
+          -0.16374327422010665,
+          0.3816330875949099
+        ]
+      }
+    },
+    "pack_out_primary_top_10": {
+      "contrast_C": 0.3087344107240856,
+      "p_uncorrected": 0.022097790220977902,
+      "p_max_fwer": 0.048095190480951906
+    },
+    "no_connectivity_primary_top_10": {
+      "contrast_C": 0.27542125637578196,
+      "p_uncorrected": 0.0425957404259574,
+      "p_max_fwer": 0.07229277072292771
+    },
+    "paired_primary_top_10": {
+      "delta_C": 0.1002954138079214,
+      "p_uncorrected": 0.013098690130986902,
+      "p_max_fwer": 0.031096890310968902
+    },
+    "paired_threshold_omnibus": {
+      "statistic": "max paired delta-C across top 5/10/20/30 percent",
+      "observed_max_delta_C": 0.1002954138079214,
+      "selected_threshold": 0.1,
+      "p_one_sided": 0.031096890310968902,
+      "null": {
+        "mean": 0.018562262242652092,
+        "sd": 0.03598299706988914,
+        "ci95": [
+          -0.04314800164314222,
+          0.1053692086171099
+        ]
+      }
+    }
+  }
 }

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Donor-tissue-restricted scoring for the eleven gene-derived measures of Figure 3d.
+"""Donor-tissue-restricted scoring for eleven gene-derived measures.
 
 The human side of these measures is Allen Human Brain Atlas expression pulled through abagen.
 Only some human parcels contain donor tissue; the producers fill the remainder with each gene's
@@ -183,7 +183,7 @@ def main():
 
     out = dict(prov)
     out["_what"] = (
-        "Donor-tissue-restricted scoring for the eleven gene-derived measures of Figure 3d. "
+        "Donor-tissue-restricted scoring for eleven gene-derived measures. "
         "published_r is scored over each measure's own territory, all 2,094 parcels for the eight "
         "cell-class measures and the Schaefer-400 cortical parcels for the three laminar "
         "contrasts, and is recomputed here and checked against biccn_composition_from_markers.json, "

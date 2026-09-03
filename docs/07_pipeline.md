@@ -9,7 +9,7 @@ Most users should download the release bundle rather than refit the model:
     python scripts/fetch_data.py
 
 This provides outputs/coupling/pi_canonical.npy, the processed parcel tables and
-the inputs used by the notebooks and manuscript analyses. load_pi() loads the
+the inputs used by the notebooks and reproducible analyses. load_pi() loads the
 released coupling by default.
 
 ## Rebuild the inputs
@@ -40,7 +40,7 @@ coupling and does not overwrite the released file unless explicitly requested.
 
 ## Reproduce analyses
 
-Current manuscript analyses are grouped by purpose under experiments/; see
+Analyses are grouped by purpose under experiments/; see
 [03_results.md](03_results.md) for the directory and log associated with each
 section. Some scripts refit the model for holdouts or nulls, while others load
 the released coupling. Their result logs record the relevant coupling hash or

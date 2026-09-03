@@ -82,8 +82,7 @@ for name, ph in phenos.items():
                                'methods. See the scoring note in 08_roundtrip_maps.py.'))
     print(f'{name:9s} round-trip r ({len(scored)} regions):  '
           f'OTTER {r_o:+.3f}   TransBrain {r_t:+.3f}   margin {r_o - r_t:+.3f}')
-# Figure 4b's round-trip correlations come from this file, so the coupling that
-# produced them is recorded alongside them.
+# Record the provenance of the coupling used for the round-trip correlations.
 out.update(pi_provenance())
 json.dump(out, open('outputs/logs/transbrain_roundtrip_maps.json', 'w'))
 print('saved -> outputs/logs/transbrain_roundtrip_maps.json')

@@ -51,9 +51,10 @@ the repository root. The `tar` commands are in
 
 ### Archive 1, `otter-reproduce-v1.3.0.tar.gz` (~735 MB gzipped)
 
-Everything needed to re-run the experiments **and all the notebooks** on the shipped
-couplings. The exact file list is in `scripts/build_archives.sh` (the `REPRODUCE`
-array).
+The shipped couplings and inputs needed to run the unrestricted analyses and
+notebooks. The QPN-NC validation requires separate authorized access to the
+restricted cohort. The exact archive file list is in `scripts/build_archives.sh`
+(the `REPRODUCE` array).
 
 **OTTER-generated (we own these, safe to redistribute):**
 
@@ -63,7 +64,6 @@ array).
 | `outputs/coupling/pi_canonical_sharp.npy` | 30 MB | canonical recipe with a later effective solver time, included for concentration sensitivity |
 | `outputs/coupling/pi_*.npy` | ~475 MB | analysis-specific ablation and sensitivity couplings |
 | `outputs/coupling/trust_multisource_canonical.npz` | ~0.1 MB | interface display metadata used by the explorer; field names are retained for file compatibility |
-| `outputs/coupling/per_disorder_predictions.npz` | 0.07 MB | ENIGMA per-disorder predicted maps |
 | `outputs/anndata/mouse.h5ad` | 42 MB | processed mouse parcel table + features |
 | `outputs/anndata/human.h5ad` | 52 MB | processed human parcel table + features |
 | `outputs/anndata/mouse.voxels.npz` | 4.6 MB | mouse parcel→voxel index map |
@@ -82,6 +82,7 @@ array).
 | `data_external/fulcher_2019_gradients/` | 11 MB | Fulcher 2019 (PNAS) cortical maps |
 | `data_external/pagani_2026/` | 1.9 MB | Pagani 2026 (Nat Neurosci) autism subtypes |
 | `data_external/transbrain_2025/` | 0.6 MB | TransBrain 2025 benchmark tables |
+| `data_external/enigma/cortical_thickness_parkinsons_HY*.csv` | <0.1 MB | Four ENIGMA-Parkinson Hoehn–Yahr stage effect-size tables |
 | `data_external/_domhof_extracted/` | 1.7 MB | Schaefer-400 + JuBrain atlas NIfTIs |
 | `data_external/_diagnostics/` | 0.2 MB | parcellation NIfTI, mask info, mouse→CCF transform |
 | `data_external/MouseHumanTranscriptomicSimilarity/AMBA/data/imaging/DSURQE_CCFv3_labels_200um.mnc` | 0.3 MB | DSURQE mouse atlas labels |
@@ -90,13 +91,17 @@ array).
 
 ### Archive 2, `otter-raw-inputs-v1.0.0.tar.gz` (606 MB gzipped, optional)
 
-The complete `data_external/` directory, for a bitwise rebuild of π through
-`pipeline/`. It is a superset of the inputs in Archive 1 plus the full
+The redistributable contents of `data_external/`, for a bitwise rebuild of π
+through `pipeline/`. It is a superset of the inputs in Archive 1 plus the full
 587 MB `MouseHumanTranscriptomicSimilarity` atlas repo and the small ISH caches.
-The Allen ISH download cache for the gene-expansion experiment
-(`experiments/.../pagani_ish_cache/`, ~584 MB) is **not** included. It is
-regeneratable via the Allen API (slow, 1–3 days) and documented in
+The Allen ISH download cache (`data_external/_ish_cache/`) is **not** included.
+It can be regenerated through the Allen API and is documented in
 `pipeline/00_external/`.
+
+Restricted QPN-NC files are never included in either archive. The QPN-NC
+validation reads approved downloads from `../data_external/qpn-nc-r01/` and
+commits only aggregate statistics without participant identifiers, maps,
+scores or small-cell stage counts.
 
 ---
 

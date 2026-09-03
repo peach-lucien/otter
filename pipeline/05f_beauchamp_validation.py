@@ -1,6 +1,7 @@
 """Construct Beauchamp candidate-region masks and score a supplied coupling.
 
-The table contains 22 non-cerebellar candidates. Downstream manuscript analyses use the 19 pairs that are scorable in both released parcellations."""
+The table contains 22 non-cerebellar candidates. Comparative evaluations use
+the 19 pairs that are scorable in both released parcellations."""
 from __future__ import annotations
 
 import argparse

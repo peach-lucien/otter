@@ -18,6 +18,7 @@ Run notebooks from the repository root so that data paths resolve consistently.
 | [`06_vs_transbrain.ipynb`](06_vs_transbrain.ipynb) | Reproduce the comparative-method analysis |
 | [`07_coverage.ipynb`](07_coverage.ipynb) | Compute mouse-based reconstruction of human connectivity |
 | [`08_disease.ipynb`](08_disease.ipynb) | Demonstrate translation of a phenotype map |
+| [`09_disease_dimensions.ipynb`](09_disease_dimensions.ipynb) | Summarise Alzheimer phenotype confirmation, TMS symptom-circuit dissociation and Parkinson stage validation |
 
 The Beauchamp scoring frame used in notebook 04 contains 19 scorable region pairs. The pairs
 inform hyperparameter evaluation but are not supplied as anatomical correspondence constraints.

@@ -2,7 +2,8 @@
 
 Both the Garin point anchors and the correspondence packs pin particular human parcels to particular
 mouse parcels. If those pins are concentrated in sensory cortex, reconstruction would be better there
-for a reason that has nothing to do with evolution. Measured at the same region level as Fig. 5c.
+for a reason that has nothing to do with evolution. The comparison is made at the same regional
+resolution as the cortical-map battery.
 """
 from __future__ import annotations
 

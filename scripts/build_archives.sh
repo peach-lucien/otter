@@ -30,6 +30,13 @@ REPRODUCE=(
   # Analysis-specific couplings and metadata required by retained experiments.
   outputs/coupling/pi_fc_plus_SC_with_all_packs.npy
   outputs/coupling/pi_fc_plus_SC.npy
+  outputs/coupling/pi_anchorfree_control.npy
+  outputs/coupling/pi_ladder_1_connectivity_only.npy
+  outputs/coupling/pi_ladder_2_+spatial.npy
+  outputs/coupling/pi_ladder_3_+anchors.npy
+  outputs/coupling/pi_ladder_5_NOCONN_spatial_only.npy
+  outputs/coupling/pi_ladder_6_NOCONN_spatial+anch+packs.npy
+  outputs/coupling/pi_tms_no_pfc_cingulate_amygdala_packs.npy
   outputs/coupling/pi_fc_plus_SC_xyz_zero.npy
   outputs/coupling/pi_fc_plus_SC_with_M1.npy
   outputs/coupling/pi_fc_plus_SC_with_amygdala.npy
@@ -52,7 +59,6 @@ REPRODUCE=(
   outputs/coupling/trust_score_fc_plus_SC.npz
   outputs/coupling/trust_score_fc_plus_SC_with_M1_hippo.npz
   outputs/coupling/bootstrap_aggregate_fc_plus_SC.npz
-  outputs/coupling/per_disorder_predictions.npz
   outputs/anndata/mouse.h5ad
   outputs/anndata/human.h5ad
   outputs/anndata/mouse.voxels.npz
@@ -84,6 +90,10 @@ REPRODUCE=(
   data_external/transbrain_2025
   data_external/_domhof_extracted
   data_external/_diagnostics
+  data_external/enigma/cortical_thickness_parkinsons_HY1.csv
+  data_external/enigma/cortical_thickness_parkinsons_HY2.csv
+  data_external/enigma/cortical_thickness_parkinsons_HY3.csv
+  data_external/enigma/cortical_thickness_parkinsons_HY4and5.csv
   data_external/MouseHumanTranscriptomicSimilarity/AMBA/data/imaging/DSURQE_CCFv3_labels_200um.mnc
   data_external/MouseHumanTranscriptomicSimilarity/AMBA/data/imaging/DSURQE_40micron_R_mapping_long.csv
   data_external/MouseHumanTranscriptomicSimilarity/AMBA/data/DSURQE_tree.json
@@ -106,12 +116,14 @@ build () {
 
 build "otter-reproduce-${REPRODUCE_VERSION}.tar.gz" "${REPRODUCE[@]}"
 
-# ---- Archive 2: full raw inputs (optional) ---------------------------------
+# ---- Archive 2: redistributable raw inputs (optional) ----------------------
 # Built only when BUILD_RAW=1.
 if [ "${BUILD_RAW:-0}" = "1" ]; then
-  echo ">> building otter-raw-inputs-${RAW_VERSION}.tar.gz (full data_external/)"
+  echo ">> building otter-raw-inputs-${RAW_VERSION}.tar.gz (restricted inputs excluded)"
   tar --no-xattrs --exclude='.DS_Store' --exclude='data_external/_ish_cache' \
       --exclude='data_external/_ish_cache_v2' \
+      --exclude='data_external/qpn-nc-r*' \
+      --exclude='data_external/**/qpn-nc-r*' \
       -czf "$OUT_DIR/otter-raw-inputs-${RAW_VERSION}.tar.gz" data_external
   echo "   wrote $OUT_DIR/otter-raw-inputs-${RAW_VERSION}.tar.gz  ($(du -h "$OUT_DIR/otter-raw-inputs-${RAW_VERSION}.tar.gz" | cut -f1))"
   shasum -a 256 "$OUT_DIR/otter-raw-inputs-${RAW_VERSION}.tar.gz"

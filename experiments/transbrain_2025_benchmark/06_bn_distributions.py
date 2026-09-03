@@ -60,8 +60,7 @@ for csv in ['homo_cortex.csv', 'homo_subcortex.csv']:
         if tw.sum() > 0: tw = tw / tw.sum()
         out[mr] = dict(otter_w=list(map(float, otter_w)), tb_w=list(map(float, tw)),
                        true=[name2col[h] for h in hs])
-# pi_provenance() stamps the coupling actually loaded. Figure 4's headline accuracy comes from
-# this file, so the coupling behind it is recorded here.
+# Record the provenance of the coupling used to construct these distributions.
 json.dump(dict(bn_names=bn_names, regions=out, **pi_provenance()),
           open('outputs/logs/transbrain_bn_distributions.json', 'w'))
 print(f"cached BN distributions for {len(out)} regions over {len(bn_names)} BN regions "

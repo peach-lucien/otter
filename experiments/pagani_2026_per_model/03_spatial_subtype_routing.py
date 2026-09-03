@@ -6,9 +6,8 @@ departs from Pagani's procedure in two ways: it aggregates over all 13 conserved
 uniformly, where Pagani use only the 5 hypo-prominent / 3 hyper-prominent regions
 (Methods, Supp Fig 2b), and Pagani's human step is a discrete classification (score each
 individual's regional global connectivity, threshold ±1 s.d.) rather than a Δ-matrix
-correlation. The analyses that follow Pagani's procedure are in:
-   `04_otter_human_masks.py`            (π-derived human hypo/hyper masks)
-   `../autism_subtypes/abide_subtype/05_abide_otter_subtyping.py`  (re-subtype ABIDE)
+correlation. The corresponding analysis that constructs π-derived human
+hypo/hyper masks is in `04_otter_human_masks.py`.
 
 01_per_model_clustering.py drives the mouse side from Pagani's coarse 9-network
 matrices. This script uses the spatial Fig 1d occurrence maps instead: for each

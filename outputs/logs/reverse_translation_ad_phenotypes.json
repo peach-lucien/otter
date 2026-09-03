@@ -1,0 +1,500 @@
+{
+  "status": "discovery_frozen_before_first_run",
+  "source": {
+    "study": "La Joie et al., Neurology 2021",
+    "doi": "10.1212/WNL.0000000000011270",
+    "neurovault_collection": "https://identifiers.org/neurovault.collection:8546",
+    "sample": {
+      "AD": 69,
+      "PCA": 21,
+      "lvPPA": 29
+    },
+    "maps": {
+      "tau": {
+        "AD": {
+          "file": "experiments/reverse_translation/ad_phenotype_maps/tau_AD.nii.gz",
+          "sha256": "18d47d59bbf5cc2f38918012ffdb1dc10545d192b9a4963dd8ecffe55cd6d8b3"
+        },
+        "PCA": {
+          "file": "experiments/reverse_translation/ad_phenotype_maps/tau_PCA.nii.gz",
+          "sha256": "ab56f1b94425cadc574f5678b382145b09fb7c4fe1520d9269587b6e0cc533a1"
+        },
+        "lvPPA": {
+          "file": "experiments/reverse_translation/ad_phenotype_maps/tau_lvPPA.nii.gz",
+          "sha256": "484d56e59bfc75335ad1367f96267463522364e4eb3a740dc25dadc5542fbd84"
+        }
+      },
+      "vbm": {
+        "AD": {
+          "file": "experiments/reverse_translation/ad_phenotype_maps/vbm_AD.nii.gz",
+          "sha256": "b4a5547a43edf063d237835299ceee995d8903e8270ffaa5fe95cabba1ed402e"
+        },
+        "PCA": {
+          "file": "experiments/reverse_translation/ad_phenotype_maps/vbm_PCA.nii.gz",
+          "sha256": "80508df27861dd1d854150ebdeddcd420fb3b30e89562d903a991e30fd7be32b"
+        },
+        "lvPPA": {
+          "file": "experiments/reverse_translation/ad_phenotype_maps/vbm_lvPPA.nii.gz",
+          "sha256": "5b4202e4cba8fd898b4ed30ad7dfcd7d4f571390f1e9e588cf110e76e92c39ed"
+        }
+      }
+    }
+  },
+  "targets": {
+    "AD": [
+      "ENTl",
+      "ENTm",
+      "CA1",
+      "CA3",
+      "DG",
+      "SUB"
+    ],
+    "PCA": [
+      "VISp",
+      "VISl",
+      "VISal",
+      "VISam",
+      "VISpm",
+      "VISrl",
+      "VISa",
+      "VISpor"
+    ],
+    "lvPPA": [
+      "AUDp",
+      "AUDd",
+      "AUDv",
+      "TEa"
+    ]
+  },
+  "primary": "tau/canonical/parcel_balanced joint_selectivity",
+  "n_human_regions": 52,
+  "n_rotations": 10000,
+  "seed": 20260826,
+  "spatial_null": "joint mirrored one-to-one rotations within hemisphere",
+  "couplings": {
+    "canonical": {
+      "pi_file": "outputs/coupling/pi_canonical.npy",
+      "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77"
+    },
+    "no_relevant_anchor_packs": {
+      "sha256_array": "8d8bca04312032e9826b54cd3a8b5b42ca233b490299b092bca1ca1f881019ea",
+      "dropped_packs": [
+        "Subiculum (Strange 2014)",
+        "CA1 (Strange 2014)",
+        "CA3 (Strange 2014)",
+        "Dentate gyrus (Strange 2014)",
+        "Entorhinal cortex (Franjic 2021)",
+        "Lateral visual area / V2 (Wang & Burkhalter 2007)",
+        "Primary auditory / A1 core (Hackett 2001)",
+        "Auditory belt (A2 dorsal+ventral; Kaas & Hackett 2000)"
+      ],
+      "n_dropped": 8
+    }
+  },
+  "results": {
+    "canonical": {
+      "parcel_balanced": {
+        "present_targets": {
+          "AD": [
+            "ENTl",
+            "ENTm",
+            "CA1",
+            "CA3",
+            "DG",
+            "SUB"
+          ],
+          "PCA": [
+            "VISp",
+            "VISl",
+            "VISal",
+            "VISam",
+            "VISpm",
+            "VISrl",
+            "VISa",
+            "VISpor"
+          ],
+          "lvPPA": [
+            "AUDp",
+            "AUDd",
+            "AUDv",
+            "TEa"
+          ]
+        },
+        "tau": {
+          "score_matrix_rows_phenotypes_cols_targets": [
+            [
+              0.2413500738006164,
+              -0.2725105455095115,
+              -0.4532108880265803
+            ],
+            [
+              -0.06371688277791732,
+              0.7064910125196697,
+              -0.46132131794024495
+            ],
+            [
+              -0.00711248635265045,
+              -0.6838122981400635,
+              0.6467834473618327
+            ]
+          ],
+          "row_selectivity": {
+            "AD": 0.6042107905686622,
+            "PCA": 0.9690101128787508,
+            "lvPPA": 0.9922458396081897
+          },
+          "row_p_max_corrected": {
+            "AD": 0.21097890210978903,
+            "PCA": 0.0240975902409759,
+            "lvPPA": 0.0201979802019798
+          },
+          "joint_selectivity": 2.5654667430556026,
+          "p_one_sided": 0.0045995400459954,
+          "z_null": 2.3688104752704087,
+          "null_ci95": [
+            -2.1522183880207724,
+            2.0436131010040555
+          ]
+        },
+        "vbm": {
+          "score_matrix_rows_phenotypes_cols_targets": [
+            [
+              0.19913914640030403,
+              -0.4227680606234132,
+              -0.36166451892228346
+            ],
+            [
+              -0.036862246998291964,
+              0.730799701805,
+              -0.37042582392895534
+            ],
+            [
+              -0.04219398221454699,
+              -0.5731422260907917,
+              0.5208243372882275
+            ]
+          ],
+          "row_selectivity": {
+            "AD": 0.5913554361731523,
+            "PCA": 0.9344437372686236,
+            "lvPPA": 0.8284924414408968
+          },
+          "row_p_max_corrected": {
+            "AD": 0.19668033196680332,
+            "PCA": 0.021597840215978402,
+            "lvPPA": 0.055594440555944404
+          },
+          "joint_selectivity": 2.3542916148826727,
+          "p_one_sided": 0.0045995400459954,
+          "z_null": 2.324601828057481,
+          "null_ci95": [
+            -2.031346163765248,
+            1.8349793534419219
+          ]
+        }
+      },
+      "structure_balanced": {
+        "present_targets": {
+          "AD": [
+            "ENTl",
+            "ENTm",
+            "CA1",
+            "CA3",
+            "DG",
+            "SUB"
+          ],
+          "PCA": [
+            "VISp",
+            "VISl",
+            "VISal",
+            "VISam",
+            "VISpm",
+            "VISrl",
+            "VISa",
+            "VISpor"
+          ],
+          "lvPPA": [
+            "AUDp",
+            "AUDd",
+            "AUDv",
+            "TEa"
+          ]
+        },
+        "tau": {
+          "score_matrix_rows_phenotypes_cols_targets": [
+            [
+              0.2853473449147076,
+              -0.24260428694530073,
+              -0.43897239683340555
+            ],
+            [
+              -0.07227576948106414,
+              0.4454347794502357,
+              -0.42928582623941886
+            ],
+            [
+              -0.011741524197509587,
+              -0.40867398083071166,
+              0.6073373647846088
+            ]
+          ],
+          "row_selectivity": {
+            "AD": 0.6261356868040607,
+            "PCA": 0.6962155773104772,
+            "lvPPA": 0.8175451172987194
+          },
+          "row_p_max_corrected": {
+            "AD": 0.15728427157284272,
+            "PCA": 0.11378862113788621,
+            "lvPPA": 0.05749425057494251
+          },
+          "joint_selectivity": 2.1398963814132577,
+          "p_one_sided": 0.0115988401159884,
+          "z_null": 2.209017359628589,
+          "null_ci95": [
+            -1.9355434694878686,
+            1.8893378614685108
+          ]
+        },
+        "vbm": {
+          "score_matrix_rows_phenotypes_cols_targets": [
+            [
+              0.23556756652964622,
+              -0.5279016807226342,
+              -0.3331747093635811
+            ],
+            [
+              -0.04113545063263546,
+              0.5367294994308608,
+              -0.3406083354280148
+            ],
+            [
+              -0.05242101575245498,
+              -0.33400476212585567,
+              0.4791493932020695
+            ]
+          ],
+          "row_selectivity": {
+            "AD": 0.6661057615727539,
+            "PCA": 0.7276013924611859,
+            "lvPPA": 0.6723622821412248
+          },
+          "row_p_max_corrected": {
+            "AD": 0.10938906109389061,
+            "PCA": 0.0736926307369263,
+            "lvPPA": 0.10488951104889511
+          },
+          "joint_selectivity": 2.0660694361751646,
+          "p_one_sided": 0.008999100089991,
+          "z_null": 2.2562208421426093,
+          "null_ci95": [
+            -1.8838982252504022,
+            1.7048508521005925
+          ]
+        }
+      }
+    },
+    "no_relevant_anchor_packs": {
+      "parcel_balanced": {
+        "present_targets": {
+          "AD": [
+            "ENTl",
+            "ENTm",
+            "CA1",
+            "CA3",
+            "DG",
+            "SUB"
+          ],
+          "PCA": [
+            "VISp",
+            "VISl",
+            "VISal",
+            "VISam",
+            "VISpm",
+            "VISrl",
+            "VISa",
+            "VISpor"
+          ],
+          "lvPPA": [
+            "AUDp",
+            "AUDd",
+            "AUDv",
+            "TEa"
+          ]
+        },
+        "tau": {
+          "score_matrix_rows_phenotypes_cols_targets": [
+            [
+              0.0786534993411318,
+              -0.2949920201268802,
+              -0.6145114649390528
+            ],
+            [
+              -0.047114544817654404,
+              0.7356715604831449,
+              -0.6295320287642271
+            ],
+            [
+              0.026411198955314043,
+              -0.7084940758634165,
+              0.8813645870339687
+            ]
+          ],
+          "row_selectivity": {
+            "AD": 0.5334052418740984,
+            "PCA": 1.0739948472740857,
+            "lvPPA": 1.22240602548802
+          },
+          "row_p_max_corrected": {
+            "AD": 0.33236676332366766,
+            "PCA": 0.0367963203679632,
+            "lvPPA": 0.007099290070992901
+          },
+          "joint_selectivity": 2.829806114636204,
+          "p_one_sided": 0.0046995300469953,
+          "z_null": 2.2320430226573746,
+          "null_ci95": [
+            -2.4166109721189537,
+            2.2625224196793923
+          ]
+        },
+        "vbm": {
+          "score_matrix_rows_phenotypes_cols_targets": [
+            [
+              0.11483963913548766,
+              -0.39650750533127277,
+              -0.5247254595050714
+            ],
+            [
+              0.01063776949940098,
+              0.7625422663547871,
+              -0.5246786852621254
+            ],
+            [
+              -0.05672539454611595,
+              -0.6158808428792705,
+              0.742687256672056
+            ]
+          ],
+          "row_selectivity": {
+            "AD": 0.5754561215536598,
+            "PCA": 1.0195627242361494,
+            "lvPPA": 1.0789903753847492
+          },
+          "row_p_max_corrected": {
+            "AD": 0.28387161283871615,
+            "PCA": 0.034996500349965,
+            "lvPPA": 0.0202979702029797
+          },
+          "joint_selectivity": 2.6740092211745585,
+          "p_one_sided": 0.0047995200479952005,
+          "z_null": 2.2596427381199806,
+          "null_ci95": [
+            -2.2160958095339183,
+            2.0454517534240835
+          ]
+        }
+      },
+      "structure_balanced": {
+        "present_targets": {
+          "AD": [
+            "ENTl",
+            "ENTm",
+            "CA1",
+            "CA3",
+            "DG",
+            "SUB"
+          ],
+          "PCA": [
+            "VISp",
+            "VISl",
+            "VISal",
+            "VISam",
+            "VISpm",
+            "VISrl",
+            "VISa",
+            "VISpor"
+          ],
+          "lvPPA": [
+            "AUDp",
+            "AUDd",
+            "AUDv",
+            "TEa"
+          ]
+        },
+        "tau": {
+          "score_matrix_rows_phenotypes_cols_targets": [
+            [
+              0.09946852068806461,
+              -0.28716900047256116,
+              -0.617060403848195
+            ],
+            [
+              -0.04296618687799199,
+              0.5069884803404471,
+              -0.6085177331433548
+            ],
+            [
+              0.015283476848618706,
+              -0.4616447757473507,
+              0.8592616442083076
+            ]
+          ],
+          "row_selectivity": {
+            "AD": 0.5515832228484427,
+            "PCA": 0.8327304403511204,
+            "lvPPA": 1.0824422936576736
+          },
+          "row_p_max_corrected": {
+            "AD": 0.30696930306969306,
+            "PCA": 0.0999900009999,
+            "lvPPA": 0.023997600239976002
+          },
+          "joint_selectivity": 2.466755956857237,
+          "p_one_sided": 0.009799020097990201,
+          "z_null": 2.128356083113122,
+          "null_ci95": [
+            -2.2136844417601886,
+            2.1502821045595852
+          ]
+        },
+        "vbm": {
+          "score_matrix_rows_phenotypes_cols_targets": [
+            [
+              0.1293516534662658,
+              -0.5236223016014391,
+              -0.4999361779292841
+            ],
+            [
+              0.018742540315902997,
+              0.6163387798782601,
+              -0.49844536515001925
+            ],
+            [
+              -0.07075958792803208,
+              -0.4165668694056133,
+              0.706132135929944
+            ]
+          ],
+          "row_selectivity": {
+            "AD": 0.6411308932316273,
+            "PCA": 0.8561901922953183,
+            "lvPPA": 0.9497953645967667
+          },
+          "row_p_max_corrected": {
+            "AD": 0.19308069193080693,
+            "PCA": 0.07179282071792821,
+            "lvPPA": 0.0362963703629637
+          },
+          "joint_selectivity": 2.4471164501237124,
+          "p_one_sided": 0.0065993400659934,
+          "z_null": 2.242643093129677,
+          "null_ci95": [
+            -2.114396298826398,
+            1.9644038618394695
+          ]
+        }
+      }
+    }
+  }
+}

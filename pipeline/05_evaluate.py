@@ -1,6 +1,6 @@
 """Run the low-level diagnostic scripts listed in STEPS.
 
-Current manuscript analyses are organised under experiments/ and are not orchestrated by this helper."""
+Higher-level analyses are organised under experiments/ and are not orchestrated by this helper."""
 from __future__ import annotations
 
 import argparse

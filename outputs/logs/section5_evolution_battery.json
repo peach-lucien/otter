@@ -7134,7 +7134,7 @@
     "coverage": "log10 mass-normalised MEAN pi column-sum per Schaefer-400 region",
     "n_spin": 1000,
     "maps_source": "schaefer_ids / map_values preserved from the previous log (published maps are pi-independent)",
-    "not_used_by_fig5": "Figure 5 uses RECONSTRUCTION-coverage computed live (see 37_fig5_gallery.py); it reads only schaefer_ids and map_values from this log. The spearman / spin_p stored here are the legacy MASS-coverage battery.",
+    "legacy_metric_note": "The primary analysis uses reconstruction coverage; it reads only schaefer_ids and map_values from this log. The spearman and spin_p values stored here are from the earlier mass-coverage battery.",
     "pi_file": "outputs/coupling/pi_canonical.npy",
     "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77"
   }

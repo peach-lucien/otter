@@ -6,7 +6,7 @@
 |---|---|
 | [`01_overview.md`](01_overview.md) | Scope, data model and intended use |
 | [`02_methods.md`](02_methods.md) | Optimal-transport formulation and fitting procedure |
-| [`03_results.md`](03_results.md) | Current manuscript analysis groups and provenance |
+| [`03_results.md`](03_results.md) | Analysis groups, interpretation and provenance |
 | [`04_anchor_packs.md`](04_anchor_packs.md) | Comparative-anatomy sources and regional-entry registry |
 | [`05_limitations.md`](05_limitations.md) | Interpretation and known limitations |
 | [`06_extending.md`](06_extending.md) | Adding a modality, regional entry or species |

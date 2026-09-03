@@ -96,6 +96,19 @@ tools/patch_readme.py
 tools/audit_pi.py
 experiments/REVIEW_ROUND.md
 experiments/reverse_translation/SECTION_DRAFT.md
+experiments/reverse_translation/TMS_FINAL_ANALYSIS.md
+experiments/reverse_translation/11_disease_summary_figure.py
+experiments/reverse_translation/pd_external_confirmation/
+outputs/logs/reverse_translation_disease_summary_figure.json
+
+# Restricted QPN-NC inputs and internal analysis-development records. The public
+# workflow reads approved archives from outside the repository and writes only
+# aggregate summaries.
+**/qpn-nc-r*/
+**/qpn*/freesurfer_v7.3.2_*.tar
+**/qpn*/structural_measures.tar
+**/qpn*/tabular.tar
+outputs/logs/pd_external_confirmation_qpn*.json
 
 # Output of the local pi-audit tool, which scans paths outside this repository.
 outputs/audit/
@@ -108,8 +121,8 @@ docs/archive/
 experiments/**/email_draft_*.md
 experiments/**/DATA_VALIDATION_*.md
 
-# ABIDE-derived results. The data are redistributable only from the 1000 Functional
-# Connectomes Project after registration, so only the analysis scripts are released.
+# Local ABIDE-derived results. The source data require separate access through
+# the 1000 Functional Connectomes Project and are not part of this release.
 outputs/logs/abide_*
 outputs/logs/out_abide_*
 outputs/logs/autism_subtypes_abide.json

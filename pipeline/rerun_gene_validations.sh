@@ -2,16 +2,14 @@
 # Rebuild mouse_genes.npy and re-run every validation that consumes it.
 #
 # Allen MetaImage .raw buffers are column-major and must be reshaped with
-# order="F". The read is done in:
-#   - pipeline/00_external/02_mouse_genes.py
-#   - experiments/autism_subtypes/allen_expansion/download_pagani_ish.py
+# order="F" in pipeline/00_external/02_mouse_genes.py.
 #
 # The production π is gene-free (use_gene_gw=False), so π and the FC/SC
 # validations do not depend on the gene matrix and are not re-run here.
 #
 # Prereqs: the otter env (numpy/scipy/pandas/anndata/nibabel/allensdk), the v2
-# mouse .mat present, and the Allen ISH energy zips cached under
-# experiments/autism_subtypes/allen_expansion/pagani_ish_cache/.
+# mouse .mat present, and any pre-downloaded Allen ISH energy zips cached under
+# data_external/_ish_cache/.
 #
 # Usage:  bash pipeline/rerun_gene_validations.sh
 set -euo pipefail

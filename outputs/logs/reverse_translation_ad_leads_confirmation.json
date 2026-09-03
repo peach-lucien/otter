@@ -1,0 +1,544 @@
+{
+  "status": "external_confirmation_frozen_before_first_run",
+  "source": {
+    "study": "Lin et al., Brain Communications 2026",
+    "doi": "10.1093/braincomms/fcag176",
+    "pmid": "42255923",
+    "pmcid": "PMC13234610",
+    "neurovault_collection": "https://neurovault.org/collections/23001/",
+    "cohort": "LEADS multisite amyloid-positive sporadic early-onset AD",
+    "sample": {
+      "total_assigned": 359,
+      "S1_typical": 144,
+      "S2_left_temporal": 111,
+      "S3_posterior": 104
+    },
+    "images": {
+      "baseline_tau_1vr_compare_3x_s1.nii.gz": {
+        "neurovault_image_id": 1017479,
+        "url": "https://neurovault.org/media/images/23001/baseline_tau_1vr_compare_3x_s1.nii.gz",
+        "sha256": "b48c213ab9bc6ec4e9c66ccb895a64da6b2eddc11dc2e01892f5d2148a7b6a13"
+      },
+      "baseline_tau_1vr_compare_3x_s3.nii.gz": {
+        "neurovault_image_id": 1017481,
+        "url": "https://neurovault.org/media/images/23001/baseline_tau_1vr_compare_3x_s3.nii.gz",
+        "sha256": "929d48fdfb497c9ec01ac0c7c44a2fc9c9d0e4928e4f71ad297346cedfc33d96"
+      },
+      "baseline_tau_1vr_compare_3x_s2.nii.gz": {
+        "neurovault_image_id": 1017480,
+        "url": "https://neurovault.org/media/images/23001/baseline_tau_1vr_compare_3x_s2.nii.gz",
+        "sha256": "10bdc4ac1f7696acfeabe747cc3ce83a592734837cc85edb260f337cd5f0476e"
+      },
+      "baseline_tau_mean_3x_s1_stage9-11.nii.gz": {
+        "neurovault_image_id": 1017486,
+        "url": "https://neurovault.org/media/images/23001/baseline_tau_mean_3x_s1_stage9-11.nii.gz",
+        "sha256": "43f197380bde03bc3411b71067a0ee9f4da0c2128cc6f2ff50dc80e766e2556a"
+      },
+      "baseline_tau_mean_3x_s1_stage12-14.nii.gz": {
+        "neurovault_image_id": 1017484,
+        "url": "https://neurovault.org/media/images/23001/baseline_tau_mean_3x_s1_stage12-14.nii.gz",
+        "sha256": "54ab4ecf91cab318e10d7b13f80457463a9bf514e2e0111253ea0e833ca26717"
+      },
+      "baseline_tau_mean_3x_s1_stage15-20.nii.gz": {
+        "neurovault_image_id": 1017485,
+        "url": "https://neurovault.org/media/images/23001/baseline_tau_mean_3x_s1_stage15-20.nii.gz",
+        "sha256": "874f97e90550dd045e5722359cb11534e3a6fe06fd9656b8452cb5250d63def0"
+      },
+      "baseline_tau_mean_3x_s2_stage9-11.nii.gz": {
+        "neurovault_image_id": 1017491,
+        "url": "https://neurovault.org/media/images/23001/baseline_tau_mean_3x_s2_stage9-11.nii.gz",
+        "sha256": "9e544689607e9263987e83c9ea9046256f18d12bdc4079fc8f2964a4f2005de6"
+      },
+      "baseline_tau_mean_3x_s2_stage12-14.nii.gz": {
+        "neurovault_image_id": 1017489,
+        "url": "https://neurovault.org/media/images/23001/baseline_tau_mean_3x_s2_stage12-14.nii.gz",
+        "sha256": "e4f23a931103810597cb8acae16af59ac652aaf108a3054b69be660796f005e5"
+      },
+      "baseline_tau_mean_3x_s2_stage15-20.nii.gz": {
+        "neurovault_image_id": 1017490,
+        "url": "https://neurovault.org/media/images/23001/baseline_tau_mean_3x_s2_stage15-20.nii.gz",
+        "sha256": "b588953b3972332fde29594f4b2a1083c80657c5da3e2b9793b94b83c48d7a6e"
+      },
+      "baseline_tau_mean_3x_s3_stage9-11.nii.gz": {
+        "neurovault_image_id": 1017496,
+        "url": "https://neurovault.org/media/images/23001/baseline_tau_mean_3x_s3_stage9-11.nii.gz",
+        "sha256": "ed09b096a5aaef983d05773badfb72ccbf73169719c7d4966a303aa277467184"
+      },
+      "baseline_tau_mean_3x_s3_stage12-14.nii.gz": {
+        "neurovault_image_id": 1017494,
+        "url": "https://neurovault.org/media/images/23001/baseline_tau_mean_3x_s3_stage12-14.nii.gz",
+        "sha256": "87bdd371894d652fd8a59478d773b7652c83a5a91baaa27c9142ae0fa57f7b5a"
+      },
+      "baseline_tau_mean_3x_s3_stage15-20.nii.gz": {
+        "neurovault_image_id": 1017495,
+        "url": "https://neurovault.org/media/images/23001/baseline_tau_mean_3x_s3_stage15-20.nii.gz",
+        "sha256": "7f1775fdbb2114f37ba47219ebdfa61e7ea8c89f55dce37b777ff44f01662ac9"
+      }
+    }
+  },
+  "frozen_mapping": {
+    "S1_typical": "AD medial-temporal target",
+    "S3_posterior": "PCA visual target",
+    "S2_left_temporal": "lvPPA auditory/temporal-association target"
+  },
+  "targets": {
+    "AD": [
+      "ENTl",
+      "ENTm",
+      "CA1",
+      "CA3",
+      "DG",
+      "SUB"
+    ],
+    "PCA": [
+      "VISp",
+      "VISl",
+      "VISal",
+      "VISam",
+      "VISpm",
+      "VISrl",
+      "VISa",
+      "VISpor"
+    ],
+    "lvPPA": [
+      "AUDp",
+      "AUDd",
+      "AUDv",
+      "TEa"
+    ]
+  },
+  "primary": "thresholded subtype-vs-rest/canonical/parcel_balanced joint_selectivity",
+  "confirmation_gate": "all row selectivities > 0 and joint p < .05 for canonical and relevant-packs-removed parcel-balanced analyses",
+  "stage_sensitivity": "unthresholded mean SUVR, within-stage subtype contrasts averaged over stages 9-11, 12-14, and 15-20",
+  "n_human_regions": 52,
+  "n_rotations": 10000,
+  "seed": 20260826,
+  "spatial_null": "joint mirrored one-to-one rotations within hemisphere",
+  "couplings": {
+    "canonical": {
+      "pi_file": "outputs/coupling/pi_canonical.npy",
+      "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77"
+    },
+    "no_relevant_anchor_packs": {
+      "sha256_array": "8d8bca04312032e9826b54cd3a8b5b42ca233b490299b092bca1ca1f881019ea",
+      "dropped_packs": [
+        "Subiculum (Strange 2014)",
+        "CA1 (Strange 2014)",
+        "CA3 (Strange 2014)",
+        "Dentate gyrus (Strange 2014)",
+        "Entorhinal cortex (Franjic 2021)",
+        "Lateral visual area / V2 (Wang & Burkhalter 2007)",
+        "Primary auditory / A1 core (Hackett 2001)",
+        "Auditory belt (A2 dorsal+ventral; Kaas & Hackett 2000)"
+      ],
+      "n_dropped": 8
+    }
+  },
+  "results": {
+    "canonical": {
+      "parcel_balanced": {
+        "present_targets": {
+          "AD": [
+            "ENTl",
+            "ENTm",
+            "CA1",
+            "CA3",
+            "DG",
+            "SUB"
+          ],
+          "PCA": [
+            "VISp",
+            "VISl",
+            "VISal",
+            "VISam",
+            "VISpm",
+            "VISrl",
+            "VISa",
+            "VISpor"
+          ],
+          "lvPPA": [
+            "AUDp",
+            "AUDd",
+            "AUDv",
+            "TEa"
+          ]
+        },
+        "primary_thresholded_subtype_vs_rest": {
+          "score_matrix_rows_phenotypes_cols_targets": [
+            [
+              -0.029242815630923347,
+              -0.584799239833546,
+              0.13450535822648982
+            ],
+            [
+              -0.01748464533489494,
+              0.6790191061420766,
+              -0.4993887509138118
+            ],
+            [
+              0.07546200731686484,
+              -0.024775991133258318,
+              0.5650084964692625
+            ]
+          ],
+          "row_selectivity": {
+            "AD": 0.19590412517260475,
+            "PCA": 0.9374558042664299,
+            "lvPPA": 0.5396654883774593
+          },
+          "row_p_max_corrected": {
+            "AD": 0.7337266273372662,
+            "PCA": 0.036996300369963,
+            "lvPPA": 0.288971102889711
+          },
+          "joint_selectivity": 1.6730254178164938,
+          "p_one_sided": 0.019998000199980003,
+          "z_null": 2.196934731320806,
+          "null_ci95": [
+            -1.2876934623941882,
+            1.606083935555923
+          ]
+        },
+        "unthresholded_stage_matched": {
+          "score_matrix_rows_phenotypes_cols_targets": [
+            [
+              0.006638130186419326,
+              -0.6357413596395266,
+              0.2750864768750317
+            ],
+            [
+              -0.026684684174745538,
+              0.6659404662631759,
+              -0.5034939363648139
+            ],
+            [
+              0.03145364181127788,
+              -0.027889876349464344,
+              0.34901173272142044
+            ]
+          ],
+          "row_selectivity": {
+            "AD": 0.18696557156866678,
+            "PCA": 0.9310297765329556,
+            "lvPPA": 0.34722984999051365
+          },
+          "row_p_max_corrected": {
+            "AD": 0.6926307369263074,
+            "PCA": 0.042995700429957005,
+            "lvPPA": 0.45965403459654036
+          },
+          "joint_selectivity": 1.4652251980921358,
+          "p_one_sided": 0.0231976802319768,
+          "z_null": 2.0827029564967803,
+          "null_ci95": [
+            -1.2352132305532544,
+            1.4467154711437762
+          ]
+        }
+      },
+      "structure_balanced": {
+        "present_targets": {
+          "AD": [
+            "ENTl",
+            "ENTm",
+            "CA1",
+            "CA3",
+            "DG",
+            "SUB"
+          ],
+          "PCA": [
+            "VISp",
+            "VISl",
+            "VISal",
+            "VISam",
+            "VISpm",
+            "VISrl",
+            "VISa",
+            "VISpor"
+          ],
+          "lvPPA": [
+            "AUDp",
+            "AUDd",
+            "AUDv",
+            "TEa"
+          ]
+        },
+        "primary_thresholded_subtype_vs_rest": {
+          "score_matrix_rows_phenotypes_cols_targets": [
+            [
+              -0.03427227411692996,
+              -0.4129862934846263,
+              0.12139376640389504
+            ],
+            [
+              -0.01837840988028542,
+              0.3832727198604526,
+              -0.4614996479152797
+            ],
+            [
+              0.08542057701693634,
+              0.11700054992754934,
+              0.534831504787306
+            ]
+          ],
+          "row_selectivity": {
+            "AD": 0.11152398942343567,
+            "PCA": 0.6232117487582352,
+            "lvPPA": 0.4336209413150632
+          },
+          "row_p_max_corrected": {
+            "AD": 0.8108189181081892,
+            "PCA": 0.16728327167283272,
+            "lvPPA": 0.3384661533846615
+          },
+          "joint_selectivity": 1.168356679496734,
+          "p_one_sided": 0.0816918308169183,
+          "z_null": 1.5839060786376118,
+          "null_ci95": [
+            -1.2780733113516658,
+            1.6401060078912284
+          ]
+        },
+        "unthresholded_stage_matched": {
+          "score_matrix_rows_phenotypes_cols_targets": [
+            [
+              0.0071169899659910595,
+              -0.424264287059025,
+              0.25068619115639695
+            ],
+            [
+              -0.0292763630340265,
+              0.36483444640274304,
+              -0.4630296950188736
+            ],
+            [
+              0.034878148488077756,
+              0.10664050782777197,
+              0.3250094981742792
+            ]
+          ],
+          "row_selectivity": {
+            "AD": 0.09390603791730508,
+            "PCA": 0.6109874754291931,
+            "lvPPA": 0.2542501700163543
+          },
+          "row_p_max_corrected": {
+            "AD": 0.7728227177282272,
+            "PCA": 0.15178482151784822,
+            "lvPPA": 0.5561443855614439
+          },
+          "joint_selectivity": 0.9591436833628525,
+          "p_one_sided": 0.1065893410658934,
+          "z_null": 1.434999172062721,
+          "null_ci95": [
+            -1.207807471175162,
+            1.4755042630034376
+          ]
+        }
+      }
+    },
+    "no_relevant_anchor_packs": {
+      "parcel_balanced": {
+        "present_targets": {
+          "AD": [
+            "ENTl",
+            "ENTm",
+            "CA1",
+            "CA3",
+            "DG",
+            "SUB"
+          ],
+          "PCA": [
+            "VISp",
+            "VISl",
+            "VISal",
+            "VISam",
+            "VISpm",
+            "VISrl",
+            "VISa",
+            "VISpor"
+          ],
+          "lvPPA": [
+            "AUDp",
+            "AUDd",
+            "AUDv",
+            "TEa"
+          ]
+        },
+        "primary_thresholded_subtype_vs_rest": {
+          "score_matrix_rows_phenotypes_cols_targets": [
+            [
+              0.005221661729189171,
+              -0.5953603545127302,
+              0.1612639375593543
+            ],
+            [
+              -0.055689881085429535,
+              0.690348593957822,
+              -0.6489872053608208
+            ],
+            [
+              0.12580722946823178,
+              -0.005516415146397274,
+              0.722853470169307
+            ]
+          ],
+          "row_selectivity": {
+            "AD": 0.22226987020587713,
+            "PCA": 1.0426871371809472,
+            "lvPPA": 0.6627080630083897
+          },
+          "row_p_max_corrected": {
+            "AD": 0.762023797620238,
+            "PCA": 0.0461953804619538,
+            "lvPPA": 0.2596740325967403
+          },
+          "joint_selectivity": 1.927665070395214,
+          "p_one_sided": 0.015298470152984701,
+          "z_null": 2.32043939677762,
+          "null_ci95": [
+            -1.338998470595383,
+            1.8168877292695924
+          ]
+        },
+        "unthresholded_stage_matched": {
+          "score_matrix_rows_phenotypes_cols_targets": [
+            [
+              0.048029675408670675,
+              -0.6291878811146491,
+              0.34152516719599896
+            ],
+            [
+              -0.07278099745881028,
+              0.6667255007309759,
+              -0.6524997116436057
+            ],
+            [
+              0.042085316616320735,
+              -0.03470655329804616,
+              0.4726645506977835
+            ]
+          ],
+          "row_selectivity": {
+            "AD": 0.19186103236799576,
+            "PCA": 1.0293658552821838,
+            "lvPPA": 0.4689751690386462
+          },
+          "row_p_max_corrected": {
+            "AD": 0.7590240975902409,
+            "PCA": 0.044295570442955706,
+            "lvPPA": 0.37976202379762025
+          },
+          "joint_selectivity": 1.6902020566888258,
+          "p_one_sided": 0.022297770222977704,
+          "z_null": 2.1622482440447235,
+          "null_ci95": [
+            -1.3039894165344936,
+            1.6518930913113672
+          ]
+        }
+      },
+      "structure_balanced": {
+        "present_targets": {
+          "AD": [
+            "ENTl",
+            "ENTm",
+            "CA1",
+            "CA3",
+            "DG",
+            "SUB"
+          ],
+          "PCA": [
+            "VISp",
+            "VISl",
+            "VISal",
+            "VISam",
+            "VISpm",
+            "VISrl",
+            "VISa",
+            "VISpor"
+          ],
+          "lvPPA": [
+            "AUDp",
+            "AUDd",
+            "AUDv",
+            "TEa"
+          ]
+        },
+        "primary_thresholded_subtype_vs_rest": {
+          "score_matrix_rows_phenotypes_cols_targets": [
+            [
+              -0.004944371257348062,
+              -0.4377190383278203,
+              0.1532512120854228
+            ],
+            [
+              -0.045635933072326426,
+              0.4172850576355368,
+              -0.6198616246576286
+            ],
+            [
+              0.12130988229005882,
+              0.1275015059748555,
+              0.6978241245231931
+            ]
+          ],
+          "row_selectivity": {
+            "AD": 0.13728954186385067,
+            "PCA": 0.7500338365005144,
+            "lvPPA": 0.5734184303907359
+          },
+          "row_p_max_corrected": {
+            "AD": 0.8508149185081492,
+            "PCA": 0.1621837816218378,
+            "lvPPA": 0.2850714928507149
+          },
+          "joint_selectivity": 1.460741808755101,
+          "p_one_sided": 0.056694330566943306,
+          "z_null": 1.8033929331490177,
+          "null_ci95": [
+            -1.3097602524530967,
+            1.7164747728123568
+          ]
+        },
+        "unthresholded_stage_matched": {
+          "score_matrix_rows_phenotypes_cols_targets": [
+            [
+              0.040734080365762454,
+              -0.43535196026339035,
+              0.32696125456327463
+            ],
+            [
+              -0.06369580497331528,
+              0.3913534163058157,
+              -0.6204341741465903
+            ],
+            [
+              0.039929923265110134,
+              0.09096186635264542,
+              0.4462386461003271
+            ]
+          ],
+          "row_selectivity": {
+            "AD": 0.0949294332158203,
+            "PCA": 0.7334184058657685,
+            "lvPPA": 0.3807927512914493
+          },
+          "row_p_max_corrected": {
+            "AD": 0.8562143785621438,
+            "PCA": 0.11918808119188082,
+            "lvPPA": 0.47655234476552344
+          },
+          "joint_selectivity": 1.2091405903730381,
+          "p_one_sided": 0.08299170082991701,
+          "z_null": 1.6161624731487765,
+          "null_ci95": [
+            -1.2022262259647727,
+            1.5490215158397578
+          ]
+        }
+      }
+    }
+  },
+  "confirmation_gate_passed": true
+}

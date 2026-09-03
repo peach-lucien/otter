@@ -6,10 +6,8 @@ energy volumes at 200 µm at the corresponding downsampled voxels.
 
 For each Allen ISH gene:
 
-  1. Locate the energy.zip in the local cache. We reuse the Pagani ISH
-     cache (`experiments/autism_subtypes/allen_expansion/pagani_ish_cache/`)
-     and fall back to direct download via the Allen API if a gene's
-     section_data_set_id is missing.
+  1. Locate the energy.zip in the local ISH cache and fall back to direct
+     download via the Allen API if a gene's section_data_set_id is missing.
   2. Open the zip; read `energy.mhd` for shape/dtype + `energy.raw`.
   3. For each of the 1864 parcels, take the parcel's CCFv3 voxel set
      (25 µm grid), downsample each voxel to the 200 µm grid (integer divide
@@ -45,7 +43,6 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA_EXT = ROOT / "data_external"
-PAGANI_CACHE = ROOT / "experiments/autism_subtypes/allen_expansion/pagani_ish_cache"
 ALLENSDK_CACHE = Path.home() / ".allensdk_cache" / "ish_energy"
 
 
@@ -103,7 +100,7 @@ def read_ish_grid(zip_path: Path, variable: str = "energy") -> np.ndarray:
 
 def find_or_download_gene(sds_id: int, work_dir: Path) -> Path | None:
     """Find ISH zip in caches or download to ``work_dir``."""
-    for cache in (PAGANI_CACHE, ALLENSDK_CACHE):
+    for cache in (work_dir, ALLENSDK_CACHE):
         p = cache / f"sds_{sds_id}_energy.zip"
         if p.exists():
             try:
@@ -190,9 +187,14 @@ def main():
     for col, row in enumerate(gene_df.itertuples()):
         sds_id = int(row.section_data_set_id)
         sym = row.gene_symbol
-        in_pagani = (PAGANI_CACHE / f"sds_{sds_id}_energy.zip").exists()
-        if in_pagani: cache_hit += 1
-        else:         cache_miss += 1
+        cached = any(
+            (cache / f"sds_{sds_id}_energy.zip").exists()
+            for cache in (work_dir, ALLENSDK_CACHE)
+        )
+        if cached:
+            cache_hit += 1
+        else:
+            cache_miss += 1
         zp = find_or_download_gene(sds_id, work_dir)
         if zp is None:
             skipped.append({"sds_id": sds_id, "symbol": sym, "reason": "no energy.zip"})
@@ -239,7 +241,7 @@ def main():
         "n_genes_kept":      int(len(kept_idx)),
         "n_genes_skipped":   int(len(skipped)),
         "skipped":           skipped,
-        "pagani_cache_hits": int(cache_hit),
+        "cache_hits":        int(cache_hit),
         "downloads_needed":  int(cache_miss),
         "ccf_resolution_um": 200,
         "ns_voxel_source": "AS_ix (25 µm) → integer-divide by 8 → 200 µm",

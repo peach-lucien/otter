@@ -172,11 +172,11 @@ def main():
                     "maps_source": "re-fetched from neuromaps" if a.refetch_maps else
                                    "schaefer_ids / map_values preserved from the previous log "
                                    "(published maps are pi-independent)",
-                    "not_used_by_fig5": (
-                        "The headline result uses RECONSTRUCTION-coverage computed live (see "
+                    "legacy_metric_note": (
+                        "The primary result uses RECONSTRUCTION-coverage computed live (see "
                         "22_reconstruction_coverage.py); it reads only schaefer_ids and map_values from "
-                        "this log. The spearman / spin_p stored here are the "
-                        "MASS-coverage battery."),
+                        "this log. The spearman and spin_p values stored here are from the "
+                        "earlier mass-coverage battery."),
                     **prov}
     OUT.write_text(json.dumps(res, indent=2))
     print("wrote", OUT)

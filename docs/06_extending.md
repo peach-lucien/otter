@@ -42,7 +42,7 @@ in the data layer rather than in the solver.
 
 ## Add an evaluation
 
-Put manuscript-facing analyses in a named subdirectory of experiments/. Each
+Put substantive analyses in a named subdirectory of experiments/. Each
 producer should:
 
 - load the coupling with load_pi() or record the complete refit recipe;

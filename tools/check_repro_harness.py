@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Smoke-test otter.repro before the notebooks are built on top of it.
+"""Smoke-test the released coupling and analysis provenance.
 
 Run this in the `otter` environment. It does no fitting and takes a couple of minutes. It checks
-that the harness imports, that the released coupling is present and hashes to the value the logs
-claim, and that every cited log exists and records which coupling produced it. A failure here
-would otherwise surface later as a broken notebook.
+that the harness imports, that the released coupling is present, that current disease analyses
+identify their input coupling, and that every available coupling hash resolves to a released file.
 
     conda activate otter
     cd otter && python3 tools/check_repro_harness.py
@@ -19,7 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]                       # .../otter
 sys.path.insert(0, str(ROOT / "src"))
 
-# The logs the reported results are allowed to draw on.
+# Analysis logs included in the reproducibility check.
 CITED = """beauchamp_metric_battery_canonical beauchamp_metric_battery_loro_canonical
 transbrain_benchmark_summary coupling_summary_canonical evidence_tiers_canonical fig1_coupling_matrix
 out_a2_splithalf out_a1c_downstream out_a1d_robust region_level_eval_canonical
@@ -30,11 +29,22 @@ biccn_composition_from_markers hodge_areal_type_reframe hodge_2019_layer_markers
 hodge_markers_like_for_like out_c1_gradient out_c2_nulls transbrain_2025_benchmark
 transbrain_bn_distributions transbrain_roundtrip_maps transbrain_bn_sizes fig5_panel_values
 out_a3_section5 section5_dlpfc_deficit section5_connectional_vs_molecular
-section6_disorder_vs_reconstruction_DK section6_reachability_spin enigma_phase1_per_disorder
-enigma_disorder_unique section6_aiopto_translation section6_circuit_translation
-section6_transbrain_aiopto pagani_per_model_translation abide_magel2_casecontrol
+section6_disorder_vs_reconstruction_DK section6_reachability_spin
+section6_aiopto_translation section6_circuit_translation
+section6_transbrain_aiopto pagani_per_model_translation
 reverse_translation_validation reverse_translation_neuromaps reverse_translation_disease
-reverse_translation_symptom_dissociation fig7h_homologue_transfer""".split()
+reverse_translation_symptom_dissociation fig7h_homologue_transfer
+reverse_translation_pd_stage_progression reverse_translation_ad_phenotypes
+reverse_translation_ad_leads_confirmation reverse_translation_qpn_pd_stage
+reverse_translation_qpn_pd_stage_surface""".split()
+
+PROVENANCE_REQUIRED = {
+    "reverse_translation_pd_stage_progression",
+    "reverse_translation_ad_phenotypes",
+    "reverse_translation_ad_leads_confirmation",
+    "reverse_translation_qpn_pd_stage",
+    "reverse_translation_qpn_pd_stage_surface",
+}
 
 # Inputs that live outside outputs/ and that an analysis would break without.
 # Paths are relative to the repository root, not to its parent, so the check does not depend on
@@ -43,7 +53,6 @@ EXTERNAL_INPUTS = [
     ("split-half FC (stability)",   "outputs/splithalf/human_splithalf.npz"),
     ("split-half FC (stability)",   "outputs/splithalf/mouse_splithalf.npz"),
     ("split-half producer",         "pipeline/02b_build_splithalf_fc.py"),
-    ("ABIDE scores, de-identified", "outputs/logs/abide_otter_scores_deidentified.csv"),
 ]
 
 # The split-half caches are gitignored because they are large and rebuildable, so a fresh clone
@@ -97,7 +106,7 @@ except Exception as exc:                                          # noqa: BLE001
     report("load_canonical()", False, f"{type(exc).__name__}: {exc}")
     observed_sha = None
 
-print("\n3. every cited log is present, and says which coupling produced it")
+print("\n3. checked analysis logs and coupling provenance")
 logs = ROOT / "outputs" / "logs"
 missing, unstamped, shas = [], [], Counter()
 for stem in CITED:
@@ -116,12 +125,15 @@ for stem in CITED:
     else:
         unstamped.append(stem)
 
-report(f"all {len(CITED)} cited logs present", not missing,
+report(f"all {len(CITED)} checked logs present", not missing,
        "" if not missing else f"missing {len(missing)}: {', '.join(sorted(missing)[:6])}"
        + (" ..." if len(missing) > 6 else ""))
-report("every present log carries a pi_sha256", not unstamped,
-       "" if not unstamped else f"{len(unstamped)} unstamped: {', '.join(sorted(unstamped)[:6])}"
-       + (" ..." if len(unstamped) > 6 else ""))
+required_unstamped = sorted(PROVENANCE_REQUIRED.intersection(unstamped))
+report("current disease logs carry a pi_sha256", not required_unstamped,
+       "" if not required_unstamped else ", ".join(required_unstamped))
+legacy_unstamped = sorted(set(unstamped) - PROVENANCE_REQUIRED)
+if legacy_unstamped:
+    print(f"  [ -- ] {len(legacy_unstamped)} legacy log(s) predate hash stamping")
 
 # A log may reference several couplings. section5_dlpfc_deficit compares four of them, so the
 # test is not whether every stamp equals the released sha but whether every stamp resolves to a

@@ -39,7 +39,7 @@ __all__ = [
 # Canonical fitting constants. The five-fold Beauchamp grid most often selected
 # xyz_weight=0.25 and epsilon=0.2. The release uses epsilon=0.05 because its
 # benchmark accuracy was nearly identical and its parcel-level coupling was more
-# concentrated; see the manuscript Methods.
+# concentrated. This choice is recorded in the released coupling provenance.
 ALPHA = 0.5             # weight on the relational (Gromov-Wasserstein) term
 EPSILON = 0.05          # KL proximal weight used for the released 25-iterate fit
 XYZ_WEIGHT = 0.25       # weight on the anchor-warped spatial cost

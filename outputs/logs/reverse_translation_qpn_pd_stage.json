@@ -1,0 +1,143 @@
+{
+  "schema_version": "1.0.0",
+  "status": "completed",
+  "analysis": "QPN-NC Parkinson stage validation",
+  "hypothesis": "Increasing Parkinson stage preferentially increases OTTER-translated mouse interoceptive-versus-primary-motor bias.",
+  "design": "Control-normative cortical thinning with regional stage models adjusted for MRI age, sex and clinical-MRI interval.",
+  "directional_alternative": "interoceptive_minus_primary_motor > 0",
+  "stage_encoding": "Hoehn-Yahr 1, 2, 3 and combined 4/5",
+  "cross_sectional": true,
+  "seed": 20260901,
+  "n_rotations": 10000,
+  "n_bootstrap": 10000,
+  "dataset": {
+    "name": "Quebec Parkinson Network Neuroimaging Cohort (QPN-NC)",
+    "doi": "10.5281/zenodo.17246063",
+    "access": "restricted; obtained directly from the data owners"
+  },
+  "coupling": {
+    "pi_file": "outputs/coupling/pi_canonical.npy",
+    "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77"
+  },
+  "atlas": {
+    "n_regions": 50,
+    "n_left": 26,
+    "n_right": 24
+  },
+  "sample": {
+    "controls": 69,
+    "PD": 141
+  },
+  "privacy": {
+    "participant_identifiers_written": false,
+    "participant_maps_or_scores_written": false,
+    "small_stage_cell_counts_written": false,
+    "restricted_file_manifest_written": false
+  },
+  "HY4_5_OLS": {
+    "D": 0.7538688645592659,
+    "spatial_p_one_sided": 0.100989901009899,
+    "spatial_p_two_sided": 0.201979802019798,
+    "spatial_null_ci95": [
+      -0.977916002872324,
+      0.9911443664325882
+    ],
+    "hemisphere_D": {
+      "L": 0.5508527026934614,
+      "R": 0.17388768654429637
+    },
+    "n": 141,
+    "bootstrap_n": 10000,
+    "bootstrap_ci95": [
+      -0.527798154107776,
+      1.3407219835701565
+    ],
+    "bootstrap_median": 0.5427802341621348,
+    "influence": {
+      "leave_one_pd": {
+        "n": 141,
+        "min_D": 0.4952131292839594,
+        "max_D": 1.1355713971570442,
+        "all_positive": true
+      },
+      "leave_one_control": {
+        "n": 69,
+        "min_D": 0.7236179935847661,
+        "max_D": 0.7688685464971341,
+        "all_positive": true
+      }
+    }
+  },
+  "stage_formulations": {
+    "HY4_5_OLS": {
+      "D": 0.7538688645592659,
+      "spatial_p_one_sided": 0.100989901009899,
+      "spatial_p_two_sided": 0.201979802019798,
+      "spatial_null_ci95": [
+        -0.977916002872324,
+        0.9911443664325882
+      ],
+      "hemisphere_D": {
+        "L": 0.5508527026934614,
+        "R": 0.17388768654429637
+      },
+      "n": 141
+    },
+    "HY1_5_OLS": {
+      "D": 0.802984673224696,
+      "spatial_p_one_sided": 0.08649135086491351,
+      "spatial_p_two_sided": 0.17298270172982702,
+      "spatial_null_ci95": [
+        -1.0207868124305397,
+        1.0256137988473315
+      ],
+      "hemisphere_D": {
+        "L": 0.5389692790916795,
+        "R": 0.23739239021290673
+      },
+      "n": 141
+    },
+    "HY3plus_vs_HY1_2_OLS": {
+      "D": 0.7613801057563239,
+      "spatial_p_one_sided": 0.08909109089091091,
+      "spatial_p_two_sided": 0.17818218178182182,
+      "spatial_null_ci95": [
+        -0.9836355635182482,
+        1.0423900918983677
+      ],
+      "hemisphere_D": {
+        "L": 0.5388737206252547,
+        "R": 0.19821262392940103
+      },
+      "n": 141
+    },
+    "HY4_5_Huber": {
+      "D": 1.043294599423957,
+      "spatial_p_one_sided": 0.0375962403759624,
+      "spatial_p_two_sided": 0.0751924807519248,
+      "spatial_null_ci95": [
+        -1.1450800360246929,
+        1.0962064473665851
+      ],
+      "hemisphere_D": {
+        "L": 0.6541467595589362,
+        "R": 0.3605921846266353
+      },
+      "n": 141
+    },
+    "participant_partial_spearman": {
+      "rho": 0.16371457197851202,
+      "spatial_p_one_sided": 0.0221977802219778,
+      "spatial_null_ci95": [
+        -0.15708242254905538,
+        0.15867499720178457
+      ],
+      "n": 141
+    }
+  },
+  "synchronized_max_statistic": {
+    "statistic": 1.938653861676953,
+    "spatial_p_one_sided": 0.049295070492950704,
+    "n_components": 5
+  }
+}

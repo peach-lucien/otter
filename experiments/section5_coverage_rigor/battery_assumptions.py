@@ -1,16 +1,16 @@
-"""What does the Fig. 5c battery actually establish, and what does it assume?
+"""Evaluate the interpretation and assumptions of the cortical-map battery.
 
 Run: cd otter && PYTHONPATH=src python experiments/section5_coverage_rigor/battery_assumptions.py
 
-Recomputes reconstruction accuracy the way make_fig5_panels.py does, then asks four questions
-the barplot cannot answer on its own.
+Recomputes parcel-wise reconstruction accuracy, then evaluates four questions:
 
   1. How independent are the seven maps? Inter-correlation and a principal component.
   2. Does any map survive once the shared axis is partialled out?
   3. Is the effect explained by where the supervision is, rather than by evolution?
   4. Is it explained by how well each parcel's own functional connectivity is estimated?
 
-Nothing here is a spin test. Where a p-value is needed the spin from the figure producer is reused.
+The residual and partial-correlation checks are distinct from the primary spatial
+tests. Where required, they use the corresponding spatial rotation procedure.
 """
 from __future__ import annotations
 

@@ -1,14 +1,10 @@
-"""Heuristic mouse → CCFv3 coordinate transform (experiment-only).
+"""Heuristic mouse-to-CCFv3 coordinate transform.
 
 This module wraps the 48-permutation + centroid-translation alignment
 produced by ``00c_align_mouse_to_ccf.py``. The main pipeline does NOT use
 it, ``01_mouse_sc.py`` / ``02_mouse_genes.py`` read pre-warped CCFv3 voxel
 indices (``ns_center_ix`` / ``AS_ix``) directly from the mouse ``.mat``
 file, so no coordinate transform is applied there.
-
-It is retained only because the
-``experiments/autism_subtypes/allen_expansion/`` chain
-(``download_pagani_ish.py``) still depends on it.
 
 The transform is computed once by 00c_align_mouse_to_ccf.py and saved to
 data_external/_diagnostics/mouse_to_ccf_transform.json.

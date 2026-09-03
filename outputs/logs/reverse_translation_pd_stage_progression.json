@@ -1,0 +1,219 @@
+{
+  "status": "completed_directional_hypothesis_test",
+  "hypothesis": "increasing Parkinson stage preferentially increases translated interoceptive relative to primary-motor burden",
+  "directional_alternative": "interoceptive_minus_primary_motor > 0",
+  "cross_sectional": true,
+  "pi_file": "outputs/coupling/pi_canonical.npy",
+  "pi_sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+  "n_human_regions": 52,
+  "n_rotations": 10000,
+  "seed": 20260825,
+  "human_null": "mirrored one-to-one rotations within hemisphere",
+  "mouse_sets": {
+    "interoceptive": [
+      "VISC",
+      "GU",
+      "AId",
+      "AIv",
+      "AIp"
+    ],
+    "primary_motor": [
+      "MOp",
+      "MOs"
+    ]
+  },
+  "sources": {
+    "HY1": {
+      "file": "data_external/enigma/cortical_thickness_parkinsons_HY1.csv",
+      "sha256": "e7a1140e5a61ee731b675c1f8d46d1da7cf97556a8f8db52bddf992e723b1b1a"
+    },
+    "HY2": {
+      "file": "data_external/enigma/cortical_thickness_parkinsons_HY2.csv",
+      "sha256": "c5e50b42e6af5b80ca878ebc427a625cb1ec180797f872c5bdff19a4f91600b0"
+    },
+    "HY3": {
+      "file": "data_external/enigma/cortical_thickness_parkinsons_HY3.csv",
+      "sha256": "d77719b3a834bb17deed5fa53a30c1dfe6a6228fa4fff4a814f1415e5dea5b5e"
+    },
+    "HY45": {
+      "file": "data_external/enigma/cortical_thickness_parkinsons_HY4and5.csv",
+      "sha256": "5d40b99c95f545a83566b5bbbb8503d39a6d10eead040b8783912722ed5657a2"
+    }
+  },
+  "couplings": {
+    "pi_canonical.npy": {
+      "sha256": "bb4cae00cbca9f16c6f9cfca3b0124292b41d81643e2ef5d5511686b20f9df77",
+      "stage_bias": {
+        "HY1": -0.7444303454108376,
+        "HY2": -0.006207777694384669,
+        "HY3": -0.09040893106084731,
+        "HY45": 0.8331511192703771
+      },
+      "linear_trend": 0.4648543240677182,
+      "p_two_sided": 0.027497250274972504,
+      "z_null": 1.8910936073159732,
+      "null_ci95": [
+        -0.4308568031843395,
+        0.4307901994097312
+      ]
+    },
+    "pi_fc_plus_SC.npy": {
+      "sha256": "666089a7b675b8946cac31520a362cf8d9154eb06ecca12e11a22cf73c506307",
+      "stage_bias": {
+        "HY1": -0.8019299597511936,
+        "HY2": -0.2734905882073081,
+        "HY3": -0.20088833780589765,
+        "HY45": 0.6682622359298712
+      },
+      "linear_trend": 0.4483178837444605,
+      "p_two_sided": 0.0170982901709829,
+      "z_null": 2.103608017540966,
+      "null_ci95": [
+        -0.4003466427875357,
+        0.3941161529602543
+      ]
+    },
+    "pi_anchorfree_control.npy": {
+      "sha256": "ef3675973d554108a20c5ebcceabdc45d1bf71da7199b0d7fa2b37e3f0b3c164",
+      "stage_bias": {
+        "HY1": -0.7492378142566387,
+        "HY2": -0.25049565414744174,
+        "HY3": -0.16514274855798133,
+        "HY45": 0.6509593168534584
+      },
+      "linear_trend": 0.42859442989197516,
+      "p_two_sided": 0.023897610238976102,
+      "z_null": 2.0381789543006805,
+      "null_ci95": [
+        -0.39661385048601683,
+        0.3869970313682872
+      ]
+    },
+    "pi_ladder_1_connectivity_only.npy": {
+      "sha256": "8da83b9d3398a75283e58686360bc60fa1419a45a9c882ee94315cd4b1cd91c8",
+      "stage_bias": {
+        "HY1": -0.0018144920112554228,
+        "HY2": 0.016543230793548504,
+        "HY3": -0.00421929491214992,
+        "HY45": -0.0004086766930915444
+      },
+      "linear_trend": -0.0016545079751206795,
+      "p_two_sided": 0.8843115688431157,
+      "z_null": -0.18257154019121785,
+      "null_ci95": [
+        -0.015696105033269278,
+        0.014825152021698292
+      ]
+    },
+    "pi_ladder_2_+spatial.npy": {
+      "sha256": "7dc3b01938149f7e8bc65f686b7e5cf4d582374458237abb330354bad7685e68",
+      "stage_bias": {
+        "HY1": -0.6607669217370504,
+        "HY2": 0.021353961231935358,
+        "HY3": -0.056898433235180845,
+        "HY45": 0.7625485095888076
+      },
+      "linear_trend": 0.4191693899510457,
+      "p_two_sided": 0.029097090290970903,
+      "z_null": 1.872698206052882,
+      "null_ci95": [
+        -0.3955476553381296,
+        0.38975822293494344
+      ]
+    },
+    "pi_ladder_3_+anchors.npy": {
+      "sha256": "860107da7d740fcc4ed6ee4f0399bcd48ae8e68614d6b758df97266c8018f084",
+      "stage_bias": {
+        "HY1": -0.6817234769969696,
+        "HY2": -0.00407447546482121,
+        "HY3": -0.06559224916956613,
+        "HY45": 0.7562106959819823
+      },
+      "linear_trend": 0.4252284745232112,
+      "p_two_sided": 0.026797320267973202,
+      "z_null": 1.8852810071361346,
+      "null_ci95": [
+        -0.3971916831026808,
+        0.39555653544360286
+      ]
+    },
+    "pi_ladder_5_NOCONN_spatial_only.npy": {
+      "sha256": "20625c08db6a3423c3161fcc34a20fc67062b9c39e88413301e539df090e70d9",
+      "stage_bias": {
+        "HY1": -0.7446147846456768,
+        "HY2": -0.009789131285902418,
+        "HY3": -0.07467243063104612,
+        "HY45": 0.790155301853212
+      },
+      "linear_trend": 0.45394269601515225,
+      "p_two_sided": 0.031796820317968204,
+      "z_null": 1.8747425036322583,
+      "null_ci95": [
+        -0.43160083769627666,
+        0.42691661097353856
+      ]
+    },
+    "pi_ladder_6_NOCONN_spatial+anch+packs.npy": {
+      "sha256": "140e741fcfeef45b5f385079655c10c74f9f2be5edfa4314c5beb7ddd8c2e2f2",
+      "stage_bias": {
+        "HY1": -0.8670129610074582,
+        "HY2": -0.08792127737794622,
+        "HY3": -0.1518235088192476,
+        "HY45": 0.7942150089566119
+      },
+      "linear_trend": 0.4919781678450909,
+      "p_two_sided": 0.029597040295970403,
+      "z_null": 1.8965999865894094,
+      "null_ci95": [
+        -0.4633451748056067,
+        0.4566047690258509
+      ]
+    }
+  },
+  "coupling_contrasts": {
+    "canonical_minus_pi_ladder_1_connectivity_only.npy": {
+      "delta_linear_trend": 0.4665088320428389,
+      "p_one_sided": 0.012998700129987,
+      "null_ci95": [
+        -0.41933368676325367,
+        0.42347310324685866
+      ]
+    },
+    "canonical_minus_pi_ladder_5_NOCONN_spatial_only.npy": {
+      "delta_linear_trend": 0.010911628052565958,
+      "p_one_sided": 0.44585541445855414,
+      "null_ci95": [
+        -0.09430098137390296,
+        0.09995383703619604
+      ]
+    },
+    "canonical_minus_pi_ladder_6_NOCONN_spatial+anch+packs.npy": {
+      "delta_linear_trend": -0.027123843777372703,
+      "p_one_sided": 0.8443155684431557,
+      "null_ci95": [
+        -0.04683548904290491,
+        0.055391050415022666
+      ]
+    }
+  },
+  "hemisphere_consistency": {
+    "L": {
+      "n_regions": 27,
+      "linear_trend": 0.24378461653240727,
+      "p_two_sided": 0.04079592040795921,
+      "z_null": 1.94703096510906
+    },
+    "R": {
+      "n_regions": 25,
+      "linear_trend": 0.1970783179960245,
+      "p_two_sided": 0.11208879112088792,
+      "z_null": 1.5579103268117933
+    }
+  },
+  "direct_human_benchmark": {
+    "contrast": "insula minus precentral",
+    "linear_trend": 0.6856229884612213,
+    "p_two_sided": 0.11578842115788421,
+    "z_null": 1.5690009821076714
+  }
+}

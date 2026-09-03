@@ -188,7 +188,7 @@
       "null_abs_p95": 0.4145498815243323
     },
     "n_parcels_recon": 1040,
-    "_metric_note": "connectivity_coverage is log-column-mass; reconstruction_coverage is the Figure 5 metric. Both are tested against the same ContB block gap.",
+    "_metric_note": "connectivity_coverage is log-column-mass; reconstruction_coverage is the primary reconstruction metric. Both are tested against the same ContB block gap.",
     "n_parcels": 1040,
     "_reading": "Coverage dips in Control B; transcriptomic similarity does not. The dlPFC territory is molecularly mouse-like but connectionally unreachable."
   },

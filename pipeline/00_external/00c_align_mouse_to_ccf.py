@@ -2,12 +2,11 @@
 coordinate system into Allen CCFv3 voxel space.
 
 .. note::
-    Experiment-only. The main pipeline does NOT use this transform
+    Optional diagnostic. The main pipeline does not use this transform:
     ``01_mouse_sc.py`` / ``02_mouse_genes.py`` read pre-warped CCFv3 voxel
     indices (``ns_center_ix`` / ``AS_ix``) directly from the mouse ``.mat``
-    file. This script is retained only because the
-    ``experiments/autism_subtypes/allen_expansion/`` chain consumes the
-    transform JSON it produces (via ``_mouse_transform.py``).
+    file. The transform is retained for analyses that begin with coordinates
+    in the input bregma-centred frame.
 
 The input mouse mask is in a bregma-centred stereotaxic convention
 (x symmetric around midline, y/z origin near a stereotaxic landmark), not
@@ -19,8 +18,8 @@ in raw CCFv3 coordinates. This script:
      that aligns the brain centroids.
   3. For each candidate transform, computes the fraction of mouse-node centres
      that land inside the CCFv3 brain.
-  4. Reports the best transform and saves it for use by
-     experiments/autism_subtypes/allen_expansion/ (via _mouse_transform.py).
+  4. Reports the best transform and saves it for optional coordinate conversion
+     via ``_mouse_transform.py``.
 
 If the best transform achieves >90% brain coverage, no further step is needed.
 At 50–90%, the transform is approximately right but a fine-tuning ANTs step is

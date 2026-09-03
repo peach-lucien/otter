@@ -30,8 +30,28 @@ display categories. The categories combine Garin-landmark or regional-entry memb
 Beauchamp benchmark-region membership and internal stability summaries. They are heuristic
 interface metadata, not calibrated confidence scores or estimates of parcel-level correctness.
 
-Result logs identify the coupling used to generate them through a filename and SHA-256 hash.
-Use `pi_provenance()` or the helpers in `otter.repro` to verify that a log and coupling match.
+Current disease-dimension logs identify the coupling used to generate them through a filename and
+SHA-256 hash. Some legacy logs predate hash stamping and are reported separately by
+`tools/check_repro_harness.py`. Use `pi_provenance()` or the helpers in `otter.repro` to verify
+that a stamped log and coupling match.
+
+The clinical disease-dimension results are stored in small committed logs:
+
+| Result | Producing analysis |
+|---|---|
+| `logs/reverse_translation_ad_phenotypes.json` | Alzheimer phenotype discovery in tau-PET and VBM |
+| `logs/reverse_translation_ad_leads_confirmation.json` | Frozen external confirmation in LEADS tau-PET |
+| `logs/reverse_translation_symptom_dissociation.json` | TMS dysphoric–anxiosomatic circuit dissociation and sensitivities |
+| `logs/reverse_translation_pd_stage_progression.json` | ENIGMA Parkinson stage translation |
+| `logs/reverse_translation_qpn_pd_stage.json` | Aggregate QPN-NC stage-validation results at 50-region resolution |
+| `logs/reverse_translation_qpn_pd_stage_surface.json` | Aggregate QPN-NC validation at 148-region native FreeSurfer resolution |
+| `logs/reverse_translation_neuromaps.json` | Molecular specificity and striatal mass fractions |
+| `logs/reverse_translation_direction_diagnostic.json` | Mirrored semirelaxed solve and direction-specific diagnostics |
+
+The QPN-NC files contain only cohort-level statistics. They exclude participant
+identifiers, participant maps and scores, small-cell stage counts, restricted
+archive manifests and region-level QPN-NC maps. The input data remain available
+only through the QPN-NC data owners.
 
 ## Rebuilding the explorer
 
